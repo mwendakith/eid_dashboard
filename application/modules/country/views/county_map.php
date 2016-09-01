@@ -1,13 +1,3 @@
-<div class="col-md-12" id ="buttons">
-    
-        <button onclick="retrieve_map('Tests', 'counties_tests', '');">Tests</button>
-        <button onclick="retrieve_map('Suppressed', 'counties_suppressed', '%');">Suppressed</button>
-        <button  onclick="retrieve_map('Non Suppressed', 'counties_non_suppressed', '%');">Non Suppressed</button>
-        <button onclick="retrieve_map('Rejected', 'counties_rejects', '%');">Rejected</button>
-        <button onclick="retrieve_map('Pregnant Mothers', 'counties_pregnant', '');">Preganant mothers</button>
-        <button onclick="retrieve_map('Lactating Mothers', 'counties_lactating', '');">Lactating mothers</button>
-   
-</div>
 
 <div id="counties_map" style="height: 600px; " class="col-md-6">
 

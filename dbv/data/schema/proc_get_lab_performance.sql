@@ -83,5 +83,45 @@ END //
 DELIMITER ;
 
 
+DROP PROCEDURE IF EXISTS `proc_get_yearly_tests`;
+DELIMITER //
+CREATE PROCEDURE `proc_get_yearly_tests`
+()
+BEGIN
+  SET @QUERY =    "SELECT
+                    `ls`.`year`, `ls`.`month`, SUM(`ls`.`tests`) AS `tests`, 
+                    SUM(`ls`.`pos`) AS `positive`,
+                    SUM(`ls`.`rejected`) AS `rejected`
+                FROM `lab_summary` `ls`
+                WHERE 1 ";
+
+    
+      SET @QUERY = CONCAT(@QUERY, " GROUP BY `ls`.`month`, `ls`.`year` ");
+      SET @QUERY = CONCAT(@QUERY, " ORDER BY `ls`.`year` DESC, `ls`.`month` ASC ");
+
+    PREPARE stmt FROM @QUERY;
+    EXECUTE stmt;
+END //
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS `proc_get_yearly_summary`;
+DELIMITER //
+CREATE PROCEDURE `proc_get_yearly_summary`
+()
+BEGIN
+  SET @QUERY =    "SELECT
+                    `ls`.`year`,  SUM(`ls`.`neg`) AS `neg`, 
+                    SUM(`ls`.`pos`) AS `positive`
+                FROM `lab_summary` `ls`
+                WHERE 1 ";
+
+    
+      SET @QUERY = CONCAT(@QUERY, " GROUP BY `ls`.`year` ");
+      SET @QUERY = CONCAT(@QUERY, " ORDER BY `ls`.`year` DESC ");
+
+    PREPARE stmt FROM @QUERY;
+    EXECUTE stmt;
+END //
+DELIMITER ;
 
 

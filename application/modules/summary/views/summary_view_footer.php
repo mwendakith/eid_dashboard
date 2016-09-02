@@ -10,6 +10,6 @@
 		$("#iprophilaxis").load("<?php echo base_url('charts/summaries/hei_follow');?>");
 		$("#feeding").load("<?php echo base_url('charts/summaries/agegroup');?>");
 
-		$("#county").load("<?php echo base_url('charts/summaries/agegroup');?>");
+		$("#county").load("<?php echo base_url('charts/summaries/county_outcomes');?>");
 	});
 </script>

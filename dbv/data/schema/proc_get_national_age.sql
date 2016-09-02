@@ -3,8 +3,21 @@ DELIMITER //
 CREATE PROCEDURE `proc_get_national_age`
 (IN filter_year INT(11), IN filter_month INT(11))
 BEGIN
-  SET @QUERY =    "SELECT * FROM `national_agebreakdown` WHERE 1";
-	
+  SET @QUERY =    "SELECT  
+            SUM(`sixweekspos`) AS `sixweekspos`, 
+            SUM(`sixweeksneg`) AS `sixweeksneg`, 
+            SUM(`sevento3mpos`) AS `sevento3mpos`, 
+            SUM(`sevento3mneg`) AS `sevento3mneg`,
+            SUM(`threemto9mpos`) AS `threemto9mpos`, 
+            SUM(`threemto9mneg`) AS `threemto9mneg`,
+            SUM(`ninemto18mpos`) AS `ninemto18mpos`, 
+            SUM(`ninemto18mneg`) AS `ninemto18mneg`,
+            SUM(`above18mpos`) AS `above18mpos`, 
+            SUM(`above18mneg`) AS `above18mneg`,
+            SUM(`nodatapos`) AS `nodatapos`, 
+            SUM(`nodataneg`) AS `nodataneg`
+          FROM `national_agebreakdown` WHERE 1";
+  
     IF (filter_month != 0 && filter_month != '') THEN
        SET @QUERY = CONCAT(@QUERY, " AND `year` = '",filter_year,"' AND `month` = '",filter_month,"' ");
     ELSE

@@ -240,7 +240,106 @@ class Summaries_model extends MY_Model
 		}
 		
 		$result = $this->db->query($sql)->result_array();
-		echo "<pre>";print_r($result);die();
+		// echo "<pre>";print_r($result);die();
+		$count = 0;
+				
+		// echo "<pre>";print_r($result);die();
+		$data['ageGnd'][0]['name'] = 'Positive';
+		$data['ageGnd'][1]['name'] = 'Negative';
+
+		$count = 0;
+		
+		$data["ageGnd"][0]["data"][0]	= $count;
+		$data["ageGnd"][1]["data"][0]	= $count;
+		$data['categories'][0]			= 'No Data';
+
+		foreach ($result as $key => $value) {
+			$data['categories'][0] 			= '6wks';
+			$data['categories'][1] 			= '7wks-3M';
+			$data['categories'][2] 			= '3M-9M';
+			$data['categories'][3] 			= '9M-18M';
+			$data['categories'][4] 			= 'above18M';
+			$data['categories'][5] 			= 'No Data';
+
+			$data["ageGnd"][0]["data"][0]	=  (int) $value['sixweekspos'];
+			$data["ageGnd"][1]["data"][0]	=  (int) $value['sixweeksneg'];
+			$data["ageGnd"][0]["data"][1]	=  (int) $value['sevento3mpos'];
+			$data["ageGnd"][1]["data"][1]	=  (int) $value['sevento3mneg'];
+			$data["ageGnd"][0]["data"][2]	=  (int) $value['threemto9mpos'];
+			$data["ageGnd"][1]["data"][2]	=  (int) $value['threemto9mneg'];
+			$data["ageGnd"][0]["data"][3]	=  (int) $value['ninemto18mpos'];
+			$data["ageGnd"][1]["data"][3]	=  (int) $value['ninemto18mneg'];
+			$data["ageGnd"][0]["data"][4]	=  (int) $value['above18mpos'];
+			$data["ageGnd"][1]["data"][4]	=  (int) $value['above18mneg'];
+			$data["ageGnd"][0]["data"][5]	=  (int) $value['nodatapos'];
+			$data["ageGnd"][1]["data"][5]	=  (int) $value['nodataneg'];
+		}
+		// die();
+		$data['ageGnd'][0]['drilldown']['color'] = '#913D88';
+		$data['ageGnd'][1]['drilldown']['color'] = '#96281B';
+
+		// echo "<pre>";print_r($data);die();
+		return $data;
+	}
+
+	function county_outcomes($year=null,$month=null,$pfil=null,$partner=null,$county=null)
+	{
+		//Initializing the value of the Year to the selected year or the default year which is current year
+		if ($year==null || $year=='null') {
+			$year = $this->session->userdata('filter_year');
+		}
+		//Assigning the value of the month or setting it to the selected value
+		if ($month==null || $month=='null') {
+			if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
+				$month = 0;
+			}else {
+				$month = $this->session->userdata('filter_month');
+			}
+		}
+
+		// Assigning the value of the county
+		if ($county==null || $county=='null') {
+			$county = $this->session->userdata('county_filter');
+		}
+		
+		if ($partner==null || $partner=='null') {
+			$partner = $this->session->userdata('partner_filter');
+		}
+				
+		// echo "PFil: ".$pfil." --Partner: ".$partner." -- County: ".$county;
+		if ($county) {
+			$sql = "CALL `proc_get_county_sites_outcomes`('".$county."','".$year."','".$month."')";
+		} else {
+			if ($pfil==1) {
+				if ($partner) {
+					$sql = "CALL `proc_get_partner_sites_outcomes`('".$partner."','".$year."','".$month."')";
+				} else {
+					$sql = "CALL `proc_get_partner_outcomes`('".$year."','".$month."')";
+				}
+				
+			} else {
+				$sql = "CALL `proc_get_county_outcomes`('".$year."','".$month."')";
+			}
+		}
+		// echo "<pre>";print_r($sql);echo "</pre>";
+		$result = $this->db->query($sql)->result_array();
+		// echo "<pre>";print_r($result);die();
+		$data['county_outcomes'][0]['name'] = 'Positive';
+		$data['county_outcomes'][1]['name'] = 'Negative';
+
+		$count = 0;
+		
+		$data["county_outcomes"][0]["data"][0]	= $count;
+		$data["county_outcomes"][1]["data"][0]	= $count;
+		$data['categories'][0]					= 'No Data';
+
+		foreach ($result as $key => $value) {
+			$data['categories'][$key] 					= $value['name'];
+			$data["county_outcomes"][0]["data"][$key]	=  (int) $value['positive'];
+			$data["county_outcomes"][1]["data"][$key]	=  (int) $value['negative'];
+		}
+		// echo "<pre>";print_r($data);die();
+		return $data;
 	}
 }
 ?>

@@ -37,7 +37,15 @@ class Summaries extends MY_Controller
 	{
 		$data['outcomes'] =$this->summaries_model->age($year,$month,$county,$partner);
 
-		$this->load->view('eid_outcomes_view', $data);
+		$this->load->view('agegroup_view', $data);
+	}
+
+
+	function county_outcomes($year=NULL,$month=NULL,$pfil=NULL,$partner=NULL,$county=NULL)
+	{
+		$data['outcomes'] = $this->summaries_model->county_outcomes($year,$month,$pfil,$partner,$county);
+
+    	$this->load->view('county_outcomes_view',$data);
 	}
 
 }

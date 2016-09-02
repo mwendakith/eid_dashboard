@@ -43,9 +43,6 @@ class Positivity_model extends MY_Model
 
 			$data['positivity_trends'][$i]['name'] = $value['year'];
 			$data['positivity_trends'][$i]['data'][$month] = (int) $value['positive'];
-			
-
-
 
 		}
 

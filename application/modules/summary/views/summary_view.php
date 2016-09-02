@@ -185,7 +185,7 @@
 		  <div class="panel-heading" id="heading">
 		  	County Outcomes <div class="display_date"></div>
 		  </div>
-		  <div class="panel-body" id="county">
+		  <div class="panel-body" id="county_outcomes">
 		    <center><div class="loader"></div></center>
 		  </div>
 		</div>

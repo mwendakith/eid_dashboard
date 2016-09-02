@@ -3,7 +3,7 @@
 </div>
 <div>
 	<ul>
-		<?php echo $outcomes['ul'];?>
+		<?php //echo $outcomes['ul'];?>
 	</ul>
 </div>
 
@@ -39,7 +39,7 @@
 		                    showInLegend: true
 		                }
 		            },
-		            series: [<?php echo json_encode($outcomes['vl_outcomes']); ?>]
+		            series: [<?php echo json_encode($outcomes['eid_outcomes']); ?>]
 
 		        });
 		    });

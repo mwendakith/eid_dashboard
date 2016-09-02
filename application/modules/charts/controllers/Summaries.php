@@ -30,7 +30,7 @@ class Summaries extends MY_Controller
 	{
 		$data['outcomes'] =$this->summaries_model->hei_follow($year,$month,$county,$partner);
 
-		$this->load->view('eid_outcomes_view', $data);
+		$this->load->view('hei_view', $data);
 	}
 
 	function agegroup($year=NULL,$month=NULL,$county=NULL,$partner=NULL)

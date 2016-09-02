@@ -59,7 +59,7 @@
 				        '#F2784B',
 				        '#1BA39C'
 				    ],
-			        series: <?php echo json_encode($outcomes['county_outcomes']);?>
+			        series: <?php echo json_encode($outcomes['testing_trends']);?>
 			    });
 			});
 </script>

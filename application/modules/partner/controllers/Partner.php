@@ -22,5 +22,10 @@ class Partner extends MY_Controller
 		$this->data['content_view'] = 'partner/partner_summary_view';
 		$this -> template($this->data);
 	}
+
+	function trends()
+	{
+		
+	}
 }
 ?>

@@ -15,14 +15,14 @@
 <script type="text/javascript">
 
   $().ready(function() {
-    $("#graphs").load("<?php echo base_url();?>charts/positivity/positive_trends");
-    $("#stacked_graph").load("<?php echo base_url();?>charts/positivity/summary");
+    $("#graphs").load("<?php echo base_url();?>charts/trends/positive_trends");
+    $("#stacked_graph").load("<?php echo base_url();?>charts/trends/summary");
   });
   
 
   function get_graphs(year){
     $.ajax({
-           url: "<?php echo base_url('charts/positivity/positive_trends'); ?>/" + year,
+           url: "<?php echo base_url('charts/trends/positive_trends'); ?>/" + year,
            
            error: function(data) {
               $("#test").append(data);

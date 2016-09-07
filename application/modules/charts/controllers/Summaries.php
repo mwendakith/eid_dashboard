@@ -40,6 +40,26 @@ class Summaries extends MY_Controller
 		$this->load->view('agegroup_view', $data);
 	}
 
+	function entry_points($year=NULL,$month=NULL,$county=NULL,$partner=NULL)
+	{
+		$data['outcomes'] =$this->summaries_model->entry_points($year,$month,$county,$partner);
+
+		$this->load->view('entry_point_view', $data);
+	}
+
+	function mprophyalxis($year=NULL,$month=NULL,$county=NULL,$partner=NULL)
+	{
+		$data['outcomes'] =$this->summaries_model->mprophylaxis($year,$month,$county,$partner);
+
+		$this->load->view('mprophylaxis_view', $data);
+	}
+
+	function iprophyalxis($year=NULL,$month=NULL,$county=NULL,$partner=NULL)
+	{
+		$data['outcomes'] =$this->summaries_model->iprophylaxis($year,$month,$county,$partner);
+
+		$this->load->view('iprophylaxis_view', $data);
+	}
 
 	function county_outcomes($year=NULL,$month=NULL,$pfil=NULL,$partner=NULL,$county=NULL)
 	{

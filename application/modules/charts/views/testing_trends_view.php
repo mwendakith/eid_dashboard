@@ -1,10 +1,10 @@
 <?php //echo"<pre>";print_r($outcomes); ?>
-<div class="panel-body" id="county_summary">
+<div class="panel-body" id="testing_trends">
 	
 </div>
 <script type="text/javascript">
 	$(function () {
-			    $('#county_summary').highcharts({
+			    $('#testing_trends').highcharts({
 			        chart: {
 			            type: 'column'
 			        },

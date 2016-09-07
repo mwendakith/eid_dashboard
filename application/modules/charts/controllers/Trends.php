@@ -4,17 +4,17 @@ defined("BASEPATH") or exit("No direct script access allowed!");
 /**
 * 
 */
-class Positivity extends MY_Controller
+class Trends extends MY_Controller
 {
 	
 	function __construct()
 	{
 		parent:: __construct();
-		$this->load->model('positivity_model');
+		$this->load->model('trends_model');
 	}
 
 	function positive_trends(){
-		$obj['trends'] = $this->positivity_model->yearly_trends();
+		$obj['trends'] = $this->trends_model->yearly_trends();
 
 		$data['trends'] = $obj['trends']['test_trends'];
 		$data['title'] = "Test Trends";
@@ -37,7 +37,7 @@ class Positivity extends MY_Controller
 	}
 
 	function summary(){
-		$data['trends'] = $this->positivity_model->yearly_summary();
+		$data['trends'] = $this->trends_model->yearly_summary();
 		//echo json_encode($data);
 		$this->load->view('lab_outcomes_view', $data);
 	}

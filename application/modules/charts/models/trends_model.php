@@ -4,7 +4,7 @@ defined("BASEPATH") or exit("No direct script access allowed");
 /**
 * 
 */
-class Positivity_model extends MY_Model
+class Trends_model extends MY_Model
 {
 	
 	function __construct()

@@ -36,19 +36,12 @@ class Summaries_model extends MY_Model
 			if ($county==null || $county=='null') {
 				$sql = "CALL `proc_get_national_testing_trends`('".$from."','".$to."')";
 			} else {
-				$sql = "CALL `proc_get_regional_sample_types`('".$county."','".$from."')";
-				$sql2 = "CALL `proc_get_regional_sample_types`('".$county."','".$to."')";
+				$sql = "CALL `proc_get_county_testing_trends`('".$county."','".$from."','".$to."')";
 			}
 		}
-		// echo "<pre>";print_r($sql);die();
-		$array1 = $this->db->query($sql)->result_array();
+		echo "<pre>";print_r($sql);die();
+		$result = $this->db->query($sql)->result_array();
 		
-		if ($sql2) {
-			$this->db->close();
-			$array2 = $this->db->query($sql2)->result_array();
-		}
-
-		$result = array_merge($array1,$array2);
 		// echo "<pre>";print_r($result);die();
 		$data['testing_trends'][0]['name'] = 'Positive';
 		$data['testing_trends'][1]['name'] = 'Negative';
@@ -102,11 +95,11 @@ class Summaries_model extends MY_Model
 				$sql = "CALL `proc_get_national_eid_outcomes`('".$year."','".$month."')";
 				// $sql2 = "CALL `proc_get_national_sitessending`('".$year."','".$month."')";
 			} else {
-				$sql = "CALL `proc_get_regional_eid_outcomes`('".$county."','".$year."','".$month."')";
+				$sql = "CALL `proc_get_county_eid_outcomes`('".$county."','".$year."','".$month."')";
 				// $sql2 = "CALL `proc_get_regional_sitessending`('".$county."','".$year."','".$month."')";
 			}
 		}
-		
+		echo "<pre>";print_r($sql);die();
 		$result = $this->db->query($sql)->result_array();
 		// echo "<pre>";print_r($result);die();
 		// $this->db->close();
@@ -169,10 +162,10 @@ class Summaries_model extends MY_Model
 			if ($county==null || $county=='null') {
 				$sql = "CALL `proc_get_national_hei`('".$year."','".$month."')";
 			} else {
-				$sql = "CALL `proc_get_regional_hei`('".$county."','".$year."','".$month."')";
+				$sql = "CALL `proc_get_county_hei`('".$county."','".$year."','".$month."')";
 			}
 		}
-		
+		echo "<pre>";print_r($sql);die();
 		$result = $this->db->query($sql)->result_array();
 		// echo "<pre>";print_r($result);die();
 		$data['hei']['name'] = 'Tests';
@@ -235,10 +228,10 @@ class Summaries_model extends MY_Model
 			if ($county==null || $county=='null') {
 				$sql = "CALL `proc_get_national_age`('".$year."','".$month."')";
 			} else {
-				$sql = "CALL `proc_get_regional_age`('".$county."','".$year."','".$month."')";
+				$sql = "CALL `proc_get_county_age`('".$county."','".$year."','".$month."')";
 			}
 		}
-		
+		echo "<pre>";print_r($sql);die();
 		$result = $this->db->query($sql)->result_array();
 		// echo "<pre>";print_r($result);die();
 		$count = 0;
@@ -282,6 +275,168 @@ class Summaries_model extends MY_Model
 		return $data;
 	}
 
+	function entry_points($year=null,$month=null,$county=null,$partner=null)
+	{
+		if ($county==null || $county=='null') {
+			$county = $this->session->userdata('county_filter');
+		}
+		if (!$partner) {
+			$partner = $this->session->userdata('partner_filter');
+		}
+
+		if ($year==null || $year=='null') {
+			$year = $this->session->userdata('filter_year');
+		}
+		if ($month==null || $month=='null') {
+			if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
+				$month = $this->session->userdata('filter_month');
+			}else {
+				$month = 0;
+			}
+		}
+
+		if ($partner) {
+			$sql = "CALL `proc_get_partner_age`('".$partner."','".$year."','".$month."')";
+		} else {
+			if ($county==null || $county=='null') {
+				$sql = "CALL `proc_get_national_entry_points`('".$year."','".$month."')";
+			} else {
+				$sql = "CALL `proc_get_county_entry_points`('".$county."','".$year."','".$month."')";
+			}
+		}
+		echo "<pre>";print_r($sql);die();
+		$result = $this->db->query($sql)->result_array();
+		// echo "<pre>";print_r($result);die();
+		$count = 0;
+				
+		$data['entry'][0]['name'] = 'Positive';
+		$data['entry'][1]['name'] = 'Negative';
+
+		$count = 0;
+		
+		$data["entry"][0]["data"][0]	= $count;
+		$data["entry"][1]["data"][0]	= $count;
+		$data['categories'][0]			= 'No Data';
+
+		foreach ($result as $key => $value) {
+			$data['categories'][$key] 		= $value['name'];
+
+			$data["entry"][0]["data"][$key]	=  (int) $value['positive'];
+			$data["entry"][1]["data"][$key]	=  (int) $value['negative'];
+			
+		}
+		// echo "<pre>";print_r($data);die();
+		return $data;
+	}
+
+	function mprophylaxis($year=null,$month=null,$county=null,$partner=null)
+	{
+		if ($county==null || $county=='null') {
+			$county = $this->session->userdata('county_filter');
+		}
+		if (!$partner) {
+			$partner = $this->session->userdata('partner_filter');
+		}
+
+		if ($year==null || $year=='null') {
+			$year = $this->session->userdata('filter_year');
+		}
+		if ($month==null || $month=='null') {
+			if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
+				$month = $this->session->userdata('filter_month');
+			}else {
+				$month = 0;
+			}
+		}
+
+		if ($partner) {
+			$sql = "CALL `proc_get_partner_age`('".$partner."','".$year."','".$month."')";
+		} else {
+			if ($county==null || $county=='null') {
+				$sql = "CALL `proc_get_national_mprophylaxis`('".$year."','".$month."')";
+			} else {
+				$sql = "CALL `proc_get_county_mprophylaxis`('".$county."','".$year."','".$month."')";
+			}
+		}
+		echo "<pre>";print_r($sql);die();
+		$result = $this->db->query($sql)->result_array();
+		// echo "<pre>";print_r($result);die();
+		$count = 0;
+				
+		$data['mprophilaxis'][0]['name'] = 'Positive';
+		$data['mprophilaxis'][1]['name'] = 'Negative';
+
+		$count = 0;
+		
+		$data["mprophilaxis"][0]["data"][0]	= $count;
+		$data["mprophilaxis"][1]["data"][0]	= $count;
+		$data['categories'][0]			= 'No Data';
+
+		foreach ($result as $key => $value) {
+			$data['categories'][$key] 		= $value['name'];
+
+			$data["mprophilaxis"][0]["data"][$key]	=  (int) $value['positive'];
+			$data["mprophilaxis"][1]["data"][$key]	=  (int) $value['negative'];
+			
+		}
+		// echo "<pre>";print_r($data);die();
+		return $data;
+	}
+
+	function iprophylaxis($year=null,$month=null,$county=null,$partner=null)
+	{
+		if ($county==null || $county=='null') {
+			$county = $this->session->userdata('county_filter');
+		}
+		if (!$partner) {
+			$partner = $this->session->userdata('partner_filter');
+		}
+
+		if ($year==null || $year=='null') {
+			$year = $this->session->userdata('filter_year');
+		}
+		if ($month==null || $month=='null') {
+			if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
+				$month = $this->session->userdata('filter_month');
+			}else {
+				$month = 0;
+			}
+		}
+
+		if ($partner) {
+			$sql = "CALL `proc_get_partner_age`('".$partner."','".$year."','".$month."')";
+		} else {
+			if ($county==null || $county=='null') {
+				$sql = "CALL `proc_get_national_iprophylaxis`('".$year."','".$month."')";
+			} else {
+				$sql = "CALL `proc_get_county_iprophylaxis`('".$county."','".$year."','".$month."')";
+			}
+		}
+		echo "<pre>";print_r($sql);die();
+		$result = $this->db->query($sql)->result_array();
+		// echo "<pre>";print_r($result);die();
+		$count = 0;
+				
+		$data['iprophilaxis'][0]['name'] = 'Positive';
+		$data['iprophilaxis'][1]['name'] = 'Negative';
+
+		$count = 0;
+		
+		$data["iprophilaxis"][0]["data"][0]	= $count;
+		$data["iprophilaxis"][1]["data"][0]	= $count;
+		$data['categories'][0]			= 'No Data';
+
+		foreach ($result as $key => $value) {
+			$data['categories'][$key] 		= $value['name'];
+
+			$data["iprophilaxis"][0]["data"][$key]	=  (int) $value['positive'];
+			$data["iprophilaxis"][1]["data"][$key]	=  (int) $value['negative'];
+			
+		}
+		// echo "<pre>";print_r($data);die();
+		return $data;
+	}
+
 	function county_outcomes($year=null,$month=null,$pfil=null,$partner=null,$county=null)
 	{
 		//Initializing the value of the Year to the selected year or the default year which is current year
@@ -321,7 +476,7 @@ class Summaries_model extends MY_Model
 				$sql = "CALL `proc_get_county_outcomes`('".$year."','".$month."')";
 			}
 		}
-		// echo "<pre>";print_r($sql);echo "</pre>";
+		echo "<pre>";print_r($sql);echo "</pre>";die();
 		$result = $this->db->query($sql)->result_array();
 		// echo "<pre>";print_r($result);die();
 		$data['county_outcomes'][0]['name'] = 'Positive';

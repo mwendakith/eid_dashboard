@@ -38,6 +38,7 @@ class Positivity extends MY_Controller
 
 	function summary(){
 		$data['trends'] = $this->positivity_model->yearly_summary();
+		//$data['trends'] = $this->positivity_model->yearly_summary();
 		//echo json_encode($data);
 		$this->load->view('lab_outcomes_view', $data);
 	}

@@ -74,6 +74,7 @@ class Positivity_model extends MY_Model
 			$data['outcomes'][1]['data'][$i] = (int) $value['neg'];
 			$i++;
 		}
+		$data['title'] = "Outcomes";
 
 		return $data;
 	}

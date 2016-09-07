@@ -51,8 +51,6 @@ class Performance_model extends MY_Model
 		//echo "<pre>";print_r($data);die();
 
 		return $data;
-
-
 	}
 
 	function lab_outcomes($year=NULL, $month=NULL){
@@ -72,6 +70,14 @@ class Performance_model extends MY_Model
 		// echo "<pre>";print_r($sql);die();
 		$result = $this->db->query($sql)->result_array();
 		$data;
+		if($month == 0){
+			$data['title'] = "Outcomes (" . $year . ")";
+		}
+		else{
+			$data['title'] = "Outcomes (" . $year . ", " . $this->resolve_month($month) . ")";
+		}
+
+		
 		foreach ($result as $key => $value) {
 
 			$lab = (int) $value['ID'];
@@ -102,6 +108,7 @@ class Performance_model extends MY_Model
 				$month = $this->session->userdata('filter_month');
 			}
 		}
+		$title = " (" . $year . ", " . $this->resolve_month($month) . ")"; 
 		
 		$sql = "CALL `proc_get_lab_tat`('".$year."','".$month."')";
 		
@@ -113,7 +120,8 @@ class Performance_model extends MY_Model
 			$lab--;
 
 			$data[$lab]['div'] = "#container" . ($lab+1);	
-			$data[$lab]['name'] = $value['name'];	
+			$data[$lab]['div_name'] = "container" . ($lab+1);	
+			$data[$lab]['name'] = $value['name'] . $title;	
 			$data[$lab]['tat1'] = (int) $value['tat1'];	
 			$data[$lab]['tat2'] = (int) $value['tat2'] + $data[$lab]['tat1'];	
 			$data[$lab]['tat3'] = (int) $value['tat3'] + $data[$lab]['tat2'];	

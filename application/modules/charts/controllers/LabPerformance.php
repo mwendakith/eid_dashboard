@@ -21,17 +21,17 @@ class LabPerformance extends MY_Controller
 		//echo json_encode($data);
 
 		$data['trends'] = $obj['trends']['test_trends'];
-		$data['title'] = "Test Trends";
+		$data['title'] = "Test Trends (" . $obj['trends']['year'] . ")";
 		$data['div'] = "#tests";
 		$this->load->view('lab_performance_view', $data);
 
 		$data['trends'] = $obj['trends']['rejected_trends'];
-		$data['title'] = "Rejected Trends";
+		$data['title'] = "Rejected Trends (" . $obj['trends']['year'] . ")";
 		$data['div'] = "#rejects";
 		$this->load->view('lab_performance_view', $data);
 
 		$data['trends'] = $obj['trends']['positivity_trends'];
-		$data['title'] = "Positivity Trends";
+		$data['title'] = "Positivity Trends (" . $obj['trends']['year'] . ")";
 		$data['div'] = "#positivity";
 		$this->load->view('lab_performance_view', $data);
 	}
@@ -46,14 +46,13 @@ class LabPerformance extends MY_Controller
 	function lab_turnaround($year=NULL, $month=NULL){
 		$data = $this->performance_model->lab_turnaround($year, $month);
 		//echo json_encode($data);
-		$this->load->view('lab_turnaround_time_view', $data[0]);
-		$this->load->view('lab_turnaround_time_view', $data[1]);
-		$this->load->view('lab_turnaround_time_view', $data[2]);
-		$this->load->view('lab_turnaround_time_view', $data[3]);
-		$this->load->view('lab_turnaround_time_view', $data[4]);
-		$this->load->view('lab_turnaround_time_view', $data[5]);
-		$this->load->view('lab_turnaround_time_view', $data[6]);
-		$this->load->view('lab_turnaround_time_view', $data[7]);
+
+		foreach ($data as $key => $value) {
+			$this->load->view('lab_turnaround_time_view', $value);
+		}
+		
+		$this->load->view('lab_turnaround_key_view');
+
 	}
 
 

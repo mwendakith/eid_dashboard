@@ -1,15 +1,15 @@
-<div id="tests" class="col-md-12">
+<div id="tests" class="col-md-6">
 
 </div>
 
 
-<div id="rejects" class="col-md-12">
+<div id="rejects" class="col-md-6">
 
 </div>
 
 
 
-<div id="positivity" class="col-md-12">
+<div id="positivity" class="col-md-6">
 
 </div>
 
@@ -41,7 +41,7 @@
         legend: {
             layout: 'vertical',
             align: 'right',
-            verticalAlign: 'middle',
+            verticalAlign: 'top',
             borderWidth: 0
         },
         series: <?php echo json_encode($trends);?>

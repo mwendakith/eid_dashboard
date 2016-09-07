@@ -39,7 +39,7 @@ class Summaries_model extends MY_Model
 				$sql = "CALL `proc_get_county_testing_trends`('".$county."','".$from."','".$to."')";
 			}
 		}
-		echo "<pre>";print_r($sql);die();
+		// echo "<pre>";print_r($sql);die();
 		$result = $this->db->query($sql)->result_array();
 		
 		// echo "<pre>";print_r($result);die();
@@ -99,7 +99,7 @@ class Summaries_model extends MY_Model
 				// $sql2 = "CALL `proc_get_regional_sitessending`('".$county."','".$year."','".$month."')";
 			}
 		}
-		echo "<pre>";print_r($sql);die();
+		// echo "<pre>";print_r($sql);die();
 		$result = $this->db->query($sql)->result_array();
 		// echo "<pre>";print_r($result);die();
 		// $this->db->close();
@@ -165,7 +165,7 @@ class Summaries_model extends MY_Model
 				$sql = "CALL `proc_get_county_hei`('".$county."','".$year."','".$month."')";
 			}
 		}
-		echo "<pre>";print_r($sql);die();
+		// echo "<pre>";print_r($sql);die();
 		$result = $this->db->query($sql)->result_array();
 		// echo "<pre>";print_r($result);die();
 		$data['hei']['name'] = 'Tests';
@@ -231,7 +231,7 @@ class Summaries_model extends MY_Model
 				$sql = "CALL `proc_get_county_age`('".$county."','".$year."','".$month."')";
 			}
 		}
-		echo "<pre>";print_r($sql);die();
+		// echo "<pre>";print_r($sql);die();
 		$result = $this->db->query($sql)->result_array();
 		// echo "<pre>";print_r($result);die();
 		$count = 0;
@@ -304,7 +304,7 @@ class Summaries_model extends MY_Model
 				$sql = "CALL `proc_get_county_entry_points`('".$county."','".$year."','".$month."')";
 			}
 		}
-		echo "<pre>";print_r($sql);die();
+		// echo "<pre>";print_r($sql);die();
 		$result = $this->db->query($sql)->result_array();
 		// echo "<pre>";print_r($result);die();
 		$count = 0;
@@ -358,7 +358,7 @@ class Summaries_model extends MY_Model
 				$sql = "CALL `proc_get_county_mprophylaxis`('".$county."','".$year."','".$month."')";
 			}
 		}
-		echo "<pre>";print_r($sql);die();
+		// echo "<pre>";print_r($sql);die();
 		$result = $this->db->query($sql)->result_array();
 		// echo "<pre>";print_r($result);die();
 		$count = 0;
@@ -412,7 +412,7 @@ class Summaries_model extends MY_Model
 				$sql = "CALL `proc_get_county_iprophylaxis`('".$county."','".$year."','".$month."')";
 			}
 		}
-		echo "<pre>";print_r($sql);die();
+		// echo "<pre>";print_r($sql);die();
 		$result = $this->db->query($sql)->result_array();
 		// echo "<pre>";print_r($result);die();
 		$count = 0;

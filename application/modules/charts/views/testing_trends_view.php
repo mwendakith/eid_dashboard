@@ -56,8 +56,9 @@
 			                }
 			            }
 			        },colors: [
-				        '#F2784B',
-				        '#1BA39C'
+				        '#52B3D9',
+				        '#E26A6A',
+				        '#913D88'
 				    ],
 			        series: <?php echo json_encode($outcomes['testing_trends']);?>
 			    });

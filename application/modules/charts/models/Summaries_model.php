@@ -14,6 +14,7 @@ class Summaries_model extends MY_Model
 
 	function test_trends($year=null,$county=null,$partner=null)
 	{
+		// echo "Year: ".$year." --Partner: ".$partner." -- County: ".$county;
 		$array1 = array();
 		$array2 = array();
 		$sql2 = NULL;
@@ -30,8 +31,7 @@ class Summaries_model extends MY_Model
 		$from = $to-1;
 
 		if ($partner) {
-			$sql = "CALL `proc_get_partner_sample_types`('".$partner."','".$from."')";
-			$sql2 = "CALL `proc_get_partner_sample_types`('".$partner."','".$to."')";
+			$sql = "CALL `proc_get_partner_testing_trends`('".$partner."','".$from."','".$to."')";
 		} else {
 			if ($county==null || $county=='null') {
 				$sql = "CALL `proc_get_national_testing_trends`('".$from."','".$to."')";
@@ -88,7 +88,7 @@ class Summaries_model extends MY_Model
 		}
 
 		if ($partner) {
-			$sql = "CALL `proc_get_partner_vl_outcomes`('".$partner."','".$year."','".$month."')";
+			$sql = "CALL `proc_get_partner_eid_outcomes`('".$partner."','".$year."','".$month."')";
 			// $sql2 = "CALL `proc_get_partner_sitessending`('".$partner."','".$year."','".$month."')";
 		} else {
 			if ($county==null || $county=='null') {
@@ -296,7 +296,7 @@ class Summaries_model extends MY_Model
 		}
 
 		if ($partner) {
-			$sql = "CALL `proc_get_partner_age`('".$partner."','".$year."','".$month."')";
+			$sql = "CALL `proc_get_partner_entry_points`('".$partner."','".$year."','".$month."')";
 		} else {
 			if ($county==null || $county=='null') {
 				$sql = "CALL `proc_get_national_entry_points`('".$year."','".$month."')";
@@ -350,7 +350,7 @@ class Summaries_model extends MY_Model
 		}
 
 		if ($partner) {
-			$sql = "CALL `proc_get_partner_age`('".$partner."','".$year."','".$month."')";
+			$sql = "CALL `proc_get_partner_mprophylaxis`('".$partner."','".$year."','".$month."')";
 		} else {
 			if ($county==null || $county=='null') {
 				$sql = "CALL `proc_get_national_mprophylaxis`('".$year."','".$month."')";
@@ -404,7 +404,7 @@ class Summaries_model extends MY_Model
 		}
 
 		if ($partner) {
-			$sql = "CALL `proc_get_partner_age`('".$partner."','".$year."','".$month."')";
+			$sql = "CALL `proc_get_partner_iprophylaxis`('".$partner."','".$year."','".$month."')";
 		} else {
 			if ($county==null || $county=='null') {
 				$sql = "CALL `proc_get_national_iprophylaxis`('".$year."','".$month."')";
@@ -476,7 +476,8 @@ class Summaries_model extends MY_Model
 				$sql = "CALL `proc_get_county_outcomes`('".$year."','".$month."')";
 			}
 		}
-		echo "<pre>";print_r($sql);echo "</pre>";die();
+		// $sql = "CALL `proc_get_county_outcomes`('".$year."','".$month."')";
+		// echo "<pre>";print_r($sql);echo "</pre>";die();
 		$result = $this->db->query($sql)->result_array();
 		// echo "<pre>";print_r($result);die();
 		$data['county_outcomes'][0]['name'] = 'Positive';

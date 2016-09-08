@@ -12,9 +12,9 @@ class Summaries extends MY_Controller
 		$this->load->model('summaries_model');
 	}
 
-	function testing_trends($year=NULL,$month=NULL,$pfil=NULL,$partner=NULL,$county=NULL)
+	function testing_trends($year=NULL,$partner=NULL,$county=NULL)
 	{
-		$data['outcomes'] = $this->summaries_model->test_trends($year,$month,$pfil,$partner,$county);
+		$data['outcomes'] = $this->summaries_model->test_trends($year,$county,$partner);
 
 		$this->load->view('testing_trends_view', $data);
 	}

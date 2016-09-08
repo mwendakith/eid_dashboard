@@ -15,6 +15,7 @@ class LabPerformance extends MY_Controller {
 
 	public function index()
 	{
+		$this->data['labs'] = TRUE;
 		$this->data['content_view'] = 'labPerformance/performance_view';
 		// echo "<pre>";print_r($this->data);die();
 		$this -> template($this->data);

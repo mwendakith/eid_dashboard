@@ -1,32 +1,12 @@
 
 <div class="row">
-    <div class="col-md-6 col-sm-6 col-xs-12">
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            Testing Trends <div class="display_range"></div>
-          </div>
-          <div class="panel-body" id="tests">
-            <center><div class="loader"></div></center>
-          </div>
-        </div>
-    </div>
-    <div class="col-md-6 col-sm-6 col-xs-12">
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            Reject Trends <div class="display_range"></div>
-          </div>
-          <div class="panel-body" id="rejects">
-            <center><div class="loader"></div></center>
-          </div>
-        </div>
-    </div>
-    <!-- <div id="tests" class="col-md-6">
+    <div id="tests" class="col-md-6">
         
-    </div> -->
+    </div>
 
-    <!-- <div id="rejects" class="col-md-6">
+    <div id="rejects" class="col-md-6">
         
-    </div> -->
+    </div>
 </div>
 
 
@@ -60,11 +40,11 @@
             valueSuffix: ''
         },
         legend: {
-            layout: 'vertical',
-            align: 'right',
-            verticalAlign: 'middle',
-            borderWidth: 0
-        },
+                layout: 'vertical',
+                align: 'right',
+                verticalAlign: 'top',
+                borderWidth: 0
+            },
         series: <?php echo json_encode($trends);?>
             
     });

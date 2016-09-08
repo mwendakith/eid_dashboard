@@ -4,7 +4,7 @@ CREATE PROCEDURE `proc_get_lab_performance`
 (IN filter_year INT(11))
 BEGIN
   SET @QUERY =    "SELECT
-                    `l`.`ID`, `l`.`name`, `ls`.`tests`, `ls`.`rejected`, `ls`.`pos`, `ls`.neg,
+                    `l`.`ID`, `l`.`labname` AS `name`, `ls`.`tests`, `ls`.`rejected`, `ls`.`pos`, `ls`.neg,
                     `ls`.`month` 
                 FROM `lab_summary` `ls`
                 JOIN `labs` `l`
@@ -27,7 +27,7 @@ CREATE PROCEDURE `proc_get_lab_tat`
 (IN filter_year INT(11), IN filter_month INT(11))
 BEGIN
   SET @QUERY =    "SELECT
-                    `l`.`ID`, `l`.`name`, AVG(`ls`.`tat1`) AS `tat1`,
+                    `l`.`ID`, `l`.`labname` AS `name`, AVG(`ls`.`tat1`) AS `tat1`,
                     AVG(`ls`.`tat2`) AS `tat2`, AVG(`ls`.`tat3`) AS `tat3`,
                     AVG(`ls`.`tat4`) AS `tat4`
                 FROM `lab_summary` `ls`
@@ -58,7 +58,7 @@ CREATE PROCEDURE `proc_get_lab_outcomes`
 (IN filter_year INT(11), IN filter_month INT(11))
 BEGIN
   SET @QUERY =    "SELECT
-                    `l`.`ID`, `l`.`name`, 
+                    `l`.`ID`, `l`.`labname` AS `name`, 
                     SUM(`ls`.`pos`) AS `pos`,
                     SUM(`ls`.`neg`) AS `neg`
                 FROM `lab_summary` `ls`
@@ -75,7 +75,7 @@ BEGIN
         END IF;
       
 
-    SET @QUERY = CONCAT(@QUERY, " ORDER BY `l`.`ID` ");
+    SET @QUERY = CONCAT(@QUERY, " GROUP BY `l`.`name` ORDER BY `l`.`ID` ");
 
     PREPARE stmt FROM @QUERY;
     EXECUTE stmt;

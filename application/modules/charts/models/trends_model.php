@@ -12,8 +12,13 @@ class Trends_model extends MY_Model
 		parent:: __construct();;
 	}
 
-	function yearly_trends(){
-		$sql = "CALL `proc_get_yearly_tests`";
+	function yearly_trends($county=NULL){
+
+		if($county == NULL || $county == 48){
+			$county = 0;
+		}
+
+		$sql = "CALL `proc_get_yearly_tests`(" . $county . ");";
 
 		$result = $this->db->query($sql)->result_array();
 
@@ -49,8 +54,13 @@ class Trends_model extends MY_Model
 		return $data;
 	}
 
-	function yearly_summary(){
-		$sql = "CALL `proc_get_yearly_summary`";
+	function yearly_summary($county=NULL){
+
+		if($county == NULL || $county == 48){
+			$county = 0;
+		}
+
+		$sql = "CALL `proc_get_yearly_summary`(" . $county . ");";
 
 		$result = $this->db->query($sql)->result_array();
 
@@ -71,6 +81,7 @@ class Trends_model extends MY_Model
 			$data['outcomes'][1]['data'][$i] = (int) $value['neg'];
 			$i++;
 		}
+		$data['title'] = "Outcomes";
 
 		return $data;
 	}

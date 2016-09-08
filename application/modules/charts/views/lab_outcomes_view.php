@@ -10,7 +10,7 @@
             type: 'column'
         },
         title: {
-            text: "Outcomes",
+            text: "<?php echo $trends['title'];?>",
             x: -20 //center
         },
         xAxis: {

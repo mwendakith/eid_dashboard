@@ -1,18 +1,11 @@
 
-<div class="row">
-    <div id="tests" class="col-md-6">
-        
-    </div>
+<?php
+    echo "<div id=" . $div_name . " class='col-md-6'>
 
-    <div id="rejects" class="col-md-6">
-        
-    </div>
-</div>
+</div>";
 
+?>
 
-<div id="positivity" class="col-md-12">
-
-</div>
 
 <script type="text/javascript">
 
@@ -40,11 +33,11 @@
             valueSuffix: ''
         },
         legend: {
-                layout: 'vertical',
-                align: 'right',
-                verticalAlign: 'top',
-                borderWidth: 0
-            },
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'top',
+            borderWidth: 0
+        },
         series: <?php echo json_encode($trends);?>
             
     });

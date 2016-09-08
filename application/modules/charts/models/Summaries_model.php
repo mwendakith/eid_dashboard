@@ -14,13 +14,11 @@ class Summaries_model extends MY_Model
 
 	function test_trends($year=null,$county=null,$partner=null)
 	{
-		// echo "Year: ".$year." --Partner: ".$partner." -- County: ".$county;
-		$array1 = array();
-		$array2 = array();
-		$sql2 = NULL;
-
 		if ($county==null || $county=='null') {
 			$county = $this->session->userdata('county_filter');
+		}
+		if (!$partner) {
+			$partner = $this->session->userdata('partner_filter');
 		}
 
 		if ($year==null || $year=='null') {
@@ -29,17 +27,20 @@ class Summaries_model extends MY_Model
 			$to = $year;
 		}
 		$from = $to-1;
-
+		
 		if ($partner) {
 			$sql = "CALL `proc_get_partner_testing_trends`('".$partner."','".$from."','".$to."')";
+			// $sql2 = "CALL `proc_get_partner_sitessending`('".$partner."','".$year."','".$month."')";
 		} else {
 			if ($county==null || $county=='null') {
 				$sql = "CALL `proc_get_national_testing_trends`('".$from."','".$to."')";
+				// $sql2 = "CALL `proc_get_national_sitessending`('".$year."','".$month."')";
 			} else {
 				$sql = "CALL `proc_get_county_testing_trends`('".$county."','".$from."','".$to."')";
+				// $sql2 = "CALL `proc_get_regional_sitessending`('".$county."','".$year."','".$month."')";
 			}
 		}
-		// echo "<pre>";print_r($sql);die();
+		echo "<pre>";print_r($sql);die();
 		$result = $this->db->query($sql)->result_array();
 		
 		// echo "<pre>";print_r($result);die();
@@ -99,7 +100,7 @@ class Summaries_model extends MY_Model
 				// $sql2 = "CALL `proc_get_regional_sitessending`('".$county."','".$year."','".$month."')";
 			}
 		}
-		// echo "<pre>";print_r($sql);die();
+		echo "<pre>";print_r($sql);die();
 		$result = $this->db->query($sql)->result_array();
 		// echo "<pre>";print_r($result);die();
 		// $this->db->close();
@@ -165,7 +166,7 @@ class Summaries_model extends MY_Model
 				$sql = "CALL `proc_get_county_hei`('".$county."','".$year."','".$month."')";
 			}
 		}
-		// echo "<pre>";print_r($sql);die();
+		echo "<pre>";print_r($sql);die();
 		$result = $this->db->query($sql)->result_array();
 		// echo "<pre>";print_r($result);die();
 		$data['hei']['name'] = 'Tests';
@@ -231,7 +232,7 @@ class Summaries_model extends MY_Model
 				$sql = "CALL `proc_get_county_age`('".$county."','".$year."','".$month."')";
 			}
 		}
-		// echo "<pre>";print_r($sql);die();
+		echo "<pre>";print_r($sql);die();
 		$result = $this->db->query($sql)->result_array();
 		// echo "<pre>";print_r($result);die();
 		$count = 0;
@@ -304,7 +305,7 @@ class Summaries_model extends MY_Model
 				$sql = "CALL `proc_get_county_entry_points`('".$county."','".$year."','".$month."')";
 			}
 		}
-		// echo "<pre>";print_r($sql);die();
+		echo "<pre>";print_r($sql);die();
 		$result = $this->db->query($sql)->result_array();
 		// echo "<pre>";print_r($result);die();
 		$count = 0;
@@ -358,7 +359,7 @@ class Summaries_model extends MY_Model
 				$sql = "CALL `proc_get_county_mprophylaxis`('".$county."','".$year."','".$month."')";
 			}
 		}
-		// echo "<pre>";print_r($sql);die();
+		echo "<pre>";print_r($sql);die();
 		$result = $this->db->query($sql)->result_array();
 		// echo "<pre>";print_r($result);die();
 		$count = 0;
@@ -412,7 +413,7 @@ class Summaries_model extends MY_Model
 				$sql = "CALL `proc_get_county_iprophylaxis`('".$county."','".$year."','".$month."')";
 			}
 		}
-		// echo "<pre>";print_r($sql);die();
+		echo "<pre>";print_r($sql);die();
 		$result = $this->db->query($sql)->result_array();
 		// echo "<pre>";print_r($result);die();
 		$count = 0;
@@ -477,7 +478,7 @@ class Summaries_model extends MY_Model
 			}
 		}
 		// $sql = "CALL `proc_get_county_outcomes`('".$year."','".$month."')";
-		// echo "<pre>";print_r($sql);echo "</pre>";die();
+		echo "<pre>";print_r($sql);echo "</pre>";die();
 		$result = $this->db->query($sql)->result_array();
 		// echo "<pre>";print_r($result);die();
 		$data['county_outcomes'][0]['name'] = 'Positive';

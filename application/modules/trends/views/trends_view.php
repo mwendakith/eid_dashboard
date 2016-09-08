@@ -23,6 +23,11 @@
       var county_id = $(this).val();
 
       var posting = $.post( "<?php echo base_url();?>template/filter_county_data", { county: county_id } );
+      posting.done(function( data ) {
+            $.get("<?php echo base_url();?>template/breadcrum/"+data, function(data){
+              $("#breadcrum").html(data);
+            });
+      });
 
       $("#graphs").load("<?php echo base_url();?>charts/trends/positive_trends/"+county_id);
       $("#stacked_graph").load("<?php echo base_url();?>charts/trends/summary/"+county_id);

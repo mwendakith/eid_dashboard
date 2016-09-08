@@ -12,7 +12,7 @@ class Summaries extends MY_Controller
 		$this->load->model('summaries_model');
 	}
 
-	function testing_trends($year=NULL,$partner=NULL,$county=NULL)
+	function testing_trends($year=NULL,$county=NULL,$partner=NULL)
 	{
 		$data['outcomes'] = $this->summaries_model->test_trends($year,$county,$partner);
 

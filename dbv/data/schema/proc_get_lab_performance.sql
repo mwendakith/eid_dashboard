@@ -87,18 +87,25 @@ DELIMITER ;
 DROP PROCEDURE IF EXISTS `proc_get_yearly_tests`;
 DELIMITER //
 CREATE PROCEDURE `proc_get_yearly_tests`
-()
+(IN county INT(11))
 BEGIN
   SET @QUERY =    "SELECT
-                    `ls`.`year`, `ls`.`month`, SUM(`ls`.`tests`) AS `tests`, 
-                    SUM(`ls`.`pos`) AS `positive`,
-                    SUM(`ls`.`rejected`) AS `rejected`
-                FROM `lab_summary` `ls`
+                    `cs`.`year`, `cs`.`month`, SUM(`cs`.`tests`) AS `tests`, 
+                    SUM(`cs`.`pos`) AS `positive`,
+                    SUM(`cs`.`rejected`) AS `rejected`
+                FROM `county_summary` `cs`
                 WHERE 1 ";
 
+      IF (county != 0 && county != '') THEN
+           SET @QUERY = CONCAT(@QUERY, " AND `cs`.`county` = '",county,"' ");
+      END IF;  
+
     
-      SET @QUERY = CONCAT(@QUERY, " GROUP BY `ls`.`month`, `ls`.`year` ");
-      SET @QUERY = CONCAT(@QUERY, " ORDER BY `ls`.`year` DESC, `ls`.`month` ASC ");
+      SET @QUERY = CONCAT(@QUERY, " GROUP BY `cs`.`month`, `cs`.`year` ");
+
+     
+      SET @QUERY = CONCAT(@QUERY, " ORDER BY `cs`.`year` DESC, `cs`.`month` ASC ");
+      
 
     PREPARE stmt FROM @QUERY;
     EXECUTE stmt;
@@ -108,17 +115,20 @@ DELIMITER ;
 DROP PROCEDURE IF EXISTS `proc_get_yearly_summary`;
 DELIMITER //
 CREATE PROCEDURE `proc_get_yearly_summary`
-()
+(IN county INT(11))
 BEGIN
   SET @QUERY =    "SELECT
-                    `ls`.`year`,  SUM(`ls`.`neg`) AS `neg`, 
-                    SUM(`ls`.`pos`) AS `positive`
-                FROM `lab_summary` `ls`
+                    `cs`.`year`,  SUM(`cs`.`neg`) AS `neg`, 
+                    SUM(`cs`.`pos`) AS `positive`
+                FROM `county_summary` `cs`
                 WHERE 1 ";
 
+      IF (county != 0 && county != '') THEN
+           SET @QUERY = CONCAT(@QUERY, " AND `cs`.`county` = '",county,"' ");
+      END IF; 
     
-      SET @QUERY = CONCAT(@QUERY, " GROUP BY `ls`.`year` ");
-      SET @QUERY = CONCAT(@QUERY, " ORDER BY `ls`.`year` DESC ");
+      SET @QUERY = CONCAT(@QUERY, " GROUP BY `cs`.`year` ");
+      SET @QUERY = CONCAT(@QUERY, " ORDER BY `cs`.`year` DESC ");
 
     PREPARE stmt FROM @QUERY;
     EXECUTE stmt;

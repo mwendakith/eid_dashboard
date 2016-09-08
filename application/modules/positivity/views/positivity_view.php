@@ -1,12 +1,12 @@
-<div id="graphs">
+<div class="row">
+  <div id="graphs">
+  
+  </div>
 
 
-	
-</div>
+  <div id="stacked_graph">
 
-
-<div id="stacked_graph">
-
+  </div>
 </div>
 
   
@@ -17,8 +17,24 @@
   $().ready(function() {
     $("#graphs").load("<?php echo base_url();?>charts/positivity/positive_trends");
     $("#stacked_graph").load("<?php echo base_url();?>charts/positivity/summary");
+
+
+    $("select").change(function(){
+      var county_id = $(this).val();
+
+      var posting = $.post( "<?php echo base_url();?>template/filter_county_data", { county: county_id } );
+
+      $("#graphs").load("<?php echo base_url();?>charts/positivity/positive_trends/"+county_id);
+      $("#stacked_graph").load("<?php echo base_url();?>charts/positivity/summary/"+county_id);
+    });
   });
   
+  $("select").change(function(){
+    var county_id = $(this).val();
+
+    $("#graphs").load("<?php echo base_url();?>charts/positivity/positive_trends/"+county_id);
+    $("#stacked_graph").load("<?php echo base_url();?>charts/positivity/summary/"+county_id);
+  });
 
   function get_graphs(year){
     $.ajax({

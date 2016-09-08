@@ -1,9 +1,11 @@
-<div id="graphs">
-	
-</div>
+<div class="row">
+  <div id="graphs">
+  	
+  </div>
 
-<div id="stacked_graph">
+  <div id="stacked_graph">
 
+  </div>
 </div>
 
 <div id="lineargauge">

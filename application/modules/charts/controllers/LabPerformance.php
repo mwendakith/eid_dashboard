@@ -23,16 +23,19 @@ class LabPerformance extends MY_Controller
 		$data['trends'] = $obj['trends']['test_trends'];
 		$data['title'] = "Test Trends (" . $obj['trends']['year'] . ")";
 		$data['div'] = "#tests";
+		$data['div_name'] = "tests";
 		$this->load->view('lab_performance_view', $data);
 
 		$data['trends'] = $obj['trends']['rejected_trends'];
 		$data['title'] = "Rejected Trends (" . $obj['trends']['year'] . ")";
 		$data['div'] = "#rejects";
+		$data['div_name'] = "rejects";
 		$this->load->view('lab_performance_view', $data);
 
 		$data['trends'] = $obj['trends']['positivity_trends'];
 		$data['title'] = "Positivity Trends (" . $obj['trends']['year'] . ")";
 		$data['div'] = "#positivity";
+		$data['div_name'] = "positivity";
 		$this->load->view('lab_performance_view', $data);
 	}
 

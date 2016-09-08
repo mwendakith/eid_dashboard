@@ -1,17 +1,11 @@
-<div id="tests" class="col-md-6">
 
-</div>
+<?php
+    echo "<div id=" . $div_name . " class='col-md-6'>
 
+</div>";
 
-<div id="rejects" class="col-md-6">
+?>
 
-</div>
-
-
-
-<div id="positivity" class="col-md-6">
-
-</div>
 
 <script type="text/javascript">
 

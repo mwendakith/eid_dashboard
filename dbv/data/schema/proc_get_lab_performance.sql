@@ -93,7 +93,8 @@ BEGIN
                     `cs`.`year`, `cs`.`month`, SUM(`cs`.`tests`) AS `tests`, 
                     SUM(`cs`.`pos`) AS `positive`,
                     SUM(`cs`.`neg`) AS `negative`,
-                    SUM(`cs`.`rejected`) AS `rejected`
+                    SUM(`cs`.`rejected`) AS `rejected`,
+                    SUM(`cs`.`infantsless2m`) AS `infants`
                 FROM `county_summary` `cs`
                 WHERE 1 ";
 

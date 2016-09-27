@@ -40,6 +40,14 @@ class Trends extends MY_Controller
 		$data['yAxis'] = "Number of Rejects (%)";
 		$this->load->view('lab_performance_view', $data);
 
+		$data['trends'] = $obj['infant_trends'];
+		$data['title'] = "Infant tests (less than 2m)";
+		$data['div'] = "#infants";
+		$data['div_name'] = "infants";
+		$data['suffix'] = "";
+		$data['yAxis'] = "Number of Infant Tests";
+		$this->load->view('lab_performance_view', $data);
+
 		
 
 		//echo json_encode($obj);

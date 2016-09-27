@@ -106,18 +106,28 @@ class Performance_model extends MY_Model
 	}
 
 	function lab_turnaround($year=NULL, $month=NULL){
-	if ($year==null || $year=='null') {
+		$title = null;
+		if($year==null || $year=='null') {
 			$year = $this->session->userdata('filter_year');
 		}
+
 		if ($month==null || $month=='null') {
 			if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
 				$month = 0;
+				$title = " (" . $year . ")";
 			}else {
 				$month = $this->session->userdata('filter_month');
+				//$title += " (" . $year . ", " . $this->resolve_month($month) . ")";
 			}
+
 		}
-		$title = " (" . $year . ", " . $this->resolve_month($month) . ")"; 
+
+		if(!$title){
+			$title = " (" . $year . ", " . $this->resolve_month($month) . ")";
+		}
+		 
 		
+
 		$sql = "CALL `proc_get_lab_tat`('".$year."','".$month."')";
 		
 		// echo "<pre>";print_r($sql);die();

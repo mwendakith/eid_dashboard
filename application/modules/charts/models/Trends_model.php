@@ -22,12 +22,18 @@ class Trends_model extends MY_Model
 
 		$result = $this->db->query($sql)->result_array();
 
-		$year = date("Y");
+		$year;
 		$i = 0;
+		$b = true;
 
 		$data;
 
 		foreach ($result as $key => $value) {
+
+			if($b){
+				$b = false;
+				$year = (int) $value['year'];
+			}
 
 			$y = (int) $value['year'];
 			if($value['year'] != $year){

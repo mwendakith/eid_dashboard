@@ -24,19 +24,27 @@ class LabPerformance extends MY_Controller
 		$data['title'] = "Test Trends (" . $obj['trends']['year'] . ")";
 		$data['div'] = "#tests";
 		$data['div_name'] = "tests";
-		$this->load->view('lab_performance_view', $data);
-
-		$data['trends'] = $obj['trends']['rejected_trends'];
-		$data['title'] = "Rejected Trends (" . $obj['trends']['year'] . ")";
-		$data['div'] = "#rejects";
-		$data['div_name'] = "rejects";
+		$data['suffix'] = "";
+		$data['yAxis'] = "Number of Tests";
 		$this->load->view('lab_performance_view', $data);
 
 		$data['trends'] = $obj['trends']['positivity_trends'];
 		$data['title'] = "Positivity Trends (" . $obj['trends']['year'] . ")";
 		$data['div'] = "#positivity";
 		$data['div_name'] = "positivity";
+		$data['suffix'] = "%";
+		$data['yAxis'] = "Number of Positives(%)";
 		$this->load->view('lab_performance_view', $data);
+
+		$data['trends'] = $obj['trends']['rejected_trends'];
+		$data['title'] = "Rejected Trends (" . $obj['trends']['year'] . ")";
+		$data['div'] = "#rejects";
+		$data['div_name'] = "rejects";
+		$data['suffix'] = "%";
+		$data['yAxis'] = "Number of Rejects(%)";
+		$this->load->view('lab_performance_view', $data);
+
+		
 	}
 
 	function lab_outcomes($year=NULL, $month=NULL){

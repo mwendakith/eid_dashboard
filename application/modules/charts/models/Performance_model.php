@@ -37,12 +37,20 @@ class Performance_model extends MY_Model
 			$data['test_trends'][$lab]['data'][$month] = (int) $value['tests'];
 
 			$data['rejected_trends'][$lab]['name'] = $value['name'];
-			$data['rejected_trends'][$lab]['data'][$month] = (int) $value['rejected'];
-
+			if($value['tests'] == 0){
+				$data['rejected_trends'][$lab]['data'][$month] = 0;
+			}else{
+				$data['rejected_trends'][$lab]['data'][$month] = (int) 
+				 ($value['rejected'] / $value['tests'] * 100);
+			}
 
 			$data['positivity_trends'][$lab]['name'] = $value['name'];
-			$data['positivity_trends'][$lab]['data'][$month] = (int) $value['pos'];
-			
+			if($value['pos'] == 0){
+				$data['positivity_trends'][$lab]['data'][$month] = 0;
+			}else{
+				$data['positivity_trends'][$lab]['data'][$month] = (int) 
+				(($value['pos']/ ($value['pos'] + $value['neg'])) * 100);
+			}
 
 
 

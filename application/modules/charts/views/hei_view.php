@@ -27,7 +27,7 @@
                     showInLegend: true
                 }
             },
-            series: [<?php echo json_encode($outcomes['justification']); ?>]
+            series: [<?php echo json_encode($outcomes['hei']); ?>]
         });
     });
 

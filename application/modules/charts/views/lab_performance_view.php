@@ -21,7 +21,7 @@
         },
         yAxis: {
             title: {
-                text: "Number of Tests"
+                text: "<?php echo $yAxis; ?>"
             },
             plotLines: [{
                 value: 0,
@@ -30,7 +30,7 @@
             }]
         },
         tooltip: {
-            valueSuffix: ''
+            valueSuffix: "<?php echo $suffix; ?>"
         },
         legend: {
             layout: 'vertical',

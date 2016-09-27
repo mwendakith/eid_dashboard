@@ -4,7 +4,7 @@ defined("BASEPATH") or exit("No direct script access allowed");
 /**
 * 
 */
-class Positivity_model extends MY_Model
+class Trends_model extends MY_Model
 {
 	
 	function __construct()
@@ -43,16 +43,24 @@ class Positivity_model extends MY_Model
 			$data['test_trends'][$i]['data'][$month] = (int) $value['tests'];
 
 			$data['rejected_trends'][$i]['name'] = $value['year'];
-			$data['rejected_trends'][$i]['data'][$month] = (int) $value['rejected'];
 
+			if($value['tests'] == 0){
+				$data['rejected_trends'][$i]['data'][$month] = 0;
+			}else{
+				$data['rejected_trends'][$i]['data'][$month] = (int)
+				($value['rejected'] / $value['tests'] * 100);
+			}
 
 			$data['positivity_trends'][$i]['name'] = $value['year'];
-			$data['positivity_trends'][$i]['data'][$month] = (int) $value['positive'];
-			
 
-
-
+			if ($value['positive'] == 0){
+				$data['positivity_trends'][$i]['data'][$month] = 0;
+			}else{
+				$data['positivity_trends'][$i]['data'][$month] = (int) 
+				($value['positive'] / ($value['positive'] + $value['negative']) * 100 );
+			}
 		}
+		
 
 		return $data;
 	}

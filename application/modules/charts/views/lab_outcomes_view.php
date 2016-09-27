@@ -1,4 +1,4 @@
-<div id="outcomes" class="col-md-6">
+<div id="outcomes">
 
 </div>
 
@@ -55,7 +55,10 @@
             borderColor: '#CCC',
             borderWidth: 1,
             shadow: false
-        },
+        },colors: [
+                        '#F2784B',
+                        '#1BA39C'
+                    ],
         series: <?php echo json_encode($trends['outcomes']);?>
             
     });

@@ -37,12 +37,20 @@ class Performance_model extends MY_Model
 			$data['test_trends'][$lab]['data'][$month] = (int) $value['tests'];
 
 			$data['rejected_trends'][$lab]['name'] = $value['name'];
-			$data['rejected_trends'][$lab]['data'][$month] = (int) $value['rejected'];
-
+			if($value['tests'] == 0){
+				$data['rejected_trends'][$lab]['data'][$month] = 0;
+			}else{
+				$data['rejected_trends'][$lab]['data'][$month] = (int) 
+				 ($value['rejected'] / $value['tests'] * 100);
+			}
 
 			$data['positivity_trends'][$lab]['name'] = $value['name'];
-			$data['positivity_trends'][$lab]['data'][$month] = (int) $value['pos'];
-			
+			if($value['pos'] == 0){
+				$data['positivity_trends'][$lab]['data'][$month] = 0;
+			}else{
+				$data['positivity_trends'][$lab]['data'][$month] = (int) 
+				(($value['pos']/ ($value['pos'] + $value['neg'])) * 100);
+			}
 
 
 
@@ -98,18 +106,28 @@ class Performance_model extends MY_Model
 	}
 
 	function lab_turnaround($year=NULL, $month=NULL){
-	if ($year==null || $year=='null') {
+		$title = null;
+		if($year==null || $year=='null') {
 			$year = $this->session->userdata('filter_year');
 		}
+
 		if ($month==null || $month=='null') {
 			if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
 				$month = 0;
+				$title = " (" . $year . ")";
 			}else {
 				$month = $this->session->userdata('filter_month');
+				//$title += " (" . $year . ", " . $this->resolve_month($month) . ")";
 			}
+
 		}
-		$title = " (" . $year . ", " . $this->resolve_month($month) . ")"; 
+
+		if(!$title){
+			$title = " (" . $year . ", " . $this->resolve_month($month) . ")";
+		}
+		 
 		
+
 		$sql = "CALL `proc_get_lab_tat`('".$year."','".$month."')";
 		
 		// echo "<pre>";print_r($sql);die();

@@ -1,4 +1,4 @@
-<div id="outcomes" class="col-md-12">
+<div id="outcomes">
 
 </div>
 

@@ -5,7 +5,7 @@
   </div>
 
 
-  <div id="stacked_graph">
+  <div id="stacked_graph" class="col-md-6">
 
   </div>
 </div>

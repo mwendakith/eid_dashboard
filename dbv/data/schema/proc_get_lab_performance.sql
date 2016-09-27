@@ -92,6 +92,7 @@ BEGIN
   SET @QUERY =    "SELECT
                     `cs`.`year`, `cs`.`month`, SUM(`cs`.`tests`) AS `tests`, 
                     SUM(`cs`.`pos`) AS `positive`,
+                    SUM(`cs`.`neg`) AS `negative`,
                     SUM(`cs`.`rejected`) AS `rejected`
                 FROM `county_summary` `cs`
                 WHERE 1 ";

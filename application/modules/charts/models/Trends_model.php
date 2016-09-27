@@ -22,12 +22,18 @@ class Trends_model extends MY_Model
 
 		$result = $this->db->query($sql)->result_array();
 
-		$year = date("Y");
+		$year;
 		$i = 0;
+		$b = true;
 
 		$data;
 
 		foreach ($result as $key => $value) {
+
+			if($b){
+				$b = false;
+				$year = (int) $value['year'];
+			}
 
 			$y = (int) $value['year'];
 			if($value['year'] != $year){
@@ -43,13 +49,24 @@ class Trends_model extends MY_Model
 			$data['test_trends'][$i]['data'][$month] = (int) $value['tests'];
 
 			$data['rejected_trends'][$i]['name'] = $value['year'];
-			$data['rejected_trends'][$i]['data'][$month] = (int) $value['rejected'];
 
+			if($value['tests'] == 0){
+				$data['rejected_trends'][$i]['data'][$month] = 0;
+			}else{
+				$data['rejected_trends'][$i]['data'][$month] = (int)
+				($value['rejected'] / $value['tests'] * 100);
+			}
 
 			$data['positivity_trends'][$i]['name'] = $value['year'];
-			$data['positivity_trends'][$i]['data'][$month] = (int) $value['positive'];
 
+			if ($value['positive'] == 0){
+				$data['positivity_trends'][$i]['data'][$month] = 0;
+			}else{
+				$data['positivity_trends'][$i]['data'][$month] = (int) 
+				($value['positive'] / ($value['positive'] + $value['negative']) * 100 );
+			}
 		}
+		
 
 		return $data;
 	}

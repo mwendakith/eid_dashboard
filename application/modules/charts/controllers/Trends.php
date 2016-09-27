@@ -13,19 +13,18 @@ class Trends extends MY_Controller
 		$this->load->model('trends_model');
 	}
 
-	function positive_trends($county=NULL){
-		$obj['trends'] = $this->trends_model->yearly_trends($county);
+	function fetching_trends_data($county=null)
+	{
+		return $this->trends_model->yearly_trends($county);
+	}
 
+	function positive_trends($county=NULL){
+		$obj['trends'] = $this->fetching_trends_data($county);
+		
 		$data['trends'] = $obj['trends']['test_trends'];
 		$data['title'] = "Test Trends";
 		$data['div'] = "#tests";
 		$data['div_name'] = "tests";
-		$this->load->view('lab_performance_view', $data);
-
-		$data['trends'] = $obj['trends']['rejected_trends'];
-		$data['title'] = "Rejected Trends";
-		$data['div'] = "#rejects";
-		$data['div_name'] = "rejects";
 		$this->load->view('lab_performance_view', $data);
 
 		$data['trends'] = $obj['trends']['positivity_trends'];
@@ -36,7 +35,11 @@ class Trends extends MY_Controller
 
 		//echo json_encode($obj);
 		//echo "<pr>";print_r($obj);die;
-
+		// $data['trends'] = $obj['trends']['rejected_trends'];
+		// $data['title'] = "Rejected Trends";
+		// $data['div'] = "#rejects";
+		// $data['div_name'] = "rejects";
+		// $this->load->view('lab_performance_view', $data);
 	}
 
 	function summary($county=NULL){

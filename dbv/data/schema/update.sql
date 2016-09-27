@@ -550,19 +550,19 @@ CREATE PROCEDURE `proc_get_county_outcomes`
 BEGIN
   SET @QUERY =    "SELECT
                     `c`.`name`,
-                    SUM(`vcs`.`undetected`+`vcs`.`less1000`) AS `suppressed`,
-                    SUM(`vcs`.`less5000`+`vcs`.`above5000`) AS `nonsuppressed` 
-                FROM `vl_county_summary` `vcs`
-                    JOIN `countys` `c` ON `vcs`.`county` = `c`.`ID`
+                    SUM(`cs`.`pos`) AS `positive`,
+                    SUM(`cs`.`neg`) AS `negative` 
+                FROM `county_summary` `cs`
+                    JOIN `countys` `c` ON `cs`.`county` = `c`.`ID`
     WHERE 1";
 
     IF (filter_month != 0 && filter_month != '') THEN
-       SET @QUERY = CONCAT(@QUERY, " AND `year` = '",filter_year,"' AND `month`='",filter_month,"' ");
+       SET @QUERY = CONCAT(@QUERY, " AND `cs`.`year` = '",filter_year,"' AND `cs`.`month`='",filter_month,"' ");
     ELSE
-        SET @QUERY = CONCAT(@QUERY, " AND `year` = '",filter_year,"' ");
+        SET @QUERY = CONCAT(@QUERY, " AND `cs`.`year` = '",filter_year,"' ");
     END IF;
 
-    SET @QUERY = CONCAT(@QUERY, " GROUP BY `vcs`.`county` ORDER BY `detectableNless1000` DESC ");
+    SET @QUERY = CONCAT(@QUERY, " GROUP BY `cs`.`county` ORDER BY `neg` DESC ");
 
      PREPARE stmt FROM @QUERY;
      EXECUTE stmt;

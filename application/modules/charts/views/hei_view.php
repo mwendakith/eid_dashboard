@@ -1,6 +1,10 @@
-
 <div id="jstification_pie">
 
+</div>
+<div>
+    <ul>
+        <?php echo $outcomes['ul'];?>
+    </ul>
 </div>
 <script type="text/javascript">
 	$(function(){

@@ -105,6 +105,7 @@ class Summaries_model extends MY_Model
 		// echo "<pre>";print_r($result);die();
 		// $this->db->close();
 		// $sitessending = $this->db->query($sql2)->result_array();
+		$data['ul'] = '';
 		$data['eid_outcomes']['name'] = 'Tests';
 		$data['eid_outcomes']['colorByPoint'] = true;
 
@@ -114,6 +115,12 @@ class Summaries_model extends MY_Model
 		$data['eid_outcomes']['data'][0]['y'] = $count;
 
 		foreach ($result as $key => $value) {
+			$data['ul'] .= '<li>Total Tests: '.(int) $value['tests'].'</li>';
+			$data['ul'] .= '<li>Redraws: '.(int) $value['redraw'].'</li>';
+			
+			$data['ul'] .= '<li>Positive/positivity: '.$value['pos'].' <strong>('.(int) (($value['pos']/$value['tests'])*100).'%)</strong></li>';
+			$data['ul'] .= '<li>Rejected: '.$value['rejected'].'</li>';
+			$data['ul'] .= '<li>Sites Sending: '.(int) $value['sitessending'].'</li>';
 			// if($value['name'] == ''){
 			// 	$data['hei']['data'][$key]['color'] = '#5C97BF';
 			// }
@@ -173,11 +180,17 @@ class Summaries_model extends MY_Model
 		$data['hei']['colorByPoint'] = true;
 
 		$count = 0;
+		$data['ul'] = '';
 
 		$data['hei']['data'][0]['name'] = 'No Data';
 		$data['hei']['data'][0]['y'] = $count;
 
 		foreach ($result as $key => $value) {
+			$total = (int) ($value['enrolled']+$value['dead']+$value['ltfu']+$value['transout']);
+			$data['ul'] .= '<li>Enrollled: '.(int) $value['enrolled'].' <strong>('.(int) (($value['enrolled']/$total)*100).'%)</strong></li>';
+			$data['ul'] .= '<li>Dead: '.(int) $value['dead'].' <strong>('.(int) (($value['dead']/$total)*100).'%)</strong></li>';
+			$data['ul'] .= '<li>Lost to Follow Up: '.$value['ltfu'].' <strong>('.(int) (($value['ltfu']/$total)*100).'%)</strong></li>';
+			$data['ul'] .= '<li>Transferred out: '.$value['transout'].' <strong>('.(int) (($value['transout']/$total)*100).'%)</strong></li>';
 			// if($value['name'] == ''){
 			// 	$data['hei']['data'][$key]['color'] = '#5C97BF';
 			// }

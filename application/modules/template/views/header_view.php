@@ -94,8 +94,9 @@
 							</ul>
 						</li>
 						<li><a href="<?php echo base_url();?>labPerformance">Lab Performance</a></li>
+						<li><a href="<?php echo base_url();?>sites">Sites</a></li>
 						<!-- <li><a href="<?php echo base_url();?>sites">Sites</a></li> -->
-						<li><a href="<?php echo base_url();?>country">County View</a></li>
+						<!-- <li><a href="<?php echo base_url();?>country">County View</a></li>
 						<!-- <li><a href="http://eid.nascop.org/vreports.php">Reports</a></li>
 						<li><a href="http://eid.nascop.org/login.php">Login</a></li>
 						<li><a href="http://eid.nascop.org">EID View</a></li> -->

@@ -1,6 +1,6 @@
 
 <?php
-    echo "<div id=" . $div_name . " class='col-md-6'>
+    echo "<div id=" . $div_name . " class=''>
 
 </div>";
 

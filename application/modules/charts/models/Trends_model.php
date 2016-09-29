@@ -18,7 +18,7 @@ class Trends_model extends MY_Model
 			$county = 0;
 		}
 
-		$sql = "CALL `proc_get_yearly_tests`(" . $county . ");";
+		$sql = "CALL `proc_get_eid_yearly_tests`(" . $county . ");";
 
 		$result = $this->db->query($sql)->result_array();
 
@@ -81,7 +81,7 @@ class Trends_model extends MY_Model
 			$county = 0;
 		}
 
-		$sql = "CALL `proc_get_yearly_summary`(" . $county . ");";
+		$sql = "CALL `proc_get_eid_yearly_summary`(" . $county . ");";
 
 		$result = $this->db->query($sql)->result_array();
 

@@ -1,15 +1,15 @@
-DROP PROCEDURE IF EXISTS `proc_get_partner_eid_outcomes`;
+DROP PROCEDURE IF EXISTS `proc_get_eid_partner_hei`;
 DELIMITER //
-CREATE PROCEDURE `proc_get_partner_eid_outcomes`
+CREATE PROCEDURE `proc_get_eid_partner_hei`
 (IN P_id INT(11), IN filter_year INT(11), IN filter_month INT(11))
 BEGIN
   SET @QUERY =    "SELECT
-        SUM(`pos`) AS `pos`,
-        SUM(`neg`) AS `neg`,
-        SUM(`redraw`) AS `redraw`,
-        SUM(`tests`) AS `tests`,
-        SUM(`rejected`) AS `rejected`, 
-        SUM(`sitessending`) AS `sitessending`
+        SUM(`enrolled`) AS `enrolled`,
+        SUM(`dead`) AS `dead`,
+        SUM(`ltfu`) AS `ltfu`,
+        SUM(`adult`) AS `adult`,
+        SUM(`transout`) AS `transout`,
+        SUM(`other`) AS `other`
     FROM `ip_summary`
     WHERE 1";
 

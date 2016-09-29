@@ -1,13 +1,15 @@
-DROP PROCEDURE IF EXISTS `proc_get_national_hei`;
+DROP PROCEDURE IF EXISTS `proc_get_eid_national_hei`;
 DELIMITER //
-CREATE PROCEDURE `proc_get_national_hei`
+CREATE PROCEDURE `proc_get_eid_national_hei`
 (IN filter_year INT(11), IN filter_month INT(11))
 BEGIN
   SET @QUERY =    "SELECT
         SUM(`enrolled`) AS `enrolled`,
         SUM(`dead`) AS `dead`,
         SUM(`ltfu`) AS `ltfu`,
-        SUM(`transout`) AS `transout`
+        SUM(`adult`) AS `adult`,
+        SUM(`transout`) AS `transout`,
+        SUM(`other`) AS `other`
     FROM `national_summary`
     WHERE 1";
 

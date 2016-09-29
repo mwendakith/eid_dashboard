@@ -55,7 +55,7 @@ $(function () {
             backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
         },
         series: [{
-            name: 'Rainfall',
+            name: 'Positives',
             type: 'column',
             yAxis: 1,
             data: <?php echo json_encode($trends[0]);?>,
@@ -64,7 +64,7 @@ $(function () {
             }
 
         }, {
-            name: 'Temperature',
+            name: 'Positivity (%)',
             type: 'spline',
             data: <?php echo json_encode($trends[1]);?>,
             tooltip: {

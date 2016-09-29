@@ -1,6 +1,6 @@
-DROP PROCEDURE IF EXISTS `proc_get_all_sites_outcomes`;
+DROP PROCEDURE IF EXISTS `proc_get_eid_all_sites_outcomes`;
 DELIMITER //
-CREATE PROCEDURE `proc_get_all_sites_outcomes`
+CREATE PROCEDURE `proc_get_eid_all_sites_outcomes`
 (IN filter_year INT(11), IN filter_month INT(11))
 BEGIN
   SET @QUERY =    "SELECT 
@@ -25,9 +25,9 @@ BEGIN
 END //
 DELIMITER ;
 
-DROP PROCEDURE IF EXISTS `proc_get_sites_trends`;
+DROP PROCEDURE IF EXISTS `proc_get_eid_sites_trends`;
 DELIMITER //
-CREATE PROCEDURE `proc_get_sites_trends`
+CREATE PROCEDURE `proc_get_eid_sites_trends`
 (IN filter_year INT(11), IN filter_site INT(11))
 BEGIN
   SET @QUERY =    "SELECT 
@@ -55,9 +55,9 @@ END //
 DELIMITER ;
 
 
-DROP PROCEDURE IF EXISTS `proc_get_sites_eid`;
+DROP PROCEDURE IF EXISTS `proc_get_eid_sites_eid`;
 DELIMITER //
-CREATE PROCEDURE `proc_get_sites_eid`
+CREATE PROCEDURE `proc_get_eid_sites_eid`
 (IN filter_year INT(11), IN filter_month INT(11),  IN filter_site INT(11))
 BEGIN
   SET @QUERY =    "SELECT 
@@ -81,9 +81,9 @@ BEGIN
 END //
 DELIMITER ;
 
-DROP PROCEDURE IF EXISTS `proc_get_sites_hei_follow_up`;
+DROP PROCEDURE IF EXISTS `proc_get_eid_sites_hei_follow_up`;
 DELIMITER //
-CREATE PROCEDURE `proc_get_sites_hei_follow_up`
+CREATE PROCEDURE `proc_get_eid_sites_hei_follow_up`
 (IN filter_year INT(11), IN filter_month INT(11),  IN filter_site INT(11))
 BEGIN
   SET @QUERY =    "SELECT 

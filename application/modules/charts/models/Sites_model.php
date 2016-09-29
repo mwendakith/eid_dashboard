@@ -26,7 +26,7 @@ class Sites_model extends MY_Model
 				$month = 0;
 			}
 		}
-		$sql = "CALL `proc_get_all_sites_outcomes`('".$year."','".$month."')";
+		$sql = "CALL `proc_get_eid_all_sites_outcomes`('".$year."','".$month."')";
 
 		$result = $this->db->query($sql)->result_array();
 
@@ -60,7 +60,7 @@ class Sites_model extends MY_Model
 		}
 
 		
-		$sql = "CALL `proc_get_sites_trends`('".$year."','".$site."')";
+		$sql = "CALL `proc_get_eid_sites_trends`('".$year."','".$site."')";
 
 		$result = $this->db->query($sql)->result_array();
 
@@ -100,7 +100,7 @@ class Sites_model extends MY_Model
 		}
 
 		
-		$sql = "CALL `proc_get_sites_trends`('".$year."','".$site."')";
+		$sql = "CALL `proc_get_eid_sites_trends`('".$year."','".$site."')";
 
 		$result = $this->db->query($sql)->result_array();
 
@@ -145,7 +145,7 @@ class Sites_model extends MY_Model
 		}
 
 		
-		$sql = "CALL `proc_get_sites_eid`('".$year."', '".$month."', '".$site."')";
+		$sql = "CALL `proc_get_eid_sites_eid`('".$year."', '".$month."', '".$site."')";
 
 		$result = $this->db->query($sql)->row();
 
@@ -195,7 +195,7 @@ class Sites_model extends MY_Model
 		}
 
 		
-		$sql = "CALL `proc_get_sites_hei_follow_up`('".$year."', '".$month."', '".$site."')";
+		$sql = "CALL `proc_get_eid_sites_hei_follow_up`('".$year."', '".$month."', '".$site."')";
 
 		$result = $this->db->query($sql)->row();
 

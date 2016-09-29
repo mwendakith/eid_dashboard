@@ -18,7 +18,7 @@ BEGIN
         SET @QUERY = CONCAT(@QUERY, " AND `ss`.`year` = '",filter_year,"' ");
     END IF;
 
-    SET @QUERY = CONCAT(@QUERY, " GROUP BY `ss`.`facility` ORDER BY `suppressed` DESC LIMIT 0, 50 ");
+    SET @QUERY = CONCAT(@QUERY, " GROUP BY `ss`.`facility` ORDER BY `pos`, `neg` DESC LIMIT 0, 50 ");
 
      PREPARE stmt FROM @QUERY;
      EXECUTE stmt;

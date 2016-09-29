@@ -20,7 +20,7 @@ class Performance_model extends MY_Model
 
 		$data['year'] = $year;
 
-		$sql = "CALL `proc_get_lab_performance`('".$year."')";
+		$sql = "CALL `proc_get_eid_lab_performance`('".$year."')";
 
 		$result = $this->db->query($sql)->result_array();
 
@@ -73,7 +73,7 @@ class Performance_model extends MY_Model
 			}
 		}
 		
-		$sql = "CALL `proc_get_lab_outcomes`('".$year."','".$month."')";
+		$sql = "CALL `proc_get_eid_lab_outcomes`('".$year."','".$month."')";
 		
 		// echo "<pre>";print_r($sql);die();
 		$result = $this->db->query($sql)->result_array();
@@ -128,7 +128,7 @@ class Performance_model extends MY_Model
 		 
 		
 
-		$sql = "CALL `proc_get_lab_tat`('".$year."','".$month."')";
+		$sql = "CALL `proc_get_eid_lab_tat`('".$year."','".$month."')";
 		
 		// echo "<pre>";print_r($sql);die();
 		$result = $this->db->query($sql)->result_array();

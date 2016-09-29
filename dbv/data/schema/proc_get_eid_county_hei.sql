@@ -1,13 +1,15 @@
-DROP PROCEDURE IF EXISTS `proc_get_county_hei`;
+DROP PROCEDURE IF EXISTS `proc_get_eid_county_hei`;
 DELIMITER //
-CREATE PROCEDURE `proc_get_county_hei`
+CREATE PROCEDURE `proc_get_eid_county_hei`
 (IN C_id INT(11), IN filter_year INT(11), IN filter_month INT(11))
 BEGIN
   SET @QUERY =    "SELECT
         SUM(`enrolled`) AS `enrolled`,
         SUM(`dead`) AS `dead`,
         SUM(`ltfu`) AS `ltfu`,
-        SUM(`transout`) AS `transout`
+        SUM(`adult`) AS `adult`,
+        SUM(`transout`) AS `transout`,
+        SUM(`other`) AS `other`
     FROM `county_summary`
     WHERE 1";
 

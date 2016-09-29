@@ -3,7 +3,7 @@
 </div>
 <div>
 	<ul>
-		<?php //echo $outcomes['ul'];?>
+		<?php echo $outcomes['ul'];?>
 	</ul>
 </div>
 

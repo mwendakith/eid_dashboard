@@ -18,7 +18,7 @@ class Partner_model extends MY_Model
 			$partner = 0;
 		}
 
-		$sql = "CALL `proc_get_partner_performance`(" . $partner . ");";
+		$sql = "CALL `proc_get_eid_partner_performance`(" . $partner . ");";
 
 		$result = $this->db->query($sql)->result_array();
 
@@ -82,7 +82,7 @@ class Partner_model extends MY_Model
 			$partner = 0;
 		}
 
-		$sql = "CALL `proc_get_partner_year_summary`(" . $partner . ");";
+		$sql = "CALL `proc_get_eid_partner_year_summary`(" . $partner . ");";
 
 		$result = $this->db->query($sql)->result_array();
 

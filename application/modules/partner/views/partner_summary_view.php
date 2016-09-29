@@ -67,7 +67,7 @@
 
 	<div class="row">
 	<!-- Map of the country -->
-		<div class="col-md-3 col-sm-3 col-xs-12">
+		<div class="col-md-4 col-sm-3 col-xs-12">
 			<div class="panel panel-default">
 			  <div class="panel-heading">
 			  	Entry Point <div class="display_date" ></div>
@@ -80,7 +80,7 @@
 		</div>
 
 		<!-- Map of the country -->
-		<div class="col-md-3 col-sm-4 col-xs-12">
+		<div class="col-md-4 col-sm-4 col-xs-12">
 			<div class="panel panel-default">
 			  <div class="panel-heading">
 				  Mother Prophylaxis <div class="display_date"></div>
@@ -94,7 +94,7 @@
 			</div>
 		</div>
 		<!-- Map of the country -->
-		<div class="col-md-3 col-sm-4 col-xs-12">
+		<div class="col-md-4 col-sm-4 col-xs-12">
 			<div class="panel panel-default">
 			  <div class="panel-heading">
 				  Infant Prophylaxis <div class="display_date"></div>
@@ -108,19 +108,6 @@
 			</div>
 		</div>
 
-		<div class="col-md-3">
-			<div class="panel panel-default">
-			  <div class="panel-heading">
-			    Feeding <div class="display_date"></div>
-			  </div>
-			  <div class="panel-body" id="feeding">
-			    <center><div class="loader"></div></center>
-			  </div>
-			  <!-- <div>
-			  	<button class="btn btn-default" onclick="ageModal();">Click here for breakdown</button>
-			  </div> -->
-			</div>
-		</div>
 	</div>
 	<div class="row">
 		<!-- Map of the country -->

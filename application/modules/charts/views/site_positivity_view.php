@@ -55,7 +55,9 @@ $(function () {
             backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
         },
         series: [{
-            name: 'Positive Tests',
+            
+            name: 'Positives',
+
             type: 'column',
             yAxis: 1,
             data: <?php echo json_encode($trends[0]);?>,

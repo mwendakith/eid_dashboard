@@ -16,6 +16,7 @@
 <script type="text/javascript">
 
   $().ready(function() {
+    $("#year-month-filter").hide();
     $("#graphs").load("<?php echo base_url();?>charts/trends/positive_trends");
     $("#stacked_graph").load("<?php echo base_url();?>charts/trends/summary");
 

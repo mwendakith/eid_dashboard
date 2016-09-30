@@ -88,9 +88,10 @@ class Trends_model extends MY_Model
 		$year = date("Y");
 		$i = 0;
 
-		$data;
-
+		
 		foreach ($result as $key => $value) {
+
+
 
 			$data['categories'][$i] = $value['year'];
 

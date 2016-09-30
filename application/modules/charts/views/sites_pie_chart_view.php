@@ -29,7 +29,10 @@ $(function () {
                     }
                 }
             }
-        },
+        },colors: [
+            '#F2784B',
+            '#1BA39C'
+        ],
         series: [{
             name: 'Tests',
             colorByPoint: true,

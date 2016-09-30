@@ -112,15 +112,61 @@ class Summaries_model extends MY_Model
 		$data['eid_outcomes']['data'][0]['y'] = $count;
 
 		foreach ($result as $key => $value) {
-			$data['ul'] .= '<li>Cumulative No. of Tests: <strong>'.(int) $value['alltests'].'</strong></li>';
-			$data['ul'] .= '<li>Cumulative No. of EQA Tests: <strong>'.(int) $value['eqatests'].'</strong></li>';
-			$data['ul'] .= '<li>No. of All Infants Tested: <strong>'.(int) $value['tests'].'</strong></li>';
-			$data['ul'] .= '<li>No. of All Infants Tested ( < 2 months): <strong>'.(int) $value['infantsless2m'].'</strong></li>';
-			$data['ul'] .= '<li>No. of first DNA PCR Test: <strong>'.(int) $value['firstdna'].'</strong></li>';
-			$data['ul'] .= '<li>No of Confirmatory PCR Test @9M: <strong>'.(int) $value['confirmdna'].'</strong></li>';
-			$data['ul'] .= '<li>Median Age of Testing (Months): <strong>'.$value['medage'].'</strong></li>';
-			$data['ul'] .= '<li>Rejected Samples: <strong>'.$value['rejected'].'</strong></li>';
-			$data['ul'] .= '<li>Sites Sending: <strong>'.(int) $value['sitessending'].'</strong></li>';
+			$data['ul'] .= '<tr>
+		    		<td>Cumulative Tests:</td>
+		    		<td>'.(int) $value['alltests'].'</td>
+		    		<td>EQA Tests:</td>
+		    		<td>'.(int) $value['eqatests'].'</td>
+		    	</tr>
+		    	<tr>
+		    		<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Actual Tests:</td>
+		    		<td>'.(int) $value['tests'].'</td>
+		    		<td>Positive Outcomes:</td>
+		    		<td>'.(int) $value['pos'].'('.round((((int) $value['pos']/(int) $value['tests'])*100)).'%)</td>
+		    	</tr>
+		    	<tr>
+		    		<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;First DNA PCR:</td>
+		    		<td>'.(int) $value['firstdna'].'</td>
+		    		<td>Confirmatory PCR:</td>
+		    		<td>'.(int) $value['confirmdna'].'</td>
+		    	</tr>
+		    	<tr>
+		    		<th colspan="4"></th>
+		    	</tr>
+		    	<tr>
+		    		<td>Actual Infants Tested:</td>
+		    		<td>'.(int) $value['actualinfants'].'</td>
+		    		<td>Positive Outcomes:</td>
+		    		<td>'.(int) $value['actualinfantspos'].'('.round((((int) $value['actualinfantspos']/(int) $value['actualinfants'])*100)).'%)</td>
+		    	</tr>
+		    	<tr>
+		    		<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Infants &lt; 2M:</td>
+		    		<td>'.(int) $value['infantsless2m'].'</td>
+		    		<td>Infants &lt; 2M Positive:</td>
+		    		<td>'.(int) $value['infantless2mpos'].'('.round((((int) $value['infantsless2mpos']/(int) $value['infantsless2m'])*100)).'%)</td>
+		    	</tr>
+		    	<tr>
+		    		<th colspan="4"></th>
+		    	</tr>
+		    	<tr>
+		    		<td>Median Age of Testing:</td>
+		    		<td>'.round($value['medage']).'</td>
+		    		<td>Rejected:</td>
+		    		<td>'.(int) $value['rejected'].'</td>
+		    	</tr>
+		    	<tr>
+		    		<td colspan="2"><center>Sites sending:</center></td>
+		    		<td colspan="2">'.(int) $value['sitessending'].'</td>
+		    	</tr>';
+			// $data['ul'] .= '<li>Cumulative No. of Tests: <strong>'.(int) $value['alltests'].'</strong></li>';
+			// $data['ul'] .= '<li>Cumulative No. of EQA Tests: <strong>'.(int) $value['eqatests'].'</strong></li>';
+			// $data['ul'] .= '<li>No. of All Infants Tested: <strong>'.(int) $value['tests'].'</strong></li>';
+			// $data['ul'] .= '<li>No. of All Infants Tested ( < 2 months): <strong>'.(int) $value['infantsless2m'].'</strong></li>';
+			// $data['ul'] .= '<li>No. of first DNA PCR Test: <strong>'.(int) $value['firstdna'].'</strong></li>';
+			// $data['ul'] .= '<li>No of Confirmatory PCR Test @9M: <strong>'.(int) $value['confirmdna'].'</strong></li>';
+			// $data['ul'] .= '<li>Median Age of Testing (Months): <strong>'.$value['medage'].'</strong></li>';
+			// $data['ul'] .= '<li>Rejected Samples: <strong>'.$value['rejected'].'</strong></li>';
+			// $data['ul'] .= '<li>Sites Sending: <strong>'.(int) $value['sitessending'].'</strong></li>';
 			// if($value['name'] == ''){
 			// 	$data['hei']['data'][$key]['color'] = '#5C97BF';
 			// }
@@ -184,18 +230,18 @@ class Summaries_model extends MY_Model
 
 		foreach ($result as $key => $value) {
 			$total = (int) ($value['enrolled']+$value['dead']+$value['ltfu']+$value['adult']+$value['transout']+$value['other']);
-			$data['ul'] .= '<li>Initiated onto Treatment: '.(int) $value['enrolled'].' <strong>('.(int) (($value['enrolled']/$total)*100).'%)</strong></li>';
+			$data['ul'] .= '<li>Initiated To Treatment: '.(int) $value['enrolled'].' <strong>('.(int) (($value['enrolled']/$total)*100).'%)</strong></li>';
 			$data['ul'] .= '<li>Lost to Follow Up: '.$value['ltfu'].' <strong>('.(int) (($value['ltfu']/$total)*100).'%)</strong></li>';
 			$data['ul'] .= '<li>Dead: '.(int) $value['dead'].' <strong>('.(int) (($value['dead']/$total)*100).'%)</strong></li>';
-			$data['ul'] .= '<li>Adult Sapmle: '.$value['adult'].' <strong>('.(int) (($value['adult']/$total)*100).'%)</strong></li>';
-			$data['ul'] .= '<li>Transferred out: '.$value['transout'].' <strong>('.(int) (($value['transout']/$total)*100).'%)</strong></li>';
-			$data['ul'] .= '<li>Other Reason: '.$value['other'].' <strong>('.(int) (($value['other']/$total)*100).'%)</strong></li>';
+			$data['ul'] .= '<li>Adult Samples: '.$value['adult'].' <strong>('.(int) (($value['adult']/$total)*100).'%)</strong></li>';
+			$data['ul'] .= '<li>Transferred Out: '.$value['transout'].' <strong>('.(int) (($value['transout']/$total)*100).'%)</strong></li>';
+			$data['ul'] .= '<li>Other Reasons(e.g denial): '.$value['other'].' <strong>('.(int) (($value['other']/$total)*100).'%)</strong></li>';
 			// if($value['name'] == ''){
 			// 	$data['hei']['data'][$key]['color'] = '#5C97BF';
 			// }
 			$data['hei']['data'][$key]['y'] = $count;
 
-			$data['hei']['data'][0]['name'] = 'Enrolled';
+			$data['hei']['data'][0]['name'] = 'Initiated To Treatment';
 			$data['hei']['data'][1]['name'] = 'Dead';
 			$data['hei']['data'][2]['name'] = 'Lost to Follow up';
 			$data['hei']['data'][3]['name'] = 'Transferred out';
@@ -472,6 +518,10 @@ class Summaries_model extends MY_Model
 		
 		if ($partner==null || $partner=='null') {
 			$partner = $this->session->userdata('partner_filter');
+		}
+
+		if ($pfil==null || $pfil=='null') {
+			$pfil = NULL;
 		}
 				
 		// echo "PFil: ".$pfil." --Partner: ".$partner." -- County: ".$county;

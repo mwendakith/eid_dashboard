@@ -60,6 +60,16 @@ class Template extends MY_Controller
 		echo $this->session->userdata('site_filter');
 	}
 
+	function filter_date_data()
+	{
+		$data = array(
+				'year' => $this->input->post('year'),
+				'month' => $this->input->post('month')
+			);
+		
+		echo $this->set_filter_date($data);
+	}
+
 	function breadcrum($data=null,$partner=NULL)
 	{
 		$this->load->model('template_model');

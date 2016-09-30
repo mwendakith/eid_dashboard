@@ -84,6 +84,12 @@ class Sites_model extends MY_Model
 			$data['trends'][2]['data'][$month] = (int) $value['pos'];
 			$data['trends'][3]['data'][$month] = (int) $value['neg'];
 		}
+		
+		$data['title'] = "Test Trends (" . $year . ")";
+		$data['div'] = "#tests";
+		$data['div_name'] = "tests";
+		$data['suffix'] = " ";
+		$data['yAxis'] = "Number of Tests";
 
 		return $data;
 	}
@@ -152,6 +158,9 @@ class Sites_model extends MY_Model
 		$data['trend'][0]['name'] = "positive";
 		$data['trend'][1]['name'] = "negative";
 
+		$data['trend'][0]['color'] = '#F2784B';
+		$data['trend'][1]['color'] = '#1BA39C';
+
 		$data['trend'][0]['y'] = (int) $result->pos;
 		$data['trend'][1]['y'] = (int) $result->neg;
 
@@ -171,6 +180,15 @@ class Sites_model extends MY_Model
 		}else{
 			$data['value'][4] = (int) ($result->rejected / $result->tests * 100);
 		}
+
+		$data['div'] = "eid_pie";
+		$data['content'] = "eid_content";
+		$data['title'] = "EID";
+		$str = "Total Tests: " . $data['value'][0];
+		$str .= "<br />Total Positives: " . $data['trend'][0]['y'] . " <b>(" . $data['value'][1] . "%) </b>";
+		$str .= "<br />Total Negatives: " . $data['trend'][1]['y'] . " <b>(" . $data['value'][2] . "%) </b>";
+		$str .= "<br />Total Rejected: " . $data['value'][3] . " <b>(" . $data['value'][4] . "%) </b>";
+		$data['stats'] = $str;
 		
 
 		return $data;
@@ -204,10 +222,43 @@ class Sites_model extends MY_Model
 		$data['trend'][2]['name'] = "lost to follow up";
 		$data['trend'][3]['name'] = "transferred out";
 
+		$per = (int) ($result->enrolled + $result->dead + $result->ltfu + $result->transout + $result->adult + $result->other);
+
 		$data['trend'][0]['y'] = (int) $result->enrolled;
 		$data['trend'][1]['y'] = (int) $result->dead;
 		$data['trend'][2]['y'] = (int) $result->ltfu;
 		$data['trend'][3]['y'] = (int) $result->transout;
+
+		$data['trend'][0]['sliced'] = true;
+		$data['trend'][0]['selected'] = true;
+
+		$data['trend'][0]['color'] = '#F2784B';
+		$data['trend'][1]['color'] = '#1BA39C';
+		$data['trend'][2]['color'] = '#5C97BF';
+
+		$data['other'][0] = (int) $result->adult;
+		$data['other'][1] = (int) $result->other;
+
+		$data['per'][0] = (int) ($result->enrolled / $per * 100);
+		$data['per'][1] = (int) ($result->dead / $per * 100);
+		$data['per'][2] = (int) ($result->ltfu / $per * 100);
+		$data['per'][3] = (int) ($result->transout / $per * 100);
+		$data['per'][4] = (int) ($result->adult / $per * 100);
+		$data['per'][5] = (int) ($result->other / $per * 100);
+
+		$str = "Enrolled: " . $data['trend'][0]['y'] . " <b>(" . $data['per'][0] . "%)</b>";
+		$str .= "<br />Dead: " . $data['trend'][1]['y'] . " <b>(" . $data['per'][1] . "%)</b>";
+		$str .= "<br />Lost to follow up: " . $data['trend'][2]['y'] . " <b>(" . $data['per'][2] . "%)</b>";
+		$str .= "<br />Transferred out: " . $data['trend'][3]['y'] . " <b>(" . $data['per'][3] . "%)</b>";
+		$str .= "<br />Adults: " . $data['other'][0] . " <b>(" . $data['per'][4] . "%)</b>";
+		$str .= "<br />Other: " . $data['other'][1] . " <b>(" . $data['per'][5] . "%)</b>";
+
+		$data['stats'] = $str;
+
+
+		$data['div'] = "hei_pie";
+		$data['content'] = "hei_content";
+		$data['title'] = "HEI Follow Up";
 		
 
 		return $data;

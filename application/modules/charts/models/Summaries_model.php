@@ -46,14 +46,12 @@ class Summaries_model extends MY_Model
 		// echo "<pre>";print_r($result);die();
 		$data['testing_trends'][0]['name'] = 'Positive';
 		$data['testing_trends'][1]['name'] = 'Negative';
-		$data['testing_trends'][2]['name'] = 'Redraw';
 
 		$count = 0;
 		
 		$data['categories'][0] = 'No Data';
 		$data["testing_trends"][0]["data"][0]	= $count;
 		$data["testing_trends"][1]["data"][0]	= $count;
-		$data["testing_trends"][2]["data"][0]	= $count;
 
 		foreach ($result as $key => $value) {
 			
@@ -61,10 +59,9 @@ class Summaries_model extends MY_Model
 
 				$data["testing_trends"][0]["data"][$key]	= (int) $value['pos'];
 				$data["testing_trends"][1]["data"][$key]	= (int) $value['neg'];
-				$data["testing_trends"][2]["data"][$key]	= (int) $value['redraw'];
 			
 		}
-		
+		// echo "<pre>";print_r($data);die();
 		return $data;
 	}
 
@@ -131,18 +128,15 @@ class Summaries_model extends MY_Model
 
 			$data['eid_outcomes']['data'][0]['name'] = 'Positive';
 			$data['eid_outcomes']['data'][1]['name'] = 'Negative';
-			$data['eid_outcomes']['data'][2]['name'] = 'Redraw';
 
 			$data['eid_outcomes']['data'][0]['y'] = (int) $value['pos'];
 			$data['eid_outcomes']['data'][1]['y'] = (int) $value['neg'];
-			$data['eid_outcomes']['data'][2]['y'] = (int) $value['redraw'];
 		}
 
 		$data['eid_outcomes']['data'][0]['sliced'] = true;
 		$data['eid_outcomes']['data'][0]['selected'] = true;
 		$data['eid_outcomes']['data'][0]['color'] = '#F2784B';
 		$data['eid_outcomes']['data'][1]['color'] = '#1BA39C';
-		$data['eid_outcomes']['data'][2]['color'] = '#5C97BF';
 		// echo "<pre>";print_r($data);die();
 		return $data;
 	}
@@ -201,7 +195,7 @@ class Summaries_model extends MY_Model
 			// }
 			$data['hei']['data'][$key]['y'] = $count;
 
-			$data['hei']['data'][0]['name'] = 'Enrollled';
+			$data['hei']['data'][0]['name'] = 'Enrolled';
 			$data['hei']['data'][1]['name'] = 'Dead';
 			$data['hei']['data'][2]['name'] = 'Lost to Follow up';
 			$data['hei']['data'][3]['name'] = 'Transferred out';
@@ -266,12 +260,12 @@ class Summaries_model extends MY_Model
 		$data['categories'][0]			= 'No Data';
 
 		foreach ($result as $key => $value) {
-			$data['categories'][0] 			= '6wks';
-			$data['categories'][1] 			= '7wks-3M';
-			$data['categories'][2] 			= '3M-9M';
-			$data['categories'][3] 			= '9M-18M';
-			$data['categories'][4] 			= 'above18M';
-			$data['categories'][5] 			= 'No Data';
+			$data['categories'][0] 			= '2M';
+			$data['categories'][1] 			= '3-8M';
+			$data['categories'][2] 			= '9-12M';
+			$data['categories'][3] 			= 'Above 12M';
+			// $data['categories'][4] 			= 'above18M';
+			$data['categories'][4] 			= 'No Data';
 
 			$data["ageGnd"][0]["data"][0]	=  (int) $value['sixweekspos'];
 			$data["ageGnd"][1]["data"][0]	=  (int) $value['sixweeksneg'];
@@ -281,10 +275,10 @@ class Summaries_model extends MY_Model
 			$data["ageGnd"][1]["data"][2]	=  (int) $value['threemto9mneg'];
 			$data["ageGnd"][0]["data"][3]	=  (int) $value['ninemto18mpos'];
 			$data["ageGnd"][1]["data"][3]	=  (int) $value['ninemto18mneg'];
-			$data["ageGnd"][0]["data"][4]	=  (int) $value['above18mpos'];
-			$data["ageGnd"][1]["data"][4]	=  (int) $value['above18mneg'];
-			$data["ageGnd"][0]["data"][5]	=  (int) $value['nodatapos'];
-			$data["ageGnd"][1]["data"][5]	=  (int) $value['nodataneg'];
+			// $data["ageGnd"][0]["data"][4]	=  (int) $value['above18mpos'];
+			// $data["ageGnd"][1]["data"][4]	=  (int) $value['above18mneg'];
+			$data["ageGnd"][0]["data"][4]	=  (int) $value['nodatapos'];
+			$data["ageGnd"][1]["data"][4]	=  (int) $value['nodataneg'];
 		}
 		// die();
 		$data['ageGnd'][0]['drilldown']['color'] = '#913D88';
@@ -484,14 +478,12 @@ class Summaries_model extends MY_Model
 		if ($county) {
 			$sql = "CALL `proc_get_eid_county_sites_outcomes`('".$county."','".$year."','".$month."')";
 		} else {
-			if ($pfil==1) {
-				// if ($partner) {
-				// 	$sql = "CALL `proc_get_partner_sites_outcomes`('".$partner."','".$year."','".$month."')";
-				// } else {
-				// 	$sql = "CALL `proc_get_partner_outcomes`('".$year."','".$month."')";
-				// }
-				$sql = "CALL `proc_get_eid_partner_outcomes`('".$year."','".$month."')";
-				
+			if ($pfil||$pfil==1) {
+				if ($partner) {
+					$sql = "CALL `proc_get_eid_partner_sites_outcomes`('".$partner."','".$year."','".$month."')";
+				} else {
+					$sql = "CALL `proc_get_eid_partner_outcomes`('".$year."','".$month."')";
+				}
 			} else {
 				$sql = "CALL `proc_get_eid_county_outcomes`('".$year."','".$month."')";
 			}

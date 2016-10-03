@@ -417,8 +417,10 @@ CREATE PROCEDURE `proc_get_eid_yearly_summary`
 (IN county INT(11))
 BEGIN
   SET @QUERY =    "SELECT
-                    `cs`.`year`,  SUM(`cs`.`neg`) AS `neg`, 
-                    SUM(`cs`.`pos`) AS `positive`
+                    `cs`.`year`,  
+                    SUM(`cs`.`neg`) AS `negative`, 
+                    SUM(`cs`.`pos`) AS `positive`, 
+                    SUM(`cs`.`redraw`) AS `redraw`
                 FROM `county_summary` `cs`
                 WHERE 1 ";
 
@@ -1105,5 +1107,24 @@ BEGIN
 
      PREPARE stmt FROM @QUERY;
      EXECUTE stmt;
+END //
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS `proc_get_eid_national_yearly_summary`;
+DELIMITER //
+CREATE PROCEDURE `proc_get_eid_national_yearly_summary`
+()
+BEGIN
+  SET @QUERY =    "SELECT 
+                    `year`, 
+                    SUM(`tests`) AS `tests`, 
+                    SUM(`pos`) AS `positive`, 
+                    SUM(`neg`) AS `negative`, 
+                    SUM(`redraw`) AS `redraws` 
+                  FROM `national_summary` 
+                  GROUP BY `year` ORDER BY `year` ASC";
+
+    PREPARE stmt FROM @QUERY;
+    EXECUTE stmt;
 END //
 DELIMITER ;

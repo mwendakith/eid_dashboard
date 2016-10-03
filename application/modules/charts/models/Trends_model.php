@@ -19,9 +19,9 @@ class Trends_model extends MY_Model
 		}
 
 		$sql = "CALL `proc_get_eid_yearly_tests`(" . $county . ");";
-
+		
 		$result = $this->db->query($sql)->result_array();
-
+		
 		$year;
 		$i = 0;
 		$b = true;
@@ -80,11 +80,16 @@ class Trends_model extends MY_Model
 		if($county == NULL || $county == 48){
 			$county = 0;
 		}
-
-		$sql = "CALL `proc_get_eid_yearly_summary`(" . $county . ");";
-
+		
+		if($county==0){
+			$sql = "CALL `proc_get_eid_national_yearly_summary`();";
+		} else {
+			$sql = "CALL `proc_get_eid_yearly_summary`(" . $county . ");";
+		}
+		// echo "<pre>";print_r($sql);die();
+		
 		$result = $this->db->query($sql)->result_array();
-
+		// echo "<pre>";print_r($result);die();
 		$year = date("Y");
 		$i = 0;
 
@@ -95,12 +100,15 @@ class Trends_model extends MY_Model
 
 			$data['categories'][$i] = $value['year'];
 
-			$data['outcomes'][0]['name'] = "positive";
+			$data['outcomes'][0]['name'] = "Positive";
 			$data['outcomes'][0]['data'][$i] = (int) $value['positive'];
 
 
-			$data['outcomes'][1]['name'] = "negative";
-			$data['outcomes'][1]['data'][$i] = (int) $value['neg'];
+			$data['outcomes'][1]['name'] = "Negative";
+			$data['outcomes'][1]['data'][$i] = (int) $value['negative'];
+
+			$data['outcomes'][2]['name'] = "Redraws";
+			$data['outcomes'][2]['data'][$i] = (int) $value['redraws'];
 			$i++;
 		}
 		$data['title'] = "Outcomes";

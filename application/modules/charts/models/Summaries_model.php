@@ -143,20 +143,22 @@ class Summaries_model extends MY_Model
 		    		<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Infants &lt; 2M:</td>
 		    		<td>'.(int) $value['infantsless2m'].'</td>
 		    		<td>Infants &lt; 2M Positive:</td>
-		    		<td>'.(int) $value['infantless2mpos'].'('.round((((int) $value['infantsless2mpos']/(int) $value['infantsless2m'])*100)).'%)</td>
+		    		<td>'.(int) $value['infantless2mpos'].'('.round((((int) $value['infantless2mpos']/(int) $value['infantsless2m'])*100)).'%)</td>
 		    	</tr>
 		    	<tr>
 		    		<th colspan="4"></th>
 		    	</tr>
 		    	<tr>
-		    		<td>Median Age of Testing:</td>
-		    		<td>'.round($value['medage']).'</td>
-		    		<td>Rejected:</td>
+		    		<td>Redraws:</td>
+		    		<td>'.(int) $value['redraw'].'</td>
+		    		<td>Rejected Samples:</td>
 		    		<td>'.(int) $value['rejected'].'</td>
 		    	</tr>
 		    	<tr>
-		    		<td colspan="2"><center>Sites sending:</center></td>
-		    		<td colspan="2">'.(int) $value['sitessending'].'</td>
+		    		<td>Median Age of Testing:</td>
+		    		<td>'.round($value['medage']).'</td>
+		    		<td>Average Sites sending:</td>
+		    		<td>'.(int) $value['sitessending'].'</td>
 		    	</tr>';
 			// $data['ul'] .= '<li>Cumulative No. of Tests: <strong>'.(int) $value['alltests'].'</strong></li>';
 			// $data['ul'] .= '<li>Cumulative No. of EQA Tests: <strong>'.(int) $value['eqatests'].'</strong></li>';

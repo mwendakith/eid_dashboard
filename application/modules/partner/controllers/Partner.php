@@ -13,6 +13,7 @@ class Partner extends MY_Controller
 		$this->data	=	array_merge($this->data,$this->load_libraries(array('material','highstock','highmaps','highcharts','custom','select2','tablecloth')));
 		$this->session->set_userdata('county_filter', NULL);
 		$this->data['part'] = TRUE;
+		$this->data['partner_select'] = $this->session->userdata('partner_filter');
 	}
 
 	function index()
@@ -30,6 +31,15 @@ class Partner extends MY_Controller
 		$this->data['content_view'] = 'partner/partner_trends_view';
 		$this -> template($this->data);
 		
+	}
+
+	function sites()
+	{
+		$this->load->module('charts/sites');
+
+		$this->data['content_view'] = 'partner/partner_sites_view';
+		// echo "<pre>";print_r($this->data);die();
+		$this -> template($this->data);
 	}
 
 	public function get_selected_partner()

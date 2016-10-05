@@ -49,6 +49,48 @@ class Sites_model extends MY_Model
 
 	}
 
+	function partner_sites_outcomes($year=NULL,$month=NULL,$site=NULL,$partner=NULL)
+	{
+		$table = '';
+		$count = 1;
+		if ($year==null || $year=='null') {
+			$year = $this->session->userdata('filter_year');
+		}
+		if ($month==null || $month=='null') {
+			if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
+				$month = 0;
+			}else {
+				$month = $this->session->userdata('filter_month');
+			}
+		}
+
+		$sql = "CALL `proc_get_eid_partner_sites_details`('".$partner."','".$year."','".$month."')";
+		// echo "<pre>";print_r($sql);die();
+		$result = $this->db->query($sql)->result_array();
+		// echo "<pre>";print_r($sql);die();
+		foreach ($result as $key => $value) {
+			$table .= '<tr>';
+			$table .= '<td>'.$count.'</td>';
+			$table .= '<td>'.$value['MFLCode'].'</td>';
+			$table .= '<td>'.$value['name'].'</td>';
+			$table .= '<td>'.$value['county'].'</td>';
+			$table .= '<td>'.$value['tests'].'</td>';
+			$table .= '<td>'.$value['eqatests'].'</td>';
+			$table .= '<td>'.$value['firstdna'].'</td>';
+			$table .= '<td>'.$value['confirmdna'].'</td>';
+			$table .= '<td>'.$value['positive'].'</td>';
+			$table .= '<td>'.$value['negative'].'</td>';
+			$table .= '<td>'.$value['redraw'].'</td>';
+			$table .= '<td>'.$value['infantsless2m'].'</td>';
+			$table .= '<td>'.$value['infantsless2mpos'].'</td>';
+			$table .= '</tr>';
+			$count++;
+		}
+		
+
+		return $table;
+	}
+
 	function get_trends($site=null, $year=null){
 
 		if ($year==null || $year=='null') {

@@ -46,14 +46,12 @@ class Summaries_model extends MY_Model
 		// echo "<pre>";print_r($result);die();
 		$data['testing_trends'][0]['name'] = 'Positive';
 		$data['testing_trends'][1]['name'] = 'Negative';
-		$data['testing_trends'][2]['name'] = 'Redraw';
 
 		$count = 0;
 		
 		$data['categories'][0] = 'No Data';
 		$data["testing_trends"][0]["data"][0]	= $count;
 		$data["testing_trends"][1]["data"][0]	= $count;
-		$data["testing_trends"][2]["data"][0]	= $count;
 
 		foreach ($result as $key => $value) {
 			
@@ -61,10 +59,9 @@ class Summaries_model extends MY_Model
 
 				$data["testing_trends"][0]["data"][$key]	= (int) $value['pos'];
 				$data["testing_trends"][1]["data"][$key]	= (int) $value['neg'];
-				$data["testing_trends"][2]["data"][$key]	= (int) $value['redraw'];
 			
 		}
-		
+		// echo "<pre>";print_r($data);die();
 		return $data;
 	}
 
@@ -115,15 +112,63 @@ class Summaries_model extends MY_Model
 		$data['eid_outcomes']['data'][0]['y'] = $count;
 
 		foreach ($result as $key => $value) {
-			$data['ul'] .= '<li>Cumulative No. of Tests: <strong>'.(int) $value['alltests'].'</strong></li>';
-			$data['ul'] .= '<li>Cumulative No. of EQA Tests: <strong>'.(int) $value['eqatests'].'</strong></li>';
-			$data['ul'] .= '<li>No. of All Infants Tested: <strong>'.(int) $value['tests'].'</strong></li>';
-			$data['ul'] .= '<li>No. of All Infants Tested ( < 2 months): <strong>'.(int) $value['infantsless2m'].'</strong></li>';
-			$data['ul'] .= '<li>No. of first DNA PCR Test: <strong>'.(int) $value['firstdna'].'</strong></li>';
-			$data['ul'] .= '<li>No of Confirmatory PCR Test @9M: <strong>'.(int) $value['confirmdna'].'</strong></li>';
-			$data['ul'] .= '<li>Median Age of Testing (Months): <strong>'.$value['medage'].'</strong></li>';
-			$data['ul'] .= '<li>Rejected Samples: <strong>'.$value['rejected'].'</strong></li>';
-			$data['ul'] .= '<li>Sites Sending: <strong>'.(int) $value['sitessending'].'</strong></li>';
+			$data['ul'] .= '<tr>
+		    		<td>Cumulative Tests:</td>
+		    		<td>'.(int) $value['alltests'].'</td>
+		    		<td>EQA Tests:</td>
+		    		<td>'.(int) $value['eqatests'].'</td>
+		    	</tr>
+		    	<tr>
+		    		<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Actual Tests:</td>
+		    		<td>'.(int) $value['tests'].'</td>
+		    		<td>Positive Outcomes:</td>
+		    		<td>'.(int) $value['pos'].'('.round((((int) $value['pos']/(int) $value['tests'])*100)).'%)</td>
+		    	</tr>
+		    	<tr>
+		    		<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;First DNA PCR:</td>
+		    		<td>'.(int) $value['firstdna'].'</td>
+		    		<td>Confirmatory PCR:</td>
+		    		<td>'.(int) $value['confirmdna'].'</td>
+		    	</tr>
+		    	<tr>
+		    		<th colspan="4"></th>
+		    	</tr>
+		    	<tr>
+		    		<td>Actual Infants Tested:</td>
+		    		<td>'.(int) $value['actualinfants'].'</td>
+		    		<td>Positive Outcomes:</td>
+		    		<td>'.(int) $value['actualinfantspos'].'('.round((((int) $value['actualinfantspos']/(int) $value['actualinfants'])*100)).'%)</td>
+		    	</tr>
+		    	<tr>
+		    		<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Infants &lt; 2M:</td>
+		    		<td>'.(int) $value['infantsless2m'].'</td>
+		    		<td>Infants &lt; 2M Positive:</td>
+		    		<td>'.(int) $value['infantless2mpos'].'('.round((((int) $value['infantless2mpos']/(int) $value['infantsless2m'])*100)).'%)</td>
+		    	</tr>
+		    	<tr>
+		    		<th colspan="4"></th>
+		    	</tr>
+		    	<tr>
+		    		<td>Redraws:</td>
+		    		<td>'.(int) $value['redraw'].'</td>
+		    		<td>Rejected Samples:</td>
+		    		<td>'.(int) $value['rejected'].'</td>
+		    	</tr>
+		    	<tr>
+		    		<td>Median Age of Testing:</td>
+		    		<td>'.round($value['medage']).'</td>
+		    		<td>Average Sites sending:</td>
+		    		<td>'.(int) $value['sitessending'].'</td>
+		    	</tr>';
+			// $data['ul'] .= '<li>Cumulative No. of Tests: <strong>'.(int) $value['alltests'].'</strong></li>';
+			// $data['ul'] .= '<li>Cumulative No. of EQA Tests: <strong>'.(int) $value['eqatests'].'</strong></li>';
+			// $data['ul'] .= '<li>No. of All Infants Tested: <strong>'.(int) $value['tests'].'</strong></li>';
+			// $data['ul'] .= '<li>No. of All Infants Tested ( < 2 months): <strong>'.(int) $value['infantsless2m'].'</strong></li>';
+			// $data['ul'] .= '<li>No. of first DNA PCR Test: <strong>'.(int) $value['firstdna'].'</strong></li>';
+			// $data['ul'] .= '<li>No of Confirmatory PCR Test @9M: <strong>'.(int) $value['confirmdna'].'</strong></li>';
+			// $data['ul'] .= '<li>Median Age of Testing (Months): <strong>'.$value['medage'].'</strong></li>';
+			// $data['ul'] .= '<li>Rejected Samples: <strong>'.$value['rejected'].'</strong></li>';
+			// $data['ul'] .= '<li>Sites Sending: <strong>'.(int) $value['sitessending'].'</strong></li>';
 			// if($value['name'] == ''){
 			// 	$data['hei']['data'][$key]['color'] = '#5C97BF';
 			// }
@@ -131,18 +176,15 @@ class Summaries_model extends MY_Model
 
 			$data['eid_outcomes']['data'][0]['name'] = 'Positive';
 			$data['eid_outcomes']['data'][1]['name'] = 'Negative';
-			$data['eid_outcomes']['data'][2]['name'] = 'Redraw';
 
 			$data['eid_outcomes']['data'][0]['y'] = (int) $value['pos'];
 			$data['eid_outcomes']['data'][1]['y'] = (int) $value['neg'];
-			$data['eid_outcomes']['data'][2]['y'] = (int) $value['redraw'];
 		}
 
 		$data['eid_outcomes']['data'][0]['sliced'] = true;
 		$data['eid_outcomes']['data'][0]['selected'] = true;
 		$data['eid_outcomes']['data'][0]['color'] = '#F2784B';
 		$data['eid_outcomes']['data'][1]['color'] = '#1BA39C';
-		$data['eid_outcomes']['data'][2]['color'] = '#5C97BF';
 		// echo "<pre>";print_r($data);die();
 		return $data;
 	}
@@ -190,18 +232,18 @@ class Summaries_model extends MY_Model
 
 		foreach ($result as $key => $value) {
 			$total = (int) ($value['enrolled']+$value['dead']+$value['ltfu']+$value['adult']+$value['transout']+$value['other']);
-			$data['ul'] .= '<li>Initiated onto Treatment: '.(int) $value['enrolled'].' <strong>('.(int) (($value['enrolled']/$total)*100).'%)</strong></li>';
+			$data['ul'] .= '<li>Initiated To Treatment: '.(int) $value['enrolled'].' <strong>('.(int) (($value['enrolled']/$total)*100).'%)</strong></li>';
 			$data['ul'] .= '<li>Lost to Follow Up: '.$value['ltfu'].' <strong>('.(int) (($value['ltfu']/$total)*100).'%)</strong></li>';
 			$data['ul'] .= '<li>Dead: '.(int) $value['dead'].' <strong>('.(int) (($value['dead']/$total)*100).'%)</strong></li>';
-			$data['ul'] .= '<li>Adult Sapmle: '.$value['adult'].' <strong>('.(int) (($value['adult']/$total)*100).'%)</strong></li>';
-			$data['ul'] .= '<li>Transferred out: '.$value['transout'].' <strong>('.(int) (($value['transout']/$total)*100).'%)</strong></li>';
-			$data['ul'] .= '<li>Other Reason: '.$value['other'].' <strong>('.(int) (($value['other']/$total)*100).'%)</strong></li>';
+			$data['ul'] .= '<li>Adult Samples: '.$value['adult'].' <strong>('.(int) (($value['adult']/$total)*100).'%)</strong></li>';
+			$data['ul'] .= '<li>Transferred Out: '.$value['transout'].' <strong>('.(int) (($value['transout']/$total)*100).'%)</strong></li>';
+			$data['ul'] .= '<li>Other Reasons(e.g denial): '.$value['other'].' <strong>('.(int) (($value['other']/$total)*100).'%)</strong></li>';
 			// if($value['name'] == ''){
 			// 	$data['hei']['data'][$key]['color'] = '#5C97BF';
 			// }
 			$data['hei']['data'][$key]['y'] = $count;
 
-			$data['hei']['data'][0]['name'] = 'Enrollled';
+			$data['hei']['data'][0]['name'] = 'Initiated To Treatment';
 			$data['hei']['data'][1]['name'] = 'Dead';
 			$data['hei']['data'][2]['name'] = 'Lost to Follow up';
 			$data['hei']['data'][3]['name'] = 'Transferred out';
@@ -266,12 +308,12 @@ class Summaries_model extends MY_Model
 		$data['categories'][0]			= 'No Data';
 
 		foreach ($result as $key => $value) {
-			$data['categories'][0] 			= '6wks';
-			$data['categories'][1] 			= '7wks-3M';
-			$data['categories'][2] 			= '3M-9M';
-			$data['categories'][3] 			= '9M-18M';
-			$data['categories'][4] 			= 'above18M';
-			$data['categories'][5] 			= 'No Data';
+			$data['categories'][0] 			= '2M';
+			$data['categories'][1] 			= '3-8M';
+			$data['categories'][2] 			= '9-12M';
+			$data['categories'][3] 			= 'Above 12M';
+			// $data['categories'][4] 			= 'above18M';
+			$data['categories'][4] 			= 'No Data';
 
 			$data["ageGnd"][0]["data"][0]	=  (int) $value['sixweekspos'];
 			$data["ageGnd"][1]["data"][0]	=  (int) $value['sixweeksneg'];
@@ -281,10 +323,10 @@ class Summaries_model extends MY_Model
 			$data["ageGnd"][1]["data"][2]	=  (int) $value['threemto9mneg'];
 			$data["ageGnd"][0]["data"][3]	=  (int) $value['ninemto18mpos'];
 			$data["ageGnd"][1]["data"][3]	=  (int) $value['ninemto18mneg'];
-			$data["ageGnd"][0]["data"][4]	=  (int) $value['above18mpos'];
-			$data["ageGnd"][1]["data"][4]	=  (int) $value['above18mneg'];
-			$data["ageGnd"][0]["data"][5]	=  (int) $value['nodatapos'];
-			$data["ageGnd"][1]["data"][5]	=  (int) $value['nodataneg'];
+			// $data["ageGnd"][0]["data"][4]	=  (int) $value['above18mpos'];
+			// $data["ageGnd"][1]["data"][4]	=  (int) $value['above18mneg'];
+			$data["ageGnd"][0]["data"][4]	=  (int) $value['nodatapos'];
+			$data["ageGnd"][1]["data"][4]	=  (int) $value['nodataneg'];
 		}
 		// die();
 		$data['ageGnd'][0]['drilldown']['color'] = '#913D88';
@@ -479,19 +521,21 @@ class Summaries_model extends MY_Model
 		if ($partner==null || $partner=='null') {
 			$partner = $this->session->userdata('partner_filter');
 		}
+
+		if ($pfil==null || $pfil=='null') {
+			$pfil = NULL;
+		}
 				
 		// echo "PFil: ".$pfil." --Partner: ".$partner." -- County: ".$county;
 		if ($county) {
 			$sql = "CALL `proc_get_eid_county_sites_outcomes`('".$county."','".$year."','".$month."')";
 		} else {
-			if ($pfil==1) {
-				// if ($partner) {
-				// 	$sql = "CALL `proc_get_partner_sites_outcomes`('".$partner."','".$year."','".$month."')";
-				// } else {
-				// 	$sql = "CALL `proc_get_partner_outcomes`('".$year."','".$month."')";
-				// }
-				$sql = "CALL `proc_get_eid_partner_outcomes`('".$year."','".$month."')";
-				
+			if ($pfil||$pfil==1) {
+				if ($partner) {
+					$sql = "CALL `proc_get_eid_partner_sites_outcomes`('".$partner."','".$year."','".$month."')";
+				} else {
+					$sql = "CALL `proc_get_eid_partner_outcomes`('".$year."','".$month."')";
+				}
 			} else {
 				$sql = "CALL `proc_get_eid_county_outcomes`('".$year."','".$month."')";
 			}

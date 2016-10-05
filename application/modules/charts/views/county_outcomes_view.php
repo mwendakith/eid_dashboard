@@ -26,12 +26,12 @@
 			                    fontWeight: 'bold',
 			                    color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'
 			                },
-			                y:-20
+			                y: -10
 			            }
 			        },
 			        legend: {
 			            align: 'right',
-			            x: -30,
+			            x: 0,
 			            verticalAlign: 'top',
 			            y: 25,
 			            floating: true,

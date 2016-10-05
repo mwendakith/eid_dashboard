@@ -1,19 +1,22 @@
 <div class="panel-body">
-	<div id="vlOutcomes_pie" style="height: 350px;"></div>
+	<div id="vlOutcomes_pie" style="height: 250px;"></div>
 </div>
 <div>
-	<ul>
-		<?php echo $outcomes['ul'];?>
-	</ul>
+		<center>
+		    <table>
+		    	<?php echo $outcomes['ul'];?>
+		    </table>
+		</center>
 </div>
 
 <script type="text/javascript">
-	// $().ready(function() {
-	// 	$.get("<?php //echo base_url('charts/summaries/suppressiondata');?>", function(data) {
-
-	// 	});
-	// 	$("#samples").load("<?php //echo base_url('charts/summaries/sample_types'); ?>");
-	// });
+	$().ready(function(){
+		$("table").tablecloth({
+	      striped: true,
+	      sortable: false,
+	      condensed: true
+	    });
+	});
 
 	$(function () {
 				$('#vlOutcomes_pie').highcharts({

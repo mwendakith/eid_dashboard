@@ -79,7 +79,7 @@
 </div>
 <div class="row">
 	<!-- Map of the country -->
-	<div class="col-md-3 col-sm-3 col-xs-12">
+	<div class="col-md-5 col-sm-3 col-xs-12">
 		<div class="panel panel-default">
 		  <div class="panel-heading">
 		  	EID Outcomes <div class="display_date" ></div>
@@ -92,7 +92,7 @@
 	</div>
 
 	<!-- Map of the country -->
-	<div class="col-md-4 col-sm-4 col-xs-12">
+	<div class="col-md-3 col-sm-4 col-xs-12">
 		<div class="panel panel-default">
 		  <div class="panel-heading">
 			  HEI Follow up <div class="display_date"></div>
@@ -106,12 +106,12 @@
 		</div>
 	</div>
 
-	<div class="col-md-5">
+	<div class="col-md-4">
 		<div class="panel panel-default">
 		  <div class="panel-heading">
 		    Age <div class="display_date"></div>
 		  </div>
-		  <div class="panel-body" id="ageGroups">
+		  <div class="panel-body" id="ageGroups" style="height:560px;">
 		    <center><div class="loader"></div></center>
 		  </div>
 		  <!-- <div>

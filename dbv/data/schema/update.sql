@@ -417,8 +417,10 @@ CREATE PROCEDURE `proc_get_eid_yearly_summary`
 (IN county INT(11))
 BEGIN
   SET @QUERY =    "SELECT
-                    `cs`.`year`,  SUM(`cs`.`neg`) AS `neg`, 
-                    SUM(`cs`.`pos`) AS `positive`
+                    `cs`.`year`,  
+                    SUM(`cs`.`neg`) AS `negative`, 
+                    SUM(`cs`.`pos`) AS `positive`, 
+                    SUM(`cs`.`redraw`) AS `redraw`
                 FROM `county_summary` `cs`
                 WHERE 1 ";
 
@@ -887,7 +889,7 @@ BEGIN
 
     SET @QUERY = CONCAT(@QUERY, " GROUP BY `ip`.`year` ");
   
-    SET @QUERY = CONCAT(@QUERY, " ORDER BY `ip`.`year` DESC ");
+    SET @QUERY = CONCAT(@QUERY, " ORDER BY `ip`.`year` ASC ");
 
 
   
@@ -1055,3 +1057,74 @@ BEGIN
 END //
 DELIMITER ;
 
+DROP PROCEDURE IF EXISTS `proc_get_eid_partner_sites_outcomes`;
+DELIMITER //
+CREATE PROCEDURE `proc_get_eid_partner_sites_outcomes`
+(IN P_id INT(11), IN filter_year INT(11), IN filter_month INT(11))
+BEGIN
+  SET @QUERY =    "SELECT 
+          `vf`.`name`,
+          SUM(`pos`) AS `positive`,
+          SUM(`neg`) AS `negative` 
+          FROM `site_summary` `ss` 
+          LEFT JOIN `view_facilitys` `vf` 
+          ON `ss`.`facility` = `vf`.`ID`  
+                  WHERE 1";
+
+    IF (filter_month != 0 && filter_month != '') THEN
+       SET @QUERY = CONCAT(@QUERY, " AND `vf`.`partner` = '",P_id,"' AND `year` = '",filter_year,"' AND `month`='",filter_month,"' ");
+    ELSE
+        SET @QUERY = CONCAT(@QUERY, " AND `vf`.`partner` = '",P_id,"' AND `year` = '",filter_year,"' ");
+    END IF;
+
+    SET @QUERY = CONCAT(@QUERY, " GROUP BY `vf`.`name` ORDER BY `negative` DESC, `positive` DESC LIMIT 0, 50 ");
+
+     PREPARE stmt FROM @QUERY;
+     EXECUTE stmt;
+END //
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS `proc_get_eid_county_sites_outcomes`;
+DELIMITER //
+CREATE PROCEDURE `proc_get_eid_county_sites_outcomes`
+(IN C_id INT(11), IN filter_year INT(11), IN filter_month INT(11))
+BEGIN
+  SET @QUERY =    "SELECT 
+                      `vf`.`name`,
+                      SUM(`pos`) AS `positive`,
+                      SUM(`neg`) AS `negative` 
+                      FROM `site_summary` `ss` 
+                      LEFT JOIN `view_facilitys` `vf` ON `ss`.`facility` = `vf`.`ID`  
+                  WHERE 1";
+
+    IF (filter_month != 0 && filter_month != '') THEN
+       SET @QUERY = CONCAT(@QUERY, " AND `vf`.`county` = '",C_id,"' AND `year` = '",filter_year,"' AND `month`='",filter_month,"' ");
+    ELSE
+        SET @QUERY = CONCAT(@QUERY, " AND `vf`.`county` = '",C_id,"' AND `year` = '",filter_year,"' ");
+    END IF;
+
+    SET @QUERY = CONCAT(@QUERY, " GROUP BY `vf`.`name` ORDER BY `negative` DESC, `positive` DESC LIMIT 0, 50 ");
+
+     PREPARE stmt FROM @QUERY;
+     EXECUTE stmt;
+END //
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS `proc_get_eid_national_yearly_summary`;
+DELIMITER //
+CREATE PROCEDURE `proc_get_eid_national_yearly_summary`
+()
+BEGIN
+  SET @QUERY =    "SELECT 
+                    `year`, 
+                    SUM(`tests`) AS `tests`, 
+                    SUM(`pos`) AS `positive`, 
+                    SUM(`neg`) AS `negative`, 
+                    SUM(`redraw`) AS `redraws` 
+                  FROM `national_summary` 
+                  GROUP BY `year` ORDER BY `year` ASC";
+
+    PREPARE stmt FROM @QUERY;
+    EXECUTE stmt;
+END //
+DELIMITER ;

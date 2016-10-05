@@ -29,7 +29,7 @@ $(function () {
             }
         }, { // Secondary yAxis
             title: {
-                text: 'Positivity (%)',
+                text: 'Positive Tests (%)',
                 style: {
                     color: Highcharts.getOptions().colors[0]
                 }
@@ -55,9 +55,7 @@ $(function () {
             backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
         },
         series: [{
-            
             name: 'Positives',
-
             type: 'column',
             yAxis: 1,
             data: <?php echo json_encode($trends[0]);?>,

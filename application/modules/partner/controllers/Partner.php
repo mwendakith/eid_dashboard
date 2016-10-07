@@ -18,6 +18,7 @@ class Partner extends MY_Controller
 
 	function index()
 	{
+		$this->session->unset_userdata('partner_filter');
 		$this->load->module('charts/summaries');
 		
 		$this->data['content_view'] = 'partner/partner_summary_view';
@@ -26,6 +27,7 @@ class Partner extends MY_Controller
 
 	function trends()
 	{
+		$this->session->unset_userdata('partner_filter');
 		$this->load->module('charts/partnertrends');
 		
 		$this->data['content_view'] = 'partner/partner_trends_view';
@@ -35,6 +37,7 @@ class Partner extends MY_Controller
 
 	function sites()
 	{
+		$this->session->unset_userdata('partner_filter');
 		$this->load->module('charts/sites');
 
 		$this->data['content_view'] = 'partner/partner_sites_view';

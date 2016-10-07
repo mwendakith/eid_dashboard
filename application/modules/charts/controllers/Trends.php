@@ -59,6 +59,7 @@ class Trends extends MY_Controller
 		$data['trends'] = $this->trends_model->yearly_summary($county);
 		//$data['trends'] = $this->positivity_model->yearly_summary();
 		//echo json_encode($data);
+		// echo "<pre>";print_r($data);die();
 		$this->load->view('lab_outcomes_view', $data);
 	}
 

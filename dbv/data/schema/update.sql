@@ -877,7 +877,8 @@ CREATE PROCEDURE `proc_get_eid_partner_year_summary`
 BEGIN
   SET @QUERY =    "SELECT
                     `ip`.`year`,  SUM(`ip`.`pos`) AS `positive`,
-                    SUM(`ip`.`neg`) AS `negative`
+                    SUM(`ip`.`neg`) AS `negative`,
+                    SUM(`ip`.`redraw`) AS `redraws`
                 FROM `ip_summary` `ip`
                 JOIN `partners` `p`
                 ON `p`.`ID` = `ip`.`partner` 
@@ -1009,10 +1010,24 @@ CREATE PROCEDURE `proc_get_eid_sites_eid`
 (IN filter_year INT(11), IN filter_month INT(11),  IN filter_site INT(11))
 BEGIN
   SET @QUERY =    "SELECT 
-                    SUM((`ss`.`pos`)) AS `pos`, 
-                    SUM(`ss`.`neg`) AS `neg`, 
-                    SUM(`ss`.`neg`) AS `tests`, 
-                    SUM(`ss`.`neg`) AS `rejected` 
+                    SUM(`pos`) AS `pos`,
+                    SUM(`neg`) AS `neg`,
+                    AVG(`medage`) AS `medage`,
+                    SUM(`alltests`) AS `alltests`,
+                    SUM(`eqatests`) AS `eqatests`,
+                    SUM(`firstdna`) AS `firstdna`,
+                    SUM(`confirmdna`) AS `confirmdna`,
+                    SUM(`repeatspos`) AS `repeatspos`,
+                    SUM(`actualinfants`) AS `actualinfants`,
+                    SUM(`actualinfantsPOS`) AS `actualinfantspos`,
+                    SUM(`infantsless2m`) AS `infantsless2m`,
+                    SUM(`infantsless2mPOS`) AS `infantless2mpos`,
+                    SUM(`adults`) AS `adults`,
+                    SUM(`adultsPOS`) AS `adultsPOS`,
+                    SUM(`redraw`) AS `redraw`,
+                    SUM(`tests`) AS `tests`,
+                    SUM(`rejected`) AS `rejected`, 
+                    AVG(`sitessending`) AS `sitessending` 
                   FROM `site_summary` `ss` 
     WHERE 1";
 

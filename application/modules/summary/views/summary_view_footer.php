@@ -1,5 +1,6 @@
 <script type="text/javascript">
 	$().ready(function(){
+		$("#nattat").load("<?php echo base_url('charts/summaries/turnaroundtime'); ?>");
 		$("#testing_trends").load("<?php echo base_url('charts/summaries/testing_trends'); ?>");
 		$("#eidOutcomes").load("<?php echo base_url('charts/summaries/eid_outcomes');?>");
 		$("#hei_follow_up").load("<?php echo base_url('charts/summaries/hei_follow');?>");
@@ -82,7 +83,7 @@
 			$(".display_range").html("( "+obj['prev_year']+" - "+obj['year']+" )");
 			
 		});
- 		
+ 		$("#nattat").html("<div>Loading...</div>");
 		$("#testing_trends").html("<center><div class='loader'></div></center>");
     	$("#eidOutcomes").html("<center><div class='loader'></div></center>");
         $("#hei_follow_up").html("<center><div class='loader'></div></center>");
@@ -93,6 +94,7 @@
 		$("#county_outcomes").html("<center><div class='loader'></div></center>");
 
 		// Actual graphs being loaded
+		$("#nattat").load("<?php echo base_url('charts/summaries/turnaroundtime'); ?>/"+year+"/"+month);
 		$("#testing_trends").load("<?php echo base_url('charts/summaries/testing_trends'); ?>/"+year);
 		$("#eidOutcomes").load("<?php echo base_url('charts/summaries/eid_outcomes');?>/"+year+"/"+month);
 		$("#hei_follow_up").load("<?php echo base_url('charts/summaries/hei_follow');?>/"+year+"/"+month);

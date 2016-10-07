@@ -12,6 +12,13 @@ class Summaries extends MY_Controller
 		$this->load->model('summaries_model');
 	}
 
+	function turnaroundtime($year=NULL,$month=NULL,$county=NULL)
+	{
+		$data['outcomes'] = $this->summaries_model->turnaroundtime($year,$month,$county);
+
+		$this->load->view('turnaroundtime_view',$data);
+	}
+	
 	function testing_trends($year=NULL,$county=NULL,$partner=NULL)
 	{
 		$data['outcomes'] = $this->summaries_model->test_trends($year,$county,$partner);

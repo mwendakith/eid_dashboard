@@ -1,8 +1,8 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed!');
 require_once('phpmailer/class.phpmailer.php');
-define('GUSER', 'ampathlabmail@gmail.com'); // Gmail username
-define('GPWD', 's1mplepl@n'); // Gmail password
+define('GUSER', 'nascop.eid.eic@gmail.com'); // Gmail username
+define('GPWD', 'masaiboy'); // Gmail password
 /**
 * 
 */

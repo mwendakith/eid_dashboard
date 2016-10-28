@@ -69,7 +69,7 @@ class Summaries_model extends MY_Model
 		if ($county==null || $county=='null') {
 			$county = $this->session->userdata('county_filter');
 		}
-		if (!$partner) {
+		if ($partner==null || $partner=='null') {
 			$partner = $this->session->userdata('partner_filter');
 		}
 
@@ -122,7 +122,7 @@ class Summaries_model extends MY_Model
 		if ($county==null || $county=='null') {
 			$county = $this->session->userdata('county_filter');
 		}
-		if (!$partner) {
+		if ($partner==null || $partner=='null') {
 			$partner = $this->session->userdata('partner_filter');
 		}
 
@@ -131,9 +131,9 @@ class Summaries_model extends MY_Model
 		}
 		if ($month==null || $month=='null') {
 			if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
-				$month = $this->session->userdata('filter_month');
-			}else {
 				$month = 0;
+			}else {
+				$month = $this->session->userdata('filter_month');
 			}
 		}
 
@@ -256,7 +256,7 @@ class Summaries_model extends MY_Model
 		if ($county==null || $county=='null') {
 			$county = $this->session->userdata('county_filter');
 		}
-		if (!$partner) {
+		if ($partner==null || $partner=='null') {
 			$partner = $this->session->userdata('partner_filter');
 		}
 
@@ -265,9 +265,9 @@ class Summaries_model extends MY_Model
 		}
 		if ($month==null || $month=='null') {
 			if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
-				$month = $this->session->userdata('filter_month');
-			}else {
 				$month = 0;
+			}else {
+				$month = $this->session->userdata('filter_month');
 			}
 		}
 
@@ -294,7 +294,7 @@ class Summaries_model extends MY_Model
 
 		foreach ($result as $key => $value) {
 			$total = (int) ($value['enrolled']+$value['dead']+$value['ltfu']+$value['adult']+$value['transout']+$value['other']);
-			$data['ul'] .= '<li>Initiated To Treatment: '.(int) $value['enrolled'].' <strong>('.(int) (($value['enrolled']/$total)*100).'%)</strong></li>';
+			$data['ul'] .= '<li>Initiated On Treatment: '.(int) $value['enrolled'].' <strong>('.(int) (($value['enrolled']/$total)*100).'%)</strong></li>';
 			$data['ul'] .= '<li>Lost to Follow Up: '.$value['ltfu'].' <strong>('.(int) (($value['ltfu']/$total)*100).'%)</strong></li>';
 			$data['ul'] .= '<li>Dead: '.(int) $value['dead'].' <strong>('.(int) (($value['dead']/$total)*100).'%)</strong></li>';
 			$data['ul'] .= '<li>Adult Samples: '.$value['adult'].' <strong>('.(int) (($value['adult']/$total)*100).'%)</strong></li>';
@@ -305,15 +305,19 @@ class Summaries_model extends MY_Model
 			// }
 			$data['hei']['data'][$key]['y'] = $count;
 
-			$data['hei']['data'][0]['name'] = 'Initiated To Treatment';
+			$data['hei']['data'][0]['name'] = 'Initiated on Treatment';
 			$data['hei']['data'][1]['name'] = 'Dead';
 			$data['hei']['data'][2]['name'] = 'Lost to Follow up';
 			$data['hei']['data'][3]['name'] = 'Transferred out';
+			$data['hei']['data'][4]['name'] = 'Adult Samples';
+			$data['hei']['data'][5]['name'] = 'Other Reasons';
 
 			$data['hei']['data'][0]['y'] = (int) $value['enrolled'];
 			$data['hei']['data'][1]['y'] = (int) $value['dead'];
 			$data['hei']['data'][2]['y'] = (int) $value['ltfu'];
 			$data['hei']['data'][3]['y'] = (int) $value['transout'];
+			$data['hei']['data'][4]['y'] = (int) $value['adult'];
+			$data['hei']['data'][5]['y'] = (int) $value['other'];
 		}
 
 		$data['hei']['data'][0]['sliced'] = true;
@@ -330,7 +334,7 @@ class Summaries_model extends MY_Model
 		if ($county==null || $county=='null') {
 			$county = $this->session->userdata('county_filter');
 		}
-		if (!$partner) {
+		if ($partner==null || $partner=='null') {
 			$partner = $this->session->userdata('partner_filter');
 		}
 
@@ -339,9 +343,9 @@ class Summaries_model extends MY_Model
 		}
 		if ($month==null || $month=='null') {
 			if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
-				$month = $this->session->userdata('filter_month');
-			}else {
 				$month = 0;
+			}else {
+				$month = $this->session->userdata('filter_month');
 			}
 		}
 
@@ -403,7 +407,7 @@ class Summaries_model extends MY_Model
 		if ($county==null || $county=='null') {
 			$county = $this->session->userdata('county_filter');
 		}
-		if (!$partner) {
+		if ($partner==null || $partner=='null') {
 			$partner = $this->session->userdata('partner_filter');
 		}
 
@@ -412,9 +416,9 @@ class Summaries_model extends MY_Model
 		}
 		if ($month==null || $month=='null') {
 			if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
-				$month = $this->session->userdata('filter_month');
-			}else {
 				$month = 0;
+			}else {
+				$month = $this->session->userdata('filter_month');
 			}
 		}
 
@@ -457,7 +461,7 @@ class Summaries_model extends MY_Model
 		if ($county==null || $county=='null') {
 			$county = $this->session->userdata('county_filter');
 		}
-		if (!$partner) {
+		if ($partner==null || $partner=='null') {
 			$partner = $this->session->userdata('partner_filter');
 		}
 
@@ -466,9 +470,9 @@ class Summaries_model extends MY_Model
 		}
 		if ($month==null || $month=='null') {
 			if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
-				$month = $this->session->userdata('filter_month');
-			}else {
 				$month = 0;
+			}else {
+				$month = $this->session->userdata('filter_month');
 			}
 		}
 
@@ -508,21 +512,24 @@ class Summaries_model extends MY_Model
 
 	function iprophylaxis($year=null,$month=null,$county=null,$partner=null)
 	{
+		// Assigning the value of the county
 		if ($county==null || $county=='null') {
 			$county = $this->session->userdata('county_filter');
 		}
-		if (!$partner) {
+		
+		if ($partner==null || $partner=='null') {
 			$partner = $this->session->userdata('partner_filter');
 		}
+
 
 		if ($year==null || $year=='null') {
 			$year = $this->session->userdata('filter_year');
 		}
 		if ($month==null || $month=='null') {
 			if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
-				$month = $this->session->userdata('filter_month');
-			}else {
 				$month = 0;
+			}else {
+				$month = $this->session->userdata('filter_month');
 			}
 		}
 
@@ -603,7 +610,7 @@ class Summaries_model extends MY_Model
 			}
 		}
 		// $sql = "CALL `proc_get_county_outcomes`('".$year."','".$month."')";
-		// echo "<pre>";print_r($sql);echo "</pre>";
+		// echo "<pre>";print_r($sql);echo "</pre>";die();
 		$result = $this->db->query($sql)->result_array();
 		// echo "<pre>";print_r($result);die();
 		$data['county_outcomes'][0]['name'] = 'Positive';

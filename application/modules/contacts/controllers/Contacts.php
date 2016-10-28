@@ -32,7 +32,7 @@ class Contacts extends MY_Controller
 		$name = $this->input->post('cname');
 		$email = $this->input->post('cemail');
 		$subject = $this->input->post('csubject');
-		$message = $this->input->post('cmessage')."\n\nFind me at ".$this->input->post('cphone');
+		$message = $this->input->post('cmessage')."\n\n".$name." ".$this->input->post('cphone');
 
 		$responce = $this->smtpmailer($email, $name, $subject, $message);
 		if ($responce) {
@@ -55,11 +55,14 @@ class Contacts extends MY_Controller
 		$mail->Port = 465; 
 		$mail->Username = GUSER;  
 		$mail->Password = GPWD;           
-		$mail->SetFrom($from, $from_name);
+		$mail->From($from);
+		$mail->FromName($from_name);
+		$mail->AddReplyTo($from, $from_name);
 		$mail->Subject = 'EID DASHBOARD: '.$subject;
 		$mail->Body = $body;
 		$mail->AddAddress('jbatuka@usaid.gov');
 		$mail->AddAddress('jhungu@clintonhealthaccess.org');
+		$mail->AddAddress('aaron.mbowa@dataposit.co.ke');
 		$mail->AddAddress('jlusike@clintonhealthaccess.org');
 		$mail->AddAddress('tngugi@clintonhealthaccess.org');
 		$mail->AddAddress('baksajoshua09@gmail.com');

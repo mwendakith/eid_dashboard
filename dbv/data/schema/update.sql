@@ -1137,7 +1137,65 @@ BEGIN
                     SUM(`neg`) AS `negative`, 
                     SUM(`redraw`) AS `redraws` 
                   FROM `national_summary` 
+                  WHERE `year` <> '2007'
                   GROUP BY `year` ORDER BY `year` ASC";
+
+    PREPARE stmt FROM @QUERY;
+    EXECUTE stmt;
+END //
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS `proc_get_eid_national_yearly_tests`;
+DELIMITER //
+CREATE PROCEDURE `proc_get_eid_national_yearly_tests`
+()
+BEGIN
+  SET @QUERY =    "SELECT
+                    `ns`.`year`, `ns`.`month`, SUM(`ns`.`tests`) AS `tests`, 
+                    SUM(`ns`.`pos`) AS `positive`,
+                    SUM(`ns`.`neg`) AS `negative`,
+                    SUM(`ns`.`rejected`) AS `rejected`,
+                    SUM(`ns`.`infantsless2m`) AS `infants`
+                FROM `national_summary` `ns`
+                WHERE 1 ";
+
+      SET @QUERY = CONCAT(@QUERY, " GROUP BY `ns`.`month`, `ns`.`year` ");
+
+     
+      SET @QUERY = CONCAT(@QUERY, " ORDER BY `ns`.`year` DESC, `ns`.`month` ASC ");
+      
+
+    PREPARE stmt FROM @QUERY;
+    EXECUTE stmt;
+END //
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS `proc_get_eid_lab_performance_stats`;
+DELIMITER //
+CREATE PROCEDURE `proc_get_eid_lab_performance_stats`
+(IN filter_year INT(11), IN filter_month INT(11))
+BEGIN
+  SET @QUERY =    "SELECT 
+                    `vf`.`name`, 
+                    AVG(`ls`.`sitessending`) AS `sitesending`, 
+                    SUM(`ls`.`batches`) AS `batches`, 
+                    SUM(`ls`.`alltests`) AS `alltests`, 
+                    SUM(`ls`.`eqatests`) AS `eqatests`, 
+                    SUM(`ls`.`rejected`) AS `rejected`,  
+                    SUM(`ls`.`pos`) AS `pos`, 
+                    SUM(`ls`.`neg`) AS `neg`, 
+                    SUM(`ls`.`redraw`) AS `redraw` 
+                  FROM `lab_summary` `ls` JOIN `view_facilitys` `vf` ON `ls`.`lab` = `vf`.`ID` 
+                WHERE 1 ";
+
+      IF (filter_month != 0 && filter_month != '') THEN
+        SET @QUERY = CONCAT(@QUERY, " AND `ls`.`year` = '",filter_year,"' AND `ls`.`month`='",filter_month,"' ");
+      ELSE
+          SET @QUERY = CONCAT(@QUERY, " AND `ls`.`year` = '",filter_year,"' ");
+      END IF;
+
+      SET @QUERY = CONCAT(@QUERY, " GROUP BY `name` ORDER BY `alltests` DESC ");
+      
 
     PREPARE stmt FROM @QUERY;
     EXECUTE stmt;

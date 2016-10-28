@@ -13,6 +13,13 @@ class LabPerformance extends MY_Controller
 		$this->load->model('performance_model');
 	}
 
+	function lab_performance_stats($year=NULL,$month=NULL)
+	{
+		$data['stats'] = $this->performance_model->lab_performance_stat($year,$month);
+
+		$this->load->view('lab_performance_stats_view', $data);
+	}
+
 	function testing_trends($year=NULL)
 	{
 		$obj['trends'] = $this->performance_model->lab_testing_trends($year);

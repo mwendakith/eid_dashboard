@@ -90,11 +90,11 @@
 							<ul class="dropdown-menu">
 								<li><a href="<?php echo base_url();?>partner">Summary</a></li>
 								<li><a href="<?php echo base_url();?>partner/trends">Trends</a></li>
-								<li><a href="<?php echo base_url();?>partner/sites">Partner Sites</a></li>
+								<li><a href="<?php echo base_url();?>partner/sites">Partner Facilities</a></li>
 							</ul>
 						</li>
 						<li><a href="<?php echo base_url();?>labPerformance">Lab Performance</a></li>
-						<li><a href="<?php echo base_url();?>sites">Sites</a></li>
+						<li><a href="<?php echo base_url();?>sites">Facilities</a></li>
 						<li><a href="<?php echo base_url();?>contacts">Contact Us</a></li>
 						<li><a href="http://eiddash.nascop.org/login.php">Login</a></li>
 						<li><a href="http://viralload.nascop.org">VL View</a></li>

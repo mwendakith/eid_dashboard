@@ -52,10 +52,10 @@
                     style: {
                         color: '#4572A7'
                     }
-                },
-                min: 0, 
-                max: 70000,
-                tickInterval: 1
+                }
+                // min: 0, 
+                // max: 70000,
+                // tickInterval: 1
             }],
             tooltip: {
                 shared: true

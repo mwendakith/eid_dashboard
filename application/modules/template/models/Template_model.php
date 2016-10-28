@@ -14,8 +14,10 @@ class Template_model extends MY_Model
 	function get_counties_dropdown()
 	{
 		$dropdown = '';
-		$county_data = $this->db->get('countys')->result_array();
-
+		$this->db->from('countys');
+		$this->db->order_by("name", "asc");
+		$county_data = $this->db->get()->result_array();
+		
 		foreach ($county_data as $key => $value) {
 			$dropdown .= '<option value="'.$value['ID'].'">'.$value['name'].' County</option>';
 		}

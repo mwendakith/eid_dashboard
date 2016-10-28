@@ -15,7 +15,7 @@ class Trends extends MY_Controller
 
 	function positive_trends($county=NULL){
 		$obj = $this->trends_model->yearly_trends($county);
-
+		// echo "<pre>";print_r($obj);echo "</pre>";die();
 		$data['trends'] = $obj['test_trends'];
 		$data['title'] = "Test Trends";
 		$data['div'] = "#tests";

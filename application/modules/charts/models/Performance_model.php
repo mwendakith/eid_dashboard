@@ -12,6 +12,42 @@ class Performance_model extends MY_Model
 		parent:: __construct();;
 	}
 
+	function lab_performance_stat($year=NULL,$month=NULL)
+	{
+		// echo round(3.6451895227869, 2, PHP_ROUND_HALF_UP);die();
+		if ($year==null || $year=='null') {
+			$year = $this->session->userdata('filter_year');
+		}
+		if ($month==null || $month=='null') {
+			$month = 0;
+		}
+
+		$sql = "CALL `proc_get_eid_lab_performance_stats`('".$year."','".$month."');";
+
+		$result = $this->db->query($sql)->result_array();
+		// echo "<pre>";print_r($result);echo "</pre>";die();
+		$ul = '';
+		foreach ($result as $key => $value) {
+			$ul .= "<tr>
+						<td>".($key+1)."</td>
+						<td>".$value['name']."</td>
+						<td>".(int) $value['sitesending']."</td>
+						<td>".(int) $value['batches']."</td>
+						<td>".(int) $value['alltests']."</td>
+						<td>".(int) $value['eqatests']."</td>
+						<td>".(int) $value['rejected']."</td>
+						<td>".(int) $value['pos']."</td>
+						<td>".round((($value['pos']*100)/$value['tests']), 2, PHP_ROUND_HALF_UP)."</td>
+						<td>".(int) $value['neg']."</td>
+						<td>".round((($value['neg']*100)/$value['tests']), 2, PHP_ROUND_HALF_UP)."</td>
+						<td>".(int) $value['redraw']."</td>
+						<td>".round((($value['redraw']*100)/$value['tests']), 2, PHP_ROUND_HALF_UP)."</td>
+					</tr>";
+		}
+
+		return $ul;
+	}
+
 	function lab_testing_trends($year=NULL)
 	{
 		if ($year==null || $year=='null') {

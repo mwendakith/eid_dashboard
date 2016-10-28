@@ -18,7 +18,11 @@ class Trends_model extends MY_Model
 			$county = 0;
 		}
 
-		$sql = "CALL `proc_get_eid_yearly_tests`(" . $county . ");";
+		if ($county == 0) {
+			$sql = "CALL `proc_get_eid_national_yearly_tests`();";
+		} else {
+			$sql = "CALL `proc_get_eid_yearly_tests`(" . $county . ");";
+		}
 		
 		$result = $this->db->query($sql)->result_array();
 		

@@ -1,6 +1,5 @@
 <script type="text/javascript">
 	$(document).ready(function(){
-		var partner = <?php echo json_encode($partner_select);?>;
 		$.get("<?php echo base_url();?>template/dates", function(data){
     		obj = $.parseJSON(data);
 	
@@ -10,17 +9,10 @@
 			$(".display_date").html("( "+obj['year']+" "+obj['month']+" )");
 			$(".display_range").html("( "+obj['prev_year']+" - "+obj['year']+" )");
     	});
-		if (partner) {
-			$("#sites_all").hide();
-			$("#partner_sites").show();
-			$("#partnerSites").load("<?php echo base_url('charts/sites/partner_sites');?>/"+null+"/"+null+"/"+null+"/"+partner);
-		} else {
-			$("#partner_sites").hide();
-			$("#sites_all").show();
-			$("#siteOutcomes").load("<?php echo base_url('charts/sites/site_outcomes');?>");
-		}
-
-
+		$("#partner_sites").hide();
+		$("#sites_all").show();
+		$("#siteOutcomes").load("<?php echo base_url('charts/sites/site_outcomes');?>");
+		
 		$("select").change(function(){
 			$("#partnerSites").html("<center><div class='loader'></div></center>");
 			em = $(this).val();

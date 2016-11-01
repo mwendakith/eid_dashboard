@@ -11,6 +11,7 @@ class Sites extends MY_Controller {
 		$this->data	=	array_merge($this->data,$this->load_libraries(array('material','highstock','highmaps','highcharts','custom','select2','tablecloth')));
 		$this->session->set_userdata('partner_filter', NULL);
 		$this->data['sit'] = TRUE;
+		$this->initialize_filter();
 		$this->load->module('charts/labperformance');
 	}
 

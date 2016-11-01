@@ -11,15 +11,15 @@ class Partner extends MY_Controller
 		parent:: __construct();
 		$this->load->module('summaries');
 		$this->data	=	array_merge($this->data,$this->load_libraries(array('material','highstock','highmaps','highcharts','custom','select2','tablecloth')));
-		$this->session->set_userdata('county_filter', NULL);
+		$this->session->unset_userdata('county_filter');
+		$this->initialize_filter();
 		$this->data['part'] = TRUE;
-		$this->data['partner_select'] = $this->session->userdata('partner_filter');
 	}
 
 	function index()
 	{
 		$this->session->unset_userdata('partner_filter');
-		$this->load->module('charts/summaries');
+		$this->load->module('charts/partner_summaries');
 		
 		$this->data['content_view'] = 'partner/partner_summary_view';
 		$this -> template($this->data);

@@ -14,6 +14,8 @@ if(!defined("BASEPATH")) exit("No direct script access allowed!");
 			$this->data['labs'] = FALSE;
 			$this->data['sit'] = FALSE;
 			$this->data['county'] = FALSE;
+			$this->data['contacts'] = FALSE;
+			$this->session->unset_userdata('filter_month');
 		}
 
 		public function load_libraries($arr){
@@ -85,19 +87,17 @@ if(!defined("BASEPATH")) exit("No direct script access allowed!");
 			}
 		}
 
-		function set_filter_date()
+		function set_filter_date($data=null)
 		{
-			$year = $this->input->post('year');
-			$month = $this->input->post('month');
+			// echo "<pre";print_r($data);die();
+			$year = $data['year'];
+			$month = $data['month'];
 
 			if ($year) {
+				$this->session->unset_userdata('filter_month');
 				$return = $this->session->set_userdata('filter_year', $year);
 			} else {
-				if ($month=='all') {
-					$return = $this->session->set_userdata('filter_month', null);
-				}else {
-					$return = $this->session->set_userdata('filter_month', $month);
-				}
+				$return = $this->session->set_userdata('filter_month', $month);
 			}
 			$this->load->model('template/template_model');
 			if(!$year)

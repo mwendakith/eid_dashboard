@@ -6,7 +6,7 @@
 	.display_range {
 		width: 130px;
 		display: inline;
-	}
+	}*/
 	#nattatdiv {
 		background-color: white;
 		margin-right: 1em;
@@ -38,10 +38,10 @@
 		border-left: 8px solid transparent;
 		border-right: 8px solid transparent;
 		border-top: 8px solid black;
-	}*/
+	}
 </style>
 <div class="row">
-	<!-- <div class="col-md-12" id="nattatdiv">
+	<div class="col-md-12" id="nattatdiv">
 		<div class="col-md-6 col-md-offset-3">
 			<div class="col-md-4 title-name" id="title">
 				<center>National TAT <l style="color:red;">(Days)</l></center>
@@ -63,7 +63,7 @@
 				</div>
 			</div>
 		</div>
-	</div> -->
+	</div>
 </div>
 <div class="row">
 	<div class="col-md-12 col-sm-12 col-xs-12">

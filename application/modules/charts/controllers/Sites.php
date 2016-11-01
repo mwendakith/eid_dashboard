@@ -33,9 +33,9 @@ class Sites extends MY_Controller
 	}
 
 	function site_eid($site=NULL, $year=NULL, $month=NULL){
-		$data = $this->sites_model->get_eid($site, $year, $month);
+		$data['outcomes'] = $this->sites_model->get_eid($site, $year, $month);
 		
-		$this->load->view('sites_pie_chart_view', $data);
+		$this->load->view('sites_eid_outcomes_view', $data);
 	}
 
 	function site_hei($site=NULL, $year=NULL, $month=NULL){
@@ -43,5 +43,11 @@ class Sites extends MY_Controller
 		$this->load->view('sites_pie_chart_view', $data);
 	}
 
+	function partner_sites($year=NULL,$month=NULL,$site=NULL,$partner=NULL)
+	{
+		$data['outcomes'] = $this->sites_model->partner_sites_outcomes($year,$month,$site,$partner);
+
+    	$this->load->view('partner_site__view',$data);
+	}
 }
 ?>

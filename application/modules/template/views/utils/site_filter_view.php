@@ -6,47 +6,10 @@
           <select class="btn js-example-basic-single" style="width:220px;background-color: #C5EFF7;" name="site">
             <option value="0" disabled="true" selected="true">Select a Site:</option>
             <option value="NA">All Sites</option>
-            <!-- <optgroup value="Counties"> -->
             <?php echo $sites; ?>
-            <!-- </optgroup> -->
           </select>
         </div>
-        <!-- <div class="col-md-6">
-          <button class="btn" type="submit" style="background-color: #81CFE0; margin-left: 0.5em;">Filter</button> -->
-          <!-- <select class="btn" style="background-color: #C5EFF7;">
-            <option value="0" disabled="true" selected="true">Sub County:</option>
-            <option>Nairobi</option>
-            <option>Nakuru</option>
-            <option>Mombasa</option>
-            <option>Kisumu</option>
-            <option>Marsabit</option>
-            <option>Embu</option>
-          </select> -->
-        <!-- </div> -->
       </div>
-      
-      <!-- <div class="row">
-        <div class="col-md-6">
-          <select class="btn btn-primary">
-          <option>Nairobi</option>
-          <option>Nakuru</option>
-          <option>Mombasa</option>
-          <option>Kisumu</option>
-          <option>Marsabit</option>
-          <option>Embu</option>
-        </select>
-        </div>
-        <div class="col-md-6">
-          <select class="btn btn-primary">
-          <option>Nairobi</option>
-          <option>Nakuru</option>
-          <option>Mombasa</option>
-          <option>Kisumu</option>
-          <option>Marsabit</option>
-          <option>Embu</option>
-        </select>
-        </div>
-      </div> -->
     </form>
   </div>
   <div class="col-md-3">
@@ -69,7 +32,6 @@
     </div>
     <div class="filter">
       Month: 
-      <a href='javascript:void(0)' onclick='date_filter("monthly", "all")' class="alert-link"> All </a>|
       <a href='javascript:void(0)' onclick='date_filter("monthly", 1)' class='alert-link'> Jan </a>|
       <a href='javascript:void(0)' onclick='date_filter("monthly", 2)' class='alert-link'> Feb </a>|
       <a href='javascript:void(0)' onclick='date_filter("monthly", 3)' class='alert-link'> Mar </a>|

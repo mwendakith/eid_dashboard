@@ -9,7 +9,7 @@ class Summary extends MY_Controller {
 	{
 		parent:: __construct();
 		$this->data	=	array_merge($this->data,$this->load_libraries(array('material','highstock','highmaps','highcharts','custom','select2','tablecloth')));
-		$this->session->set_userdata('partner_filter', NULL);
+		$this->session->unset_userdata('partner_filter');
 		$this->load->module('charts/summaries');
 	}
 

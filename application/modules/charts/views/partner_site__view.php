@@ -6,14 +6,14 @@
 			<th>Name</th>
 			<th>County</th>
 			<th>Tests</th>
-			<th>Suspected Failures</th>
-			<th>Repeat VL</th>
-			<th>Confirmed Tx</th>
-			<th>Rejected</th>
-			<th>Adult Tests</th>
-			<th>Paeds Tests</th>
-			<th>Male</th>
-			<th>Female</th>
+			<th>EQA Tests</th>
+			<th>First DNA PCR</th>
+			<th>Confirmed PCR</th>
+			<th>Positive Outcomes</th>
+			<th>Negative Outcomes</th>
+			<th>Redraws</th>
+			<th>Infants &lt;2M</th>
+			<th>Infants &lt;2M Positive</th>
 		</tr>
 	</thead>
 	<tbody>

@@ -1,4 +1,16 @@
 <div class="row">
+  <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        LAB PERFORMANCE STATS ON EID <div class="display_range"></div>
+      </div>
+      <div class="panel-body" id="lab_perfomance_stats">
+        <center><div class="loader"></div></center>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
   <div id="graphs">
   	
   </div>
@@ -20,6 +32,7 @@
     $("#graphs").load("<?php echo base_url();?>charts/LabPerformance/testing_trends");
     $("#stacked_graph").load("<?php echo base_url();?>charts/LabPerformance/lab_outcomes");
     $("#lineargauge").load("<?php echo base_url();?>charts/LabPerformance/lab_turnaround");
+    $("#lab_perfomance_stats").load("<?php echo base_url();?>charts/LabPerformance/lab_performance_stats");
   });
   
 

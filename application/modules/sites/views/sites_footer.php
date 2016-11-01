@@ -1,11 +1,8 @@
 <script type="text/javascript">
 	$().ready(function(){
 		var site = <?php echo json_encode($this->session->userdata("site_filter")); ?>;
-		
 		//$("#siteOutcomes").load("<?php echo base_url('charts/sites/site_outcomes');?>");
 		
-		
-
 		if (!site) {
     		$("#siteOutcomes").load("<?php echo base_url('charts/sites/site_outcomes');?>");
 			$("#first").show();

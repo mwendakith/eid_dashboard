@@ -49,6 +49,48 @@ class Sites_model extends MY_Model
 
 	}
 
+	function partner_sites_outcomes($year=NULL,$month=NULL,$site=NULL,$partner=NULL)
+	{
+		$table = '';
+		$count = 1;
+		if ($year==null || $year=='null') {
+			$year = $this->session->userdata('filter_year');
+		}
+		if ($month==null || $month=='null') {
+			if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
+				$month = 0;
+			}else {
+				$month = $this->session->userdata('filter_month');
+			}
+		}
+
+		$sql = "CALL `proc_get_eid_partner_sites_details`('".$partner."','".$year."','".$month."')";
+		// echo "<pre>";print_r($sql);die();
+		$result = $this->db->query($sql)->result_array();
+		// echo "<pre>";print_r($sql);die();
+		foreach ($result as $key => $value) {
+			$table .= '<tr>';
+			$table .= '<td>'.$count.'</td>';
+			$table .= '<td>'.$value['MFLCode'].'</td>';
+			$table .= '<td>'.$value['name'].'</td>';
+			$table .= '<td>'.$value['county'].'</td>';
+			$table .= '<td>'.$value['tests'].'</td>';
+			$table .= '<td>'.$value['eqatests'].'</td>';
+			$table .= '<td>'.$value['firstdna'].'</td>';
+			$table .= '<td>'.$value['confirmdna'].'</td>';
+			$table .= '<td>'.$value['positive'].'</td>';
+			$table .= '<td>'.$value['negative'].'</td>';
+			$table .= '<td>'.$value['redraw'].'</td>';
+			$table .= '<td>'.$value['infantsless2m'].'</td>';
+			$table .= '<td>'.$value['infantsless2mpos'].'</td>';
+			$table .= '</tr>';
+			$count++;
+		}
+		
+
+		return $table;
+	}
+
 	function get_trends($site=null, $year=null){
 
 		if ($year==null || $year=='null') {
@@ -153,44 +195,102 @@ class Sites_model extends MY_Model
 		
 		$sql = "CALL `proc_get_eid_sites_eid`('".$year."', '".$month."', '".$site."')";
 
-		$result = $this->db->query($sql)->row();
+		$result = $this->db->query($sql)->result_array();
+		// echo "<pre>";print_r($result);die();
+		$data['ul'] = '';
+		$data['eid_outcomes']['name'] = 'Tests';
+		$data['eid_outcomes']['colorByPoint'] = true;
 
-		$data['trend'][0]['name'] = "positive";
-		$data['trend'][1]['name'] = "negative";
+		$count = 0;
 
-		$data['trend'][0]['color'] = '#F2784B';
-		$data['trend'][1]['color'] = '#1BA39C';
+		$data['eid_outcomes']['data'][0]['name'] = 'No Data';
+		$data['eid_outcomes']['data'][0]['y'] = $count;
 
-		$data['trend'][0]['y'] = (int) $result->pos;
-		$data['trend'][1]['y'] = (int) $result->neg;
+		foreach ($result as $key => $value) {
+			$data['ul'] .= '<tr>
+		    		<td>Cumulative Tests:</td>
+		    		<td>'.(int) $value['alltests'].'</td>
+		    		<td>EQA Tests:</td>
+		    		<td>'.(int) $value['eqatests'].'</td>
+		    	</tr>
+		    	<tr>
+		    		<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Actual Tests:</td>
+		    		<td>'.(int) $value['tests'].'</td>
+		    		<td>Positive Outcomes:</td>
+		    		<td>'.(int) $value['pos'].'('.round((((int) $value['pos']/(int) $value['tests'])*100),1).'%)</td>
+		    	</tr>
+		    	<tr>
+		    		<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;First DNA PCR:</td>
+		    		<td>'.(int) $value['firstdna'].'</td>
+		    		<td>Confirmatory PCR @9M:</td>
+		    		<td>'.(int) $value['confirmdna'].'</td>
+		    	</tr>
+		    	<tr>
+		    		<td colspan="2"><center>Repeats for  Positive Confimation:</center></td>
+			    	<td colspan="2">'.(int) $value['repeatspos'].'</td>
+			    </tr>
+		    	<tr>
+		    		<th colspan="4"></th>
+		    	</tr>
+		    	<tr>
+		    		<td>Actual Infants Tested:</td>
+		    		<td>'.(int) $value['actualinfants'].'</td>
+		    		<td>Positive Outcomes:</td>
+		    		<td>'.(int) $value['actualinfantspos'].'('.round((((int) $value['actualinfantspos']/(int) $value['actualinfants'])*100),1).'%)</td>
+		    	</tr>
+		    	<tr>
+		    		<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Infants &lt; 2M:</td>
+		    		<td>'.(int) $value['infantsless2m'].'</td>
+		    		<td>Infants &lt; 2M Positive:</td>
+		    		<td>'.(int) $value['infantless2mpos'].'('.round((((int) $value['infantless2mpos']/(int) $value['infantsless2m'])*100),1).'%)</td>
+		    	</tr>
+		    	<tr>
+		    		<td>Adults Tested:</td>
+		    		<td>'.(int) $value['adults'].'</td>
+		    		<td>Positive Outcomes:</td>
+		    		<td>'.(int) $value['adultsPOS'].'('.round((((int) $value['adultsPOS']/(int) $value['adults'])*100),1).'%)</td>
+		    	</tr>
+		    	<tr>
+		    		<th colspan="4"></th>
+		    	</tr>
+		    	<tr>
+		    		<td>Redraws:</td>
+		    		<td>'.(int) $value['redraw'].'</td>
+		    		<td>Rejected Samples:</td>
+		    		<td>'.(int) $value['rejected'].'</td>
+		    	</tr>
+		    	<tr>
+		    		<td>Median Age of Testing:</td>
+		    		<td>'.round($value['medage']).'</td>
+		    		<td>Average Sites sending:</td>
+		    		<td>'.(int) $value['sitessending'].'</td>
+		    	</tr>';
+			// $data['ul'] .= '<li>Cumulative No. of Tests: <strong>'.(int) $value['alltests'].'</strong></li>';
+			// $data['ul'] .= '<li>Cumulative No. of EQA Tests: <strong>'.(int) $value['eqatests'].'</strong></li>';
+			// $data['ul'] .= '<li>No. of All Infants Tested: <strong>'.(int) $value['tests'].'</strong></li>';
+			// $data['ul'] .= '<li>No. of All Infants Tested ( < 2 months): <strong>'.(int) $value['infantsless2m'].'</strong></li>';
+			// $data['ul'] .= '<li>No. of first DNA PCR Test: <strong>'.(int) $value['firstdna'].'</strong></li>';
+			// $data['ul'] .= '<li>No of Confirmatory PCR Test @9M: <strong>'.(int) $value['confirmdna'].'</strong></li>';
+			// $data['ul'] .= '<li>Median Age of Testing (Months): <strong>'.$value['medage'].'</strong></li>';
+			// $data['ul'] .= '<li>Rejected Samples: <strong>'.$value['rejected'].'</strong></li>';
+			// $data['ul'] .= '<li>Sites Sending: <strong>'.(int) $value['sitessending'].'</strong></li>';
+			// if($value['name'] == ''){
+			// 	$data['hei']['data'][$key]['color'] = '#5C97BF';
+			// }
+			$data['eid_outcomes']['data'][$key]['y'] = $count;
 
-		$data['value'][0] = (int) $result->tests;
+			$data['eid_outcomes']['data'][0]['name'] = 'Positive';
+			$data['eid_outcomes']['data'][1]['name'] = 'Negative';
 
-		if($result->pos == 0 && $result->neg == 0){
-			$data['value'][1] = 0;
-			$data['value'][2] = 0;
-		}else{
-			$data['value'][1] = (int) ($result->pos / ($result->pos + $result->neg) * 100);
-			$data['value'][2] = (int) ($result->neg / ($result->pos + $result->neg) * 100);
+			$data['eid_outcomes']['data'][0]['y'] = (int) $value['pos'];
+			$data['eid_outcomes']['data'][1]['y'] = (int) $value['neg'];
 		}
 
-		$data['value'][3] = (int) $result->rejected;
-		if($result->tests == 0){
-			$data['value'][4] = 0; 
-		}else{
-			$data['value'][4] = (int) ($result->rejected / $result->tests * 100);
-		}
-
-		$data['div'] = "eid_pie";
-		$data['content'] = "eid_content";
-		$data['title'] = "EID";
-		$str = "Total Tests: " . $data['value'][0];
-		$str .= "<br />Total Positives: " . $data['trend'][0]['y'] . " <b>(" . $data['value'][1] . "%) </b>";
-		$str .= "<br />Total Negatives: " . $data['trend'][1]['y'] . " <b>(" . $data['value'][2] . "%) </b>";
-		$str .= "<br />Total Rejected: " . $data['value'][3] . " <b>(" . $data['value'][4] . "%) </b>";
-		$data['stats'] = $str;
-		
-
+		$data['eid_outcomes']['data'][0]['sliced'] = true;
+		$data['eid_outcomes']['data'][0]['selected'] = true;
+		$data['eid_outcomes']['data'][0]['color'] = '#F2784B';
+		$data['eid_outcomes']['data'][1]['color'] = '#1BA39C';
+		// echo "<pre>";print_r($data);die();
 		return $data;
 	}
 

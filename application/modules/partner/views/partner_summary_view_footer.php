@@ -1,7 +1,15 @@
 <script type="text/javascript">
 	$().ready(function(){
 		$("#second").hide();
-		
+		$.get("<?php echo base_url();?>template/dates", function(data){
+    		obj = $.parseJSON(data);
+	
+			if(obj['month'] == "null" || obj['month'] == null){
+				obj['month'] = "";
+			}
+			$(".display_date").html("( "+obj['year']+" "+obj['month']+" )");
+			$(".display_range").html("( "+obj['prev_year']+" - "+obj['year']+" )");
+    	});
 		$("#partner").load("<?php echo base_url('charts/summaries/county_outcomes'); ?>/"+null+"/"+null+"/"+1);
 
 		//Function when the prtner is selected
@@ -87,7 +95,7 @@
 			
 			$.get("<?php echo base_url();?>partner/check_partner_select", function (data) {
 				partner = data;
-				
+				console.log(partner);
 				if (partner==0) {
 					$("#second").hide();
 					$("#first").show();
@@ -99,8 +107,7 @@
 					partner = "<?php echo json_decode("+partner+")?>";
 					$("#first").hide();
 					$("#second").show();
-					
-	        		// Loader displaying
+					// Loader displaying
 		        	$("#testing_trends").html("<center><div class='loader'></div></center>");
 		        	$("#eidOutcomes").html("<center><div class='loader'></div></center>");
 			        $("#hei_follow_up").html("<center><div class='loader'></div></center>");
@@ -112,7 +119,7 @@
 
 					// Actual graphs being loaded
 					$("#testing_trends").load("<?php echo base_url('charts/summaries/testing_trends'); ?>/"+null+"/"+null+"/"+partner);
-					$("#eidOutcomes").load("<?php echo base_url('charts/summaries/eid_outcomes');?>/"+null+"/"+null+"/"+"/"+null+"/"+partner);
+					$("#eidOutcomes").load("<?php echo base_url('charts/summaries/eid_outcomes');?>/"+year+"/"+month+"/"+"/"+null+"/"+partner);
 					$("#hei_follow_up").load("<?php echo base_url('charts/summaries/hei_follow');?>/"+null+"/"+null+"/"+"/"+null+"/"+partner);
 					$("#ageGroups").load("<?php echo base_url('charts/summaries/agegroup');?>/"+null+"/"+null+"/"+"/"+null+"/"+partner);
 

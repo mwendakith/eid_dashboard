@@ -26,7 +26,7 @@ class Summaries_model extends MY_Model
 		}
 
 		$sql = "CALL `proc_get_eid_national_tat`('".$year."','".$month."')";
-		// echo "<pre>";print_r($sql);die();
+		echo "<pre>";print_r($sql);die();
 		$result = $this->db->query($sql)->result_array();
 		// echo "<pre>";print_r($result);die();
 		$count = 0;
@@ -92,7 +92,7 @@ class Summaries_model extends MY_Model
 				// $sql2 = "CALL `proc_get_regional_sitessending`('".$county."','".$year."','".$month."')";
 			}
 		}
-		// echo "<pre>";print_r($sql);die();
+		echo "<pre>";print_r($sql);die();
 		$result = $this->db->query($sql)->result_array();
 		
 		// echo "<pre>";print_r($result);die();
@@ -149,7 +149,7 @@ class Summaries_model extends MY_Model
 				// $sql2 = "CALL `proc_get_regional_sitessending`('".$county."','".$year."','".$month."')";
 			}
 		}
-		// echo "<pre>";print_r($sql);die();
+		echo "<pre>";print_r($sql);die();
 		$result = $this->db->query($sql)->result_array();
 		// echo "<pre>";print_r($result);die();
 		// $this->db->close();
@@ -222,18 +222,6 @@ class Summaries_model extends MY_Model
 		    		<td>Average Sites sending:</td>
 		    		<td>'.(int) $value['sitessending'].'</td>
 		    	</tr>';
-			// $data['ul'] .= '<li>Cumulative No. of Tests: <strong>'.(int) $value['alltests'].'</strong></li>';
-			// $data['ul'] .= '<li>Cumulative No. of EQA Tests: <strong>'.(int) $value['eqatests'].'</strong></li>';
-			// $data['ul'] .= '<li>No. of All Infants Tested: <strong>'.(int) $value['tests'].'</strong></li>';
-			// $data['ul'] .= '<li>No. of All Infants Tested ( < 2 months): <strong>'.(int) $value['infantsless2m'].'</strong></li>';
-			// $data['ul'] .= '<li>No. of first DNA PCR Test: <strong>'.(int) $value['firstdna'].'</strong></li>';
-			// $data['ul'] .= '<li>No of Confirmatory PCR Test @9M: <strong>'.(int) $value['confirmdna'].'</strong></li>';
-			// $data['ul'] .= '<li>Median Age of Testing (Months): <strong>'.$value['medage'].'</strong></li>';
-			// $data['ul'] .= '<li>Rejected Samples: <strong>'.$value['rejected'].'</strong></li>';
-			// $data['ul'] .= '<li>Sites Sending: <strong>'.(int) $value['sitessending'].'</strong></li>';
-			// if($value['name'] == ''){
-			// 	$data['hei']['data'][$key]['color'] = '#5C97BF';
-			// }
 			$data['eid_outcomes']['data'][$key]['y'] = $count;
 
 			$data['eid_outcomes']['data'][0]['name'] = 'Positive';
@@ -280,7 +268,7 @@ class Summaries_model extends MY_Model
 				$sql = "CALL `proc_get_eid_county_hei`('".$county."','".$year."','".$month."')";
 			}
 		}
-		// echo "<pre>";print_r($sql);die();
+		echo "<pre>";print_r($sql);die();
 		$result = $this->db->query($sql)->result_array();
 		// echo "<pre>";print_r($result);die();
 		$data['hei']['name'] = 'Tests';
@@ -358,7 +346,7 @@ class Summaries_model extends MY_Model
 				$sql = "CALL `proc_get_eid_county_age`('".$county."','".$year."','".$month."')";
 			}
 		}
-		// echo "<pre>";print_r($sql);die();
+		echo "<pre>";print_r($sql);die();
 		$result = $this->db->query($sql)->result_array();
 		// echo "<pre>";print_r($result);die();
 		$count = 0;
@@ -431,7 +419,7 @@ class Summaries_model extends MY_Model
 				$sql = "CALL `proc_get_eid_county_entry_points`('".$county."','".$year."','".$month."')";
 			}
 		}
-		// echo "<pre>";print_r($sql);die();
+		echo "<pre>";print_r($sql);die();
 		$result = $this->db->query($sql)->result_array();
 		// echo "<pre>";print_r($result);die();
 		$count = 0;
@@ -485,7 +473,7 @@ class Summaries_model extends MY_Model
 				$sql = "CALL `proc_get_eid_county_mprophylaxis`('".$county."','".$year."','".$month."')";
 			}
 		}
-		// echo "<pre>";print_r($sql);die();
+		echo "<pre>";print_r($sql);die();
 		$result = $this->db->query($sql)->result_array();
 		// echo "<pre>";print_r($result);die();
 		$count = 0;
@@ -542,7 +530,7 @@ class Summaries_model extends MY_Model
 				$sql = "CALL `proc_get_eid_county_iprophylaxis`('".$county."','".$year."','".$month."')";
 			}
 		}
-		// echo "<pre>";print_r($sql);die();
+		echo "<pre>";print_r($sql);die();
 		$result = $this->db->query($sql)->result_array();
 		// echo "<pre>";print_r($result);die();
 		$count = 0;

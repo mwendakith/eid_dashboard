@@ -21,13 +21,13 @@
 	$(function () {
 				$('#eid_outcomes_pie').highcharts({
 			        chart: {
-                plotBackgroundColor: null,
-                plotBorderWidth: null,
-                plotShadow: false,
-                type: 'pie'
+		                plotBackgroundColor: null,
+		                plotBorderWidth: null,
+		                plotShadow: false,
+		                type: 'pie'
 		            },
 		            title: {
-		                text: ''
+		                text: "<?php echo $outcomes['title'];?>"
 		            },
 		            tooltip: {
 		                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'

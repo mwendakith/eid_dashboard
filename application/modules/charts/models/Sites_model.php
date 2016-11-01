@@ -170,7 +170,7 @@ class Sites_model extends MY_Model
 					($value['pos'] + $value['neg']) * 100);
 			}
 		}
-
+		$data['title'] = "Positivity (" . $year . ")";
 		return $data;
 	}
 
@@ -180,15 +180,20 @@ class Sites_model extends MY_Model
 			$year = $this->session->userdata('filter_year');
 		}
 
+		$data['title'] = "EID Outcome (" . $year . ", " . $this->resolve_month($month) . ")";
+
+		
+		
 		if ($site==null || $site=='null') {
 			$site = $this->session->userdata('site_filter');
 		}
 
 		if ($month==null || $month=='null') {
+			$data['title'] = "EID Outcome (" . $year . ")";
 			if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
-				$month = $this->session->userdata('filter_month');
-			}else {
 				$month = 0;
+			}else {
+				$month = $this->session->userdata('filter_month');
 			}
 		}
 
@@ -290,25 +295,32 @@ class Sites_model extends MY_Model
 		$data['eid_outcomes']['data'][0]['selected'] = true;
 		$data['eid_outcomes']['data'][0]['color'] = '#F2784B';
 		$data['eid_outcomes']['data'][1]['color'] = '#1BA39C';
+
+		
+
 		// echo "<pre>";print_r($data);die();
 		return $data;
 	}
 
 	function get_hei($site=null, $year=null, $month=null){
 
+
 		if ($year==null || $year=='null') {
 			$year = $this->session->userdata('filter_year');
 		}
+		
+		$data['title'] = "HEI Follow Up (" . $year . ", " . $this->resolve_month($month) . ")";
 
 		if ($site==null || $site=='null') {
 			$site = $this->session->userdata('site_filter');
 		}
 
 		if ($month==null || $month=='null') {
+			$data['title'] = "HEI Follow Up (" . $year . ")";
 			if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
-				$month = $this->session->userdata('filter_month');
-			}else {
 				$month = 0;
+			}else {
+				$month = $this->session->userdata('filter_month');
 			}
 		}
 
@@ -317,10 +329,10 @@ class Sites_model extends MY_Model
 
 		$result = $this->db->query($sql)->row();
 
-		$data['trend'][0]['name'] = "enrolled";
-		$data['trend'][1]['name'] = "dead";
-		$data['trend'][2]['name'] = "lost to follow up";
-		$data['trend'][3]['name'] = "transferred out";
+		$data['trend'][0]['name'] = "Initiated On Treatment";
+		$data['trend'][1]['name'] = "Dead";
+		$data['trend'][2]['name'] = "Lost to Follow Up";
+		$data['trend'][3]['name'] = "Transferred Out";
 
 		$per = (int) ($result->enrolled + $result->dead + $result->ltfu + $result->transout + $result->adult + $result->other);
 
@@ -346,9 +358,9 @@ class Sites_model extends MY_Model
 		$data['per'][4] = (int) ($result->adult / $per * 100);
 		$data['per'][5] = (int) ($result->other / $per * 100);
 
-		$str = "Enrolled: " . $data['trend'][0]['y'] . " <b>(" . $data['per'][0] . "%)</b>";
+		$str = "Initiated On Treatment: " . $data['trend'][0]['y'] . " <b>(" . $data['per'][0] . "%)</b>";
 		$str .= "<br />Dead: " . $data['trend'][1]['y'] . " <b>(" . $data['per'][1] . "%)</b>";
-		$str .= "<br />Lost to follow up: " . $data['trend'][2]['y'] . " <b>(" . $data['per'][2] . "%)</b>";
+		$str .= "<br />Lost to Follow Up: " . $data['trend'][2]['y'] . " <b>(" . $data['per'][2] . "%)</b>";
 		$str .= "<br />Transferred out: " . $data['trend'][3]['y'] . " <b>(" . $data['per'][3] . "%)</b>";
 		$str .= "<br />Adults: " . $data['other'][0] . " <b>(" . $data['per'][4] . "%)</b>";
 		$str .= "<br />Other: " . $data['other'][1] . " <b>(" . $data['per'][5] . "%)</b>";
@@ -358,7 +370,7 @@ class Sites_model extends MY_Model
 
 		$data['div'] = "hei_pie";
 		$data['content'] = "hei_content";
-		$data['title'] = "HEI Follow Up";
+		
 		
 
 		return $data;

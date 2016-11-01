@@ -80,6 +80,7 @@ if(!defined("BASEPATH")) exit("No direct script access allowed!");
 				$filter_data = array(
 								'county_filter' => null,
 								'partner_filter' => null,
+								'site_filter' => null,
 								'filter_year' => Date('Y'),
 								'filter_month' => null
 								);

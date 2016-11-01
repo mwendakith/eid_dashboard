@@ -7,7 +7,7 @@ $(function () {
             zoomType: 'xy'
         },
         title: {
-            text: 'Positivity'
+            text: "<?php echo $title; ?>",
         },
         xAxis: [{
             categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
@@ -15,42 +15,41 @@ $(function () {
             crosshair: true
         }],
         yAxis: [{ // Primary yAxis
-            labels: {
-                format: '{value}',
-                style: {
-                    color: Highcharts.getOptions().colors[1]
-                }
-            },
             title: {
                 text: 'Positive Tests',
                 style: {
-                    color: Highcharts.getOptions().colors[1]
-                }
-            }
-        }, { // Secondary yAxis
-            title: {
-                text: 'Positive Tests (%)',
-                style: {
-                    color: Highcharts.getOptions().colors[0]
+                    color: '#1BA39C'
                 }
             },
             labels: {
+                format: '{value}',
+                style: {
+                    color: '#1BA39C'
+                }
+            }
+        },
+        { // Secondary yAxis
+            labels: {
                 format: '{value} (%)',
                 style: {
-                    color: Highcharts.getOptions().colors[0]
+                    color: Highcharts.getOptions().colors[1]
+                }
+            },
+            title: {
+                text: 'Positivity (%)',
+                style: {
+                    color: Highcharts.getOptions().colors[1]
                 }
             },
             opposite: true
-        }],
+        }, ],
         tooltip: {
             shared: true
         },
         legend: {
             layout: 'vertical',
-            align: 'left',
-            x: 120,
+            align: 'right',
             verticalAlign: 'top',
-            y: 100,
             floating: true,
             backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
         },
@@ -61,16 +60,20 @@ $(function () {
             data: <?php echo json_encode($trends[0]);?>,
             tooltip: {
                 valueSuffix: ' '
-            }
+            },
+            color : '#1BA39C',
 
-        }, {
-            name: 'Positivity (%)',
+        },
+        {
+            name: 'Positivity (%) ',
             type: 'spline',
             data: <?php echo json_encode($trends[1]);?>,
             tooltip: {
                 valueSuffix: '%'
-            }
-        }]
+            },
+            color : Highcharts.getOptions().colors[1],
+        },
+        ]
     });
 });
 

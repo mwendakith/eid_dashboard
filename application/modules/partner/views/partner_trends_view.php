@@ -24,11 +24,12 @@
 
       var posting = $.post( "<?php echo base_url();?>template/filter_partner_data", { partner: part } );
       posting.done(function( data ) {
-            $.get("<?php echo base_url();?>template/breadcrum/"+data, function(data){
-              $("#breadcrum").html(data);
-            });
-            $("#graphs").load("<?php echo base_url();?>charts/PartnerTrends/partner_trends/"+data);
-            $("#stacked_graph").load("<?php echo base_url();?>charts/PartnerTrends/summary/"+data);
+        if (data=="") {data = 0;}
+        $.get("<?php echo base_url();?>template/breadcrum/"+data+"/"+1, function(data){
+          $("#breadcrum").html(data);
+        });
+        $("#graphs").load("<?php echo base_url();?>charts/PartnerTrends/partner_trends/"+data);
+        $("#stacked_graph").load("<?php echo base_url();?>charts/PartnerTrends/summary/"+data);
       });
 
 

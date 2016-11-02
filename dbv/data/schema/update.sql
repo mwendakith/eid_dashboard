@@ -420,7 +420,7 @@ BEGIN
                     `cs`.`year`,  
                     SUM(`cs`.`neg`) AS `negative`, 
                     SUM(`cs`.`pos`) AS `positive`, 
-                    SUM(`cs`.`redraw`) AS `redraw`
+                    SUM(`cs`.`redraw`) AS `redraws`
                 FROM `county_summary` `cs`
                 WHERE 1 ";
 

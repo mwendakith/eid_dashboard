@@ -12,12 +12,12 @@ class Partner extends MY_Controller
 		$this->load->module('summaries');
 		$this->data	=	array_merge($this->data,$this->load_libraries(array('material','highstock','highmaps','highcharts','custom','select2','tablecloth')));
 		$this->session->unset_userdata('county_filter');
-		$this->initialize_filter();
 		$this->data['part'] = TRUE;
 	}
 
 	function index()
 	{
+		$this->clear_all_session_data();
 		$this->session->unset_userdata('partner_filter');
 		$this->load->module('charts/partner_summaries');
 		
@@ -27,6 +27,7 @@ class Partner extends MY_Controller
 
 	function trends()
 	{
+		$this->clear_all_session_data();
 		$this->session->unset_userdata('partner_filter');
 		$this->load->module('charts/partnertrends');
 		
@@ -37,6 +38,7 @@ class Partner extends MY_Controller
 
 	function sites()
 	{
+		$this->clear_all_session_data();
 		$this->session->unset_userdata('partner_filter');
 		$this->load->module('charts/sites');
 

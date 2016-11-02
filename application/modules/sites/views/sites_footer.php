@@ -2,7 +2,16 @@
 	$().ready(function(){
 		var site = <?php echo json_encode($this->session->userdata("site_filter")); ?>;
 		//$("#siteOutcomes").load("<?php echo base_url('charts/sites/site_outcomes');?>");
-		
+		$.get("<?php echo base_url();?>template/dates", function(data){
+    		obj = $.parseJSON(data);
+	
+			if(obj['month'] == "null" || obj['month'] == null){
+				obj['month'] = "";
+			}
+			$(".display_date").html("( "+obj['year']+" "+obj['month']+" )");
+			$(".display_range").html("( "+obj['prev_year']+" - "+obj['year']+" )");
+    	});
+
 		if (!site) {
     		$("#siteOutcomes").load("<?php echo base_url('charts/sites/site_outcomes');?>");
 			$("#first").show();

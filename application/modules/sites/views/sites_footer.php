@@ -80,8 +80,7 @@
 
 	function date_filter(criteria, id)
  	{
- 		$("#partner").html("<div>Loading...</div>");
-
+ 		//alert('hellp');
  		if (criteria === "monthly") {
  			year = null;
  			month = id;
@@ -89,9 +88,7 @@
  			year = id;
  			month = null;
  		}
-
  		var posting = $.post( '<?php echo base_url();?>summary/set_filter_date', { 'year': year, 'month': month } );
-
  		// Put the results in a div
 		posting.done(function( data ) {
 			obj = $.parseJSON(data);
@@ -113,13 +110,15 @@
 			$("#stoutcomes").html("<center><div class='loader'></div></center>");
 			$("#vlOutcomes").html("<center><div class='loader'></div></center>");
 			$("#ageGroups").html("<center><div class='loader'></div></center>");
-
 			$("#tsttrends").load("<?php echo base_url('charts/sites/site_trends');?>/"+null+"/"+year);
 			$("#stoutcomes").load("<?php echo base_url('charts/sites/site_positivity');?>/"+null+"/"+year);
-			$("#vlOutcomes").load("<?php echo base_url('charts/sites/site_eid');?>/"+null+"/"+year);
-			$("#ageGroups").load("<?php echo base_url('charts/sites/site_hei');?>/"+null+"/"+year);
+			$("#vlOutcomes").load("<?php echo base_url('charts/sites/site_eid');?>/"+null+"/"+year+"/"+month);
+			$("#ageGroups").load("<?php echo base_url('charts/sites/site_hei');?>/"+null+"/"+year+"/"+month);
 			
 		}
+		/*if(!$("#second").is(":hidden")){
+			alert('found');
+		}*/
 		///console.log(county);
 
 	 	

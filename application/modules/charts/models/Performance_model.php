@@ -129,12 +129,15 @@ class Performance_model extends MY_Model
 
 			$data['categories'][$lab] = $value['name'];
 
-			$data['outcomes'][0]['name'] = "positive";
+			$data['outcomes'][0]['name'] = "Positive";
 			$data['outcomes'][0]['data'][$lab] = (int) $value['pos'];
 
 
-			$data['outcomes'][1]['name'] = "negative";
+			$data['outcomes'][1]['name'] = "Negative";
 			$data['outcomes'][1]['data'][$lab] = (int) $value['neg'];
+
+			$data['outcomes'][2]['name'] = "Redraws";
+			$data['outcomes'][2]['data'][$lab] = (int) $value['redraw'];
 
 		}
 		 // echo "<pre>";print_r($data);die();

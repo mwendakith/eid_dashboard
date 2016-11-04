@@ -355,7 +355,8 @@ BEGIN
   SET @QUERY =    "SELECT
                     `l`.`ID`, `l`.`labname` AS `name`, 
                     SUM(`ls`.`pos`) AS `pos`,
-                    SUM(`ls`.`neg`) AS `neg`
+                    SUM(`ls`.`neg`) AS `neg`,
+                    SUM(`redraw`) AS `redraw`
                 FROM `lab_summary` `ls`
                 JOIN `labs` `l`
                 ON `l`.`ID` = `ls`.`lab` 

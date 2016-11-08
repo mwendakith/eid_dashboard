@@ -75,12 +75,15 @@ class Sites_model extends MY_Model
 			$table .= '<td>'.$value['name'].'</td>';
 			$table .= '<td>'.$value['county'].'</td>';
 			$table .= '<td>'.$value['tests'].'</td>';
-			$table .= '<td>'.$value['eqatests'].'</td>';
 			$table .= '<td>'.$value['firstdna'].'</td>';
 			$table .= '<td>'.$value['confirmdna'].'</td>';
 			$table .= '<td>'.$value['positive'].'</td>';
 			$table .= '<td>'.$value['negative'].'</td>';
 			$table .= '<td>'.$value['redraw'].'</td>';
+			$table .= '<td>'.$value['adults'].'</td>';
+			$table .= '<td>'.$value['adultspos'].'</td>';
+			$table .= '<td>'.$value['medage'].'</td>';
+			$table .= '<td>'.$value['rejected'].'</td>';
 			$table .= '<td>'.$value['infantsless2m'].'</td>';
 			$table .= '<td>'.$value['infantsless2mpos'].'</td>';
 			$table .= '</tr>';

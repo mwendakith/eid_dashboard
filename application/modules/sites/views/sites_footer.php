@@ -2,37 +2,33 @@
 	$().ready(function(){
 		var site = <?php echo json_encode($this->session->userdata("site_filter")); ?>;
 		//$("#siteOutcomes").load("<?php echo base_url('charts/sites/site_outcomes');?>");
-		$.get("<?php echo base_url();?>template/dates", function(data){
-    		obj = $.parseJSON(data);
-	
-			if(obj['month'] == "null" || obj['month'] == null){
-				obj['month'] = "";
-			}
-			$(".display_date").html("( "+obj['year']+" "+obj['month']+" )");
-			$(".display_range").html("( "+obj['prev_year']+" - "+obj['year']+" )");
-    	});
 
-		if (!site) {
-    		$("#siteOutcomes").load("<?php echo base_url('charts/sites/site_outcomes');?>");
-			$("#first").show();
-			$("#second").hide();
-		} else {
-			$("#first").hide();
-			$("#second").show();
+		// if (!site) {
+    // 		$("#siteOutcomes").load("<?php echo base_url('charts/sites/site_outcomes');?>");
+		// 	$("#first").show();
+		// 	$("#second").hide();
+		// } else {
+		// 	$("#first").hide();
+		// 	$("#second").show();
+		//
+		// 	$("#tsttrends").html("<center><div class='loader'></div></center>");
+		// 	$("#stoutcomes").html("<center><div class='loader'></div></center>");
+		// 	$("#vlOutcomes").html("<center><div class='loader'></div></center>");
+		// 	$("#ageGroups").html("<center><div class='loader'></div></center>");
+		//
+		// 	$("#tsttrends").load("<?php echo base_url('charts/sites/site_trends');?>/"+site);
+		// 	$("#stoutcomes").load("<?php echo base_url('charts/sites/site_positivity');?>/"+site);
+		// 	$("#vlOutcomes").load("<?php echo base_url('charts/sites/site_eid');?>/"+site);
+		// 	$("#ageGroups").load("<?php echo base_url('charts/sites/site_hei');?>/"+site);
+		//
+		// }
 
-			$("#tsttrends").html("<center><div class='loader'></div></center>");
-			$("#stoutcomes").html("<center><div class='loader'></div></center>");
-			$("#vlOutcomes").html("<center><div class='loader'></div></center>");
-			$("#ageGroups").html("<center><div class='loader'></div></center>");
+		$("#siteOutcomes").load("<?php echo base_url('charts/sites/site_outcomes');?>");
+		$("#first").show();
+		$("#second").hide();
 
-			$("#tsttrends").load("<?php echo base_url('charts/sites/site_trends');?>/"+site);
-			$("#stoutcomes").load("<?php echo base_url('charts/sites/site_positivity');?>/"+site);
-			$("#vlOutcomes").load("<?php echo base_url('charts/sites/site_eid');?>/"+site);
-			$("#ageGroups").load("<?php echo base_url('charts/sites/site_hei');?>/"+site);
-			
-		}
 
-		
+
 		$("select").change(function() {
 			em = $(this).val();
 
@@ -43,7 +39,7 @@
 	        posting.done(function( data ) {
 	        	$.get("<?php echo base_url();?>template/dates", function(data){
 	        		obj = $.parseJSON(data);
-			
+
 					if(obj['month'] == "null" || obj['month'] == null){
 						obj['month'] = "";
 					}
@@ -72,7 +68,7 @@
 					$("#stoutcomes").load("<?php echo base_url('charts/sites/site_positivity');?>/"+data);
 					$("#vlOutcomes").load("<?php echo base_url('charts/sites/site_eid');?>/"+data);
 					$("#ageGroups").load("<?php echo base_url('charts/sites/site_hei');?>/"+data);
-					
+
 				}
 	        });
 		});
@@ -80,7 +76,7 @@
 
 	function date_filter(criteria, id)
  	{
- 		// alert('hellp');
+ 		//alert('hellp');
  		if (criteria === "monthly") {
  			year = null;
  			month = id;
@@ -88,18 +84,17 @@
  			year = id;
  			month = null;
  		}
- 		console.log(month+" of "+year);
  		var posting = $.post( '<?php echo base_url();?>summary/set_filter_date', { 'year': year, 'month': month } );
  		// Put the results in a div
 		posting.done(function( data ) {
 			obj = $.parseJSON(data);
-			
+
 			if(obj['month'] == "null" || obj['month'] == null){
 				obj['month'] = "";
 			}
 			$(".display_date").html("( "+obj['year']+" "+obj['month']+" )");
 			$(".display_range").html("( "+obj['prev_year']+" - "+obj['year']+" )");
-			
+
 		});
 		var site = <?php echo json_encode($this->session->userdata('site_filter')); ?>;
 		//Checking if site was previously selected and calling the relevant views
@@ -115,14 +110,14 @@
 			$("#stoutcomes").load("<?php echo base_url('charts/sites/site_positivity');?>/"+null+"/"+year);
 			$("#vlOutcomes").load("<?php echo base_url('charts/sites/site_eid');?>/"+null+"/"+year+"/"+month);
 			$("#ageGroups").load("<?php echo base_url('charts/sites/site_hei');?>/"+null+"/"+year+"/"+month);
-			
+
 		}
 		/*if(!$("#second").is(":hidden")){
 			alert('found');
 		}*/
 		///console.log(county);
 
-	 	
+
  	}
 
 	function ageModal()

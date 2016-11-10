@@ -39,6 +39,10 @@
 				$("#partnerSites").load("<?php echo base_url('charts/sites/partner_sites');?>/"+null+"/"+null+"/"+null+"/"+em);
 			}
 		});
+
+		// $("#partner_sites_excels").click(function(){
+		// 	$(location).("<?php echo base_url('partner/excel_test');?>");
+		// });
 	});
 
 	function date_filter(criteria, id)

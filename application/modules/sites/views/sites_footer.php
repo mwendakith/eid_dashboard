@@ -80,7 +80,7 @@
 
 	function date_filter(criteria, id)
  	{
- 		//alert('hellp');
+ 		// alert('hellp');
  		if (criteria === "monthly") {
  			year = null;
  			month = id;
@@ -88,6 +88,7 @@
  			year = id;
  			month = null;
  		}
+ 		console.log(month+" of "+year);
  		var posting = $.post( '<?php echo base_url();?>summary/set_filter_date', { 'year': year, 'month': month } );
  		// Put the results in a div
 		posting.done(function( data ) {

@@ -21,7 +21,7 @@
     <div class="col-md-12">
       <div class="panel panel-default">
         <div class="panel-heading">
-          Sites Outcomes <div class="display_date"></div>
+          Facilities Outcomes <div class="display_date"></div>
         </div>
           <div class="panel-body" id="siteOutcomes">
             <center><div class="loader"></div></center>

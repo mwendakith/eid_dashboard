@@ -66,5 +66,69 @@ class Partner extends MY_Controller
 		}
 		echo json_encode($partner);
 	}
+
+	function excel_test($partner=null)
+	{
+		header('Content-type: application/excel');
+		$filename = 'filename.xls';
+		header('Content-Disposition: attachment; filename='.$filename);
+		$this->load->module('charts/sites');
+
+		$conc = $this->sites->partner_sites_excel($partner);
+		// echo "<pre>";print_r($conc);die();
+
+		$data = '<html xmlns:x="urn:schemas-microsoft-com:office:excel">
+		<head>
+		    <!--[if gte mso 9]>
+		    <xml>
+		        <x:ExcelWorkbook>
+		            <x:ExcelWorksheets>
+		                <x:ExcelWorksheet>
+		                    <x:Name>Sheet 1</x:Name>
+		                    <x:WorksheetOptions>
+		                        <x:Print>
+		                            <x:ValidPrinterInfo/>
+		                        </x:Print>
+		                    </x:WorksheetOptions>
+		                </x:ExcelWorksheet>
+		            </x:ExcelWorksheets>
+		        </x:ExcelWorkbook>
+		    </xml>
+		    <![endif]-->
+		</head>
+
+		<body>
+		   <table>
+				<thead>
+					<tr class="colhead">
+						<th rowspan="2">#</th>
+						<th rowspan="2">MFL Code</th>
+						<th rowspan="2">Name</th>
+						<th rowspan="2">County</th>
+						<th rowspan="2">Tests</th>
+						<th rowspan="2">1st DNA PCR</th>
+						<th rowspan="2">Confirmed PCR</th>
+						<th rowspan="2">+</th>
+						<th rowspan="2">-</th>
+						<th rowspan="2">Redraws</th>
+						<th colspan="2">Adults</th>
+						<th rowspan="2">Median Age</th>
+						<th rowspan="2">Rejected</th>
+						<th rowspan="2">Infants &lt;2M</th>
+						<th rowspan="2">Infants &lt;2M +</th>
+					</tr>
+					<tr>
+						<th>Tests</th>
+						<th>+</th>
+					</tr>
+				</thead>
+				<tbody>
+					'.$conc.'
+				</tbody>
+			</table>
+		</body></html>';
+
+		echo $data;
+	}
 }
 ?>

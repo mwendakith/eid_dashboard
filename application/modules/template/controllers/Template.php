@@ -12,6 +12,9 @@ class Template extends MY_Controller
 		$this->load_template($data);
 	}
 
+	public function all_sess()
+	{print_r($this->session->all_userdata());}
+
 	public function load_template($data)
 	{
 		$this->load->model('template_model');

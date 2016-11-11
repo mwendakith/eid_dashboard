@@ -170,6 +170,7 @@ if(!defined("BASEPATH")) exit("No direct script access allowed!");
 
 		function filter_site($data=null)
 		{
+
 			if (!$data) {
 				
 			} else {
@@ -185,7 +186,7 @@ if(!defined("BASEPATH")) exit("No direct script access allowed!");
 					$this->session->set_userdata('county_filter', null);
 				}
 			}
-			
+			// print_r($this->session->all_userdata());die();
 			return TRUE;
 		}
 

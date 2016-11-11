@@ -157,7 +157,9 @@ class Sites_model extends MY_Model
 
 		$data;
 		$data['year'] = $year;
-				
+		$data['trends'][0][0] = 0;
+		$data['trends'][1][0] = 0;
+
 		foreach ($result as $key => $value) {
 
 			$month = (int) $value['month'];
@@ -174,6 +176,7 @@ class Sites_model extends MY_Model
 			}
 		}
 		$data['title'] = "Positivity (" . $year . ")";
+		// echo "<pre>";print_r($data);die();
 		return $data;
 	}
 

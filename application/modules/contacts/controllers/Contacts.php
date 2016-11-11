@@ -28,6 +28,13 @@ class Contacts extends MY_Controller
 
 	function submit()
 	{
+		print_r($this->input->post());die();
+		require_once __DIR__ . '/../../../libraries/autoload.php';
+		$secret = '6LfymQsUAAAAAFay69bbyGSjTH4ofVgFxv7kyuGQ';
+		$recaptcha = new \ReCaptcha\ReCaptcha($secret);
+		$resp = $recaptcha->verify($_POST['g-recaptcha-response'], $_SERVER['REMOTE_ADDR']);
+		print_r($resp);die();
+
 		$data = array();
 		$name = $this->input->post('cname');
 		$email = $this->input->post('cemail');

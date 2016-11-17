@@ -36,6 +36,7 @@ class Performance_model extends MY_Model
 						<td>".(int) $value['alltests']."</td>
 						<td>".(int) $value['eqatests']."</td>
 						<td>".(int) $value['rejected']."</td>
+						<td>".(int) $value['tests']."</td>
 						<td>".(int) $value['pos']."</td>
 						<td>".round((($value['pos']*100)/$value['tests']), 2, PHP_ROUND_HALF_UP)."</td>
 						<td>".(int) $value['neg']."</td>

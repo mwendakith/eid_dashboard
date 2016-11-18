@@ -1,29 +1,10 @@
 <script type="text/javascript">
 	$().ready(function(){
 		var site = <?php echo json_encode($this->session->userdata("site_filter")); ?>;
-		//$("#siteOutcomes").load("<?php echo base_url('charts/sites/site_outcomes');?>");
-
-		// if (!site) {
-    // 		$("#siteOutcomes").load("<?php echo base_url('charts/sites/site_outcomes');?>");
-		// 	$("#first").show();
-		// 	$("#second").hide();
-		// } else {
-		// 	$("#first").hide();
-		// 	$("#second").show();
-		//
-		// 	$("#tsttrends").html("<center><div class='loader'></div></center>");
-		// 	$("#stoutcomes").html("<center><div class='loader'></div></center>");
-		// 	$("#vlOutcomes").html("<center><div class='loader'></div></center>");
-		// 	$("#ageGroups").html("<center><div class='loader'></div></center>");
-		//
-		// 	$("#tsttrends").load("<?php echo base_url('charts/sites/site_trends');?>/"+site);
-		// 	$("#stoutcomes").load("<?php echo base_url('charts/sites/site_positivity');?>/"+site);
-		// 	$("#vlOutcomes").load("<?php echo base_url('charts/sites/site_eid');?>/"+site);
-		// 	$("#ageGroups").load("<?php echo base_url('charts/sites/site_hei');?>/"+site);
-		//
-		// }
+		
 
 		$("#siteOutcomes").load("<?php echo base_url('charts/sites/site_outcomes');?>");
+		$("#unsupportedSites").load("<?php echo base_url('charts/sites/unsupported_sites');?>");
 		$("#first").show();
 		$("#second").hide();
 

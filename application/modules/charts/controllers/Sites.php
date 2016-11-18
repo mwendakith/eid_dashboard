@@ -20,6 +20,13 @@ class Sites extends MY_Controller
     	$this->load->view('site_outcomes_view',$data);
 	}
 
+	function unsupported_sites()
+	{
+		$data['outcomes'] = $this->sites_model->unsupported_sites();
+
+    	$this->load->view('unsupported_sites_view',$data);
+	}
+
 	function site_trends($site=NULL,$year=NULL)
 	{
 		$data = $this->sites_model->get_trends($site,$year);

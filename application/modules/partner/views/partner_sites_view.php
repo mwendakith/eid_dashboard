@@ -46,10 +46,10 @@
 		  	<hr>
 		  	<div class="row" id="excels">
 		  		<div class="col-md-6">
-		  			<center><button class="btn btn-primary" style="background-color: #009688;color: white;">Generate List of Sites without partners</button></center>
+		  			<center><button class="btn btn-primary" style="background-color: #009688;color: white;">List of all supported sites</button></center>
 		  		</div>
 		  		<div class="col-md-6">
-		  			<center><button id="partner_sites_excels" class="btn btn-primary" style="background-color: #009688;color: white;">Generate Site details for currect partner</button></center>
+		  			<center><button id="partner_sites_excels" class="btn btn-primary" style="background-color: #009688;color: white;">Partner Facilities Details</button></center>
 		  		</div>
 		  	</div>
 		</div>

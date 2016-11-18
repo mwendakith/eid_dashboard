@@ -49,6 +49,26 @@ class Sites_model extends MY_Model
 
 	}
 
+	function unsupported_sites(){
+		$sql = "CALL `proc_get_eid_unsupported_facilities`()";
+
+		$result = $this->db->query($sql)->result_array();
+
+		$ul = '';
+		foreach ($result as $key => $value) {
+			$ul .= "<tr>
+				<td>" . ($key+1) . "</td>
+				<td>" . $value['facilitycode'] . "</td>
+				<td>" . $value['name'] . "</td>
+				<td>" . $value['county'] . "</td>
+				<td>" . $value['subcounty'] . "</td>
+			</tr>";
+		}
+
+		return $ul;
+
+	}
+
 	function partner_sites_outcomes($year=NULL,$month=NULL,$site=NULL,$partner=NULL)
 	{
 		$table = '';

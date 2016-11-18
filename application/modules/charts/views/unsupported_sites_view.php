@@ -3,6 +3,7 @@
 		<tr class="colhead">
 			<th >No</th>
 			<th >MFL code</th>
+			<th >DHIS code</th>
 			<th >Name</th>
 			<th >County</th>
 			<th >Subcounty</th>

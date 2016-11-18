@@ -34,7 +34,7 @@
     <div class="col-md-12">
       <div class="panel panel-default">
         <div class="panel-heading">
-          Sites Without Support <div class="display_date"></div>
+          Facilities Without Supporting Partner <div class="display_date"></div>
         </div>
           <div class="panel-body" id="unsupportedSites">
             <center><div class="loader"></div></center>

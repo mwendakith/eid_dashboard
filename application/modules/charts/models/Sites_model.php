@@ -59,6 +59,7 @@ class Sites_model extends MY_Model
 			$ul .= "<tr>
 				<td>" . ($key+1) . "</td>
 				<td>" . $value['facilitycode'] . "</td>
+				<td>" . $value['DHIScode'] . "</td>
 				<td>" . $value['name'] . "</td>
 				<td>" . $value['county'] . "</td>
 				<td>" . $value['subcounty'] . "</td>

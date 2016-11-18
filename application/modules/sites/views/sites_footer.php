@@ -82,6 +82,8 @@
 		if (!site) {
 			$("#siteOutcomes").html("<center><div class='loader'></div></center>");
 			$("#siteOutcomes").load("<?php echo base_url('charts/sites/site_outcomes');?>/"+year+"/"+month+"/"+null);
+			$("#unsupportedSites").html("<center><div class='loader'></div></center>");
+			$("#unsupportedSites").load("<?php echo base_url('charts/sites/unsupported_sites');?>");
 		} else {
 			$("#tsttrends").html("<center><div class='loader'></div></center>");
 			$("#stoutcomes").html("<center><div class='loader'></div></center>");

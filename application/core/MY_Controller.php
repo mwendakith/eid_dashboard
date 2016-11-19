@@ -73,6 +73,18 @@ if(!defined("BASEPATH")) exit("No direct script access allowed!");
 			return 	$libs;
 		}
 
+		function clear_all_session_data()
+		{
+			$filter_data = array(
+								'county_filter',
+								'partner_filter',
+								'site_filter',
+								'filter_year',
+								'filter_month'
+								);
+			$this->session->unset_userdata($filter_data);
+		}
+
 		function initialize_filter()
 		{
 			if(!$this->session->userdata('filter_year'))
@@ -141,14 +153,14 @@ if(!defined("BASEPATH")) exit("No direct script access allowed!");
 				
 			} else {
 				if ($data['partner']=='NA') {
-					$this->session->set_userdata('partner_filter', null);
-					$this->session->set_userdata('filter_month', null);
-					$this->session->set_userdata('county_filter', null);
+					$this->session->unset_userdata('partner_filter');
+					$this->session->unset_userdata('filter_month');
+					$this->session->unset_userdata('county_filter');
 					$this->session->unset_userdata('site_filter');
 				}else{
 					$this->session->set_userdata('partner_filter', $data['partner']);
-					$this->session->set_userdata('filter_month', null);
-					$this->session->set_userdata('county_filter', null);
+					$this->session->unset_userdata('filter_month');
+					$this->session->unset_userdata('county_filter');
 					$this->session->unset_userdata('site_filter');
 				}
 			}
@@ -158,6 +170,7 @@ if(!defined("BASEPATH")) exit("No direct script access allowed!");
 
 		function filter_site($data=null)
 		{
+
 			if (!$data) {
 				
 			} else {
@@ -173,7 +186,7 @@ if(!defined("BASEPATH")) exit("No direct script access allowed!");
 					$this->session->set_userdata('county_filter', null);
 				}
 			}
-			
+			// print_r($this->session->all_userdata());die();
 			return TRUE;
 		}
 

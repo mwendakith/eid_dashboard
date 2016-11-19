@@ -8,12 +8,15 @@ BEGIN
                   `view_facilitys`.`name`, 
                   `countys`.`name` AS `county`, 
                   SUM(`tests`) AS `tests`, 
-                  SUM(`eqatests`) AS `eqatests`,
                   SUM(`firstdna`) AS `firstdna`, 
                   SUM(`confirmdna`) AS `confirmdna`,
                   SUM(`pos`) AS `positive`, 
                   SUM(`neg`) AS `negative`, 
                   SUM(`redraw`) AS `redraw`, 
+                  SUM(`adults`) AS `adults`, 
+                  SUM(`adultsPOS`) AS `adultspos`, 
+                  SUM(`medage`) AS `medage`, 
+                  SUM(`rejected`) AS `rejected`, 
                   SUM(`infantsless2m`) AS `infantsless2m`, 
                   SUM(`infantsless2mPOS`) AS `infantsless2mpos` 
                   FROM `site_summary` 
@@ -26,7 +29,7 @@ BEGIN
         SET @QUERY = CONCAT(@QUERY, " AND `view_facilitys`.`partner` = '",P_id,"' AND `year` = '",filter_year,"' ");
     END IF;
 
-    SET @QUERY = CONCAT(@QUERY, " GROUP BY `view_facilitys`.`ID` ORDER BY `tests` DESC LIMIT 0, 50 ");
+    SET @QUERY = CONCAT(@QUERY, " GROUP BY `view_facilitys`.`ID` ORDER BY `tests` DESC ");
 
      PREPARE stmt FROM @QUERY;
      EXECUTE stmt;

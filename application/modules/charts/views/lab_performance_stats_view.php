@@ -5,9 +5,10 @@
 			<th rowspan="2">Testing Lab</th>
 			<th rowspan="2">Facilities Serviced</th>
 			<th rowspan="2">No of Batches</th>
-			<th rowspan="2">Samples Tested</th>
+			<th rowspan="2">All Samples Run (plus reruns)</th>
 			<th rowspan="2">EQA Samples Tested</th>
 			<th rowspan="2">Rejected Samples</th>
+			<th rowspan="2">Actual Samples Tested</th>
 			<th colspan="6"><center>Test Outcome</center></th>
 		</tr>
 		<tr>

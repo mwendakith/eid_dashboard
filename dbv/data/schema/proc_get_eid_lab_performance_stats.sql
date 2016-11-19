@@ -23,7 +23,7 @@ BEGIN
           SET @QUERY = CONCAT(@QUERY, " AND `ls`.`year` = '",filter_year,"' ");
       END IF;
 
-      SET @QUERY = CONCAT(@QUERY, " GROUP BY `name` ORDER BY `alltests` DESC ");
+      SET @QUERY = CONCAT(@QUERY, " GROUP BY `l`.`ID` ORDER BY `alltests` DESC ");
       
 
     PREPARE stmt FROM @QUERY;

@@ -12,6 +12,9 @@ class Template extends MY_Controller
 		$this->load_template($data);
 	}
 
+	public function all_sess()
+	{print_r($this->session->all_userdata());}
+
 	public function load_template($data)
 	{
 		$this->load->model('template_model');
@@ -75,10 +78,15 @@ class Template extends MY_Controller
 		$this->load->model('template_model');
 		
 		if ($partner) {
-			if (!$this->session->userdata('partner_filter')) {
-			echo "<a href='javascript:void(0)' class='alert-link'><strong>All Partners</strong></a>";
+			if (!$data) {
+				if (!$this->session->userdata('partner_filter')) {
+					echo "<a href='javascript:void(0)' class='alert-link'><strong>All Partners</strong></a>";
+				} else {
+					$partner = $this->template_model->get_partner_name($this->session->userdata('partner_filter'));
+					echo "<a href='javascript:void(0)' class='alert-link'><strong>".$partner."</strong></a>";
+				}
 			} else {
-				$partner = $this->template_model->get_partner_name($this->session->userdata('partner_filter'));
+				$partner = $this->template_model->get_partner_name($data);
 				echo "<a href='javascript:void(0)' class='alert-link'><strong>".$partner."</strong></a>";
 			}
 		} else {

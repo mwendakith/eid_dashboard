@@ -58,6 +58,7 @@
 				color: black;
 			}
 		</style>
+		<script src='https://www.google.com/recaptcha/api.js'></script>
 	</head>
 	<body>
 	<?php //echo "<pre>";print_r($_SERVER['REQUEST_URI']);die();?>

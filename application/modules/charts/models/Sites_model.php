@@ -96,12 +96,15 @@ class Sites_model extends MY_Model
 			$table .= '<td>'.$value['name'].'</td>';
 			$table .= '<td>'.$value['county'].'</td>';
 			$table .= '<td>'.$value['tests'].'</td>';
-			$table .= '<td>'.$value['eqatests'].'</td>';
 			$table .= '<td>'.$value['firstdna'].'</td>';
 			$table .= '<td>'.$value['confirmdna'].'</td>';
 			$table .= '<td>'.$value['positive'].'</td>';
 			$table .= '<td>'.$value['negative'].'</td>';
 			$table .= '<td>'.$value['redraw'].'</td>';
+			$table .= '<td>'.$value['adults'].'</td>';
+			$table .= '<td>'.$value['adultspos'].'</td>';
+			$table .= '<td>'.$value['medage'].'</td>';
+			$table .= '<td>'.$value['rejected'].'</td>';
 			$table .= '<td>'.$value['infantsless2m'].'</td>';
 			$table .= '<td>'.$value['infantsless2mpos'].'</td>';
 			$table .= '</tr>';
@@ -175,7 +178,9 @@ class Sites_model extends MY_Model
 
 		$data;
 		$data['year'] = $year;
-				
+		$data['trends'][0][0] = 0;
+		$data['trends'][1][0] = 0;
+
 		foreach ($result as $key => $value) {
 
 			$month = (int) $value['month'];
@@ -192,6 +197,7 @@ class Sites_model extends MY_Model
 			}
 		}
 		$data['title'] = "Positivity (" . $year . ")";
+		// echo "<pre>";print_r($data);die();
 		return $data;
 	}
 

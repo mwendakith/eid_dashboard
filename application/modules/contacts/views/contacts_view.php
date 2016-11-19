@@ -1,3 +1,5 @@
+<?php $siteKey = '6LfymQsUAAAAAG7YlfJ12gGnmFNRUZJ6JSkPEFiT';
+$lang = 'en';?>
 <div class="row">
 	<div class="col-md-6 col-md-offset-3">
 		<div class="panel panel-default">
@@ -37,6 +39,10 @@
 							<textarea class="form-control" rows="4" id="message" name="message" required></textarea>
 						</div>
 					</div>
+					<div class="g-recaptcha" data-sitekey="<?php echo $siteKey; ?>"></div>
+			            <script type="text/javascript"
+			                    src="https://www.google.com/recaptcha/api.js?hl=<?php echo $lang; ?>">
+			            </script>
 					<div class="form-group">
 						<div class="col-sm-4 col-sm-offset-2">
 							<input id="submit" name="submit" type="submit" value="Submit" class="btn btn-primary" style="color:white; background-color:#1BA39C;">

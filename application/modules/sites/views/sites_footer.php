@@ -32,6 +32,7 @@
 	        		$("#breadcrum").html(data);
 	        	});
 
+	        	
 	        	if (em=="NA") {
 	        		$("#siteOutcomes").load("<?php echo base_url('charts/sites/site_outcomes');?>");
 					$("#first").show();
@@ -57,7 +58,7 @@
 
 	function date_filter(criteria, id)
  	{
- 		//alert('hellp');
+ 		// alert('hellp');
  		if (criteria === "monthly") {
  			year = null;
  			month = id;
@@ -65,11 +66,12 @@
  			year = id;
  			month = null;
  		}
- 		var posting = $.post( '<?php echo base_url();?>summary/set_filter_date', { 'year': year, 'month': month } );
+
+ 		var posting = $.post( '<?php echo base_url();?>template/filter_date_data', { 'year': year, 'month': month } );
  		// Put the results in a div
 		posting.done(function( data ) {
 			obj = $.parseJSON(data);
-
+			
 			if(obj['month'] == "null" || obj['month'] == null){
 				obj['month'] = "";
 			}
@@ -77,24 +79,29 @@
 			$(".display_range").html("( "+obj['prev_year']+" - "+obj['year']+" )");
 
 		});
-		var site = <?php echo json_encode($this->session->userdata('site_filter')); ?>;
-		//Checking if site was previously selected and calling the relevant views
-		if (!site) {
-			$("#siteOutcomes").html("<center><div class='loader'></div></center>");
-			$("#siteOutcomes").load("<?php echo base_url('charts/sites/site_outcomes');?>/"+year+"/"+month+"/"+null);
-			$("#unsupportedSites").html("<center><div class='loader'></div></center>");
-			$("#unsupportedSites").load("<?php echo base_url('charts/sites/unsupported_sites');?>");
-		} else {
-			$("#tsttrends").html("<center><div class='loader'></div></center>");
-			$("#stoutcomes").html("<center><div class='loader'></div></center>");
-			$("#vlOutcomes").html("<center><div class='loader'></div></center>");
-			$("#ageGroups").html("<center><div class='loader'></div></center>");
-			$("#tsttrends").load("<?php echo base_url('charts/sites/site_trends');?>/"+null+"/"+year);
-			$("#stoutcomes").load("<?php echo base_url('charts/sites/site_positivity');?>/"+null+"/"+year);
-			$("#vlOutcomes").load("<?php echo base_url('charts/sites/site_eid');?>/"+null+"/"+year+"/"+month);
-			$("#ageGroups").load("<?php echo base_url('charts/sites/site_hei');?>/"+null+"/"+year+"/"+month);
+		
+		$.get("<?php echo base_url();?>sites/check_site_select", function(data){
+    		site = $.parseJSON(data);
+    		console.log(site);
+    		//Checking if site was previously selected and calling the relevant views
+			if (!site) {
+				$("#siteOutcomes").html("<center><div class='loader'></div></center>");
+				$("#siteOutcomes").load("<?php echo base_url('charts/sites/site_outcomes');?>/"+year+"/"+month+"/"+null);
+				$("#unsupportedSites").html("<center><div class='loader'></div></center>");
+				$("#unsupportedSites").load("<?php echo base_url('charts/sites/unsupported_sites');?>");
+			} else {
+				$("#tsttrends").html("<center><div class='loader'></div></center>");
+				$("#stoutcomes").html("<center><div class='loader'></div></center>");
+				$("#vlOutcomes").html("<center><div class='loader'></div></center>");
+				$("#ageGroups").html("<center><div class='loader'></div></center>");
+				$("#tsttrends").load("<?php echo base_url('charts/sites/site_trends');?>/"+null+"/"+year);
+				$("#stoutcomes").load("<?php echo base_url('charts/sites/site_positivity');?>/"+null+"/"+year);
+				$("#vlOutcomes").load("<?php echo base_url('charts/sites/site_eid');?>/"+null+"/"+year+"/"+month);
+				$("#ageGroups").load("<?php echo base_url('charts/sites/site_hei');?>/"+null+"/"+year+"/"+month);
 
-		}
+			}
+    	});
+
 		/*if(!$("#second").is(":hidden")){
 			alert('found');
 		}*/

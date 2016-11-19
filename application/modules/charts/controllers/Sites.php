@@ -56,5 +56,10 @@ class Sites extends MY_Controller
 
     	$this->load->view('partner_site__view',$data);
 	}
+
+	function partner_sites_excel($partner=NULL)
+	{
+		return $this->sites_model->partner_sites_outcomes(null,null,null,$partner);
+	}
 }
 ?>

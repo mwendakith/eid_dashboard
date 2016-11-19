@@ -36,6 +36,7 @@ class Performance_model extends MY_Model
 						<td>".(int) $value['alltests']."</td>
 						<td>".(int) $value['eqatests']."</td>
 						<td>".(int) $value['rejected']."</td>
+						<td>".(int) $value['tests']."</td>
 						<td>".(int) $value['pos']."</td>
 						<td>".round((($value['pos']*100)/$value['tests']), 2, PHP_ROUND_HALF_UP)."</td>
 						<td>".(int) $value['neg']."</td>
@@ -129,12 +130,15 @@ class Performance_model extends MY_Model
 
 			$data['categories'][$lab] = $value['name'];
 
-			$data['outcomes'][0]['name'] = "positive";
+			$data['outcomes'][0]['name'] = "Positive";
 			$data['outcomes'][0]['data'][$lab] = (int) $value['pos'];
 
 
-			$data['outcomes'][1]['name'] = "negative";
+			$data['outcomes'][1]['name'] = "Negative";
 			$data['outcomes'][1]['data'][$lab] = (int) $value['neg'];
+
+			$data['outcomes'][2]['name'] = "Redraws";
+			$data['outcomes'][2]['data'][$lab] = (int) $value['redraw'];
 
 		}
 		 // echo "<pre>";print_r($data);die();

@@ -12,57 +12,6 @@ class Partner_summaries_model extends MY_Model
 		parent:: __construct();
 	}
 
-	// function turnaroundtime($year=null,$month=null,$county=null)
-	// {
-	// 	if ($year==null || $year=='null') {
-	// 		$year = $this->session->userdata('filter_year');
-	// 	}
-	// 	if ($month==null || $month=='null') {
-	// 		if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
-	// 			$month = 0;
-	// 		}else {
-	// 			$month = $this->session->userdata('filter_month');
-	// 		}
-	// 	}
-
-	// 	$sql = "CALL `proc_get_eid_national_tat`('".$year."','".$month."')";
-	// 	// echo "<pre>";print_r($sql);die();
-	// 	$result = $this->db->query($sql)->result_array();
-	// 	// echo "<pre>";print_r($result);die();
-	// 	$count = 0;
-	// 	$tat1 = 0;
-	// 	$tat2 = 0;
-	// 	$tat3 = 0;
-	// 	$tat4 = 0;
-	// 	$tat = array();
-		
-	// 	foreach ($result as $key => $value) {
-	// 		if (($value['tat1']!=0) || ($value['tat2']!=0) || ($value['tat3']!=0) || ($value['tat4']!=0)) {
-	// 			$count++;
-
-	// 			$tat1 = $tat1+$value['tat1'];
-	// 			$tat2 = $tat2+$value['tat2'];
-	// 			$tat3 = $tat3+$value['tat3'];
-	// 			$tat4 = $tat4+$value['tat4'];
-	// 		}
-	// 	}
-	// 	$tat[] = array(
-	// 				'tat1' => $tat1,
-	// 				'tat2' => $tat2,
-	// 				'tat3' => $tat3,
-	// 				'tat4' => $tat4,
-	// 				'count' => $count
-	// 				);
-	// 	// echo "<pre>";print_r($tat);die();
-	// 	foreach ($tat as $key => $value) {
-	// 		$data['tat1'] = round(@$value['tat1']/@$value['count']);
-	// 		$data['tat2'] = round((@$value['tat2']/@$value['count']) + @$data['tat1']);
-	// 		$data['tat3'] = round((@$value['tat3']/@$value['count']) + @$data['tat2']);
-	// 		$data['tat4'] = round(@$value['tat4']/@$value['count']);
-	// 	}
-	// 	// echo "<pre>";print_r($data);die();
-	// 	return $data;
-	// }
 
 	function test_trends($year=null,$partner=null)
 	{

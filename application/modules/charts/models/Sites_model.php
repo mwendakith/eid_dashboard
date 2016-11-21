@@ -51,9 +51,9 @@ class Sites_model extends MY_Model
 
 	function unsupported_sites(){
 		$sql = "CALL `proc_get_eid_unsupported_facilities`()";
-
+		// echo "<pre>";print_r($sql);die();
 		$result = $this->db->query($sql)->result_array();
-
+		echo "<pre>";print_r($result);die();
 		$ul = '';
 		foreach ($result as $key => $value) {
 			$ul .= "<tr>
@@ -371,8 +371,8 @@ class Sites_model extends MY_Model
 		$data['trend'][0]['sliced'] = true;
 		$data['trend'][0]['selected'] = true;
 
-		$data['trend'][0]['color'] = '#F2784B';
-		$data['trend'][1]['color'] = '#1BA39C';
+		$data['trend'][0]['color'] = '#1BA39C';
+		$data['trend'][1]['color'] = '#F2784B';
 		$data['trend'][2]['color'] = '#5C97BF';
 
 		$data['other'][0] = (int) $result->adult;

@@ -27,6 +27,11 @@ class Sites extends MY_Controller
     	$this->load->view('unsupported_sites_view',$data);
 	}
 
+	function download_unsupported_sites()
+	{
+		$this->sites_model->download_unsupported_sites();
+	}
+
 	function site_trends($site=NULL,$year=NULL)
 	{
 		$data = $this->sites_model->get_trends($site,$year);
@@ -54,7 +59,18 @@ class Sites extends MY_Controller
 	{
 		$data['outcomes'] = $this->sites_model->partner_sites_outcomes($year,$month,$site,$partner);
 
+		$link = $year . '/' . $month . '/' . $partner;
+
+		//$data['link'] = anchor('charts/sites/download_partner_sites/' . $link, 'Download List');
+
+		$data['link'] = "<a href='" . base_url('charts/sites/download_partner_sites/' . $link) . "'>Download List</a>";
+
     	$this->load->view('partner_site__view',$data);
+	}
+
+	function download_partner_sites($year=NULL,$month=NULL,$partner=NULL)
+	{
+		$this->sites_model->partner_sites_outcomes_download($year,$month,$partner);
 	}
 
 	function partner_sites_excel($partner=NULL)

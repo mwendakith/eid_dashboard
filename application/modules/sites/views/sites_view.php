@@ -29,6 +29,13 @@
       </div>
     </div>
   </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <a href="<?php echo base_url('charts/sites/download_unsupported_sites');?>">Download List</a>
+    </div>
+  </div>
+
   
   <div class="row">
     <div class="col-md-12">

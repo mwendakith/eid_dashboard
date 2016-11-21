@@ -70,6 +70,48 @@ class Sites_model extends MY_Model
 
 	}
 
+	function download_unsupported_sites(){
+		$sql = "CALL `proc_get_eid_unsupported_facilities`()";
+
+		$data = $this->db->query($sql)->result_array();
+
+		$this->load->helper('download');
+        $this->load->library('PHPReport/PHPReport');
+
+
+        $template = 'unsupported_sites_template.xlsx';
+
+	    //set absolute path to directory with template files
+	    $templateDir = __DIR__ . "/";
+	    
+	    //set config for report
+	    $config = array(
+	        'template' => $template,
+	        'templateDir' => $templateDir
+	    );
+
+
+	      //load template
+	    $R = new PHPReport($config);
+	    
+	    $R->load(array(
+	            'id' => 'data',
+	            'repeat' => TRUE,
+	            'data' => $data   
+	        )
+	    );
+	      
+	      // define output directoy 
+	    $output_file_dir = __DIR__ ."/tmp/";
+	     // echo "<pre>";print_r("Still working");die();
+
+	    $output_file_excel = $output_file_dir  . "unsupported_sites.xlsx";
+	    //download excel sheet with data in /tmp folder
+	    $result = $R->render('excel', $output_file_excel);
+	    force_download($output_file_excel, null);
+
+	}
+
 	function partner_sites_outcomes($year=NULL,$month=NULL,$site=NULL,$partner=NULL)
 	{
 		$table = '';
@@ -114,6 +156,62 @@ class Sites_model extends MY_Model
 
 		return $table;
 	}
+
+	function partner_sites_outcomes_download($year=NULL,$month=NULL,$partner=NULL)
+	{
+		if ($year==null || $year=='null') {
+			$year = $this->session->userdata('filter_year');
+		}
+		if ($month==null || $month=='null') {
+			if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
+				$month = 0;
+			}else {
+				$month = $this->session->userdata('filter_month');
+			}
+		}
+
+		$sql = "CALL `proc_get_eid_partner_sites_details`('".$partner."','".$year."','".$month."')";
+		// echo "<pre>";print_r($sql);die();
+		$data = $this->db->query($sql)->result_array();
+
+		$this->load->helper('download');
+        $this->load->library('PHPReport/PHPReport');
+
+
+        $template = 'partner_sites.xlsx';
+
+	    //set absolute path to directory with template files
+	    $templateDir = __DIR__ . "/";
+	    
+	    //set config for report
+	    $config = array(
+	        'template' => $template,
+	        'templateDir' => $templateDir
+	    );
+
+
+	      //load template
+	    $R = new PHPReport($config);
+	    
+	    $R->load(array(
+	            'id' => 'data',
+	            'repeat' => TRUE,
+	            'data' => $data   
+	        )
+	    );
+	      
+	      // define output directoy 
+	    $output_file_dir = __DIR__ ."/tmp/";
+	     // echo "<pre>";print_r("Still working");die();
+
+	    $output_file_excel = $output_file_dir  . "partner_sites.xlsx";
+	    //download excel sheet with data in /tmp folder
+	    $result = $R->render('excel', $output_file_excel);
+	    force_download($output_file_excel, null);		
+		
+	}
+
+
 
 	function get_trends($site=null, $year=null){
 

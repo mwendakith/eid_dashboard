@@ -67,11 +67,11 @@ class Contacts extends MY_Controller
 		$mail->AddReplyTo($from, $from_name);
 		$mail->Subject = 'EID DASHBOARD: '.$subject;
 		$mail->Body = $body;
-		$mail->AddAddress('jbatuka@usaid.gov');
-		$mail->AddAddress('jhungu@clintonhealthaccess.org');
-		$mail->AddAddress('aaron.mbowa@dataposit.co.ke');
-		$mail->AddAddress('jlusike@clintonhealthaccess.org');
-		$mail->AddAddress('tngugi@clintonhealthaccess.org');
+		// $mail->AddAddress('jbatuka@usaid.gov');
+		// $mail->AddAddress('jhungu@clintonhealthaccess.org');
+		// $mail->AddAddress('aaron.mbowa@dataposit.co.ke');
+		// $mail->AddAddress('jlusike@clintonhealthaccess.org');
+		// $mail->AddAddress('tngugi@clintonhealthaccess.org');
 		$mail->AddAddress('baksajoshua09@gmail.com');
 		if(!$mail->Send()) {
 			$error = 'Mail error: '.$mail->ErrorInfo; 

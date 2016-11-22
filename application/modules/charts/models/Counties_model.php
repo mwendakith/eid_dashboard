@@ -11,6 +11,45 @@ class Counties_model extends MY_Model
 		parent:: __construct();;
 	}
 
+	function sub_county_outcomes($year=null,$month=null,$county=null)
+	{
+		if ($county==null || $county=='null') {
+			$county = $this->session->userdata('county_filter');
+		}
+
+		if ($year==null || $year=='null') {
+			$year = $this->session->userdata('filter_year');
+		}
+		if ($month==null || $month=='null') {
+			if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
+				$month = 0;
+			}else {
+				$month = $this->session->userdata('filter_month');
+			}
+		}
+
+		$sql = "CALL `proc_get_eid_subcounty_outcomes`('".$county."','".$year."','".$month."')";
+		// echo "<pre>";print_r($sql);die();
+		$result = $this->db->query($sql)->result_array();
+
+		$data['sub_county_outcomes'][0]['name'] = 'Positive';
+		$data['sub_county_outcomes'][1]['name'] = 'Negative';
+
+		$count = 0;
+		
+		$data["sub_county_outcomes"][0]["data"][0]	= $count;
+		$data["sub_county_outcomes"][1]["data"][0]	= $count;
+		$data['categories'][0]					= 'No Data';
+
+		foreach ($result as $key => $value) {
+			$data['categories'][$key] 					= $value['name'];
+			$data["sub_county_outcomes"][0]["data"][$key]	=  (int) $value['positive'];
+			$data["sub_county_outcomes"][1]["data"][$key]	=  (int) $value['negative'];
+		}
+		// echo "<pre>";print_r($data);die();
+		return $data;
+	}
+
 	function country_tests($year=NULL,$month=NULL)
 	{
 		if ($year==null || $year=='null') {
@@ -147,6 +186,7 @@ class Counties_model extends MY_Model
 
 	function country_pregnant($year=NULL,$month=NULL)
 	{
+
 		if ($year==null || $year=='null') {
 			$year = $this->session->userdata('filter_year');
 		}

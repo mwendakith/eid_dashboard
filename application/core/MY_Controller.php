@@ -133,10 +133,7 @@ if(!defined("BASEPATH")) exit("No direct script access allowed!");
 				
 			} else {//if data is not null
 				if ($data['county']==48||$data['county']=='NA') {
-					$this->session->set_userdata('county_filter', null);
-					$this->session->set_userdata('filter_month', null);
-					$this->session->set_userdata('partner_filter', null);
-					$this->session->unset_userdata('site_filter');
+					$this->clear_all_session_data();
 				}else{
 					$this->session->set_userdata('county_filter', $data['county']);
 					$this->session->set_userdata('filter_month', null);

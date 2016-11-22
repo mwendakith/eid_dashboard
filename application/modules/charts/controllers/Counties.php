@@ -13,6 +13,13 @@ class Counties extends MY_Controller
 		$this->load->model('counties_model');
 	}
 
+	function subCounties_outcomes($year=NULL,$month=NULL,$county=NULL)
+	{
+		$data['outcomes'] = $this->counties_model->sub_county_outcomes($year,$month,$county);
+
+    	$this->load->view('subcounty_outcomes_view',$data);
+	}
+
 	function counties_tests($year = NULL, $month = NULL)
 	{
 		$data = $this->counties_model->country_tests($year, $month);

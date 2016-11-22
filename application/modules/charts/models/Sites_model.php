@@ -90,6 +90,9 @@ class Sites_model extends MY_Model
 	        'templateDir' => $templateDir
 	    );
 
+	    ini_set('memory_limit','-1');
+	    ini_set('max_execution_time', 900);
+
 
 	      //load template
 	    $R = new PHPReport($config);

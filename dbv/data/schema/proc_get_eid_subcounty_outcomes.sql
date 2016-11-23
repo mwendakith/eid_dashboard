@@ -14,7 +14,7 @@ BEGIN
     WHERE 1";
 
     IF (filter_month != 0 && filter_month != '') THEN
-       SET @QUERY = CONCAT(@QUERY, " AND `c`.`ID` = '",C_id,"' AND `scs`.`year` = '",filter_year,"' AND `cs`.`month`='",filter_month,"' ");
+       SET @QUERY = CONCAT(@QUERY, " AND `c`.`ID` = '",C_id,"' AND `scs`.`year` = '",filter_year,"' AND `scs`.`month`='",filter_month,"' ");
     ELSE
         SET @QUERY = CONCAT(@QUERY, " AND `c`.`ID` = '",C_id,"' AND `scs`.`year` = '",filter_year,"' ");
     END IF;

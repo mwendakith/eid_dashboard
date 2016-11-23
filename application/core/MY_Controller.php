@@ -157,7 +157,7 @@ if(!defined("BASEPATH")) exit("No direct script access allowed!");
 					$this->clear_all_session_data();
 				}else{
 					$this->session->unset_userdata('county_filter');
-					$this->session->unset_userdata('sub_county_filter');
+					$this->session->set_userdata('sub_county_filter', $data['sub_county']);
 					$this->session->unset_userdata('filter_month');
 					$this->session->unset_userdata('partner_filter');
 					$this->session->unset_userdata('site_filter');

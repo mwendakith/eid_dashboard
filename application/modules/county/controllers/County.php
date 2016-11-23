@@ -35,5 +35,15 @@ class County extends MY_Controller
 		$this->data['content_view'] = 'county/county_map';
 		$this -> template($this->data);
 	}
+
+	public function check_subcounty_select()
+	{
+		if ($this->session->userdata('sub_county_filter')) {
+			$subcounty = $this->session->userdata('sub_county_filter');
+		} else {
+			$subcounty = 0;
+		}
+		echo json_encode($subcounty);
+	}
 }
 ?>

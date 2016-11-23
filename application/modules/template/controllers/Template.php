@@ -41,6 +41,19 @@ class Template extends MY_Controller
 		
 	}
 
+	function filter_sub_county_data()
+	{
+		
+		$data = array(
+				'sub_county' => $this->input->post('subCounty')
+			);
+		// echo "<pre>";print_r($data);die();
+		$this->filter_sub_county($data);
+
+		echo $this->session->userdata('sub_county_filter');
+		
+	}
+
 	function filter_partner_data()
 	{
 		
@@ -74,13 +87,19 @@ class Template extends MY_Controller
 		echo $this->set_filter_date($data);
 	}
 
-	function breadcrum($data=null,$partner=NULL,$site=NULL)
+	function breadcrum($data=null,$partner=NULL,$site=NULL,$sub_county=NULL)
 	{
 		if ($partner=='null'||$partner==null) {
 			$partner = NULL;
 		}
+		if ($site=='null'||$site==null) {
+			$site = NULL;
+		}
+		if ($data=='null'||$data==null) {
+			$data = NULL;
+		}
 		$this->load->model('template_model');
-		// echo "<pre>";print_r($data."<___>".$partner."<___>".$site);die();
+		// echo "<pre>";print_r($data."<___>".$partner."<___>".$site."<___>".$sub_county);die();
 		if ($partner) {
 			if (!$data) {
 				if (!$this->session->userdata('partner_filter')) {
@@ -104,6 +123,19 @@ class Template extends MY_Controller
 			} else {
 				$site = $this->template_model->get_site_name($data);
 				echo "<a href='javascript:void(0)' class='alert-link'><strong>".$site."</strong></a>";
+			}
+			
+		} else if ($sub_county) {
+			if (!$data) {
+				if (!$this->session->userdata('site_filter')) {
+					echo "<a href='javascript:void(0)' class='alert-link'><strong>All Sub-Counties</strong></a>";
+				} else {
+					$sub_county = $this->template_model->get_sub_county_name($this->session->userdata('site_filter'));
+					echo "<a href='javascript:void(0)' class='alert-link'><strong>".$sub_county."</strong></a>";
+				}
+			} else {
+				$sub_county = $this->template_model->get_sub_county_name($data);
+				echo "<a href='javascript:void(0)' class='alert-link'><strong>".$sub_county."</strong></a>";
 			}
 			
 		} else {

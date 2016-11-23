@@ -32,8 +32,10 @@
 					$("#second").show();
 					// Loader displaying
 		        	$("#subcounty_outcomes").html("<center><div class='loader'></div></center>");
+		        	$("#county_sites_details").html("<center><div class='loader'></div></center>");
 		        	// Actual graphs being loaded
 					$("#subcounty_outcomes").load("<?php echo base_url('charts/counties/subCounties_outcomes'); ?>/"+null+"/"+null+"/"+data);
+					$("#county_sites_details").load("<?php echo base_url('charts/counties/county_sites_details'); ?>/"+null+"/"+null+"/"+data);
 	        	}
 	        });
 		});

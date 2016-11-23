@@ -50,6 +50,54 @@ class Counties_model extends MY_Model
 		return $data;
 	}
 
+	function county_sites_outcomes($year=null,$month=null,$county=null)
+	{
+		$table = '';
+		$count = 1;
+		if ($county==null || $county=='null') {
+			$county = $this->session->userdata('county_filter');
+		}
+		if ($year==null || $year=='null') {
+			$year = $this->session->userdata('filter_year');
+		}
+		if ($month==null || $month=='null') {
+			if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
+				$month = 0;
+			}else {
+				$month = $this->session->userdata('filter_month');
+			}
+		}
+
+		$sql = "CALL `proc_get_eid_county_sites_details`('".$county."','".$year."','".$month."')";
+		// echo "<pre>";print_r($sql);die();
+		$result = $this->db->query($sql)->result_array();
+		// echo "<pre>";print_r($sql);die();
+		foreach ($result as $key => $value) {
+			$table .= '<tr>';
+			$table .= '<td>'.$count.'</td>';
+			$table .= '<td>'.$value['MFLCode'].'</td>';
+			$table .= '<td>'.$value['name'].'</td>';
+			$table .= '<td>'.$value['county'].'</td>';
+			$table .= '<td>'.$value['tests'].'</td>';
+			$table .= '<td>'.$value['firstdna'].'</td>';
+			$table .= '<td>'.$value['confirmdna'].'</td>';
+			$table .= '<td>'.$value['positive'].'</td>';
+			$table .= '<td>'.$value['negative'].'</td>';
+			$table .= '<td>'.$value['redraw'].'</td>';
+			$table .= '<td>'.$value['adults'].'</td>';
+			$table .= '<td>'.$value['adultspos'].'</td>';
+			$table .= '<td>'.$value['medage'].'</td>';
+			$table .= '<td>'.$value['rejected'].'</td>';
+			$table .= '<td>'.$value['infantsless2m'].'</td>';
+			$table .= '<td>'.$value['infantsless2mpos'].'</td>';
+			$table .= '</tr>';
+			$count++;
+		}
+		
+
+		return $table;
+	}
+
 	function country_tests($year=NULL,$month=NULL)
 	{
 		if ($year==null || $year=='null') {

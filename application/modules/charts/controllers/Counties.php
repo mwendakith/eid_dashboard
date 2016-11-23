@@ -20,6 +20,19 @@ class Counties extends MY_Controller
     	$this->load->view('subcounty_outcomes_view',$data);
 	}
 
+	function county_sites_details($year=NULL,$month=NULL,$county=NULL)
+	{
+		$data['outcomes'] = $this->counties_model->county_sites_outcomes($year,$month,$county);
+
+		// $link = $year . '/' . $month . '/' . $partner;
+
+		//$data['link'] = anchor('charts/sites/download_partner_sites/' . $link, 'Download List');
+		$data['link'] = "";
+		// $data['link'] = "<a href='" . base_url('charts/sites/download_partner_sites/' . $link) . "'>Download List</a>";
+
+    	$this->load->view('partner_site__view',$data);
+	}
+
 	function counties_tests($year = NULL, $month = NULL)
 	{
 		$data = $this->counties_model->country_tests($year, $month);

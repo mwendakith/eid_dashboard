@@ -143,18 +143,7 @@ class Subcounties_model extends MY_Model
 		    		<td>Average Sites sending:</td>
 		    		<td>'.(int) $value['sitessending'].'</td>
 		    	</tr>';
-			// $data['ul'] .= '<li>Cumulative No. of Tests: <strong>'.(int) $value['alltests'].'</strong></li>';
-			// $data['ul'] .= '<li>Cumulative No. of EQA Tests: <strong>'.(int) $value['eqatests'].'</strong></li>';
-			// $data['ul'] .= '<li>No. of All Infants Tested: <strong>'.(int) $value['tests'].'</strong></li>';
-			// $data['ul'] .= '<li>No. of All Infants Tested ( < 2 months): <strong>'.(int) $value['infantsless2m'].'</strong></li>';
-			// $data['ul'] .= '<li>No. of first DNA PCR Test: <strong>'.(int) $value['firstdna'].'</strong></li>';
-			// $data['ul'] .= '<li>No of Confirmatory PCR Test @9M: <strong>'.(int) $value['confirmdna'].'</strong></li>';
-			// $data['ul'] .= '<li>Median Age of Testing (Months): <strong>'.$value['medage'].'</strong></li>';
-			// $data['ul'] .= '<li>Rejected Samples: <strong>'.$value['rejected'].'</strong></li>';
-			// $data['ul'] .= '<li>Sites Sending: <strong>'.(int) $value['sitessending'].'</strong></li>';
-			// if($value['name'] == ''){
-			// 	$data['hei']['data'][$key]['color'] = '#5C97BF';
-			// }
+			
 			$data['eid_outcomes']['data'][$key]['y'] = $count;
 
 			$data['eid_outcomes']['data'][0]['name'] = 'Positive';

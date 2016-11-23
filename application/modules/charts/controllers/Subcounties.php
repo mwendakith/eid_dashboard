@@ -53,9 +53,9 @@ class Subcounties extends MY_Controller
     	$this->load->view('partner_site__view',$data);
 	}
 
-	function download_partner_sites($subcounty=NULL,$year=NULL,$month=NULL)
+	function download_subcounty_sites($subcounty=NULL,$year=NULL,$month=NULL)
 	{
-		$this->sites_model->partner_sites_outcomes_download($year,$month,$partner);
+		$this->subcounties_model->subcounty_sites_outcomes_download($year,$month,$subcounty);
 	}
 }
 ?>

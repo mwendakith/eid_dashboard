@@ -73,6 +73,9 @@ class Trends_model extends MY_Model
 			$data['infant_trends'][$i]['name'] = $value['year'];
 			$data['infant_trends'][$i]['data'][$month] = (int) $value['infants'];
 
+			$data['tat4_trends'][$i]['name'] = $value['year'];
+			$data['tat4_trends'][$i]['data'][$month] = (int) $value['tat4'];
+
 		}
 		
 

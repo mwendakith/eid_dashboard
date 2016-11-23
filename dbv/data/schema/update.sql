@@ -391,7 +391,8 @@ BEGIN
                     SUM(`cs`.`pos`) AS `positive`,
                     SUM(`cs`.`neg`) AS `negative`,
                     SUM(`cs`.`rejected`) AS `rejected`,
-                    SUM(`cs`.`infantsless2m`) AS `infants`
+                    SUM(`cs`.`infantsless2m`) AS `infants`,
+                    SUM(`cs`.`tat4`) AS `tat4`
                 FROM `county_summary` `cs`
                 WHERE 1 ";
 

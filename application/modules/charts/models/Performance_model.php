@@ -19,7 +19,11 @@ class Performance_model extends MY_Model
 			$year = $this->session->userdata('filter_year');
 		}
 		if ($month==null || $month=='null') {
-			$month = 0;
+			if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
+				$month = 0;
+			}else {
+				$month = $this->session->userdata('filter_month');
+			}
 		}
 
 		$sql = "CALL `proc_get_eid_lab_performance_stats`('".$year."','".$month."');";
@@ -47,6 +51,83 @@ class Performance_model extends MY_Model
 		}
 
 		return $ul;
+	}
+
+
+	function download_lab_performance_stat($year=NULL,$month=NULL)
+	{
+		// echo round(3.6451895227869, 2, PHP_ROUND_HALF_UP);die();
+		if ($year==null || $year=='null') {
+			$year = $this->session->userdata('filter_year');
+		}
+		if ($month==null || $month=='null') {
+			if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
+				$month = 0;
+			}else {
+				$month = $this->session->userdata('filter_month');
+			}
+		}
+
+		$sql = "CALL `proc_get_eid_lab_performance_stats`('".$year."','".$month."');";
+
+		$result = $this->db->query($sql)->result_array();
+
+		$data;
+
+		foreach ($result as $key => $value) {
+
+			$data[$key]['name'] = $value['name']; 
+			$data[$key]['sitesending'] = $value['sitesending']; 
+			$data[$key]['batches'] = $value['batches']; 
+			$data[$key]['alltests'] = $value['alltests']; 
+			$data[$key]['eqatests'] = $value['eqatests']; 
+			$data[$key]['rejected'] = $value['rejected']; 
+			$data[$key]['tests'] = $value['tests']; 
+			$data[$key]['pos'] = $value['pos']; 
+			$data[$key]['pos_percentage'] = round((($value['pos']*100)/$value['tests']), 2, PHP_ROUND_HALF_UP); 
+			$data[$key]['neg'] = $value['neg']; 
+			$data[$key]['neg_percentage'] = round((($value['neg']*100)/$value['tests']), 2, PHP_ROUND_HALF_UP); 
+			$data[$key]['redraw'] = $value['redraw']; 
+			$data[$key]['redraw_percentage'] = round((($value['redraw']*100)/$value['tests']), 2, PHP_ROUND_HALF_UP); 
+		}
+
+		$this->load->helper('download');
+        $this->load->library('PHPReport/PHPReport');
+
+        ini_set('memory_limit','-1');
+	    ini_set('max_execution_time', 900);
+
+        $template = 'lab_performance_template.xlsx';
+
+	    //set absolute path to directory with template files
+	    $templateDir = __DIR__ . "/";
+	    
+	    //set config for report
+	    $config = array(
+	        'template' => $template,
+	        'templateDir' => $templateDir
+	    );
+
+
+	      //load template
+	    $R = new PHPReport($config);
+	    
+	    $R->load(array(
+	            'id' => 'data',
+	            'repeat' => TRUE,
+	            'data' => $data   
+	        )
+	    );
+	      
+	      // define output directoy 
+	    $output_file_dir = __DIR__ ."/tmp/";
+	     // echo "<pre>";print_r("Still working");die();
+
+	    $output_file_excel = $output_file_dir  . "lab_performance.xlsx";
+	    //download excel sheet with data in /tmp folder
+	    $result = $R->render('excel', $output_file_excel);
+	    force_download($output_file_excel, null);
+
 	}
 
 	function lab_testing_trends($year=NULL)

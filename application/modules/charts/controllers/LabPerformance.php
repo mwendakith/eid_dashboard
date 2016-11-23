@@ -17,8 +17,17 @@ class LabPerformance extends MY_Controller
 	{
 		$data['stats'] = $this->performance_model->lab_performance_stat($year,$month);
 
+		$link = $year . '/' . $month;
+
+		$data['link'] = "<a href='" . base_url('charts/LabPerformance/download_lab_performance_stats/' . $link) . "'>Download List</a>";
+
 		$this->load->view('lab_performance_stats_view', $data);
 	}
+
+	function download_lab_performance_stats($year=NULL,$month=NULL)
+	{
+		$this->performance_model->download_lab_performance_stat($year,$month);
+	}	
 
 	function testing_trends($year=NULL)
 	{

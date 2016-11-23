@@ -25,15 +25,6 @@ class Template_model extends MY_Model
 		return $dropdown;
 	}
 
-	function get_county_name($county_id)
-	{
-		$this->db->where('ID', $county_id);
-		$data = $this->db->get('countys')->result_array();
-		$name = $data[0]["name"];
-
-		return $name;
-	}
-
 	function get_partners_dropdown()
 	{
 		$dropdown = '';
@@ -58,10 +49,28 @@ class Template_model extends MY_Model
 		return $dropdown;
 	}
 
+	function get_county_name($county_id)
+	{
+		$this->db->where('ID', $county_id);
+		$data = $this->db->get('countys')->result_array();
+		$name = $data[0]["name"];
+
+		return $name;
+	}
+
 	function get_partner_name($partner_id)
 	{
 		$this->db->where('ID', $partner_id);
 		$data = $this->db->get('partners')->result_array();
+		$name = $data[0]["name"];
+
+		return $name;
+	}
+
+	function get_site_name($site_id)
+	{
+		$this->db->where('ID', $site_id);
+		$data = $this->db->get('view_facilitys')->result_array();
 		$name = $data[0]["name"];
 
 		return $name;

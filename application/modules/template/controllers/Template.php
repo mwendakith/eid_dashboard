@@ -73,10 +73,13 @@ class Template extends MY_Controller
 		echo $this->set_filter_date($data);
 	}
 
-	function breadcrum($data=null,$partner=NULL)
+	function breadcrum($data=null,$partner=NULL,$site=NULL)
 	{
+		if ($partner=='null'||$partner==null) {
+			$partner = NULL;
+		}
 		$this->load->model('template_model');
-		
+		// echo "<pre>";print_r($data."<___>".$partner."<___>".$site);die();
 		if ($partner) {
 			if (!$data) {
 				if (!$this->session->userdata('partner_filter')) {
@@ -89,6 +92,19 @@ class Template extends MY_Controller
 				$partner = $this->template_model->get_partner_name($data);
 				echo "<a href='javascript:void(0)' class='alert-link'><strong>".$partner."</strong></a>";
 			}
+		} else if ($site) {
+			if (!$data) {
+				if (!$this->session->userdata('site_filter')) {
+					echo "<a href='javascript:void(0)' class='alert-link'><strong>All Sites</strong></a>";
+				} else {
+					$site = $this->template_model->get_site_name($this->session->userdata('site_filter'));
+					echo "<a href='javascript:void(0)' class='alert-link'><strong>".$site."</strong></a>";
+				}
+			} else {
+				$site = $this->template_model->get_site_name($data);
+				echo "<a href='javascript:void(0)' class='alert-link'><strong>".$site."</strong></a>";
+			}
+			
 		} else {
 			if (!$data) {
 				if (!$this->session->userdata('county_filter')) {

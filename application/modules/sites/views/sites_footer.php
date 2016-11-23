@@ -28,7 +28,7 @@
 					$(".display_range").html("( "+obj['prev_year']+" - "+obj['year']+" )");
 	        	});
 
-	        	$.get("<?php echo base_url();?>template/breadcrum", function(data){
+	        	$.get("<?php echo base_url();?>template/breadcrum/"+em+"/"+null+"/"+1, function(data){
 	        		$("#breadcrum").html(data);
 	        	});
 
@@ -82,7 +82,7 @@
 		
 		$.get("<?php echo base_url();?>sites/check_site_select", function(data){
     		site = $.parseJSON(data);
-    		console.log(site);
+    		// console.log(site);
     		//Checking if site was previously selected and calling the relevant views
 			if (!site) {
 				$("#siteOutcomes").html("<center><div class='loader'></div></center>");

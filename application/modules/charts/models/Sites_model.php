@@ -180,6 +180,9 @@ class Sites_model extends MY_Model
 		$this->load->helper('download');
         $this->load->library('PHPReport/PHPReport');
 
+        ini_set('memory_limit','-1');
+	    ini_set('max_execution_time', 900);
+
 
         $template = 'partner_sites.xlsx';
 

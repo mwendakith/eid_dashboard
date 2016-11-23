@@ -1,4 +1,9 @@
-<div id='download_link'></div>
+<style type="text/css">
+	#excels {
+		padding-top: 0.5em;
+		padding-bottom: 2em;
+	}
+</style>
 <table id="example" cellspacing="1" cellpadding="3" class="tablehead table table-striped table-bordered" style="background:#CCC;">
 	<thead>
 		<tr class="colhead">
@@ -27,9 +32,19 @@
 		<?php echo $outcomes;?>
 	</tbody>
 </table>
+<div class="row" id="excels">
+	<div class="col-md-6">
+		<!-- <center><button class="btn btn-primary" style="background-color: #009688;color: white;">List of all supported sites</button></center> -->
+	</div>
+	<div class="col-md-6">
+		<center><button id="download_link" class="btn btn-primary" style="background-color: #009688;color: white;"></button></center>
+	</div>
+</div>
+<!-- <div id='download_link'></div> -->
 <script type="text/javascript" charset="utf-8">
   $(document).ready(function() {
   	$('#download_link').html("<?php echo $link;?>");
+  	$('#download_link > a').css("color","white");
   	$('#example').DataTable();
 
     $("table").tablecloth({

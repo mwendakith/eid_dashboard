@@ -1,6 +1,6 @@
 <div id="<?php echo $div;?>"></div>
 
-<div id="<?php echo $content;?>"></div>
+<ul id="<?php echo $content;?>"></ul>
 
 <script type="text/javascript">
 $(function () {

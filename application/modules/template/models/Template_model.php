@@ -72,6 +72,15 @@ class Template_model extends MY_Model
 		return $name;
 	}
 
+	function get_sub_county_name($sub_county_id)
+	{
+		$this->db->where('ID', $sub_county_id);
+		$data = $this->db->get('districts')->result_array();
+		$name = $data[0]["name"];
+
+		return $name;
+	}
+
 	function get_partner_name($partner_id)
 	{
 		$this->db->where('ID', $partner_id);

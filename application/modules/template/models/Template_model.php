@@ -25,6 +25,20 @@ class Template_model extends MY_Model
 		return $dropdown;
 	}
 
+	function get_sub_county_dropdown()
+	{
+		$dropdown = '';
+		$this->db->from('districts');
+		$this->db->order_by("name", "asc");
+		$county_data = $this->db->get()->result_array();
+		
+		foreach ($county_data as $key => $value) {
+			$dropdown .= '<option value="'.$value['ID'].'">'.$value['name'].' Sub-County</option>';
+		}
+		
+		return $dropdown;
+	}
+
 	function get_partners_dropdown()
 	{
 		$dropdown = '';

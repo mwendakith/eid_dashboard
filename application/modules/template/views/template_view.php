@@ -10,7 +10,10 @@
 		$this->load->view('utils/site_filter_view');
 	}else if ($county) {
 		$this->load->view('utils/date_filter_view');
-	}else if ($contacts) {
+	} else if ($sub_county){
+		$this->load->view('utils/sub_county_filter_view');
+	}
+	else if ($contacts) {
 
 	}else {
 		$this->load->view('utils/filter_view');

@@ -78,6 +78,7 @@ if(!defined("BASEPATH")) exit("No direct script access allowed!");
 		{
 			$filter_data = array(
 								'county_filter',
+								'sub_county_filter',
 								'partner_filter',
 								'site_filter',
 								'filter_year',

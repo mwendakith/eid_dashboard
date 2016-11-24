@@ -10,7 +10,7 @@ class Contacts extends MY_Controller
 {
 	public $data = array();
 	
-	
+	//comment to demo
 	function __construct()
 	{
 		parent::__construct();

@@ -13,6 +13,13 @@ class Counties extends MY_Controller
 		$this->load->model('counties_model');
 	}
 
+	function counties_details($year=NULL,$month=NULL)
+	{
+		$data['outcomes'] = $this->counties_model->counties_details($year,$month);
+
+		$this->load->view('counties_details_view', $data);
+	}
+
 	function subCounties_outcomes($year=NULL,$month=NULL,$county=NULL)
 	{
 		$data['outcomes'] = $this->counties_model->sub_county_outcomes($year,$month,$county);
@@ -30,7 +37,7 @@ class Counties extends MY_Controller
 		$data['link'] = "";
 		// $data['link'] = "<a href='" . base_url('charts/sites/download_partner_sites/' . $link) . "'>Download List</a>";
 
-    	$this->load->view('partner_site__view',$data);
+    	$this->load->view('county_sites__view',$data);
 	}
 
 	function counties_tests($year = NULL, $month = NULL)

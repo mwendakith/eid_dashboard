@@ -11,6 +11,49 @@ class Counties_model extends MY_Model
 		parent:: __construct();;
 	}
 
+	function counties_details($year=NULL,$month=NULL)
+	{
+		$table = '';
+		$count = 1;
+		if ($year==null || $year=='null') {
+			$year = $this->session->userdata('filter_year');
+		}
+		if ($month==null || $month=='null') {
+			if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
+				$month = 0;
+			}else {
+				$month = $this->session->userdata('filter_month');
+			}
+		}
+
+		$sql = "CALL `proc_get_eid_countys_details`('".$year."','".$month."')";
+		// echo "<pre>";print_r($sql);die();
+		$result = $this->db->query($sql)->result_array();
+		// echo "<pre>";print_r($result);die();
+		foreach ($result as $key => $value) {
+			$table .= '<tr>';
+			$table .= '<td>'.$count.'</td>';
+			$table .= '<td>'.$value['county'].'</td>';
+			$table .= '<td>'.$value['tests'].'</td>';
+			$table .= '<td>'.$value['firstdna'].'</td>';
+			$table .= '<td>'.$value['confirmdna'].'</td>';
+			$table .= '<td>'.$value['positive'].'</td>';
+			$table .= '<td>'.$value['negative'].'</td>';
+			$table .= '<td>'.$value['redraw'].'</td>';
+			$table .= '<td>'.$value['adults'].'</td>';
+			$table .= '<td>'.$value['adultspos'].'</td>';
+			$table .= '<td>'.$value['medage'].'</td>';
+			$table .= '<td>'.$value['rejected'].'</td>';
+			$table .= '<td>'.$value['infantsless2m'].'</td>';
+			$table .= '<td>'.$value['infantsless2mpos'].'</td>';
+			$table .= '</tr>';
+			$count++;
+		}
+		
+		// echo "<pre>";print_r($table);die();
+		return $table;
+	}
+
 	function sub_county_outcomes($year=null,$month=null,$county=null)
 	{
 		if ($county==null || $county=='null') {
@@ -78,6 +121,7 @@ class Counties_model extends MY_Model
 			$table .= '<td>'.$value['MFLCode'].'</td>';
 			$table .= '<td>'.$value['name'].'</td>';
 			$table .= '<td>'.$value['county'].'</td>';
+			$table .= '<td>'.$value['subcounty'].'</td>';
 			$table .= '<td>'.$value['tests'].'</td>';
 			$table .= '<td>'.$value['firstdna'].'</td>';
 			$table .= '<td>'.$value['confirmdna'].'</td>';

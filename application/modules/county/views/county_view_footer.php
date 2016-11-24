@@ -2,6 +2,7 @@
 	$().ready(function(){
 		$("#second").hide();
 		$("#county_outcomes").load("<?php echo base_url('charts/summaries/county_outcomes');?>");
+		$("#county_details").load("<?php echo base_url('charts/counties/counties_details');?>");
 
 		$("select").change(function(){
 			em = $(this).val();
@@ -27,6 +28,7 @@
 	        		$("#second").hide();
 	        		$("#first").show();
 					$("#county_outcomes").load("<?php echo base_url('charts/summaries/county_outcomes');?>");
+					$("#county_details").load("<?php echo base_url('charts/counties/counties_details');?>");
 	        	}else {
 	        		$("#first").hide();
 					$("#second").show();
@@ -71,6 +73,8 @@
 					// fetching the partner outcomes
 					$("#county_outcomes").html("<center><div class='loader'></div></center>");
 					$("#county_outcomes").load("<?php echo base_url('charts/summaries/county_outcomes');?>/"+year+"/"+month);
+					$("#county_details").html("<center><div class='loader'></div></center>");
+					$("#county_details").load("<?php echo base_url('charts/counties/counties_details');?>/"+year+"/"+month);
 				} else {
 					data = "<?php echo json_decode("+data+")?>";
 					$("#first").hide();

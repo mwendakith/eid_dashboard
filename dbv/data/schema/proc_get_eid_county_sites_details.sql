@@ -7,6 +7,7 @@ BEGIN
                   `view_facilitys`.`facilitycode` AS `MFLCode`, 
                   `view_facilitys`.`name`, 
                   `countys`.`name` AS `county`, 
+                  `districts`.`name` AS `subcounty`, 
                   SUM(`tests`) AS `tests`, 
                   SUM(`firstdna`) AS `firstdna`, 
                   SUM(`confirmdna`) AS `confirmdna`,
@@ -21,7 +22,8 @@ BEGIN
                   SUM(`infantsless2mPOS`) AS `infantsless2mpos` 
                   FROM `site_summary` 
                   LEFT JOIN `view_facilitys` ON `site_summary`.`facility` = `view_facilitys`.`ID` 
-                  LEFT JOIN `countys` ON `view_facilitys`.`county` = `countys`.`ID`  WHERE 1";
+                  LEFT JOIN `countys` ON `view_facilitys`.`county` = `countys`.`ID` 
+                  LEFT JOIN `districts` ON `view_facilitys`.`district` = `districts`.`ID`  WHERE 1";
 
     IF (filter_month != 0 && filter_month != '') THEN
        SET @QUERY = CONCAT(@QUERY, " AND `view_facilitys`.`county` = '",C_id,"' AND `year` = '",filter_year,"' AND `month`='",filter_month,"' ");

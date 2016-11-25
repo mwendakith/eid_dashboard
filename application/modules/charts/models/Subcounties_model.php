@@ -49,6 +49,9 @@ class Subcounties_model extends MY_Model
 
 	function get_eid($subcounty=null, $year=null, $month=null){
 
+		if ($subcounty==null || $subcounty=='null') {
+			$subcounty = $this->session->userdata('sub_county_filter');
+		}
 		if ($year==null || $year=='null') {
 			$year = $this->session->userdata('filter_year');
 		}
@@ -72,7 +75,7 @@ class Subcounties_model extends MY_Model
 
 		
 		$sql = "CALL `proc_get_eid_subcounty_eid`('".$year."', '".$month."', '".$subcounty."')";
-
+		// echo "<pre>";print_r($sql);die();
 		$result = $this->db->query($sql)->result_array();
 		// echo "<pre>";print_r($result);die();
 		$data['ul'] = '';
@@ -166,6 +169,9 @@ class Subcounties_model extends MY_Model
 
 	function get_hei($subcounty=null, $year=null, $month=null){
 
+		if ($subcounty==null || $subcounty=='null') {
+			$subcounty = $this->session->userdata('sub_county_filter');
+		}
 
 		if ($year==null || $year=='null') {
 			$year = $this->session->userdata('filter_year');
@@ -188,7 +194,7 @@ class Subcounties_model extends MY_Model
 
 		
 		$sql = "CALL `proc_get_eid_subcounty_hei_follow_up`('".$year."', '".$month."', '".$subcounty."')";
-
+		// echo "<pre>";print_r($sql);die();
 		$result = $this->db->query($sql)->row();
 		// echo "<pre>";print_r($result);die();
 		$data['trend'][0]['name'] = "Initiated On Treatment";
@@ -249,14 +255,15 @@ class Subcounties_model extends MY_Model
 		return $data;
 	}
 
-	function age($year=null,$month=null,$county=null,$partner=null)
+	function age($subcounty=null, $year=null, $month=null)
 	{
-		if ($county==null || $county=='null') {
-			$county = $this->session->userdata('county_filter');
+		// echo "<pre>";print_r($subcounty."<__>");die();
+		if ($subcounty==null || $subcounty=='null') {
+			$subcounty = $this->session->userdata('sub_county_filter');
 		}
-		if ($partner==null || $partner=='null') {
-			$partner = $this->session->userdata('partner_filter');
-		}
+		// if ($partner==null || $partner=='null') {
+		// 	$partner = $this->session->userdata('partner_filter');
+		// }
 
 		if ($year==null || $year=='null') {
 			$year = $this->session->userdata('filter_year');
@@ -269,15 +276,7 @@ class Subcounties_model extends MY_Model
 			}
 		}
 
-		if ($partner) {
-			$sql = "CALL `proc_get_eid_partner_age`('".$partner."','".$year."','".$month."')";
-		} else {
-			if ($county==null || $county=='null') {
-				$sql = "CALL `proc_get_eid_national_age`('".$year."','".$month."')";
-			} else {
-				$sql = "CALL `proc_get_eid_county_age`('".$county."','".$year."','".$month."')";
-			}
-		}
+		$sql = "CALL `proc_get_eid_subcounty_age`('".$subcounty."','".$year."','".$month."')";
 		// echo "<pre>";print_r($sql);die();
 		$result = $this->db->query($sql)->result_array();
 		// echo "<pre>";print_r($result);die();
@@ -326,6 +325,9 @@ class Subcounties_model extends MY_Model
 	{
 		$table = '';
 		$count = 1;
+		if ($subcounty==null || $subcounty=='null') {
+			$subcounty = $this->session->userdata('sub_county_filter');
+		}
 		if ($year==null || $year=='null') {
 			$year = $this->session->userdata('filter_year');
 		}

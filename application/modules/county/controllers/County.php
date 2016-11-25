@@ -36,6 +36,16 @@ class County extends MY_Controller
 		$this -> template($this->data);
 	}
 
+	public function check_county_select()
+	{
+		if ($this->session->userdata('county_filter')) {
+			$county = $this->session->userdata('county_filter');
+		} else {
+			$county = 0;
+		}
+		echo json_encode($county);
+	}
+
 	public function check_subcounty_select()
 	{
 		if ($this->session->userdata('sub_county_filter')) {

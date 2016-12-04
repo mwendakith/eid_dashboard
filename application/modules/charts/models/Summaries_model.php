@@ -165,57 +165,78 @@ class Summaries_model extends MY_Model
 
 		foreach ($result as $key => $value) {
 			$data['ul'] .= '<tr>
-		    		<td>Cumulative Tests:</td>
+		    		<td>Cumulative Tests (All Samples Run):</td>
 		    		<td>'.(int) $value['alltests'].'</td>
-		    		<td>EQA Tests:</td>
-		    		<td>'.(int) $value['eqatests'].'</td>
+		    		<td></td>
+		    		<td></td>
 		    	</tr>
+
 		    	<tr>
-		    		<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Actual Tests:</td>
+		    		<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Actual Tests With Valid Results:</td>
 		    		<td>'.(int) $value['tests'].'</td>
 		    		<td>Positive Outcomes:</td>
 		    		<td>'.(int) $value['pos'].'('.round((((int) $value['pos']/(int) $value['tests'])*100),1).'%)</td>
 		    	</tr>
+
 		    	<tr>
-		    		<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;First DNA PCR:</td>
-		    		<td>'.(int) $value['firstdna'].'</td>
-		    		<td>Confirmatory PCR @9M:</td>
-		    		<td>'.(int) $value['confirmdna'].'</td>
+		    		<td>First DNA PCR With Valid Results:</td>
+		    		<td>'. (int) $value['firstdna']  .'</td>
+		    		<td></td>
+		    		<td></td>
 		    	</tr>
+
 		    	<tr>
-		    		<td colspan="2"><center>Repeats for  Positive Confimation:</center></td>
-			    	<td colspan="2">'.(int) $value['repeatspos'].'</td>
-			    </tr>
-		    	<tr>
-		    		<th colspan="4"></th>
+		    		<td>Repeat +ve Confirmatory Tests:</td>
+		    		<td>'. ((int) $value['confirmdna'] + (int) $value['repeatspos']) .'</td>
+		    		<td></td>
+		    		<td></td>
 		    	</tr>
+
+		    	<tr>
+		    		<td></td>
+		    		<td></td>
+		    		<td></td>
+		    		<td></td>
+		    	</tr>
+
 		    	<tr>
 		    		<td>Actual Infants Tested:</td>
 		    		<td>'.(int) $value['actualinfants'].'</td>
 		    		<td>Positive Outcomes:</td>
-		    		<td>'.(int) $value['actualinfantspos'].'('.round((((int) $value['actualinfantspos']/(int) $value['actualinfants'])*100),1).'%)</td>
+		    		<td>'.(int) $value['actualinfantspos'].'('. round((((int) $value['actualinfantspos']/(int) $value['actualinfants'])*100),1)  .'%)</td>
 		    	</tr>
+
 		    	<tr>
 		    		<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Infants &lt; 2M:</td>
 		    		<td>'.(int) $value['infantsless2m'].'</td>
 		    		<td>Infants &lt; 2M Positive:</td>
 		    		<td>'.(int) $value['infantless2mpos'].'('.round((((int) $value['infantless2mpos']/(int) $value['infantsless2m'])*100),1).'%)</td>
 		    	</tr>
+
 		    	<tr>
 		    		<td>Adults Tested:</td>
 		    		<td>'.(int) $value['adults'].'</td>
 		    		<td>Positive Outcomes:</td>
 		    		<td>'.(int) $value['adultsPOS'].'('.round((((int) $value['adultsPOS']/(int) $value['adults'])*100),1).'%)</td>
 		    	</tr>
+
+
 		    	<tr>
-		    		<th colspan="4"></th>
+		    		<td></td>
+		    		<td></td>
+		    		<td></td>
+		    		<td></td>
 		    	</tr>
+
+
 		    	<tr>
-		    		<td>Redraws:</td>
-		    		<td>'.(int) $value['redraw'].'</td>
 		    		<td>Rejected Samples:</td>
 		    		<td>'.(int) $value['rejected'].'</td>
+		    		<td>% Rejection:</td>
+		    		<td>'.round((((int) $value['rejected']/(int) $value['alltests'])*100),1).'%</td>
 		    	</tr>
+
+
 		    	<tr>
 		    		<td>Median Age of Testing:</td>
 		    		<td>'.round($value['medage']).'</td>
@@ -362,25 +383,25 @@ class Summaries_model extends MY_Model
 		$data['categories'][0]			= 'No Data';
 
 		foreach ($result as $key => $value) {
-			$data['categories'][0] 			= '2M';
-			$data['categories'][1] 			= '3-8M';
-			$data['categories'][2] 			= '9-12M';
-			$data['categories'][3] 			= 'Above 12M';
+			$data['categories'][0] 			= 'No Data';
+			$data['categories'][1] 			= '2M';
+			$data['categories'][2] 			= '3-8M';
+			$data['categories'][3] 			= '9-12M';
+			$data['categories'][4] 			= 'Above 12M';
 			// $data['categories'][4] 			= 'above18M';
-			$data['categories'][4] 			= 'No Data';
 
-			$data["ageGnd"][0]["data"][0]	=  (int) $value['sixweekspos'];
-			$data["ageGnd"][1]["data"][0]	=  (int) $value['sixweeksneg'];
-			$data["ageGnd"][0]["data"][1]	=  (int) $value['sevento3mpos'];
-			$data["ageGnd"][1]["data"][1]	=  (int) $value['sevento3mneg'];
-			$data["ageGnd"][0]["data"][2]	=  (int) $value['threemto9mpos'];
-			$data["ageGnd"][1]["data"][2]	=  (int) $value['threemto9mneg'];
-			$data["ageGnd"][0]["data"][3]	=  (int) $value['ninemto18mpos'];
-			$data["ageGnd"][1]["data"][3]	=  (int) $value['ninemto18mneg'];
+			$data["ageGnd"][0]["data"][0]	=  (int) $value['nodatapos'];
+			$data["ageGnd"][1]["data"][0]	=  (int) $value['nodataneg'];
+			$data["ageGnd"][0]["data"][1]	=  (int) $value['sixweekspos'];
+			$data["ageGnd"][1]["data"][1]	=  (int) $value['sixweeksneg'];
+			$data["ageGnd"][0]["data"][2]	=  (int) $value['sevento3mpos'];
+			$data["ageGnd"][1]["data"][2]	=  (int) $value['sevento3mneg'];
+			$data["ageGnd"][0]["data"][3]	=  (int) $value['threemto9mpos'];
+			$data["ageGnd"][1]["data"][3]	=  (int) $value['threemto9mneg'];
+			$data["ageGnd"][0]["data"][4]	=  (int) $value['ninemto18mpos'];
+			$data["ageGnd"][1]["data"][4]	=  (int) $value['ninemto18mneg'];
 			// $data["ageGnd"][0]["data"][4]	=  (int) $value['above18mpos'];
 			// $data["ageGnd"][1]["data"][4]	=  (int) $value['above18mneg'];
-			$data["ageGnd"][0]["data"][4]	=  (int) $value['nodatapos'];
-			$data["ageGnd"][1]["data"][4]	=  (int) $value['nodataneg'];
 		}
 		// die();
 		$data['ageGnd'][0]['drilldown']['color'] = '#913D88';

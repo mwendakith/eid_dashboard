@@ -8,14 +8,18 @@
 			<th rowspan="2">No</th>
 			<th rowspan="2">Testing Lab</th>
 			<th rowspan="2">Facilities Serviced</th>
-			<th rowspan="2">No of Batches</th>
-			<th rowspan="2">All Samples Run (plus reruns)</th>
-			<th rowspan="2">EQA Samples Tested</th>
-			<th rowspan="2">Rejected Samples</th>
-			<th rowspan="2">Actual Samples Tested</th>
+			<th rowspan="2">Total Samples Received</th>
+			<th rowspan="2">Rejected Samples (on receipt at lab)</th>
+			<th rowspan="2">Redraws (after testing)</th>
+			<th rowspan="1">All Samples Run (plus reruns)</th>
+			<th rowspan="2">Valid Test Results</th>
+			<th rowspan="2">Repeat +ve Confirmatory Tests</th>
+			<th rowspan="2">EQA QA/IQC Tests</th>
+			<th rowspan="2">Total Tests Performed</th>
 			<th colspan="6"><center>Test Outcome</center></th>
 		</tr>
 		<tr>
+			<th>Excludes QA and Repeats</th>
 			<th>Positives</th>
 			<th>%</th>
 			<th>Negatives</th>

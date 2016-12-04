@@ -36,11 +36,16 @@ class Performance_model extends MY_Model
 						<td>".($key+1)."</td>
 						<td>".$value['name']."</td>
 						<td>".(int) $value['sitesending']."</td>
-						<td>".(int) $value['batches']."</td>
+						<td>".(int) $value['received']."</td>
+						<td>".(int) $value['rejected'] . " (" . 
+							round((($value['rejected']*100)/$value['tests']), 2, PHP_ROUND_HALF_UP)."%)</td>
+						<td>".(int) $value['redraw']."</td>
+
 						<td>".(int) $value['alltests']."</td>
-						<td>".(int) $value['eqatests']."</td>
-						<td>".(int) $value['rejected']."</td>
 						<td>".(int) $value['tests']."</td>
+						<td>".((int) $value['confirmdna'] + (int) $value['repeatspos'])."</td>
+						<td>".(int) $value['eqa']."</td>
+						<td>".((int) $value['alltests'] + (int) $value['eqa'] + (int) $value['confirmdna'] + (int) $value['repeatspos'])."</td>
 						<td>".(int) $value['pos']."</td>
 						<td>".round((($value['pos']*100)/$value['tests']), 2, PHP_ROUND_HALF_UP)."</td>
 						<td>".(int) $value['neg']."</td>
@@ -77,12 +82,16 @@ class Performance_model extends MY_Model
 		foreach ($result as $key => $value) {
 
 			$data[$key]['name'] = $value['name']; 
-			$data[$key]['sitesending'] = $value['sitesending']; 
-			$data[$key]['batches'] = $value['batches']; 
-			$data[$key]['alltests'] = $value['alltests']; 
-			$data[$key]['eqatests'] = $value['eqatests']; 
-			$data[$key]['rejected'] = $value['rejected']; 
-			$data[$key]['tests'] = $value['tests']; 
+			$data[$key]['sitesending'] = (int) $value['sitesending']; 
+			$data[$key]['received'] = $value['received'];
+			$data[$key]['rejected'] = $value['rejected']. " (" . 
+							round((($value['rejected']*100)/$value['tests']), 2, PHP_ROUND_HALF_UP)."%)"; 
+			$data[$key]['redrawal'] =  $value['redraw'];
+			$data[$key]['alltests'] = $value['alltests'];
+			$data[$key]['tests'] = $value['tests'];  
+			$data[$key]['confirms'] = (int) $value['confirmdna'] + (int) $value['repeatspos'];  
+			$data[$key]['eqa'] = $value['eqa']; 
+			$data[$key]['total_tests'] = (int) $value['alltests'] + (int) $value['eqa'] + (int) $value['confirmdna'] + (int) $value['repeatspos']; 
 			$data[$key]['pos'] = $value['pos']; 
 			$data[$key]['pos_percentage'] = round((($value['pos']*100)/$value['tests']), 2, PHP_ROUND_HALF_UP); 
 			$data[$key]['neg'] = $value['neg']; 

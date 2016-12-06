@@ -29,14 +29,7 @@
       </div>
     </div>
   </div>
-
-  <div class="row">
-    <div class="col-md-12">
-      <a href="<?php echo base_url('charts/sites/download_unsupported_sites');?>">Download List</a>
-    </div>
-  </div>
-
-  
+ 
   <div class="row">
     <div class="col-md-12">
       <div class="panel panel-default">
@@ -45,6 +38,9 @@
         </div>
           <div class="panel-body" id="unsupportedSites">
             <center><div class="loader"></div></center>
+          </div>
+          <div class="col-md-12" style="margin-top: 1em;margin-bottom: 1em;">
+            <center><button id="partner_sites_excels" class="btn btn-primary" style="background-color: #009688;"><a href="<?php echo base_url('charts/sites/download_unsupported_sites');?>"  style="color: white;">Download List</a></button></center>
           </div>
       </div>
     </div>

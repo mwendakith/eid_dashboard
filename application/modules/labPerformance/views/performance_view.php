@@ -4,9 +4,13 @@
       <div class="panel-heading">
         LAB PERFORMANCE STATS ON EID <div class="display_date"></div>
       </div>
-      <div class="panel-body" id="lab_perfomance_stats">
-        <center><div class="loader"></div></center>
+      <div class="panel-body">
+        <div id="lab_perfomance_stats"><center><div class="loader"></div></center></div>
+        <div class="col-md-12" style="margin-top: 1em;margin-bottom: 1em;">
+            <center><button id="partner_sites_excels" class="btn btn-primary" style="background-color: #009688;"><a href="<?php echo base_url('charts/LabPerformance/download_lab_performance_stats');?>"  style="color: white;">Download List</a></button></center>
+          </div>
       </div>
+      
     </div>
   </div>
 </div>

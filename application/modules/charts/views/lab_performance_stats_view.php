@@ -1,7 +1,3 @@
-<div id="download_link">
-  
-</div>
-
 <table id="example" cellspacing="1" cellpadding="3" class="tablehead table table-striped table-bordered" style="/*background:#CCC;">
 	<thead>
 		<tr class="colhead">
@@ -34,7 +30,6 @@
 </table>
 <script type="text/javascript" charset="utf-8">
   $(document).ready(function() {
-  	$('#download_link').html("<?php echo $link;?>");
   	$('#example').DataTable();
 
     $("table").tablecloth({

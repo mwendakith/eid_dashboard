@@ -13,7 +13,7 @@ BEGIN
                     SUM(`ls`.`rejected`) AS `rejected`,  
                     SUM(`ls`.`confirmdna`) AS `confirmdna`,  
                     SUM(`ls`.`repeatspos`) AS `repeatspos`,  
-                    SUM(`ls`.`eqa`) AS `eqa`,  
+                    SUM(`ls`.`eqatests`) AS `eqa`,  
                     SUM(`ls`.`pos`) AS `pos`, 
                     SUM(`ls`.`neg`) AS `neg`, 
                     SUM(`ls`.`redraw`) AS `redraw` 

@@ -121,6 +121,7 @@ class Sites_model extends MY_Model
         $filename = "unsupported_sites.csv";
         $sql = "CALL `proc_get_eid_unsupported_facilities`()";
         $result = $this->db->query($sql);
+        // echo "<pre>";print_r($result);die();
         $data = $this->dbutil->csv_from_result($result, $delimiter, $newline);
         force_download($filename, $data);
 

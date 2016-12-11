@@ -33,19 +33,18 @@
 		<?php echo $outcomes;?>
 	</tbody>
 </table>
-<div class="row" id="excels">
-	<div class="col-md-6">
-		<!-- <center><button class="btn btn-primary" style="background-color: #009688;color: white;">List of all supported sites</button></center> -->
-	</div>
-	<div class="col-md-6">
-		<center><button id="download_link" class="btn btn-primary" style="background-color: #009688;color: white;"></button></center>
+<div class="row" id="exc">
+	
+	<div class="col-md-12">
+		<center><button id="download_link_" class="btn btn-primary" style="background-color: #009688;color: white;"></button></center>
 	</div>
 </div>
-<!-- <div id='download_link'></div> -->
 <script type="text/javascript" charset="utf-8">
   $(document).ready(function() {
-  	// $('#download_link').html("<?php echo $link;?>");
-  	// $('#download_link > a').css("color","white");
+
+  	$('#download_link_').html("<?php echo $link;?>");
+  	$('#download_link_ > a').css("color","white");
+
   	$('#example').DataTable();
 
     $("table").tablecloth({
@@ -55,7 +54,6 @@
       condensed: true
     });
 
-    //$('#download_link').empty().append("<?php echo $link;?>");
     
   });
 </script>

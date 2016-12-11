@@ -46,12 +46,55 @@ class Counties_model extends MY_Model
 			$table .= '<td>'.$value['rejected'].'</td>';
 			$table .= '<td>'.$value['infantsless2m'].'</td>';
 			$table .= '<td>'.$value['infantsless2mpos'].'</td>';
+
 			$table .= '</tr>';
 			$count++;
 		}
 		
 		// echo "<pre>";print_r($table);die();
 		return $table;
+	}
+
+	function download_counties_details($year=NULL,$month=NULL){
+		if ($year==null || $year=='null') {
+			$year = $this->session->userdata('filter_year');
+		}
+		if ($month==null || $month=='null') {
+			if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
+				$month = 0;
+			}else {
+				$month = $this->session->userdata('filter_month');
+			}
+		}
+
+		$sql = "CALL `proc_get_eid_countys_details`('".$year."','".$month."')";
+		// echo "<pre>";print_r($sql);die();
+		$result = $this->db->query($sql)->result_array();
+
+		$this->load->helper('file');
+        $this->load->helper('download');
+        $delimiter = ",";
+        $newline = "\r\n";
+
+	    /** open raw memory as file, no need for temp files, be careful not to run out of memory thought */
+	    $f = fopen('php://memory', 'w');
+	    /** loop through array  */
+
+	    $b = array('County', 'Tests', '1st DNA PCR', 'Confirmed PCR', '+', '-', 'Redraws', 'Adults Tests', 'Adults Tests Positives', 'Median Age', 'Rejected', 'Infants < 2m', 'Infants < 2m +');
+
+	    fputcsv($f, $b, $delimiter);
+
+	    foreach ($result as $line) {
+	        /** default php csv handler **/
+	        fputcsv($f, $line, $delimiter);
+	    }
+	    /** rewrind the "file" with the csv lines **/
+	    fseek($f, 0);
+	    /** modify header to be downloadable csv file **/
+	    header('Content-Type: application/csv');
+	    header('Content-Disposition: attachement; filename="county_details.csv";');
+	    /** Send file to browser for download */
+	    fpassthru($f);
 	}
 
 	function sub_county_outcomes($year=null,$month=null,$county=null)
@@ -141,6 +184,56 @@ class Counties_model extends MY_Model
 
 		return $table;
 	}
+
+	function download_county_sites_outcomes($year=null,$month=null,$county=null)
+	{
+		
+		if ($county==null || $county=='null') {
+			$county = $this->session->userdata('county_filter');
+		}
+		if ($year==null || $year=='null') {
+			$year = $this->session->userdata('filter_year');
+		}
+		if ($month==null || $month=='null') {
+			if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
+				$month = 0;
+			}else {
+				$month = $this->session->userdata('filter_month');
+			}
+		}
+
+		$sql = "CALL `proc_get_eid_county_sites_details`('".$county."','".$year."','".$month."')";
+		// echo "<pre>";print_r($sql);die();
+		$result = $this->db->query($sql)->result_array();
+
+		$this->load->helper('file');
+        $this->load->helper('download');
+        $delimiter = ",";
+        $newline = "\r\n";
+
+	    /** open raw memory as file, no need for temp files, be careful not to run out of memory thought */
+	    $f = fopen('php://memory', 'w');
+	    /** loop through array  */
+
+	    $b = array('MFL Code', 'Name', 'County', 'Subcounty', 'Tests', '1st DNA PCR', 'Confirmed PCR', '+', '-', 'Redraws', 'Adults Tests', 'Adults Tests Positives', 'Median Age', 'Rejected', 'Infants < 2m', 'Infants < 2m +');
+
+	    fputcsv($f, $b, $delimiter);
+
+	    foreach ($result as $line) {
+	        /** default php csv handler **/
+	        fputcsv($f, $line, $delimiter);
+	    }
+	    /** rewrind the "file" with the csv lines **/
+	    fseek($f, 0);
+	    /** modify header to be downloadable csv file **/
+	    header('Content-Type: application/csv');
+	    header('Content-Disposition: attachement; filename="county_details.csv";');
+	    /** Send file to browser for download */
+	    fpassthru($f);
+		
+	}
+
+
 
 	function country_tests($year=NULL,$month=NULL)
 	{
@@ -401,6 +494,8 @@ class Counties_model extends MY_Model
 
 		return $table;
 	}
+
+	
 	
 	
 }

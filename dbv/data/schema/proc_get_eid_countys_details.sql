@@ -16,7 +16,7 @@ BEGIN
                   SUM(`medage`) AS `medage`, 
                   SUM(`rejected`) AS `rejected`, 
                   SUM(`infantsless2m`) AS `infantsless2m`, 
-                  SUM(`infantsless2mPOS`) AS `infantsless2mpos` 
+                  SUM(`infantsless2mPOS`) AS `infantsless2mpos`
                   FROM `county_summary` 
                   LEFT JOIN `countys` ON `county_summary`.`county` = `countys`.`ID`  WHERE 1";
 

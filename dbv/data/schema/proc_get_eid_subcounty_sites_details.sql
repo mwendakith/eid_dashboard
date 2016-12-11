@@ -1,7 +1,7 @@
-DROP PROCEDURE IF EXISTS `proc_get_eid_county_sites_details`;
+DROP PROCEDURE IF EXISTS `proc_get_eid_subcounty_sites_details`;
 DELIMITER //
-CREATE PROCEDURE `proc_get_eid_county_sites_details`
-(IN C_id INT(11), IN filter_year INT(11), IN filter_month INT(11))
+CREATE PROCEDURE `proc_get_eid_subcounty_sites_details`
+(IN SC_id INT(11), IN filter_year INT(11), IN filter_month INT(11))
 BEGIN
   SET @QUERY =    "SELECT 
                   `view_facilitys`.`facilitycode` AS `MFLCode`, 
@@ -20,16 +20,15 @@ BEGIN
                   SUM(`rejected`) AS `rejected`, 
                   SUM(`infantsless2m`) AS `infantsless2m`, 
                   SUM(`infantsless2mPOS`) AS `infantsless2mpos` 
-
-                  FROM `site_summary` 
-                  LEFT JOIN `view_facilitys` ON `site_summary`.`facility` = `view_facilitys`.`ID` 
-                  LEFT JOIN `countys` ON `view_facilitys`.`county` = `countys`.`ID` 
-                  LEFT JOIN `districts` ON `view_facilitys`.`district` = `districts`.`ID`  WHERE 1";
+                  FROM `site_summary`
+                  LEFT JOIN `view_facilitys` ON `site_summary`.`facility` = `view_facilitys`.`ID`
+                  JOIN `districts` ON  `view_facilitys`.`district` = `districts`.`ID` 
+                  LEFT JOIN `countys` ON `view_facilitys`.`county` = `countys`.`ID`  WHERE 1";
 
     IF (filter_month != 0 && filter_month != '') THEN
-       SET @QUERY = CONCAT(@QUERY, " AND `view_facilitys`.`county` = '",C_id,"' AND `year` = '",filter_year,"' AND `month`='",filter_month,"' ");
+       SET @QUERY = CONCAT(@QUERY, " AND `view_facilitys`.`district` = '",SC_id,"' AND `year` = '",filter_year,"' AND `month`='",filter_month,"' ");
     ELSE
-        SET @QUERY = CONCAT(@QUERY, " AND `view_facilitys`.`county` = '",C_id,"' AND `year` = '",filter_year,"' ");
+        SET @QUERY = CONCAT(@QUERY, " AND `view_facilitys`.`district` = '",SC_id,"' AND `year` = '",filter_year,"' ");
     END IF;
 
     SET @QUERY = CONCAT(@QUERY, " GROUP BY `view_facilitys`.`ID` ORDER BY `tests` DESC ");

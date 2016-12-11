@@ -17,12 +17,22 @@ class Counties extends MY_Controller
 	{
 		$data['outcomes'] = $this->counties_model->counties_details($year,$month);
 
+		$link = $year . '/' . $month;
+
+		$data['link'] = "<a href='" . base_url('charts/counties/download_counties_details/' . $link) . "'>Download List</a>";
+
 		$this->load->view('counties_details_view', $data);
+	}
+
+	function download_counties_details($year=NULL,$month=NULL){
+		$this->counties_model->download_counties_details($year,$month);
 	}
 
 	function subCounties_outcomes($year=NULL,$month=NULL,$county=NULL)
 	{
 		$data['outcomes'] = $this->counties_model->sub_county_outcomes($year,$month,$county);
+
+		
 
     	$this->load->view('subcounty_outcomes_view',$data);
 	}
@@ -31,13 +41,17 @@ class Counties extends MY_Controller
 	{
 		$data['outcomes'] = $this->counties_model->county_sites_outcomes($year,$month,$county);
 
-		// $link = $year . '/' . $month . '/' . $partner;
+		$link = $year . '/' . $month . '/' . $county;
 
-		//$data['link'] = anchor('charts/sites/download_partner_sites/' . $link, 'Download List');
-		$data['link'] = "";
-		// $data['link'] = "<a href='" . base_url('charts/sites/download_partner_sites/' . $link) . "'>Download List</a>";
+		$data['link'] = "<a href='" . base_url('charts/counties/download_county_sites_outcomes/' . $link) . "'>Download List</a>";
+
 
     	$this->load->view('county_sites__view',$data);
+	}
+
+	function download_county_sites_outcomes($year=NULL,$month=NULL,$county=NULL)
+	{
+		$this->counties_model->download_county_sites_outcomes($year,$month,$county);
 	}
 
 	function counties_tests($year = NULL, $month = NULL)

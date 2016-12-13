@@ -34,7 +34,7 @@
 </table>
 <div class="row" id="excels">
 	<div class="col-md-6">
-		<!-- <center><button class="btn btn-primary" style="background-color: #009688;color: white;">List of all supported sites</button></center> -->
+		<center><button id="unsupported" class="btn btn-primary" style="background-color: #009688;color: white;"></button></center>
 	</div>
 	<div class="col-md-6">
 		<center><button id="download_link" class="btn btn-primary" style="background-color: #009688;color: white;"></button></center>
@@ -43,8 +43,10 @@
 <!-- <div id='download_link'></div> -->
 <script type="text/javascript" charset="utf-8">
   $(document).ready(function() {
+  	$('#unsupported').html("<?php echo $link2; ?>")
   	$('#download_link').html("<?php echo $link;?>");
   	$('#download_link > a').css("color","white");
+  	$('#unsupported > a').css("color","white");
   	$('#example').DataTable();
 
     $("table").tablecloth({

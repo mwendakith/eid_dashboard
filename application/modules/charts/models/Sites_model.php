@@ -118,7 +118,7 @@ class Sites_model extends MY_Model
         $this->load->helper('download');
         $delimiter = ",";
         $newline = "\r\n";
-        $filename = "unsupported_sites.csv";
+        $filename = "eid_unsupported_sites.csv";
         $sql = "CALL `proc_get_eid_unsupported_facilities`()";
         $result = $this->db->query($sql);
         // echo "<pre>";print_r($result);die();
@@ -191,7 +191,7 @@ class Sites_model extends MY_Model
 		// echo "<pre>";print_r($sql);die();
 		$data = $this->db->query($sql)->result_array();
 
-		
+		echo "<pre>";print_r($data);die();
 
 		// $this->load->helper('download');
   //       $this->load->library('PHPReport/PHPReport');
@@ -252,13 +252,26 @@ class Sites_model extends MY_Model
 	    fseek($f, 0);
 	    /** modify header to be downloadable csv file **/
 	    header('Content-Type: application/csv');
-	    header('Content-Disposition: attachement; filename="partner_sites.csv";');
+	    header('Content-Disposition: attachement; filename="eid_partner_sites.csv";');
 	    /** Send file to browser for download */
 	    fpassthru($f);
 		
 	}
 
-
+	function partner_supported_sites_download($partner=NULL)
+	{
+		$this->load->dbutil();
+        $this->load->helper('file');
+        $this->load->helper('download');
+        $delimiter = ",";
+        $newline = "\r\n";
+        $filename = "eid_partner_supported_sites.csv";
+        $sql = "CALL `proc_get_eid_partner_supported_sites`('".$partner."')";
+        $result = $this->db->query($sql);
+        // echo "<pre>";print_r($result);die();
+        $data = $this->dbutil->csv_from_result($result, $delimiter, $newline);
+        force_download($filename, $data);
+	}
 
 	function get_trends($site=null, $year=null){
 

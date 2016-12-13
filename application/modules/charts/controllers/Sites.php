@@ -60,10 +60,11 @@ class Sites extends MY_Controller
 		$data['outcomes'] = $this->sites_model->partner_sites_outcomes($year,$month,$site,$partner);
 
 		$link = $year . '/' . $month . '/' . $partner;
-
+		$link2 = $partner;
 		//$data['link'] = anchor('charts/sites/download_partner_sites/' . $link, 'Download List');
 
-		$data['link'] = "<a href='" . base_url('charts/sites/download_partner_sites/' . $link) . "'>Download List</a>";
+		$data['link'] = "<a href='" . base_url('charts/sites/download_partner_sites/' . $link) . "'>Export to Excel</a>";
+		$data['link2'] = "<a href='" . base_url('charts/sites/download_partner_supported_sites/' . $link2) . "'>Export to Supported Sites</a>";
 
     	$this->load->view('partner_site__view',$data);
 	}
@@ -71,6 +72,11 @@ class Sites extends MY_Controller
 	function download_partner_sites($year=NULL,$month=NULL,$partner=NULL)
 	{
 		$this->sites_model->partner_sites_outcomes_download($year,$month,$partner);
+	}
+
+	function download_partner_supported_sites($partner=NULL)
+	{
+		$this->sites_model->partner_supported_sites_download($partner);
 	}
 
 	function partner_sites_excel($partner=NULL)

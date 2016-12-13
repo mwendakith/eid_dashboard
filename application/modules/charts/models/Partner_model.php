@@ -113,10 +113,19 @@ class Partner_model extends MY_Model
 		foreach ($result as $key => $value) {
 			$data['categories'][$i] = $value['year'];
 
+			$total = (int) $value['negative']+(int) $value['positive']+(int) $value['redraws'];
+
 			$data['outcomes'][0]['data'][$i] = (int) $value['redraws'];
 			$data['outcomes'][1]['data'][$i] = (int) $value['positive'];
 			$data['outcomes'][2]['data'][$i] = (int) $value['negative'];
-			$data['outcomes'][3]['data'][$i] = round(((int) $value['positive']*100)/((int) $value['negative']+(int) $value['positive']+(int) $value['redraws']),1);
+
+			if($total == 0){
+				$data['outcomes'][3]['data'][$i] = 0;
+			}
+			else{
+				$data['outcomes'][3]['data'][$i] round(( (int) $value['positive']*100)/$total,1);
+			}
+			
 			$i++;
 		}
 		$data['outcomes'][0]['tooltip'] = array("valueSuffix" => ' ');

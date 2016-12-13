@@ -374,7 +374,7 @@ class Subcounties_model extends MY_Model
 			$table .= '<td>'.$value['county'].'</td>';
 			$table .= '<td>'.$value['tests'].'</td>';
 			$table .= '<td>'.$value['firstdna'].'</td>';
-			$table .= '<td>'.$value['confirmdna'] + .'</td>';
+			$table .= '<td>'.$value['confirmdna'].'</td>';
 			$table .= '<td>'.$value['positive'].'</td>';
 			$table .= '<td>'.$value['negative'].'</td>';
 			$table .= '<td>'.$value['redraw'].'</td>';

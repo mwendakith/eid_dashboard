@@ -198,8 +198,8 @@ class Performance_model extends MY_Model
 			if($value['tests'] == 0){
 				$data['rejected_trends'][$lab]['data'][$month] = 0;
 			}else{
-				$data['rejected_trends'][$lab]['data'][$month] = (int) 
-				 ($value['rejected'] / $value['tests'] * 100);
+				$data['rejected_trends'][$lab]['data'][$month] =  
+				 round(($value['rejected'] / $value['tests'] * 100), 2);
 			}
 
 			$data['positivity_trends'][$lab]['name'] = $value['name'];
@@ -210,8 +210,19 @@ class Performance_model extends MY_Model
 				(($value['pos']/ ($value['pos'] + $value['neg'])) * 100);
 			}
 
+		}
 
+		$this->db->close();
 
+		$sql2 = "CALL `proc_get_eid_average_rejection`('".$year."')";
+		$result2 = $this->db->query($sql2)->result_array();
+			$i = count($data['rejected_trends']);
+		$count = 0;
+		foreach ($result2 as $key => $value) {
+					
+			$data['rejected_trends'][$i]['name'] = 'National Rejection Rate';
+			$data['rejected_trends'][$i]['data'][$count] = round(@((int) $value['rejected'] * 100 / (int) $value['tests']), 2);
+			$count++;
 		}
 
 		//echo "<pre>";print_r($data);die();

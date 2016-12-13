@@ -1,12 +1,14 @@
 <div class="row">
+  <div id="stacked_graph" class="col-md-12">
+
+  </div>
+  
   <div id="graphs">
   
   </div>
 
 
-  <div id="stacked_graph" class="col-md-12">
-
-  </div>
+  
 </div>
 
   

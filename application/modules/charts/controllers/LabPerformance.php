@@ -49,15 +49,15 @@ class LabPerformance extends MY_Controller
 		$data['div'] = "#positivity";
 		$data['div_name'] = "positivity";
 		$data['suffix'] = "%";
-		$data['yAxis'] = "Number of Positives(%)";
+		$data['yAxis'] = "Positivity (%)";
 		$this->load->view('lab_performance_view', $data);
 
 		$data['trends'] = $obj['trends']['rejected_trends'];
-		$data['title'] = "Rejected Trends (" . $obj['trends']['year'] . ")";
+		$data['title'] = "Rejection Rate Trends (" . $obj['trends']['year'] . ")";
 		$data['div'] = "#rejects";
 		$data['div_name'] = "rejects";
 		$data['suffix'] = "%";
-		$data['yAxis'] = "Number of Rejects(%)";
+		$data['yAxis'] = "Rejection (%)";
 		$this->load->view('lab_performance_view', $data);
 
 		

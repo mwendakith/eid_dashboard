@@ -374,7 +374,7 @@ class Subcounties_model extends MY_Model
 			$table .= '<td>'.$value['county'].'</td>';
 			$table .= '<td>'.$value['tests'].'</td>';
 			$table .= '<td>'.$value['firstdna'].'</td>';
-			$table .= '<td>'.$value['confirmdna'].'</td>';
+			$table .= '<td>'.$value['confirmdna'] + .'</td>';
 			$table .= '<td>'.$value['positive'].'</td>';
 			$table .= '<td>'.$value['negative'].'</td>';
 			$table .= '<td>'.$value['redraw'].'</td>';
@@ -456,7 +456,7 @@ class Subcounties_model extends MY_Model
 	    $f = fopen('php://memory', 'w');
 	    /** loop through array  */
 
-	    $b = array('MFL Code', 'Name', 'County', 'Subcounty', 'Tests', '1st DNA PCR', 'Confirmed PCR', '+', '-', 'Redraws', 'Adults Tests', 'Adults Tests Positives', 'Median Age', 'Rejected', 'Infants < 2m', 'Infants < 2m +');
+	    $b = array('MFL Code', 'Name', 'County', 'Subcounty', 'Tests', '1st DNA PCR', 'Repeat Confirmatory PCR', '+', '-', 'Redraws', 'Adults Tests', 'Adults Tests Positives', 'Median Age', 'Rejected', 'Infants < 2m', 'Infants < 2m +');
 
 	    fputcsv($f, $b, $delimiter);
 
@@ -468,7 +468,7 @@ class Subcounties_model extends MY_Model
 	    fseek($f, 0);
 	    /** modify header to be downloadable csv file **/
 	    header('Content-Type: application/csv');
-	    header('Content-Disposition: attachement; filename="partner_sites.csv";');
+	    header('Content-Disposition: attachement; filename="subcounty_sites.csv";');
 	    /** Send file to browser for download */
 	    fpassthru($f);	
 		

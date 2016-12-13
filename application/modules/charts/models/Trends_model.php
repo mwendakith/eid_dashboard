@@ -32,49 +32,56 @@ class Trends_model extends MY_Model
 
 		$data;
 
+		$cur_year = date('Y');
+
 		foreach ($result as $key => $value) {
 
-			if($b){
-				$b = false;
-				$year = (int) $value['year'];
+			if((int) $value['year'] > $cur_year || (int) $value['year'] < 2008){
+
 			}
+			else{
+				if($b){
+					$b = false;
+					$year = (int) $value['year'];
+				}
 
-			$y = (int) $value['year'];
-			if($value['year'] != $year){
-				$i++;
-				$year--;
+				$y = (int) $value['year'];
+				if($value['year'] != $year){
+					$i++;
+					$year--;
+				}
+
+				$month = (int) $value['month'];
+				$month--;
+
+
+				$data['test_trends'][$i]['name'] = $value['year'];
+				$data['test_trends'][$i]['data'][$month] = (int) $value['tests'];
+
+				$data['rejected_trends'][$i]['name'] = $value['year'];
+
+				if($value['tests'] == 0){
+					$data['rejected_trends'][$i]['data'][$month] = 0;
+				}else{
+					$data['rejected_trends'][$i]['data'][$month] = (int)
+					($value['rejected'] / $value['tests'] * 100);
+				}
+
+				$data['positivity_trends'][$i]['name'] = $value['year'];
+
+				if ($value['positive'] == 0){
+					$data['positivity_trends'][$i]['data'][$month] = 0;
+				}else{
+					$data['positivity_trends'][$i]['data'][$month] = (int) 
+					($value['positive'] / ($value['positive'] + $value['negative']) * 100 );
+				}
+
+				$data['infant_trends'][$i]['name'] = $value['year'];
+				$data['infant_trends'][$i]['data'][$month] = (int) $value['infants'];
+
+				$data['tat4_trends'][$i]['name'] = $value['year'];
+				$data['tat4_trends'][$i]['data'][$month] = (int) $value['tat4'];
 			}
-
-			$month = (int) $value['month'];
-			$month--;
-
-
-			$data['test_trends'][$i]['name'] = $value['year'];
-			$data['test_trends'][$i]['data'][$month] = (int) $value['tests'];
-
-			$data['rejected_trends'][$i]['name'] = $value['year'];
-
-			if($value['tests'] == 0){
-				$data['rejected_trends'][$i]['data'][$month] = 0;
-			}else{
-				$data['rejected_trends'][$i]['data'][$month] = (int)
-				($value['rejected'] / $value['tests'] * 100);
-			}
-
-			$data['positivity_trends'][$i]['name'] = $value['year'];
-
-			if ($value['positive'] == 0){
-				$data['positivity_trends'][$i]['data'][$month] = 0;
-			}else{
-				$data['positivity_trends'][$i]['data'][$month] = (int) 
-				($value['positive'] / ($value['positive'] + $value['negative']) * 100 );
-			}
-
-			$data['infant_trends'][$i]['name'] = $value['year'];
-			$data['infant_trends'][$i]['data'][$month] = (int) $value['infants'];
-
-			$data['tat4_trends'][$i]['name'] = $value['year'];
-			$data['tat4_trends'][$i]['data'][$month] = (int) $value['tat4'];
 
 		}
 		

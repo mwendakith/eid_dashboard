@@ -24,20 +24,12 @@ class PartnerTrends extends MY_Controller
 		$data['yAxis'] = "Number of Tests";
 		$this->load->view('lab_performance_view', $data);
 
-		$data['trends'] = $obj['positivity_trends'];
-		$data['title'] = "Positivity Trends";
-		$data['div'] = "#positivity";
-		$data['div_name'] = "positivity";
-		$data['suffix'] = "%";
-		$data['yAxis'] = "Number of Positives (%)";
-		$this->load->view('lab_performance_view', $data);
-
 		$data['trends'] = $obj['rejected_trends'];
-		$data['title'] = "Rejected Trends";
+		$data['title'] = "Rejection Rate Trends";
 		$data['div'] = "#rejects";
 		$data['div_name'] = "rejects";
 		$data['suffix'] = "%";
-		$data['yAxis'] = "Number of Rejects (%)";
+		$data['yAxis'] = "Rejection (%)";
 		$this->load->view('lab_performance_view', $data);
 
 		$data['trends'] = $obj['infant_trends'];
@@ -48,6 +40,13 @@ class PartnerTrends extends MY_Controller
 		$data['yAxis'] = "Number of Tests (Infants under 2m)";
 		$this->load->view('lab_performance_view', $data);
 
+		$data['trends'] = $obj['positivity_trends'];
+		$data['title'] = "Positivity Trends";
+		$data['div'] = "#positivity";
+		$data['div_name'] = "positivity";
+		$data['suffix'] = "%";
+		$data['yAxis'] = "Positivity (%)";
+		$this->load->view('lab_performance_wide_view', $data);
 		
 	}
 

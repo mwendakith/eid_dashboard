@@ -13,7 +13,7 @@
 			<th rowspan="2">County</th>
 			<th rowspan="2">Tests</th>
 			<th rowspan="2">1st DNA PCR</th>
-			<th rowspan="2">Confirmed PCR</th>
+			<th rowspan="2">Repeat Confirmatory PCR</th>
 			<th rowspan="2">+</th>
 			<th rowspan="2">-</th>
 			<th rowspan="2">Redraws</th>

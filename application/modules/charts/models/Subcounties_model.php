@@ -372,6 +372,7 @@ class Subcounties_model extends MY_Model
 			$table .= '<td>'.$value['MFLCode'].'</td>';
 			$table .= '<td>'.$value['name'].'</td>';
 			$table .= '<td>'.$value['county'].'</td>';
+			$table .= '<td>'.$value['subcounty'].'</td>';
 			$table .= '<td>'.$value['tests'].'</td>';
 			$table .= '<td>'.$value['firstdna'].'</td>';
 			$table .= '<td>'.$value['confirmdna'].'</td>';

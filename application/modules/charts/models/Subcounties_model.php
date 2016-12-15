@@ -344,8 +344,9 @@ class Subcounties_model extends MY_Model
 		return $data;
 	}
 
-	function subcounty_sites_outcomes($year=NULL,$month=NULL,$subcounty=NULL)
+	function subcounty_sites_outcomes($subcounty=NULL,$year=NULL,$month=NULL)
 	{
+		// echo "<pre>";print_r($subcounty."<__>".$year."<___>".$month);die();
 		$table = '';
 		$count = 1;
 		if ($subcounty==null || $subcounty=='null') {
@@ -393,7 +394,7 @@ class Subcounties_model extends MY_Model
 		return $table;
 	}
 
-	function subcounty_sites_outcomes_download($year=NULL,$month=NULL,$subcounty=NULL)
+	function subcounty_sites_outcomes_download($subcounty=NULL,$year=NULL,$month=NULL)
 	{
 		if ($year==null || $year=='null') {
 			$year = $this->session->userdata('filter_year');

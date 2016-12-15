@@ -54,7 +54,7 @@ class County extends MY_Controller
 		} else {
 			$subcounty = 0;
 		}
-		echo json_encode($subcounty);
+		echo $subcounty;
 	}
 }
 ?>

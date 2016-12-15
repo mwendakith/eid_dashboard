@@ -1,11 +1,20 @@
+<style type="text/css">
+	#excels {
+		padding-top: 0.5em;
+		padding-bottom: 2em;
+	}
+</style>
 <table id="example" cellspacing="1" cellpadding="3" class="tablehead table table-striped table-bordered" style="background:#CCC;">
 	<thead>
 		<tr class="colhead">
 			<th rowspan="2">#</th>
+			<th rowspan="2">MFL Code</th>
+			<th rowspan="2">Name</th>
 			<th rowspan="2">County</th>
+			<th rowspan="2">Sub-County</th>
 			<th rowspan="2">Tests</th>
 			<th rowspan="2">1st DNA PCR</th>
-			<th rowspan="2">Confirmed PCR</th>
+			<th rowspan="2">Repeat Confirmatory PCR</th>
 			<th rowspan="2">+</th>
 			<th rowspan="2">-</th>
 			<th rowspan="2">Redraws</th>
@@ -25,16 +34,20 @@
 	</tbody>
 </table>
 <div class="row" id="excels">
-	
-	<div class="col-md-12">
+	<div class="col-md-6">
+		
+	</div>
+	<div class="col-md-6">
 		<center id="download_link"></center>
 	</div>
 </div>
+<!-- <div id='download_link'></div> -->
 <script type="text/javascript" charset="utf-8">
   $(document).ready(function() {
   	
   	$('#download_link').html("<?php echo $link;?>");
   	$('#download_link > a').css("color","white");
+  	
   	$('#example').DataTable();
 
     $("table").tablecloth({
@@ -43,6 +56,8 @@
       sortable: true,
       condensed: true
     });
-   
+
+    //$('#download_link').empty().append("<?php echo $link;?>");
+    
   });
 </script>

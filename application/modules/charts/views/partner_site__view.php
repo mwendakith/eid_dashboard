@@ -34,10 +34,10 @@
 </table>
 <div class="row" id="excels">
 	<div class="col-md-6">
-		<center><button id="unsupported" class="btn btn-primary" style="background-color: #009688;color: white;"></button></center>
+		<center id="unsupported"></center>
 	</div>
 	<div class="col-md-6">
-		<center><button id="download_link" class="btn btn-primary" style="background-color: #009688;color: white;"></button></center>
+		<center id="download_link"></center>
 	</div>
 </div>
 <!-- <div id='download_link'></div> -->

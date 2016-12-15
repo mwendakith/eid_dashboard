@@ -33,7 +33,7 @@ class Trends extends MY_Controller
 		$this->load->view('lab_performance_view', $data);
 
 		$data['trends'] = $obj['tat4_trends'];
-		$data['title'] = "Collection - Dispatch";
+		$data['title'] = "Turn Around Time ( Collection - Dispatch )";
 		$data['div'] = "#tat";
 		$data['div_name'] = "tat";
 		$data['suffix'] = "";

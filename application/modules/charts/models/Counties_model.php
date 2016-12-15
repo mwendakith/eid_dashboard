@@ -136,7 +136,7 @@ class Counties_model extends MY_Model
 		return $data;
 	}
 
-	function county_sites_outcomes($year=null,$month=null,$county=null)
+	function county_subcounties_details($year=null,$month=null,$county=null)
 	{
 		$table = '';
 		$count = 1;
@@ -154,16 +154,13 @@ class Counties_model extends MY_Model
 			}
 		}
 
-		$sql = "CALL `proc_get_eid_county_sites_details`('".$county."','".$year."','".$month."')";
+		$sql = "CALL `proc_get_eid_county_subcounties_details`('".$county."','".$year."','".$month."')";
 		// echo "<pre>";print_r($sql);die();
 		$result = $this->db->query($sql)->result_array();
 		// echo "<pre>";print_r($sql);die();
 		foreach ($result as $key => $value) {
 			$table .= '<tr>';
 			$table .= '<td>'.$count.'</td>';
-			$table .= '<td>'.$value['MFLCode'].'</td>';
-			$table .= '<td>'.$value['name'].'</td>';
-			$table .= '<td>'.$value['county'].'</td>';
 			$table .= '<td>'.$value['subcounty'].'</td>';
 			$table .= '<td>'.$value['tests'].'</td>';
 			$table .= '<td>'.$value['firstdna'].'</td>';
@@ -185,7 +182,7 @@ class Counties_model extends MY_Model
 		return $table;
 	}
 
-	function download_county_sites_outcomes($year=null,$month=null,$county=null)
+	function download_county_subcounty_outcomes($year=null,$month=null,$county=null)
 	{
 		
 		if ($county==null || $county=='null') {
@@ -202,7 +199,7 @@ class Counties_model extends MY_Model
 			}
 		}
 
-		$sql = "CALL `proc_get_eid_county_sites_details`('".$county."','".$year."','".$month."')";
+		$sql = "CALL `proc_get_eid_county_subcounties_details`('".$county."','".$year."','".$month."')";
 		// echo "<pre>";print_r($sql);die();
 		$result = $this->db->query($sql)->result_array();
 
@@ -215,7 +212,7 @@ class Counties_model extends MY_Model
 	    $f = fopen('php://memory', 'w');
 	    /** loop through array  */
 
-	    $b = array('MFL Code', 'Name', 'County', 'Subcounty', 'Tests', '1st DNA PCR', 'Confirmed PCR', '+', '-', 'Redraws', 'Adults Tests', 'Adults Tests Positives', 'Median Age', 'Rejected', 'Infants < 2m', 'Infants < 2m +');
+	    $b = array('Subcounty', 'County', 'Tests', '1st DNA PCR', 'Confirmed PCR', '+', '-', 'Redraws', 'Adults Tests', 'Adults Tests Positives', 'Median Age', 'Rejected', 'Infants < 2m', 'Infants < 2m +');
 
 	    fputcsv($f, $b, $delimiter);
 
@@ -227,7 +224,7 @@ class Counties_model extends MY_Model
 	    fseek($f, 0);
 	    /** modify header to be downloadable csv file **/
 	    header('Content-Type: application/csv');
-	    header('Content-Disposition: attachement; filename="county_details.csv";');
+	    header('Content-Disposition: attachement; filename="county_subcounty_details.csv";');
 	    /** Send file to browser for download */
 	    fpassthru($f);
 		

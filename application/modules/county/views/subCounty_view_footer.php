@@ -1,5 +1,14 @@
 <script type="text/javascript">
 	$().ready(function(){
+		$.get("<?php echo base_url();?>template/dates", function(data){
+    		obj = $.parseJSON(data);
+	
+			if(obj['month'] == "null" || obj['month'] == null){
+				obj['month'] = "";
+			}
+			$(".display_date").html("( "+obj['year']+" "+obj['month']+" )");
+			$(".display_range").html("( "+obj['prev_year']+" - "+obj['year']+" )");
+    	});
 		$.get("<?php echo base_url();?>template/breadcrum/"+null+"/"+null+"/"+null+"/"+1, function(data){
 	        	$("#breadcrum").html(data);
 	       });
@@ -80,7 +89,7 @@
 			
 			$.get("<?php echo base_url();?>county/check_subcounty_select", function (data) {
 				subcounty = data;
-				console.log(subcounty);
+				// console.log(subcounty);
 				if (subcounty==0) {
 					$("#second").hide();
 					$("#first").show();
@@ -89,8 +98,8 @@
 					$("#county_outcomes").html("<center><div class='loader'></div></center>");
 					$("#county_outcomes").load("<?php echo base_url('charts/subcounties/subcounties_outcomes'); ?>/"+year+"/"+month);
 				} else {
-					subcounty = "<?php echo json_decode("+subcounty+")?>";
-
+					// subcounty = "<?php echo json_decode("+subcounty+")?>";
+					// console.log(subcounty);
 					$("#first").hide();
 					$("#second").show();
 					// Loader displaying

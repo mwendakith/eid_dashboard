@@ -132,7 +132,7 @@ class Partner_model extends MY_Model
 				$data['outcomes'][3]['data'][$i] = 0;
 			}
 			else{
-				$data['outcomes'][3]['data'][$i] round(( (int) $value['positive']*100)/$total,1);
+				$data['outcomes'][3]['data'][$i] = round(( (int) $value['positive']*100)/$total,1);
 			}
 			
 			$i++;

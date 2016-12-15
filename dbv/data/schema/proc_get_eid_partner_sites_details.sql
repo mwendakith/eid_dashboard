@@ -9,7 +9,7 @@ BEGIN
                   `countys`.`name` AS `county`, 
                   SUM(`tests`) AS `tests`, 
                   SUM(`firstdna`) AS `firstdna`, 
-                  SUM(`confirmdna`) AS `confirmdna`,
+                  SUM(`confirmdna` + `repeatspos`) AS `confirmdna`,
                   SUM(`pos`) AS `positive`, 
                   SUM(`neg`) AS `negative`, 
                   SUM(`redraw`) AS `redraw`, 

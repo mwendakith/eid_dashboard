@@ -46,14 +46,14 @@ class PartnerTrends extends MY_Controller
 		$data['div_name'] = "positivity";
 		$data['suffix'] = "%";
 		$data['yAxis'] = "Positivity (%)";
-		$this->load->view('lab_performance_wide_view', $data);
+		$this->load->view('lab_performance_view', $data);
 		
 	}
 
 	function summary($partner=NULL){
 		$data['trends'] = $this->partner_model->yearly_summary($partner);
 		// echo "<pre>";print_r($data);die();
-		$this->load->view('lab_outcomes_view', $data);
+		$this->load->view('trends_outcomes_view', $data);
 	}
 
 

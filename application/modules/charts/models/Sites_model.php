@@ -191,7 +191,7 @@ class Sites_model extends MY_Model
 		// echo "<pre>";print_r($sql);die();
 		$data = $this->db->query($sql)->result_array();
 
-		echo "<pre>";print_r($data);die();
+		// echo "<pre>";print_r($data);die();
 
 		// $this->load->helper('download');
   //       $this->load->library('PHPReport/PHPReport');

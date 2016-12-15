@@ -11,6 +11,7 @@
 			<th rowspan="2">MFL Code</th>
 			<th rowspan="2">Name</th>
 			<th rowspan="2">County</th>
+			<th rowspan="2">Sub-County</th>
 			<th rowspan="2">Tests</th>
 			<th rowspan="2">1st DNA PCR</th>
 			<th rowspan="2">Repeat Confirmatory PCR</th>
@@ -33,20 +34,16 @@
 	</tbody>
 </table>
 <div class="row" id="excels">
-	<div class="col-md-6">
-		<center id="unsupported"></center>
-	</div>
-	<div class="col-md-6">
-		<center id="download_link"></center>
+	<div class="col-md-12">
+		<center><a href="<?php  echo $link; ?>"><button id="download_link" class="btn btn-primary" style="background-color: #009688;color: white;">Export To Excel</button></a></center>
 	</div>
 </div>
 <!-- <div id='download_link'></div> -->
 <script type="text/javascript" charset="utf-8">
   $(document).ready(function() {
-  	$('#unsupported').html("<?php echo $link2; ?>")
-  	$('#download_link').html("<?php echo $link;?>");
-  	$('#download_link > a').css("color","white");
-  	$('#unsupported > a').css("color","white");
+  	
+  	
+  	
   	$('#example').DataTable();
 
     $("table").tablecloth({

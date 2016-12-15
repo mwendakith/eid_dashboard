@@ -28,6 +28,11 @@
 		<?php echo $stats;?>
 	</tbody>
 </table>
+<div class="row">
+	<div class="col-md-12">
+		<center><a href="<?php  echo $link; ?>"><button id="download_link" class="btn btn-primary" style="background-color: #009688;color: white;">Export To Excel</button></a></center>
+	</div>
+</div>
 <script type="text/javascript" charset="utf-8">
   $(document).ready(function() {
   	$('#example').DataTable();

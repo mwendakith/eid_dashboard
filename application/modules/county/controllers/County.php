@@ -24,6 +24,7 @@ class County extends MY_Controller
 
 	public function subCounty()
 	{
+		$this->load->module('charts/subcounties');
 		$this->data['sub_county'] = TRUE;
 		$this->clear_all_session_data();
 		$this->data['content_view'] = 'county/subCounty_view';
@@ -53,7 +54,7 @@ class County extends MY_Controller
 		} else {
 			$subcounty = 0;
 		}
-		echo json_encode($subcounty);
+		echo $subcounty;
 	}
 }
 ?>

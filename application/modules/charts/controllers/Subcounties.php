@@ -29,33 +29,32 @@ class Subcounties extends MY_Controller
 
 	function subcounties_hei($sub_county=NULL,$year=NULL,$month=NULL)
 	{
-		$data= $this->subcounties_model->get_hei($year,$month);
+		$data= $this->subcounties_model->get_hei($sub_county,$year,$month);
 
     	$this->load->view('sites_pie_chart_view',$data);
 	}
 
 	function subcounties_age($sub_county=NULL,$year=NULL,$month=NULL)
 	{
-		$data['outcomes'] = $this->subcounties_model->age($year,$month);
+		$data['outcomes'] = $this->subcounties_model->age($sub_county,$year,$month);
 
     	$this->load->view('agegroup_view',$data);
 	}
 
 	function subcounties_sites($sub_county=NULL,$year=NULL,$month=NULL)
 	{
-		$data['outcomes'] = $this->subcounties_model->subcounty_sites_outcomes($year,$month, $sub_county);
+		$data['outcomes'] = $this->subcounties_model->subcounty_sites_outcomes($sub_county,$year,$month);
 
 		$link = $sub_county . '/' . $year . '/' . $month;
 
+    	$data['link'] = base_url('charts/subcounties/download_subcounty_sites/' . $link);
 
-    	$data['link'] = "<a href='" . base_url('charts/subcounties/download_subcounty_sites/' . $link) . "'>Export to Excel</a>";
-
-    	$this->load->view('partner_site__view',$data);
+    	$this->load->view('subcounty_sites_view',$data);
 	}
 
 	function download_subcounty_sites($sub_county=NULL,$year=NULL,$month=NULL)
 	{
-		$this->subcounties_model->subcounty_sites_outcomes_download($year,$month,$sub_county);
+		$this->subcounties_model->subcounty_sites_outcomes_download($sub_county,$year,$month);
 	}
 }
 ?>

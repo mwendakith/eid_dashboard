@@ -27,7 +27,7 @@
 <div class="row" id="excels">
 	
 	<div class="col-md-12">
-		<center><button id="download_link" class="btn btn-primary" style="background-color: #009688;color: white;"></button></center>
+		<center id="download_link"></center>
 	</div>
 </div>
 <script type="text/javascript" charset="utf-8">

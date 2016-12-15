@@ -8,9 +8,6 @@
 	<thead>
 		<tr class="colhead">
 			<th rowspan="2">#</th>
-			<th rowspan="2">MFL Code</th>
-			<th rowspan="2">Name</th>
-			<th rowspan="2">County</th>
 			<th rowspan="2">Sub-County</th>
 			<th rowspan="2">Tests</th>
 			<th rowspan="2">1st DNA PCR</th>
@@ -36,16 +33,14 @@
 <div class="row" id="exc">
 	
 	<div class="col-md-12">
-		<center><button id="download_link_" class="btn btn-primary" style="background-color: #009688;color: white;"></button></center>
+		<center id="download_link_"></center>
 	</div>
 </div>
 <script type="text/javascript" charset="utf-8">
   $(document).ready(function() {
-
+  	
   	$('#download_link_').html("<?php echo $link;?>");
   	$('#download_link_ > a').css("color","white");
-
-  	$('#example').DataTable();
 
     $("table").tablecloth({
       theme: "paper",
@@ -53,7 +48,7 @@
       sortable: true,
       condensed: true
     });
-
+    $('#example').DataTable();
     
   });
 </script>

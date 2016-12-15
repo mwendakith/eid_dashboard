@@ -19,7 +19,7 @@ class Counties extends MY_Controller
 
 		$link = $year . '/' . $month;
 
-		$data['link'] = "<a href='" . base_url('charts/counties/download_counties_details/' . $link) . "'>Export to Excel</a>";
+		$data['link'] = "<a href='" . base_url('charts/counties/download_counties_details/' . $link) . "'><button class='btn btn-primary' style='background-color: #009688;color: white;'>Export to Excel</button></a>";
 
 		$this->load->view('counties_details_view', $data);
 	}
@@ -37,21 +37,21 @@ class Counties extends MY_Controller
     	$this->load->view('subcounty_outcomes_view',$data);
 	}
 
-	function county_sites_details($year=NULL,$month=NULL,$county=NULL)
+	function county_subcounties_details($year=NULL,$month=NULL,$county=NULL)
 	{
-		$data['outcomes'] = $this->counties_model->county_sites_outcomes($year,$month,$county);
+		$data['outcomes'] = $this->counties_model->county_subcounties_details($year,$month,$county);
 
 		$link = $year . '/' . $month . '/' . $county;
 
-		$data['link'] = "<a href='" . base_url('charts/counties/download_county_sites_outcomes/' . $link) . "'>Export to Excel</a>";
+		$data['link'] = "<a href='" . base_url('charts/counties/download_county_subcounties_outcomes/' . $link) . "'><button class='btn btn-primary' style='background-color: #009688;color: white;'>Export to Excel</button></a>";
 
 
-    	$this->load->view('county_sites__view',$data);
+    	$this->load->view('county_subcounty__view',$data);
 	}
 
-	function download_county_sites_outcomes($year=NULL,$month=NULL,$county=NULL)
+	function download_county_subcounties_outcomes($year=NULL,$month=NULL,$county=NULL)
 	{
-		$this->counties_model->download_county_sites_outcomes($year,$month,$county);
+		$this->counties_model->download_county_subcounty_outcomes($year,$month,$county);
 	}
 
 	function counties_tests($year = NULL, $month = NULL)

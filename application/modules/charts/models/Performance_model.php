@@ -29,7 +29,7 @@ class Performance_model extends MY_Model
 		$sql = "CALL `proc_get_eid_lab_performance_stats`('".$year."','".$month."');";
 
 		$result = $this->db->query($sql)->result_array();
-		echo "<pre>";print_r($sql);echo "</pre>";die();
+		// echo "<pre>";print_r($sql);echo "</pre>";die();
 		$ul = '';
 		foreach ($result as $key => $value) {
 			$ul .= "<tr>

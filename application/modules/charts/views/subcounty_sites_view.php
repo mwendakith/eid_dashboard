@@ -34,19 +34,15 @@
 	</tbody>
 </table>
 <div class="row" id="excels">
-	<div class="col-md-6">
-		
-	</div>
-	<div class="col-md-6">
-		<center id="download_link"></center>
+	<div class="col-md-12">
+		<center><a href="<?php  echo $link; ?>"><button id="download_link" class="btn btn-primary" style="background-color: #009688;color: white;">Export To Excel</button></a></center>
 	</div>
 </div>
 <!-- <div id='download_link'></div> -->
 <script type="text/javascript" charset="utf-8">
   $(document).ready(function() {
   	
-  	$('#download_link').html("<?php echo $link;?>");
-  	$('#download_link > a').css("color","white");
+  	
   	
   	$('#example').DataTable();
 

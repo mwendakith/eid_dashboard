@@ -39,9 +39,7 @@
           <div class="panel-body" id="unsupportedSites">
             <center><div class="loader"></div></center>
           </div>
-          <div class="col-md-12" style="margin-top: 1em;margin-bottom: 1em;">
-            <center><button id="partner_sites_excels" class="btn btn-primary" style="background-color: #009688;"><a href="<?php echo base_url('charts/sites/download_unsupported_sites');?>"  style="color: white;">Export to Excel</a></button></center>
-          </div>
+          
       </div>
     </div>
   </div>

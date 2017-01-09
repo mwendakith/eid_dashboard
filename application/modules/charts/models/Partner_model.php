@@ -29,48 +29,57 @@ class Partner_model extends MY_Model
 
 		$data;
 
+		$cur_year = date('Y');
+
 		foreach ($result as $key => $value) {
-			if($b){
-				$b = false;
-				$year = (int) $value['year'];
+			if((int) $value['year'] > $cur_year || (int) $value['year'] < 2008){
+
+			}
+			else{
+
+				if($b){
+					$b = false;
+					$year = (int) $value['year'];
+				}
+
+
+				$y = (int) $value['year'];
+				if($value['year'] != $year){
+					$i++;
+					$year--;
+				}
+
+				$month = (int) $value['month'];
+				$month--;
+
+
+				$data['test_trends'][$i]['name'] = $value['year'];
+				$data['test_trends'][$i]['data'][$month] = (int) $value['tests'];
+
+				$data['rejected_trends'][$i]['name'] = $value['year'];
+
+				if($value['tests'] == 0){
+					$data['rejected_trends'][$i]['data'][$month] = 0;
+				}else{
+					$data['rejected_trends'][$i]['data'][$month] = (int)
+					($value['rej'] / $value['tests'] * 100);
+				}
+
+				$data['positivity_trends'][$i]['name'] = $value['year'];
+
+				if ($value['pos'] == 0){
+					$data['positivity_trends'][$i]['data'][$month] = 0;
+				}else{
+					$data['positivity_trends'][$i]['data'][$month] = (int) 
+					($value['pos'] / ($value['pos'] + $value['neg']) * 100 );
+				}
+
+				$data['infant_trends'][$i]['name'] = $value['year'];
+				$data['infant_trends'][$i]['data'][$month] = (int) $value['infants'];
+				
 			}
 
-
-			$y = (int) $value['year'];
-			if($value['year'] != $year){
-				$i++;
-				$year--;
-			}
-
-			$month = (int) $value['month'];
-			$month--;
-
-
-			$data['test_trends'][$i]['name'] = $value['year'];
-			$data['test_trends'][$i]['data'][$month] = (int) $value['tests'];
-
-			$data['rejected_trends'][$i]['name'] = $value['year'];
-
-			if($value['tests'] == 0){
-				$data['rejected_trends'][$i]['data'][$month] = 0;
-			}else{
-				$data['rejected_trends'][$i]['data'][$month] = (int)
-				($value['rej'] / $value['tests'] * 100);
-			}
-
-			$data['positivity_trends'][$i]['name'] = $value['year'];
-
-			if ($value['pos'] == 0){
-				$data['positivity_trends'][$i]['data'][$month] = 0;
-			}else{
-				$data['positivity_trends'][$i]['data'][$month] = (int) 
-				($value['pos'] / ($value['pos'] + $value['neg']) * 100 );
-			}
-
-			$data['infant_trends'][$i]['name'] = $value['year'];
-			$data['infant_trends'][$i]['data'][$month] = (int) $value['infants'];
-			
-		}
+	}
 		
 
 		return $data;
@@ -113,10 +122,19 @@ class Partner_model extends MY_Model
 		foreach ($result as $key => $value) {
 			$data['categories'][$i] = $value['year'];
 
+			$total = (int) $value['negative']+(int) $value['positive']+(int) $value['redraws'];
+
 			$data['outcomes'][0]['data'][$i] = (int) $value['redraws'];
 			$data['outcomes'][1]['data'][$i] = (int) $value['positive'];
 			$data['outcomes'][2]['data'][$i] = (int) $value['negative'];
-			$data['outcomes'][3]['data'][$i] = round(((int) $value['positive']*100)/((int) $value['negative']+(int) $value['positive']+(int) $value['redraws']),1);
+
+			if($total == 0){
+				$data['outcomes'][3]['data'][$i] = 0;
+			}
+			else{
+				$data['outcomes'][3]['data'][$i] = round(( (int) $value['positive']*100)/$total,1);
+			}
+			
 			$i++;
 		}
 		$data['outcomes'][0]['tooltip'] = array("valueSuffix" => ' ');

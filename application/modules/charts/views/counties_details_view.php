@@ -5,7 +5,7 @@
 			<th rowspan="2">County</th>
 			<th rowspan="2">Tests</th>
 			<th rowspan="2">1st DNA PCR</th>
-			<th rowspan="2">Confirmed PCR</th>
+			<th rowspan="2">Repeat Confirmatory PCR</th>
 			<th rowspan="2">+</th>
 			<th rowspan="2">-</th>
 			<th rowspan="2">Redraws</th>
@@ -27,14 +27,12 @@
 <div class="row" id="excels">
 	
 	<div class="col-md-12">
-		<center id="download_link"></center>
+		<center><a href="<?php  echo $link; ?>"><button id="download_link" class="btn btn-primary" style="background-color: #009688;color: white;">Export To Excel</button></a></center>
 	</div>
 </div>
 <script type="text/javascript" charset="utf-8">
   $(document).ready(function() {
   	
-  	$('#download_link').html("<?php echo $link;?>");
-  	$('#download_link > a').css("color","white");
   	$('#example').DataTable();
 
     $("table").tablecloth({

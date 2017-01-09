@@ -19,7 +19,7 @@ class Counties extends MY_Controller
 
 		$link = $year . '/' . $month;
 
-		$data['link'] = "<a href='" . base_url('charts/counties/download_counties_details/' . $link) . "'><button class='btn btn-primary' style='background-color: #009688;color: white;'>Export to Excel</button></a>";
+		$data['link'] = base_url('charts/counties/download_counties_details/' . $link);
 
 		$this->load->view('counties_details_view', $data);
 	}
@@ -32,7 +32,6 @@ class Counties extends MY_Controller
 	{
 		$data['outcomes'] = $this->counties_model->sub_county_outcomes($year,$month,$county);
 
-		
 
     	$this->load->view('subcounty_outcomes_view',$data);
 	}
@@ -43,7 +42,7 @@ class Counties extends MY_Controller
 
 		$link = $year . '/' . $month . '/' . $county;
 
-		$data['link'] = "<a href='" . base_url('charts/counties/download_county_subcounties_outcomes/' . $link) . "'><button class='btn btn-primary' style='background-color: #009688;color: white;'>Export to Excel</button></a>";
+		$data['link'] = base_url('charts/counties/download_county_subcounties_outcomes/' . $link);
 
 
     	$this->load->view('county_subcounty__view',$data);

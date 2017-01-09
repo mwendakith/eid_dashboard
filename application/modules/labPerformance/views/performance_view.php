@@ -59,12 +59,12 @@
       month = null;
     }
 
-    var posting = $.post( '<?php echo base_url();?>summary/set_filter_date', { 'year': year, 'month': month } );
+    var posting = $.post( '<?php echo base_url();?>template/filter_date_data', { 'year': year, 'month': month } );
 
     // Put the results in a div
     posting.done(function( data ) {
       obj = $.parseJSON(data);
-      
+      console.log(obj);
       if(obj['month'] == "null" || obj['month'] == null){
         obj['month'] = "";
       }
@@ -77,7 +77,6 @@
     $("#lineargauge").html("<div>Loading...</div>");
 
     if (criteria === "monthly") {
-      
       $("#stacked_graph").load("<?php echo base_url();?>charts/LabPerformance/lab_outcomes/"+year+"/"+month);
       $("#lineargauge").load("<?php echo base_url();?>charts/LabPerformance/lab_turnaround/"+year+"/"+month);
       $("#lab_perfomance_stats").load("<?php echo base_url();?>charts/LabPerformance/lab_performance_stats/"+year+"/"+month);

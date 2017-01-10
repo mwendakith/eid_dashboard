@@ -79,7 +79,7 @@
 </div>
 <div class="row">
 	<!-- Map of the country -->
-	<div class="col-md-5 col-sm-3 col-xs-12">
+	<div class="col-md-6 col-sm-3 col-xs-12">
 		<div class="panel panel-default">
 		  <div class="panel-heading">
 		  	EID Outcomes <div class="display_date" ></div>
@@ -106,7 +106,7 @@
 		</div>
 	</div>
 
-	<div class="col-md-4">
+	<div class="col-md-3">
 		<div class="panel panel-default">
 		  <div class="panel-heading">
 		    Age <div class="display_date"></div>

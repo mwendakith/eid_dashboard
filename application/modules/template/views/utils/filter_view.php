@@ -1,3 +1,8 @@
+<style type="text/css">
+  .ui-datepicker-calendar {
+display: none;
+}
+</style>
 <div class="row" id="filter">
   <div class="col-md-3">
     <form action="<?php echo base_url();?>template/filter_county_data" method="post" id="filter_form">

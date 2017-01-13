@@ -61,10 +61,10 @@
             },
             legend: {
                 layout: 'vertical',
-                align: 'left',
-                x: 120,
+                align: 'right',
+                x: -120,
                 verticalAlign: 'top',
-                y: 80,
+                y: 40,
                 floating: true,
                 backgroundColor: '#FFFFFF'
             },

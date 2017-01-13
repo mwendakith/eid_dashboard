@@ -162,17 +162,15 @@ class Summaries_model extends MY_Model
 
 		$data['eid_outcomes']['data'][0]['name'] = 'No Data';
 		$data['eid_outcomes']['data'][0]['y'] = $count;
-
+		// <td>Cumulative Tests (All Samples Run):</td>
+		//     		<td>'.number_format((int) $value['alltests']).'</td>
+		//     		<td></td>
+		//     		<td></td>
+		//     	</tr>
+		//<tr>
 		foreach ($result as $key => $value) {
 			$data['ul'] .= '<tr>
-		    		<td>Cumulative Tests (All Samples Run):</td>
-		    		<td>'.number_format((int) $value['alltests']).'</td>
-		    		<td></td>
-		    		<td></td>
-		    	</tr>
-
-		    	<tr>
-		    		<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Actual Tests With Valid Results:</td>
+		    	<td>Actual Tests With Valid Results:</td>
 		    		<td>'.number_format((int) $value['tests']).'</td>
 		    		<td>Positive Outcomes:</td>
 		    		<td>'.number_format((int) $value['pos']).'('.round((((int) $value['pos']/(int) $value['tests'])*100),1).'%)</td>
@@ -188,8 +186,8 @@ class Summaries_model extends MY_Model
 		    	<tr>
 		    		<td>Repeat +ve Confirmatory Tests:</td>
 		    		<td>'. number_format((int) $value['confirmdna'] + (int) $value['repeatspos']) .'</td>
-		    		<td></td>
-		    		<td></td>
+		    		<td>Repeat +ve Confirmatory Tests POS</td>
+		    		<td>'. number_format((int) $value['confirmpos']) .'('. round(((int) $value['confirmpos'])/((int) $value['confirmdna'] + (int) $value['repeatspos'])*100,1) .'%)</td>
 		    	</tr>
 
 		    	<tr>

@@ -1,8 +1,13 @@
+<style type="text/css">
+  .ui-datepicker-calendar {
+display: none;
+}
+</style>
 <div class="row" id="filter">
-  <div class="col-md-4">
+  <div class="col-md-3">
     <form action="<?php echo base_url();?>template/filter_county_data" method="post" id="filter_form">
       <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-12">
           <select class="btn btn-primary js-example-basic-single" style="background-color: #C5EFF7;" name="county">
             <option value="0" disabled="true" selected="true">Select County:</option>
             <option value="48">National</option>
@@ -20,7 +25,7 @@
       
     </div>
   </div>
-  <div class="col-md-5" id="year-month-filter">
+  <div class="col-md-4" id="year-month-filter">
     <div class="filter">
       Year: 
       <a href="javascript:void(0)" onclick="date_filter('yearly', 2010 )" class="alert-link"> 2010 </a>|
@@ -49,8 +54,27 @@
       <a href='javascript:void(0)' onclick='date_filter("monthly", 12)' class='alert-link'> Dec</a>
     </div>
   </div>
+  <div class="col-md-3">
+    <label for="startDate">From :</label>
+    <input name="startDate" id="startDate" class="date-picker" />
+    <label for="startDate">To :</label>
+    <input name="endDate" id="endDate" class="date-picker" />
+  </div>
 </div>
 <script type="text/javascript">
+  $(function() {
+    $('.date-picker').datepicker( {
+        changeMonth: true,
+        changeYear: true,
+        showButtonPanel: true,
+        dateFormat: 'MM yy',
+        onClose: function(dateText, inst) { 
+            var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
+            var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
+            $(this).datepicker('setDate', new Date(year, month, 1));
+        }
+    });
+  });
   $().ready(function(){
     $(".js-example-basic-single").select2();
     //Getting the URL dynamically

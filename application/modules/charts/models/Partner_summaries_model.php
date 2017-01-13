@@ -89,14 +89,8 @@ class Partner_summaries_model extends MY_Model
 
 		foreach ($result as $key => $value) {
 			$data['ul'] .= '<tr>
-		    		<td>Cumulative Tests (All Samples Run):</td>
-		    		<td>'.(int) $value['alltests'].'</td>
-		    		<td></td>
-		    		<td></td>
-		    	</tr>
-
 		    	<tr>
-		    		<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Actual Tests With Valid Results:</td>
+		    		<td>Actual Tests With Valid Results:</td>
 		    		<td>'.(int) $value['tests'].'</td>
 		    		<td>Positive Outcomes:</td>
 		    		<td>'.(int) $value['pos'].'('.round((((int) $value['pos']/(int) $value['tests'])*100),1).'%)</td>
@@ -112,8 +106,8 @@ class Partner_summaries_model extends MY_Model
 		    	<tr>
 		    		<td>Repeat +ve Confirmatory Tests:</td>
 		    		<td>'. ((int) $value['confirmdna'] + (int) $value['repeatspos']) .'</td>
-		    		<td></td>
-		    		<td></td>
+		    		<td>Repeat +ve Confirmatory Tests POS</td>
+		    		<td>'. number_format((int) $value['confirmpos']) .'('. round(((int) $value['confirmpos'])/((int) $value['confirmdna'] + (int) $value['repeatspos'])*100,1) .'%)</td>
 		    	</tr>
 
 		    	<tr>

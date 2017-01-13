@@ -11,6 +11,7 @@ BEGIN
         SUM(`eqatests`) AS `eqatests`,
         SUM(`firstdna`) AS `firstdna`,
         SUM(`confirmdna`) AS `confirmdna`,
+        SUM(`confirmPOS`) AS `confirmpos`,
         SUM(`repeatspos`) AS `repeatspos`,
         SUM(`actualinfants`) AS `actualinfants`,
         SUM(`actualinfantsPOS`) AS `actualinfantspos`,

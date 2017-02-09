@@ -1,7 +1,7 @@
 DROP PROCEDURE IF EXISTS `proc_get_eid_national_eid_outcomes`;
 DELIMITER //
 CREATE PROCEDURE `proc_get_eid_national_eid_outcomes`
-(IN filter_year INT(11), IN filter_month INT(11))
+(IN filter_year INT(11), IN from_month INT(11), IN to_month INT(11))
 BEGIN
   SET @QUERY =    "SELECT
         SUM(`pos`) AS `pos`,
@@ -11,7 +11,7 @@ BEGIN
         SUM(`eqatests`) AS `eqatests`,
         SUM(`firstdna`) AS `firstdna`,
         SUM(`confirmdna`) AS `confirmdna`,
-        SUM(`confirmPOS`) AS `confirmpos`,
+        SUM(`confirmedPOS`) AS `confirmpos`,
         SUM(`repeatspos`) AS `repeatspos`,
         SUM(`actualinfants`) AS `actualinfants`,
         SUM(`actualinfantsPOS`) AS `actualinfantspos`,
@@ -26,13 +26,18 @@ BEGIN
     FROM `national_summary`
     WHERE 1";
 
-    IF (filter_month != 0 && filter_month != '') THEN
-       SET @QUERY = CONCAT(@QUERY, " AND `year` = '",filter_year,"' AND `month`='",filter_month,"' ");
+    IF (from_month != 0 && from_month != '') THEN
+        IF (to_month != 0 && to_month != '') THEN
+            SET @QUERY = CONCAT(@QUERY, " AND `year` = '",filter_year,"' AND `month` BETWEEN '",from_month,"' AND '",to_month,"' ");
+        ELSE
+            SET @QUERY = CONCAT(@QUERY, " AND `year` = '",filter_year,"' AND `month`='",from_month,"' ");
+        END IF;
     ELSE
         SET @QUERY = CONCAT(@QUERY, " AND `year` = '",filter_year,"' ");
     END IF;
 
-     PREPARE stmt FROM @QUERY;
-     EXECUTE stmt;
+    PREPARE stmt FROM @QUERY;
+    EXECUTE stmt;
+     
 END //
 DELIMITER ;

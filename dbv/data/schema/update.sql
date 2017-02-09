@@ -1,35 +1,4 @@
-DROP PROCEDURE IF EXISTS `proc_get_county_age`;
-DROP PROCEDURE IF EXISTS `proc_get_eid_county_age`;
-DELIMITER //
-CREATE PROCEDURE `proc_get_eid_county_age`
-(IN C_id INT(11), IN filter_year INT(11), IN filter_month INT(11))
-BEGIN
-  SET @QUERY =    "SELECT  
-            SUM(`sixweekspos`) AS `sixweekspos`, 
-            SUM(`sixweeksneg`) AS `sixweeksneg`, 
-            SUM(`sevento3mpos`) AS `sevento3mpos`, 
-            SUM(`sevento3mneg`) AS `sevento3mneg`,
-            SUM(`threemto9mpos`) AS `threemto9mpos`, 
-            SUM(`threemto9mneg`) AS `threemto9mneg`,
-            SUM(`ninemto18mpos`) AS `ninemto18mpos`, 
-            SUM(`ninemto18mneg`) AS `ninemto18mneg`,
-            SUM(`above18mpos`) AS `above18mpos`, 
-            SUM(`above18mneg`) AS `above18mneg`,
-            SUM(`nodatapos`) AS `nodatapos`, 
-            SUM(`nodataneg`) AS `nodataneg`
-          FROM `county_agebreakdown` WHERE 1";
-  
-    IF (filter_month != 0 && filter_month != '') THEN
-       SET @QUERY = CONCAT(@QUERY, " AND `county` = '",C_id,"' AND `year` = '",filter_year,"' AND `month` = '",filter_month,"' ");
-    ELSE
-        SET @QUERY = CONCAT(@QUERY, " AND `county` = '",C_id,"' AND `year` = '",filter_year,"' ");
-    END IF;
-    SET @QUERY = CONCAT(@QUERY, " ORDER BY `month` ASC ");
-    
-    PREPARE stmt FROM @QUERY;
-    EXECUTE stmt;
-END //
-DELIMITER ;
+
 DROP PROCEDURE IF EXISTS `proc_get_county_eid_outcomes`;
 DROP PROCEDURE IF EXISTS `proc_get_eid_county_eid_outcomes`;
 DELIMITER //
@@ -63,33 +32,7 @@ BEGIN
 END //
 DELIMITER ;
 
-DROP PROCEDURE IF EXISTS `proc_get_county_entry_points`;
-DROP PROCEDURE IF EXISTS `proc_get_eid_county_entry_points`;
-DELIMITER //
-CREATE PROCEDURE `proc_get_eid_county_entry_points`
-(IN C_id INT(11), IN filter_year INT(11), IN filter_month INT(11))
-BEGIN
-  SET @QUERY =    "SELECT 
-                        `ep`.`name`, 
-                        SUM(`pos`) AS `positive`, 
-                        SUM(`neg`) AS `negative`  
-                    FROM `county_entrypoint` `nep` 
-                    JOIN `entry_points` `ep` 
-                    ON `nep`.`entrypoint` = `ep`.`ID`
-                WHERE 1";
 
-    IF (filter_month != 0 && filter_month != '') THEN
-       SET @QUERY = CONCAT(@QUERY, " AND `county` = '",C_id,"' AND `nep`.`year` = '",filter_year,"' AND `nep`.`month`='",filter_month,"' ");
-    ELSE
-        SET @QUERY = CONCAT(@QUERY, " AND `county` = '",C_id,"' AND `nep`.`year` = '",filter_year,"' ");
-    END IF;
-
-    SET @QUERY = CONCAT(@QUERY, " GROUP BY `ep`.`ID` ORDER BY `negative` DESC ");
-
-     PREPARE stmt FROM @QUERY;
-     EXECUTE stmt;
-END //
-DELIMITER ;
 
 DROP PROCEDURE IF EXISTS `proc_get_county_hei`;
 DROP PROCEDURE IF EXISTS `proc_get_eid_county_hei`;
@@ -118,32 +61,7 @@ BEGIN
 END //
 DELIMITER ;
 
-DROP PROCEDURE IF EXISTS `proc_get_county_iprophylaxis`;
-DROP PROCEDURE IF EXISTS `proc_get_eid_county_iprophylaxis`;
-DELIMITER //
-CREATE PROCEDURE `proc_get_eid_county_iprophylaxis`
-(IN C_id INT(11), IN filter_year INT(11), IN filter_month INT(11))
-BEGIN
-  SET @QUERY =    "SELECT 
-                        `p`.`name`, 
-                        SUM(`pos`) AS `positive`, 
-                        SUM(`neg`) AS `negative` 
-                    FROM `county_iprophylaxis` `nip` 
-                    JOIN `prophylaxis` `p` ON `nip`.`prophylaxis` = `p`.`ID`
-                WHERE 1";
 
-    IF (filter_month != 0 && filter_month != '') THEN
-       SET @QUERY = CONCAT(@QUERY, " AND `county` = '",C_id,"' AND `nip`.`year` = '",filter_year,"' AND `nip`.`month`='",filter_month,"' ");
-    ELSE
-        SET @QUERY = CONCAT(@QUERY, " AND `county` = '",C_id,"' AND `nip`.`year` = '",filter_year,"' ");
-    END IF;
-
-    SET @QUERY = CONCAT(@QUERY, " GROUP BY `p`.`ID` ORDER BY `negative` DESC ");
-
-     PREPARE stmt FROM @QUERY;
-     EXECUTE stmt;
-END //
-DELIMITER ;
 
 
 DROP PROCEDURE IF EXISTS `proc_get_county_iprophylaxis`;
@@ -173,32 +91,6 @@ BEGIN
 END //
 DELIMITER ;
 
-DROP PROCEDURE IF EXISTS `proc_get_county_mprophylaxis`;
-DROP PROCEDURE IF EXISTS `proc_get_eid_county_mprophylaxis`;
-DELIMITER //
-CREATE PROCEDURE `proc_get_eid_county_mprophylaxis`
-(IN C_id INT(11), IN filter_year INT(11), IN filter_month INT(11))
-BEGIN
-  SET @QUERY =    "SELECT 
-                        `p`.`name`, 
-                        SUM(`pos`) AS `positive`, 
-                        SUM(`neg`) AS `negative` 
-                    FROM `county_mprophylaxis` `nmp` 
-                    JOIN `prophylaxis` `p` ON `nmp`.`prophylaxis` = `p`.`ID`
-                WHERE 1";
-
-    IF (filter_month != 0 && filter_month != '') THEN
-       SET @QUERY = CONCAT(@QUERY, " AND `county` = '",C_id,"' AND `nmp`.`year` = '",filter_year,"' AND `nmp`.`month`='",filter_month,"' ");
-    ELSE
-        SET @QUERY = CONCAT(@QUERY, " AND `county` = '",C_id,"' AND `nmp`.`year` = '",filter_year,"' ");
-    END IF;
-
-    SET @QUERY = CONCAT(@QUERY, " GROUP BY `p`.`ID` ORDER BY `negative` DESC ");
-
-     PREPARE stmt FROM @QUERY;
-     EXECUTE stmt;
-END //
-DELIMITER ;
 
 DROP PROCEDURE IF EXISTS `proc_get_county_testing_trends`;
 DROP PROCEDURE IF EXISTS `proc_get_eid_county_testing_trends`;
@@ -240,32 +132,7 @@ BEGIN
 END //
 DELIMITER ;
 
-DROP PROCEDURE IF EXISTS `proc_get_eid_county_outcomes`;
-DELIMITER //
-CREATE PROCEDURE `proc_get_eid_county_outcomes`
-(IN filter_year INT(11), IN filter_month INT(11))
-BEGIN
-  SET @QUERY =    "SELECT
-                    `c`.`name`,
-                    `cs`.`county`,
-                    SUM(`cs`.`pos`) AS `positive`,
-                    SUM(`cs`.`neg`) AS `negative` 
-                FROM `county_summary` `cs`
-                    JOIN `countys` `c` ON `cs`.`county` = `c`.`ID`
-    WHERE 1";
 
-    IF (filter_month != 0 && filter_month != '') THEN
-       SET @QUERY = CONCAT(@QUERY, " AND `cs`.`year` = '",filter_year,"' AND `cs`.`month`='",filter_month,"' ");
-    ELSE
-        SET @QUERY = CONCAT(@QUERY, " AND `cs`.`year` = '",filter_year,"' ");
-    END IF;
-
-    SET @QUERY = CONCAT(@QUERY, " GROUP BY `cs`.`county` ORDER BY `negative` DESC ");
-
-     PREPARE stmt FROM @QUERY;
-     EXECUTE stmt;
-END //
-DELIMITER ;
 
 DROP PROCEDURE IF EXISTS `proc_get_eid_national_infantsless2m`;
 DELIMITER //
@@ -438,39 +305,6 @@ BEGIN
 END //
 DELIMITER ;
 
-DROP PROCEDURE IF EXISTS `proc_get_national_age`;
-DROP PROCEDURE IF EXISTS `proc_get_eid_national_age`;
-DELIMITER //
-CREATE PROCEDURE `proc_get_eid_national_age`
-(IN filter_year INT(11), IN filter_month INT(11))
-BEGIN
-  SET @QUERY =    "SELECT  
-            SUM(`sixweekspos`) AS `sixweekspos`, 
-            SUM(`sixweeksneg`) AS `sixweeksneg`, 
-            SUM(`sevento3mpos`) AS `sevento3mpos`, 
-            SUM(`sevento3mneg`) AS `sevento3mneg`,
-            SUM(`threemto9mpos`) AS `threemto9mpos`, 
-            SUM(`threemto9mneg`) AS `threemto9mneg`,
-            SUM(`ninemto18mpos`) AS `ninemto18mpos`, 
-            SUM(`ninemto18mneg`) AS `ninemto18mneg`,
-            SUM(`above18mpos`) AS `above18mpos`, 
-            SUM(`above18mneg`) AS `above18mneg`,
-            SUM(`nodatapos`) AS `nodatapos`, 
-            SUM(`nodataneg`) AS `nodataneg`
-          FROM `national_agebreakdown` WHERE 1";
-  
-    IF (filter_month != 0 && filter_month != '') THEN
-       SET @QUERY = CONCAT(@QUERY, " AND `year` = '",filter_year,"' AND `month` = '",filter_month,"' ");
-    ELSE
-        SET @QUERY = CONCAT(@QUERY, " AND `year` = '",filter_year,"' ");
-    END IF;
-    SET @QUERY = CONCAT(@QUERY, " ORDER BY `month` ASC ");
-    
-    PREPARE stmt FROM @QUERY;
-    EXECUTE stmt;
-END //
-DELIMITER ;
-
 DROP PROCEDURE IF EXISTS `proc_get_national_eid_outcomes`;
 DROP PROCEDURE IF EXISTS `proc_get_eid_national_eid_outcomes`;
 DELIMITER //
@@ -504,33 +338,6 @@ BEGIN
 END //
 DELIMITER ;
 
-DROP PROCEDURE IF EXISTS `proc_get_national_entry_points`;
-DROP PROCEDURE IF EXISTS `proc_get_eid_national_entry_points`;
-DELIMITER //
-CREATE PROCEDURE `proc_get_eid_national_entry_points`
-(IN filter_year INT(11), IN filter_month INT(11))
-BEGIN
-  SET @QUERY =    "SELECT 
-                        `ep`.`name`, 
-                        SUM(`pos`) AS `positive`, 
-                        SUM(`neg`) AS `negative`  
-                    FROM `national_entrypoint` `nep` 
-                    JOIN `entry_points` `ep` 
-                    ON `nep`.`entrypoint` = `ep`.`ID`
-                WHERE 1";
-
-    IF (filter_month != 0 && filter_month != '') THEN
-       SET @QUERY = CONCAT(@QUERY, " AND `nep`.`year` = '",filter_year,"' AND `nep`.`month`='",filter_month,"' ");
-    ELSE
-        SET @QUERY = CONCAT(@QUERY, " AND `nep`.`year` = '",filter_year,"' ");
-    END IF;
-
-    SET @QUERY = CONCAT(@QUERY, " GROUP BY `ep`.`ID` ORDER BY `negative` DESC ");
-
-     PREPARE stmt FROM @QUERY;
-     EXECUTE stmt;
-END //
-DELIMITER ;
 
 DROP PROCEDURE IF EXISTS `proc_get_national_hei`;
 DROP PROCEDURE IF EXISTS `proc_get_eid_national_hei`;
@@ -559,59 +366,8 @@ BEGIN
 END //
 DELIMITER ;
 
-DROP PROCEDURE IF EXISTS `proc_get_national_iprophylaxis`;
-DROP PROCEDURE IF EXISTS `proc_get_eid_national_iprophylaxis`;
-DELIMITER //
-CREATE PROCEDURE `proc_get_eid_national_iprophylaxis`
-(IN filter_year INT(11), IN filter_month INT(11))
-BEGIN
-  SET @QUERY =    "SELECT 
-                        `p`.`name`, 
-                        SUM(`pos`) AS `positive`, 
-                        SUM(`neg`) AS `negative` 
-                    FROM `national_iprophylaxis` `nip` 
-                    JOIN `prophylaxis` `p` ON `nip`.`prophylaxis` = `p`.`ID`
-                WHERE 1";
 
-    IF (filter_month != 0 && filter_month != '') THEN
-       SET @QUERY = CONCAT(@QUERY, " AND `nip`.`year` = '",filter_year,"' AND `nip`.`month`='",filter_month,"' ");
-    ELSE
-        SET @QUERY = CONCAT(@QUERY, " AND `nip`.`year` = '",filter_year,"' ");
-    END IF;
 
-    SET @QUERY = CONCAT(@QUERY, " GROUP BY `p`.`ID` ORDER BY `negative` DESC ");
-
-     PREPARE stmt FROM @QUERY;
-     EXECUTE stmt;
-END //
-DELIMITER ;
-
-DROP PROCEDURE IF EXISTS `proc_get_national_mprophylaxis`;
-DROP PROCEDURE IF EXISTS `proc_get_eid_national_mprophylaxis`;
-DELIMITER //
-CREATE PROCEDURE `proc_get_eid_national_mprophylaxis`
-(IN filter_year INT(11), IN filter_month INT(11))
-BEGIN
-  SET @QUERY =    "SELECT 
-                        `p`.`name`, 
-                        SUM(`pos`) AS `positive`, 
-                        SUM(`neg`) AS `negative` 
-                    FROM `national_mprophylaxis` `nmp` 
-                    JOIN `prophylaxis` `p` ON `nmp`.`prophylaxis` = `p`.`ID`
-                WHERE 1";
-
-    IF (filter_month != 0 && filter_month != '') THEN
-       SET @QUERY = CONCAT(@QUERY, " AND `nmp`.`year` = '",filter_year,"' AND `nmp`.`month`='",filter_month,"' ");
-    ELSE
-        SET @QUERY = CONCAT(@QUERY, " AND `nmp`.`year` = '",filter_year,"' ");
-    END IF;
-
-    SET @QUERY = CONCAT(@QUERY, " GROUP BY `p`.`ID` ORDER BY `negative` DESC ");
-
-     PREPARE stmt FROM @QUERY;
-     EXECUTE stmt;
-END //
-DELIMITER ;
 
 DROP PROCEDURE IF EXISTS `proc_get_national_testing_trends`;
 DROP PROCEDURE IF EXISTS `proc_get_eid_national_testing_trends`;
@@ -634,38 +390,7 @@ BEGIN
 END //
 DELIMITER ;
 
-DROP PROCEDURE IF EXISTS `proc_get_partner_age`;
-DROP PROCEDURE IF EXISTS `proc_get_eid_partner_age`;
-DELIMITER //
-CREATE PROCEDURE `proc_get_eid_partner_age`
-(IN P_id INT(11), IN filter_year INT(11), IN filter_month INT(11))
-BEGIN
-  SET @QUERY =    "SELECT  
-            SUM(`sixweekspos`) AS `sixweekspos`, 
-            SUM(`sixweeksneg`) AS `sixweeksneg`, 
-            SUM(`sevento3mpos`) AS `sevento3mpos`, 
-            SUM(`sevento3mneg`) AS `sevento3mneg`,
-            SUM(`threemto9mpos`) AS `threemto9mpos`, 
-            SUM(`threemto9mneg`) AS `threemto9mneg`,
-            SUM(`ninemto18mpos`) AS `ninemto18mpos`, 
-            SUM(`ninemto18mneg`) AS `ninemto18mneg`,
-            SUM(`above18mpos`) AS `above18mpos`, 
-            SUM(`above18mneg`) AS `above18mneg`,
-            SUM(`nodatapos`) AS `nodatapos`, 
-            SUM(`nodataneg`) AS `nodataneg`
-          FROM `ip_agebreakdown` WHERE 1";
-  
-    IF (filter_month != 0 && filter_month != '') THEN
-       SET @QUERY = CONCAT(@QUERY, " AND `partner` = '",P_id,"' AND `year` = '",filter_year,"' AND `month` = '",filter_month,"' ");
-    ELSE
-        SET @QUERY = CONCAT(@QUERY, " AND `partner` = '",P_id,"' AND `year` = '",filter_year,"' ");
-    END IF;
-    SET @QUERY = CONCAT(@QUERY, " ORDER BY `month` ASC ");
-    
-    PREPARE stmt FROM @QUERY;
-    EXECUTE stmt;
-END //
-DELIMITER ;
+
 
 DROP PROCEDURE IF EXISTS `proc_get_partner_eid_outcomes`;
 DROP PROCEDURE IF EXISTS `proc_get_eid_partner_eid_outcomes`;
@@ -700,33 +425,7 @@ BEGIN
 END //
 DELIMITER ;
 
-DROP PROCEDURE IF EXISTS `proc_get_partner_entry_points`;
-DROP PROCEDURE IF EXISTS `proc_get_eid_partner_entry_points`;
-DELIMITER //
-CREATE PROCEDURE `proc_get_eid_partner_entry_points`
-(IN P_id INT(11), IN filter_year INT(11), IN filter_month INT(11))
-BEGIN
-  SET @QUERY =    "SELECT 
-                        `ep`.`name`, 
-                        SUM(`pos`) AS `positive`, 
-                        SUM(`neg`) AS `negative`  
-                    FROM `ip_entrypoint` `nep` 
-                    JOIN `entry_points` `ep` 
-                    ON `nep`.`entrypoint` = `ep`.`ID`
-                WHERE 1";
 
-    IF (filter_month != 0 && filter_month != '') THEN
-       SET @QUERY = CONCAT(@QUERY, " AND `partner` = '",P_id,"' AND `nep`.`year` = '",filter_year,"' AND `nep`.`month`='",filter_month,"' ");
-    ELSE
-        SET @QUERY = CONCAT(@QUERY, " AND `partner` = '",P_id,"' AND `nep`.`year` = '",filter_year,"' ");
-    END IF;
-
-    SET @QUERY = CONCAT(@QUERY, " GROUP BY `ep`.`ID` ORDER BY `negative` DESC ");
-
-     PREPARE stmt FROM @QUERY;
-     EXECUTE stmt;
-END //
-DELIMITER ;
 
 DROP PROCEDURE IF EXISTS `proc_get_partner_hei`;
 DROP PROCEDURE IF EXISTS `proc_get_eid_partner_hei`;
@@ -755,86 +454,10 @@ BEGIN
 END //
 DELIMITER ;
 
-DROP PROCEDURE IF EXISTS `proc_get_partner_iprophylaxis`;
-DROP PROCEDURE IF EXISTS `proc_get_eid_partner_iprophylaxis`;
-DELIMITER //
-CREATE PROCEDURE `proc_get_eid_partner_iprophylaxis`
-(IN P_id INT(11), IN filter_year INT(11), IN filter_month INT(11))
-BEGIN
-  SET @QUERY =    "SELECT 
-                        `p`.`name`, 
-                        SUM(`pos`) AS `positive`, 
-                        SUM(`neg`) AS `negative` 
-                    FROM `ip_iprophylaxis` `nip` 
-                    JOIN `prophylaxis` `p` ON `nip`.`prophylaxis` = `p`.`ID`
-                WHERE 1";
 
-    IF (filter_month != 0 && filter_month != '') THEN
-       SET @QUERY = CONCAT(@QUERY, " AND `partner` = '",P_id,"' AND `nip`.`year` = '",filter_year,"' AND `nip`.`month`='",filter_month,"' ");
-    ELSE
-        SET @QUERY = CONCAT(@QUERY, " AND `partner` = '",P_id,"' AND `nip`.`year` = '",filter_year,"' ");
-    END IF;
 
-    SET @QUERY = CONCAT(@QUERY, " GROUP BY `p`.`ID` ORDER BY `negative` DESC ");
 
-     PREPARE stmt FROM @QUERY;
-     EXECUTE stmt;
-END //
-DELIMITER ;
 
-DROP PROCEDURE IF EXISTS `proc_get_partner_mprophylaxis`;
-DROP PROCEDURE IF EXISTS `proc_get_eid_partner_mprophylaxis`;
-DELIMITER //
-CREATE PROCEDURE `proc_get_eid_partner_mprophylaxis`
-(IN P_id INT(11), IN filter_year INT(11), IN filter_month INT(11))
-BEGIN
-  SET @QUERY =    "SELECT 
-                        `p`.`name`, 
-                        SUM(`pos`) AS `positive`, 
-                        SUM(`neg`) AS `negative` 
-                    FROM `ip_mprophylaxis` `nmp` 
-                    JOIN `prophylaxis` `p` ON `nmp`.`prophylaxis` = `p`.`ID`
-                WHERE 1";
-
-    IF (filter_month != 0 && filter_month != '') THEN
-       SET @QUERY = CONCAT(@QUERY, " AND `partner` = '",P_id,"' AND `nmp`.`year` = '",filter_year,"' AND `nmp`.`month`='",filter_month,"' ");
-    ELSE
-        SET @QUERY = CONCAT(@QUERY, " AND `partner` = '",P_id,"' AND `nmp`.`year` = '",filter_year,"' ");
-    END IF;
-
-    SET @QUERY = CONCAT(@QUERY, " GROUP BY `p`.`ID` ORDER BY `negative` DESC ");
-
-     PREPARE stmt FROM @QUERY;
-     EXECUTE stmt;
-END //
-DELIMITER ;
-
-DROP PROCEDURE IF EXISTS `proc_get_partner_outcomes`;
-DROP PROCEDURE IF EXISTS `proc_get_eid_partner_outcomes`;
-DELIMITER //
-CREATE PROCEDURE `proc_get_eid_partner_outcomes`
-(IN filter_year INT(11), IN filter_month INT(11))
-BEGIN
-  SET @QUERY =    "SELECT
-                    `p`.`name`,
-                    SUM((`ps`.`pos`)) AS `positive`,
-                    SUM((`ps`.`neg`)) AS `negative`
-                FROM `ip_summary` `ps`
-                    JOIN `partners` `p` ON `ps`.`partner` = `p`.`ID`
-                WHERE 1";
-
-    IF (filter_month != 0 && filter_month != '') THEN
-       SET @QUERY = CONCAT(@QUERY, " AND `ps`.`year` = '",filter_year,"' AND `ps`.`month`='",filter_month,"' ");
-    ELSE
-        SET @QUERY = CONCAT(@QUERY, " AND `ps`.`year` = '",filter_year,"' ");
-    END IF;
-
-    SET @QUERY = CONCAT(@QUERY, " GROUP BY `ps`.`partner` ORDER BY `negative` DESC ");
-
-     PREPARE stmt FROM @QUERY;
-     EXECUTE stmt;
-END //
-DELIMITER ;
 
 DROP PROCEDURE IF EXISTS `proc_get_partner_performance`;
 DROP PROCEDURE IF EXISTS `proc_get_eid_partner_performance`;

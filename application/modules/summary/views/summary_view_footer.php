@@ -67,8 +67,47 @@
 				$("#county_outcomes").load("<?php echo base_url('charts/summaries/county_outcomes'); ?>/"+null+"/"+null+"/"+null+"/"+null+"/"+data); 
 	        });
 		});
-	});
 
+		
+
+		// $('#startDate').on('input',function(e){
+		//      alert('Changed!')
+		//  });
+		// $("#startDate").focusout(function() {
+		// 	startDate = $(this).val();
+		// 	console.log(startDate);
+		// });
+	});
+	$("button").click(function () {
+		    var first, second;
+		    first = $(".date-picker[name=startDate]").val();
+		    second = $(".date-picker[name=endDate]").val();
+		    
+		    from 	= format_date(first);
+		    to 		= format_date(second);
+		    
+		    $("#nattat").html("<div>Loading...</div>");
+        	$("#eidOutcomes").html("<center><div class='loader'></div></center>");
+	        $("#hei_follow_up").html("<center><div class='loader'></div></center>");
+			$("#ageGroups").html("<center><div class='loader'></div></center>");
+			$("#entry_point").html("<center><div class='loader'></div></center>");
+			$("#mprophilaxis").html("<center><div class='loader'></div></center>");
+			$("#iprophilaxis").html("<center><div class='loader'></div></center>");
+			$("#county_outcomes").html("<center><div class='loader'></div></center>");
+
+			$("#nattat").load("<?php echo base_url('charts/summaries/turnaroundtime'); ?>/"+from[1]+"/"+from[0]+"/"+null+"/"+to[0]);
+			$("#eidOutcomes").load("<?php echo base_url('charts/summaries/eid_outcomes');?>/"+from[1]+"/"+from[0]+"/"+null+"/"+"/"+null+"/"+to[0]);
+			$("#hei_follow_up").load("<?php echo base_url('charts/summaries/hei_follow');?>/"+from[1]+"/"+from[0]+"/"+null+"/"+"/"+null+"/"+to[0]);
+			$("#ageGroups").load("<?php echo base_url('charts/summaries/agegroup');?>/"+from[1]+"/"+from[0]+"/"+null+"/"+"/"+null+"/"+to[0]);
+
+			$("#entry_point").load("<?php echo base_url('charts/summaries/entry_points');?>/"+from[1]+"/"+from[0]+"/"+null+"/"+"/"+null+"/"+to[0]);
+			$("#mprophilaxis").load("<?php echo base_url('charts/summaries/mprophyalxis');?>/"+from[1]+"/"+from[0]+"/"+null+"/"+"/"+null+"/"+to[0]);
+			$("#iprophilaxis").load("<?php echo base_url('charts/summaries/iprophyalxis');?>/"+from[1]+"/"+from[0]+"/"+null+"/"+"/"+null+"/"+to[0]);
+			// $("#feeding").load("<?php //echo base_url('charts/summaries/agegroup');?>");
+			
+			$("#county_outcomes").load("<?php echo base_url('charts/summaries/county_outcomes'); ?>/"+from[1]+"/"+from[0]+"/"+null+"/"+null+"/"+null+"/"+to[0]);
+		    
+		});
 	function date_filter(criteria, id)
  	{
  		if (criteria === "monthly") {
@@ -115,5 +154,16 @@
 		// $("#feeding").load("<?php //echo base_url('charts/summaries/agegroup');?>");
 		
 		$("#county_outcomes").load("<?php echo base_url('charts/summaries/county_outcomes');?>/"+year+"/"+month); 
+	}
+
+	function format_date(data)
+	{
+		date = data.split(" ");
+		var month = date[0];
+	    month = month.toLowerCase();
+	    var months = ["january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december"];
+	    month = months.indexOf(month)+1;
+		
+		return [month, date[1]];
 	}
 </script>

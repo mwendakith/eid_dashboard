@@ -84,6 +84,9 @@
 		    second = $(".date-picker[name=endDate]").val();
 		    
 		    from 	= format_date(first);
+		    /* from is an array
+		     	[0] => month
+		     	[1] => year*/
 		    to 		= format_date(second);
 		    
 		    $("#nattat").html("<div>Loading...</div>");
@@ -154,16 +157,5 @@
 		// $("#feeding").load("<?php //echo base_url('charts/summaries/agegroup');?>");
 		
 		$("#county_outcomes").load("<?php echo base_url('charts/summaries/county_outcomes');?>/"+year+"/"+month); 
-	}
-
-	function format_date(data)
-	{
-		date = data.split(" ");
-		var month = date[0];
-	    month = month.toLowerCase();
-	    var months = ["january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december"];
-	    month = months.indexOf(month)+1;
-		
-		return [month, date[1]];
 	}
 </script>

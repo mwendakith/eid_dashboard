@@ -11,7 +11,7 @@ class Counties_model extends MY_Model
 		parent:: __construct();;
 	}
 
-	function counties_details($year=NULL,$month=NULL)
+	function counties_details($year=NULL,$month=NULL,$to_month=NULL)
 	{
 		$table = '';
 		$count = 1;
@@ -25,8 +25,11 @@ class Counties_model extends MY_Model
 				$month = $this->session->userdata('filter_month');
 			}
 		}
+		if ($to_month==null || $to_month=='null') {
+			$to_month = 0;
+		}
 
-		$sql = "CALL `proc_get_eid_countys_details`('".$year."','".$month."')";
+		$sql = "CALL `proc_get_eid_countys_details`('".$year."','".$month."','".$to_month."')";
 		// echo "<pre>";print_r($sql);die();
 		$result = $this->db->query($sql)->result_array();
 		// echo "<pre>";print_r($result);die();
@@ -55,7 +58,7 @@ class Counties_model extends MY_Model
 		return $table;
 	}
 
-	function download_counties_details($year=NULL,$month=NULL){
+	function download_counties_details($year=NULL,$month=NULL,$to_month=NULL){
 		if ($year==null || $year=='null') {
 			$year = $this->session->userdata('filter_year');
 		}
@@ -66,8 +69,11 @@ class Counties_model extends MY_Model
 				$month = $this->session->userdata('filter_month');
 			}
 		}
+		if ($to_month==null || $to_month=='null') {
+			$to_month = 0;
+		}
 
-		$sql = "CALL `proc_get_eid_countys_details`('".$year."','".$month."')";
+		$sql = "CALL `proc_get_eid_countys_details`('".$year."','".$month."','".$to_month."')";
 		// echo "<pre>";print_r($sql);die();
 		$result = $this->db->query($sql)->result_array();
 
@@ -97,7 +103,7 @@ class Counties_model extends MY_Model
 	    fpassthru($f);
 	}
 
-	function sub_county_outcomes($year=null,$month=null,$county=null)
+	function sub_county_outcomes($year=null,$month=null,$county=null,$to_month=NULL)
 	{
 		if ($county==null || $county=='null') {
 			$county = $this->session->userdata('county_filter');
@@ -113,8 +119,11 @@ class Counties_model extends MY_Model
 				$month = $this->session->userdata('filter_month');
 			}
 		}
+		if ($to_month==null || $to_month=='null') {
+			$to_month = 0;
+		}
 
-		$sql = "CALL `proc_get_eid_subcounty_outcomes`('".$county."','".$year."','".$month."')";
+		$sql = "CALL `proc_get_eid_subcounty_outcomes`('".$county."','".$year."','".$month."','".$to_month."')";
 		// echo "<pre>";print_r($sql);die();
 		$result = $this->db->query($sql)->result_array();
 
@@ -136,7 +145,7 @@ class Counties_model extends MY_Model
 		return $data;
 	}
 
-	function county_subcounties_details($year=null,$month=null,$county=null)
+	function county_subcounties_details($year=null,$month=null,$county=null,$to_month=NULL)
 	{
 		$table = '';
 		$count = 1;
@@ -153,8 +162,11 @@ class Counties_model extends MY_Model
 				$month = $this->session->userdata('filter_month');
 			}
 		}
+		if ($to_month==null || $to_month=='null') {
+			$to_month = 0;
+		}
 
-		$sql = "CALL `proc_get_eid_county_subcounties_details`('".$county."','".$year."','".$month."')";
+		$sql = "CALL `proc_get_eid_county_subcounties_details`('".$county."','".$year."','".$month."','".$to_month."')";
 		// echo "<pre>";print_r($sql);die();
 		$result = $this->db->query($sql)->result_array();
 		// echo "<pre>";print_r($sql);die();
@@ -182,7 +194,7 @@ class Counties_model extends MY_Model
 		return $table;
 	}
 
-	function download_county_subcounty_outcomes($year=null,$month=null,$county=null)
+	function download_county_subcounty_outcomes($year=null,$month=null,$county=null,$to_month=NULL)
 	{
 		
 		if ($county==null || $county=='null') {
@@ -198,8 +210,11 @@ class Counties_model extends MY_Model
 				$month = $this->session->userdata('filter_month');
 			}
 		}
+		if ($to_month==null || $to_month=='null') {
+			$to_month = 0;
+		}
 
-		$sql = "CALL `proc_get_eid_county_subcounties_details`('".$county."','".$year."','".$month."')";
+		$sql = "CALL `proc_get_eid_county_subcounties_details`('".$county."','".$year."','".$month."','".$to_month."')";
 		// echo "<pre>";print_r($sql);die();
 		$result = $this->db->query($sql)->result_array();
 
@@ -232,265 +247,265 @@ class Counties_model extends MY_Model
 
 
 
-	function country_tests($year=NULL,$month=NULL)
-	{
-		if ($year==null || $year=='null') {
-			$year = $this->session->userdata('filter_year');
-		}
-		if ($month==null || $month=='null') {
-			if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
-				$month = 0;
-			}else {
-				$month = $this->session->userdata('filter_month');
-			}
-		}
+	// function country_tests($year=NULL,$month=NULL)
+	// {
+	// 	if ($year==null || $year=='null') {
+	// 		$year = $this->session->userdata('filter_year');
+	// 	}
+	// 	if ($month==null || $month=='null') {
+	// 		if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
+	// 			$month = 0;
+	// 		}else {
+	// 			$month = $this->session->userdata('filter_month');
+	// 		}
+	// 	}
 		
-		$sql = "CALL `proc_get_county_suppression`('".$year."','".$month."')";
+	// 	$sql = "CALL `proc_get_county_suppression`('".$year."','".$month."')";
 		
-		// echo "<pre>";print_r($sql);die();
-		$result = $this->db->query($sql)->result_array();
-		$data;
-		foreach ($result as $key => $value) {
+	// 	// echo "<pre>";print_r($sql);die();
+	// 	$result = $this->db->query($sql)->result_array();
+	// 	$data;
+	// 	foreach ($result as $key => $value) {
 			
-				$data[$value['id']]['id'] = $value['id'];
+	// 			$data[$value['id']]['id'] = $value['id'];
 				
-				$data[$value['id']]['value'] = $value['tests'];
-				
-			
-		}
-		 // echo "<pre>";print_r($data);die();
-		return $data;
-
-	}
-
-	function country_suppression($year=NULL,$month=NULL)
-	{
-		if ($year==null || $year=='null') {
-			$year = $this->session->userdata('filter_year');
-		}
-		if ($month==null || $month=='null') {
-			if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
-				$month = 0;
-			}else {
-				$month = $this->session->userdata('filter_month');
-			}
-		}
-		
-		$sql = "CALL `proc_get_county_suppression`('".$year."','".$month."')";
-		
-		// echo "<pre>";print_r($sql);die();
-		$result = $this->db->query($sql)->result_array();
-		$data;
-		foreach ($result as $key => $value) {
-			
-				$data[$value['id']]['id'] = $value['id'];
-				if($value['tests'] == 0){
-					$data[$value['id']]['value'] = 0;
-				}
-				else{
-					$data[$value['id']]['value'] = round((int) $value['suppressed'] / $value['tests'] * 100);
-				}
-			
-		}
-		 // echo "<pre>";print_r($data);die();
-		return $data;
-
-	}
-
-	function country_non_suppression($year=NULL,$month=NULL)
-	{
-		if ($year==null || $year=='null') {
-			$year = $this->session->userdata('filter_year');
-		}
-		if ($month==null || $month=='null') {
-			if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
-				$month = 0;
-			}else {
-				$month = $this->session->userdata('filter_month');
-			}
-		}
-		
-		$sql = "CALL `proc_get_county_non_suppression`('".$year."','".$month."')";
-		
-		// echo "<pre>";print_r($sql);die();
-		$result = $this->db->query($sql)->result_array();
-		$data;
-		foreach ($result as $key => $value) {
-			
-				$data[$value['id']]['id'] = $value['id'];
-				if($value['tests'] == 0){
-					$data[$value['id']]['value'] = 0;
-				}
-				else{
-					$data[$value['id']]['value'] = 
-					round((int) $value['non_suppressed'] / $value['tests'] * 100);
-				}
-			
-		}
-		 // echo "<pre>";print_r($data);die();
-		return $data;
-
-	}
-
-	function country_rejects($year=NULL,$month=NULL)
-	{
-		if ($year==null || $year=='null') {
-			$year = $this->session->userdata('filter_year');
-		}
-		if ($month==null || $month=='null') {
-			if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
-				$month = 0;
-			}else {
-				$month = $this->session->userdata('filter_month');
-			}
-		}
-		
-		$sql = "CALL `proc_get_county_rejected`('".$year."','".$month."')";
-		
-		// echo "<pre>";print_r($sql);die();
-		$result = $this->db->query($sql)->result_array();
-		$data;
-		foreach ($result as $key => $value) {
-			
-				$data[$value['id']]['id'] = $value['id'];
-				if($value['tests'] == 0){
-					$data[$value['id']]['value'] = 0;
-				}
-				else{
-					$data[$value['id']]['value'] = round((int) $value['rejected'] / $value['tests'] * 100);
-				}
-			
-		}
-		 // echo "<pre>";print_r($data);die();
-		return $data;
-
-	}
-
-	function country_pregnant($year=NULL,$month=NULL)
-	{
-
-		if ($year==null || $year=='null') {
-			$year = $this->session->userdata('filter_year');
-		}
-		if ($month==null || $month=='null') {
-			if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
-				$month = $this->session->userdata('filter_month');
-			}else {
-				$month = 0;
-			}
-		}
-		
-		$sql = "CALL `proc_get_county_pregnant_women`('".$year."','".$month."')";
-		
-		// echo "<pre>";print_r($sql);die();
-		$result = $this->db->query($sql)->result_array();
-		$data;
-		foreach ($result as $key => $value) {
-			
-				$data[$value['id']]['id'] = $value['id'];
-				
-				$data[$value['id']]['value'] = $value['tests'];
-				
+	// 			$data[$value['id']]['value'] = $value['tests'];
 				
 			
-		}
-		 // echo "<pre>";print_r($data);die();
-		return $data;
+	// 	}
+	// 	 // echo "<pre>";print_r($data);die();
+	// 	return $data;
 
-	}
+	// }
 
-	function country_lactating($year=NULL,$month=NULL)
-	{
-		if ($year==null || $year=='null') {
-			$year = $this->session->userdata('filter_year');
-		}
-		if ($month==null || $month=='null') {
-			if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
-				$month = 0;
-			}else {
-				$month = $this->session->userdata('filter_month');
-			}
-		}
+	// function country_suppression($year=NULL,$month=NULL)
+	// {
+	// 	if ($year==null || $year=='null') {
+	// 		$year = $this->session->userdata('filter_year');
+	// 	}
+	// 	if ($month==null || $month=='null') {
+	// 		if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
+	// 			$month = 0;
+	// 		}else {
+	// 			$month = $this->session->userdata('filter_month');
+	// 		}
+	// 	}
 		
-		$sql = "CALL `proc_get_county_lactating_women`('".$year."','".$month."')";
+	// 	$sql = "CALL `proc_get_county_suppression`('".$year."','".$month."')";
 		
-		// echo "<pre>";print_r($sql);die();
-		$result = $this->db->query($sql)->result_array();
-		$data;
-		foreach ($result as $key => $value) {
+	// 	// echo "<pre>";print_r($sql);die();
+	// 	$result = $this->db->query($sql)->result_array();
+	// 	$data;
+	// 	foreach ($result as $key => $value) {
 			
-				$data[$value['id']]['id'] = $value['id'];
+	// 			$data[$value['id']]['id'] = $value['id'];
+	// 			if($value['tests'] == 0){
+	// 				$data[$value['id']]['value'] = 0;
+	// 			}
+	// 			else{
+	// 				$data[$value['id']]['value'] = round((int) $value['suppressed'] / $value['tests'] * 100);
+	// 			}
+			
+	// 	}
+	// 	 // echo "<pre>";print_r($data);die();
+	// 	return $data;
+
+	// }
+
+	// function country_non_suppression($year=NULL,$month=NULL)
+	// {
+	// 	if ($year==null || $year=='null') {
+	// 		$year = $this->session->userdata('filter_year');
+	// 	}
+	// 	if ($month==null || $month=='null') {
+	// 		if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
+	// 			$month = 0;
+	// 		}else {
+	// 			$month = $this->session->userdata('filter_month');
+	// 		}
+	// 	}
+		
+	// 	$sql = "CALL `proc_get_county_non_suppression`('".$year."','".$month."')";
+		
+	// 	// echo "<pre>";print_r($sql);die();
+	// 	$result = $this->db->query($sql)->result_array();
+	// 	$data;
+	// 	foreach ($result as $key => $value) {
+			
+	// 			$data[$value['id']]['id'] = $value['id'];
+	// 			if($value['tests'] == 0){
+	// 				$data[$value['id']]['value'] = 0;
+	// 			}
+	// 			else{
+	// 				$data[$value['id']]['value'] = 
+	// 				round((int) $value['non_suppressed'] / $value['tests'] * 100);
+	// 			}
+			
+	// 	}
+	// 	 // echo "<pre>";print_r($data);die();
+	// 	return $data;
+
+	// }
+
+	// function country_rejects($year=NULL,$month=NULL)
+	// {
+	// 	if ($year==null || $year=='null') {
+	// 		$year = $this->session->userdata('filter_year');
+	// 	}
+	// 	if ($month==null || $month=='null') {
+	// 		if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
+	// 			$month = 0;
+	// 		}else {
+	// 			$month = $this->session->userdata('filter_month');
+	// 		}
+	// 	}
+		
+	// 	$sql = "CALL `proc_get_county_rejected`('".$year."','".$month."')";
+		
+	// 	// echo "<pre>";print_r($sql);die();
+	// 	$result = $this->db->query($sql)->result_array();
+	// 	$data;
+	// 	foreach ($result as $key => $value) {
+			
+	// 			$data[$value['id']]['id'] = $value['id'];
+	// 			if($value['tests'] == 0){
+	// 				$data[$value['id']]['value'] = 0;
+	// 			}
+	// 			else{
+	// 				$data[$value['id']]['value'] = round((int) $value['rejected'] / $value['tests'] * 100);
+	// 			}
+			
+	// 	}
+	// 	 // echo "<pre>";print_r($data);die();
+	// 	return $data;
+
+	// }
+
+	// function country_pregnant($year=NULL,$month=NULL)
+	// {
+
+	// 	if ($year==null || $year=='null') {
+	// 		$year = $this->session->userdata('filter_year');
+	// 	}
+	// 	if ($month==null || $month=='null') {
+	// 		if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
+	// 			$month = $this->session->userdata('filter_month');
+	// 		}else {
+	// 			$month = 0;
+	// 		}
+	// 	}
+		
+	// 	$sql = "CALL `proc_get_county_pregnant_women`('".$year."','".$month."')";
+		
+	// 	// echo "<pre>";print_r($sql);die();
+	// 	$result = $this->db->query($sql)->result_array();
+	// 	$data;
+	// 	foreach ($result as $key => $value) {
+			
+	// 			$data[$value['id']]['id'] = $value['id'];
 				
-				$data[$value['id']]['value'] = $value['tests'];
+	// 			$data[$value['id']]['value'] = $value['tests'];
 				
 				
 			
-		}
-		 // echo "<pre>";print_r($data);die();
-		return $data;
+	// 	}
+	// 	 // echo "<pre>";print_r($data);die();
+	// 	return $data;
 
-	}		
+	// }
 
-	function county_details($county=NULL,$year=NULL,$month=NULL)
-	{
-		if ($year==null || $year=='null') {
-			$year = $this->session->userdata('filter_year');
-		}
-		if ($month==null || $month=='null') {
-			if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
-				$month = 0;
-			}else {
-				$month = $this->session->userdata('filter_month');
-			}
-		}
+	// function country_lactating($year=NULL,$month=NULL)
+	// {
+	// 	if ($year==null || $year=='null') {
+	// 		$year = $this->session->userdata('filter_year');
+	// 	}
+	// 	if ($month==null || $month=='null') {
+	// 		if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
+	// 			$month = 0;
+	// 		}else {
+	// 			$month = $this->session->userdata('filter_month');
+	// 		}
+	// 	}
 		
-		$sql = "CALL `proc_get_county_partner_details`('".$county."','".$year."','".$month."')";
-
-		$result = $this->db->query($sql)->result_array();
+	// 	$sql = "CALL `proc_get_county_lactating_women`('".$year."','".$month."')";
 		
-		$data;
-		$i = 0;
-
-		foreach ($result as $key => $value) {
+	// 	// echo "<pre>";print_r($sql);die();
+	// 	$result = $this->db->query($sql)->result_array();
+	// 	$data;
+	// 	foreach ($result as $key => $value) {
 			
-			$data[$i]['partner'] = $value['partner'];
-			$data[$i]['facility'] = $value['facility'];
-			$data[$i]['tests'] = $value['tests'];
+	// 			$data[$value['id']]['id'] = $value['id'];
+				
+	// 			$data[$value['id']]['value'] = $value['tests'];
+				
+				
+			
+	// 	}
+	// 	 // echo "<pre>";print_r($data);die();
+	// 	return $data;
 
-			if($value['tests'] == 0){
-					$data[$i]['suppressed'] = 0;
-					$data[$i]['non_suppressed'] = 0;
-					$data[$i]['rejected'] = $value['rejected'];
-				}
-			else{
-				$data[$i]['suppressed'] = $value['suppressed'] . " (" . round((int) $value['suppressed'] / $value['tests'] * 100) . "%)";
-				$data[$i]['non_suppressed'] = $value['non_suppressed'] . " (" . round((int) $value['non_suppressed'] / $value['tests'] * 100) . "%)";
-				$data[$i]['rejected'] = $value['rejected'] . " (" . round((int) $value['rejected'] / $value['tests'] * 100) . "%)";
+	// }		
 
-			}
+	// function county_details($county=NULL,$year=NULL,$month=NULL)
+	// {
+	// 	if ($year==null || $year=='null') {
+	// 		$year = $this->session->userdata('filter_year');
+	// 	}
+	// 	if ($month==null || $month=='null') {
+	// 		if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
+	// 			$month = 0;
+	// 		}else {
+	// 			$month = $this->session->userdata('filter_month');
+	// 		}
+	// 	}
+		
+	// 	$sql = "CALL `proc_get_county_partner_details`('".$county."','".$year."','".$month."')";
+
+	// 	$result = $this->db->query($sql)->result_array();
+		
+	// 	$data;
+	// 	$i = 0;
+
+	// 	foreach ($result as $key => $value) {
+			
+	// 		$data[$i]['partner'] = $value['partner'];
+	// 		$data[$i]['facility'] = $value['facility'];
+	// 		$data[$i]['tests'] = $value['tests'];
+
+	// 		if($value['tests'] == 0){
+	// 				$data[$i]['suppressed'] = 0;
+	// 				$data[$i]['non_suppressed'] = 0;
+	// 				$data[$i]['rejected'] = $value['rejected'];
+	// 			}
+	// 		else{
+	// 			$data[$i]['suppressed'] = $value['suppressed'] . " (" . round((int) $value['suppressed'] / $value['tests'] * 100) . "%)";
+	// 			$data[$i]['non_suppressed'] = $value['non_suppressed'] . " (" . round((int) $value['non_suppressed'] / $value['tests'] * 100) . "%)";
+	// 			$data[$i]['rejected'] = $value['rejected'] . " (" . round((int) $value['rejected'] / $value['tests'] * 100) . "%)";
+
+	// 		}
 			
 			
-			$data[$i]['adults'] = $value['adults'];
-			$data[$i]['children'] = $value['children'];
+	// 		$data[$i]['adults'] = $value['adults'];
+	// 		$data[$i]['children'] = $value['children'];
 			
-			$i++;
-		}		
-		$table = '';
-		foreach ($data as $key => $value) {
-			$table .= '<tr>';
-			$table .= '<td>'.$value['partner'].'</td>';
-			$table .= '<td>'.$value['facility'].'</td>';
-			$table .= '<td>'.$value['tests'].'</td>';
-			$table .= '<td>'.$value['suppressed'].'</td>';
-			$table .= '<td>'.$value['non_suppressed'].'</td>';
-			$table .= '<td>'.$value['rejected'].'</td>';
-			$table .= '<td>'.$value['adults'].'</td>';
-			$table .= '<td>'.$value['children'].'</td>';
-			$table .= '</tr>';
-		}
+	// 		$i++;
+	// 	}		
+	// 	$table = '';
+	// 	foreach ($data as $key => $value) {
+	// 		$table .= '<tr>';
+	// 		$table .= '<td>'.$value['partner'].'</td>';
+	// 		$table .= '<td>'.$value['facility'].'</td>';
+	// 		$table .= '<td>'.$value['tests'].'</td>';
+	// 		$table .= '<td>'.$value['suppressed'].'</td>';
+	// 		$table .= '<td>'.$value['non_suppressed'].'</td>';
+	// 		$table .= '<td>'.$value['rejected'].'</td>';
+	// 		$table .= '<td>'.$value['adults'].'</td>';
+	// 		$table .= '<td>'.$value['children'].'</td>';
+	// 		$table .= '</tr>';
+	// 	}
 
-		return $table;
-	}
+	// 	return $table;
+	// }
 
 	
 	

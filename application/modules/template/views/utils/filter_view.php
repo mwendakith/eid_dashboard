@@ -46,10 +46,18 @@ display: none;
         </div>
     </div>
     <div class="col-md-2">
-        <label for="startDate">From :</label>
-        <input name="startDate" id="startDate" class="date-picker" onchange="youFunction();" onkeyup="this.onchange();" onpaste="this.onchange();" oninput="this.onchange();"/>
-        <label for="startDate">To :</label>
-        <input name="endDate" id="endDate" class="date-picker" /><button id="filter" class="btn btn-primary">Filter</button>
+        <div class="row" id="range">
+            <div class="col-md-6">
+                <label for="startDate" style="color: black;">From :</label>
+                <input name="startDate" id="startDate" class="date-picker"  />
+            </div>
+            <div class="col-md-6">
+                <label for="startDate" style="color: black;">To :</label>
+                <input name="endDate" id="endDate" class="date-picker" />
+            </div>
+            <center><button id="filter" class="btn btn-primary" style="color: white;background-color: #1BA39C; margin-top: 0.2em;">Filter</button></center>
+        </div>
+        
     </div>
 </div>
 <script type="text/javascript">
@@ -71,8 +79,8 @@ display: none;
     //Getting the URL dynamically
     var url = $(location).attr('href');
     // Getting the file name i.e last segment of URL (i.e. example.html)
-    var fn = url.split('/').indexOf("partner");
-    console.log(fn);
+    var fn = url.split('/').indexOf("trends");
+    // console.log(fn);
     
     if (fn==-1) {
       $.get("<?php echo base_url();?>template/breadcrum", function(data){
@@ -81,6 +89,7 @@ display: none;
     } else {
       $.get("<?php echo base_url();?>template/breadcrum", function(data){
         $("#breadcrum").html(data);
+        $("#range").hide();
       });
     }
     

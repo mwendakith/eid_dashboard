@@ -13,7 +13,7 @@ class Sites_model extends MY_Model
 	}
 
 
-	function sites_outcomes($year=null,$month=null){
+	function sites_outcomes($year=null,$month=null,$to_month=NULL){
 
 		if ($year==null || $year=='null') {
 			$year = $this->session->userdata('filter_year');
@@ -26,7 +26,7 @@ class Sites_model extends MY_Model
 				$month = 0;
 			}
 		}
-		$sql = "CALL `proc_get_eid_all_sites_outcomes`('".$year."','".$month."')";
+		$sql = "CALL `proc_get_eid_all_sites_outcomes`('".$year."','".$month."','".$to_month."')";
 
 		$result = $this->db->query($sql)->result_array();
 
@@ -128,7 +128,7 @@ class Sites_model extends MY_Model
 
 	}
 
-	function partner_sites_outcomes($year=NULL,$month=NULL,$site=NULL,$partner=NULL)
+	function partner_sites_outcomes($year=NULL,$month=NULL,$site=NULL,$partner=NULL,$to_month=NULL)
 	{
 		$table = '';
 		$count = 1;
@@ -143,7 +143,7 @@ class Sites_model extends MY_Model
 			}
 		}
 
-		$sql = "CALL `proc_get_eid_partner_sites_details`('".$partner."','".$year."','".$month."')";
+		$sql = "CALL `proc_get_eid_partner_sites_details`('".$partner."','".$year."','".$month."','".$to_month."')";
 		// echo "<pre>";print_r($sql);die();
 		$result = $this->db->query($sql)->result_array();
 		// echo "<pre>";print_r($sql);die();

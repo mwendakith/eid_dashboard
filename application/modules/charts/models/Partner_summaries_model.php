@@ -54,7 +54,7 @@ class Partner_summaries_model extends MY_Model
 		return $data;
 	}
 
-	function eid_outcomes($year=null,$month=null,$partner=null)
+	function eid_outcomes($year=null,$month=null,$partner=null,$to_month=null)
 	{
 		if ($partner==null || $partner=='null') {
 			$partner = $this->session->userdata('partner_filter');
@@ -70,8 +70,11 @@ class Partner_summaries_model extends MY_Model
 				$month = $this->session->userdata('filter_month');
 			}
 		}
+		if ($to_month==null || $to_month=='null') {
+			$to_month = 0;
+		}
 
-		$sql = "CALL `proc_get_eid_partner_eid_outcomes`('".$partner."','".$year."','".$month."')";
+		$sql = "CALL `proc_get_eid_partner_eid_outcomes`('".$partner."','".$year."','".$month."','".$to_month."')";
 		
 		// echo "<pre>";print_r($sql);die();
 		$result = $this->db->query($sql)->result_array();
@@ -178,7 +181,7 @@ class Partner_summaries_model extends MY_Model
 		return $data;
 	}
 
-	function hei_follow($year=null,$month=null,$partner=null)
+	function hei_follow($year=null,$month=null,$partner=null,$to_month=null)
 	{
 		if ($partner==null || $partner=='null') {
 			$partner = $this->session->userdata('partner_filter');
@@ -194,8 +197,11 @@ class Partner_summaries_model extends MY_Model
 				$month = $this->session->userdata('filter_month');
 			}
 		}
+		if ($to_month==null || $to_month=='null') {
+			$to_month = 0;
+		}
 
-		$sql = "CALL `proc_get_eid_partner_hei`('".$partner."','".$year."','".$month."')";
+		$sql = "CALL `proc_get_eid_partner_hei`('".$partner."','".$year."','".$month."','".$to_month."')";
 		
 		// echo "<pre>";print_r($sql);die();
 		$result = $this->db->query($sql)->result_array();
@@ -246,7 +252,7 @@ class Partner_summaries_model extends MY_Model
 		return $data;
 	}
 
-	function age($year=null,$month=null,$partner=null)
+	function age($year=null,$month=null,$partner=null,$to_month=null)
 	{
 		if ($partner==null || $partner=='null') {
 			$partner = $this->session->userdata('partner_filter');
@@ -262,8 +268,11 @@ class Partner_summaries_model extends MY_Model
 				$month = $this->session->userdata('filter_month');
 			}
 		}
+		if ($to_month==null || $to_month=='null') {
+			$to_month = 0;
+		}
 
-		$sql = "CALL `proc_get_eid_partner_age`('".$partner."','".$year."','".$month."')";
+		$sql = "CALL `proc_get_eid_partner_age`('".$partner."','".$year."','".$month."','".$to_month."')";
 		
 		// echo "<pre>";print_r($sql);die();
 		$result = $this->db->query($sql)->result_array();
@@ -309,7 +318,7 @@ class Partner_summaries_model extends MY_Model
 		return $data;
 	}
 
-	function entry_points($year=null,$month=null,$partner=null)
+	function entry_points($year=null,$month=null,$partner=null,$to_month=null)
 	{
 		if ($partner==null || $partner=='null') {
 			$partner = $this->session->userdata('partner_filter');
@@ -325,8 +334,11 @@ class Partner_summaries_model extends MY_Model
 				$month = $this->session->userdata('filter_month');
 			}
 		}
+		if ($to_month==null || $to_month=='null') {
+			$to_month = 0;
+		}
 
-		$sql = "CALL `proc_get_eid_partner_entry_points`('".$partner."','".$year."','".$month."')";
+		$sql = "CALL `proc_get_eid_partner_entry_points`('".$partner."','".$year."','".$month."','".$to_month."')";
 		
 		// echo "<pre>";print_r($sql);die();
 		$result = $this->db->query($sql)->result_array();
@@ -353,7 +365,7 @@ class Partner_summaries_model extends MY_Model
 		return $data;
 	}
 
-	function mprophylaxis($year=null,$month=null,$partner=null)
+	function mprophylaxis($year=null,$month=null,$partner=null,$to_month=null)
 	{
 		if ($partner==null || $partner=='null') {
 			$partner = $this->session->userdata('partner_filter');
@@ -369,8 +381,11 @@ class Partner_summaries_model extends MY_Model
 				$month = $this->session->userdata('filter_month');
 			}
 		}
+		if ($to_month==null || $to_month=='null') {
+			$to_month = 0;
+		}
 
-		$sql = "CALL `proc_get_eid_partner_mprophylaxis`('".$partner."','".$year."','".$month."')";
+		$sql = "CALL `proc_get_eid_partner_mprophylaxis`('".$partner."','".$year."','".$month."','".$to_month."')";
 		
 		// echo "<pre>";print_r($sql);die();
 		$result = $this->db->query($sql)->result_array();
@@ -397,7 +412,7 @@ class Partner_summaries_model extends MY_Model
 		return $data;
 	}
 
-	function iprophylaxis($year=null,$month=null,$partner=null)
+	function iprophylaxis($year=null,$month=null,$partner=null,$to_month=null)
 	{
 		if ($partner==null || $partner=='null') {
 			$partner = $this->session->userdata('partner_filter');
@@ -414,8 +429,11 @@ class Partner_summaries_model extends MY_Model
 				$month = $this->session->userdata('filter_month');
 			}
 		}
+		if ($to_month==null || $to_month=='null') {
+			$to_month = 0;
+		}
 
-		$sql = "CALL `proc_get_eid_partner_iprophylaxis`('".$partner."','".$year."','".$month."')";
+		$sql = "CALL `proc_get_eid_partner_iprophylaxis`('".$partner."','".$year."','".$month."','".$to_month."')";
 		
 		// echo "<pre>";print_r($sql);die();
 		$result = $this->db->query($sql)->result_array();
@@ -442,7 +460,7 @@ class Partner_summaries_model extends MY_Model
 		return $data;
 	}
 
-	function partner_outcomes($year=null,$month=null,$partner=null)
+	function partner_outcomes($year=null,$month=null,$partner=null,$to_month=null)
 	{
 		//Initializing the value of the Year to the selected year or the default year which is current year
 		if ($year==null || $year=='null') {
@@ -456,6 +474,9 @@ class Partner_summaries_model extends MY_Model
 				$month = $this->session->userdata('filter_month');
 			}
 		}
+		if ($to_month==null || $to_month=='null') {
+			$to_month = 0;
+		}
 
 		
 		if ($partner==null || $partner=='null') {
@@ -463,7 +484,7 @@ class Partner_summaries_model extends MY_Model
 		}
 
 		if ($partner) {
-			$sql = "CALL `proc_get_eid_partner_sites_outcomes`('".$partner."','".$year."','".$month."')";
+			$sql = "CALL `proc_get_eid_partner_sites_outcomes`('".$partner."','".$year."','".$month."','".$to_month."')";
 		} else {
 			$sql = "CALL `proc_get_eid_partner_outcomes`('".$year."','".$month."')";
 		}

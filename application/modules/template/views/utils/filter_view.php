@@ -53,7 +53,7 @@ display: none;
             </div>
             <div class="col-md-6">
                 <label for="startDate" style="color: black;">To :</label>
-                <input name="endDate" id="endDate" class="date-picker" />
+                <input name="endDate" id="endDate" class="month-picker" />
             </div>
             <center><button id="filter" class="btn btn-primary" style="color: white;background-color: #1BA39C; margin-top: 0.2em;">Filter</button></center>
         </div>
@@ -65,6 +65,16 @@ display: none;
     $('.date-picker').datepicker( {
         changeMonth: true,
         changeYear: true,
+        showButtonPanel: true,
+        dateFormat: 'MM yy',
+        onClose: function(dateText, inst) { 
+            var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
+            var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
+            $(this).datepicker('setDate', new Date(year, month, 1));
+        }
+    });
+    $('.month-picker').datepicker( {
+        changeMonth: true,
         showButtonPanel: true,
         dateFormat: 'MM yy',
         onClose: function(dateText, inst) { 

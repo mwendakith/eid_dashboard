@@ -13,34 +13,34 @@ class Counties extends MY_Controller
 		$this->load->model('counties_model');
 	}
 
-	function counties_details($year=NULL,$month=NULL)
+	function counties_details($year=NULL,$month=NULL,$to_month=NULL)
 	{
-		$data['outcomes'] = $this->counties_model->counties_details($year,$month);
+		$data['outcomes'] = $this->counties_model->counties_details($year,$month,$to_month);
 
-		$link = $year . '/' . $month;
+		$link = $year . '/' . $month . '/' . $to_month;
 
 		$data['link'] = base_url('charts/counties/download_counties_details/' . $link);
 
 		$this->load->view('counties_details_view', $data);
 	}
 
-	function download_counties_details($year=NULL,$month=NULL){
-		$this->counties_model->download_counties_details($year,$month);
+	function download_counties_details($year=NULL,$month=NULL,$to_month=NULL){
+		$this->counties_model->download_counties_details($year,$month,$to_month);
 	}
 
-	function subCounties_outcomes($year=NULL,$month=NULL,$county=NULL)
+	function subCounties_outcomes($year=NULL,$month=NULL,$county=NULL,$to_month=NULL)
 	{
-		$data['outcomes'] = $this->counties_model->sub_county_outcomes($year,$month,$county);
+		$data['outcomes'] = $this->counties_model->sub_county_outcomes($year,$month,$county,$to_month);
 
 
     	$this->load->view('subcounty_outcomes_view',$data);
 	}
 
-	function county_subcounties_details($year=NULL,$month=NULL,$county=NULL)
+	function county_subcounties_details($year=NULL,$month=NULL,$county=NULL,$to_month=NULL)
 	{
-		$data['outcomes'] = $this->counties_model->county_subcounties_details($year,$month,$county);
+		$data['outcomes'] = $this->counties_model->county_subcounties_details($year,$month,$county,$to_month);
 
-		$link = $year . '/' . $month . '/' . $county;
+		$link = $year . '/' . $month . '/' . $county . '/' . $to_month;
 
 		$data['link'] = base_url('charts/counties/download_county_subcounties_outcomes/' . $link);
 
@@ -48,9 +48,9 @@ class Counties extends MY_Controller
     	$this->load->view('county_subcounty__view',$data);
 	}
 
-	function download_county_subcounties_outcomes($year=NULL,$month=NULL,$county=NULL)
+	function download_county_subcounties_outcomes($year=NULL,$month=NULL,$county=NULL,$to_month=NULL)
 	{
-		$this->counties_model->download_county_subcounty_outcomes($year,$month,$county);
+		$this->counties_model->download_county_subcounty_outcomes($year,$month,$county,$to_month);
 	}
 
 	function counties_tests($year = NULL, $month = NULL)

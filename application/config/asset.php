@@ -67,7 +67,7 @@ $config['css_files']		=	array(
 									array('title' => 'custom'	,	'file'	=>	'custom.css')
 								);
 $config['js_files']			=	array(
-									
+									array('title' => 'custom' ,	'file'	=>	'customFunctions.js')
 								);
 $config['plugin_js_files']	=	array(
 									array('title'=> 'jquery',		'file'	=>	'jquery/jquery-2.2.3.min.js'),
@@ -88,8 +88,8 @@ $config['plugin_js_files']	=	array(
 								);	
 $config['plugin_css_files']	=	array(
 									array('title'=> 'jquery-ui',	'file'	=>	'jquery-ui/jquery-ui.min.css'),
-									array('title'=> 'jquery-ui',	'file'	=>	'jquery-ui/jquery-ui.structure.min.css'),
-									array('title'=> 'jquery-ui',	'file'	=>	'jquery-ui/jquery-ui.theme.min.css'),
+									// array('title'=> 'jquery-ui',	'file'	=>	'jquery-ui/jquery-ui.structure.min.css'),
+									// array('title'=> 'jquery-ui',	'file'	=>	'jquery-ui/jquery-ui.theme.min.css'),
 									array('title'=> 'bootstrap'	,	'file'	=>	'bootstrap/css/bootstrap.min.css'),
 									array('title'=> 'material'	,	'file'	=>	'bootstrap/css/bootstrap-material-design.min.css'),
 									array('title'=> 'ripples',		'file'	=>	'bootstrap/css/ripples.min.css'),

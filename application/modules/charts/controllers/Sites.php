@@ -13,9 +13,9 @@ class Sites extends MY_Controller
 		$this->load->model('sites_model');
 	}
 
-	function site_outcomes($year=NULL,$month=NULL)
+	function site_outcomes($year=NULL,$month=NULL,$to_month=NULL)
 	{
-		$data['outcomes'] = $this->sites_model->sites_outcomes($year,$month);
+		$data['outcomes'] = $this->sites_model->sites_outcomes($year,$month,$to_month);
 
     	$this->load->view('site_outcomes_view',$data);
 	}
@@ -55,9 +55,9 @@ class Sites extends MY_Controller
 		$this->load->view('sites_pie_chart_view', $data);
 	}
 
-	function partner_sites($year=NULL,$month=NULL,$site=NULL,$partner=NULL)
+	function partner_sites($year=NULL,$month=NULL,$site=NULL,$partner=NULL,$to_month=NULL)
 	{
-		$data['outcomes'] = $this->sites_model->partner_sites_outcomes($year,$month,$site,$partner);
+		$data['outcomes'] = $this->sites_model->partner_sites_outcomes($year,$month,$site,$partner,$to_month);
 
 		$link = $year . '/' . $month . '/' . $partner;
 		$link2 = $partner;

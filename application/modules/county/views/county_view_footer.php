@@ -56,6 +56,10 @@
 		    var first, second;
 		    first = $(".date-picker[name=startDate]").val();
 		    second = $(".date-picker[name=endDate]").val();
+
+		    var new_title = set_multiple_date(first, second);
+
+		    $(".display_date").html(new_title);
 		    
 		    from 	= format_date(first);
 		    to 		= format_date(second);

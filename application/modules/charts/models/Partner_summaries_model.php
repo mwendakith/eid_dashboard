@@ -486,7 +486,7 @@ class Partner_summaries_model extends MY_Model
 		if ($partner) {
 			$sql = "CALL `proc_get_eid_partner_sites_outcomes`('".$partner."','".$year."','".$month."','".$to_month."')";
 		} else {
-			$sql = "CALL `proc_get_eid_partner_outcomes`('".$year."','".$month."')";
+			$sql = "CALL `proc_get_eid_partner_outcomes`('".$year."','".$month."','".$to_month."')";
 		}
 		// $sql = "CALL `proc_get_county_outcomes`('".$year."','".$month."')";
 		// echo "<pre>";print_r($sql);echo "</pre>";die();

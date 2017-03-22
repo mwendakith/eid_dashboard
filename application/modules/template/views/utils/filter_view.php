@@ -53,7 +53,7 @@ display: none;
             </div>
             <div class="col-md-6">
                 <label for="startDate" style="color: black;">To :</label>
-                <input name="endDate" id="endDate" class="month-picker" />
+                <input name="endDate" id="endDate" class="date-picker" />
             </div>
             <center><button id="filter" class="btn btn-primary" style="color: white;background-color: #1BA39C; margin-top: 0.2em;">Filter</button></center>
         </div>
@@ -73,7 +73,7 @@ display: none;
             $(this).datepicker('setDate', new Date(year, month, 1));
         }
     });
-    $('.month-picker').datepicker( {
+    $('#endDate').datepicker( {
         changeMonth: true,
         showButtonPanel: true,
         dateFormat: 'MM yy',

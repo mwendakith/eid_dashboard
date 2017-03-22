@@ -8,3 +8,9 @@ function format_date(data)
 		
 		return [month, date[1]];
 	}
+
+function set_multiple_date(first, second){
+	var f = first.split(" ");
+	var s = second.split(" ");
+	return f[0] + "-" + s[0] + " " + f[1];
+}

@@ -76,8 +76,12 @@
 	    
 	    from 	= format_date(first);
 	    to 		= format_date(second);
+	    var error_check = check_error_date_range(from, to);
 		    
-		$.get("<?php echo base_url();?>county/check_subcounty_select", function (data) {
+		if (!error_check) {
+
+		    
+			$.get("<?php echo base_url();?>county/check_subcounty_select", function (data) {
 				subcounty = data;
 				// console.log(subcounty);
 				if (subcounty==0) {
@@ -112,6 +116,7 @@
 					
 				}
 			});
+		}
 		    
 		});
 

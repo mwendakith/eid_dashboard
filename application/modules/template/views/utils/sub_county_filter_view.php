@@ -1,6 +1,27 @@
 <style type="text/css">
-  .ui-datepicker-calendar {
-display: none;
+.ui-datepicker-calendar {
+    display: none;
+}
+.date-picker {
+    width: 100px;
+    margin-right: 0.5em;
+    font-size: 11px;
+}
+.date-pickerBtn {
+    /*width: 80px;*/
+    font-size: 11px;
+    height: 22px;
+}
+.filter {
+    font-size: 11px;
+}
+#breadcrum {
+    font-size: 11px;
+}
+#errorAlert {
+    font-size: 11px;
+    background-color: #E08283;
+    color: #96281B;
 }
 </style>
 <div class="row" id="filter">
@@ -47,17 +68,17 @@ display: none;
     </div>
     <div class="col-md-2">
         <div class="row" id="range">
-            <div class="col-md-6">
-                <label for="startDate" style="color: black;">From :</label>
-                <input name="startDate" id="startDate" class="date-picker"  />
+            <div class="col-md-4">
+                <input name="startDate" id="startDate" class="date-picker" placeholder="From:" />
             </div>
-            <div class="col-md-6">
-                <label for="startDate" style="color: black;">To :</label>
-                <input name="endDate" id="endDate" class="date-picker" />
+            <div class="col-md-4 endDate">
+                <input name="endDate" id="endDate" class="date-picker" placeholder="To:" />
             </div>
-            <center><button id="filter" class="btn btn-primary" style="color: white;background-color: #1BA39C; margin-top: 0.2em;">Filter</button></center>
+            <div class="col-md-4">
+                <button id="filter" class="btn btn-primary date-pickerBtn" style="color: white;background-color: #1BA39C; margin-top: 0.2em; margin-bottom: 0em; margin-left: 4em;"><center>Filter</center></button>
+            </div>
         </div>
-        
+            <center><div id="errorAlertDateRange"><div id="errorAlert" class="alert alert-danger" role="alert">...</div></div></center>
     </div>
 </div>
 <script type="text/javascript">
@@ -75,6 +96,7 @@ display: none;
     });
   });
   $().ready(function(){
+    $('#errorAlertDateRange').hide();
     $(".js-example-basic-single").select2();
     //Getting the URL dynamically
     // var url = $(location).attr('href');

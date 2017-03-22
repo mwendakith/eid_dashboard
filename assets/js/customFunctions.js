@@ -14,3 +14,36 @@ function set_multiple_date(first, second){
 	var s = second.split(" ");
 	return f[0] + "-" + s[0] + " " + f[1];
 }
+
+function check_error_date_range (first, second) {
+	firstMonth = first[0];
+	firstYear = first[1];
+
+	secondMonth = second[0];
+	secondYear = second[1];
+
+	var returnVal = true;
+
+	var content = "";
+
+	if (firstYear === secondYear) {
+		if (firstMonth <= secondMonth) {
+			returnVal = false;
+		} else {
+			content = "<strong>Warning!</strong>The from month is greater than the to month!";
+			doAlert('errorAlert', content);
+		}
+	} else {
+		content = "<strong>Warning!</strong>Please select months within the same year";
+		doAlert('errorAlert', content);
+	}
+
+	return returnVal;
+}
+
+function doAlert(placementId, Content)
+{
+	$("#"+placementId).html(Content);
+    $("#errorAlertDateRange").show();
+    setTimeout(function(){$('#errorAlertDateRange').hide(); }, 5000);
+}

@@ -19,6 +19,7 @@ class Sites extends MY_Controller {
 
 	public function index()
 	{
+		$this->clear_all_session_data();
 		$this->data['content_view'] = 'sites/sites_view';
 		// echo "<pre>";print_r($this->data);die();
 		$this -> template($this->data);

@@ -48,8 +48,27 @@
     $("#lab_perfomance_stats").load("<?php echo base_url();?>charts/LabPerformance/lab_performance_stats");
   });
   
+$("button").click(function () {
+      var first, second;
+      first = $(".date-picker[name=startDate]").val();
+      second = $(".date-picker[name=endDate]").val();
 
-	function date_filter(criteria, id)
+        var new_title = set_multiple_date(first, second);
+
+        $(".display_date").html(new_title);
+      
+      from  = format_date(first);
+      to    = format_date(second);
+      var error_check = check_error_date_range(from, to);
+        
+    if (!error_check) {
+      $("#stacked_graph").load("<?php echo base_url();?>charts/LabPerformance/lab_outcomes/"+from[1]+"/"+from[0]+"/"+to[0]);
+      $("#lineargauge").load("<?php echo base_url();?>charts/LabPerformance/lab_turnaround/"+from[1]+"/"+from[0]+"/"+to[0]);
+      $("#lab_perfomance_stats").load("<?php echo base_url();?>charts/LabPerformance/lab_performance_stats/"+from[1]+"/"+from[0]+"/"+to[0]);
+    }
+        
+});
+function date_filter(criteria, id)
   {
     if (criteria === "monthly") {
       year = null;

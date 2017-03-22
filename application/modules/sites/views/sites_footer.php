@@ -1,6 +1,6 @@
 <script type="text/javascript">
 	$().ready(function(){
-		var site = <?php echo json_encode($this->session->userdata("site_filter")); ?>;
+		// var site = <?php //echo json_encode($this->session->userdata("site_filter")); ?>;
 		
 
 		$("#siteOutcomes").load("<?php echo base_url('charts/sites/site_outcomes');?>");
@@ -56,6 +56,44 @@
 		});
 	});
 
+	$("button").click(function () {
+		var first, second;
+		first = $(".date-picker[name=startDate]").val();
+		second = $(".date-picker[name=endDate]").val();
+
+		var new_title = set_multiple_date(first, second);
+
+		$(".display_date").html(new_title);
+
+		from  = format_date(first);
+		to    = format_date(second);
+		var error_check = check_error_date_range(from, to);
+	        
+	    if (!error_check) {
+		    $.get("<?php echo base_url();?>sites/check_site_select", function(data){
+	    		site = $.parseJSON(data);
+	    		console.log(site);
+	    		//Checking if site was previously selected and calling the relevant views
+				if (!site) {
+					$("#siteOutcomes").html("<center><div class='loader'></div></center>");
+					$("#siteOutcomes").load("<?php echo base_url('charts/sites/site_outcomes');?>/"+from[1]+"/"+from[0]+"/"+to[0]);
+					$("#unsupportedSites").html("<center><div class='loader'></div></center>");
+					$("#unsupportedSites").load("<?php echo base_url('charts/sites/unsupported_sites');?>");
+				} else {
+					$("#tsttrends").html("<center><div class='loader'></div></center>");
+					$("#stoutcomes").html("<center><div class='loader'></div></center>");
+					$("#vlOutcomes").html("<center><div class='loader'></div></center>");
+					$("#ageGroups").html("<center><div class='loader'></div></center>");
+					$("#tsttrends").load("<?php echo base_url('charts/sites/site_trends');?>/"+site+"/"+from[1]);
+					$("#stoutcomes").load("<?php echo base_url('charts/sites/site_positivity');?>/"+site+"/"+from[1]);
+					$("#vlOutcomes").load("<?php echo base_url('charts/sites/site_eid');?>/"+site+"/"+from[1]+"/"+from[0]+"/"+to[0]);
+					$("#ageGroups").load("<?php echo base_url('charts/sites/site_hei');?>/"+site+"/"+from[1]+"/"+from[0]+"/"+to[0]);
+
+				}
+	    	});
+	    }
+	        
+	});
 	function date_filter(criteria, id)
  	{
  		// alert('hellp');

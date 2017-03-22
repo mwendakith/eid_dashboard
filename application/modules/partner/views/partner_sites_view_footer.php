@@ -44,7 +44,42 @@
 		// 	$(location).("<?php echo base_url('partner/excel_test');?>");
 		// });
 	});
+	$("button").click(function () {
+		    var first, second;
+		    first = $(".date-picker[name=startDate]").val();
+		    second = $(".date-picker[name=endDate]").val();
+		    
+		    var new_title = set_multiple_date(first, second);
 
+		    $(".display_date").html(new_title);
+		    
+		    from = format_date(first);
+		    /* from is an array
+		     	[0] => month
+		     	[1] => year*/
+		    to 	= format_date(second);
+		    var error_check = check_error_date_range(from, to);
+		    
+		    if (!error_check) {
+			    $.get("<?php echo base_url();?>partner/check_partner_select", function (data) {
+				var partner = data;
+				partner = $.parseJSON(partner);
+				
+				if (partner==0) {
+					$("#partner_sites").hide();
+					$("#sites_all").show();
+					$("#siteOutcomes").html("<center><div class='loader'></div></center>");
+					$("#siteOutcomes").load("<?php echo base_url('charts/sites/site_outcomes');?>/"+from[1]+"/"+from[0]+"/"+to[0]);
+				} else {
+					$("#sites_all").hide();
+					$("#partner_sites").show();
+					$("#partnerSites").html("<center><div class='loader'></div></center>");
+					$("#partnerSites").load("<?php echo base_url('charts/sites/partner_sites');?>/"+from[1]+"/"+from[0]+"/"+null+"/"+partner+"/"+to[0]);
+				}
+			});
+			}
+		    
+		});
 	function date_filter(criteria, id)
 	{
 		// console.log(criteria+":"+id);
@@ -76,7 +111,7 @@
 					$("#partner_sites").hide();
 					$("#sites_all").show();
 					$("#siteOutcomes").html("<center><div class='loader'></div></center>");
-					$("#siteOutcomes").load("<?php echo base_url('charts/sites/site_outcomes');?>");
+					$("#siteOutcomes").load("<?php echo base_url('charts/sites/site_outcomes');?>/"+year+"/"+month);
 				} else {
 					$("#sites_all").hide();
 					$("#partner_sites").show();

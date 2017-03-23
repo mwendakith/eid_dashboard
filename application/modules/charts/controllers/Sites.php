@@ -59,7 +59,7 @@ class Sites extends MY_Controller
 	{
 		$data['outcomes'] = $this->sites_model->partner_sites_outcomes($year,$month,$site,$partner,$to_month);
 
-		$link = $year . '/' . $month . '/' . $partner;
+		$link = $year . '/' . $month . '/' . $partner . '/' . $to_month;
 		$link2 = $partner;
 		//$data['link'] = anchor('charts/sites/download_partner_sites/' . $link, 'Download List');
 
@@ -69,9 +69,9 @@ class Sites extends MY_Controller
     	$this->load->view('partner_site__view',$data);
 	}
 
-	function download_partner_sites($year=NULL,$month=NULL,$partner=NULL)
+	function download_partner_sites($year=NULL,$month=NULL,$partner=NULL,$to_month=NULL)
 	{
-		$this->sites_model->partner_sites_outcomes_download($year,$month,$partner);
+		$this->sites_model->partner_sites_outcomes_download($year,$month,$partner,$to_month);
 	}
 
 	function download_partner_supported_sites($partner=NULL)

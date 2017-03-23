@@ -145,6 +145,9 @@ class Sites_model extends MY_Model
 				$month = $this->session->userdata('filter_month');
 			}
 		}
+		if ($to_month==null || $to_month=='null') {
+			$to_month = 0;
+		}
 
 		$sql = "CALL `proc_get_eid_partner_sites_details`('".$partner."','".$year."','".$month."','".$to_month."')";
 		// echo "<pre>";print_r($sql);die();
@@ -177,7 +180,7 @@ class Sites_model extends MY_Model
 		return $table;
 	}
 
-	function partner_sites_outcomes_download($year=NULL,$month=NULL,$partner=NULL)
+	function partner_sites_outcomes_download($year=NULL,$month=NULL,$partner=NULL,$to_month=NULL)
 	{
 		if ($year==null || $year=='null') {
 			$year = $this->session->userdata('filter_year');
@@ -189,8 +192,11 @@ class Sites_model extends MY_Model
 				$month = $this->session->userdata('filter_month');
 			}
 		}
+		if ($to_month==null || $to_month=='null') {
+			$to_month = 0;
+		}
 
-		$sql = "CALL `proc_get_eid_partner_sites_details`('".$partner."','".$year."','".$month."')";
+		$sql = "CALL `proc_get_eid_partner_sites_details`('".$partner."','".$year."','".$month."','".$to_month."')";
 		// echo "<pre>";print_r($sql);die();
 		$data = $this->db->query($sql)->result_array();
 

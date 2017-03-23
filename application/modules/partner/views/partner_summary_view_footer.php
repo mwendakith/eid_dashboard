@@ -97,7 +97,7 @@
 						$("#partner").html("<center><div class='loader'></div></center>");
 						$("#partner").load("<?php echo base_url('charts/partner_summaries/partner_outcomes'); ?>/"+from[1]+"/"+from[0]+"/"+null+"/"+to[0]);
 					} else {
-						partner = "<?php echo json_decode("+partner+")?>";
+						partner = $.parseJSON(partner);
 						$("#first").hide();
 						$("#second").show();
 						// Loader displaying
@@ -160,7 +160,7 @@
 					$("#partner").html("<center><div class='loader'></div></center>");
 					$("#partner").load("<?php echo base_url('charts/partner_summaries/partner_outcomes'); ?>/"+year+"/"+month);
 				} else {
-					partner = "<?php echo json_decode("+partner+")?>";
+					partner = $.parseJSON(partner);
 					$("#first").hide();
 					$("#second").show();
 					// Loader displaying

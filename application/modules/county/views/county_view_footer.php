@@ -68,6 +68,7 @@
 		    if (!error_check) {
 		    
 			 	$.get("<?php echo base_url();?>county/check_county_select", function (data) {
+			 		// console.log(data);
 					if (data==0) {
 						$("#second").hide();
 						$("#first").show();
@@ -76,9 +77,10 @@
 						$("#county_outcomes").html("<center><div class='loader'></div></center>");
 						$("#county_outcomes").load("<?php echo base_url('charts/summaries/county_outcomes');?>/"+from[1]+"/"+from[0]+"/"+null+"/"+"/"+null+"/"+"/"+null+"/"+to[0]);
 						$("#county_details").html("<center><div class='loader'></div></center>");
-						$("#county_details").load("<?php echo base_url('charts/counties/counties_details');?>/"+from[1]+"/"+from[0]+"/"+null+"/"+to[0]);
+						$("#county_details").load("<?php echo base_url('charts/counties/counties_details');?>/"+from[1]+"/"+from[0]+"/"+to[0]);
 					} else {
-						data = "<?php echo json_decode("+data+")?>";
+						data = $.parseJSON(data);
+						console.log(data);
 						$("#first").hide();
 						$("#second").show();
 						// Loader displaying
@@ -86,7 +88,7 @@
 			        	$("#county_sites_details").html("<center><div class='loader'></div></center>");
 			        	// Actual graphs being loaded
 						$("#subcounty_outcomes").load("<?php echo base_url('charts/counties/subCounties_outcomes'); ?>/"+from[1]+"/"+from[0]+"/"+data+"/"+to[0]);
-						$("#county_sites_details").load("<?php echo base_url('charts/counties/county_sites_details'); ?>/"+from[1]+"/"+from[0]+"/"+data+"/"+to[0]);
+						$("#county_sub_county_details").load("<?php echo base_url('charts/counties/county_subcounties_details'); ?>/"+from[1]+"/"+from[0]+"/"+data+"/"+to[0]);
 					}
 				});
 			}
@@ -133,7 +135,7 @@
 		        	$("#county_sites_details").html("<center><div class='loader'></div></center>");
 		        	// Actual graphs being loaded
 					$("#subcounty_outcomes").load("<?php echo base_url('charts/counties/subCounties_outcomes'); ?>/"+year+"/"+month+"/"+data);
-					$("#county_sites_details").load("<?php echo base_url('charts/counties/county_sites_details'); ?>/"+year+"/"+month+"/"+data);
+					$("#county_sub_county_details").load("<?php echo base_url('charts/counties/county_subcounties_details'); ?>/"+year+"/"+month+"/"+data);
 				}
 			});
 			

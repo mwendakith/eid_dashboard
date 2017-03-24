@@ -73,7 +73,7 @@
       <a href='javascript:void(0)' onclick='date_filter("monthly", 12)' class='alert-link'> Dec</a>
     </div>
   </div>
-  <div class="col-md-2">
+  <div class="col-md-2" id="date-range-filter">
         <div class="row" id="range">
             <div class="col-md-4">
                 <input name="startDate" id="startDate" class="date-picker" placeholder="From:" />
@@ -106,5 +106,17 @@
     $('#errorAlertDateRange').hide();
     $(".js-example-basic-single").select2();
     $("#breadcrum").html("<a href='javascript:void(0)' class='alert-link'><strong>All Partners</strong></a>");
+      //Getting the URL dynamically
+    var url = $(location).attr('href');
+    // Getting the file name i.e last segment of URL (i.e. example.html)
+    var fn = url.split('/').indexOf("partner");
+    
+    if (fn > -1) {
+      var trends = url.split('/').indexOf("trends");
+      if (trends > -1) {
+        $('#year-month-filter').hide();
+          $('#date-range-filter').hide();
+      }
+    }
   });
 </script>

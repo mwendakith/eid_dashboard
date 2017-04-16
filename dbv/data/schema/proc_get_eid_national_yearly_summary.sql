@@ -9,7 +9,8 @@ BEGIN
                     SUM(`pos`) AS `positive`, 
                     SUM(`neg`) AS `negative`, 
                     SUM(`redraw`) AS `redraws` 
-                  FROM `national_summary` 
+                  FROM `national_summary`  
+                  WHERE `year` > '2007'
                   GROUP BY `year` ORDER BY `year` ASC";
 
     PREPARE stmt FROM @QUERY;

@@ -104,17 +104,17 @@
 				$("#iprophilaxis").html("<center><div class='loader'></div></center>");
 				$("#county_outcomes").html("<center><div class='loader'></div></center>");
 
-				$("#nattat").load("<?php echo base_url('charts/summaries/turnaroundtime'); ?>/"+from[1]+"/"+from[0]+"/"+null+"/"+to[0]);
-				$("#eidOutcomes").load("<?php echo base_url('charts/summaries/eid_outcomes');?>/"+from[1]+"/"+from[0]+"/"+null+"/"+"/"+null+"/"+to[0]);
-				$("#hei_follow_up").load("<?php echo base_url('charts/summaries/hei_follow');?>/"+from[1]+"/"+from[0]+"/"+null+"/"+"/"+null+"/"+to[0]);
-				$("#ageGroups").load("<?php echo base_url('charts/summaries/agegroup');?>/"+from[1]+"/"+from[0]+"/"+null+"/"+"/"+null+"/"+to[0]);
+				$("#nattat").load("<?php echo base_url('charts/summaries/turnaroundtime'); ?>/"+from[1]+"/"+from[0]+"/"+null+"/"+to[1]+"/"+to[0]);
+				$("#eidOutcomes").load("<?php echo base_url('charts/summaries/eid_outcomes');?>/"+from[1]+"/"+from[0]+"/"+null+"/"+"/"+null+"/"+to[1]+"/"+to[0]);
+				$("#hei_follow_up").load("<?php echo base_url('charts/summaries/hei_follow');?>/"+from[1]+"/"+from[0]+"/"+null+"/"+"/"+null+"/"+to[1]+"/"+to[0]);
+				$("#ageGroups").load("<?php echo base_url('charts/summaries/agegroup');?>/"+from[1]+"/"+from[0]+"/"+null+"/"+"/"+null+"/"+to[1]+"/"+to[0]);
 
-				$("#entry_point").load("<?php echo base_url('charts/summaries/entry_points');?>/"+from[1]+"/"+from[0]+"/"+null+"/"+"/"+null+"/"+to[0]);
-				$("#mprophilaxis").load("<?php echo base_url('charts/summaries/mprophyalxis');?>/"+from[1]+"/"+from[0]+"/"+null+"/"+"/"+null+"/"+to[0]);
-				$("#iprophilaxis").load("<?php echo base_url('charts/summaries/iprophyalxis');?>/"+from[1]+"/"+from[0]+"/"+null+"/"+"/"+null+"/"+to[0]);
+				$("#entry_point").load("<?php echo base_url('charts/summaries/entry_points');?>/"+from[1]+"/"+from[0]+"/"+null+"/"+"/"+null+"/"+to[1]+"/"+to[0]);
+				$("#mprophilaxis").load("<?php echo base_url('charts/summaries/mprophyalxis');?>/"+from[1]+"/"+from[0]+"/"+null+"/"+"/"+null+"/"+to[1]+"/"+to[0]);
+				$("#iprophilaxis").load("<?php echo base_url('charts/summaries/iprophyalxis');?>/"+from[1]+"/"+from[0]+"/"+null+"/"+"/"+null+"/"+to[1]+"/"+to[0]);
 				// $("#feeding").load("<?php //echo base_url('charts/summaries/agegroup');?>");
 				
-				$("#county_outcomes").load("<?php echo base_url('charts/summaries/county_outcomes'); ?>/"+from[1]+"/"+from[0]+"/"+null+"/"+null+"/"+null+"/"+to[0]);
+				$("#county_outcomes").load("<?php echo base_url('charts/summaries/county_outcomes'); ?>/"+from[1]+"/"+from[0]+"/"+null+"/"+null+"/"+null+"/"+to[1]+"/"+to[0]);
 			}
 		    
 		});

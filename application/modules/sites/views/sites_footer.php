@@ -76,7 +76,7 @@
 	    		//Checking if site was previously selected and calling the relevant views
 				if (!site) {
 					$("#siteOutcomes").html("<center><div class='loader'></div></center>");
-					$("#siteOutcomes").load("<?php echo base_url('charts/sites/site_outcomes');?>/"+from[1]+"/"+from[0]+"/"+to[0]);
+					$("#siteOutcomes").load("<?php echo base_url('charts/sites/site_outcomes');?>/"+from[1]+"/"+from[0]+"/"+to[1]+"/"+to[0]);
 					$("#unsupportedSites").html("<center><div class='loader'></div></center>");
 					$("#unsupportedSites").load("<?php echo base_url('charts/sites/unsupported_sites');?>");
 				} else {
@@ -86,8 +86,8 @@
 					$("#ageGroups").html("<center><div class='loader'></div></center>");
 					$("#tsttrends").load("<?php echo base_url('charts/sites/site_trends');?>/"+site+"/"+from[1]);
 					$("#stoutcomes").load("<?php echo base_url('charts/sites/site_positivity');?>/"+site+"/"+from[1]);
-					$("#vlOutcomes").load("<?php echo base_url('charts/sites/site_eid');?>/"+site+"/"+from[1]+"/"+from[0]+"/"+to[0]);
-					$("#ageGroups").load("<?php echo base_url('charts/sites/site_hei');?>/"+site+"/"+from[1]+"/"+from[0]+"/"+to[0]);
+					$("#vlOutcomes").load("<?php echo base_url('charts/sites/site_eid');?>/"+site+"/"+from[1]+"/"+from[0]+"/"+to[1]+"/"+to[0]);
+					$("#ageGroups").load("<?php echo base_url('charts/sites/site_hei');?>/"+site+"/"+from[1]+"/"+from[0]+"/"+to[1]+"/"+to[0]);
 
 				}
 	    	});

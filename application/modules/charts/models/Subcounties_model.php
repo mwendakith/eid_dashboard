@@ -11,7 +11,7 @@ class Subcounties_model extends MY_Model
 		parent:: __construct();;
 	}
 
-	function subcounties_outcomes($year=null,$month=null,$to_month=null)
+	function subcounties_outcomes($year=null,$month=null,$to_year=null,$to_month=null)
 	{
 
 		if ($year==null || $year=='null') {
@@ -27,8 +27,11 @@ class Subcounties_model extends MY_Model
 		if ($to_month==null || $to_month=='null') {
 			$to_month = 0;
 		}
+		if ($to_year==null || $to_year=='null') {
+			$to_year = 0;
+		}
 
-		$sql = "CALL `proc_get_eid_top_subcounty_outcomes`('".$year."','".$month."','".$to_month."')";
+		$sql = "CALL `proc_get_eid_top_subcounty_outcomes`('".$year."','".$month."','".$to_year."','".$to_month."')";
 		// echo "<pre>";print_r($sql);die();
 		$result = $this->db->query($sql)->result_array();
 
@@ -50,7 +53,7 @@ class Subcounties_model extends MY_Model
 		return $data;
 	}
 
-	function get_eid($subcounty=null, $year=null, $month=null,$to_month=null){
+	function get_eid($subcounty=null, $year=null, $month=null,$to_year=null,$to_month=null){
 
 		if ($subcounty==null || $subcounty=='null') {
 			$subcounty = $this->session->userdata('sub_county_filter');
@@ -77,6 +80,9 @@ class Subcounties_model extends MY_Model
 		}
 		if ($to_month==null || $to_month=='null') {
 			$to_month = 0;
+		}
+		if ($to_year==null || $to_year=='null') {
+			$to_year = 0;
 		}
 
 		
@@ -194,7 +200,7 @@ class Subcounties_model extends MY_Model
 		return $data;
 	}
 
-	function get_hei($subcounty=null, $year=null, $month=null,$to_month=null){
+	function get_hei($subcounty=null, $year=null, $month=null,$to_year=null,$to_month=null){
 
 		if ($subcounty==null || $subcounty=='null') {
 			$subcounty = $this->session->userdata('sub_county_filter');
@@ -220,6 +226,9 @@ class Subcounties_model extends MY_Model
 		}
 		if ($to_month==null || $to_month=='null') {
 			$to_month = 0;
+		}
+		if ($to_year==null || $to_year=='null') {
+			$to_year = 0;
 		}
 
 		
@@ -285,7 +294,7 @@ class Subcounties_model extends MY_Model
 		return $data;
 	}
 
-	function age($subcounty=null, $year=null, $month=null,$to_month=null)
+	function age($subcounty=null, $year=null, $month=null,$to_year=null,$to_month=null)
 	{
 		// echo "<pre>";print_r($subcounty."<__>");die();
 		if ($subcounty==null || $subcounty=='null') {
@@ -308,8 +317,11 @@ class Subcounties_model extends MY_Model
 		if ($to_month==null || $to_month=='null') {
 			$to_month = 0;
 		}
+		if ($to_year==null || $to_year=='null') {
+			$to_year = 0;
+		}
 
-		$sql = "CALL `proc_get_eid_subcounty_age`('".$subcounty."','".$year."','".$month."','".$to_month."')";
+		$sql = "CALL `proc_get_eid_subcounty_age`('".$subcounty."','".$year."','".$month."','".$to_year."','".$to_month."')";
 		// echo "<pre>";print_r($sql);die();
 		$result = $this->db->query($sql)->result_array();
 		// echo "<pre>";print_r($result);die();
@@ -356,7 +368,7 @@ class Subcounties_model extends MY_Model
 		return $data;
 	}
 
-	function subcounty_sites_outcomes($subcounty=NULL,$year=NULL,$month=NULL,$to_month=null)
+	function subcounty_sites_outcomes($subcounty=NULL,$year=NULL,$month=NULL,$to_year=null,$to_month=null)
 	{
 		// echo "<pre>";print_r($subcounty."<__>".$year."<___>".$month);die();
 		$table = '';
@@ -377,8 +389,11 @@ class Subcounties_model extends MY_Model
 		if ($to_month==null || $to_month=='null') {
 			$to_month = 0;
 		}
+		if ($to_year==null || $to_year=='null') {
+			$to_year = 0;
+		}
 
-		$sql = "CALL `proc_get_eid_subcounty_sites_details`('".$subcounty."','".$year."','".$month."','".$to_month."')";
+		$sql = "CALL `proc_get_eid_subcounty_sites_details`('".$subcounty."','".$year."','".$month."','".$to_year."','".$to_month."')";
 		// echo "<pre>";print_r($sql);die();
 		$result = $this->db->query($sql)->result_array();
 		// echo "<pre>";print_r($sql);die();
@@ -409,7 +424,7 @@ class Subcounties_model extends MY_Model
 		return $table;
 	}
 
-	function subcounty_sites_outcomes_download($subcounty=NULL,$year=NULL,$month=NULL,$to_month=null)
+	function subcounty_sites_outcomes_download($subcounty=NULL,$year=NULL,$month=NULL,$to_year=null,$to_month=null)
 	{
 		if ($year==null || $year=='null') {
 			$year = $this->session->userdata('filter_year');
@@ -424,8 +439,11 @@ class Subcounties_model extends MY_Model
 		if ($to_month==null || $to_month=='null') {
 			$to_month = 0;
 		}
+		if ($to_year==null || $to_year=='null') {
+			$to_year = 0;
+		}
 
-		$sql = "CALL `proc_get_eid_subcounty_sites_details`('".$subcounty."','".$year."','".$month."','".$to_month."')";
+		$sql = "CALL `proc_get_eid_subcounty_sites_details`('".$subcounty."','".$year."','".$month."','".$to_year."','".$to_month."')";
 		// echo "<pre>";print_r($sql);die();
 		$data = $this->db->query($sql)->result_array();
 

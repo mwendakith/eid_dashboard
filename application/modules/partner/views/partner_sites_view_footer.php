@@ -69,12 +69,12 @@
 					$("#partner_sites").hide();
 					$("#sites_all").show();
 					$("#siteOutcomes").html("<center><div class='loader'></div></center>");
-					$("#siteOutcomes").load("<?php echo base_url('charts/sites/site_outcomes');?>/"+from[1]+"/"+from[0]+"/"+to[0]);
+					$("#siteOutcomes").load("<?php echo base_url('charts/sites/site_outcomes');?>/"+from[1]+"/"+from[0]+"/"+to[1]+"/"+to[0]);
 				} else {
 					$("#sites_all").hide();
 					$("#partner_sites").show();
 					$("#partnerSites").html("<center><div class='loader'></div></center>");
-					$("#partnerSites").load("<?php echo base_url('charts/sites/partner_sites');?>/"+from[1]+"/"+from[0]+"/"+null+"/"+partner+"/"+to[0]);
+					$("#partnerSites").load("<?php echo base_url('charts/sites/partner_sites');?>/"+from[1]+"/"+from[0]+"/"+null+"/"+partner+"/"+to[1]+"/"+to[0]);
 				}
 			});
 			}

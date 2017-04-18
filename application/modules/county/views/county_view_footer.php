@@ -75,9 +75,9 @@
 					
 						// fetching the partner outcomes
 						$("#county_outcomes").html("<center><div class='loader'></div></center>");
-						$("#county_outcomes").load("<?php echo base_url('charts/summaries/county_outcomes');?>/"+from[1]+"/"+from[0]+"/"+null+"/"+"/"+null+"/"+"/"+null+"/"+to[0]);
+						$("#county_outcomes").load("<?php echo base_url('charts/summaries/county_outcomes');?>/"+from[1]+"/"+from[0]+"/"+null+"/"+"/"+null+"/"+"/"+null+"/"+to[1]+"/"+to[0]);
 						$("#county_details").html("<center><div class='loader'></div></center>");
-						$("#county_details").load("<?php echo base_url('charts/counties/counties_details');?>/"+from[1]+"/"+from[0]+"/"+to[0]);
+						$("#county_details").load("<?php echo base_url('charts/counties/counties_details');?>/"+from[1]+"/"+from[0]+"/"+to[1]+"/"+to[0]);
 					} else {
 						data = $.parseJSON(data);
 						// console.log(data);
@@ -87,8 +87,8 @@
 			        	$("#subcounty_outcomes").html("<center><div class='loader'></div></center>");
 			        	$("#county_sites_details").html("<center><div class='loader'></div></center>");
 			        	// Actual graphs being loaded
-						$("#subcounty_outcomes").load("<?php echo base_url('charts/counties/subCounties_outcomes'); ?>/"+from[1]+"/"+from[0]+"/"+data+"/"+to[0]);
-						$("#county_sub_county_details").load("<?php echo base_url('charts/counties/county_subcounties_details'); ?>/"+from[1]+"/"+from[0]+"/"+data+"/"+to[0]);
+						$("#subcounty_outcomes").load("<?php echo base_url('charts/counties/subCounties_outcomes'); ?>/"+from[1]+"/"+from[0]+"/"+data+"/"+to[1]+"/"+to[0]);
+						$("#county_sub_county_details").load("<?php echo base_url('charts/counties/county_subcounties_details'); ?>/"+from[1]+"/"+from[0]+"/"+data+"/"+to[1]+"/"+to[0]);
 					}
 				});
 			}

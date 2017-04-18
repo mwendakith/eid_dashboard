@@ -11,7 +11,7 @@ class Counties_model extends MY_Model
 		parent:: __construct();;
 	}
 
-	function counties_details($year=NULL,$month=NULL,$to_month=NULL)
+	function counties_details($year=NULL,$month=NULL,$to_year=null,$to_month=null)
 	{
 		$table = '';
 		$count = 1;
@@ -28,8 +28,11 @@ class Counties_model extends MY_Model
 		if ($to_month==null || $to_month=='null') {
 			$to_month = 0;
 		}
+		if ($to_year==null || $to_year=='null') {
+			$to_year = 0;
+		}
 
-		$sql = "CALL `proc_get_eid_countys_details`('".$year."','".$month."','".$to_month."')";
+		$sql = "CALL `proc_get_eid_countys_details`('".$year."','".$month."','".$to_year."','".$to_month."')";
 		// echo "<pre>";print_r($sql);die();
 		$result = $this->db->query($sql)->result_array();
 		// echo "<pre>";print_r($result);die();
@@ -58,7 +61,7 @@ class Counties_model extends MY_Model
 		return $table;
 	}
 
-	function download_counties_details($year=NULL,$month=NULL,$to_month=NULL){
+	function download_counties_details($year=NULL,$month=NULL,$to_year=null,$to_month=null){
 		if ($year==null || $year=='null') {
 			$year = $this->session->userdata('filter_year');
 		}
@@ -72,8 +75,11 @@ class Counties_model extends MY_Model
 		if ($to_month==null || $to_month=='null') {
 			$to_month = 0;
 		}
+		if ($to_year==null || $to_year=='null') {
+			$to_year = 0;
+		}
 
-		$sql = "CALL `proc_get_eid_countys_details`('".$year."','".$month."','".$to_month."')";
+		$sql = "CALL `proc_get_eid_countys_details`('".$year."','".$month."','".$to_year."','".$to_month."')";
 		// echo "<pre>";print_r($sql);die();
 		$result = $this->db->query($sql)->result_array();
 
@@ -103,7 +109,7 @@ class Counties_model extends MY_Model
 	    fpassthru($f);
 	}
 
-	function sub_county_outcomes($year=null,$month=null,$county=null,$to_month=NULL)
+	function sub_county_outcomes($year=null,$month=null,$county=null,$to_year=null,$to_month=null)
 	{
 		if ($county==null || $county=='null') {
 			$county = $this->session->userdata('county_filter');
@@ -122,8 +128,11 @@ class Counties_model extends MY_Model
 		if ($to_month==null || $to_month=='null') {
 			$to_month = 0;
 		}
+		if ($to_year==null || $to_year=='null') {
+			$to_year = 0;
+		}
 
-		$sql = "CALL `proc_get_eid_subcounty_outcomes`('".$county."','".$year."','".$month."','".$to_month."')";
+		$sql = "CALL `proc_get_eid_subcounty_outcomes`('".$county."','".$year."','".$month."','".$to_year."','".$to_month."')";
 		// echo "<pre>";print_r($sql);die();
 		$result = $this->db->query($sql)->result_array();
 
@@ -145,7 +154,7 @@ class Counties_model extends MY_Model
 		return $data;
 	}
 
-	function county_subcounties_details($year=null,$month=null,$county=null,$to_month=NULL)
+	function county_subcounties_details($year=null,$month=null,$county=null,$to_year=null,$to_month=null)
 	{
 		$table = '';
 		$count = 1;
@@ -165,8 +174,11 @@ class Counties_model extends MY_Model
 		if ($to_month==null || $to_month=='null') {
 			$to_month = 0;
 		}
+		if ($to_year==null || $to_year=='null') {
+			$to_year = 0;
+		}
 
-		$sql = "CALL `proc_get_eid_county_subcounties_details`('".$county."','".$year."','".$month."','".$to_month."')";
+		$sql = "CALL `proc_get_eid_county_subcounties_details`('".$county."','".$year."','".$month."','".$to_year."','".$to_month."')";
 		// echo "<pre>";print_r($sql);die();
 		$result = $this->db->query($sql)->result_array();
 		// echo "<pre>";print_r($sql);die();
@@ -194,7 +206,7 @@ class Counties_model extends MY_Model
 		return $table;
 	}
 
-	function download_county_subcounty_outcomes($year=null,$month=null,$county=null,$to_month=NULL)
+	function download_county_subcounty_outcomes($year=null,$month=null,$county=null,$to_year=null,$to_month=null)
 	{
 		
 		if ($county==null || $county=='null') {
@@ -213,8 +225,11 @@ class Counties_model extends MY_Model
 		if ($to_month==null || $to_month=='null') {
 			$to_month = 0;
 		}
+		if ($to_year==null || $to_year=='null') {
+			$to_year = 0;
+		}
 
-		$sql = "CALL `proc_get_eid_county_subcounties_details`('".$county."','".$year."','".$month."','".$to_month."')";
+		$sql = "CALL `proc_get_eid_county_subcounties_details`('".$county."','".$year."','".$month."','".$to_year."','".$to_month."')";
 		// echo "<pre>";print_r($sql);die();
 		$result = $this->db->query($sql)->result_array();
 

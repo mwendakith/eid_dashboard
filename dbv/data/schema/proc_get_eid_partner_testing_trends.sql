@@ -1,6 +1,6 @@
-DROP PROCEDURE IF EXISTS `proc_get_partner_testing_trends`;
+DROP PROCEDURE IF EXISTS `proc_get_eid_partner_testing_trends`;
 DELIMITER //
-CREATE PROCEDURE `proc_get_partner_testing_trends`
+CREATE PROCEDURE `proc_get_eid_partner_testing_trends`
 (IN P_id INT(11), IN from_year INT(11), IN to_year INT(11))
 BEGIN
   SET @QUERY =    "SELECT 
@@ -17,3 +17,4 @@ BEGIN
     EXECUTE stmt;
 END //
 DELIMITER ;
+

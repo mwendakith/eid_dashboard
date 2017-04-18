@@ -13,9 +13,9 @@ class Sites extends MY_Controller
 		$this->load->model('sites_model');
 	}
 
-	function site_outcomes($year=NULL,$month=NULL,$to_month=NULL)
+	function site_outcomes($year=NULL,$month=NULL,$to_year=NULL,$to_month=NULL)
 	{
-		$data['outcomes'] = $this->sites_model->sites_outcomes($year,$month,$to_month);
+		$data['outcomes'] = $this->sites_model->sites_outcomes($year,$month,$to_year,$to_month);
 
     	$this->load->view('site_outcomes_view',$data);
 	}
@@ -45,7 +45,7 @@ class Sites extends MY_Controller
 	}
 
 	function site_eid($site=NULL, $year=NULL, $month=NULL, $to_month=NULL){
-		$data['outcomes'] = $this->sites_model->get_eid($site,$year,$month,$to_month);
+		$data['outcomes'] = $this->sites_model->get_eid($site,$year,$month,$to_year,$to_month);
 		
 		$this->load->view('sites_eid_outcomes_view', $data);
 	}
@@ -55,11 +55,11 @@ class Sites extends MY_Controller
 		$this->load->view('sites_pie_chart_view', $data);
 	}
 
-	function partner_sites($year=NULL,$month=NULL,$site=NULL,$partner=NULL,$to_month=NULL)
+	function partner_sites($year=NULL,$month=NULL,$site=NULL,$partner=NULL,$to_year=NULL,$to_month=NULL)
 	{
-		$data['outcomes'] = $this->sites_model->partner_sites_outcomes($year,$month,$site,$partner,$to_month);
+		$data['outcomes'] = $this->sites_model->partner_sites_outcomes($year,$month,$site,$partner,$to_year,$to_month);
 
-		$link = $year . '/' . $month . '/' . $partner . '/' . $to_month;
+		$link = $year . '/' . $month . '/' . $partner . '/' . $to_year . '/' . $to_month;
 		$link2 = $partner;
 		//$data['link'] = anchor('charts/sites/download_partner_sites/' . $link, 'Download List');
 
@@ -69,9 +69,9 @@ class Sites extends MY_Controller
     	$this->load->view('partner_site__view',$data);
 	}
 
-	function download_partner_sites($year=NULL,$month=NULL,$partner=NULL,$to_month=NULL)
+	function download_partner_sites($year=NULL,$month=NULL,$partner=NULL,$to_year=NULL,$to_month=NULL)
 	{
-		$this->sites_model->partner_sites_outcomes_download($year,$month,$partner,$to_month);
+		$this->sites_model->partner_sites_outcomes_download($year,$month,$partner,$to_year,$to_month);
 	}
 
 	function download_partner_supported_sites($partner=NULL)

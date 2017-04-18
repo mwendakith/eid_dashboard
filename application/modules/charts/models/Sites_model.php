@@ -13,7 +13,7 @@ class Sites_model extends MY_Model
 	}
 
 
-	function sites_outcomes($year=null,$month=null,$to_month=NULL){
+	function sites_outcomes($year=null,$month=null,$to_year=null,$to_month=null){
 		if ($year==null || $year=='null') {
 			$year = $this->session->userdata('filter_year');
 		}
@@ -28,8 +28,11 @@ class Sites_model extends MY_Model
 		if ($to_month==null || $to_month=='null') {
 			$to_month = 0;
 		}
+		if ($to_year==null || $to_year=='null') {
+			$to_year = 0;
+		}
 
-		$sql = "CALL `proc_get_eid_all_sites_outcomes`('".$year."','".$month."','".$to_month."')";
+		$sql = "CALL `proc_get_eid_all_sites_outcomes`('".$year."','".$month."','".$to_year."','".$to_month."')";
 		// echo $sql;die();
 		$result = $this->db->query($sql)->result_array();
 
@@ -131,7 +134,7 @@ class Sites_model extends MY_Model
 
 	}
 
-	function partner_sites_outcomes($year=NULL,$month=NULL,$site=NULL,$partner=NULL,$to_month=NULL)
+	function partner_sites_outcomes($year=NULL,$month=NULL,$site=NULL,$partner=NULL,$to_year=null,$to_month=null)
 	{
 		$table = '';
 		$count = 1;
@@ -148,8 +151,11 @@ class Sites_model extends MY_Model
 		if ($to_month==null || $to_month=='null') {
 			$to_month = 0;
 		}
+		if ($to_year==null || $to_year=='null') {
+			$to_year = 0;
+		}
 
-		$sql = "CALL `proc_get_eid_partner_sites_details`('".$partner."','".$year."','".$month."','".$to_month."')";
+		$sql = "CALL `proc_get_eid_partner_sites_details`('".$partner."','".$year."','".$month."','".$to_year."','".$to_month."')";
 		// echo "<pre>";print_r($sql);die();
 		$result = $this->db->query($sql)->result_array();
 		// echo "<pre>";print_r($sql);die();
@@ -180,7 +186,7 @@ class Sites_model extends MY_Model
 		return $table;
 	}
 
-	function partner_sites_outcomes_download($year=NULL,$month=NULL,$partner=NULL,$to_month=NULL)
+	function partner_sites_outcomes_download($year=NULL,$month=NULL,$partner=NULL,$to_year=null,$to_month=null)
 	{
 		if ($year==null || $year=='null') {
 			$year = $this->session->userdata('filter_year');
@@ -195,8 +201,11 @@ class Sites_model extends MY_Model
 		if ($to_month==null || $to_month=='null') {
 			$to_month = 0;
 		}
+		if ($to_year==null || $to_year=='null') {
+			$to_year = 0;
+		}
 
-		$sql = "CALL `proc_get_eid_partner_sites_details`('".$partner."','".$year."','".$month."','".$to_month."')";
+		$sql = "CALL `proc_get_eid_partner_sites_details`('".$partner."','".$year."','".$month."','".$to_year."','".$to_month."')";
 		// echo "<pre>";print_r($sql);die();
 		$data = $this->db->query($sql)->result_array();
 
@@ -293,7 +302,7 @@ class Sites_model extends MY_Model
 		}
 
 		
-		$sql = "CALL `proc_get_eid_sites_trends`('".$year."','".$site."')";
+		$sql = "CALL `proc_get_eid_sites_trends`('".$site."', '".$year."')";
 
 		$result = $this->db->query($sql)->result_array();
 
@@ -391,11 +400,14 @@ class Sites_model extends MY_Model
 		}
 		if ($to_month==null || $to_month=='null') {
 			$to_month = 0;
+		}
+		if ($to_year==null || $to_year=='null') {
+			$to_year = 0;
 		}else {
 			$data['title'] = "EID Outcome (" . $year . ", " . $this->resolve_month($month) . " - ".$this->resolve_month($to_month).")";
 		}
 		
-		$sql = "CALL `proc_get_eid_sites_eid`('".$year."', '".$month."', '".$to_month."', '".$site."')";
+		$sql = "CALL `proc_get_eid_sites_eid`('".$site."', '".$year."', '".$month."', '".$to_month."')";
 
 		$result = $this->db->query($sql)->result_array();
 		// echo "<pre>";print_r($result);die();
@@ -543,12 +555,15 @@ class Sites_model extends MY_Model
 		}
 		if ($to_month==null || $to_month=='null') {
 			$to_month = 0;
+		}
+		if ($to_year==null || $to_year=='null') {
+			$to_year = 0;
 		}else {
 			$data['title'] = "EID Outcome (" . $year . ", " . $this->resolve_month($month) . " - ".$this->resolve_month($to_month).")";
 		}
 
 		
-		$sql = "CALL `proc_get_eid_sites_hei_follow_up`('".$year."', '".$month."', '".$to_month."', '".$site."')";
+		$sql = "CALL `proc_get_eid_sites_hei_follow_up`('".$site."', '".$year."', '".$month."', '".$to_month."')";
 
 		$result = $this->db->query($sql)->row();
 		// echo "<pre>";print_r($result);die();

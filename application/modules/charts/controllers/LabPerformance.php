@@ -13,20 +13,20 @@ class LabPerformance extends MY_Controller
 		$this->load->model('performance_model');
 	}
 
-	function lab_performance_stats($year=NULL,$month=NULL,$to_month=NULL)
+	function lab_performance_stats($year=NULL,$month=NULL,$to_year=NULL,$to_month=NULL)
 	{
-		$data['stats'] = $this->performance_model->lab_performance_stat($year,$month,$to_month);
+		$data['stats'] = $this->performance_model->lab_performance_stat($year,$month,$to_year,$to_month);
 
-		$link = $year . '/' . $month . '/' . $to_month;
+		$link = $year . '/' . $month . '/' . $to_year . '/' . $to_month;
 
 		$data['link'] = base_url('charts/LabPerformance/download_lab_performance_stats/' . $link) ;
 
 		$this->load->view('lab_performance_stats_view', $data);
 	}
 
-	function download_lab_performance_stats($year=NULL,$month=NULL)
+	function download_lab_performance_stats($year=NULL,$month=NULL,$to_year=NULL,$to_month=NULL)
 	{
-		$this->performance_model->download_lab_performance_stat($year,$month);
+		$this->performance_model->download_lab_performance_stat($year,$month,$to_year,$to_month);
 	}	
 
 	function testing_trends($year=NULL)
@@ -63,15 +63,15 @@ class LabPerformance extends MY_Controller
 		
 	}
 
-	function lab_outcomes($year=NULL, $month=NULL,$to_month=NULL){
-		$data['trends'] = $this->performance_model->lab_outcomes($year,$month,$to_month);
+	function lab_outcomes($year=NULL, $month=NULL,$to_year=NULL,$to_month=NULL){
+		$data['trends'] = $this->performance_model->lab_outcomes($year,$month,$to_year,$to_month);
 		//echo json_encode($data);
 		$this->load->view('lab_outcomes_view', $data);
 
 	}
 
-	function lab_turnaround($year=NULL, $month=NULL,$to_month=NULL){
-		$data = $this->performance_model->lab_turnaround($year,$month,$to_month);
+	function lab_turnaround($year=NULL, $month=NULL,$to_year=NULL,$to_month=NULL){
+		$data = $this->performance_model->lab_turnaround($year,$month,$to_year,$to_month);
 		//echo json_encode($data);
 
 		foreach ($data as $key => $value) {

@@ -90,7 +90,7 @@
 				
 					// fetching the partner outcomes
 					$("#county_outcomes").html("<center><div class='loader'></div></center>");
-					$("#county_outcomes").load("<?php echo base_url('charts/subcounties/subcounties_outcomes'); ?>/"+from[1]+"/"+from[0]+"/"+to[0]);
+					$("#county_outcomes").load("<?php echo base_url('charts/subcounties/subcounties_outcomes'); ?>/"+from[1]+"/"+from[0]+"/"+to[1]+"/"+to[0]);
 				} else {
 					// subcounty = "<?php echo json_decode("+subcounty+")?>";
 					// console.log(subcounty);
@@ -99,19 +99,19 @@
 					// Loader displaying
 		        	$("#eid_outcomes").html("<center><div class='loader'></div></center>");
 		        	// Actual graphs being loaded
-					$("#eid_outcomes").load("<?php echo base_url('charts/subcounties/subcounties_eid'); ?>/"+subcounty+"/"+from[1]+"/"+from[0]+"/"+to[0]);
+					$("#eid_outcomes").load("<?php echo base_url('charts/subcounties/subcounties_eid'); ?>/"+subcounty+"/"+from[1]+"/"+from[0]+"/"+to[1]+"/"+to[0]);
 
 					$("#subcounty_hei").html("<center><div class='loader'></div></center>");
 		        	// Actual graphs being loaded
-					$("#subcounty_hei").load("<?php echo base_url('charts/subcounties/subcounties_hei'); ?>/"+subcounty+"/"+from[1]+"/"+from[0]+"/"+to[0]);
+					$("#subcounty_hei").load("<?php echo base_url('charts/subcounties/subcounties_hei'); ?>/"+subcounty+"/"+from[1]+"/"+from[0]+"/"+to[1]+"/"+to[0]);
 
 					$("#subcounty_age").html("<center><div class='loader'></div></center>");
 		        	// Actual graphs being loaded
-					$("#subcounty_age").load("<?php echo base_url('charts/subcounties/subcounties_age'); ?>/"+subcounty+"/"+from[1]+"/"+from[0]+"/"+to[0]);
+					$("#subcounty_age").load("<?php echo base_url('charts/subcounties/subcounties_age'); ?>/"+subcounty+"/"+from[1]+"/"+from[0]+"/"+to[1]+"/"+to[0]);
 
 					$("#subcounty_facilities").html("<center><div class='loader'></div></center>");
 		        	// Actual graphs being loaded
-					$("#subcounty_facilities").load("<?php echo base_url('charts/subcounties/subcounties_sites'); ?>/"+subcounty+"/"+from[1]+"/"+from[0]+"/"+to[0]);
+					$("#subcounty_facilities").load("<?php echo base_url('charts/subcounties/subcounties_sites'); ?>/"+subcounty+"/"+from[1]+"/"+from[0]+"/"+to[1]+"/"+to[0]);
 
 					
 				}

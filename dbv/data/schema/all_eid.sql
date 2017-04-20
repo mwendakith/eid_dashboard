@@ -235,7 +235,7 @@ DROP PROCEDURE IF EXISTS `proc_get_county_iprophylaxis`;
 DROP PROCEDURE IF EXISTS `proc_get_eid_county_iprophylaxis`;
 DELIMITER //
 CREATE PROCEDURE `proc_get_eid_county_iprophylaxis`
-(IN C_id INT(11), IN filter_year INT(11), IN from_month INT(11), IN to_year INT(11) IN to_month INT(11))
+(IN C_id INT(11), IN filter_year INT(11), IN from_month INT(11), IN to_year INT(11), IN to_month INT(11))
 BEGIN
   SET @QUERY =    "SELECT 
                         `p`.`name`, 
@@ -271,7 +271,7 @@ DROP PROCEDURE IF EXISTS `proc_get_county_mprophylaxis`;
 DROP PROCEDURE IF EXISTS `proc_get_eid_county_mprophylaxis`;
 DELIMITER //
 CREATE PROCEDURE `proc_get_eid_county_mprophylaxis`
-(IN C_id INT(11), IN filter_year INT(11), IN from_month INT(11), IN to_year INT(11) IN to_month INT(11))
+(IN C_id INT(11), IN filter_year INT(11), IN from_month INT(11), IN to_year INT(11), IN to_month INT(11))
 BEGIN
   SET @QUERY =    "SELECT 
                         `p`.`name`, 
@@ -512,7 +512,7 @@ BEGIN
 END //
 DELIMITER ;
 
-    DROP PROCEDURE IF EXISTS `proc_get_eid_county_testing_trends`;
+DROP PROCEDURE IF EXISTS `proc_get_eid_county_testing_trends`;
 DELIMITER //
 CREATE PROCEDURE `proc_get_eid_county_testing_trends`
 (IN C_id INT(11), IN from_year INT(11), IN to_year INT(11))
@@ -1499,7 +1499,7 @@ DELIMITER ;
 DROP PROCEDURE IF EXISTS `proc_get_eid_sites_hei_follow_up`;
 DELIMITER //
 CREATE PROCEDURE `proc_get_eid_sites_hei_follow_up`
-(IN filter_site INT(11), IN filter_year INT(11), IN from_month INT(11), IN to_year INT(11) IN to_month INT(11))
+(IN filter_site INT(11), IN filter_year INT(11), IN from_month INT(11), IN to_year INT(11), IN to_month INT(11))
 BEGIN
   SET @QUERY =    "SELECT 
                     SUM((`ss`.`enrolled`)) AS `enrolled`, 

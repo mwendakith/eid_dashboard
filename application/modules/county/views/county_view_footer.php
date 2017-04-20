@@ -80,7 +80,7 @@
 						$("#county_details").load("<?php echo base_url('charts/counties/counties_details');?>/"+from[1]+"/"+from[0]+"/"+to[1]+"/"+to[0]);
 					} else {
 						data = $.parseJSON(data);
-						console.log(data);
+						// console.log(data);
 						$("#first").hide();
 						$("#second").show();
 						// Loader displaying

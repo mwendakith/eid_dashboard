@@ -464,9 +464,9 @@ class Sites_model extends MY_Model
 		    	</tr>
 
 		    	<tr>
-		    		<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Infants &lt; 2M:</td>
+		    		<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Infants &lt;= 2M:</td>
 		    		<td>'.(int) $value['infantsless2m'].'</td>
-		    		<td>Infants &lt; 2M Positive:</td>
+		    		<td>Infants &lt;= 2M Positive:</td>
 		    		<td>'.(int) $value['infantless2mpos'].'('.round((((int) $value['infantless2mpos']/(int) $value['infantsless2m'])*100),1).'%)</td>
 		    	</tr>
 

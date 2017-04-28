@@ -93,6 +93,7 @@
 								<li><a href="<?php echo base_url();?>county/subCounty">Sub-County</a></li>
 							</ul>
 						</li>
+						<li><a href="<?php echo base_url();?>age">Age</a></li>
 						<li class="dropdown">
 							<a href="bootstrap-elements.html" data-target="#" class="dropdown-toggle" data-toggle="dropdown">Partners
 							<b class="caret"></b></a>

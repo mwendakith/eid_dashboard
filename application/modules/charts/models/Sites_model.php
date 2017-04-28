@@ -348,7 +348,7 @@ class Sites_model extends MY_Model
 		}
 
 		
-		$sql = "CALL `proc_get_eid_sites_trends`('".$year."','".$site."')";
+		$sql = "CALL `proc_get_eid_sites_trends`('".$site."','".$year."')";
 
 		$result = $this->db->query($sql)->result_array();
 

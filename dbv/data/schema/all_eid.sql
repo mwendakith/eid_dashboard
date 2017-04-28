@@ -32,6 +32,7 @@ BEGIN
      EXECUTE stmt;
 END //
 DELIMITER ;
+
 DROP PROCEDURE IF EXISTS `proc_get_eid_average_rejection`;
 DELIMITER //
 CREATE PROCEDURE `proc_get_eid_average_rejection`
@@ -1468,8 +1469,20 @@ BEGIN
   SET @QUERY =    "SELECT 
                     SUM((`ss`.`pos`)) AS `pos`, 
                     SUM(`ss`.`neg`) AS `neg`, 
-                    SUM(`ss`.`neg`) AS `tests`, 
-                    SUM(`ss`.`neg`) AS `rejected` 
+                    SUM(`ss`.`tests`) AS `tests`, 
+                    SUM(`ss`.`rejected`) AS `rejected`, 
+                    SUM(`ss`.`repeatspos`) AS `repeatspos`, 
+                    SUM(`ss`.`alltests`) AS `alltests`, 
+                    SUM(`ss`.`firstdna`) AS `firstdna`, 
+                    SUM(`ss`.`confirmdna`) AS `confirmdna`, 
+                    SUM(`ss`.`actualinfants`) AS `actualinfants`, 
+                    SUM(`ss`.`actualinfantsPOS`) AS `actualinfantspos`, 
+                    SUM(`ss`.`infantsless2m`) AS `infantsless2m`, 
+                    SUM(`ss`.`infantsless2mPOS`) AS `infantless2mpos`,
+                    SUM(`ss`.`adults`) AS `adults`, 
+                    SUM(`ss`.`adultsPOS`) AS `adultsPOS`, 
+                    AVG(`ss`.`medage`) AS `medage`, 
+                    AVG(`ss`.`sitessending`) AS `sitessending` 
                   FROM `site_summary` `ss` 
             WHERE 1";
 
@@ -1505,6 +1518,8 @@ BEGIN
                     SUM((`ss`.`enrolled`)) AS `enrolled`, 
                     SUM(`ss`.`dead`) AS `dead`, 
                     SUM(`ss`.`ltfu`) AS `ltfu`, 
+                    SUM(`ss`.`adult`) AS `adult`, 
+                    SUM(`ss`.`other`) AS `other`, 
                     SUM(`ss`.`transout`) AS `transout` 
                   FROM `site_summary` `ss` 
     WHERE 1";

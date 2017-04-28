@@ -44,14 +44,14 @@ class Sites extends MY_Controller
 		$this->load->view('site_positivity_view', $data);
 	}
 
-	function site_eid($site=NULL, $year=NULL, $month=NULL, $to_month=NULL){
+	function site_eid($site=NULL, $year=NULL, $month=NULL,$to_year=NULL, $to_month=NULL){
 		$data['outcomes'] = $this->sites_model->get_eid($site,$year,$month,$to_year,$to_month);
 		
 		$this->load->view('sites_eid_outcomes_view', $data);
 	}
 
-	function site_hei($site=NULL, $year=NULL, $month=NULL){
-		$data = $this->sites_model->get_hei($site, $year, $month);
+	function site_hei($site=NULL, $year=NULL, $month=NULL,$to_year=NULL, $to_month=NULL){
+		$data = $this->sites_model->get_hei($site, $year, $month,$to_year,$to_month);
 		$this->load->view('sites_pie_chart_view', $data);
 	}
 

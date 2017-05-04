@@ -19,5 +19,14 @@ defined('BASEPATH') or exit('No direct script acces allowed!');
 		// echo "<pre>";print_r($this->data);die();
 		$this -> template($this->data);
  	}
+
+ 	function test1(){
+ 		$this->data['content_view'] = 'age/testv1';
+ 		$this->template($this->data);
+ 	}
+ 	function test2(){
+ 		$this->data['content_view'] = 'age/testv2';
+ 		$this->template($this->data);
+ 	}
  }
 ?> 

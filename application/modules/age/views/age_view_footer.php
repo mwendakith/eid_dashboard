@@ -1,5 +1,14 @@
 <script type="text/javascript">
 	$(document).ready(function () {
+		$.get("<?php echo base_url();?>template/dates", function(data){
+    		obj = $.parseJSON(data);
+	
+			if(obj['month'] == "null" || obj['month'] == null){
+				obj['month'] = "";
+			}
+			$(".display_date").html("( "+obj['year']+" "+obj['month']+" )");
+			$(".display_range").html("( "+obj['prev_year']+" - "+obj['year']+" )");
+    	});
 		$("#summary").load("<?= base_url('charts/ages/get_age_summary');?>");
 		$("#positivity").load("<?= base_url('charts/ages/get_age_positivity');?>");
 		$("#age_outcomes").load("<?= base_url('charts/ages/get_age_outcomes');?>");

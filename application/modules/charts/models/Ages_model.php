@@ -36,35 +36,35 @@ class Ages_model extends MY_Model
 		    	<tr>
 		    		<td>&nbsp;&nbsp;&nbsp;&nbsp;<=2M</td>
 		    		<td>'.number_format((int) $result['infantsless2m']).'</td>
-		    		<td>Pos:</td>
+		    		<td>Positive:</td>
 		    		<td>'.number_format((int) $result['infantsless2mPOS']).'&nbsp;<strong>('.round((((int) $result['infantsless2mPOS']/(int) $result['infantsless2m'])*100),1).'%)</strong></td>
 		    	</tr>
 
 		    	<tr>
 		    		<td>&nbsp;&nbsp;&nbsp;&nbsp;<2Weeks:</td>
 		    		<td>'. number_format((int) $result['infantsless2w']).'</td>
-		    		<td>Pos:</td>
+		    		<td>Positive:</td>
 		    		<td>'.number_format((int) $result['infantsless2wPOS']).'&nbsp;<strong>('.round((((int) $result['infantsless2wPOS']/(int) $result['infantsless2w'])*100),1).'%)</strong></td>
 		    	</tr>
 
 		    	<tr>
 		    		<td>&nbsp;&nbsp;&nbsp;&nbsp;4-6 weeks:</td>
 		    		<td>'. number_format((int) $result['infants4to6w']).'</td>
-		    		<td>Pos:</td>
+		    		<td>Positive:</td>
 		    		<td>'. number_format((int) $result['infants4to6wPOS']) .'&nbsp;<strong>('. round(((int) $result['infants4to6wPOS'])/((int) $result['infants4to6w'])*100,1) .'%)</strong></td>
 		    	</tr>
 
 		    	<tr>
 		    		<td>>2M:</td>
 		    		<td>'. number_format((int) $result['infantsabove2m']).'</td>
-		    		<td>Pos:</td>
+		    		<td>Positive:</td>
 		    		<td>'.number_format((int) $result['infantsabove2mPOS']).'&nbsp;<strong>('.round((((int) $result['infantsabove2mPOS']/(int) $result['infantsabove2m'])*100),1).'%)</strong></td>
 		    	</tr>
 
 		    	<tr>
 		    		<td>Adults:</td>
 		    		<td>'. number_format((int) $result['adults']) .'</td>
-		    		<td>Pos:</td>
+		    		<td>Positive:</td>
 		    		<td>'. number_format((int) $result['adultsPOS']) .'&nbsp;<strong>('. round(((int) $result['adultsPOS'])/((int) $result['adults'])*100,1) .'%)</strong></td>
 		    	</tr>';
 		
@@ -108,7 +108,7 @@ class Ages_model extends MY_Model
 		$data['outcomes'][2]['name'] = "Positivity";
 
 		$data['outcomes'][0]['color'] = '#E26A6A';
-		$data['outcomes'][1]['color'] = '#52B3D9';
+		$data['outcomes'][1]['color'] = '#257766';
 		$data['outcomes'][2]['color'] = '#913D88';
 
 		$data['outcomes'][0]['type'] = "column";
@@ -117,7 +117,6 @@ class Ages_model extends MY_Model
 
 		$data['outcomes'][0]['yAxis'] = 1;
 		$data['outcomes'][1]['yAxis'] = 1;
-		$data['outcomes'][2]['yAxis'] = 1;
 
 		$data['categories'] = array('<2 weeks', '2-6 weeks', '6-8 weeks', '6 months', '9 months', '12 months');
 		//This is the section that needs to be edited
@@ -157,10 +156,10 @@ class Ages_model extends MY_Model
 	function get_summary_data($year=null,$month=null,$to_year=null,$to_month=null,$county=null,$subcounty=null)
 	{
 		if ($county == null || $county == 'null') {
-			$county = null;
+			$county = $this->session->userdata('county_filter');
 		}
 		if ($subcounty == null || $subcounty == 'null') {
-			$subcounty = null;
+			$subcounty = $this->session->userdata('sub_county_filter');
 		}
 		if ($year==null || $year=='null') {
 			$year = $this->session->userdata('filter_year');
@@ -186,7 +185,7 @@ class Ages_model extends MY_Model
 		} else {
 			$sql = "CALL `proc_get_eid_national_age_summary`('".$year."','".$month."','".$to_year."','".$to_month."')";
 		}
-		
+		// echo "<pre>";print_r($sql);die();
 		$data = $this->db->query($sql)->result_array();
 
 		$newdata = array();
@@ -199,10 +198,10 @@ class Ages_model extends MY_Model
 	function get_breakdown_data($year=null,$month=null,$to_year=null,$to_month=null,$county=null,$subcounty=null)
 	{
 		if ($county == null || $county == 'null') {
-			$county = null;
+			$county = $this->session->userdata('county_filter');
 		}
 		if ($subcounty == null || $subcounty == 'null') {
-			$subcounty = null;
+			$subcounty = $this->session->userdata('sub_county_filter');
 		}
 		if ($year==null || $year=='null') {
 			$year = $this->session->userdata('filter_year');
@@ -228,7 +227,7 @@ class Ages_model extends MY_Model
 		} else {
 			$sql = "CALL `proc_get_eid_national_age_breakdown`('".$year."','".$month."','".$to_year."','".$to_month."')";
 		}
-		
+		// echo "<pre>";print_r($sql);die();
 		$data = $this->db->query($sql)->result_array();
 
 		$newdata = array();

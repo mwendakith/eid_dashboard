@@ -5,14 +5,14 @@ CREATE PROCEDURE `proc_get_eid_rht_pos_trend`
 (IN filter_county INT(11), IN filter_year INT(11), IN filter_result INT(11))
 BEGIN
   SET @QUERY =    "SELECT 
-                    MONTH(`rs`.`dateuploaded`) AS `month`, 
+                    MONTH(`rs`.`datetested`) AS `month`, 
                     COUNT(*) AS `tests`
                   FROM `rht_samples` `rs` 
                   LEFT JOIN `view_facilitys` `vf` 
                     ON `rs`.`facility` = `vf`.`ID`
     WHERE 1";
 
-    SET @QUERY = CONCAT(@QUERY, " AND YEAR(`dateuploaded`) = '",filter_year,"' ");
+    SET @QUERY = CONCAT(@QUERY, " AND YEAR(`datetested`) = '",filter_year,"' ");
 
     
     IF (filter_result != 0 && filter_result != '') THEN
@@ -36,8 +36,8 @@ CREATE PROCEDURE `proc_get_eid_rht_yearly_trend`
 (IN filter_county INT(11), IN filter_result INT(11))
 BEGIN
   SET @QUERY =    "SELECT  
-                    YEAR(`rs`.`dateuploaded`) AS `year`, 
-                    MONTH(`rs`.`dateuploaded`) AS `month`,
+                    YEAR(`rs`.`datetested`) AS `year`, 
+                    MONTH(`rs`.`datetested`) AS `month`,
                     COUNT(*) AS `tests`
                   FROM `rht_samples` `rs` 
                   LEFT JOIN `view_facilitys` `vf` 
@@ -86,15 +86,15 @@ BEGIN
 
     IF (from_month != 0 && from_month != '') THEN
       IF (to_month != 0 && to_month != '' && filter_year = to_year) THEN
-        SET @QUERY = CONCAT(@QUERY, " AND YEAR(`dateuploaded`) = '",filter_year,"' AND MONTH(`dateuploaded`) BETWEEN '",from_month,"' AND '",to_month,"' ");
+        SET @QUERY = CONCAT(@QUERY, " AND YEAR(`datetested`) = '",filter_year,"' AND MONTH(`datetested`) BETWEEN '",from_month,"' AND '",to_month,"' ");
       ELSE IF(to_month != 0 && to_month != '' && filter_year != to_year) THEN
-        SET @QUERY = CONCAT(@QUERY, " AND ((YEAR(`dateuploaded`) = '",filter_year,"' AND MONTH(`dateuploaded`) >= '",from_month,"')  OR (YEAR(`dateuploaded`) = '",to_year,"' AND MONTH(`dateuploaded`) <= '",to_month,"') OR (YEAR(`dateuploaded`) > '",filter_year,"' AND YEAR(`dateuploaded`) < '",to_year,"')) ");
+        SET @QUERY = CONCAT(@QUERY, " AND ((YEAR(`datetested`) = '",filter_year,"' AND MONTH(`datetested`) >= '",from_month,"')  OR (YEAR(`datetested`) = '",to_year,"' AND MONTH(`datetested`) <= '",to_month,"') OR (YEAR(`datetested`) > '",filter_year,"' AND YEAR(`datetested`) < '",to_year,"')) ");
       ELSE
-        SET @QUERY = CONCAT(@QUERY, " AND YEAR(`dateuploaded`) = '",filter_year,"' AND MONTH(`dateuploaded`)='",from_month,"' ");
+        SET @QUERY = CONCAT(@QUERY, " AND YEAR(`datetested`) = '",filter_year,"' AND MONTH(`datetested`)='",from_month,"' ");
       END IF;
     END IF;
     ELSE
-      SET @QUERY = CONCAT(@QUERY, " AND YEAR(`dateuploaded`) = '",filter_year,"' ");
+      SET @QUERY = CONCAT(@QUERY, " AND YEAR(`datetested`) = '",filter_year,"' ");
     END IF;
 
      PREPARE stmt FROM @QUERY;
@@ -127,15 +127,15 @@ BEGIN
 
     IF (from_month != 0 && from_month != '') THEN
       IF (to_month != 0 && to_month != '' && filter_year = to_year) THEN
-        SET @QUERY = CONCAT(@QUERY, " AND YEAR(`dateuploaded`) = '",filter_year,"' AND MONTH(`dateuploaded`) BETWEEN '",from_month,"' AND '",to_month,"' ");
+        SET @QUERY = CONCAT(@QUERY, " AND YEAR(`datetested`) = '",filter_year,"' AND MONTH(`datetested`) BETWEEN '",from_month,"' AND '",to_month,"' ");
       ELSE IF(to_month != 0 && to_month != '' && filter_year != to_year) THEN
-        SET @QUERY = CONCAT(@QUERY, " AND ((YEAR(`dateuploaded`) = '",filter_year,"' AND MONTH(`dateuploaded`) >= '",from_month,"')  OR (YEAR(`dateuploaded`) = '",to_year,"' AND MONTH(`dateuploaded`) <= '",to_month,"') OR (YEAR(`dateuploaded`) > '",filter_year,"' AND YEAR(`dateuploaded`) < '",to_year,"')) ");
+        SET @QUERY = CONCAT(@QUERY, " AND ((YEAR(`datetested`) = '",filter_year,"' AND MONTH(`datetested`) >= '",from_month,"')  OR (YEAR(`datetested`) = '",to_year,"' AND MONTH(`datetested`) <= '",to_month,"') OR (YEAR(`datetested`) > '",filter_year,"' AND YEAR(`datetested`) < '",to_year,"')) ");
       ELSE
-        SET @QUERY = CONCAT(@QUERY, " AND YEAR(`dateuploaded`) = '",filter_year,"' AND MONTH(`dateuploaded`)='",from_month,"' ");
+        SET @QUERY = CONCAT(@QUERY, " AND YEAR(`datetested`) = '",filter_year,"' AND MONTH(`datetested`)='",from_month,"' ");
       END IF;
     END IF;
     ELSE
-      SET @QUERY = CONCAT(@QUERY, " AND YEAR(`dateuploaded`) = '",filter_year,"' ");
+      SET @QUERY = CONCAT(@QUERY, " AND YEAR(`datetested`) = '",filter_year,"' ");
     END IF;
 
     SET @QUERY = CONCAT(@QUERY, " GROUP BY `rs`.`facility` ORDER BY `tests` DESC ");

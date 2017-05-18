@@ -68,8 +68,8 @@ class Rht_model extends MY_Model
 		$data['outcomes'][1]['yAxis'] = 1;
 
 
-		$data['outcomes'][0]['color'] = '#52B3D9';
-		$data['outcomes'][1]['color'] = '#E26A6A';
+		$data['outcomes'][0]['color'] = '#F2784B';
+		$data['outcomes'][1]['color'] = '#1BA39C';
 		$data['outcomes'][2]['color'] = '#913D88';
 
 		$y = $from;

@@ -12,6 +12,7 @@
 		$("#nattat").load("<?php echo base_url('charts/summaries/turnaroundtime'); ?>");
 		$("#testing_trends").load("<?php echo base_url('charts/summaries/testing_trends'); ?>");
 		$("#eidOutcomes").load("<?php echo base_url('charts/summaries/eid_outcomes');?>");
+		$("#hei_outcomes").load("<?php echo base_url('charts/summaries/hei_validation');?>");
 		$("#hei_follow_up").load("<?php echo base_url('charts/summaries/hei_follow');?>");
 		$("#ageGroups").load("<?php echo base_url('charts/summaries/agegroup');?>");
 
@@ -46,6 +47,7 @@
 	        	// Loader displaying
 	        	$("#testing_trends").html("<center><div class='loader'></div></center>");
 	        	$("#eidOutcomes").html("<center><div class='loader'></div></center>");
+		        $("#hei_outcomes").html("<center><div class='loader'></div></center>");
 		        $("#hei_follow_up").html("<center><div class='loader'></div></center>");
 				$("#ageGroups").html("<center><div class='loader'></div></center>");
 				$("#entry_point").html("<center><div class='loader'></div></center>");
@@ -56,6 +58,7 @@
 				// Actual graphs being loaded
 				$("#testing_trends").load("<?php echo base_url('charts/summaries/testing_trends'); ?>/"+null+"/"+data);
 				$("#eidOutcomes").load("<?php echo base_url('charts/summaries/eid_outcomes');?>/"+null+"/"+null+"/"+data);
+				$("#hei_outcomes").load("<?php echo base_url('charts/summaries/hei_validation');?>/"+null+"/"+null+"/"+data);
 				$("#hei_follow_up").load("<?php echo base_url('charts/summaries/hei_follow');?>/"+null+"/"+null+"/"+data);
 				$("#ageGroups").load("<?php echo base_url('charts/summaries/agegroup');?>/"+null+"/"+null+"/"+data);
 
@@ -97,6 +100,7 @@
 		    if (!error_check) {
 			    $("#nattat").html("<div>Loading...</div>");
 	        	$("#eidOutcomes").html("<center><div class='loader'></div></center>");
+		        $("#hei_outcomes").html("<center><div class='loader'></div></center>");
 		        $("#hei_follow_up").html("<center><div class='loader'></div></center>");
 				$("#ageGroups").html("<center><div class='loader'></div></center>");
 				$("#entry_point").html("<center><div class='loader'></div></center>");
@@ -106,6 +110,7 @@
 
 				$("#nattat").load("<?php echo base_url('charts/summaries/turnaroundtime'); ?>/"+from[1]+"/"+from[0]+"/"+null+"/"+to[1]+"/"+to[0]);
 				$("#eidOutcomes").load("<?php echo base_url('charts/summaries/eid_outcomes');?>/"+from[1]+"/"+from[0]+"/"+null+"/"+"/"+null+"/"+to[1]+"/"+to[0]);
+				$("#hei_outcomes").load("<?php echo base_url('charts/summaries/hei_validation');?>/"+from[1]+"/"+from[0]+"/"+null+"/"+"/"+null+"/"+to[1]+"/"+to[0]);
 				$("#hei_follow_up").load("<?php echo base_url('charts/summaries/hei_follow');?>/"+from[1]+"/"+from[0]+"/"+null+"/"+"/"+null+"/"+to[1]+"/"+to[0]);
 				$("#ageGroups").load("<?php echo base_url('charts/summaries/agegroup');?>/"+from[1]+"/"+from[0]+"/"+null+"/"+"/"+null+"/"+to[1]+"/"+to[0]);
 
@@ -144,6 +149,7 @@
  		$("#nattat").html("<div>Loading...</div>");
 		$("#testing_trends").html("<center><div class='loader'></div></center>");
     	$("#eidOutcomes").html("<center><div class='loader'></div></center>");
+        $("#hei_outcomes").html("<center><div class='loader'></div></center>");
         $("#hei_follow_up").html("<center><div class='loader'></div></center>");
 		$("#ageGroups").html("<center><div class='loader'></div></center>");
 		$("#entry_point").html("<center><div class='loader'></div></center>");
@@ -155,6 +161,7 @@
 		$("#nattat").load("<?php echo base_url('charts/summaries/turnaroundtime'); ?>/"+year+"/"+month);
 		$("#testing_trends").load("<?php echo base_url('charts/summaries/testing_trends'); ?>/"+year);
 		$("#eidOutcomes").load("<?php echo base_url('charts/summaries/eid_outcomes');?>/"+year+"/"+month);
+		$("#hei_outcomes").load("<?php echo base_url('charts/summaries/hei_validation');?>/"+year+"/"+month);
 		$("#hei_follow_up").load("<?php echo base_url('charts/summaries/hei_follow');?>/"+year+"/"+month);
 		$("#ageGroups").load("<?php echo base_url('charts/summaries/agegroup');?>/"+year+"/"+month);
 

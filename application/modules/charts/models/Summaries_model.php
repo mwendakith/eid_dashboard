@@ -271,6 +271,72 @@ class Summaries_model extends MY_Model
 		return $data;
 	}
 
+	function hei_validation($year=null,$month=null,$county=null,$partner=null,$to_year=null,$to_month=null)
+	{
+		if ($county==null || $county=='null') {
+			$county = $this->session->userdata('county_filter');
+		}
+		if ($partner==null || $partner=='null') {
+			$partner = $this->session->userdata('partner_filter');
+		}
+
+		if ($year==null || $year=='null') {
+			$year = $this->session->userdata('filter_year');
+		}
+		if ($month==null || $month=='null') {
+			if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
+				$month = 0;
+			}else {
+				$month = $this->session->userdata('filter_month');
+			}
+		}
+		if ($to_month==null || $to_month=='null') {
+			$to_month = 0;
+		}
+		if ($to_year==null || $to_year=='null') {
+			$to_year = 0;
+		}
+
+		if ($partner) {
+			$sql = "CALL `proc_get_eid_partner_hei_validation`('".$partner."','".$year."','".$month."','".$to_year."','".$to_month."')";
+		} else {
+			if ($county==null || $county=='null') {
+				$sql = "CALL `proc_get_eid_national_hei_validation`('".$year."','".$month."','".$to_year."','".$to_month."')";
+			} else {
+				$sql = "CALL `proc_get_eid_county_hei_validation`('".$county."','".$year."','".$month."','".$to_year."','".$to_month."')";
+			}
+		}
+		// echo "<pre>";print_r($sql);die();
+		$result = $this->db->query($sql)->row();
+		// echo "<pre>";print_r($result);die();
+		$data['hei']['name'] = 'Validation';
+		$data['hei']['colorByPoint'] = true;
+
+		$count = 0;
+
+		$data['hei']['data'][0]['name'] = 'No Data';
+		$data['hei']['data'][0]['y'] = $count;
+
+		foreach ($result as $key => $value) {
+			
+
+
+			$data['hei']['data'][$count]['name'] = $key;
+
+			$data['hei']['data'][$count]['y'] = (int) $value;
+
+			$count++;
+		}
+
+		$data['hei']['data'][0]['sliced'] = true;
+		$data['hei']['data'][0]['selected'] = true;
+		$data['hei']['data'][0]['color'] = '#1BA39C';
+		$data['hei']['data'][1]['color'] = '#F2784B';
+		$data['hei']['data'][2]['color'] = '#5C97BF';
+		// echo "<pre>";print_r($data);die();
+		return $data;
+	}
+
 	function hei_follow($year=null,$month=null,$county=null,$partner=null,$to_year=null,$to_month=null)
 	{
 		if ($county==null || $county=='null') {

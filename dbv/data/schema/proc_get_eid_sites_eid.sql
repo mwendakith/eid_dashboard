@@ -6,8 +6,8 @@ BEGIN
   SET @QUERY =    "SELECT 
                     SUM((`ss`.`pos`)) AS `pos`, 
                     SUM(`ss`.`neg`) AS `neg`, 
-                    SUM(`ss`.`neg`) AS `tests`, 
-                    SUM(`ss`.`neg`) AS `rejected` 
+                    SUM(`ss`.`alltests`) AS `tests`, 
+                    SUM(`ss`.`rejected`) AS `rejected` 
                   FROM `site_summary` `ss` 
             WHERE 1";
 

@@ -33,9 +33,21 @@ class Summaries extends MY_Controller
 		$this->load->view('eid_outcomes_view', $data);
 	}
 
+	function hei_validation($year=NULL,$month=NULL,$county=NULL,$partner=NULL,$to_year=NULL,$to_month=NULL)
+	{
+		$data['outcomes'] =$this->summaries_model->hei_validation($year,$month,$county,$partner,$to_year,$to_month);
+
+		// echo json_encode($data);
+
+
+		$this->load->view('hei_validation_pie', $data);
+	}
+
 	function hei_follow($year=NULL,$month=NULL,$county=NULL,$partner=NULL,$to_year=NULL,$to_month=NULL)
 	{
 		$data['outcomes'] =$this->summaries_model->hei_follow($year,$month,$county,$partner,$to_year,$to_month);
+
+		// echo json_encode($data);
 
 		$this->load->view('hei_view', $data);
 	}

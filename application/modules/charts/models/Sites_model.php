@@ -422,31 +422,24 @@ class Sites_model extends MY_Model
 
 		foreach ($result as $key => $value) {
 			$data['ul'] .= '<tr>
-		    		<td>Cumulative Tests (All Samples Run):</td>
-		    		<td>'.(int) $value['alltests'].'</td>
-		    		<td></td>
-		    		<td></td>
-		    	</tr>
-
-		    	<tr>
-		    		<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Actual Tests With Valid Results:</td>
-		    		<td>'.(int) $value['tests'].'</td>
+		    	<td>Actual Tests With Valid Results:</td>
+		    		<td>'.number_format((int) $value['tests']).'</td>
 		    		<td>Positive Outcomes:</td>
-		    		<td>'.(int) $value['pos'].'('.round((((int) $value['pos']/(int) $value['tests'])*100),1).'%)</td>
+		    		<td>'.number_format((int) $value['pos']).'('.round((((int) $value['pos']/(int) $value['tests'])*100),1).'%)</td>
 		    	</tr>
 
 		    	<tr>
 		    		<td>First DNA PCR With Valid Results:</td>
-		    		<td>'. (int) $value['firstdna']  .'</td>
+		    		<td>'. number_format((int) $value['firstdna']).'</td>
 		    		<td></td>
 		    		<td></td>
 		    	</tr>
 
 		    	<tr>
 		    		<td>Repeat +ve Confirmatory Tests:</td>
-		    		<td>'. ((int) $value['confirmdna'] + (int) $value['repeatspos']) .'</td>
-		    		<td></td>
-		    		<td></td>
+		    		<td>'. number_format((int) $value['confirmdna'] + (int) $value['repeatspos']) .'</td>
+		    		<td>Repeat +ve Confirmatory Tests POS</td>
+		    		<td>'. number_format((int) $value['confirmpos']) .'('. round(((int) $value['confirmpos'])/((int) $value['confirmdna'] + (int) $value['repeatspos'])*100,1) .'%)</td>
 		    	</tr>
 
 		    	<tr>
@@ -458,23 +451,23 @@ class Sites_model extends MY_Model
 
 		    	<tr>
 		    		<td>Actual Infants Tested:</td>
-		    		<td>'.(int) $value['actualinfants'].'</td>
+		    		<td>'.number_format((int) $value['actualinfants']).'</td>
 		    		<td>Positive Outcomes:</td>
-		    		<td>'.(int) $value['actualinfantspos'].'('. round((((int) $value['actualinfantspos']/(int) $value['actualinfants'])*100),1)  .'%)</td>
+		    		<td>'.number_format((int) $value['actualinfantspos']).'('. round((((int) $value['actualinfantspos']/(int) $value['actualinfants'])*100),1)  .'%)</td>
 		    	</tr>
 
 		    	<tr>
 		    		<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Infants &lt;= 2M:</td>
-		    		<td>'.(int) $value['infantsless2m'].'</td>
+		    		<td>'.number_format((int) $value['infantsless2m']).'</td>
 		    		<td>Infants &lt;= 2M Positive:</td>
-		    		<td>'.(int) $value['infantless2mpos'].'('.round((((int) $value['infantless2mpos']/(int) $value['infantsless2m'])*100),1).'%)</td>
+		    		<td>'.number_format((int) $value['infantless2mpos']).'('.round((((int) $value['infantless2mpos']/(int) $value['infantsless2m'])*100),1).'%)</td>
 		    	</tr>
 
 		    	<tr>
 		    		<td>Adults Tested:</td>
-		    		<td>'.(int) $value['adults'].'</td>
+		    		<td>'.number_format((int) $value['adults']).'</td>
 		    		<td>Positive Outcomes:</td>
-		    		<td>'.(int) $value['adultsPOS'].'('.round((((int) $value['adultsPOS']/(int) $value['adults'])*100),1).'%)</td>
+		    		<td>'.number_format((int) $value['adultsPOS']).'('.round((((int) $value['adultsPOS']/(int) $value['adults'])*100),1).'%)</td>
 		    	</tr>
 
 
@@ -484,11 +477,11 @@ class Sites_model extends MY_Model
 		    		<td></td>
 		    		<td></td>
 		    	</tr>
-		    	
+
 
 		    	<tr>
 		    		<td>Rejected Samples:</td>
-		    		<td>'.(int) $value['rejected'].'</td>
+		    		<td>'.number_format((int) $value['rejected']).'</td>
 		    		<td>% Rejection:</td>
 		    		<td>'.round((((int) $value['rejected']/(int) $value['alltests'])*100),1).'%</td>
 		    	</tr>
@@ -498,7 +491,7 @@ class Sites_model extends MY_Model
 		    		<td>Median Age of Testing:</td>
 		    		<td>'.round($value['medage']).'</td>
 		    		<td>Average Sites sending:</td>
-		    		<td>'.(int) $value['sitessending'].'</td>
+		    		<td>'.number_format((int) $value['sitessending']).'</td>
 		    	</tr>';
 			// $data['ul'] .= '<li>Cumulative No. of Tests: <strong>'.(int) $value['alltests'].'</strong></li>';
 			// $data['ul'] .= '<li>Cumulative No. of EQA Tests: <strong>'.(int) $value['eqatests'].'</strong></li>';
@@ -565,7 +558,7 @@ class Sites_model extends MY_Model
 		$sql = "CALL `proc_get_eid_sites_hei_follow_up`('".$site."', '".$year."', '".$month."','".$to_year."','".$to_month."')";
 
 		$result = $this->db->query($sql)->row();
-		// echo "<pre>";print_r($result);die();
+		echo "<pre>";print_r($result);die();
 		$data['trend'][0]['name'] = "Initiated On Treatment";
 		$data['trend'][1]['name'] = "Dead";
 		$data['trend'][2]['name'] = "Lost to Follow Up";

@@ -7,7 +7,9 @@ BEGIN
                     SUM((`ss`.`enrolled`)) AS `enrolled`, 
                     SUM(`ss`.`dead`) AS `dead`, 
                     SUM(`ss`.`ltfu`) AS `ltfu`, 
-                    SUM(`ss`.`transout`) AS `transout` 
+                    SUM(`ss`.`transout`) AS `transout`, 
+                    SUM(`ss`.`adult`) AS `adult`,
+                    SUM(`ss`.`other`) AS `other`
                   FROM `site_summary` `ss` 
     WHERE 1";
 

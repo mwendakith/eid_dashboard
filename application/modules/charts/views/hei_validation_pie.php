@@ -1,8 +1,23 @@
 <div id="validation_pie">
 
 </div>
+<div>
+        <center>
+            <table>
+                <?php echo $outcomes['ul'];?>
+            </table>
+        </center>
+</div>
 <script type="text/javascript">
-	$(function(){
+	$().ready(function(){
+        $("table").tablecloth({
+          striped: true,
+          sortable: false,
+          condensed: true
+        });
+    });
+
+    $(function(){
 	    $('#validation_pie').highcharts({
 	        chart: {
         plotBackgroundColor: null,

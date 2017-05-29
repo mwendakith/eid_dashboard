@@ -1,7 +1,7 @@
 DROP PROCEDURE IF EXISTS `proc_get_eid_sites_hei_follow_up`;
 DELIMITER //
 CREATE PROCEDURE `proc_get_eid_sites_hei_follow_up`
-(IN filter_site INT(11), IN filter_year INT(11), IN from_month INT(11), IN to_year INT(11) IN to_month INT(11))
+(IN filter_site INT(11), IN filter_year INT(11), IN from_month INT(11), IN to_year INT(11), IN to_month INT(11))
 BEGIN
   SET @QUERY =    "SELECT 
                     SUM((`ss`.`enrolled`)) AS `enrolled`, 
@@ -9,7 +9,9 @@ BEGIN
                     SUM(`ss`.`ltfu`) AS `ltfu`, 
                     SUM(`ss`.`transout`) AS `transout`, 
                     SUM(`ss`.`adult`) AS `adult`,
-                    SUM(`ss`.`other`) AS `other`
+                    SUM(`ss`.`other`) AS `other`,
+                    SUM(`ss`.`validation_confirmedpos`) AS `followup_positives`, 
+                    SUM(`ss`.`confirmedPOS`-`ss`.`validation_repeattest) AS `positives`
                   FROM `site_summary` `ss` 
     WHERE 1";
 

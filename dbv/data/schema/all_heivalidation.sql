@@ -8,8 +8,11 @@ BEGIN
         SUM(`validation_repeattest`) AS `Repeat Test`,
         AVG(`validation_viralload`) AS `Viral Load`,
         SUM(`validation_adult`) AS `Adult`,
-        SUM(`validation_unknownsite`) AS `Unknown Facility`
-    FROM `county_summary`
+        SUM(`validation_unknownsite`) AS `Unknown Facility`,
+        SUM(`validation_confirmedpos`+`validation_repeattest`+`validation_unknownsite`+`validation_adult`+`validation_viralload`) AS `followup_positives`, 
+        SUM(`pos`-`repeatspos`) AS `positives`,
+        SUM(`tests`-(`validation_repeattest`+`validation_unknownsite`+`validation_adult`+`validation_viralload`)) AS `true_tests` 
+        FROM `county_summary`
     WHERE 1";
 
 
@@ -43,8 +46,11 @@ BEGIN
         SUM(`validation_repeattest`) AS `Repeat Test`,
         AVG(`validation_viralload`) AS `Viral Load`,
         SUM(`validation_adult`) AS `Adult`,
-        SUM(`validation_unknownsite`) AS `Unknown Facility`
-    FROM `national_summary`
+        SUM(`validation_unknownsite`) AS `Unknown Facility`,
+        SUM(`validation_confirmedpos`+`validation_repeattest`+`validation_unknownsite`+`validation_adult`+`validation_viralload`) AS `followup_positives`, 
+        SUM(`pos`-`repeatspos`) AS `positives`,
+        SUM(`tests`-(`validation_repeattest`+`validation_unknownsite`+`validation_adult`+`validation_viralload`)) AS `true_tests` 
+        FROM `national_summary`
     WHERE 1";
 
     IF (from_month != 0 && from_month != '') THEN
@@ -76,8 +82,11 @@ BEGIN
         SUM(`validation_repeattest`) AS `Repeat Test`,
         AVG(`validation_viralload`) AS `Viral Load`,
         SUM(`validation_adult`) AS `Adult`,
-        SUM(`validation_unknownsite`) AS `Unknown Facility`
-    FROM `ip_summary`
+        SUM(`validation_unknownsite`) AS `Unknown Facility`,
+        SUM(`validation_confirmedpos`+`validation_repeattest`+`validation_unknownsite`+`validation_adult`+`validation_viralload`) AS `followup_positives`, 
+        SUM(`pos`-`repeatspos`) AS `positives`,
+        SUM(`tests`-(`validation_repeattest`+`validation_unknownsite`+`validation_adult`+`validation_viralload`)) AS `true_tests` 
+        FROM `ip_summary`
     WHERE 1";
 
     IF (from_month != 0 && from_month != '') THEN
@@ -105,13 +114,16 @@ DELIMITER //
 CREATE PROCEDURE `proc_get_eid_subcounty_hei_validation`
 (IN filter_subcounty INT(11), IN filter_year INT(11), IN from_month INT(11), IN to_year INT(11), IN to_month INT(11))
 BEGIN
-  SET @QUERY =    "SELECT 
+  SET @QUERY =    "SELECT
         SUM(`validation_confirmedpos`) AS `Confirmed Positive`,
         SUM(`validation_repeattest`) AS `Repeat Test`,
         AVG(`validation_viralload`) AS `Viral Load`,
         SUM(`validation_adult`) AS `Adult`,
-        SUM(`validation_unknownsite`) AS `Unknown Facility` 
-                  FROM `subcounty_summary` 
+        SUM(`validation_unknownsite`) AS `Unknown Facility`,
+        SUM(`validation_confirmedpos`+`validation_repeattest`+`validation_unknownsite`+`validation_adult`+`validation_viralload`) AS `followup_positives`, 
+        SUM(`pos`-`repeatspos`) AS `positives`,
+        SUM(`tests`-(`validation_repeattest`+`validation_unknownsite`+`validation_adult`+`validation_viralload`)) AS `true_tests` 
+        FROM `subcounty_summary` 
     WHERE 1";
 
 
@@ -141,13 +153,16 @@ DELIMITER //
 CREATE PROCEDURE `proc_get_eid_site_hei_validation`
 (IN filter_site INT(11), IN filter_year INT(11), IN from_month INT(11), IN to_year INT(11), IN to_month INT(11))
 BEGIN
-  SET @QUERY =    "SELECT 
+  SET @QUERY =    "SELECT
         SUM(`validation_confirmedpos`) AS `Confirmed Positive`,
         SUM(`validation_repeattest`) AS `Repeat Test`,
         AVG(`validation_viralload`) AS `Viral Load`,
         SUM(`validation_adult`) AS `Adult`,
-        SUM(`validation_unknownsite`) AS `Unknown Facility`  
-                  FROM `site_summary` 
+        SUM(`validation_unknownsite`) AS `Unknown Facility`,
+        SUM(`validation_confirmedpos`+`validation_repeattest`+`validation_unknownsite`+`validation_adult`+`validation_viralload`) AS `followup_positives`, 
+        SUM(`pos`-`repeatspos`) AS `positives`,
+        SUM(`tests`-(`validation_repeattest`+`validation_unknownsite`+`validation_adult`+`validation_viralload`)) AS `true_tests` 
+        FROM `site_summary` 
             WHERE 1";
 
 

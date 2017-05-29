@@ -307,23 +307,43 @@ class Summaries_model extends MY_Model
 			}
 		}
 		// echo "<pre>";print_r($sql);die();
-		$result = $this->db->query($sql)->row();
+		$result = $this->db->query($sql)->result_array();
 		// echo "<pre>";print_r($result);die();
 		$data['hei']['name'] = 'Validation';
 		$data['hei']['colorByPoint'] = true;
 
 		$count = 0;
+		$data['ul'] = '';
 
 		$data['hei']['data'][0]['name'] = 'No Data';
 		$data['hei']['data'][0]['y'] = $count;
 
 		foreach ($result as $key => $value) {
-			
+			// echo "<pre>";print_r($value);die();
+			$data['ul'] .= '<tr>
+		    	<td>Validated Positives:</td>
+		    		<td>'.number_format((int) $value['followup_positives']).'('.round((((int) $value['followup_positives']/(int) $value['positives'])*100),1).'%)</td>
+		    		<td></td>
+		    		<td></td>
+		    	</tr>
 
+		    	<tr>
+		    		<td>Confirmed Actual positive Infants:</td>
+		    		<td>'.number_format((int) $value['Confirmed Positive']).'('.round((((int) $value['Confirmed Positive']/(int) $value['true_tests'])*100),1).'%)</td>
+		    		<td></td>
+		    		<td></td>
+		    	</tr>';
+			$data['hei']['data'][0]['name'] = 'Confirmed Positive';
+			$data['hei']['data'][1]['name'] = 'Repeat Test';
+			$data['hei']['data'][2]['name'] = 'Viral Load';
+			$data['hei']['data'][3]['name'] = 'Adult';
+			$data['hei']['data'][4]['name'] = 'Unknown Facility';
 
-			$data['hei']['data'][$count]['name'] = $key;
-
-			$data['hei']['data'][$count]['y'] = (int) $value;
+			$data['hei']['data'][0]['y'] = (int) $value['Confirmed Positive'];
+			$data['hei']['data'][1]['y'] = (int) $value['Repeat Test'];
+			$data['hei']['data'][2]['y'] = (int) $value['Viral Load'];
+			$data['hei']['data'][3]['y'] = (int) $value['Adult'];
+			$data['hei']['data'][4]['y'] = (int) $value['Unknown Facility'];
 
 			$count++;
 		}

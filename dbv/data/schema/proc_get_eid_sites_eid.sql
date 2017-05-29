@@ -4,10 +4,25 @@ CREATE PROCEDURE `proc_get_eid_sites_eid`
 (IN filter_site INT(11), IN filter_year INT(11), IN from_month INT(11), IN to_year INT(11), IN to_month INT(11))
 BEGIN
   SET @QUERY =    "SELECT 
-                    SUM((`ss`.`pos`)) AS `pos`, 
-                    SUM(`ss`.`neg`) AS `neg`, 
-                    SUM(`ss`.`alltests`) AS `tests`, 
-                    SUM(`ss`.`rejected`) AS `rejected` 
+                    SUM(`pos`) AS `pos`,
+                    SUM(`neg`) AS `neg`,
+                    AVG(`medage`) AS `medage`,
+                    SUM(`alltests`) AS `alltests`,
+                    SUM(`eqatests`) AS `eqatests`,
+                    SUM(`firstdna`) AS `firstdna`,
+                    SUM(`confirmdna`) AS `confirmdna`,
+                    SUM(`confirmedPOS`) AS `confirmpos`,
+                    SUM(`repeatspos`) AS `repeatspos`,
+                    SUM(`actualinfants`) AS `actualinfants`,
+                    SUM(`actualinfantsPOS`) AS `actualinfantspos`,
+                    SUM(`infantsless2m`) AS `infantsless2m`,
+                    SUM(`infantsless2mPOS`) AS `infantless2mpos`,
+                    SUM(`adults`) AS `adults`,
+                    SUM(`adultsPOS`) AS `adultsPOS`,
+                    SUM(`redraw`) AS `redraw`,
+                    SUM(`tests`) AS `tests`,
+                    SUM(`rejected`) AS `rejected`, 
+                    AVG(`sitessending`) AS `sitessending` 
                   FROM `site_summary` `ss` 
             WHERE 1";
 

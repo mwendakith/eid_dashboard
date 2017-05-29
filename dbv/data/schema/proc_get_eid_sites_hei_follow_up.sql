@@ -1,7 +1,7 @@
 DROP PROCEDURE IF EXISTS `proc_get_eid_sites_hei_follow_up`;
 DELIMITER //
 CREATE PROCEDURE `proc_get_eid_sites_hei_follow_up`
-(IN filter_site INT(11), IN filter_year INT(11), IN from_month INT(11), IN to_year INT(11) IN to_month INT(11))
+(IN filter_site INT(11), IN filter_year INT(11), IN from_month INT(11), IN to_year INT(11), IN to_month INT(11))
 BEGIN
   SET @QUERY =    "SELECT 
                     SUM((`ss`.`enrolled`)) AS `enrolled`, 

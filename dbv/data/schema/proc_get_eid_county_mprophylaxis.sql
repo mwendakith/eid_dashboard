@@ -2,7 +2,7 @@ DROP PROCEDURE IF EXISTS `proc_get_county_mprophylaxis`;
 DROP PROCEDURE IF EXISTS `proc_get_eid_county_mprophylaxis`;
 DELIMITER //
 CREATE PROCEDURE `proc_get_eid_county_mprophylaxis`
-(IN C_id INT(11), IN filter_year INT(11), IN from_month INT(11), IN to_year INT(11) IN to_month INT(11))
+(IN C_id INT(11), IN filter_year INT(11), IN from_month INT(11), IN to_year INT(11), IN to_month INT(11))
 BEGIN
   SET @QUERY =    "SELECT 
                         `p`.`name`, 

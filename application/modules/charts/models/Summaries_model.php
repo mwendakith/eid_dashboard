@@ -307,27 +307,63 @@ class Summaries_model extends MY_Model
 			}
 		}
 		// echo "<pre>";print_r($sql);die();
-		$result = $this->db->query($sql)->row();
+		$result = $this->db->query($sql)->result_array();
 		// echo "<pre>";print_r($result);die();
 		$data['hei']['name'] = 'Validation';
 		$data['hei']['colorByPoint'] = true;
 
 		$count = 0;
+		$data['ul'] = '';
 
 		$data['hei']['data'][0]['name'] = 'No Data';
 		$data['hei']['data'][0]['y'] = $count;
 
 		foreach ($result as $key => $value) {
-			
+			// echo "<pre>";print_r($value);die();
+			// $data['ul'] .= '<tr>
+   //              <td>Validated Positives:</td>
+   //                  <td>'.number_format((int) $value['followup_positives']).'<b>('.round((((int) $value['followup_positives']/(int) $value['positives'])*100),1).'%)</b></td>
+   //                  <td></td>
+   //                  <td></td>
+   //              </tr>
+ 
+   //              <tr>
+   //                  <td>Confirmed Actual positive Infants:</td>
+   //                  <td>'.number_format((int) $value['Confirmed Positive']).'<b>('.round((((int) $value['Confirmed Positive']/(int) $value['true_tests'])*100),1).'%)</b></td>
+   //                  <td></td>
+   //                  <td></td>
+   //              </tr>';
+				$data['ul'] .= '<tr>
+                 <td>Positve Outcomes Actual Infants:</td>
+                     <td>'.number_format((int) $value['positives']).'</td>
+                     <td></td>
+                     <td></td>
+                </tr><tr>
+                 <td>Followed Up HEIs:</td>
+                     <td>'.number_format((int) $value['followup_positives']).'<b>('.round((((int) $value['followup_positives']/(int) $value['positives'])*100),1).'%)</b></td>
+                     <td></td>
+                     <td></td>
+                </tr>
+               	<tr>
+                   <td>Confirmed Positives:</td>
+                     <td>'.number_format((int) $value['Confirmed Positive']).'<b>('.round((((int) $value['Confirmed Positive']/(int) $value['true_tests'])*100),1).'%)</b></td>
+                     <td></td>
+                     <td></td>
+                 </tr>';
+			$data['hei']['data'][0]['name'] = 'Confirmed Positive';
+			$data['hei']['data'][1]['name'] = 'Repeat Test';
+			$data['hei']['data'][2]['name'] = 'Viral Load';
+			$data['hei']['data'][3]['name'] = 'Adult';
+			$data['hei']['data'][4]['name'] = 'Unknown Facility';
 
-
-			$data['hei']['data'][$count]['name'] = $key;
-
-			$data['hei']['data'][$count]['y'] = (int) $value;
+			$data['hei']['data'][0]['y'] = (int) $value['Confirmed Positive'];
+			$data['hei']['data'][1]['y'] = (int) $value['Repeat Test'];
+			$data['hei']['data'][2]['y'] = (int) $value['Viral Load'];
+			$data['hei']['data'][3]['y'] = (int) $value['Adult'];
+			$data['hei']['data'][4]['y'] = (int) $value['Unknown Facility'];
 
 			$count++;
 		}
-
 		$data['hei']['data'][0]['sliced'] = true;
 		$data['hei']['data'][0]['selected'] = true;
 		$data['hei']['data'][0]['color'] = '#1BA39C';
@@ -385,13 +421,13 @@ class Summaries_model extends MY_Model
 		$data['hei']['data'][0]['y'] = $count;
 
 		foreach ($result as $key => $value) {
-			$total = (int) ($value['enrolled']+$value['dead']+$value['ltfu']+$value['adult']+$value['transout']+$value['other']);
+			/*$total = (int) ($value['enrolled']+$value['dead']+$value['ltfu']+$value['adult']+$value['transout']+$value['other']);
 			$data['ul'] .= '<li>Initiated On Treatment: '.(int) $value['enrolled'].' <strong>('.(int) (($value['enrolled']/$total)*100).'%)</strong></li>';
 			$data['ul'] .= '<li>Lost to Follow Up: '.$value['ltfu'].' <strong>('.(int) (($value['ltfu']/$total)*100).'%)</strong></li>';
 			$data['ul'] .= '<li>Dead: '.(int) $value['dead'].' <strong>('.(int) (($value['dead']/$total)*100).'%)</strong></li>';
 			$data['ul'] .= '<li>Adult Samples: '.$value['adult'].' <strong>('.(int) (($value['adult']/$total)*100).'%)</strong></li>';
 			$data['ul'] .= '<li>Transferred Out: '.$value['transout'].' <strong>('.(int) (($value['transout']/$total)*100).'%)</strong></li>';
-			$data['ul'] .= '<li>Other Reasons(e.g denial): '.$value['other'].' <strong>('.(int) (($value['other']/$total)*100).'%)</strong></li>';
+			$data['ul'] .= '<li>Other Reasons(e.g denial): '.$value['other'].' <strong>('.(int) (($value['other']/$total)*100).'%)</strong></li>';*/
 			// if($value['name'] == ''){
 			// 	$data['hei']['data'][$key]['color'] = '#5C97BF';
 			// }

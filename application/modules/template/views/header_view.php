@@ -144,7 +144,7 @@
 							</ul>
 						</li>
 						<li><a href="<?php echo base_url();?>labPerformance">Lab Performance</a></li>
-						<li><a href="<?php echo base_url();?>rht">RHT Testing</a></li>
+						<!-- <li><a href="<?php echo base_url();?>rht">RHT Testing</a></li> -->
 						<li><a href="<?php echo base_url();?>sites">Facilities</a></li>
 						<li><a href="<?php echo base_url();?>contacts">Contact Us</a></li>
 						<li><a href="http://eiddash.nascop.org/login.php">Login</a></li>

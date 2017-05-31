@@ -26,6 +26,13 @@ class Partner_summaries extends MY_Controller
 		$this->load->view('eid_outcomes_view', $data);
 	}
 
+	function hei_validation($year=NULL,$month=NULL,$partner=NULL,$to_year=NULL,$to_month=NULL)
+	{
+		$data['outcomes'] =$this->partner_summaries_model->hei_validation($year,$month,$partner,$to_year,$to_month);
+
+		$this->load->view('hei_validation_pie', $data);
+	}
+
 	function hei_follow($year=NULL,$month=NULL,$partner=NULL,$to_year=NULL,$to_month=NULL)
 	{
 		$data['outcomes'] =$this->partner_summaries_model->hei_follow($year,$month,$partner,$to_year,$to_month);

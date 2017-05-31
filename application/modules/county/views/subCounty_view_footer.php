@@ -49,6 +49,10 @@
 		        	// Actual graphs being loaded
 					$("#eid_outcomes").load("<?php echo base_url('charts/subcounties/subcounties_eid'); ?>/"+data+"/"+null+"/"+null);
 
+					$("#subcounty_hei_outcomes").html("<center><div class='loader'></div></center>");
+		        	// Actual graphs being loaded
+					$("#subcounty_hei_outcomes").load("<?php echo base_url('charts/subcounties/subcounties_hei_outcomes'); ?>/"+data+"/"+null+"/"+null);
+
 					$("#subcounty_hei").html("<center><div class='loader'></div></center>");
 		        	// Actual graphs being loaded
 					$("#subcounty_hei").load("<?php echo base_url('charts/subcounties/subcounties_hei'); ?>/"+data+"/"+null+"/"+null);
@@ -100,6 +104,10 @@
 		        	$("#eid_outcomes").html("<center><div class='loader'></div></center>");
 		        	// Actual graphs being loaded
 					$("#eid_outcomes").load("<?php echo base_url('charts/subcounties/subcounties_eid'); ?>/"+subcounty+"/"+from[1]+"/"+from[0]+"/"+to[1]+"/"+to[0]);
+
+					$("#subcounty_hei_outcomes").html("<center><div class='loader'></div></center>");
+		        	// Actual graphs being loaded
+					$("#subcounty_hei_outcomes").load("<?php echo base_url('charts/subcounties/subcounties_hei_outcomes'); ?>/"+subcounty+"/"+from[1]+"/"+from[0]+"/"+to[1]+"/"+to[0]);
 
 					$("#subcounty_hei").html("<center><div class='loader'></div></center>");
 		        	// Actual graphs being loaded
@@ -161,6 +169,10 @@
 		        	$("#eid_outcomes").html("<center><div class='loader'></div></center>");
 		        	// Actual graphs being loaded
 					$("#eid_outcomes").load("<?php echo base_url('charts/subcounties/subcounties_eid'); ?>/"+subcounty+"/"+year+"/"+month);
+
+					$("#subcounty_hei_outcomes").html("<center><div class='loader'></div></center>");
+		        	// Actual graphs being loaded
+					$("#subcounty_hei_outcomes").load("<?php echo base_url('charts/subcounties/subcounties_hei_outcomes'); ?>/"+subcounty+"/"+year+"/"+month);
 
 					$("#subcounty_hei").html("<center><div class='loader'></div></center>");
 		        	// Actual graphs being loaded

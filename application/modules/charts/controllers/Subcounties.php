@@ -27,6 +27,13 @@ class Subcounties extends MY_Controller
     	$this->load->view('sites_eid_outcomes_view',$data);
 	}
 
+	function subcounties_hei_outcomes($sub_county=NULL,$year=NULL,$month=NULL,$to_year=NULL,$to_month=NULL)
+	{
+		$data['outcomes']= $this->subcounties_model->hei_validation($sub_county,$year,$month,$to_year,$to_month);
+
+    	$this->load->view('hei_validation_pie',$data);
+	}
+
 	function subcounties_hei($sub_county=NULL,$year=NULL,$month=NULL,$to_year=NULL,$to_month=NULL)
 	{
 		$data= $this->subcounties_model->get_hei($sub_county,$year,$month,$to_year,$to_month);

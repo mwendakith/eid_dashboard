@@ -104,7 +104,7 @@
 	</div>
 
 	<!-- Map of the country -->
-	<div class="col-md-3 col-sm-4 col-xs-12">
+	<div class="col-md-2 col-sm-4 col-xs-12">
 		<div class="panel panel-default">
 		  <div class="panel-heading">
 			  HEI Follow up <div class="display_date"></div>
@@ -118,7 +118,7 @@
 		</div>
 	</div>
 
-	<div class="col-md-2">
+	<div class="col-md-3">
 		<div class="panel panel-default">
 		  <div class="panel-heading">
 		    Age <div class="display_date"></div>

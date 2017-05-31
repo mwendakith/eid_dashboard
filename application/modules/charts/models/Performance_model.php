@@ -41,22 +41,22 @@ class Performance_model extends MY_Model
 			$ul .= "<tr>
 						<td>".($key+1)."</td>
 						<td>".$value['name']."</td>
-						<td>".(int) $value['sitesending']."</td>
-						<td>".(int) $value['received']."</td>
-						<td>".(int) $value['rejected'] . " (" . 
+						<td>".number_format((int) $value['sitesending'])."</td>
+						<td>".number_format((int) $value['received'])."</td>
+						<td>".number_format((int) $value['rejected']) . " (" . 
 							round(@(($value['rejected']*100)/$value['tests']), 2, PHP_ROUND_HALF_UP)."%)</td>
-						<td>".(int) $value['redraw']."</td>
+						<td>".number_format((int) $value['redraw'])."</td>
 
-						<td>".(int) $value['alltests']."</td>
-						<td>".(int) $value['tests']."</td>
-						<td>".((int) $value['confirmdna'] + (int) $value['repeatspos'])."</td>
-						<td>".(int) $value['eqa']."</td>
-						<td>".((int) $value['alltests'] + (int) $value['eqa'] + (int) $value['confirmdna'] + (int) $value['repeatspos'])."</td>
-						<td>".(int) $value['pos']."</td>
+						<td>".number_format((int) $value['alltests'])."</td>
+						<td>".number_format((int) $value['tests'])."</td>
+						<td>".number_format((int) $value['confirmdna'] + (int) $value['repeatspos'])."</td>
+						<td>".number_format((int) $value['eqa'])."</td>
+						<td>".number_format((int) $value['alltests'] + (int) $value['eqa'] + (int) $value['confirmdna'] + (int) $value['repeatspos'])."</td>
+						<td>".number_format((int) $value['pos'])."</td>
 						<td>".round(@(($value['pos']*100)/$value['tests']), 2, PHP_ROUND_HALF_UP)."</td>
-						<td>".(int) $value['neg']."</td>
+						<td>".number_format((int) $value['neg'])."</td>
 						<td>".round(@(($value['neg']*100)/$value['tests']), 2, PHP_ROUND_HALF_UP)."</td>
-						<td>".(int) $value['redraw']."</td>
+						<td>".number_format((int) $value['redraw'])."</td>
 						<td>".round(@(($value['redraw']*100)/$value['tests']), 2, PHP_ROUND_HALF_UP)."</td>
 					</tr>";
 		}

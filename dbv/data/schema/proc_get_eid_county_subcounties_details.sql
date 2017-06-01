@@ -14,7 +14,7 @@ BEGIN
                   SUM(`redraw`) AS `redraw`, 
                   SUM(`adults`) AS `adults`, 
                   SUM(`adultsPOS`) AS `adultspos`, 
-                  SUM(`medage`) AS `medage`, 
+                  AVG(`medage`) AS `medage`, 
                   SUM(`rejected`) AS `rejected`, 
                   SUM(`infantsless2m`) AS `infantsless2m`, 
                   SUM(`infantsless2mPOS`) AS `infantsless2mpos` 

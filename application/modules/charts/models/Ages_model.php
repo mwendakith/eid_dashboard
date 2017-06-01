@@ -42,14 +42,14 @@ class Ages_model extends MY_Model
 
 		    	<tr>
 		    		<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<2Weeks:</td>
-		    		<td>'. number_format((int) $result['infantsless2w']).'</td>
+		    		<td>&nbsp;&nbsp;&nbsp;&nbsp;'. number_format((int) $result['infantsless2w']).'</td>
 		    		<td>Positive:</td>
 		    		<td>'.number_format((int) $result['infantsless2wPOS']).'&nbsp;<strong>('.round((((int) $result['infantsless2wPOS']/(int) $result['infantsless2w'])*100),1).'%)</strong></td>
 		    	</tr>
 
 		    	<tr>
 		    		<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4-6 weeks:</td>
-		    		<td>'. number_format((int) $result['infants4to6w']).'</td>
+		    		<td>&nbsp;&nbsp;&nbsp;&nbsp;'. number_format((int) $result['infants4to6w']).'</td>
 		    		<td>Positive:</td>
 		    		<td>'. number_format((int) $result['infants4to6wPOS']) .'&nbsp;<strong>('. round(((int) $result['infants4to6wPOS'])/((int) $result['infants4to6w'])*100,1) .'%)</strong></td>
 		    	</tr>

@@ -35,7 +35,9 @@
 </div>
 <script type="text/javascript" charset="utf-8">
   $(document).ready(function() {
-  	$('#example').DataTable();
+  	$('#example').DataTable({
+  		responsive: true
+  	});
 
     $("table").tablecloth({
       theme: "paper",

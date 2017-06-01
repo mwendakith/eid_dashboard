@@ -66,20 +66,30 @@
   </div>
   <div class="row">
     <!-- Map of the country -->
-    <div class="col-md-6 col-sm-12 col-xs-12">
+    <div class="col-md-5 col-sm-12 col-xs-12">
       <div class="panel panel-default">
        
-        <div id="vlOutcomes">
+        <div id="eidOutcomes">
+          <center><div class="loader"></div></center>
+        </div>
+        
+      </div>
+    </div>
+
+    <div class="col-md-4 col-sm-12 col-xs-12">
+      <div class="panel panel-default">
+       
+        <div id="heiOutcomes">
           <center><div class="loader"></div></center>
         </div>
         
       </div>
     </div>
     
-    <div class="col-md-6">
+    <div class="col-md-3">
       <div class="panel panel-default">
         
-        <div class="panel-body" id="ageGroups">
+        <div class="panel-body" id="heiFollowUp">
           <center><div class="loader"></div></center>
         </div>
         

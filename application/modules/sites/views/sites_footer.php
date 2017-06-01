@@ -43,13 +43,15 @@
 
 					$("#tsttrends").html("<center><div class='loader'></div></center>");
 					$("#stoutcomes").html("<center><div class='loader'></div></center>");
-					$("#vlOutcomes").html("<center><div class='loader'></div></center>");
-					$("#ageGroups").html("<center><div class='loader'></div></center>");
+					$("#eidOutcomes").html("<center><div class='loader'></div></center>");
+					$("#heiOutcomes").html("<center><div class='loader'></div></center>");
+					$("#heiFollowUp").html("<center><div class='loader'></div></center>");
 
 					$("#tsttrends").load("<?php echo base_url('charts/sites/site_trends');?>/"+data);
 					$("#stoutcomes").load("<?php echo base_url('charts/sites/site_positivity');?>/"+data);
-					$("#vlOutcomes").load("<?php echo base_url('charts/sites/site_eid');?>/"+data);
-					$("#ageGroups").load("<?php echo base_url('charts/sites/site_hei');?>/"+data);
+					$("#eidOutcomes").load("<?php echo base_url('charts/sites/site_eid');?>/"+data);
+					$("#heiOutcomes").load("<?php echo base_url('charts/sites/site_hei_validation');?>/"+data);
+					$("#heiFollowUp").load("<?php echo base_url('charts/sites/site_hei');?>/"+data);
 
 				}
 	        });
@@ -82,12 +84,14 @@
 				} else {
 					$("#tsttrends").html("<center><div class='loader'></div></center>");
 					$("#stoutcomes").html("<center><div class='loader'></div></center>");
-					$("#vlOutcomes").html("<center><div class='loader'></div></center>");
-					$("#ageGroups").html("<center><div class='loader'></div></center>");
+					$("#eidOutcomes").html("<center><div class='loader'></div></center>");
+					$("#heiOutcomes").html("<center><div class='loader'></div></center>");
+					$("#heiFollowUp").html("<center><div class='loader'></div></center>");
 					$("#tsttrends").load("<?php echo base_url('charts/sites/site_trends');?>/"+site+"/"+from[1]);
 					$("#stoutcomes").load("<?php echo base_url('charts/sites/site_positivity');?>/"+site+"/"+from[1]);
-					$("#vlOutcomes").load("<?php echo base_url('charts/sites/site_eid');?>/"+site+"/"+from[1]+"/"+from[0]+"/"+to[1]+"/"+to[0]);
-					$("#ageGroups").load("<?php echo base_url('charts/sites/site_hei');?>/"+site+"/"+from[1]+"/"+from[0]+"/"+to[1]+"/"+to[0]);
+					$("#eidOutcomes").load("<?php echo base_url('charts/sites/site_eid');?>/"+site+"/"+from[1]+"/"+from[0]+"/"+to[1]+"/"+to[0]);
+					$("#heiOutcomes").load("<?php echo base_url('charts/sites/site_hei_validation');?>/"+site+"/"+from[1]+"/"+from[0]+"/"+to[1]+"/"+to[0]);
+					$("#heiFollowUp").load("<?php echo base_url('charts/sites/site_hei');?>/"+site+"/"+from[1]+"/"+from[0]+"/"+to[1]+"/"+to[0]);
 
 				}
 	    	});
@@ -130,12 +134,14 @@
 			} else {
 				$("#tsttrends").html("<center><div class='loader'></div></center>");
 				$("#stoutcomes").html("<center><div class='loader'></div></center>");
-				$("#vlOutcomes").html("<center><div class='loader'></div></center>");
-				$("#ageGroups").html("<center><div class='loader'></div></center>");
+				$("#eidOutcomes").html("<center><div class='loader'></div></center>");
+				$("#heiOutcomes").html("<center><div class='loader'></div></center>");
+				$("#heiFollowUp").html("<center><div class='loader'></div></center>");
 				$("#tsttrends").load("<?php echo base_url('charts/sites/site_trends');?>/"+null+"/"+year);
 				$("#stoutcomes").load("<?php echo base_url('charts/sites/site_positivity');?>/"+null+"/"+year);
-				$("#vlOutcomes").load("<?php echo base_url('charts/sites/site_eid');?>/"+null+"/"+year+"/"+month);
-				$("#ageGroups").load("<?php echo base_url('charts/sites/site_hei');?>/"+null+"/"+year+"/"+month);
+				$("#eidOutcomes").load("<?php echo base_url('charts/sites/site_eid');?>/"+null+"/"+year+"/"+month);
+				$("#heiOutcomes").load("<?php echo base_url('charts/sites/site_hei_validation');?>/"+null+"/"+year+"/"+month);
+				$("#heiFollowUp").load("<?php echo base_url('charts/sites/site_hei');?>/"+null+"/"+year+"/"+month);
 
 			}
     	});

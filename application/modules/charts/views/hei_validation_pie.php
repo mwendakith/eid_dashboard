@@ -2,11 +2,11 @@
 
 </div>
 <div>
-        <center>
-            <table>
-                <?php echo $outcomes['ul'];?>
-            </table>
-        </center>
+    <center>
+        <table>
+            <?php echo $outcomes['ul'];?>
+        </table>
+    </center>
 </div>
 <script type="text/javascript">
 	$().ready(function(){
@@ -16,7 +16,6 @@
           condensed: true
         });
     });
-
     $(function(){
 	    $('#validation_pie').highcharts({
 	        chart: {
@@ -26,7 +25,7 @@
         type: 'pie'
             },
             title: {
-                text: ''
+                text: "<?= @(isset($outcomes['title']) ? $outcomes['title'] : '');?>"
             },
             tooltip: {
                 pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b><br/>{series.name}: <b>{point.y:.1f}</b>'

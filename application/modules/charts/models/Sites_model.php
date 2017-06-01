@@ -166,18 +166,18 @@ class Sites_model extends MY_Model
 			$table .= '<td>'.$value['MFLCode'].'</td>';
 			$table .= '<td>'.$value['name'].'</td>';
 			$table .= '<td>'.$value['county'].'</td>';
-			$table .= '<td>'.$value['tests'].'</td>';
-			$table .= '<td>'.$value['firstdna'].'</td>';
-			$table .= '<td>'.$value['confirmdna'].'</td>';
-			$table .= '<td>'.$value['positive'].'</td>';
-			$table .= '<td>'.$value['negative'].'</td>';
-			$table .= '<td>'.$value['redraw'].'</td>';
-			$table .= '<td>'.$value['adults'].'</td>';
-			$table .= '<td>'.$value['adultspos'].'</td>';
-			$table .= '<td>'.$value['medage'].'</td>';
-			$table .= '<td>'.$value['rejected'].'</td>';
-			$table .= '<td>'.$value['infantsless2m'].'</td>';
-			$table .= '<td>'.$value['infantsless2mpos'].'</td>';
+			$table .= '<td>'.number_format($value['tests']).'</td>';
+			$table .= '<td>'.number_format($value['firstdna']).'</td>';
+			$table .= '<td>'.number_format($value['confirmdna']).'</td>';
+			$table .= '<td>'.number_format($value['positive']).'</td>';
+			$table .= '<td>'.number_format($value['negative']).'</td>';
+			$table .= '<td>'.number_format($value['redraw']).'</td>';
+			$table .= '<td>'.number_format($value['adults']).'</td>';
+			$table .= '<td>'.number_format($value['adultspos']).'</td>';
+			$table .= '<td>'.round($value['medage']).'</td>';
+			$table .= '<td>'.number_format($value['rejected']).'</td>';
+			$table .= '<td>'.number_format($value['infantsless2m']).'</td>';
+			$table .= '<td>'.number_format($value['infantsless2mpos']).'</td>';
 			$table .= '</tr>';
 			$count++;
 		}
@@ -489,7 +489,7 @@ class Sites_model extends MY_Model
 
 		    	<tr>
 		    		<td>Median Age of Testing:</td>
-		    		<td>'.round($value['medage']).'</td>
+		    		<td>'.round($value['medage'],1).'</td>
 		    		<td>Average Sites sending:</td>
 		    		<td>'.number_format((int) $value['sitessending']).'</td>
 		    	</tr>';
@@ -525,6 +525,104 @@ class Sites_model extends MY_Model
 		return $data;
 	}
 
+	function get_hei_validation($site=null,$year=null,$month=null,$to_year=null,$to_month=null)
+	{
+		if ($year==null || $year=='null') {
+			$year = $this->session->userdata('filter_year');
+		}
+		
+		$data['title'] = "HEI Validation Outcomes (" . $year . ", " . $this->resolve_month($month) . ")";
+	
+		
+		if ($site==null || $site=='null') {
+			$site = $this->session->userdata('site_filter');
+		}
+
+		if ($month==null || $month=='null') {
+			$data['title'] = "HEI Validation Outcomes (" . $year . ")";
+			if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
+				$month = 0;
+			}else {
+				$month = $this->session->userdata('filter_month');
+			}
+		}
+		if ($to_month==null || $to_month=='null') {
+			$to_month = 0;
+		}
+		if ($to_year==null || $to_year=='null') {
+			$to_year = 0;
+		}else {
+			$data['title'] = "HEI Validation Outcomes (" . $year . ", " . $this->resolve_month($month) . " - ".$this->resolve_month($to_month).")";
+		}
+
+		$sql = "CALL `proc_get_eid_site_hei_validation`('".$site."', '".$year."', '".$month."','".$to_year."', '".$to_month."')";
+		// echo "<pre>";print_r($sql);die();
+		$result = $this->db->query($sql)->result_array();
+		// echo "<pre>";print_r($result);die();
+		$data['hei']['name'] = 'Validation';
+		$data['hei']['colorByPoint'] = true;
+
+		$count = 0;
+		$data['ul'] = '';
+
+		$data['hei']['data'][0]['name'] = 'No Data';
+		$data['hei']['data'][0]['y'] = $count;
+
+		foreach ($result as $key => $value) {
+			// echo "<pre>";print_r($value);die();
+			// $data['ul'] .= '<tr>
+   //              <td>Validated Positives:</td>
+   //                  <td>'.number_format((int) $value['followup_positives']).'<b>('.round((((int) $value['followup_positives']/(int) $value['positives'])*100),1).'%)</b></td>
+   //                  <td></td>
+   //                  <td></td>
+   //              </tr>
+ 
+   //              <tr>
+   //                  <td>Confirmed Actual positive Infants:</td>
+   //                  <td>'.number_format((int) $value['Confirmed Positive']).'<b>('.round((((int) $value['Confirmed Positive']/(int) $value['true_tests'])*100),1).'%)</b></td>
+   //                  <td></td>
+   //                  <td></td>
+   //              </tr>';
+				$data['ul'] .= '<tr>
+                 <td>Positve Outcomes Actual Infants:</td>
+                     <td>'.number_format((int) $value['positives']).'</td>
+                     <td></td>
+                     <td></td>
+                </tr><tr>
+                 <td>Followed Up HEIs:</td>
+                     <td>'.number_format((int) $value['followup_positives']).'<b>('.round((((int) $value['followup_positives']/(int) $value['positives'])*100),1).'%)</b></td>
+                     <td></td>
+                     <td></td>
+                </tr>
+               	<tr>
+                   <td>Confirmed Positives:</td>
+                     <td>'.number_format((int) $value['Confirmed Positive']).'<b>('.round((((int) $value['Confirmed Positive']/(int) $value['true_tests'])*100),1).'%)</b></td>
+                     <td></td>
+                     <td></td>
+                 </tr>';
+			$data['hei']['data'][0]['name'] = 'Confirmed Positive';
+			$data['hei']['data'][1]['name'] = 'Repeat Test';
+			$data['hei']['data'][2]['name'] = 'Viral Load';
+			$data['hei']['data'][3]['name'] = 'Adult';
+			$data['hei']['data'][4]['name'] = 'Unknown Facility';
+
+			$data['hei']['data'][0]['y'] = (int) $value['Confirmed Positive'];
+			$data['hei']['data'][1]['y'] = (int) $value['Repeat Test'];
+			$data['hei']['data'][2]['y'] = (int) $value['Viral Load'];
+			$data['hei']['data'][3]['y'] = (int) $value['Adult'];
+			$data['hei']['data'][4]['y'] = (int) $value['Unknown Facility'];
+
+			$count++;
+		}
+		$data['hei']['data'][0]['sliced'] = true;
+		$data['hei']['data'][0]['selected'] = true;
+		$data['hei']['data'][0]['color'] = '#1BA39C';
+		$data['hei']['data'][1]['color'] = '#F2784B';
+		$data['hei']['data'][2]['color'] = '#5C97BF';
+		// echo "<pre>";print_r($data);die();
+		return $data;
+	}
+
 	function get_hei($site=null, $year=null, $month=null,$to_year=null,$to_month=null){
 
 
@@ -553,7 +651,7 @@ class Sites_model extends MY_Model
 		if ($to_year==null || $to_year=='null') {
 			$to_year = 0;
 		}
-		
+		// proc_get_eid_sites_hei_follow_up
 		
 		$sql = "CALL `proc_get_eid_sites_hei_follow_up`('".$site."', '".$year."', '".$month."','".$to_year."','".$to_month."')";
 
@@ -592,19 +690,19 @@ class Sites_model extends MY_Model
 		$data['per'][4] = (int) ($result->adult / $per * 100);
 		$data['per'][5] = (int) ($result->other / $per * 100);
 
-		$str = "Initiated On Treatment: " . $data['trend'][0]['y'] . " <b>(" . $data['per'][0] . "%)</b>";
-		$str .= "<br />Lost to Follow Up: " . $data['trend'][2]['y'] . " <b>(" . $data['per'][2] . "%)</b>";
-		$str .= "<br />Dead: " . $data['trend'][1]['y'] . " <b>(" . $data['per'][1] . "%)</b>";
-		$str .= "<br />Adult Samples: " . $data['other'][0] . " <b>(" . $data['per'][4] . "%)</b>";
-		$str .= "<br />Transferred out: " . $data['trend'][3]['y'] . " <b>(" . $data['per'][3] . "%)</b>";
-		$str .= "<br />Other Reasons(e.g denial): " . $data['other'][1] . " <b>(" . $data['per'][5] . "%)</b>";
+		$str = "Initiated On Treatment: " . number_format($data['trend'][0]['y']) . " <b>(" . $data['per'][0] . "%)</b>";
+		$str .= "<br />Lost to Follow Up: " . number_format($data['trend'][2]['y']) . " <b>(" . $data['per'][2] . "%)</b>";
+		$str .= "<br />Dead: " . number_format($data['trend'][1]['y']) . " <b>(" . $data['per'][1] . "%)</b>";
+		$str .= "<br />Adult Samples: " . number_format($data['other'][0]) . " <b>(" . $data['per'][4] . "%)</b>";
+		$str .= "<br />Transferred out: " . number_format($data['trend'][3]['y']) . " <b>(" . $data['per'][3] . "%)</b>";
+		$str .= "<br />Other Reasons(e.g denial): " . number_format($data['other'][1]) . " <b>(" . $data['per'][5] . "%)</b>";
 
-		$str = '<li>Initiated On Treatment: '.(int) $data['trend'][0]['y'].' <strong>('.(int) $data['per'][0].'%)</strong></li>';
-		$str .= '<li>Lost to Follow Up: '.$data['trend'][2]['y'].' <strong>('.(int) $data['per'][2].'%)</strong></li>';
-		$str .= '<li>Dead: '.(int) $data['trend'][1]['y'].' <strong>('.(int) $data['per'][1].'%)</strong></li>';
-		$str .= '<li>Adult Samples: '.$data['other'][0].' <strong>('.(int) $data['per'][4].'%)</strong></li>';
-		$str .= '<li>Transferred Out: '.$data['trend'][3]['y'].' <strong>('.(int) $data['per'][3].'%)</strong></li>';
-		$str .= '<li>Other Reasons(e.g denial): '.$data['other'][1].' <strong>('.(int) $data['per'][5].'%)</strong></li>';
+		$str = '<li>Initiated On Treatment: '.number_format((int) $data['trend'][0]['y']).' <strong>('.(int) $data['per'][0].'%)</strong></li>';
+		$str .= '<li>Lost to Follow Up: '.number_format($data['trend'][2]['y']).' <strong>('.(int) $data['per'][2].'%)</strong></li>';
+		$str .= '<li>Dead: '.number_format((int) $data['trend'][1]['y']).' <strong>('.(int) $data['per'][1].'%)</strong></li>';
+		$str .= '<li>Adult Samples: '.number_format($data['other'][0]).' <strong>('.(int) $data['per'][4].'%)</strong></li>';
+		$str .= '<li>Transferred Out: '.number_format($data['trend'][3]['y']).' <strong>('.(int) $data['per'][3].'%)</strong></li>';
+		$str .= '<li>Other Reasons(e.g denial): '.number_format($data['other'][1]).' <strong>('.(int) $data['per'][5].'%)</strong></li>';
 
 		$data['stats'] = $str;
 

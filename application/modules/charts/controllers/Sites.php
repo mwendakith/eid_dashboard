@@ -50,6 +50,12 @@ class Sites extends MY_Controller
 		$this->load->view('sites_eid_outcomes_view', $data);
 	}
 
+	function site_hei_validation($site=NULL, $year=NULL, $month=NULL,$to_year=NULL, $to_month=NULL){
+		$data['outcomes'] = $this->sites_model->get_hei_validation($site,$year,$month,$to_year,$to_month);
+		
+		$this->load->view('hei_validation_pie', $data);
+	}
+
 	function site_hei($site=NULL, $year=NULL, $month=NULL,$to_year=NULL, $to_month=NULL){
 		$data = $this->sites_model->get_hei($site, $year, $month,$to_year,$to_month);
 		$this->load->view('sites_pie_chart_view', $data);

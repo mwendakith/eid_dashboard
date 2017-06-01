@@ -45,6 +45,7 @@
 		        	// Loader displaying
 		        	$("#testing_trends").html("<center><div class='loader'></div></center>");
 		        	$("#eidOutcomes").html("<center><div class='loader'></div></center>");
+		        	$("#hei_outcomes").html("<center><div class='loader'></div></center>");
 			        $("#hei_follow_up").html("<center><div class='loader'></div></center>");
 					$("#ageGroups").html("<center><div class='loader'></div></center>");
 					$("#entry_point").html("<center><div class='loader'></div></center>");
@@ -55,6 +56,7 @@
 					// Actual graphs being loaded
 					$("#testing_trends").load("<?php echo base_url('charts/partner_summaries/testing_trends'); ?>/"+null+"/"+data);
 					$("#eidOutcomes").load("<?php echo base_url('charts/partner_summaries/eid_outcomes');?>/"+null+"/"+null+"/"+data);
+					$("#hei_outcomes").load("<?php echo base_url('charts/partner_summaries/hei_validation');?>/"+null+"/"+null+"/"+data);
 					$("#hei_follow_up").load("<?php echo base_url('charts/partner_summaries/hei_follow');?>/"+null+"/"+null+"/"+data);
 					$("#ageGroups").load("<?php echo base_url('charts/partner_summaries/agegroup');?>/"+null+"/"+null+"/"+data);
 
@@ -103,6 +105,7 @@
 						// Loader displaying
 			        	$("#testing_trends").html("<center><div class='loader'></div></center>");
 			        	$("#eidOutcomes").html("<center><div class='loader'></div></center>");
+				        $("#hei_outcomes").html("<center><div class='loader'></div></center>");
 				        $("#hei_follow_up").html("<center><div class='loader'></div></center>");
 						$("#ageGroups").html("<center><div class='loader'></div></center>");
 						$("#entry_point").html("<center><div class='loader'></div></center>");
@@ -113,6 +116,7 @@
 						// Actual graphs being loaded
 						$("#testing_trends").load("<?php echo base_url('charts/partner_summaries/testing_trends'); ?>/"+from[1]+"/"+partner);
 						$("#eidOutcomes").load("<?php echo base_url('charts/partner_summaries/eid_outcomes');?>/"+from[1]+"/"+from[0]+"/"+partner+"/"+to[1]+"/"+to[0]);
+						$("#hei_outcomes").load("<?php echo base_url('charts/partner_summaries/hei_validation');?>/"+from[1]+"/"+from[0]+"/"+partner+"/"+to[1]+"/"+to[0]);
 						$("#hei_follow_up").load("<?php echo base_url('charts/partner_summaries/hei_follow');?>/"+from[1]+"/"+from[0]+"/"+partner+"/"+to[1]+"/"+to[0]);
 						$("#ageGroups").load("<?php echo base_url('charts/partner_summaries/agegroup');?>/"+from[1]+"/"+from[0]+"/"+partner+"/"+to[1]+"/"+to[0]);
 
@@ -166,6 +170,7 @@
 					// Loader displaying
 		        	$("#testing_trends").html("<center><div class='loader'></div></center>");
 		        	$("#eidOutcomes").html("<center><div class='loader'></div></center>");
+		        	$("#hei_outcomes").html("<center><div class='loader'></div></center>");
 			        $("#hei_follow_up").html("<center><div class='loader'></div></center>");
 					$("#ageGroups").html("<center><div class='loader'></div></center>");
 					$("#entry_point").html("<center><div class='loader'></div></center>");
@@ -176,6 +181,7 @@
 					// Actual graphs being loaded
 					$("#testing_trends").load("<?php echo base_url('charts/partner_summaries/testing_trends'); ?>/"+year+"/"+partner);
 					$("#eidOutcomes").load("<?php echo base_url('charts/partner_summaries/eid_outcomes');?>/"+year+"/"+month+"/"+partner);
+					$("#hei_outcomes").load("<?php echo base_url('charts/partner_summaries/hei_validation');?>/"+year+"/"+month+"/"+partner);
 					$("#hei_follow_up").load("<?php echo base_url('charts/partner_summaries/hei_follow');?>/"+year+"/"+month+"/"+partner);
 					$("#ageGroups").load("<?php echo base_url('charts/partner_summaries/agegroup');?>/"+year+"/"+month+"/"+partner);
 

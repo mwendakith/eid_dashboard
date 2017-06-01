@@ -10,9 +10,9 @@ BEGIN
         SUM(`validation_adult`) AS `Adult`,
         SUM(`validation_unknownsite`) AS `Unknown Facility`,
         SUM(`validation_confirmedpos`+`validation_repeattest`+`validation_unknownsite`+`validation_adult`+`validation_viralload`) AS `followup_positives`, 
-        SUM(`pos`-`repeatspos`) AS `positives`,
+        sum(`actualinfantsPOS`) AS `positives`, 
         SUM(`tests`-(`validation_repeattest`+`validation_unknownsite`+`validation_adult`+`validation_viralload`)) AS `true_tests` 
-        FROM `county_summary`
+    FROM `county_summary`
     WHERE 1";
 
 
@@ -48,7 +48,7 @@ BEGIN
         SUM(`validation_adult`) AS `Adult`,
         SUM(`validation_unknownsite`) AS `Unknown Facility`,
         SUM(`validation_confirmedpos`+`validation_repeattest`+`validation_unknownsite`+`validation_adult`+`validation_viralload`) AS `followup_positives`, 
-        SUM(`pos`-`repeatspos`) AS `positives`,
+        sum(`actualinfantsPOS`) AS `positives`, 
         SUM(`tests`-(`validation_repeattest`+`validation_unknownsite`+`validation_adult`+`validation_viralload`)) AS `true_tests` 
         FROM `national_summary`
     WHERE 1";
@@ -84,9 +84,9 @@ BEGIN
         SUM(`validation_adult`) AS `Adult`,
         SUM(`validation_unknownsite`) AS `Unknown Facility`,
         SUM(`validation_confirmedpos`+`validation_repeattest`+`validation_unknownsite`+`validation_adult`+`validation_viralload`) AS `followup_positives`, 
-        SUM(`pos`-`repeatspos`) AS `positives`,
-        SUM(`tests`-(`validation_repeattest`+`validation_unknownsite`+`validation_adult`+`validation_viralload`)) AS `true_tests` 
-        FROM `ip_summary`
+        sum(`actualinfantsPOS`) AS `positives`, 
+        SUM(`tests`-(`validation_repeattest`+`validation_unknownsite`+`validation_adult`+`validation_viralload`)) AS `true_tests`
+    FROM `ip_summary`
     WHERE 1";
 
     IF (from_month != 0 && from_month != '') THEN
@@ -121,9 +121,9 @@ BEGIN
         SUM(`validation_adult`) AS `Adult`,
         SUM(`validation_unknownsite`) AS `Unknown Facility`,
         SUM(`validation_confirmedpos`+`validation_repeattest`+`validation_unknownsite`+`validation_adult`+`validation_viralload`) AS `followup_positives`, 
-        SUM(`pos`-`repeatspos`) AS `positives`,
+        sum(`actualinfantsPOS`) AS `positives`, 
         SUM(`tests`-(`validation_repeattest`+`validation_unknownsite`+`validation_adult`+`validation_viralload`)) AS `true_tests` 
-        FROM `subcounty_summary` 
+                  FROM `subcounty_summary` 
     WHERE 1";
 
 
@@ -160,9 +160,9 @@ BEGIN
         SUM(`validation_adult`) AS `Adult`,
         SUM(`validation_unknownsite`) AS `Unknown Facility`,
         SUM(`validation_confirmedpos`+`validation_repeattest`+`validation_unknownsite`+`validation_adult`+`validation_viralload`) AS `followup_positives`, 
-        SUM(`pos`-`repeatspos`) AS `positives`,
-        SUM(`tests`-(`validation_repeattest`+`validation_unknownsite`+`validation_adult`+`validation_viralload`)) AS `true_tests` 
-        FROM `site_summary` 
+        sum(`actualinfantsPOS`) AS `positives`, 
+        SUM(`tests`-(`validation_repeattest`+`validation_unknownsite`+`validation_adult`+`validation_viralload`)) AS `true_tests`  
+                  FROM `site_summary` 
             WHERE 1";
 
 

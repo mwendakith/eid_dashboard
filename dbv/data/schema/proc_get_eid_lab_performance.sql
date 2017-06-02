@@ -5,7 +5,7 @@ CREATE PROCEDURE `proc_get_eid_lab_performance`
 (IN filter_year INT(11))
 BEGIN
   SET @QUERY =    "SELECT
-                    `l`.`ID`, `l`.`labname` AS `name`, `ls`.`tests`, `ls`.`rejected`, `ls`.`pos`, `ls`.neg,
+                    `l`.`ID`, `l`.`labname` AS `name`, (`ls`.`alltests`+`ls`.`confirmdna`+`ls`.`repeatspos`+`ls`.`eqatests`) AS `tests`, `ls`.`rejected`, `ls`.`pos`, `ls`.neg,
                     `ls`.`month` 
                 FROM `lab_summary` `ls`
                 JOIN `labs` `l`

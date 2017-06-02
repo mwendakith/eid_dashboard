@@ -51,7 +51,7 @@ class Performance_model extends MY_Model
 						<td>".number_format((int) $value['tests'])."</td>
 						<td>".number_format((int) $value['confirmdna'] + (int) $value['repeatspos'])."</td>
 						<td>".number_format((int) $value['eqa'])."</td>
-						<td>".number_format((int) $value['tests'])."</td>
+						<td>".number_format((int) $value['alltests'] + (int) $value['eqa'] + (int) $value['confirmdna'] + (int) $value['repeatspos'])."</td>
 						<td>".number_format((int) $value['pos'])."</td>
 						<td>".round(@(($value['pos']*100)/$value['tests']), 2, PHP_ROUND_HALF_UP)."</td>
 						<td>".number_format((int) $value['neg'])."</td>
@@ -59,7 +59,7 @@ class Performance_model extends MY_Model
 						<td>".number_format((int) $value['redraw'])."</td>
 						<td>".round(@(($value['redraw']*100)/$value['tests']), 2, PHP_ROUND_HALF_UP)."</td>
 					</tr>";
-					// <td>".number_format((int) $value['alltests'] + (int) $value['eqa'] + (int) $value['confirmdna'] + (int) $value['repeatspos'])."</td>
+					
 		}
 
 		return $ul;
@@ -194,7 +194,7 @@ class Performance_model extends MY_Model
 		$sql = "CALL `proc_get_eid_lab_performance`('".$year."')";
 
 		$result = $this->db->query($sql)->result_array();
-
+		// echo "<pre>";print_r($sql);die();
 		$categories = array();
 		foreach ($result as $key => $value) {
 
@@ -203,16 +203,17 @@ class Performance_model extends MY_Model
 
 			$lab = (int) $value['ID'];
 			$lab--;
+			$tests = $value['alltests']+$value['eqatests']+$value['confirmdna']+$value['repeatspos'];
 
 			$data['test_trends'][$lab]['name'] = $value['name'];
-			$data['test_trends'][$lab]['data'][$month] = (int) $value['tests'];
+			$data['test_trends'][$lab]['data'][$month] = (int) $tests;
 
 			$data['rejected_trends'][$lab]['name'] = $value['name'];
-			if($value['tests'] == 0){
+			if($tests == 0){
 				$data['rejected_trends'][$lab]['data'][$month] = 0;
 			}else{
 				$data['rejected_trends'][$lab]['data'][$month] =  
-				 round(($value['rejected'] / $value['tests'] * 100), 2);
+				 round(($value['rejected'] / $tests * 100), 2);
 			}
 
 			$data['positivity_trends'][$lab]['name'] = $value['name'];

@@ -14,7 +14,10 @@ class Ages_model extends MY_Model
 
 	function ages_summary($year=null,$month=null,$toYear=null,$toMonth=null,$county=null,$subCounty=null){
 		$result = $this->get_summary_data($year,$month,$toYear,$toMonth,$county,$subCounty);
-		
+		echo "<pre>";print_r($result);echo "</pre>";
+		$this->db->close();
+		$result = $this->get_breakdown_data($year,$month,$toYear,$toMonth,$county,$subCounty);
+		echo "<pre>";print_r($result);die();
 		$data['eidAgesSummary']['name'] = 'Tests';
 		$data['eidAgesSummary']['colorByPoint'] = true;
 
@@ -59,14 +62,14 @@ class Ages_model extends MY_Model
 		    		<td>'. number_format((int) $result['infantsabove2m']).'</td>
 		    		<td>Positive:</td>
 		    		<td>'.number_format((int) $result['infantsabove2mPOS']).'&nbsp;<strong>('.round((((int) $result['infantsabove2mPOS']/(int) $result['infantsabove2m'])*100),1).'%)</strong></td>
-		    	</tr>
-
-		    	<tr>
-		    		<td>Adults:</td>
-		    		<td>'. number_format((int) $result['adults']) .'</td>
-		    		<td>Positive:</td>
-		    		<td>'. number_format((int) $result['adultsPOS']) .'&nbsp;<strong>('. round(((int) $result['adultsPOS'])/((int) $result['adults'])*100,1) .'%)</strong></td>
 		    	</tr>';
+
+		    	// <tr>
+		    	// 	<td>Adults:</td>
+		    	// 	<td>'. number_format((int) $result['adults']) .'</td>
+		    	// 	<td>Positive:</td>
+		    	// 	<td>'. number_format((int) $result['adultsPOS']) .'&nbsp;<strong>('. round(((int) $result['adultsPOS'])/((int) $result['adults'])*100,1) .'%)</strong></td>
+		    	// </tr>
 		
 		return $data;
 	}

@@ -14,10 +14,10 @@ class Ages_model extends MY_Model
 
 	function ages_summary($year=null,$month=null,$toYear=null,$toMonth=null,$county=null,$subCounty=null){
 		$result = $this->get_summary_data($year,$month,$toYear,$toMonth,$county,$subCounty);
-		echo "<pre>";print_r($result);echo "</pre>";
-		$this->db->close();
-		$result = $this->get_breakdown_data($year,$month,$toYear,$toMonth,$county,$subCounty);
-		echo "<pre>";print_r($result);die();
+		// echo "<pre>";print_r($result);echo "</pre>";
+		// $this->db->close();
+		// $result = $this->get_breakdown_data($year,$month,$toYear,$toMonth,$county,$subCounty);
+		// echo "<pre>";print_r($result);die();
 		$data['eidAgesSummary']['name'] = 'Tests';
 		$data['eidAgesSummary']['colorByPoint'] = true;
 

@@ -328,6 +328,7 @@ class Subcounties_model extends MY_Model
 		// echo "<pre>";print_r($sql);die();
 		$result = $this->db->query($sql)->row();
 		// echo "<pre>";print_r($result);die();
+		// $data['trend']['name'] = 'Followed-Up';
 		$data['trend'][0]['name'] = "Initiated On Treatment";
 		$data['trend'][1]['name'] = "Dead";
 		$data['trend'][2]['name'] = "Lost to Follow Up";
@@ -496,18 +497,18 @@ class Subcounties_model extends MY_Model
 			$table .= '<td>'.$value['name'].'</td>';
 			$table .= '<td>'.$value['county'].'</td>';
 			$table .= '<td>'.$value['subcounty'].'</td>';
-			$table .= '<td>'.$value['tests'].'</td>';
-			$table .= '<td>'.$value['firstdna'].'</td>';
-			$table .= '<td>'.$value['confirmdna'].'</td>';
-			$table .= '<td>'.$value['positive'].'</td>';
-			$table .= '<td>'.$value['negative'].'</td>';
-			$table .= '<td>'.$value['redraw'].'</td>';
-			$table .= '<td>'.$value['adults'].'</td>';
-			$table .= '<td>'.$value['adultspos'].'</td>';
-			$table .= '<td>'.$value['medage'].'</td>';
-			$table .= '<td>'.$value['rejected'].'</td>';
-			$table .= '<td>'.$value['infantsless2m'].'</td>';
-			$table .= '<td>'.$value['infantsless2mpos'].'</td>';
+			$table .= '<td>'.number_format((int) $value['tests']).'</td>';
+			$table .= '<td>'.number_format((int) $value['firstdna']).'</td>';
+			$table .= '<td>'.number_format((int) $value['confirmdna']).'</td>';
+			$table .= '<td>'.number_format((int) $value['positive']).'</td>';
+			$table .= '<td>'.number_format((int) $value['negative']).'</td>';
+			$table .= '<td>'.number_format((int) $value['redraw']).'</td>';
+			$table .= '<td>'.number_format((int) $value['adults']).'</td>';
+			$table .= '<td>'.number_format((int) $value['adultspos']).'</td>';
+			$table .= '<td>'.round($value['medage']).'</td>';
+			$table .= '<td>'.number_format((int) $value['rejected']).'</td>';
+			$table .= '<td>'.number_format((int) $value['infantsless2m']).'</td>';
+			$table .= '<td>'.number_format((int) $value['infantsless2mpos']).'</td>';
 			$table .= '</tr>';
 			$count++;
 		}

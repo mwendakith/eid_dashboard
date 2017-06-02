@@ -51,7 +51,7 @@ class Performance_model extends MY_Model
 						<td>".number_format((int) $value['tests'])."</td>
 						<td>".number_format((int) $value['confirmdna'] + (int) $value['repeatspos'])."</td>
 						<td>".number_format((int) $value['eqa'])."</td>
-						<td>".number_format((int) $value['alltests'] + (int) $value['eqa'] + (int) $value['confirmdna'] + (int) $value['repeatspos'])."</td>
+						<td>".number_format((int) $value['tests'])."</td>
 						<td>".number_format((int) $value['pos'])."</td>
 						<td>".round(@(($value['pos']*100)/$value['tests']), 2, PHP_ROUND_HALF_UP)."</td>
 						<td>".number_format((int) $value['neg'])."</td>
@@ -59,6 +59,7 @@ class Performance_model extends MY_Model
 						<td>".number_format((int) $value['redraw'])."</td>
 						<td>".round(@(($value['redraw']*100)/$value['tests']), 2, PHP_ROUND_HALF_UP)."</td>
 					</tr>";
+					// <td>".number_format((int) $value['alltests'] + (int) $value['eqa'] + (int) $value['confirmdna'] + (int) $value['repeatspos'])."</td>
 		}
 
 		return $ul;
@@ -242,7 +243,7 @@ class Performance_model extends MY_Model
 		return $data;
 	}
 
-	function lab_outcomes($year=NULL, $month=NULL, $to_month=NULL){
+	function lab_outcomes($year=NULL, $month=NULL,$to_year=NULL,$to_month=NULL){
 		if ($year==null || $year=='null') {
 			$year = $this->session->userdata('filter_year');
 		}

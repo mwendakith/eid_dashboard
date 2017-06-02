@@ -369,12 +369,12 @@ class Subcounties_model extends MY_Model
 		$str .= "<br />Transferred out: " . $data['trend'][3]['y'] . " <b>(" . $data['per'][3] . "%)</b>";
 		$str .= "<br />Other Reasons(e.g denial): " . $data['other'][1] . " <b>(" . $data['per'][5] . "%)</b>";
 
-		$str = '<li>Initiated On Treatment: '.(int) $data['trend'][0]['y'].' <strong>('.(int) $data['per'][0].'%)</strong></li>';
-		$str .= '<li>Lost to Follow Up: '.$data['trend'][2]['y'].' <strong>('.(int) $data['per'][2].'%)</strong></li>';
-		$str .= '<li>Dead: '.(int) $data['trend'][1]['y'].' <strong>('.(int) $data['per'][1].'%)</strong></li>';
-		$str .= '<li>Adult Samples: '.$data['other'][0].' <strong>('.(int) $data['per'][4].'%)</strong></li>';
-		$str .= '<li>Transferred Out: '.$data['trend'][3]['y'].' <strong>('.(int) $data['per'][3].'%)</strong></li>';
-		$str .= '<li>Other Reasons(e.g denial): '.$data['other'][1].' <strong>('.(int) $data['per'][5].'%)</strong></li>';
+		$str = '<li>Initiated On Treatment: '.number_format((int) $data['trend'][0]['y']).' <strong>('.(int) $data['per'][0].'%)</strong></li>';
+		$str .= '<li>Lost to Follow Up: '.number_format((int) $data['trend'][2]['y']).' <strong>('.(int) $data['per'][2].'%)</strong></li>';
+		$str .= '<li>Dead: '.number_format((int) $data['trend'][1]['y']).' <strong>('.(int) $data['per'][1].'%)</strong></li>';
+		$str .= '<li>Adult Samples: '.number_format((int) $data['other'][0]).' <strong>('.(int) $data['per'][4].'%)</strong></li>';
+		$str .= '<li>Transferred Out: '.number_format((int) $data['trend'][3]['y']).' <strong>('.(int) $data['per'][3].'%)</strong></li>';
+		$str .= '<li>Other Reasons(e.g denial): '.number_format((int) $data['other'][1]).' <strong>('.(int) $data['per'][5].'%)</strong></li>';
 
 		$data['stats'] = $str;
 

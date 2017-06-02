@@ -203,7 +203,7 @@ class Performance_model extends MY_Model
 
 			$lab = (int) $value['ID'];
 			$lab--;
-			$tests = $value['alltests']+$value['eqatests']+$value['confirmdna']+$value['repeatspos'];
+			$tests = (int) $value['alltests']+(int) $value['eqatests']+(int) $value['confirmdna']+(int) $value['repeatspos'];
 
 			$data['test_trends'][$lab]['name'] = $value['name'];
 			$data['test_trends'][$lab]['data'][$month] = (int) $tests;

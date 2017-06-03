@@ -335,13 +335,13 @@ class Summaries_model extends MY_Model
    //                  <td></td>
    //              </tr>';
 				$data['ul'] .= '<tr>
-                 <td>Positve Outcomes Actual Infants:</td>
+                 <td>Positve Outcomes (Actual Infants):</td>
                      <td>'.number_format((int) $value['positives']).'</td>
                      <td></td>
                      <td></td>
                 </tr><tr>
                  <td>Followed Up HEIs:</td>
-                     <td>'.number_format((int) $value['followup_positives']).'<b>('.round((((int) $value['followup_positives']/(int) $value['positives'])*100),1).'%)</b></td>
+                     <td>'.number_format((int) $value['followup_hei']).'<b>('.round((((int) $value['followup_hei']/(int) $value['positives'])*100),1).'%)</b></td>
                      <td></td>
                      <td></td>
                 </tr>
@@ -412,7 +412,7 @@ class Summaries_model extends MY_Model
 		// echo "<pre>";print_r($sql);die();
 		$result = $this->db->query($sql)->result_array();
 		// echo "<pre>";print_r($result);die();
-		$data['hei']['name'] = 'Tests';
+		$data['hei']['name'] = 'Followed-Up';
 		$data['hei']['colorByPoint'] = true;
 
 		$count = 0;

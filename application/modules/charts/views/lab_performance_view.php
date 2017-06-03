@@ -36,8 +36,8 @@
         legend: {
             layout: 'vertical',
             align: 'right',
-            verticalAlign: 'top',
-            floating: true,
+            verticalAlign: 'bottom',
+            floating: false,
             borderWidth: 0
         },
         series: <?php echo json_encode($trends);?>

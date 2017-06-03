@@ -656,7 +656,7 @@ class Sites_model extends MY_Model
 		$sql = "CALL `proc_get_eid_sites_hei_follow_up`('".$site."', '".$year."', '".$month."','".$to_year."','".$to_month."')";
 
 		$result = $this->db->query($sql)->row();
-		echo "<pre>";print_r($result);die();
+		// echo "<pre>";print_r($result);die();
 		$data['trend'][0]['name'] = "Initiated On Treatment";
 		$data['trend'][1]['name'] = "Dead";
 		$data['trend'][2]['name'] = "Lost to Follow Up";

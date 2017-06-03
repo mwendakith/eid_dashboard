@@ -59,6 +59,7 @@ class Performance_model extends MY_Model
 						<td>".number_format((int) $value['redraw'])."</td>
 						<td>".round(@(($value['redraw']*100)/$value['tests']), 2, PHP_ROUND_HALF_UP)."</td>
 					</tr>";
+					
 		}
 
 		return $ul;
@@ -193,7 +194,7 @@ class Performance_model extends MY_Model
 		$sql = "CALL `proc_get_eid_lab_performance`('".$year."')";
 
 		$result = $this->db->query($sql)->result_array();
-
+		// echo "<pre>";print_r($sql);die();
 		$categories = array();
 		foreach ($result as $key => $value) {
 
@@ -202,16 +203,17 @@ class Performance_model extends MY_Model
 
 			$lab = (int) $value['ID'];
 			$lab--;
+			$tests = (int) $value['alltests']+(int) $value['eqatests']+(int) $value['confirmdna']+(int) $value['repeatspos'];
 
 			$data['test_trends'][$lab]['name'] = $value['name'];
-			$data['test_trends'][$lab]['data'][$month] = (int) $value['tests'];
+			$data['test_trends'][$lab]['data'][$month] = (int) $tests;
 
 			$data['rejected_trends'][$lab]['name'] = $value['name'];
-			if($value['tests'] == 0){
+			if($tests == 0){
 				$data['rejected_trends'][$lab]['data'][$month] = 0;
 			}else{
 				$data['rejected_trends'][$lab]['data'][$month] =  
-				 round(($value['rejected'] / $value['tests'] * 100), 2);
+				 round(($value['rejected'] / $tests * 100), 2);
 			}
 
 			$data['positivity_trends'][$lab]['name'] = $value['name'];
@@ -242,7 +244,7 @@ class Performance_model extends MY_Model
 		return $data;
 	}
 
-	function lab_outcomes($year=NULL, $month=NULL, $to_year=NULL, $to_month=NULL){
+	function lab_outcomes($year=NULL, $month=NULL,$to_year=NULL,$to_month=NULL){
 		if ($year==null || $year=='null') {
 			$year = $this->session->userdata('filter_year');
 		}

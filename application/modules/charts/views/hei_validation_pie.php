@@ -28,7 +28,7 @@
                 text: "<?= @(isset($outcomes['title']) ? $outcomes['title'] : '');?>"
             },
             tooltip: {
-                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b><br/>{series.name}: <b>{point.y:.1f}</b>'
+                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b><br/>Total Patients: <b>{point.y:.1f}</b>'
             },
             plotOptions: {
                 pie: {

@@ -203,7 +203,7 @@ class Performance_model extends MY_Model
 
 			$lab = (int) $value['ID'];
 			$lab--;
-			$tests = (int) $value['alltests']+(int) $value['eqatests']+(int) $value['confirmdna']+(int) $value['repeatspos'];
+			$tests = (int) $value['tests'];
 
 			$data['test_trends'][$lab]['name'] = $value['name'];
 			$data['test_trends'][$lab]['data'][$month] = (int) $tests;
@@ -354,6 +354,76 @@ class Performance_model extends MY_Model
 		}
 		 // echo "<pre>";print_r($data);die();
 		return $data;		
+	}
+
+	function yearly_trends($lab=NULL){
+
+
+		$sql = "CALL `proc_get_eid_yearly_lab_tests`(" . $lab . ");";
+		
+		
+		$result = $this->db->query($sql)->result_array();
+		
+		$year;
+		$i = 0;
+		$b = true;
+
+		$data;
+
+		$cur_year = date('Y');
+
+		foreach ($result as $key => $value) {
+
+			if((int) $value['year'] > $cur_year || (int) $value['year'] < 2008){
+
+			}
+			else{
+				if($b){
+					$b = false;
+					$year = (int) $value['year'];
+				}
+
+				$y = (int) $value['year'];
+				if($value['year'] != $year){
+					$i++;
+					$year--;
+				}
+
+				$month = (int) $value['month'];
+				$month--;
+
+
+				$data['test_trends'][$i]['name'] = $value['year'];
+				$data['test_trends'][$i]['data'][$month] = (int) $value['tests'];
+
+				$data['rejected_trends'][$i]['name'] = $value['year'];
+
+				if($value['tests'] == 0){
+					$data['rejected_trends'][$i]['data'][$month] = 0;
+				}else{
+					$data['rejected_trends'][$i]['data'][$month] = (int)
+					($value['rejected'] / $value['tests'] * 100);
+				}
+
+				$data['positivity_trends'][$i]['name'] = $value['year'];
+
+				if ($value['positive'] == 0){
+					$data['positivity_trends'][$i]['data'][$month] = 0;
+				}else{
+					$data['positivity_trends'][$i]['data'][$month] = (int) 
+					($value['positive'] / ($value['positive'] + $value['negative']) * 100 );
+				}
+
+				
+
+				$data['tat4_trends'][$i]['name'] = $value['year'];
+				$data['tat4_trends'][$i]['data'][$month] = (int) $value['tat4'];
+			}
+
+		}
+		
+
+		return $data;
 	}
 
 

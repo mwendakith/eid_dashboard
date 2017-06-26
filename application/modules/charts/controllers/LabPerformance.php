@@ -82,5 +82,51 @@ class LabPerformance extends MY_Controller
 
 	}
 
+	function lab_trends($lab=NULL){
+		$obj = $this->performance_model->yearly_trends($lab);
+		// echo "<pre>";print_r($obj);echo "</pre>";die();
+		$data['trends'] = $obj['test_trends'];
+		$data['title'] = "Testing Trends";
+		$data['div'] = "#tests2";
+		$data['div_name'] = "tests2";
+		$data['suffix'] = "";
+		$data['yAxis'] = "Number of Tests";
+		$this->load->view('lab_performance_view', $data);
+
+		$data['trends'] = $obj['positivity_trends'];
+		$data['title'] = "Positivity Trends";
+		$data['div'] = "#positivity2";
+		$data['div_name'] = "positivity2";
+		$data['suffix'] = "%";
+		$data['yAxis'] = "Positivity (%)";
+		$this->load->view('lab_performance_view', $data);
+
+		$data['trends'] = $obj['rejected_trends'];
+		$data['title'] = "Rejection Rate Trends";
+		$data['div'] = "#rejects2";
+		$data['div_name'] = "rejects2";
+		$data['suffix'] = "%";
+		$data['yAxis'] = "Rejection (%)";
+		$this->load->view('lab_performance_view', $data);
+
+		$data['trends'] = $obj['tat4_trends'];
+		$data['title'] = "Turn Around Time ( Collection - Dispatch )";
+		$data['div'] = "#tat";
+		$data['div_name'] = "tat";
+		$data['suffix'] = "";
+		$data['yAxis'] = "TAT(Days)";
+		$this->load->view('lab_performance_view', $data);
+
+
+		
+
+		
+		
+
+		//echo json_encode($obj);
+		//echo "<pr>";print_r($obj);die;
+
+	}
+
 
 }

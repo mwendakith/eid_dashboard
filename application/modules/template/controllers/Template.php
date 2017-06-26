@@ -23,6 +23,7 @@ class Template extends MY_Controller
 		$data['partner'] = $this->template_model->get_partners_dropdown();
 		$data['sites'] = $this->template_model->get_site_dropdown();
 		$data['subCounty'] = $this->template_model->get_sub_county_dropdown();
+		$data['laborotories'] = $this->template_model->get_lab_dropdown();
 		// $data['breadcrum'] = $this->breadcrum();
 		// echo "<pre>";print_r($data);die();
 		$this->load->view('template_view',$data);
@@ -66,6 +67,7 @@ class Template extends MY_Controller
 		echo $this->session->userdata('partner_filter');
 		
 	}
+	
 	function filter_site_data()
 	{
 		$data = array(

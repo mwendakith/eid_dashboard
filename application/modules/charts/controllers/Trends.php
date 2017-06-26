@@ -18,7 +18,6 @@ class Trends extends MY_Controller
 		// echo "<pre>";print_r($obj);echo "</pre>";die();
 		$data['trends'] = $obj['test_trends'];
 		$data['title'] = "Testing Trends";
-		$data['div'] = "#tests";
 		$data['div_name'] = "tests";
 		$data['suffix'] = "";
 		$data['yAxis'] = "Number of Tests";
@@ -26,7 +25,6 @@ class Trends extends MY_Controller
 
 		$data['trends'] = $obj['rejected_trends'];
 		$data['title'] = "Rejection Rate Trends";
-		$data['div'] = "#rejects";
 		$data['div_name'] = "rejects";
 		$data['suffix'] = "%";
 		$data['yAxis'] = "Rejection (%)";
@@ -34,7 +32,6 @@ class Trends extends MY_Controller
 
 		$data['trends'] = $obj['tat4_trends'];
 		$data['title'] = "Turn Around Time ( Collection - Dispatch )";
-		$data['div'] = "#tat";
 		$data['div_name'] = "tat";
 		$data['suffix'] = "";
 		$data['yAxis'] = "TAT(Days)";
@@ -43,7 +40,6 @@ class Trends extends MY_Controller
 
 		$data['trends'] = $obj['infant_trends'];
 		$data['title'] = "Infant tests (less than 2m)";
-		$data['div'] = "#infants";
 		$data['div_name'] = "infants";
 		$data['suffix'] = "";
 		$data['yAxis'] = "Number of Infant Tests";
@@ -51,7 +47,6 @@ class Trends extends MY_Controller
 
 		$data['trends'] = $obj['positivity_trends'];
 		$data['title'] = "Positivity Trends";
-		$data['div'] = "#positivity";
 		$data['div_name'] = "positivity";
 		$data['suffix'] = "%";
 		$data['yAxis'] = "Positivity (%)";
@@ -72,6 +67,57 @@ class Trends extends MY_Controller
 		// echo "<pre>";print_r($data);die();
 		$this->load->view('trends_outcomes_view', $data);
 	}
+
+	function quarterly($county=NULL){
+		$obj = $this->trends_model->quarterly_trends($county);
+		// echo "<pre>";print_r($obj);echo "</pre>";die();
+		$data['trends'] = $obj['test_trends'];
+		$data['title'] = "Testing Trends";
+		$data['div_name'] = "tests_q";
+		$data['suffix'] = "";
+		$data['yAxis'] = "Number of Tests";
+		$this->load->view('quarterly_view', $data);
+
+		$data['trends'] = $obj['positivity_trends'];
+		$data['title'] = "Positivity Trends";
+		$data['div_name'] = "positivity_q";
+		$data['suffix'] = "%";
+		$data['yAxis'] = "Positivity (%)";
+		$this->load->view('quarterly_view', $data);
+
+		$data['trends'] = $obj['rejected_trends'];
+		$data['title'] = "Rejection Rate Trends";
+		$data['div_name'] = "rejects_q";
+		$data['suffix'] = "%";
+		$data['yAxis'] = "Rejection (%)";
+		$this->load->view('quarterly_view', $data);
+
+		$data['trends'] = $obj['tat4_trends'];
+		$data['title'] = "Turn Around Time ( Collection - Dispatch )";
+		$data['div_name'] = "tat_q";
+		$data['suffix'] = "";
+		$data['yAxis'] = "TAT(Days)";
+		$this->load->view('quarterly_view', $data);
+
+
+		$data['trends'] = $obj['infant_trends'];
+		$data['title'] = "Infant tests (less than 2m)";
+		$data['div_name'] = "infants_q";
+		$data['suffix'] = "";
+		$data['yAxis'] = "Number of Infant Tests";
+		$this->load->view('quarterly_view', $data);
+
+		
+
+		
+		
+
+		//echo json_encode($obj);
+		//echo "<pr>";print_r($obj);die;
+
+	}
+
+
 
 
 }

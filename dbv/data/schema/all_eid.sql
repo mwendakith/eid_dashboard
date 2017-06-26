@@ -1,3 +1,607 @@
+DROP PROCEDURE IF EXISTS `proc_get_eid_national_age_summary`;
+DELIMITER //
+CREATE PROCEDURE `proc_get_eid_national_age_summary`
+(IN filter_year INT(11), IN from_month INT(11), IN to_year INT(11), IN to_month INT(11))
+BEGIN
+  SET @QUERY =    "SELECT
+  					SUM(`infantsless2m`) AS `infantsless2m`,       
+					SUM(`infantsless2mPOS`) AS `infantsless2mPOS`,     
+					SUM(`infantsless2w`) AS `infantsless2w`,       
+					SUM(`infantsless2wPOS`) AS `infantsless2wPOS`,    
+					SUM(`infants4to6w`) AS `infants4to6w`,        
+					SUM(`infants4to6wPOS`) AS `infants4to6wPOS`,     
+					SUM(`infantsabove2m`) AS `infantsabove2m`,      
+					SUM(`infantsabove2mPOS`) AS `infantsabove2mPOS`,   
+					SUM(`adults`) AS `adults`,              
+					SUM(`adultsPOS`) AS `adultsPOS`            
+					FROM `national_summary`
+    WHERE 1";
+
+
+    IF (from_month != 0 && from_month != '') THEN
+      IF (to_month != 0 && to_month != '' && filter_year = to_year) THEN
+            SET @QUERY = CONCAT(@QUERY, " AND `year` = '",filter_year,"' AND `month` BETWEEN '",from_month,"' AND '",to_month,"' ");
+        ELSE IF(to_month != 0 && to_month != '' && filter_year != to_year) THEN
+          SET @QUERY = CONCAT(@QUERY, " AND ((`year` = '",filter_year,"' AND `month` >= '",from_month,"')  OR (`year` = '",to_year,"' AND `month` <= '",to_month,"') OR (`year` > '",filter_year,"' AND `year` < '",to_year,"')) ");
+        ELSE
+            SET @QUERY = CONCAT(@QUERY, " AND `year` = '",filter_year,"' AND `month`='",from_month,"' ");
+        END IF;
+    END IF;
+    ELSE
+        SET @QUERY = CONCAT(@QUERY, " AND `year` = '",filter_year,"' ");
+    END IF;
+
+     PREPARE stmt FROM @QUERY;
+     EXECUTE stmt;
+END //
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS `proc_get_eid_county_age_summary`;
+DELIMITER //
+CREATE PROCEDURE `proc_get_eid_county_age_summary`
+(IN C_Id INT(11), IN filter_year INT(11), IN from_month INT(11), IN to_year INT(11), IN to_month INT(11))
+BEGIN
+  SET @QUERY =    "SELECT
+            SUM(`infantsless2m`) AS `infantsless2m`,       
+          SUM(`infantsless2mPOS`) AS `infantsless2mPOS`,     
+          SUM(`infantsless2w`) AS `infantsless2w`,       
+          SUM(`infantsless2wPOS`) AS `infantsless2wPOS`,    
+          SUM(`infants4to6w`) AS `infants4to6w`,        
+          SUM(`infants4to6wPOS`) AS `infants4to6wPOS`,     
+          SUM(`infantsabove2m`) AS `infantsabove2m`,      
+          SUM(`infantsabove2mPOS`) AS `infantsabove2mPOS`,   
+          SUM(`adults`) AS `adults`,              
+          SUM(`adultsPOS`) AS `adultsPOS`            
+          FROM `county_summary`
+    WHERE 1";
+
+
+    IF (from_month != 0 && from_month != '') THEN
+      IF (to_month != 0 && to_month != '' && filter_year = to_year) THEN
+            SET @QUERY = CONCAT(@QUERY, " AND `county` = '",C_Id,"' AND `year` = '",filter_year,"' AND `month` BETWEEN '",from_month,"' AND '",to_month,"' ");
+        ELSE IF(to_month != 0 && to_month != '' && filter_year != to_year) THEN
+          SET @QUERY = CONCAT(@QUERY, " AND `county` = '",C_Id,"' AND ((`year` = '",filter_year,"' AND `month` >= '",from_month,"')  OR (`year` = '",to_year,"' AND `month` <= '",to_month,"') OR (`year` > '",filter_year,"' AND `year` < '",to_year,"')) ");
+        ELSE
+            SET @QUERY = CONCAT(@QUERY, " AND `county` = '",C_Id,"' AND `year` = '",filter_year,"' AND `month`='",from_month,"' ");
+        END IF;
+    END IF;
+    ELSE
+        SET @QUERY = CONCAT(@QUERY, " AND `county` = '",C_Id,"' AND `year` = '",filter_year,"' ");
+    END IF;
+
+     PREPARE stmt FROM @QUERY;
+     EXECUTE stmt;
+END //
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS `proc_get_eid_subcounty_age_summary`;
+DELIMITER //
+CREATE PROCEDURE `proc_get_eid_subcounty_age_summary`
+(IN SC_Id INT(11), IN filter_year INT(11), IN from_month INT(11), IN to_year INT(11), IN to_month INT(11))
+BEGIN
+  SET @QUERY =    "SELECT
+            SUM(`infantsless2m`) AS `infantsless2m`,       
+          SUM(`infantsless2mPOS`) AS `infantsless2mPOS`,     
+          SUM(`infantsless2w`) AS `infantsless2w`,       
+          SUM(`infantsless2wPOS`) AS `infantsless2wPOS`,    
+          SUM(`infants4to6w`) AS `infants4to6w`,        
+          SUM(`infants4to6wPOS`) AS `infants4to6wPOS`,     
+          SUM(`infantsabove2m`) AS `infantsabove2m`,      
+          SUM(`infantsabove2mPOS`) AS `infantsabove2mPOS`,   
+          SUM(`adults`) AS `adults`,              
+          SUM(`adultsPOS`) AS `adultsPOS`            
+          FROM `subcounty_summary`
+    WHERE 1";
+
+
+    IF (from_month != 0 && from_month != '') THEN
+      IF (to_month != 0 && to_month != '' && filter_year = to_year) THEN
+            SET @QUERY = CONCAT(@QUERY, " AND `subcounty` = '",SC_Id,"' AND `year` = '",filter_year,"' AND `month` BETWEEN '",from_month,"' AND '",to_month,"' ");
+        ELSE IF(to_month != 0 && to_month != '' && filter_year != to_year) THEN
+          SET @QUERY = CONCAT(@QUERY, " AND `subcounty` = '",SC_Id,"' AND ((`year` = '",filter_year,"' AND `month` >= '",from_month,"')  OR (`year` = '",to_year,"' AND `month` <= '",to_month,"') OR (`year` > '",filter_year,"' AND `year` < '",to_year,"')) ");
+        ELSE
+            SET @QUERY = CONCAT(@QUERY, " AND `subcounty` = '",SC_Id,"' AND `year` = '",filter_year,"' AND `month`='",from_month,"' ");
+        END IF;
+    END IF;
+    ELSE
+        SET @QUERY = CONCAT(@QUERY, " AND `subcounty` = '",SC_Id,"' AND `year` = '",filter_year,"' ");
+    END IF;
+
+     PREPARE stmt FROM @QUERY;
+     EXECUTE stmt;
+END //
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS `proc_get_eid_national_age_breakdown`;
+DELIMITER //
+CREATE PROCEDURE `proc_get_eid_national_age_breakdown`
+(IN filter_year INT(11), IN from_month INT(11), IN to_year INT(11), IN to_month INT(11))
+BEGIN
+  SET @QUERY =    "SELECT 
+                    SUM(`less2wpos`) AS `less2wpos`,
+                    SUM(`less2wneg`) AS `less2wneg`,
+                    SUM(`twoto6wpos`) AS `twoto6wpos`,
+                    SUM(`twoto6wneg`) AS `twoto6wneg`,
+                    SUM(`sixto8wpos`) AS `sixto8wpos`,
+                    SUM(`sixto8wneg`) AS `sixto8wneg`,
+                    SUM(`sixmonthpos`) AS `sixmonthpos`,
+                    SUM(`sixmonthneg`) AS `sixmonthneg`,
+                    SUM(`ninemonthpos`) AS `ninemonthpos`,
+                    SUM(`ninemonthneg`) AS `ninemonthneg`,
+                    SUM(`twelvemonthpos`) AS `twelvemonthpos`,
+                    SUM(`twelvemonthneg`) AS `twelvemonthneg`
+                    FROM national_agebreakdown
+    WHERE 1";
+
+
+    IF (from_month != 0 && from_month != '') THEN
+      IF (to_month != 0 && to_month != '' && filter_year = to_year) THEN
+            SET @QUERY = CONCAT(@QUERY, " AND `year` = '",filter_year,"' AND `month` BETWEEN '",from_month,"' AND '",to_month,"' ");
+        ELSE IF(to_month != 0 && to_month != '' && filter_year != to_year) THEN
+          SET @QUERY = CONCAT(@QUERY, " AND ((`year` = '",filter_year,"' AND `month` >= '",from_month,"')  OR (`year` = '",to_year,"' AND `month` <= '",to_month,"') OR (`year` > '",filter_year,"' AND `year` < '",to_year,"')) ");
+        ELSE
+            SET @QUERY = CONCAT(@QUERY, " AND `year` = '",filter_year,"' AND `month`='",from_month,"' ");
+        END IF;
+    END IF;
+    ELSE
+        SET @QUERY = CONCAT(@QUERY, " AND `year` = '",filter_year,"' ");
+    END IF;
+
+     PREPARE stmt FROM @QUERY;
+     EXECUTE stmt;
+END //
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS `proc_get_eid_county_age_breakdown`;
+DELIMITER //
+CREATE PROCEDURE `proc_get_eid_county_age_breakdown`
+(IN C_Id INT(11), IN filter_year INT(11), IN from_month INT(11), IN to_year INT(11), IN to_month INT(11))
+BEGIN
+  SET @QUERY =    "SELECT 
+                    SUM(`less2wpos`) AS `less2wpos`,
+                    SUM(`less2wneg`) AS `less2wneg`,
+                    SUM(`twoto6wpos`) AS `twoto6wpos`,
+                    SUM(`twoto6wneg`) AS `twoto6wneg`,
+                    SUM(`sixto8wpos`) AS `sixto8wpos`,
+                    SUM(`sixto8wneg`) AS `sixto8wneg`,
+                    SUM(`sixmonthpos`) AS `sixmonthpos`,
+                    SUM(`sixmonthneg`) AS `sixmonthneg`,
+                    SUM(`ninemonthpos`) AS `ninemonthpos`,
+                    SUM(`ninemonthneg`) AS `ninemonthneg`,
+                    SUM(`twelvemonthpos`) AS `twelvemonthpos`,
+                    SUM(`twelvemonthneg`) AS `twelvemonthneg`
+                    FROM county_agebreakdown
+    WHERE 1";
+
+
+    IF (from_month != 0 && from_month != '') THEN
+      IF (to_month != 0 && to_month != '' && filter_year = to_year) THEN
+            SET @QUERY = CONCAT(@QUERY, " AND `county` = '",C_Id,"' AND `year` = '",filter_year,"' AND `month` BETWEEN '",from_month,"' AND '",to_month,"' ");
+        ELSE IF(to_month != 0 && to_month != '' && filter_year != to_year) THEN
+          SET @QUERY = CONCAT(@QUERY, " AND `county` = '",C_Id,"' AND ((`year` = '",filter_year,"' AND `month` >= '",from_month,"')  OR (`year` = '",to_year,"' AND `month` <= '",to_month,"') OR (`year` > '",filter_year,"' AND `year` < '",to_year,"')) ");
+        ELSE
+            SET @QUERY = CONCAT(@QUERY, " AND `county` = '",C_Id,"' AND `year` = '",filter_year,"' AND `month`='",from_month,"' ");
+        END IF;
+    END IF;
+    ELSE
+        SET @QUERY = CONCAT(@QUERY, " AND `county` = '",C_Id,"' AND `year` = '",filter_year,"' ");
+    END IF;
+
+     PREPARE stmt FROM @QUERY;
+     EXECUTE stmt;
+END //
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS `proc_get_eid_subcounty_age_breakdown`;
+DELIMITER //
+CREATE PROCEDURE `proc_get_eid_subcounty_age_breakdown`
+(IN SC_Id INT(11), IN filter_year INT(11), IN from_month INT(11), IN to_year INT(11), IN to_month INT(11))
+BEGIN
+  SET @QUERY =    "SELECT 
+                    SUM(`less2wpos`) AS `less2wpos`,
+                    SUM(`less2wneg`) AS `less2wneg`,
+                    SUM(`twoto6wpos`) AS `twoto6wpos`,
+                    SUM(`twoto6wneg`) AS `twoto6wneg`,
+                    SUM(`sixto8wpos`) AS `sixto8wpos`,
+                    SUM(`sixto8wneg`) AS `sixto8wneg`,
+                    SUM(`sixmonthpos`) AS `sixmonthpos`,
+                    SUM(`sixmonthneg`) AS `sixmonthneg`,
+                    SUM(`ninemonthpos`) AS `ninemonthpos`,
+                    SUM(`ninemonthneg`) AS `ninemonthneg`,
+                    SUM(`twelvemonthpos`) AS `twelvemonthpos`,
+                    SUM(`twelvemonthneg`) AS `twelvemonthneg`
+                    FROM subcounty_agebreakdown
+    WHERE 1";
+
+
+    IF (from_month != 0 && from_month != '') THEN
+      IF (to_month != 0 && to_month != '' && filter_year = to_year) THEN
+            SET @QUERY = CONCAT(@QUERY, " AND `subcounty` = '",SC_Id,"' AND `year` = '",filter_year,"' AND `month` BETWEEN '",from_month,"' AND '",to_month,"' ");
+        ELSE IF(to_month != 0 && to_month != '' && filter_year != to_year) THEN
+          SET @QUERY = CONCAT(@QUERY, " AND `subcounty` = '",SC_Id,"' AND ((`year` = '",filter_year,"' AND `month` >= '",from_month,"')  OR (`year` = '",to_year,"' AND `month` <= '",to_month,"') OR (`year` > '",filter_year,"' AND `year` < '",to_year,"')) ");
+        ELSE
+            SET @QUERY = CONCAT(@QUERY, " AND `subcounty` = '",SC_Id,"' AND `year` = '",filter_year,"' AND `month`='",from_month,"' ");
+        END IF;
+    END IF;
+    ELSE
+        SET @QUERY = CONCAT(@QUERY, " AND `subcounty` = '",SC_Id,"' AND `year` = '",filter_year,"' ");
+    END IF;
+
+     PREPARE stmt FROM @QUERY;
+     EXECUTE stmt;
+END //
+DELIMITER ;-- DROP PROCEDURE IF EXISTS `proc_get_eid_county_hei_validation`;
+-- DELIMITER //
+-- CREATE PROCEDURE `proc_get_eid_county_hei_validation`
+-- (IN C_id INT(11), IN filter_year INT(11), IN from_month INT(11), IN to_year INT(11), IN to_month INT(11))
+-- BEGIN
+--   SET @QUERY =    "SELECT
+--         SUM(`validation_confirmedpos`) AS `Confirmed Positive`,
+--         SUM(`validation_repeattest`) AS `Repeat Test`,
+--         AVG(`validation_viralload`) AS `Viral Load`,
+--         SUM(`validation_adult`) AS `Adult`,
+--         SUM(`validation_unknownsite`) AS `Unknown Facility`,
+--         SUM(`validation_confirmedpos`+`validation_repeattest`+`validation_unknownsite`+`validation_adult`+`validation_viralload`) AS `followup_positives`, 
+--         sum(`actualinfantsPOS`) AS `positives`, 
+--         SUM(`tests`-(`validation_repeattest`+`validation_unknownsite`+`validation_adult`+`validation_viralload`)) AS `true_tests` 
+--     FROM `county_summary`
+--     WHERE 1";
+
+
+--     IF (from_month != 0 && from_month != '') THEN
+--       IF (to_month != 0 && to_month != '' && filter_year = to_year) THEN
+--             SET @QUERY = CONCAT(@QUERY, " AND `year` = '",filter_year,"' AND `month` BETWEEN '",from_month,"' AND '",to_month,"' ");
+--         ELSE IF(to_month != 0 && to_month != '' && filter_year != to_year) THEN
+--           SET @QUERY = CONCAT(@QUERY, " AND ((`year` = '",filter_year,"' AND `month` >= '",from_month,"')  OR (`year` = '",to_year,"' AND `month` <= '",to_month,"') OR (`year` > '",filter_year,"' AND `year` < '",to_year,"')) ");
+--         ELSE
+--             SET @QUERY = CONCAT(@QUERY, " AND `year` = '",filter_year,"' AND `month`='",from_month,"' ");
+--         END IF;
+--     END IF;
+--     ELSE
+--         SET @QUERY = CONCAT(@QUERY, " AND `year` = '",filter_year,"' ");
+--     END IF;
+
+--     SET @QUERY = CONCAT(@QUERY, " AND `county` = '",C_id,"' ");
+
+--      PREPARE stmt FROM @QUERY;
+--      EXECUTE stmt;
+-- END //
+-- DELIMITER ;
+
+DROP PROCEDURE IF EXISTS `proc_get_eid_county_hei_validation`;
+DELIMITER //
+CREATE PROCEDURE `proc_get_eid_county_hei_validation`
+(IN C_id INT(11), IN filter_year INT(11), IN from_month INT(11), IN to_year INT(11), IN to_month INT(11))
+BEGIN
+  SET @QUERY =    "SELECT
+        SUM(`validation_confirmedpos`) AS `Confirmed Positive`,
+        SUM(`validation_repeattest`) AS `Repeat Test`,
+        AVG(`validation_viralload`) AS `Viral Load`,
+        SUM(`validation_adult`) AS `Adult`,
+        SUM(`validation_unknownsite`) AS `Unknown Facility`,
+        SUM(`enrolled`+`ltfu`+`adult`+`transout`+`dead`+`other`) AS `followup_hei`, 
+        sum(`actualinfantsPOS`) AS `positives`, 
+        SUM(`actualinfants`-((`enrolled`+`ltfu`+`adult`+`transout`+`dead`+`other`)-(`validation_repeattest`+`validation_unknownsite`+`validation_adult`+`validation_viralload`))) AS `true_tests` 
+    FROM `county_summary`
+    WHERE 1";
+
+
+    IF (from_month != 0 && from_month != '') THEN
+      IF (to_month != 0 && to_month != '' && filter_year = to_year) THEN
+            SET @QUERY = CONCAT(@QUERY, " AND `year` = '",filter_year,"' AND `month` BETWEEN '",from_month,"' AND '",to_month,"' ");
+        ELSE IF(to_month != 0 && to_month != '' && filter_year != to_year) THEN
+          SET @QUERY = CONCAT(@QUERY, " AND ((`year` = '",filter_year,"' AND `month` >= '",from_month,"')  OR (`year` = '",to_year,"' AND `month` <= '",to_month,"') OR (`year` > '",filter_year,"' AND `year` < '",to_year,"')) ");
+        ELSE
+            SET @QUERY = CONCAT(@QUERY, " AND `year` = '",filter_year,"' AND `month`='",from_month,"' ");
+        END IF;
+    END IF;
+    ELSE
+        SET @QUERY = CONCAT(@QUERY, " AND `year` = '",filter_year,"' ");
+    END IF;
+
+    SET @QUERY = CONCAT(@QUERY, " AND `county` = '",C_id,"' ");
+
+     PREPARE stmt FROM @QUERY;
+     EXECUTE stmt;
+END //
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS `proc_get_eid_national_hei_validation`;
+DELIMITER //
+CREATE PROCEDURE `proc_get_eid_national_hei_validation`
+(IN filter_year INT(11), IN from_month INT(11), IN to_year INT(11), IN to_month INT(11))
+BEGIN
+  SET @QUERY =    "SELECT
+        SUM(`validation_confirmedpos`) AS `Confirmed Positive`,
+        SUM(`validation_repeattest`) AS `Repeat Test`,
+        AVG(`validation_viralload`) AS `Viral Load`,
+        SUM(`validation_adult`) AS `Adult`,
+        SUM(`validation_unknownsite`) AS `Unknown Facility`,
+        SUM(`enrolled`+`ltfu`+`adult`+`transout`+`dead`+`other`) AS `followup_hei`, 
+        sum(`actualinfantsPOS`) AS `positives`, 
+        SUM(`actualinfants`-((`enrolled`+`ltfu`+`adult`+`transout`+`dead`+`other`)-(`validation_repeattest`+`validation_unknownsite`+`validation_adult`+`validation_viralload`))) AS `true_tests` 
+        FROM `national_summary`
+    WHERE 1";
+
+    IF (from_month != 0 && from_month != '') THEN
+      IF (to_month != 0 && to_month != '' && filter_year = to_year) THEN
+            SET @QUERY = CONCAT(@QUERY, " AND `year` = '",filter_year,"' AND `month` BETWEEN '",from_month,"' AND '",to_month,"' ");
+        ELSE IF(to_month != 0 && to_month != '' && filter_year != to_year) THEN
+          SET @QUERY = CONCAT(@QUERY, " AND ((`year` = '",filter_year,"' AND `month` >= '",from_month,"')  OR (`year` = '",to_year,"' AND `month` <= '",to_month,"') OR (`year` > '",filter_year,"' AND `year` < '",to_year,"')) ");
+        ELSE
+            SET @QUERY = CONCAT(@QUERY, " AND `year` = '",filter_year,"' AND `month`='",from_month,"' ");
+        END IF;
+    END IF;
+    ELSE
+        SET @QUERY = CONCAT(@QUERY, " AND `year` = '",filter_year,"' ");
+    END IF;
+
+    PREPARE stmt FROM @QUERY;
+    EXECUTE stmt;
+     
+END //
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS `proc_get_eid_partner_hei_validation`;
+DELIMITER //
+CREATE PROCEDURE `proc_get_eid_partner_hei_validation`
+(IN P_id INT(11), IN filter_year INT(11), IN from_month INT(11), IN to_year INT(11), IN to_month INT(11))
+BEGIN
+  SET @QUERY =    "SELECT
+        SUM(`validation_confirmedpos`) AS `Confirmed Positive`,
+        SUM(`validation_repeattest`) AS `Repeat Test`,
+        AVG(`validation_viralload`) AS `Viral Load`,
+        SUM(`validation_adult`) AS `Adult`,
+        SUM(`validation_unknownsite`) AS `Unknown Facility`,
+        SUM(`enrolled`+`ltfu`+`adult`+`transout`+`dead`+`other`) AS `followup_hei`, 
+        sum(`actualinfantsPOS`) AS `positives`, 
+        SUM(`actualinfants`-((`enrolled`+`ltfu`+`adult`+`transout`+`dead`+`other`)-(`validation_repeattest`+`validation_unknownsite`+`validation_adult`+`validation_viralload`))) AS `true_tests`
+    FROM `ip_summary`
+    WHERE 1";
+
+    IF (from_month != 0 && from_month != '') THEN
+      IF (to_month != 0 && to_month != '' && filter_year = to_year) THEN
+            SET @QUERY = CONCAT(@QUERY, " AND `year` = '",filter_year,"' AND `month` BETWEEN '",from_month,"' AND '",to_month,"' ");
+        ELSE IF(to_month != 0 && to_month != '' && filter_year != to_year) THEN
+          SET @QUERY = CONCAT(@QUERY, " AND ((`year` = '",filter_year,"' AND `month` >= '",from_month,"')  OR (`year` = '",to_year,"' AND `month` <= '",to_month,"') OR (`year` > '",filter_year,"' AND `year` < '",to_year,"')) ");
+        ELSE
+            SET @QUERY = CONCAT(@QUERY, " AND `year` = '",filter_year,"' AND `month`='",from_month,"' ");
+        END IF;
+    END IF;
+    ELSE
+        SET @QUERY = CONCAT(@QUERY, " AND `year` = '",filter_year,"' ");
+    END IF;
+
+    SET @QUERY = CONCAT(@QUERY, " AND `partner` = '",P_id,"' ");
+
+     PREPARE stmt FROM @QUERY;
+     EXECUTE stmt;
+END //
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS `proc_get_eid_subcounty_hei_validation`;
+DELIMITER //
+CREATE PROCEDURE `proc_get_eid_subcounty_hei_validation`
+(IN filter_subcounty INT(11), IN filter_year INT(11), IN from_month INT(11), IN to_year INT(11), IN to_month INT(11))
+BEGIN
+  SET @QUERY =    "SELECT
+        SUM(`validation_confirmedpos`) AS `Confirmed Positive`,
+        SUM(`validation_repeattest`) AS `Repeat Test`,
+        AVG(`validation_viralload`) AS `Viral Load`,
+        SUM(`validation_adult`) AS `Adult`,
+        SUM(`validation_unknownsite`) AS `Unknown Facility`,
+        SUM(`enrolled`+`ltfu`+`adult`+`transout`+`dead`+`other`) AS `followup_hei`, 
+        sum(`actualinfantsPOS`) AS `positives`, 
+        SUM(`actualinfants`-((`enrolled`+`ltfu`+`adult`+`transout`+`dead`+`other`)-(`validation_repeattest`+`validation_unknownsite`+`validation_adult`+`validation_viralload`))) AS `true_tests` 
+                  FROM `subcounty_summary` 
+    WHERE 1";
+
+
+    IF (from_month != 0 && from_month != '') THEN
+      IF (to_month != 0 && to_month != '' && filter_year = to_year) THEN
+            SET @QUERY = CONCAT(@QUERY, " AND `year` = '",filter_year,"' AND `month` BETWEEN '",from_month,"' AND '",to_month,"' ");
+        ELSE IF(to_month != 0 && to_month != '' && filter_year != to_year) THEN
+          SET @QUERY = CONCAT(@QUERY, " AND ((`year` = '",filter_year,"' AND `month` >= '",from_month,"')  OR (`year` = '",to_year,"' AND `month` <= '",to_month,"') OR (`year` > '",filter_year,"' AND `year` < '",to_year,"')) ");
+        ELSE
+            SET @QUERY = CONCAT(@QUERY, " AND `year` = '",filter_year,"' AND `month`='",from_month,"' ");
+        END IF;
+    END IF;
+    ELSE
+        SET @QUERY = CONCAT(@QUERY, " AND `year` = '",filter_year,"' ");
+    END IF;
+
+    SET @QUERY = CONCAT(@QUERY, " AND `subcounty` = '",filter_subcounty,"' ");
+
+
+     PREPARE stmt FROM @QUERY;
+     EXECUTE stmt;
+END //
+DELIMITER ; 
+
+DROP PROCEDURE IF EXISTS `proc_get_eid_site_hei_validation`;
+DELIMITER //
+CREATE PROCEDURE `proc_get_eid_site_hei_validation`
+(IN filter_site INT(11), IN filter_year INT(11), IN from_month INT(11), IN to_year INT(11), IN to_month INT(11))
+BEGIN
+  SET @QUERY =    "SELECT
+       SUM(`validation_confirmedpos`) AS `Confirmed Positive`,
+        SUM(`validation_repeattest`) AS `Repeat Test`,
+        AVG(`validation_viralload`) AS `Viral Load`,
+        SUM(`validation_adult`) AS `Adult`,
+        SUM(`validation_unknownsite`) AS `Unknown Facility`,
+        SUM(`enrolled`+`ltfu`+`adult`+`transout`+`dead`+`other`) AS `followup_hei`, 
+        sum(`actualinfantsPOS`) AS `positives`, 
+        SUM(`actualinfants`-((`enrolled`+`ltfu`+`adult`+`transout`+`dead`+`other`)-(`validation_repeattest`+`validation_unknownsite`+`validation_adult`+`validation_viralload`))) AS `true_tests`  
+                  FROM `site_summary` 
+            WHERE 1";
+
+
+    IF (from_month != 0 && from_month != '') THEN
+      IF (to_month != 0 && to_month != '' && filter_year = to_year) THEN
+            SET @QUERY = CONCAT(@QUERY, " AND `year` = '",filter_year,"' AND `month` BETWEEN '",from_month,"' AND '",to_month,"' ");
+        ELSE IF(to_month != 0 && to_month != '' && filter_year != to_year) THEN
+          SET @QUERY = CONCAT(@QUERY, " AND ((`year` = '",filter_year,"' AND `month` >= '",from_month,"')  OR (`year` = '",to_year,"' AND `month` <= '",to_month,"') OR (`year` > '",filter_year,"' AND `year` < '",to_year,"')) ");
+        ELSE
+            SET @QUERY = CONCAT(@QUERY, " AND `year` = '",filter_year,"' AND `month`='",from_month,"' ");
+        END IF;
+    END IF;
+    ELSE
+        SET @QUERY = CONCAT(@QUERY, " AND `year` = '",filter_year,"' ");
+    END IF;
+
+    SET @QUERY = CONCAT(@QUERY, " AND `facility` = '",filter_site,"' ");
+
+     PREPARE stmt FROM @QUERY;
+     EXECUTE stmt;
+     
+END //
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS `proc_get_eid_rht_pos_trend`;
+DELIMITER //
+CREATE PROCEDURE `proc_get_eid_rht_pos_trend`
+(IN filter_county INT(11), IN filter_year INT(11), IN filter_result INT(11))
+BEGIN
+  SET @QUERY =    "SELECT 
+                    MONTH(`rs`.`datetested`) AS `month`, 
+                    COUNT(*) AS `tests`
+                  FROM `rht_samples` `rs` 
+                  LEFT JOIN `view_facilitys` `vf` 
+                    ON `rs`.`facility` = `vf`.`ID`
+    WHERE 1";
+
+    SET @QUERY = CONCAT(@QUERY, " AND YEAR(`datetested`) = '",filter_year,"' ");
+
+    
+    IF (filter_result != 0 && filter_result != '') THEN
+      SET @QUERY = CONCAT(@QUERY, " AND `rs`.`result` = '",filter_result,"' ");
+    END IF;
+
+    IF (filter_county != 0 && filter_county != '') THEN
+      SET @QUERY = CONCAT(@QUERY, " AND `vf`.`county` = '",filter_county,"' ");
+    END IF;
+
+    SET @QUERY = CONCAT(@QUERY, " GROUP BY `month` ORDER BY `month` ");
+
+     PREPARE stmt FROM @QUERY;
+     EXECUTE stmt;
+END //
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS `proc_get_eid_rht_yearly_trend`;
+DELIMITER //
+CREATE PROCEDURE `proc_get_eid_rht_yearly_trend`
+(IN filter_county INT(11), IN filter_result INT(11))
+BEGIN
+  SET @QUERY =    "SELECT  
+                    YEAR(`rs`.`datetested`) AS `year`, 
+                    MONTH(`rs`.`datetested`) AS `month`,
+                    COUNT(*) AS `tests`
+                  FROM `rht_samples` `rs` 
+                  LEFT JOIN `view_facilitys` `vf` 
+                    ON `rs`.`facility` = `vf`.`ID`
+    WHERE 1";
+
+    
+    IF (filter_result != 0 && filter_result != '') THEN
+      SET @QUERY = CONCAT(@QUERY, " AND `rs`.`result` = '",filter_result,"' ");
+    END IF;
+
+    IF (filter_county != 0 && filter_county != '') THEN
+      SET @QUERY = CONCAT(@QUERY, " AND `vf`.`county` = '",filter_county,"' ");
+    END IF;
+
+    SET @QUERY = CONCAT(@QUERY, " GROUP BY `month`, `year` ORDER BY `year` DESC, `month` ASC ");
+
+     PREPARE stmt FROM @QUERY;
+     EXECUTE stmt;
+END //
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS `proc_get_eid_rht_outcomes`;
+DELIMITER //
+CREATE PROCEDURE `proc_get_eid_rht_outcomes`
+(IN filter_county INT(11), IN filter_year INT(11), IN from_month INT(11), IN to_year INT(11), IN to_month INT(11), IN filter_result INT(11), IN filter_gender VARCHAR(11))
+BEGIN
+  SET @QUERY =    "SELECT 
+                    COUNT(*) AS `tests` 
+                  FROM `rht_samples` `rs` 
+                  LEFT JOIN `view_facilitys` `vf` 
+                    ON `rs`.`facility` = `vf`.`ID`
+    WHERE 1";
+
+    IF (filter_county != 0 && filter_county != '') THEN
+      SET @QUERY = CONCAT(@QUERY, " AND `vf`.`county` = '",filter_county,"' ");
+    END IF;
+
+    IF (filter_gender != '') THEN
+      SET @QUERY = CONCAT(@QUERY, " AND `rs`.`gender` = '",filter_gender,"' ");
+    END IF;
+
+    IF (filter_result != 0 && filter_result != '') THEN
+      SET @QUERY = CONCAT(@QUERY, " AND `rs`.`result` = '",filter_result,"' ");
+    END IF;
+
+    IF (from_month != 0 && from_month != '') THEN
+      IF (to_month != 0 && to_month != '' && filter_year = to_year) THEN
+        SET @QUERY = CONCAT(@QUERY, " AND YEAR(`datetested`) = '",filter_year,"' AND MONTH(`datetested`) BETWEEN '",from_month,"' AND '",to_month,"' ");
+      ELSE IF(to_month != 0 && to_month != '' && filter_year != to_year) THEN
+        SET @QUERY = CONCAT(@QUERY, " AND ((YEAR(`datetested`) = '",filter_year,"' AND MONTH(`datetested`) >= '",from_month,"')  OR (YEAR(`datetested`) = '",to_year,"' AND MONTH(`datetested`) <= '",to_month,"') OR (YEAR(`datetested`) > '",filter_year,"' AND YEAR(`datetested`) < '",to_year,"')) ");
+      ELSE
+        SET @QUERY = CONCAT(@QUERY, " AND YEAR(`datetested`) = '",filter_year,"' AND MONTH(`datetested`)='",from_month,"' ");
+      END IF;
+    END IF;
+    ELSE
+      SET @QUERY = CONCAT(@QUERY, " AND YEAR(`datetested`) = '",filter_year,"' ");
+    END IF;
+
+     PREPARE stmt FROM @QUERY;
+     EXECUTE stmt;
+END //
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS `proc_get_eid_rht_facility_outcomes`;
+DELIMITER //
+CREATE PROCEDURE `proc_get_eid_rht_facility_outcomes`
+(IN filter_county INT(11), IN filter_year INT(11), IN from_month INT(11), IN to_year INT(11), IN to_month INT(11), IN filter_result INT(11))
+BEGIN
+  SET @QUERY =    "SELECT 
+                    DISTINCT(`rs`.`facility`) AS `facility`,
+                    `vf`.`name` AS `name`,
+                    COUNT(*) AS `tests` 
+                  FROM `rht_samples` `rs` 
+                  LEFT JOIN `view_facilitys` `vf` 
+                    ON `rs`.`facility` = `vf`.`ID`
+    WHERE 1";
+
+    IF (filter_county != 0 && filter_county != '') THEN
+      SET @QUERY = CONCAT(@QUERY, " AND `vf`.`county` = '",filter_county,"' ");
+    END IF;
+
+
+    IF (filter_result != 0 && filter_result != '') THEN
+      SET @QUERY = CONCAT(@QUERY, " AND `rs`.`result` = '",filter_result,"' ");
+    END IF;
+
+    IF (from_month != 0 && from_month != '') THEN
+      IF (to_month != 0 && to_month != '' && filter_year = to_year) THEN
+        SET @QUERY = CONCAT(@QUERY, " AND YEAR(`datetested`) = '",filter_year,"' AND MONTH(`datetested`) BETWEEN '",from_month,"' AND '",to_month,"' ");
+      ELSE IF(to_month != 0 && to_month != '' && filter_year != to_year) THEN
+        SET @QUERY = CONCAT(@QUERY, " AND ((YEAR(`datetested`) = '",filter_year,"' AND MONTH(`datetested`) >= '",from_month,"')  OR (YEAR(`datetested`) = '",to_year,"' AND MONTH(`datetested`) <= '",to_month,"') OR (YEAR(`datetested`) > '",filter_year,"' AND YEAR(`datetested`) < '",to_year,"')) ");
+      ELSE
+        SET @QUERY = CONCAT(@QUERY, " AND YEAR(`datetested`) = '",filter_year,"' AND MONTH(`datetested`)='",from_month,"' ");
+      END IF;
+    END IF;
+    ELSE
+      SET @QUERY = CONCAT(@QUERY, " AND YEAR(`datetested`) = '",filter_year,"' ");
+    END IF;
+
+    SET @QUERY = CONCAT(@QUERY, " GROUP BY `rs`.`facility` ORDER BY `tests` DESC ");
+
+     PREPARE stmt FROM @QUERY;
+     EXECUTE stmt;
+END //
+DELIMITER ;
 DROP PROCEDURE IF EXISTS `proc_get_eid_all_sites_outcomes`;
 DELIMITER //
 CREATE PROCEDURE `proc_get_eid_all_sites_outcomes`
@@ -32,7 +636,6 @@ BEGIN
      EXECUTE stmt;
 END //
 DELIMITER ;
-
 DROP PROCEDURE IF EXISTS `proc_get_eid_average_rejection`;
 DELIMITER //
 CREATE PROCEDURE `proc_get_eid_average_rejection`
@@ -51,6 +654,45 @@ BEGIN
 
     PREPARE stmt FROM @QUERY;
     EXECUTE stmt;
+END //
+DELIMITER ;
+DROP PROCEDURE IF EXISTS `proc_get_eid_county_age_breakdown`;
+DELIMITER //
+CREATE PROCEDURE `proc_get_eid_county_age_breakdown`
+(IN C_Id INT(11), IN filter_year INT(11), IN from_month INT(11), IN to_year INT(11), IN to_month INT(11))
+BEGIN
+  SET @QUERY =    "SELECT 
+                    SUM(`less2wpos`) AS `less2wpos`,
+                    SUM(`less2wneg`) AS `less2wneg`,
+                    SUM(`twoto6wpos`) AS `twoto6wpos`,
+                    SUM(`twoto6wneg`) AS `twoto6wneg`,
+                    SUM(`sixto8wpos`) AS `sixto8wpos`,
+                    SUM(`sixto8wneg`) AS `sixto8wneg`,
+                    SUM(`sixmonthpos`) AS `sixmonthpos`,
+                    SUM(`sixmonthneg`) AS `sixmonthneg`,
+                    SUM(`ninemonthpos`) AS `ninemonthpos`,
+                    SUM(`ninemonthneg`) AS `ninemonthneg`,
+                    SUM(`twelvemonthpos`) AS `twelvemonthpos`,
+                    SUM(`twelvemonthneg`) AS `twelvemonthneg`
+                    FROM county_agebreakdown
+    WHERE 1";
+
+
+    IF (from_month != 0 && from_month != '') THEN
+      IF (to_month != 0 && to_month != '' && filter_year = to_year) THEN
+            SET @QUERY = CONCAT(@QUERY, " AND `county` = '",C_Id,"' AND `year` = '",filter_year,"' AND `month` BETWEEN '",from_month,"' AND '",to_month,"' ");
+        ELSE IF(to_month != 0 && to_month != '' && filter_year != to_year) THEN
+          SET @QUERY = CONCAT(@QUERY, " AND `county` = '",C_Id,"' AND ((`year` = '",filter_year,"' AND `month` >= '",from_month,"')  OR (`year` = '",to_year,"' AND `month` <= '",to_month,"') OR (`year` > '",filter_year,"' AND `year` < '",to_year,"')) ");
+        ELSE
+            SET @QUERY = CONCAT(@QUERY, " AND `county` = '",C_Id,"' AND `year` = '",filter_year,"' AND `month`='",from_month,"' ");
+        END IF;
+    END IF;
+    ELSE
+        SET @QUERY = CONCAT(@QUERY, " AND `county` = '",C_Id,"' AND `year` = '",filter_year,"' ");
+    END IF;
+
+     PREPARE stmt FROM @QUERY;
+     EXECUTE stmt;
 END //
 DELIMITER ;
 DROP PROCEDURE IF EXISTS `proc_get_county_age`;
@@ -89,6 +731,43 @@ BEGIN
     END IF;
 
     SET @QUERY = CONCAT(@QUERY, " AND `county` = '",C_id,"' ");
+
+     PREPARE stmt FROM @QUERY;
+     EXECUTE stmt;
+END //
+DELIMITER ;
+DROP PROCEDURE IF EXISTS `proc_get_eid_county_age_summary`;
+DELIMITER //
+CREATE PROCEDURE `proc_get_eid_county_age_summary`
+(IN C_Id INT(11), IN filter_year INT(11), IN from_month INT(11), IN to_year INT(11), IN to_month INT(11))
+BEGIN
+  SET @QUERY =    "SELECT
+  					SUM(`infantsless2m`) AS `infantsless2m`,       
+					SUM(`infantsless2mPOS`) AS `infantsless2mPOS`,     
+					SUM(`infantsless2w`) AS `infantsless2w`,       
+					SUM(`infantsless2wPOS`) AS `infantsless2wPOS`,    
+					SUM(`infants4to6w`) AS `infants4to6w`,        
+					SUM(`infants4to6wPOS`) AS `infants4to6wPOS`,     
+					SUM(`infantsabove2m`) AS `infantsabove2m`,      
+					SUM(`infantsabove2mPOS`) AS `infantsabove2mPOS`,   
+					SUM(`adults`) AS `adults`,              
+					SUM(`adultsPOS`) AS `adultsPOS`            
+					FROM `county_summary`
+    WHERE 1";
+
+
+    IF (from_month != 0 && from_month != '') THEN
+      IF (to_month != 0 && to_month != '' && filter_year = to_year) THEN
+            SET @QUERY = CONCAT(@QUERY, " AND `county` = '",C_Id,"' AND `year` = '",filter_year,"' AND `month` BETWEEN '",from_month,"' AND '",to_month,"' ");
+        ELSE IF(to_month != 0 && to_month != '' && filter_year != to_year) THEN
+          SET @QUERY = CONCAT(@QUERY, " AND `county` = '",C_Id,"' AND ((`year` = '",filter_year,"' AND `month` >= '",from_month,"')  OR (`year` = '",to_year,"' AND `month` <= '",to_month,"') OR (`year` > '",filter_year,"' AND `year` < '",to_year,"')) ");
+        ELSE
+            SET @QUERY = CONCAT(@QUERY, " AND `county` = '",C_Id,"' AND `year` = '",filter_year,"' AND `month`='",from_month,"' ");
+        END IF;
+    END IF;
+    ELSE
+        SET @QUERY = CONCAT(@QUERY, " AND `county` = '",C_Id,"' AND `year` = '",filter_year,"' ");
+    END IF;
 
      PREPARE stmt FROM @QUERY;
      EXECUTE stmt;
@@ -482,7 +1161,7 @@ BEGIN
                   SUM(`redraw`) AS `redraw`, 
                   SUM(`adults`) AS `adults`, 
                   SUM(`adultsPOS`) AS `adultspos`, 
-                  SUM(`medage`) AS `medage`, 
+                  AVG(`medage`) AS `medage`, 
                   SUM(`rejected`) AS `rejected`, 
                   SUM(`infantsless2m`) AS `infantsless2m`, 
                   SUM(`infantsless2mPOS`) AS `infantsless2mpos` 
@@ -513,7 +1192,7 @@ BEGIN
 END //
 DELIMITER ;
 
-DROP PROCEDURE IF EXISTS `proc_get_eid_county_testing_trends`;
+    DROP PROCEDURE IF EXISTS `proc_get_eid_county_testing_trends`;
 DELIMITER //
 CREATE PROCEDURE `proc_get_eid_county_testing_trends`
 (IN C_id INT(11), IN from_year INT(11), IN to_year INT(11))
@@ -576,7 +1255,7 @@ CREATE PROCEDURE `proc_get_eid_lab_performance`
 (IN filter_year INT(11))
 BEGIN
   SET @QUERY =    "SELECT
-                    `l`.`ID`, `l`.`labname` AS `name`, `ls`.`tests`, `ls`.`rejected`, `ls`.`pos`, `ls`.neg,
+                    `l`.`ID`, `l`.`labname` AS `name`, (`ls`.`alltests`+`ls`.`confirmdna`+`ls`.`repeatspos`+`ls`.`eqatests`) AS `tests`, `ls`.`rejected`, `ls`.`pos`, `ls`.neg,
                     `ls`.`month` 
                 FROM `lab_summary` `ls`
                 JOIN `labs` `l`
@@ -671,6 +1350,45 @@ BEGIN
     EXECUTE stmt;
 END //
 DELIMITER ;
+DROP PROCEDURE IF EXISTS `proc_get_eid_national_age_breakdown`;
+DELIMITER //
+CREATE PROCEDURE `proc_get_eid_national_age_breakdown`
+(IN filter_year INT(11), IN from_month INT(11), IN to_year INT(11), IN to_month INT(11))
+BEGIN
+  SET @QUERY =    "SELECT 
+                    SUM(`less2wpos`) AS `less2wpos`,
+                    SUM(`less2wneg`) AS `less2wneg`,
+                    SUM(`twoto6wpos`) AS `twoto6wpos`,
+                    SUM(`twoto6wneg`) AS `twoto6wneg`,
+                    SUM(`sixto8wpos`) AS `sixto8wpos`,
+                    SUM(`sixto8wneg`) AS `sixto8wneg`,
+                    SUM(`sixmonthpos`) AS `sixmonthpos`,
+                    SUM(`sixmonthneg`) AS `sixmonthneg`,
+                    SUM(`ninemonthpos`) AS `ninemonthpos`,
+                    SUM(`ninemonthneg`) AS `ninemonthneg`,
+                    SUM(`twelvemonthpos`) AS `twelvemonthpos`,
+                    SUM(`twelvemonthneg`) AS `twelvemonthneg`
+                    FROM national_agebreakdown
+    WHERE 1";
+
+
+    IF (from_month != 0 && from_month != '') THEN
+      IF (to_month != 0 && to_month != '' && filter_year = to_year) THEN
+            SET @QUERY = CONCAT(@QUERY, " AND `year` = '",filter_year,"' AND `month` BETWEEN '",from_month,"' AND '",to_month,"' ");
+        ELSE IF(to_month != 0 && to_month != '' && filter_year != to_year) THEN
+          SET @QUERY = CONCAT(@QUERY, " AND ((`year` = '",filter_year,"' AND `month` >= '",from_month,"')  OR (`year` = '",to_year,"' AND `month` <= '",to_month,"') OR (`year` > '",filter_year,"' AND `year` < '",to_year,"')) ");
+        ELSE
+            SET @QUERY = CONCAT(@QUERY, " AND `year` = '",filter_year,"' AND `month`='",from_month,"' ");
+        END IF;
+    END IF;
+    ELSE
+        SET @QUERY = CONCAT(@QUERY, " AND `year` = '",filter_year,"' ");
+    END IF;
+
+     PREPARE stmt FROM @QUERY;
+     EXECUTE stmt;
+END //
+DELIMITER ;
 DROP PROCEDURE IF EXISTS `proc_get_national_age`;
 DROP PROCEDURE IF EXISTS `proc_get_eid_national_age`;
 DELIMITER //
@@ -708,6 +1426,43 @@ BEGIN
     PREPARE stmt FROM @QUERY;
     EXECUTE stmt;
 
+END //
+DELIMITER ;
+DROP PROCEDURE IF EXISTS `proc_get_eid_national_age_summary`;
+DELIMITER //
+CREATE PROCEDURE `proc_get_eid_national_age_summary`
+(IN filter_year INT(11), IN from_month INT(11), IN to_year INT(11), IN to_month INT(11))
+BEGIN
+  SET @QUERY =    "SELECT
+  					SUM(`infantsless2m`) AS `infantsless2m`,       
+					SUM(`infantsless2mPOS`) AS `infantsless2mPOS`,     
+					SUM(`infantsless2w`) AS `infantsless2w`,       
+					SUM(`infantsless2wPOS`) AS `infantsless2wPOS`,    
+					SUM(`infants4to6w`) AS `infants4to6w`,        
+					SUM(`infants4to6wPOS`) AS `infants4to6wPOS`,     
+					SUM(`infantsabove2m`) AS `infantsabove2m`,      
+					SUM(`infantsabove2mPOS`) AS `infantsabove2mPOS`,   
+					SUM(`adults`) AS `adults`,              
+					SUM(`adultsPOS`) AS `adultsPOS`            
+					FROM `national_summary`
+    WHERE 1";
+
+
+    IF (from_month != 0 && from_month != '') THEN
+      IF (to_month != 0 && to_month != '' && filter_year = to_year) THEN
+            SET @QUERY = CONCAT(@QUERY, " AND `year` = '",filter_year,"' AND `month` BETWEEN '",from_month,"' AND '",to_month,"' ");
+        ELSE IF(to_month != 0 && to_month != '' && filter_year != to_year) THEN
+          SET @QUERY = CONCAT(@QUERY, " AND ((`year` = '",filter_year,"' AND `month` >= '",from_month,"')  OR (`year` = '",to_year,"' AND `month` <= '",to_month,"') OR (`year` > '",filter_year,"' AND `year` < '",to_year,"')) ");
+        ELSE
+            SET @QUERY = CONCAT(@QUERY, " AND `year` = '",filter_year,"' AND `month`='",from_month,"' ");
+        END IF;
+    END IF;
+    ELSE
+        SET @QUERY = CONCAT(@QUERY, " AND `year` = '",filter_year,"' ");
+    END IF;
+
+     PREPARE stmt FROM @QUERY;
+     EXECUTE stmt;
 END //
 DELIMITER ;
 DROP PROCEDURE IF EXISTS `proc_get_eid_national_eid_outcomes`;
@@ -1325,7 +2080,7 @@ BEGIN
                   SUM(`redraw`) AS `redraw`, 
                   SUM(`adults`) AS `adults`, 
                   SUM(`adultsPOS`) AS `adultspos`, 
-                  SUM(`medage`) AS `medage`, 
+                  AVG(`medage`) AS `medage`, 
                   SUM(`rejected`) AS `rejected`, 
                   SUM(`infantsless2m`) AS `infantsless2m`, 
                   SUM(`infantsless2mPOS`) AS `infantsless2mpos` 
@@ -1467,22 +2222,25 @@ CREATE PROCEDURE `proc_get_eid_sites_eid`
 (IN filter_site INT(11), IN filter_year INT(11), IN from_month INT(11), IN to_year INT(11), IN to_month INT(11))
 BEGIN
   SET @QUERY =    "SELECT 
-                    SUM((`ss`.`pos`)) AS `pos`, 
-                    SUM(`ss`.`neg`) AS `neg`, 
-                    SUM(`ss`.`tests`) AS `tests`, 
-                    SUM(`ss`.`rejected`) AS `rejected`, 
-                    SUM(`ss`.`repeatspos`) AS `repeatspos`, 
-                    SUM(`ss`.`alltests`) AS `alltests`, 
-                    SUM(`ss`.`firstdna`) AS `firstdna`, 
-                    SUM(`ss`.`confirmdna`) AS `confirmdna`, 
-                    SUM(`ss`.`actualinfants`) AS `actualinfants`, 
-                    SUM(`ss`.`actualinfantsPOS`) AS `actualinfantspos`, 
-                    SUM(`ss`.`infantsless2m`) AS `infantsless2m`, 
-                    SUM(`ss`.`infantsless2mPOS`) AS `infantless2mpos`,
-                    SUM(`ss`.`adults`) AS `adults`, 
-                    SUM(`ss`.`adultsPOS`) AS `adultsPOS`, 
-                    AVG(`ss`.`medage`) AS `medage`, 
-                    AVG(`ss`.`sitessending`) AS `sitessending` 
+                    SUM(`pos`) AS `pos`,
+                    SUM(`neg`) AS `neg`,
+                    AVG(`medage`) AS `medage`,
+                    SUM(`alltests`) AS `alltests`,
+                    SUM(`eqatests`) AS `eqatests`,
+                    SUM(`firstdna`) AS `firstdna`,
+                    SUM(`confirmdna`) AS `confirmdna`,
+                    SUM(`confirmedPOS`) AS `confirmpos`,
+                    SUM(`repeatspos`) AS `repeatspos`,
+                    SUM(`actualinfants`) AS `actualinfants`,
+                    SUM(`actualinfantsPOS`) AS `actualinfantspos`,
+                    SUM(`infantsless2m`) AS `infantsless2m`,
+                    SUM(`infantsless2mPOS`) AS `infantless2mpos`,
+                    SUM(`adults`) AS `adults`,
+                    SUM(`adultsPOS`) AS `adultsPOS`,
+                    SUM(`redraw`) AS `redraw`,
+                    SUM(`tests`) AS `tests`,
+                    SUM(`rejected`) AS `rejected`, 
+                    AVG(`sitessending`) AS `sitessending` 
                   FROM `site_summary` `ss` 
             WHERE 1";
 
@@ -1518,9 +2276,9 @@ BEGIN
                     SUM((`ss`.`enrolled`)) AS `enrolled`, 
                     SUM(`ss`.`dead`) AS `dead`, 
                     SUM(`ss`.`ltfu`) AS `ltfu`, 
+                    SUM(`ss`.`transout`) AS `transout`, 
                     SUM(`ss`.`adult`) AS `adult`, 
-                    SUM(`ss`.`other`) AS `other`, 
-                    SUM(`ss`.`transout`) AS `transout` 
+                    SUM(`ss`.`other`) AS `other` 
                   FROM `site_summary` `ss` 
     WHERE 1";
 
@@ -1574,6 +2332,45 @@ BEGIN
      EXECUTE stmt;
 END //
 DELIMITER ;
+DROP PROCEDURE IF EXISTS `proc_get_eid_subcounty_age_breakdown`;
+DELIMITER //
+CREATE PROCEDURE `proc_get_eid_subcounty_age_breakdown`
+(IN SC_Id INT(11), IN filter_year INT(11), IN from_month INT(11), IN to_year INT(11), IN to_month INT(11))
+BEGIN
+  SET @QUERY =    "SELECT 
+                    SUM(`less2wpos`) AS `less2wpos`,
+                    SUM(`less2wneg`) AS `less2wneg`,
+                    SUM(`twoto6wpos`) AS `twoto6wpos`,
+                    SUM(`twoto6wneg`) AS `twoto6wneg`,
+                    SUM(`sixto8wpos`) AS `sixto8wpos`,
+                    SUM(`sixto8wneg`) AS `sixto8wneg`,
+                    SUM(`sixmonthpos`) AS `sixmonthpos`,
+                    SUM(`sixmonthneg`) AS `sixmonthneg`,
+                    SUM(`ninemonthpos`) AS `ninemonthpos`,
+                    SUM(`ninemonthneg`) AS `ninemonthneg`,
+                    SUM(`twelvemonthpos`) AS `twelvemonthpos`,
+                    SUM(`twelvemonthneg`) AS `twelvemonthneg`
+                    FROM subcounty_agebreakdown
+    WHERE 1";
+
+
+    IF (from_month != 0 && from_month != '') THEN
+      IF (to_month != 0 && to_month != '' && filter_year = to_year) THEN
+            SET @QUERY = CONCAT(@QUERY, " AND `subcounty` = '",SC_Id,"' AND `year` = '",filter_year,"' AND `month` BETWEEN '",from_month,"' AND '",to_month,"' ");
+        ELSE IF(to_month != 0 && to_month != '' && filter_year != to_year) THEN
+          SET @QUERY = CONCAT(@QUERY, " AND `subcounty` = '",SC_Id,"' AND ((`year` = '",filter_year,"' AND `month` >= '",from_month,"')  OR (`year` = '",to_year,"' AND `month` <= '",to_month,"') OR (`year` > '",filter_year,"' AND `year` < '",to_year,"')) ");
+        ELSE
+            SET @QUERY = CONCAT(@QUERY, " AND `subcounty` = '",SC_Id,"' AND `year` = '",filter_year,"' AND `month`='",from_month,"' ");
+        END IF;
+    END IF;
+    ELSE
+        SET @QUERY = CONCAT(@QUERY, " AND `subcounty` = '",SC_Id,"' AND `year` = '",filter_year,"' ");
+    END IF;
+
+     PREPARE stmt FROM @QUERY;
+     EXECUTE stmt;
+END //
+DELIMITER ;
 DROP PROCEDURE IF EXISTS `proc_get_eid_subcounty_age`;
 DELIMITER //
 CREATE PROCEDURE `proc_get_eid_subcounty_age`
@@ -1612,6 +2409,43 @@ BEGIN
     
     PREPARE stmt FROM @QUERY;
     EXECUTE stmt;
+END //
+DELIMITER ;
+DROP PROCEDURE IF EXISTS `proc_get_eid_subcounty_age_summary`;
+DELIMITER //
+CREATE PROCEDURE `proc_get_eid_subcounty_age_summary`
+(IN SC_Id INT(11), IN filter_year INT(11), IN from_month INT(11), IN to_year INT(11), IN to_month INT(11))
+BEGIN
+  SET @QUERY =    "SELECT
+  					SUM(`infantsless2m`) AS `infantsless2m`,       
+					SUM(`infantsless2mPOS`) AS `infantsless2mPOS`,     
+					SUM(`infantsless2w`) AS `infantsless2w`,       
+					SUM(`infantsless2wPOS`) AS `infantsless2wPOS`,    
+					SUM(`infants4to6w`) AS `infants4to6w`,        
+					SUM(`infants4to6wPOS`) AS `infants4to6wPOS`,     
+					SUM(`infantsabove2m`) AS `infantsabove2m`,      
+					SUM(`infantsabove2mPOS`) AS `infantsabove2mPOS`,   
+					SUM(`adults`) AS `adults`,              
+					SUM(`adultsPOS`) AS `adultsPOS`            
+					FROM `subcounty_summary`
+    WHERE 1";
+
+
+    IF (from_month != 0 && from_month != '') THEN
+      IF (to_month != 0 && to_month != '' && filter_year = to_year) THEN
+            SET @QUERY = CONCAT(@QUERY, " AND `subcounty` = '",SC_Id,"' AND `year` = '",filter_year,"' AND `month` BETWEEN '",from_month,"' AND '",to_month,"' ");
+        ELSE IF(to_month != 0 && to_month != '' && filter_year != to_year) THEN
+          SET @QUERY = CONCAT(@QUERY, " AND `subcounty` = '",SC_Id,"' AND ((`year` = '",filter_year,"' AND `month` >= '",from_month,"')  OR (`year` = '",to_year,"' AND `month` <= '",to_month,"') OR (`year` > '",filter_year,"' AND `year` < '",to_year,"')) ");
+        ELSE
+            SET @QUERY = CONCAT(@QUERY, " AND `subcounty` = '",SC_Id,"' AND `year` = '",filter_year,"' AND `month`='",from_month,"' ");
+        END IF;
+    END IF;
+    ELSE
+        SET @QUERY = CONCAT(@QUERY, " AND `subcounty` = '",SC_Id,"' AND `year` = '",filter_year,"' ");
+    END IF;
+
+     PREPARE stmt FROM @QUERY;
+     EXECUTE stmt;
 END //
 DELIMITER ;
 DROP PROCEDURE IF EXISTS `proc_get_eid_subcounty_eid`;
@@ -2372,6 +3206,35 @@ BEGIN
 
     SET @QUERY = CONCAT(@QUERY, " AND `partner` = '",P_id,"' AND `year` BETWEEN '",from_year,"' AND '",to_year,"' ORDER BY `year` ASC, `month` ");
     
+    PREPARE stmt FROM @QUERY;
+    EXECUTE stmt;
+END //
+DELIMITER ;
+DROP PROCEDURE IF EXISTS `proc_get_eid_yearly_lab_tests`;
+DELIMITER //
+CREATE PROCEDURE `proc_get_eid_yearly_lab_tests`
+(IN lab INT(11))
+BEGIN
+  SET @QUERY =    "SELECT
+                    `ls`.`year`, `ls`.`month`, SUM(`ls`.`tests`) AS `tests`, 
+                    SUM(`ls`.`pos`) AS `positive`,
+                    SUM(`ls`.`neg`) AS `negative`,
+                    SUM(`ls`.`rejected`) AS `rejected`,
+                    SUM(`ls`.`tat4`) AS `tat4`
+                FROM `lab_summary` `ls`
+                WHERE 1 ";
+
+      IF (lab != 0 && lab != '') THEN
+           SET @QUERY = CONCAT(@QUERY, " AND `ls`.`lab` = '",lab,"' ");
+      END IF;  
+
+    
+      SET @QUERY = CONCAT(@QUERY, " GROUP BY `ls`.`month`, `ls`.`year` ");
+
+     
+      SET @QUERY = CONCAT(@QUERY, " ORDER BY `ls`.`year` DESC, `ls`.`month` ASC ");
+      
+
     PREPARE stmt FROM @QUERY;
     EXECUTE stmt;
 END //

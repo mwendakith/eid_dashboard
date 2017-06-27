@@ -3,8 +3,8 @@
     display: none;
 }
 .date-picker {
-    /*width: 100px;*/
-    /*margin-right: 0.5em;*/
+    width: 100px;
+    margin-right: 0.5em;
     font-size: 11px;
 }
 .date-pickerBtn {
@@ -25,8 +25,32 @@
 }
 </style>
 <div class="row" id="filter">
+
   
-  <div class="col-md-6" id="year-month-filter">
+  <div class="col-md-3">
+    <form action="<?php echo base_url();?>template/filter_partner_data" method="post" id="filter_form">
+      <div class="row">
+        <div class="col-md-12">
+          <select id="my_list" class="btn js-example-basic-single" style="width:220px;background-color: #C5EFF7;" name="partner">
+            <option disabled="true" selected="true">Select Laborotory:</option>
+            <option value="0" >All Laborotories</option>
+            <!-- <optgroup value="Counties"> -->
+            <?php echo $laborotories; ?>
+            <!-- </optgroup> -->
+          </select>
+        </div>
+       
+      </div>
+     
+    </form>
+  </div>
+  <div class="col-md-2">
+    <div id="breadcrum" class="alert" style="background-color: #1BA39C;display:none;">
+      
+    </div>
+  </div>
+  
+  <div class="col-md-4 " id="year-month-filter">
     <div class="filter">
       Year: 
       <a href="javascript:void(0)" onclick="date_filter('yearly', 2010 )" class="alert-link"> 2010 </a>|
@@ -41,6 +65,7 @@
     </div>
     <div class="filter">
       Month: 
+      <a href='javascript:void(0)' onclick='date_filter("monthly", "all")' class="alert-link"> All </a>|
       <a href='javascript:void(0)' onclick='date_filter("monthly", 1)' class='alert-link'> Jan </a>|
       <a href='javascript:void(0)' onclick='date_filter("monthly", 2)' class='alert-link'> Feb </a>|
       <a href='javascript:void(0)' onclick='date_filter("monthly", 3)' class='alert-link'> Mar </a>|
@@ -55,23 +80,25 @@
       <a href='javascript:void(0)' onclick='date_filter("monthly", 12)' class='alert-link'> Dec</a>
     </div>
   </div>
-  <div class="col-md-6">
-        <div class="row" id="range">
-            <div class="col-md-4">
-                <input name="startDate" id="startDate" class="date-picker" placeholder="From:" />
-            </div>
-            <div class="col-md-4 endDate">
-                <input name="endDate" id="endDate" class="date-picker" placeholder="To:" />
-            </div>
-            <div class="col-md-4">
-                <button id="filter" class="btn btn-primary date-pickerBtn" style="color: white;background-color: #1BA39C; margin-top: 0.2em; margin-bottom: 0em;"><center>Filter</center></button>
-            </div>
-        </div>
-            <center><div id="errorAlertDateRange"><div id="errorAlert" class="alert alert-danger" role="alert">...</div></div></center>
-    </div>
+
+  <div class="col-md-2">
+      <div class="row" id="range">
+          <div class="col-md-4">
+              <input name="startDate" id="startDate" class="date-picker" placeholder="From:" />
+          </div>
+          <div class="col-md-4 endDate">
+              <input name="endDate" id="endDate" class="date-picker" placeholder="To:" />
+          </div>
+          <div class="col-md-4">
+              <button id="filter" class="btn btn-primary date-pickerBtn" style="color: white;background-color: #1BA39C; margin-top: 0.2em; margin-bottom: 0em; margin-left: 4em;"><center>Filter</center></button>
+          </div>
+      </div>
+          <center><div id="errorAlertDateRange"><div id="errorAlert" class="alert alert-danger" role="alert">...</div></div></center>
+  </div>
 </div>
+
 <script type="text/javascript">
-$(function() {
+  $(function() {
     $('.date-picker').datepicker( {
         changeMonth: true,
         changeYear: true,
@@ -83,24 +110,22 @@ $(function() {
             $(this).datepicker('setDate', new Date(year, month, 1));
         }
     });
+    $('#endDate').datepicker( {
+        changeMonth: true,
+        changeYear: false,
+        showButtonPanel: true,
+        dateFormat: 'MM',
+        onClose: function(dateText, inst) { 
+            var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
+            // var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
+            $(this).datepicker('setDate', new Date(month, 1));
+        }
+    });
   });
+  
   $().ready(function(){
     $('#errorAlertDateRange').hide();
-  //   //Getting the URL dynamically
-  //   var url = $(location).attr('href');
-  //   // Getting the file name i.e last segment of URL (i.e. example.html)
-  //   var fn = url.split('/').indexOf("partner");
-  //   console.log(fn);
-    
-  //   if (fn==-1) {
-  //     $.get("<?php echo base_url();?>template/breadcrum", function(data){
-  //       $("#breadcrum").html(data);
-  //     });
-  //   } else {
-  //     $.get("<?php echo base_url();?>template/breadcrum", function(data){
-  //       $("#breadcrum").html(data);
-  //     });
-  //   }
+    $(".js-example-basic-single").select2();
     
   });
 </script>

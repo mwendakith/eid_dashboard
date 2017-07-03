@@ -31,7 +31,19 @@ class Counties extends MY_Controller
 	function subCounties_outcomes($year=NULL,$month=NULL,$county=NULL,$to_year=NULL,$to_month=NULL)
 	{
 		$data['outcomes'] = $this->counties_model->sub_county_outcomes($year,$month,$county,$to_year,$to_month);
+		$data['type'] = 'normal';
+		$data['yAxisText'] = 'Tests';
+		$data['div'] = 'sub_counties_outcomes_chart';
 
+    	$this->load->view('subcounty_outcomes_view',$data);
+	}
+
+	function subCounties_positivity($year=NULL,$month=NULL,$county=NULL,$to_year=NULL,$to_month=NULL)
+	{
+		$data['outcomes'] = $this->counties_model->sub_county_positivity($year,$month,$county,$to_year,$to_month);
+		$data['type'] = 'percent';
+		$data['yAxisText'] = 'Positivity';
+		$data['div'] = 'sub_counties_positivity_chart';
 
     	$this->load->view('subcounty_outcomes_view',$data);
 	}

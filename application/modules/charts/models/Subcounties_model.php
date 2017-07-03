@@ -259,7 +259,7 @@ class Subcounties_model extends MY_Model
                      <td></td>
                 </tr><tr>
                  <td>Followed Up HEIs:</td>
-                     <td>'.number_format((int) $value['followup_positives']).'<b>('.round((((int) $value['followup_positives']/(int) $value['positives'])*100),1).'%)</b></td>
+                     <td>'.number_format((int) $value['followup_hei']).'<b>('.round((((int) $value['followup_hei']/(int) $value['positives'])*100),1).'%)</b></td>
                      <td></td>
                      <td></td>
                 </tr>

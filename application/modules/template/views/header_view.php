@@ -141,6 +141,7 @@
 								<li><a href="<?php echo base_url();?>partner">Summary</a></li>
 								<li><a href="<?php echo base_url();?>partner/trends">Trends</a></li>
 								<li><a href="<?php echo base_url();?>partner/sites">Partner Facilities</a></li>
+								<li><a href="<?php echo base_url();?>partner/counties">Partner Counties</a></li>
 							</ul>
 						</li>
 						<li><a href="<?php echo base_url();?>labPerformance">Lab Performance</a></li>

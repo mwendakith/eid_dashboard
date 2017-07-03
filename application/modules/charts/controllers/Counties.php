@@ -31,7 +31,19 @@ class Counties extends MY_Controller
 	function subCounties_outcomes($year=NULL,$month=NULL,$county=NULL,$to_year=NULL,$to_month=NULL)
 	{
 		$data['outcomes'] = $this->counties_model->sub_county_outcomes($year,$month,$county,$to_year,$to_month);
+		$data['type'] = 'normal';
+		$data['yAxisText'] = 'Tests';
+		$data['div'] = 'sub_counties_outcomes_chart';
 
+    	$this->load->view('subcounty_outcomes_view',$data);
+	}
+
+	function subCounties_positivity($year=NULL,$month=NULL,$county=NULL,$to_year=NULL,$to_month=NULL)
+	{
+		$data['outcomes'] = $this->counties_model->sub_county_positivity($year,$month,$county,$to_year,$to_month);
+		$data['type'] = 'percent';
+		$data['yAxisText'] = 'Positivity';
+		$data['div'] = 'sub_counties_positivity_chart';
 
     	$this->load->view('subcounty_outcomes_view',$data);
 	}
@@ -52,6 +64,25 @@ class Counties extends MY_Controller
 	{
 		$this->counties_model->download_county_subcounty_outcomes($year,$month,$county,$to_year,$to_month);
 	}
+
+	function county_partners_details($year=NULL,$month=NULL,$county=NULL,$to_year=NULL,$to_month=NULL)
+	{
+		$data['outcomes'] = $this->counties_model->county_partners_details($year,$month,$county,$to_year,$to_month);
+
+		$link = $year . '/' . $month . '/' . $county . '/' . $to_month;
+
+		$data['link'] = base_url('charts/counties/download_county_partners_outcomes/' . $link);
+
+
+    	$this->load->view('county_partner__view',$data);
+	}
+
+	function download_county_partners_outcomes($year=NULL,$month=NULL,$county=NULL,$to_year=NULL,$to_month=NULL)
+	{
+		$this->counties_model->download_county_partners_outcomes($year,$month,$county,$to_year,$to_month);
+	}
+
+
 
 	function counties_tests($year = NULL, $month = NULL)
 	{

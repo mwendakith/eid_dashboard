@@ -154,6 +154,51 @@ class Counties_model extends MY_Model
 		return $data;
 	}
 
+	function sub_county_positivity($year=null,$month=null,$county=null,$to_year=null,$to_month=null)
+	{
+		if ($county==null || $county=='null') {
+			$county = $this->session->userdata('county_filter');
+		}
+
+		if ($year==null || $year=='null') {
+			$year = $this->session->userdata('filter_year');
+		}
+		if ($month==null || $month=='null') {
+			if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
+				$month = 0;
+			}else {
+				$month = $this->session->userdata('filter_month');
+			}
+		}
+		if ($to_month==null || $to_month=='null') {
+			$to_month = 0;
+		}
+		if ($to_year==null || $to_year=='null') {
+			$to_year = 0;
+		}
+
+		$sql = "CALL `proc_get_eid_subcounty_outcomes`('".$county."','".$year."','".$month."','".$to_year."','".$to_month."')";
+		// echo "<pre>";print_r($sql);die();
+		$result = $this->db->query($sql)->result_array();
+		// echo "<pre>";print_r($result);die();
+		$data['sub_county_outcomes'][0]['name'] = 'Positive';
+		$data['sub_county_outcomes'][1]['name'] = 'Negative';
+
+		$count = 0;
+		
+		$data["sub_county_outcomes"][0]["data"][0]	= $count;
+		$data["sub_county_outcomes"][1]["data"][0]	= $count;
+		$data['categories'][0]					= 'No Data';
+
+		foreach ($result as $key => $value) {
+			$data['categories'][$key] 					= $value['name'];
+			$data["sub_county_outcomes"][0]["data"][$key]	=  (int) $value['positive'];
+			$data["sub_county_outcomes"][1]["data"][$key]	=  (int) $value['negative'];
+		}
+		// echo "<pre>";print_r($data);die();
+		return $data;
+	}
+
 	function county_subcounties_details($year=null,$month=null,$county=null,$to_year=null,$to_month=null)
 	{
 		$table = '';
@@ -230,6 +275,112 @@ class Counties_model extends MY_Model
 		}
 
 		$sql = "CALL `proc_get_eid_county_subcounties_details`('".$county."','".$year."','".$month."','".$to_year."','".$to_month."')";
+		// echo "<pre>";print_r($sql);die();
+		$result = $this->db->query($sql)->result_array();
+
+		$this->load->helper('file');
+        $this->load->helper('download');
+        $delimiter = ",";
+        $newline = "\r\n";
+
+	    /** open raw memory as file, no need for temp files, be careful not to run out of memory thought */
+	    $f = fopen('php://memory', 'w');
+	    /** loop through array  */
+
+	    $b = array('Subcounty', 'County', 'Tests', '1st DNA PCR', 'Confirmed PCR', '+', '-', 'Redraws', 'Adults Tests', 'Adults Tests Positives', 'Median Age', 'Rejected', 'Infants < 2m', 'Infants < 2m +');
+
+	    fputcsv($f, $b, $delimiter);
+
+	    foreach ($result as $line) {
+	        /** default php csv handler **/
+	        fputcsv($f, $line, $delimiter);
+	    }
+	    /** rewrind the "file" with the csv lines **/
+	    fseek($f, 0);
+	    /** modify header to be downloadable csv file **/
+	    header('Content-Type: application/csv');
+	    header('Content-Disposition: attachement; filename="county_subcounty_details.csv";');
+	    /** Send file to browser for download */
+	    fpassthru($f);
+		
+	}
+
+	function county_partners_details($year=null,$month=null,$county=null,$to_year=null,$to_month=null)
+	{
+		$table = '';
+		$count = 1;
+		if ($county==null || $county=='null') {
+			$county = $this->session->userdata('county_filter');
+		}
+		if ($year==null || $year=='null') {
+			$year = $this->session->userdata('filter_year');
+		}
+		if ($month==null || $month=='null') {
+			if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
+				$month = 0;
+			}else {
+				$month = $this->session->userdata('filter_month');
+			}
+		}
+		if ($to_month==null || $to_month=='null') {
+			$to_month = 0;
+		}
+		if ($to_year==null || $to_year=='null') {
+			$to_year = 0;
+		}
+
+		$sql = "CALL `proc_get_eid_county_partners_details`('".$county."','".$year."','".$month."','".$to_year."','".$to_month."')";
+		// echo "<pre>";print_r($sql);die();
+		$result = $this->db->query($sql)->result_array();
+		// echo "<pre>";print_r($sql);die();
+		foreach ($result as $key => $value) {
+			$table .= '<tr>';
+			$table .= '<td>'.$count.'</td>';
+			$table .= '<td>'.$value['partner'].'</td>';
+			$table .= '<td>'.number_format($value['tests']).'</td>';
+			$table .= '<td>'.number_format($value['firstdna']).'</td>';
+			$table .= '<td>'.number_format($value['confirmdna']).'</td>';
+			$table .= '<td>'.number_format($value['positive']).'</td>';
+			$table .= '<td>'.number_format($value['negative']).'</td>';
+			$table .= '<td>'.number_format($value['redraw']).'</td>';
+			$table .= '<td>'.number_format($value['adults']).'</td>';
+			$table .= '<td>'.number_format($value['adultspos']).'</td>';
+			$table .= '<td>'.number_format($value['medage']).'</td>';
+			$table .= '<td>'.number_format($value['rejected']).'</td>';
+			$table .= '<td>'.number_format($value['infantsless2m']).'</td>';
+			$table .= '<td>'.number_format($value['infantsless2mpos']).'</td>';
+			$table .= '</tr>';
+			$count++;
+		}
+		
+
+		return $table;
+	}
+
+	function download_county_partners_outcomes($year=null,$month=null,$county=null,$to_year=null,$to_month=null)
+	{
+		
+		if ($county==null || $county=='null') {
+			$county = $this->session->userdata('county_filter');
+		}
+		if ($year==null || $year=='null') {
+			$year = $this->session->userdata('filter_year');
+		}
+		if ($month==null || $month=='null') {
+			if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
+				$month = 0;
+			}else {
+				$month = $this->session->userdata('filter_month');
+			}
+		}
+		if ($to_month==null || $to_month=='null') {
+			$to_month = 0;
+		}
+		if ($to_year==null || $to_year=='null') {
+			$to_year = 0;
+		}
+
+		$sql = "CALL `proc_get_eid_county_partners_details`('".$county."','".$year."','".$month."','".$to_year."','".$to_month."')";
 		// echo "<pre>";print_r($sql);die();
 		$result = $this->db->query($sql)->result_array();
 

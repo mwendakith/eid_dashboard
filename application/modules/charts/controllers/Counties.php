@@ -65,6 +65,25 @@ class Counties extends MY_Controller
 		$this->counties_model->download_county_subcounty_outcomes($year,$month,$county,$to_year,$to_month);
 	}
 
+	function county_partners_details($year=NULL,$month=NULL,$county=NULL,$to_year=NULL,$to_month=NULL)
+	{
+		$data['outcomes'] = $this->counties_model->county_partners_details($year,$month,$county,$to_year,$to_month);
+
+		$link = $year . '/' . $month . '/' . $county . '/' . $to_month;
+
+		$data['link'] = base_url('charts/counties/download_county_partners_outcomes/' . $link);
+
+
+    	$this->load->view('county_partner__view',$data);
+	}
+
+	function download_county_partners_outcomes($year=NULL,$month=NULL,$county=NULL,$to_year=NULL,$to_month=NULL)
+	{
+		$this->counties_model->download_county_partners_outcomes($year,$month,$county,$to_year,$to_month);
+	}
+
+
+
 	function counties_tests($year = NULL, $month = NULL)
 	{
 		$data = $this->counties_model->country_tests($year, $month);

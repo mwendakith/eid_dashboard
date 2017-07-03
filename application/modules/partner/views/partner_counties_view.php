@@ -37,6 +37,17 @@
 	<div class="col-md-12">
 		<div class="panel panel-default">
 			<div class="panel-heading">
+			  County Outcomes <div class="display_date"></div>
+			</div>
+		  	<div class="panel-body" id="pcountyOutcomes">
+		  		<center><div class="loader"></div></center>
+		  	</div>
+		</div>
+	</div>
+
+	<div class="col-md-12">
+		<div class="panel panel-default">
+			<div class="panel-heading">
 			  Partner Counties <div class="display_date"></div>
 			</div>
 		  	<div class="panel-body" id="partnerCounties">

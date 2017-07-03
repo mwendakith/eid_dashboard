@@ -1016,6 +1016,53 @@ BEGIN
      EXECUTE stmt;
 END //
 DELIMITER ;
+DROP PROCEDURE IF EXISTS `proc_get_eid_county_partners_details`;
+DELIMITER //
+CREATE PROCEDURE `proc_get_eid_county_partners_details`
+(IN C_id INT(11), IN filter_year INT(11), IN from_month INT(11), IN to_year INT(11), IN to_month INT(11))
+BEGIN
+  SET @QUERY =    "SELECT 
+                  `p`.name AS `partner`, 
+                  `c`.name AS `county`,
+                  SUM(`tests`) AS `tests`, 
+                  SUM(`firstdna`) AS `firstdna`, 
+                  SUM(`confirmdna` + `repeatspos`) AS `confirmdna`,
+                  SUM(`pos`) AS `positive`, 
+                  SUM(`neg`) AS `negative`, 
+                  SUM(`redraw`) AS `redraw`, 
+                  SUM(`adults`) AS `adults`, 
+                  SUM(`adultsPOS`) AS `adultspos`, 
+                  AVG(`medage`) AS `medage`, 
+                  SUM(`rejected`) AS `rejected`, 
+                  SUM(`infantsless2m`) AS `infantsless2m`, 
+                  SUM(`infantsless2mPOS`) AS `infantsless2mpos`
+                  FROM `ip_summary` `is`
+                  LEFT JOIN `view_facilitys` `vf` ON `vf`.partner = `is`.partner
+                  LEFT JOIN `partners` `p` ON `p`.ID = `vf`.partner 
+                  LEFT JOIN `countys` `c` ON `c`.`ID` = `vf`.`county`  WHERE 1";
+
+
+    IF (from_month != 0 && from_month != '') THEN
+      IF (to_month != 0 && to_month != '' && filter_year = to_year) THEN
+            SET @QUERY = CONCAT(@QUERY, " AND `year` = '",filter_year,"' AND `month` BETWEEN '",from_month,"' AND '",to_month,"' ");
+        ELSE IF(to_month != 0 && to_month != '' && filter_year != to_year) THEN
+          SET @QUERY = CONCAT(@QUERY, " AND ((`year` = '",filter_year,"' AND `month` >= '",from_month,"')  OR (`year` = '",to_year,"' AND `month` <= '",to_month,"') OR (`year` > '",filter_year,"' AND `year` < '",to_year,"')) ");
+        ELSE
+            SET @QUERY = CONCAT(@QUERY, " AND `year` = '",filter_year,"' AND `month`='",from_month,"' ");
+        END IF;
+    END IF;
+    ELSE
+        SET @QUERY = CONCAT(@QUERY, " AND `year` = '",filter_year,"' ");
+    END IF;
+
+    SET @QUERY = CONCAT(@QUERY, " AND `vf`.county = '",C_id,"' ");
+
+    SET @QUERY = CONCAT(@QUERY, " GROUP BY `is`.partner ORDER BY `tests` DESC ");
+
+     PREPARE stmt FROM @QUERY;
+     EXECUTE stmt;
+END //
+DELIMITER ;
 DROP PROCEDURE IF EXISTS `proc_get_eid_countys_details`;
 DELIMITER //
 CREATE PROCEDURE `proc_get_eid_countys_details`
@@ -1806,6 +1853,101 @@ BEGIN
     END IF;
 
     SET @QUERY = CONCAT(@QUERY, " AND `partner` = '",P_id,"' ");
+
+     PREPARE stmt FROM @QUERY;
+     EXECUTE stmt;
+END //
+DELIMITER ;
+DROP PROCEDURE IF EXISTS `proc_get_eid_partner_counties_details`;
+DELIMITER //
+CREATE PROCEDURE `proc_get_eid_partner_counties_details`
+(IN P_id INT(11), IN filter_year INT(11), IN from_month INT(11), IN to_year INT(11), IN to_month INT(11))
+BEGIN
+  SET @QUERY =    "SELECT 
+                      `c`.`name` AS `county`, 
+                      `p`.`name` AS `partner`, 
+                      SUM(`tests`) AS `tests`, 
+                      SUM(`firstdna`) AS `firstdna`, 
+                      SUM(`confirmdna` + `repeatspos`) AS `confirmdna`,
+                      SUM(`pos`) AS `positive`, 
+                      SUM(`neg`) AS `negative`, 
+                      SUM(`redraw`) AS `redraw`, 
+                      SUM(`adults`) AS `adults`, 
+                      SUM(`adultsPOS`) AS `adultspos`, 
+                      AVG(`medage`) AS `medage`, 
+                      SUM(`rejected`) AS `rejected`, 
+                      SUM(`infantsless2m`) AS `infantsless2m`, 
+                      SUM(`infantsless2mPOS`) AS `infantsless2mpos`
+                  FROM `county_summary` `cs`
+                  JOIN `view_facilitys` `vf` ON `vf`.county = `cs`.county 
+                  JOIN `countys` `c` ON `c`.ID = `cs`.county 
+                  JOIN `partners` `p` ON `p`.ID = `vf`.partner  WHERE 1";
+
+
+
+    IF (from_month != 0 && from_month != '') THEN
+      IF (to_month != 0 && to_month != '' && filter_year = to_year) THEN
+            SET @QUERY = CONCAT(@QUERY, " AND `year` = '",filter_year,"' AND `month` BETWEEN '",from_month,"' AND '",to_month,"' ");
+        ELSE IF(to_month != 0 && to_month != '' && filter_year != to_year) THEN
+          SET @QUERY = CONCAT(@QUERY, " AND ((`year` = '",filter_year,"' AND `month` >= '",from_month,"')  OR (`year` = '",to_year,"' AND `month` <= '",to_month,"') OR (`year` > '",filter_year,"' AND `year` < '",to_year,"')) ");
+        ELSE
+            SET @QUERY = CONCAT(@QUERY, " AND `year` = '",filter_year,"' AND `month`='",from_month,"' ");
+        END IF;
+    END IF;
+    ELSE
+        SET @QUERY = CONCAT(@QUERY, " AND `year` = '",filter_year,"' ");
+    END IF;
+
+    SET @QUERY = CONCAT(@QUERY, " AND `vf`.`partner` = '",P_id,"' ");
+
+    SET @QUERY = CONCAT(@QUERY, " GROUP BY `c`.ID ORDER BY `tests` DESC ");
+
+     PREPARE stmt FROM @QUERY;
+     EXECUTE stmt;
+END //
+DELIMITER ;
+DROP PROCEDURE IF EXISTS `proc_get_eid_partner_county_details`;
+DELIMITER //
+CREATE PROCEDURE `proc_get_eid_partner_county_details`
+(IN P_id INT(11), IN filter_year INT(11), IN from_month INT(11), IN to_year INT(11), IN to_month INT(11))
+BEGIN
+  SET @QUERY =    "SELECT  
+                  `countys`.`name` AS `county`, 
+                  COUNT(DISTINCT `view_facilitys`.`ID`) AS `facilities`, 
+                  SUM(`tests`) AS `tests`,
+                  SUM(`firstdna`) AS `firstdna`, 
+                  SUM(`confirmdna` + `repeatspos`) AS `confirmdna`,
+                  SUM(`pos`) AS `positive`, 
+                  SUM(`neg`) AS `negative`, 
+                  SUM(`redraw`) AS `redraw`, 
+                  SUM(`adults`) AS `adults`, 
+                  SUM(`adultsPOS`) AS `adultspos`, 
+                  AVG(`medage`) AS `medage`, 
+                  SUM(`rejected`) AS `rejected`, 
+                  SUM(`infantsless2m`) AS `infantsless2m`, 
+                  SUM(`infantsless2mPOS`) AS `infantsless2mpos` 
+                  FROM `site_summary` 
+                  LEFT JOIN `view_facilitys` ON `site_summary`.`facility` = `view_facilitys`.`ID` 
+                  LEFT JOIN `countys` ON `view_facilitys`.`county` = `countys`.`ID`  WHERE 1";
+
+
+
+    IF (from_month != 0 && from_month != '') THEN
+      IF (to_month != 0 && to_month != '' && filter_year = to_year) THEN
+            SET @QUERY = CONCAT(@QUERY, " AND `year` = '",filter_year,"' AND `month` BETWEEN '",from_month,"' AND '",to_month,"' ");
+        ELSE IF(to_month != 0 && to_month != '' && filter_year != to_year) THEN
+          SET @QUERY = CONCAT(@QUERY, " AND ((`year` = '",filter_year,"' AND `month` >= '",from_month,"')  OR (`year` = '",to_year,"' AND `month` <= '",to_month,"') OR (`year` > '",filter_year,"' AND `year` < '",to_year,"')) ");
+        ELSE
+            SET @QUERY = CONCAT(@QUERY, " AND `year` = '",filter_year,"' AND `month`='",from_month,"' ");
+        END IF;
+    END IF;
+    ELSE
+        SET @QUERY = CONCAT(@QUERY, " AND `year` = '",filter_year,"' ");
+    END IF;
+
+    SET @QUERY = CONCAT(@QUERY, " AND `view_facilitys`.`partner` = '",P_id,"' ");
+
+    SET @QUERY = CONCAT(@QUERY, " GROUP BY `view_facilitys`.`county` ORDER BY `tests` DESC ");
 
      PREPARE stmt FROM @QUERY;
      EXECUTE stmt;
@@ -2675,6 +2817,35 @@ BEGIN
     EXECUTE stmt;
 END //
 DELIMITER ;
+DROP PROCEDURE IF EXISTS `proc_get_eid_yearly_lab_tests`;
+DELIMITER //
+CREATE PROCEDURE `proc_get_eid_yearly_lab_tests`
+(IN lab INT(11))
+BEGIN
+  SET @QUERY =    "SELECT
+                    `ls`.`year`, `ls`.`month`, SUM(`ls`.`tests`) AS `tests`, 
+                    SUM(`ls`.`pos`) AS `positive`,
+                    SUM(`ls`.`neg`) AS `negative`,
+                    SUM(`ls`.`rejected`) AS `rejected`,
+                    SUM(`ls`.`tat4`) AS `tat4`
+                FROM `lab_summary` `ls`
+                WHERE 1 ";
+
+      IF (lab != 0 && lab != '') THEN
+           SET @QUERY = CONCAT(@QUERY, " AND `ls`.`lab` = '",lab,"' ");
+      END IF;  
+
+    
+      SET @QUERY = CONCAT(@QUERY, " GROUP BY `ls`.`month`, `ls`.`year` ");
+
+     
+      SET @QUERY = CONCAT(@QUERY, " ORDER BY `ls`.`year` DESC, `ls`.`month` ASC ");
+      
+
+    PREPARE stmt FROM @QUERY;
+    EXECUTE stmt;
+END //
+DELIMITER ;
 DROP PROCEDURE IF EXISTS `proc_get_yearly_summary`;
 DROP PROCEDURE IF EXISTS `proc_get_eid_yearly_summary`;
 DELIMITER //
@@ -3206,35 +3377,6 @@ BEGIN
 
     SET @QUERY = CONCAT(@QUERY, " AND `partner` = '",P_id,"' AND `year` BETWEEN '",from_year,"' AND '",to_year,"' ORDER BY `year` ASC, `month` ");
     
-    PREPARE stmt FROM @QUERY;
-    EXECUTE stmt;
-END //
-DELIMITER ;
-DROP PROCEDURE IF EXISTS `proc_get_eid_yearly_lab_tests`;
-DELIMITER //
-CREATE PROCEDURE `proc_get_eid_yearly_lab_tests`
-(IN lab INT(11))
-BEGIN
-  SET @QUERY =    "SELECT
-                    `ls`.`year`, `ls`.`month`, SUM(`ls`.`tests`) AS `tests`, 
-                    SUM(`ls`.`pos`) AS `positive`,
-                    SUM(`ls`.`neg`) AS `negative`,
-                    SUM(`ls`.`rejected`) AS `rejected`,
-                    SUM(`ls`.`tat4`) AS `tat4`
-                FROM `lab_summary` `ls`
-                WHERE 1 ";
-
-      IF (lab != 0 && lab != '') THEN
-           SET @QUERY = CONCAT(@QUERY, " AND `ls`.`lab` = '",lab,"' ");
-      END IF;  
-
-    
-      SET @QUERY = CONCAT(@QUERY, " GROUP BY `ls`.`month`, `ls`.`year` ");
-
-     
-      SET @QUERY = CONCAT(@QUERY, " ORDER BY `ls`.`year` DESC, `ls`.`month` ASC ");
-      
-
     PREPARE stmt FROM @QUERY;
     EXECUTE stmt;
 END //

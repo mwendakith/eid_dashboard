@@ -36,7 +36,9 @@
 				$("#partners_all").hide();
 				$("#partner_counties").show();
 				$("#partnerCounties").html("<center><div class='loader'></div></center>");
-				$("#partnerCounties").load("<?php echo base_url('charts/partner_summaries/partner_counties');?>/"+null+"/"+null+"/"+null+"/"+em);
+				$("#partnerCounties").load("<?php echo base_url('charts/partner_summaries/partner_counties');?>/"+null+"/"+null+"/"+em);
+				$("#pcountyOutcomes").html("<center><div class='loader'></div></center>");
+				$("#pcountyOutcomes").load("<?php echo base_url('charts/partner_summaries/partner_county');?>/"+null+"/"+null+"/"+em);
 			}
 		});
 
@@ -73,6 +75,10 @@
 				} else {
 					$("#partners_all").hide();
 					$("#partner_counties").show();
+
+					$("#pcountyOutcomes").html("<center><div class='loader'></div></center>");
+					$("#pcountyOutcomes").load("<?php echo base_url('charts/partner_summaries/partner_county');?>/"+from[1]+"/"+from[0]+"/"+partner+"/"+to[1]+"/"+to[0]);
+
 					$("#partnerCounties").html("<center><div class='loader'></div></center>");
 					$("#partnerCounties").load("<?php echo base_url('charts/partner_summaries/partner_counties');?>/"+from[1]+"/"+from[0]+"/"+partner+"/"+to[1]+"/"+to[0]);
 				}
@@ -115,8 +121,12 @@
 				} else {
 					$("#partners_all").hide();
 					$("#partner_counties").show();
+
+					$("#pcountyOutcomes").html("<center><div class='loader'></div></center>");
+					$("#pcountyOutcomes").load("<?php echo base_url('charts/partner_summaries/partner_county');?>/"+year+"/"+month+"/"+partner);
+
 					$("#partnerCounties").html("<center><div class='loader'></div></center>");
-					$("#partnerCounties").load("<?php echo base_url('charts/partner_summaries/partner_counties');?>/"+year+"/"+month+"/"+null+"/"+partner);
+					$("#partnerCounties").load("<?php echo base_url('charts/partner_summaries/partner_counties');?>/"+year+"/"+month+"/"+partner);
 				}
 			});
 		});

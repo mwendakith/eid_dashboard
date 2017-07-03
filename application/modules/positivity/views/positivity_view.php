@@ -46,7 +46,7 @@
 
 </style>
 <div id="notification" style="margin-bottom: 1em;background-color:#E4F1FE;">
-  	Not Suppressed: XXXX
+  	Positivity: XXXX
 </div>
 <div class="row">
 	<div class="col-md-3">
@@ -162,7 +162,7 @@
 			  EID County Positivity <div class="display_date"></div>
 			</div>
 		  	<div class="panel-body">
-		  	<div id="countiesGraph">
+		  	<div id="county_outcomes">
 		  		<div>Loading...</div>
 		  	</div>
 		  	<!-- -->

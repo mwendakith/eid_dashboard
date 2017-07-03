@@ -82,6 +82,10 @@ class Positivity extends MY_Controller
 
 	function county_outcomes($year=NULL,$month=NULL,$county=NULL,$to_year=NULL,$to_month=NULL)
 	{
+		$data['suppressions'] = $this->positivity_model->county_positivities($year,$month,$county,$to_year,$to_month);
+		$data['div'] = 'county_positivity';
+
+		$this->load->view('positivity_view',$data);
 
 	}
 }

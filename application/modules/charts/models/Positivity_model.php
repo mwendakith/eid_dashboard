@@ -520,5 +520,51 @@ class Positivity_model extends MY_Model
 						'table' => $table);
 		return $data;
 	}
+
+	function county_positivities($year=null,$month=null,$county=NULL,$to_year=NULL,$to_month=null)
+	{
+		if ($county==null || $county=='null') {
+			$county = $this->session->userdata('county_filter');
+		}
+		if ($to_year==null || $to_year=='null') {
+			$to_year = 0;
+		}
+		if ($to_month==null || $to_month=='null') {
+			$to_month = 0;
+		}
+
+		if ($year==null || $year=='null') {
+			$year = $this->session->userdata('filter_year');
+		}
+		if ($month==null || $month=='null') {
+			if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
+				$month = 0;
+			}else {
+				$month = $this->session->userdata('filter_month');
+			}
+		}
+
+		$sql = "CALL `proc_get_eid_counties_positivity_stats`('".$year."','".$month."','".$to_year."','".$to_month."')";
+		// echo "<pre>";print_r($sql);die();
+		$result = $this->db->query($sql)->result_array();
+		// echo "<pre>";print_r($result);die();
+
+		$data['positivity'][0]['name'] = 'Positives';
+		$data['positivity'][1]['name'] = 'Negatives';
+
+		$count = 0;
+		
+		$data["positivity"][0]["data"][0]	= $count;
+		$data["positivity"][1]["data"][0]	= $count;
+		$data['categories'][0]					= 'No Data';
+
+		foreach ($result as $key => $value) {
+			$data['categories'][$key] 					= $value['name'];
+			$data["positivity"][0]["data"][$key]	=  (int) $value['pos'];
+			$data["positivity"][1]["data"][$key]	=  (int) $value['neg'];
+		}
+		// echo "<pre>";print_r($data);die();
+		return $data;
+	}
 }
 ?>

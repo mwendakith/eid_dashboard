@@ -21,7 +21,7 @@
 		$("#partners").load("<?php echo base_url('charts/positivity/partners');?>");
 		// $("#feeding").load("<?php //echo base_url('charts/summaries/agegroup');?>");
 		
-		$("#county_outcomes").load("<?php echo base_url('charts/summaries/county_outcomes'); ?>");
+		$("#county_outcomes").load("<?php echo base_url('charts/positivity/county_outcomes'); ?>");
 
 		//Function when the county is selected
 		$("select").change(function(){
@@ -67,7 +67,7 @@
 				$("#facilities").load("<?php echo base_url('charts/positivity/facilites');?>/"+null+"/"+null+"/"+data);
 				$("#partners").load("<?php echo base_url('charts/positivity/partners');?>/"+null+"/"+null+"/"+data);
 				
-				$("#county_outcomes").load("<?php echo base_url('charts/summaries/county_outcomes'); ?>/"+null+"/"+null+"/"+null+"/"+null+"/"+data); 
+				$("#county_outcomes").load("<?php echo base_url('charts/positivity/county_outcomes'); ?>/"+null+"/"+null+"/"+data); 
 	        });
 		});
 
@@ -119,7 +119,7 @@
 				$("#facilities").load("<?php echo base_url('charts/positivity/facilites');?>/"+from[1]+"/"+from[0]+"/"+null+"/"+to[1]+"/"+to[0]);
 				$("#partners").load("<?php echo base_url('charts/positivity/partners');?>/"+from[1]+"/"+from[0]+"/"+null+"/"+to[1]+"/"+to[0]);
 				
-				$("#county_outcomes").load("<?php echo base_url('charts/summaries/county_outcomes'); ?>/"+from[1]+"/"+from[0]+"/"+null+"/"+null+"/"+null+"/"+to[1]+"/"+to[0]);
+				$("#county_outcomes").load("<?php echo base_url('charts/positivity/county_outcomes'); ?>/"+from[1]+"/"+from[0]+"/"+null+"/"+to[1]+"/"+to[0]);
 			}
 		    
 		});
@@ -168,6 +168,6 @@
 		$("#facilities").load("<?php echo base_url('charts/positivity/iprophyalxis');?>/"+year+"/"+month);
 		$("#partners").load("<?php echo base_url('charts/positivity/agegroup');?>/"+year+"/"+month);
 		
-		$("#county_outcomes").load("<?php echo base_url('charts/summaries/county_outcomes');?>/"+year+"/"+month); 
+		$("#county_outcomes").load("<?php echo base_url('charts/positivity/county_outcomes');?>/"+year+"/"+month); 
 	}
 </script>

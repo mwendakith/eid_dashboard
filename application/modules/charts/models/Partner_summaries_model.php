@@ -623,6 +623,54 @@ class Partner_summaries_model extends MY_Model
 		return $data;
 	}
 
+	function partner_counties($year=NULL,$month=NULL,$partner=NULL,$to_year=null,$to_month=null)
+	{
+
+		if ($year==null || $year=='null') {
+			$year = $this->session->userdata('filter_year');
+		}
+		if ($month==null || $month=='null') {
+			if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
+				$month = 0;
+			}else {
+				$month = $this->session->userdata('filter_month');
+			}
+		}
+		if ($to_month==null || $to_month=='null') {
+			$to_month = 0;
+		}
+		if ($to_year==null || $to_year=='null') {
+			$to_year = 0;
+		}
+
+		$sql = "CALL `proc_get_eid_partner_county_details`('".$partner."','".$year."','".$month."','".$to_year."','".$to_month."')";
+		// echo "<pre>";print_r($sql);die();
+		$result = $this->db->query($sql)->result_array();
+
+		// echo "<pre>";print_r($result);die();
+
+		$data['testing_trends'][0]['name'] = 'Positive';
+		$data['testing_trends'][1]['name'] = 'Negative';
+
+		$count = 0;
+		
+		$data['categories'][0] = 'No Data';
+		$data["testing_trends"][0]["data"][0]	= $count;
+		$data["testing_trends"][1]["data"][0]	= $count;
+
+		foreach ($result as $key => $value) {
+			
+				$data['categories'][$key] = $value['county'];
+
+				$data["testing_trends"][0]["data"][$key]	= (int) $value['positive'];
+				$data["testing_trends"][1]["data"][$key]	= (int) $value['negative'];
+			
+		}
+		// echo "<pre>";print_r($data);die();
+		return $data;
+
+	}
+
 	function partner_counties_outcomes($year=NULL,$month=NULL,$partner=NULL,$to_year=null,$to_month=null)
 	{
 		$table = '';
@@ -644,7 +692,7 @@ class Partner_summaries_model extends MY_Model
 			$to_year = 0;
 		}
 
-		$sql = "CALL `proc_get_eid_partner_sites_details`('".$partner."','".$year."','".$month."','".$to_year."','".$to_month."')";
+		$sql = "CALL `proc_get_eid_partner_county_details`('".$partner."','".$year."','".$month."','".$to_year."','".$to_month."')";
 		// echo "<pre>";print_r($sql);die();
 		$result = $this->db->query($sql)->result_array();
 		// echo "<pre>";print_r($sql);die();
@@ -652,9 +700,8 @@ class Partner_summaries_model extends MY_Model
 			$table .= '<tr>';
 			$table .= '<td>'.$count.'</td>';
 
-			$table .= '<td>'.$value['MFLCode'].'</td>';
-			$table .= '<td>'.$value['name'].'</td>';
 			$table .= '<td>'.$value['county'].'</td>';
+			$table .= '<td>'.$value['facilities'].'</td>';
 			$table .= '<td>'.number_format($value['tests']).'</td>';
 			$table .= '<td>'.number_format($value['firstdna']).'</td>';
 			$table .= '<td>'.number_format($value['confirmdna']).'</td>';
@@ -673,6 +720,57 @@ class Partner_summaries_model extends MY_Model
 		
 
 		return $table;
+	}
+
+	function partner_counties_download($year=NULL,$month=NULL,$partner=NULL,$to_year=NULL,$to_month=NULL)
+	{
+		if ($year==null || $year=='null') {
+			$year = $this->session->userdata('filter_year');
+		}
+		if ($month==null || $month=='null') {
+			if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
+				$month = 0;
+			}else {
+				$month = $this->session->userdata('filter_month');
+			}
+		}
+		if ($to_month==null || $to_month=='null') {
+			$to_month = 0;
+		}
+		if ($to_year==null || $to_year=='null') {
+			$to_year = 0;
+		}
+
+		$sql = "CALL `proc_get_eid_partner_county_details`('".$partner."','".$year."','".$month."','".$to_year."','".$to_month."')";
+		// echo "<pre>";print_r($sql);die();
+		$data = $this->db->query($sql)->result_array();
+
+		$this->load->helper('file');
+        $this->load->helper('download');
+        $delimiter = ",";
+        $newline = "\r\n";
+
+	    /** open raw memory as file, no need for temp files, be careful not to run out of memory thought */
+	    $f = fopen('php://memory', 'w');
+	    /** loop through array  */
+
+	    $b = array('County', 'Facilities', 'Tests', '1st DNA PCR', 'Confirmed PCR', '+', '-', 'Redraws', 'Adults Tests', 'Adults Tests Positives', 'Median Age', 'Rejected', 'Infants < 2m', 'Infants < 2m +');
+
+	    fputcsv($f, $b, $delimiter);
+
+	    foreach ($data as $line) {
+	        /** default php csv handler **/
+	        fputcsv($f, $line, $delimiter);
+	    }
+	    /** rewrind the "file" with the csv lines **/
+	    fseek($f, 0);
+	    /** modify header to be downloadable csv file **/
+	    header('Content-Type: application/csv');
+	    header('Content-Disposition: attachement; filename="eid_partner_sites.csv";');
+	    /** Send file to browser for download */
+	    fpassthru($f);
+
+
 	}
 }
 ?>

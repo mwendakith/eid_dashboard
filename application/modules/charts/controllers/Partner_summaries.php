@@ -75,6 +75,13 @@ class Partner_summaries extends MY_Controller
     	$this->load->view('county_outcomes_view',$data);
 	}
 
+	function partner_county($year=NULL,$month=NULL,$partner=NULL,$to_year=NULL,$to_month=NULL)
+	{
+		$data['outcomes'] = $this->partner_summaries_model->partner_counties($year,$month,$partner,$to_year,$to_month);
+
+    	$this->load->view('testing_trends_view',$data);
+	}
+
 	function partner_counties($year=NULL,$month=NULL,$partner=NULL,$to_year=NULL,$to_month=NULL)
 	{
 		$data['outcomes'] = $this->partner_summaries_model->partner_counties_outcomes($year,$month,$partner,$to_year,$to_month);
@@ -83,16 +90,18 @@ class Partner_summaries extends MY_Controller
 		$link2 = $partner;
 		//$data['link'] = anchor('charts/sites/download_partner_sites/' . $link, 'Download List');
 
-		$data['link'] = "<a href='" . base_url('charts/sites/download_partner_sites/' . $link) . "'><button class='btn btn-primary' style='background-color: #009688;color: white;'>Export to Excel</button></a>";
+		$data['link'] = "<a href='" . base_url('charts/partner_summaries/download_partner_counties/' . $link) . "'><button class='btn btn-primary' style='background-color: #009688;color: white;'>Export to Excel</button></a>";
 		$data['link2'] = "<a href='" . base_url('charts/sites/download_partner_supported_sites/' . $link2) . "'><button class='btn btn-primary' style='background-color: #009688;color: white;'>DOWNLOAD LIST OF ALL SUPPORTED SITES</button></a>";
 
-    	$this->load->view('partner_site__view',$data);
+    	$this->load->view('partner__site__view',$data);
 	}
 
-	function download_partner_sites($year=NULL,$month=NULL,$partner=NULL,$to_year=NULL,$to_month=NULL)
+	function download_partner_counties($year=NULL,$month=NULL,$partner=NULL,$to_year=NULL,$to_month=NULL)
 	{
-		$this->sites_model->partner_sites_outcomes_download($year,$month,$partner,$to_year,$to_month);
+		$this->partner_summaries_model->partner_counties_download($year,$month,$partner,$to_year,$to_month);
 	}
+
+
 
 }
 ?>

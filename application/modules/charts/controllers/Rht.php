@@ -17,6 +17,8 @@ class Rht extends MY_Controller
 	{
 		$data['trends'] = $this->rht_model->get_trends($county,$year);
 
+		$data['div_name'] = "rht_outcome_trends";
+
 		$this->load->view('trends_outcomes_view', $data);
 	}
 

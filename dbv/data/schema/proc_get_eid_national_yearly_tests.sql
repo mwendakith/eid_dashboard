@@ -9,6 +9,7 @@ BEGIN
                     SUM(`ns`.`neg`) AS `negative`,
                     SUM(`ns`.`rejected`) AS `rejected`,
                     SUM(`ns`.`infantsless2m`) AS `infants`,
+                    SUM(`ns`.`redraw`) AS `redraw`,
                     SUM(`ns`.`tat4`) AS `tat4`
                 FROM `national_summary` `ns`
                 WHERE 1 ";

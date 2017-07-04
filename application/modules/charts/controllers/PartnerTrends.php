@@ -52,6 +52,7 @@ class PartnerTrends extends MY_Controller
 
 	function summary($partner=NULL){
 		$data['trends'] = $this->partner_model->yearly_summary($partner);
+		$data['div_name'] = "partner_outcome_trends";
 		// echo "<pre>";print_r($data);die();
 		$this->load->view('trends_outcomes_view', $data);
 	}

@@ -31,6 +31,10 @@
 </div>
 
 <div id="second">
+  <div id="lab_summary">
+      
+  </div>
+
   <div id="trends_lab">
       
   </div>
@@ -99,6 +103,7 @@
         $("#breadcrum").show();
         var t = $("#my_list option:selected").text();
         $("#breadcrum").html(t);
+        $("#lab_summary").load("<?php echo base_url();?>charts/LabPerformance/summary/"+em);
         $("#trends_lab").load("<?php echo base_url();?>charts/LabPerformance/lab_trends/"+em);
         
       }

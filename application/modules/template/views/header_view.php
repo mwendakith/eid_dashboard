@@ -147,11 +147,12 @@
 						<li><a href="<?php echo base_url();?>labPerformance">Lab Performance</a></li>
 						<!-- <li><a href="<?php echo base_url();?>rht">RHT Testing</a></li> -->
 						<li><a href="<?php echo base_url();?>sites">Facilities</a></li>
+						<li><a href="<?php echo base_url();?>positivity">Positivity</a></li>
 						<li><a href="<?php echo base_url();?>contacts">Contact Us</a></li>
 						<li><a href="http://eiddash.nascop.org/login.php">Login</a></li>
 						<li><a href="http://viralload.nascop.org">VL View</a></li>
 						<!-- <li><a href="<?php echo base_url();?>county">County View</a></li>
-						<!-- <li><a href="http://eid.nascop.org/vreports.php">Reports</a></li>
+						<li><a href="http://eid.nascop.org/vreports.php">Reports</a></li>
 						<li><a href="http://eid.nascop.org/login.php">Login</a></li>
 						<li><a href="http://eid.nascop.org">EID View</a></li> -->
 						<!-- <li><a href="javascript:void(0)">Link</a></li> -->

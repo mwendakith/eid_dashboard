@@ -7,8 +7,8 @@ BEGIN
                     `ss`.`month`, 
                     SUM((`ss`.`pos`)) AS `pos`, 
                     SUM(`ss`.`neg`) AS `neg`,
-                    SUM(`ss`.`neg`) AS `tests`,
-                    SUM(`ss`.`neg`) AS `rejected`
+                    SUM(`ss`.`pos`+`ss`.`neg`) AS `tests`,
+                    SUM(`ss`.`rejected`) AS `rejected`
                   FROM `site_summary` `ss` 
                   LEFT JOIN `view_facilitys` `vf` 
                     ON `ss`.`facility` = `vf`.`ID`

@@ -18,10 +18,11 @@ BEGIN
                   SUM(`rejected`) AS `rejected`, 
                   SUM(`infantsless2m`) AS `infantsless2m`, 
                   SUM(`infantsless2mPOS`) AS `infantsless2mpos`
-                  FROM `ip_summary` `is`
-                  LEFT JOIN `view_facilitys` `vf` ON `vf`.partner = `is`.partner
-                  LEFT JOIN `partners` `p` ON `p`.ID = `vf`.partner 
-                  LEFT JOIN `countys` `c` ON `c`.`ID` = `vf`.`county`  WHERE 1";
+                  FROM `site_summary` `is`
+                    LEFT JOIN `view_facilitys` `vf` ON `vf`.`ID` = `vss`.`facility`
+                    LEFT JOIN `partners` `p` ON `p`.`ID` = `vf`.`partner`
+                    LEFT JOIN `countys` `c` ON `c`.`ID` = `vf`.`county`
+                  WHERE 1";
 
 
     IF (from_month != 0 && from_month != '') THEN

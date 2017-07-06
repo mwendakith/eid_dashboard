@@ -18,10 +18,11 @@ BEGIN
                   SUM(`rejected`) AS `rejected`, 
                   SUM(`infantsless2m`) AS `infantsless2m`, 
                   SUM(`infantsless2mPOS`) AS `infantsless2mpos`
-                  FROM `ip_summary` `is`
-                  LEFT JOIN `view_facilitys` `vf` ON `vf`.partner = `is`.partner
-                  LEFT JOIN `partners` `p` ON `p`.ID = `vf`.partner 
-                  LEFT JOIN `countys` `c` ON `c`.`ID` = `vf`.`county`  WHERE 1";
+                  FROM `site_summary` `is`
+                    LEFT JOIN `view_facilitys` `vf` ON `vf`.`ID` = `is`.`facility`
+                    LEFT JOIN `partners` `p` ON `p`.`ID` = `vf`.`partner`
+                    LEFT JOIN `countys` `c` ON `c`.`ID` = `vf`.`county`
+                  WHERE 1";
 
 
     IF (from_month != 0 && from_month != '') THEN
@@ -39,7 +40,7 @@ BEGIN
 
     SET @QUERY = CONCAT(@QUERY, " AND `vf`.county = '",C_id,"' ");
 
-    SET @QUERY = CONCAT(@QUERY, " GROUP BY `is`.partner ORDER BY `tests` DESC ");
+    SET @QUERY = CONCAT(@QUERY, " GROUP BY `p`.`name` ORDER BY `tests` DESC ");
 
      PREPARE stmt FROM @QUERY;
      EXECUTE stmt;

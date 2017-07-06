@@ -334,6 +334,9 @@ class Counties_model extends MY_Model
 		$result = $this->db->query($sql)->result_array();
 		// echo "<pre>";print_r($sql);die();
 		foreach ($result as $key => $value) {
+			if ($value['partner'] == NULL || $value['partner'] == 'NULL') {
+				$value['partner'] = 'No Partner';
+			}
 			$table .= '<tr>';
 			$table .= '<td>'.$count.'</td>';
 			$table .= '<td>'.$value['partner'].'</td>';

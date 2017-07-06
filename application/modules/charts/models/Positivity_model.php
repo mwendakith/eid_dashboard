@@ -45,11 +45,19 @@ class Positivity_model extends MY_Model
 			$data['month'] .= ' to '.$this->resolve_month($to_month).' of '.$to_year;
 		}
 
-		if ($county==null || $county=='null') {
-			$sql = "CALL `proc_get_national_positivity_notification`('".$year."','".$month."','".$to_year."','".$to_month."')";
+		if ($month == 0) {
+			if ($county==null || $county=='null') {
+				$sql = "CALL `proc_get_national_positivity_yearly_notification`('".$year."')";
+			} else {
+				$sql = "CALL `proc_get_county_positivity_yearly_notification`('".$county."','".$year."')";
+			}
 		} else {
-			$sql = "CALL `proc_get_county_positivity_notification`('".$county."','".$year."','".$month."','".$to_year."','".$to_month."')";
-			// $data['county'] = $county;
+			if ($county==null || $county=='null') {
+				$sql = "CALL `proc_get_national_positivity_notification`('".$year."','".$month."','".$to_year."','".$to_month."')";
+			} else {
+				$sql = "CALL `proc_get_county_positivity_notification`('".$county."','".$year."','".$month."','".$to_year."','".$to_month."')";
+				// $data['county'] = $county;
+			}
 		}
 		// echo "<pre>";print_r($sql);die();
 		$result = $this->db->query($sql)->result_array();
@@ -97,13 +105,13 @@ class Positivity_model extends MY_Model
 			}
 		}
 
+		if ($county==null || $county=='null') {
+			$sql = "CALL `proc_get_eid_national_age_positivity`('".$year."','".$month."','".$to_year."','".$to_month."')";
+		} else {
+			$sql = "CALL `proc_get_eid_county_age_positivity`('".$county."','".$year."','".$month."','".$to_year."','".$to_month."')";
+		}
 		
-			if ($county==null || $county=='null') {
-				$sql = "CALL `proc_get_eid_national_age_positivity`('".$year."','".$month."','".$to_year."','".$to_month."')";
-			} else {
-				$sql = "CALL `proc_get_eid_county_age_positivity`('".$county."','".$year."','".$month."','".$to_year."','".$to_month."')";
-			}
-		 // echo "<pre>";print_r($sql);die();
+		// echo "<pre>";print_r($sql);die();
 		$result = $this->db->query($sql)->result_array();
 		// echo "<pre>";print_r($result);die();
 

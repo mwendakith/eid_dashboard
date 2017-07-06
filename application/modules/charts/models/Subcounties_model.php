@@ -122,7 +122,7 @@ class Subcounties_model extends MY_Model
 		    	</tr>
 
 		    	<tr>
-		    		<td>Repeat +ve Confirmatory Tests:</td>
+		    		<td>Repeat Confirmatory Tests:</td>
 		    		<td>'. ((int) $value['confirmdna'] + (int) $value['repeatspos']) .'</td>
 		    		<td></td>
 		    		<td></td>
@@ -223,7 +223,11 @@ class Subcounties_model extends MY_Model
 			$to_year = 0;
 		}
 
-		$sql = "CALL `proc_get_eid_subcounty_hei_validation`('".$subcounty."','".$year."','".$month."','".$to_year."','".$to_month."')";
+		if ($month == 0) {
+			$sql = "CALL `proc_get_eid_subcounty_yearly_hei_validation`('".$subcounty."','".$year."')";
+		} else {
+			$sql = "CALL `proc_get_eid_subcounty_hei_validation`('".$subcounty."','".$year."','".$month."','".$to_year."','".$to_month."')";
+		}
 		
 		// echo "<pre>";print_r($sql);die();
 		$result = $this->db->query($sql)->result_array();
@@ -323,8 +327,12 @@ class Subcounties_model extends MY_Model
 			$to_year = 0;
 		}
 
+		if ($month == 0) {
+			$sql = "CALL `proc_get_eid_subcounty_yearly_hei_follow_up`('".$subcounty."','".$year."')";
+		} else {
+			$sql = "CALL `proc_get_eid_subcounty_hei_follow_up`('".$subcounty."','".$year."', '".$month."','".$to_year."', '".$to_month."')";
+		}
 		
-		$sql = "CALL `proc_get_eid_subcounty_hei_follow_up`('".$subcounty."','".$year."', '".$month."','".$to_year."', '".$to_month."')";
 		// echo "<pre>";print_r($sql);die();
 		$result = $this->db->query($sql)->row();
 		// echo "<pre>";print_r($result);die();

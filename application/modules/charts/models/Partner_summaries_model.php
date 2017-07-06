@@ -110,9 +110,9 @@ class Partner_summaries_model extends MY_Model
 		    	</tr>
 
 		    	<tr>
-		    		<td>Repeat +ve Confirmatory Tests:</td>
+		    		<td>Repeat Confirmatory Tests:</td>
 		    		<td>'. ((int) $value['confirmdna'] + (int) $value['repeatspos']) .'</td>
-		    		<td>Repeat +ve Confirmatory Tests POS</td>
+		    		<td>Repeat Confirmatory Tests POS</td>
 		    		<td>'. number_format((int) $value['confirmpos']) .'('. round(((int) $value['confirmpos'])/((int) $value['confirmdna'] + (int) $value['repeatspos'])*100,1) .'%)</td>
 		    	</tr>
 
@@ -207,7 +207,11 @@ class Partner_summaries_model extends MY_Model
 			$to_year = 0;
 		}
 
-		$sql = "CALL `proc_get_eid_partner_hei_validation`('".$partner."','".$year."','".$month."','".$to_year."','".$to_month."')";
+		if ($month == 0) {
+			$sql = "CALL `proc_get_eid_partner_yearly_hei_validation`('".$partner."','".$year."')";
+		} else {
+			$sql = "CALL `proc_get_eid_partner_hei_validation`('".$partner."','".$year."','".$month."','".$to_year."','".$to_month."')";
+		}
 		
 		// echo "<pre>";print_r($sql);die();
 		$result = $this->db->query($sql)->result_array();
@@ -299,7 +303,11 @@ class Partner_summaries_model extends MY_Model
 			$to_year = 0;
 		}
 
-		$sql = "CALL `proc_get_eid_partner_hei`('".$partner."','".$year."','".$month."','".$to_year."','".$to_month."')";
+		if ($month == 0) {
+			$sql = "CALL `proc_get_eid_partner_yearly_hei`('".$partner."','".$year."')";
+		} else {
+			$sql = "CALL `proc_get_eid_partner_hei`('".$partner."','".$year."','".$month."','".$to_year."','".$to_month."')";
+		}
 		
 		// echo "<pre>";print_r($sql);die();
 		$result = $this->db->query($sql)->result_array();

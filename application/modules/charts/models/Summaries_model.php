@@ -197,9 +197,9 @@ class Summaries_model extends MY_Model
 		    	</tr>
 
 		    	<tr>
-		    		<td>Repeat +ve Confirmatory Tests:</td>
+		    		<td>Repeat Confirmatory Tests:</td>
 		    		<td>'. number_format((int) $value['confirmdna'] + (int) $value['repeatspos']) .'</td>
-		    		<td>Repeat +ve Confirmatory Tests POS</td>
+		    		<td>Repeat Confirmatory Tests POS</td>
 		    		<td>'. number_format((int) $value['confirmpos']) .'('. round(((int) $value['confirmpos'])/((int) $value['confirmdna'] + (int) $value['repeatspos'])*100,1) .'%)</td>
 		    	</tr>
 
@@ -297,15 +297,28 @@ class Summaries_model extends MY_Model
 			$to_year = 0;
 		}
 
-		if ($partner) {
-			$sql = "CALL `proc_get_eid_partner_hei_validation`('".$partner."','".$year."','".$month."','".$to_year."','".$to_month."')";
-		} else {
-			if ($county==null || $county=='null') {
-				$sql = "CALL `proc_get_eid_national_hei_validation`('".$year."','".$month."','".$to_year."','".$to_month."')";
+		if ($month == 0) {
+			if ($partner) {
+				$sql = "CALL `proc_get_eid_partner_yearly_hei_validation`('".$partner."','".$year."')";
 			} else {
-				$sql = "CALL `proc_get_eid_county_hei_validation`('".$county."','".$year."','".$month."','".$to_year."','".$to_month."')";
+				if ($county==null || $county=='null') {
+					$sql = "CALL `proc_get_eid_national_yearly_hei_validation`('".$year."')";
+				} else {
+					$sql = "CALL `proc_get_eid_county_yearly_hei_validation`('".$county."','".$year."')";
+				}
+			}
+		} else {
+			if ($partner) {
+				$sql = "CALL `proc_get_eid_partner_hei_validation`('".$partner."','".$year."','".$month."','".$to_year."','".$to_month."')";
+			} else {
+				if ($county==null || $county=='null') {
+					$sql = "CALL `proc_get_eid_national_hei_validation`('".$year."','".$month."','".$to_year."','".$to_month."')";
+				} else {
+					$sql = "CALL `proc_get_eid_county_hei_validation`('".$county."','".$year."','".$month."','".$to_year."','".$to_month."')";
+				}
 			}
 		}
+		
 		// echo "<pre>";print_r($sql);die();
 		$result = $this->db->query($sql)->result_array();
 		// echo "<pre>";print_r($result);die();
@@ -400,15 +413,28 @@ class Summaries_model extends MY_Model
 			$to_year = 0;
 		}
 
-		if ($partner) {
-			$sql = "CALL `proc_get_eid_partner_hei`('".$partner."','".$year."','".$month."','".$to_year."','".$to_month."')";
-		} else {
-			if ($county==null || $county=='null') {
-				$sql = "CALL `proc_get_eid_national_hei`('".$year."','".$month."','".$to_year."','".$to_month."')";
+		if ($month == 0) {
+			if ($partner) {
+				$sql = "CALL `proc_get_eid_partner_yearly_hei`('".$partner."','".$year."')";
 			} else {
-				$sql = "CALL `proc_get_eid_county_hei`('".$county."','".$year."','".$month."','".$to_year."','".$to_month."')";
+				if ($county==null || $county=='null') {
+					$sql = "CALL `proc_get_eid_national_yearly_hei`('".$year."')";
+				} else {
+					$sql = "CALL `proc_get_eid_county_yearly_hei`('".$county."','".$year."')";
+				}
+			}
+		} else {
+			if ($partner) {
+				$sql = "CALL `proc_get_eid_partner_hei`('".$partner."','".$year."','".$month."','".$to_year."','".$to_month."')";
+			} else {
+				if ($county==null || $county=='null') {
+					$sql = "CALL `proc_get_eid_national_hei`('".$year."','".$month."','".$to_year."','".$to_month."')";
+				} else {
+					$sql = "CALL `proc_get_eid_county_hei`('".$county."','".$year."','".$month."','".$to_year."','".$to_month."')";
+				}
 			}
 		}
+		
 		// echo "<pre>";print_r($sql);die();
 		$result = $this->db->query($sql)->result_array();
 		// echo "<pre>";print_r($result);die();

@@ -19,7 +19,7 @@ BEGIN
                   SUM(`infantsless2m`) AS `infantsless2m`, 
                   SUM(`infantsless2mPOS`) AS `infantsless2mpos`
                   FROM `site_summary` `is`
-                    LEFT JOIN `view_facilitys` `vf` ON `vf`.`ID` = `vss`.`facility`
+                    LEFT JOIN `view_facilitys` `vf` ON `vf`.`ID` = `is`.`facility`
                     LEFT JOIN `partners` `p` ON `p`.`ID` = `vf`.`partner`
                     LEFT JOIN `countys` `c` ON `c`.`ID` = `vf`.`county`
                   WHERE 1";
@@ -40,7 +40,7 @@ BEGIN
 
     SET @QUERY = CONCAT(@QUERY, " AND `vf`.county = '",C_id,"' ");
 
-    SET @QUERY = CONCAT(@QUERY, " GROUP BY `is`.partner ORDER BY `tests` DESC ");
+    SET @QUERY = CONCAT(@QUERY, " GROUP BY `p`.`name` ORDER BY `tests` DESC ");
 
      PREPARE stmt FROM @QUERY;
      EXECUTE stmt;

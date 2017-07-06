@@ -122,7 +122,7 @@ class Subcounties_model extends MY_Model
 		    	</tr>
 
 		    	<tr>
-		    		<td>Repeat +ve Confirmatory Tests:</td>
+		    		<td>Repeat Confirmatory Tests:</td>
 		    		<td>'. ((int) $value['confirmdna'] + (int) $value['repeatspos']) .'</td>
 		    		<td></td>
 		    		<td></td>

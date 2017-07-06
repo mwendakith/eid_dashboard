@@ -555,7 +555,12 @@ class Sites_model extends MY_Model
 			$data['title'] = "HEI Validation Outcomes (" . $year . ", " . $this->resolve_month($month) . " - ".$this->resolve_month($to_month).")";
 		}
 
-		$sql = "CALL `proc_get_eid_site_hei_validation`('".$site."', '".$year."', '".$month."','".$to_year."', '".$to_month."')";
+		if ($month == 0) {
+			$sql = "CALL `proc_get_eid_site_yearly_hei_validation`('".$site."', '".$year."')";
+		} else {
+			$sql = "CALL `proc_get_eid_site_hei_validation`('".$site."', '".$year."', '".$month."','".$to_year."', '".$to_month."')";
+		}
+		
 		// echo "<pre>";print_r($sql);die();
 		$result = $this->db->query($sql)->result_array();
 		// echo "<pre>";print_r($result);die();
@@ -653,8 +658,12 @@ class Sites_model extends MY_Model
 		}
 		// proc_get_eid_sites_hei_follow_up
 		
-		$sql = "CALL `proc_get_eid_sites_hei_follow_up`('".$site."', '".$year."', '".$month."','".$to_year."','".$to_month."')";
-
+		if ($month == 0) {
+			$sql = "CALL `proc_get_eid_sites_yearly_hei_follow_up`('".$site."', '".$year."')";
+		} else {
+			$sql = "CALL `proc_get_eid_sites_hei_follow_up`('".$site."', '".$year."', '".$month."','".$to_year."','".$to_month."')";
+		}
+		
 		$result = $this->db->query($sql)->row();
 		// echo "<pre>";print_r($result);die();
 		$data['trend'][0]['name'] = "Initiated On Treatment";

@@ -31,7 +31,7 @@
 </div>
 
 <div id="second">
-  <div id="lab_summary">
+  <div id="lab_summary_two_years">
       
   </div>
 
@@ -98,12 +98,13 @@
 
       }
       else{
+        localStorage.setItem("my_lab", em);
         $("#first").hide();
         $("#second").show();
         $("#breadcrum").show();
         var t = $("#my_list option:selected").text();
         $("#breadcrum").html(t);
-        $("#lab_summary").load("<?php echo base_url();?>charts/LabPerformance/summary/"+em);
+        $("#lab_summary_two_years").load("<?php echo base_url();?>charts/LabPerformance/summary/"+em);
         $("#trends_lab").load("<?php echo base_url();?>charts/LabPerformance/lab_trends/"+em);
         
       }
@@ -145,6 +146,7 @@ function date_filter(criteria, id)
       $("#stacked_graph").load("<?php echo base_url();?>charts/LabPerformance/lab_outcomes/"+year+"/"+month);
       $("#lineargauge").load("<?php echo base_url();?>charts/LabPerformance/lab_turnaround/"+year+"/"+month);
       $("#lab_perfomance_stats").load("<?php echo base_url();?>charts/LabPerformance/lab_performance_stats/"+year+"/"+month);
+
     }
 
     else{
@@ -154,6 +156,11 @@ function date_filter(criteria, id)
       $("#stacked_graph").load("<?php echo base_url();?>charts/LabPerformance/lab_outcomes/"+year+"/"+month);
       $("#lineargauge").load("<?php echo base_url();?>charts/LabPerformance/lab_turnaround/"+year+"/"+month);
       $("#lab_perfomance_stats").load("<?php echo base_url();?>charts/LabPerformance/lab_performance_stats/"+year+"/"+month);
+
+      var em = localStorage.getItem("my_lab");
+      $("#lab_summary_two_years").html("<div>Loading...</div>");
+
+      $("#lab_summary_two_years").load("<?php echo base_url();?>charts/LabPerformance/summary/"+em+"/"+year);
 
     }
 

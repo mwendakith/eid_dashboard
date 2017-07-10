@@ -122,9 +122,9 @@ class LabPerformance extends MY_Controller
 
 	}
 
-	function summary($lab=NULL){
-		$data['trends'] = $this->performance_model->yearly_summary($lab);
-		$data['div_name'] = "lab_trends";
+	function summary($lab=NULL, $year=NULL){
+		$data['trends'] = $this->performance_model->yearly_summary($lab, $year);
+		$data['div_name'] = "lab_trends_2";
 		//$data['trends'] = $this->positivity_model->yearly_summary();
 		//echo json_encode($data);
 		// echo "<pre>";print_r($data);die();

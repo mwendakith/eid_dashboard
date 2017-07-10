@@ -426,15 +426,23 @@ class Performance_model extends MY_Model
 		return $data;
 	}
 
-	function yearly_summary($lab=NULL){
+	function yearly_summary($lab=NULL, $year=NULL){
+
+		if($lab == NULL || $lab == 'null'){
+			$lab = 0;
+		}
+
+		if($year==null || $year=='null') {
+			$year = $this->session->userdata('filter_year');
+		}
+
+		$from = $year-1;
 
 		
-		$sql = "CALL `proc_get_eid_yearly_lab_summary`(" . $lab . ");";
+		$sql = "CALL `proc_get_eid_yearly_lab_summary`(" . $lab . ",'" . $from . "','" . $year . "');";
 		
 		$result = $this->db->query($sql)->result_array();
 		// echo "<pre>";print_r($result);die();
-		$year = date("Y");
-		$i = 0;
 
 		$data['outcomes'][0]['name'] = "Redraws";
 		$data['outcomes'][1]['name'] = "Positive";
@@ -456,15 +464,13 @@ class Performance_model extends MY_Model
 		$data['outcomes'][2]['yAxis'] = 1;
 
 		foreach ($result as $key => $value) {
-			if($value['year'] != 2007){
-				$data['categories'][$i] = $value['year'];
-			
-				$data['outcomes'][0]['data'][$i] = (int) $value['redraws'];
-				$data['outcomes'][1]['data'][$i] = (int) $value['positive'];
-				$data['outcomes'][2]['data'][$i] = (int) $value['negative'];
-				$data['outcomes'][3]['data'][$i] = round( ((int) $value['positive']*100) /((int) $value['negative']+(int) $value['positive']+(int) $value['redraws']),1);
-				$i++;
-			}
+
+			$data['categories'][$key] = $this->resolve_month($value['month']).'-'.$value['year'];
+		
+			$data['outcomes'][0]['data'][$key] = (int) $value['redraw'];
+			$data['outcomes'][1]['data'][$key] = (int) $value['pos'];
+			$data['outcomes'][2]['data'][$key] = (int) $value['neg'];
+			$data['outcomes'][3]['data'][$key] = round(@( ((int) $value['pos']*100) /((int) $value['neg']+(int) $value['pos']+(int) $value['redraw'])),1);
 			
 		}
 		$data['outcomes'][0]['tooltip'] = array("valueSuffix" => ' ');

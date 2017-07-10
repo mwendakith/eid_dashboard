@@ -7,17 +7,21 @@ BEGIN
                   `p`.name AS `partner`, 
                   `c`.name AS `county`,
                   SUM(`tests`) AS `tests`, 
-                  SUM(`firstdna`) AS `firstdna`, 
+                  SUM(`actualinfants`) AS `actualinfants`, 
                   SUM(`confirmdna` + `repeatspos`) AS `confirmdna`,
-                  SUM(`pos`) AS `positive`, 
-                  SUM(`neg`) AS `negative`, 
+                  SUM(`actualinfantsPOS`) AS `positive`, 
+                  SUM(`actualinfants`-`actualinfantsPOS`) AS `negative`, 
                   SUM(`redraw`) AS `redraw`, 
                   SUM(`adults`) AS `adults`, 
                   SUM(`adultsPOS`) AS `adultspos`, 
                   AVG(`medage`) AS `medage`, 
                   SUM(`rejected`) AS `rejected`, 
+                  SUM(`infantsless2w`) AS `infantsless2w`, 
+                  SUM(`infantsless2wPOS`) AS `infantsless2wpos`, 
                   SUM(`infantsless2m`) AS `infantsless2m`, 
-                  SUM(`infantsless2mPOS`) AS `infantsless2mpos`
+                  SUM(`infantsless2mPOS`) AS `infantsless2mpos`, 
+                  SUM(`infantsabove2m`) AS `infantsabove2m`, 
+                  SUM(`infantsabove2mPOS`) AS `infantsabove2mpos` 
                   FROM `site_summary` `is`
                     LEFT JOIN `view_facilitys` `vf` ON `vf`.`ID` = `is`.`facility`
                     LEFT JOIN `partners` `p` ON `p`.`ID` = `vf`.`partner`

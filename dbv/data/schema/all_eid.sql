@@ -731,8 +731,8 @@ CREATE PROCEDURE `proc_get_eid_all_sites_outcomes`
 BEGIN
   SET @QUERY =    "SELECT 
                     `vf`.`name`, 
-                    SUM((`ss`.`pos`)) AS `pos`, 
-                    SUM((`ss`.`neg`)) AS `neg` 
+                    SUM(`ss`.`actualinfantsPOS`) AS `positive`,
+                    SUM(`ss`.`actualinfants`-`ss`.`actualinfantsPOS`) AS `negative` 
                   FROM `site_summary` `ss` 
                   LEFT JOIN `view_facilitys` `vf` 
                     ON `ss`.`facility` = `vf`.`ID`
@@ -752,7 +752,7 @@ BEGIN
         SET @QUERY = CONCAT(@QUERY, " AND `year` = '",filter_year,"' ");
     END IF;
 
-    SET @QUERY = CONCAT(@QUERY, " GROUP BY `ss`.`facility` ORDER BY `neg` DESC, `pos` DESC LIMIT 0, 50 ");
+    SET @QUERY = CONCAT(@QUERY, " GROUP BY `ss`.`facility` ORDER BY `neg` DESC, `posittive` DESC LIMIT 0, 50 ");
 
      PREPARE stmt FROM @QUERY;
      EXECUTE stmt;
@@ -951,8 +951,8 @@ CREATE PROCEDURE `proc_get_eid_county_entry_points`
 BEGIN
   SET @QUERY =    "SELECT 
                         `ep`.`name`, 
-                        SUM(`pos`) AS `positive`, 
-                        SUM(`neg`) AS `negative`  
+                        SUM(`nep`.`actualinfantsPOS`) AS `positive`,
+                        SUM(`nep`.`actualinfants`-`nep`.`actualinfantsPOS`) AS `negative` 
                     FROM `county_entrypoint` `nep` 
                     JOIN `entry_points` `ep` 
                     ON `nep`.`entrypoint` = `ep`.`ID`
@@ -1041,8 +1041,8 @@ CREATE PROCEDURE `proc_get_eid_county_iprophylaxis`
 BEGIN
   SET @QUERY =    "SELECT 
                         `p`.`name`, 
-                        SUM(`pos`) AS `positive`, 
-                        SUM(`neg`) AS `negative` 
+                        SUM(`nip`.`actualinfantsPOS`) AS `positive`,
+                        SUM(`nip`.`actualinfants`-`nip`.`actualinfantsPOS`) AS `negative` 
                     FROM `county_iprophylaxis` `nip` 
                     JOIN `prophylaxis` `p` ON `nip`.`prophylaxis` = `p`.`ID`
                 WHERE 1";
@@ -1077,8 +1077,8 @@ CREATE PROCEDURE `proc_get_eid_county_mprophylaxis`
 BEGIN
   SET @QUERY =    "SELECT 
                         `p`.`name`, 
-                        SUM(`pos`) AS `positive`, 
-                        SUM(`neg`) AS `negative` 
+                        SUM(`nmp`.`actualinfantsPOS`) AS `positive`, 
+                        SUM(`nmp`.`actualinfants`-`nmp`.`actualinfantsPOS`) AS `negative` 
                     FROM `county_mprophylaxis` `nmp` 
                     JOIN `prophylaxis` `p` ON `nmp`.`prophylaxis` = `p`.`ID`
                 WHERE 1";
@@ -1112,8 +1112,8 @@ BEGIN
   SET @QUERY =    "SELECT
                     `c`.`name`,
                     `cs`.`county`,
-                    SUM(`cs`.`pos`) AS `positive`,
-                    SUM(`cs`.`neg`) AS `negative` 
+                    SUM(`cs`.`actualinfantsPOS`) AS `positive`,
+                    SUM(`cs`.`actualinfants`-`cs`.`actualinfantsPOS`) AS `negative` 
                 FROM `county_summary` `cs`
                     JOIN `countys` `c` ON `cs`.`county` = `c`.`ID`
     WHERE 1";
@@ -1149,8 +1149,8 @@ BEGIN
                   SUM(`tests`) AS `tests`, 
                   SUM(`firstdna`) AS `firstdna`, 
                   SUM(`confirmdna` + `repeatspos`) AS `confirmdna`,
-                  SUM(`pos`) AS `positive`, 
-                  SUM(`neg`) AS `negative`, 
+                  SUM(`actualinfantsPOS`) AS `positive`, 
+                  SUM(`actualinfants`-`actualinfantsPOS`) AS `negative`, 
                   SUM(`redraw`) AS `redraw`, 
                   SUM(`adults`) AS `adults`, 
                   SUM(`adultsPOS`) AS `adultspos`, 

@@ -6,8 +6,8 @@ BEGIN
   SET @QUERY =    "SELECT
                     `d`.`name`,
                     `scs`.`subcounty`,
-                    SUM(`scs`.`pos`) AS `positive`,
-                    SUM(`scs`.`neg`) AS `negative` 
+                    SUM(`scs`.`actualinfantsPOS`) AS `positive`,
+                    SUM(`scs`.`actualinfants`-`scs`.`actualinfantsPOS`) AS `negative` 
                 FROM `subcounty_summary` `scs` 
                 JOIN `districts` `d` ON `scs`.`subcounty` = `d`.`ID` 
                 JOIN `countys` `c` ON `d`.`county` = `c`.`ID`

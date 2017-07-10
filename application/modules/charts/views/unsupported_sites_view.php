@@ -21,7 +21,7 @@
 </div>
 <script type="text/javascript" charset="utf-8">
   $(document).ready(function() {
-  	$('#example2').DataTable();
+  	$('table').DataTable();
 
     $("table").tablecloth({
       theme: "paper",

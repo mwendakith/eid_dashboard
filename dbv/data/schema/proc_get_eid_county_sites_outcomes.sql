@@ -5,8 +5,8 @@ CREATE PROCEDURE `proc_get_eid_county_sites_outcomes`
 BEGIN
   SET @QUERY =    "SELECT 
                       `vf`.`name`,
-                      SUM(`pos`) AS `positive`,
-                      SUM(`neg`) AS `negative` 
+                      SUM(`actualinfantsPOS`) AS `positive`,
+                      SUM(`actualinfants`-`actualinfantsPOS`) AS `negative` 
                       FROM `site_summary` `ss` 
                       LEFT JOIN `view_facilitys` `vf` ON `ss`.`facility` = `vf`.`ID`  
                   WHERE 1";

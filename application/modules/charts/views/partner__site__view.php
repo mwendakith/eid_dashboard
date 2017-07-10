@@ -10,21 +10,25 @@
 			<th rowspan="2">#</th>
 			<th rowspan="2">County</th>
 			<th rowspan="2">Facilities</th>
-			<th rowspan="2">Tests</th>
-			<th rowspan="2">1st DNA PCR</th>
-			<th rowspan="2">Repeat Confirmatory PCR</th>
-			<th rowspan="2">+</th>
-			<th rowspan="2">-</th>
+			<th rowspan="2">All Tests</th>
+			<th rowspan="2">Actual Infants Tested</th>
+			<th rowspan="2">Repeat Confirmatory Tests</th>
+			<th rowspan="2">Pos</th>
+			<th rowspan="2">Neg</th>
 			<th rowspan="2">Redraws</th>
-			<th colspan="2">Adults</th>
+			<th colspan="2">Infants &lt;2Weeks</th>
+			<th colspan="2">Infants &lt;=2M</th>
+			<th colspan="2">Infants &gt;=2M</th>
 			<th rowspan="2">Median Age</th>
 			<th rowspan="2">Rejected</th>
-			<th rowspan="2">Infants &lt;2M</th>
-			<th rowspan="2">Infants &lt;2M +</th>
 		</tr>
 		<tr>
 			<th>Tests</th>
-			<th>+</th>
+			<th>Pos</th>
+			<th>Tests</th>
+			<th>Pos</th>
+			<th>Tests</th>
+			<th>Pos</th>
 		</tr>
 	</thead>
 	<tbody>

@@ -5,8 +5,8 @@ CREATE PROCEDURE `proc_get_eid_sites_trends`
 BEGIN
   SET @QUERY =    "SELECT 
                     `ss`.`month`, 
-                    SUM((`ss`.`pos`)) AS `pos`, 
-                    SUM(`ss`.`neg`) AS `neg`,
+                    SUM((`ss`.`actualinfantsPOS`)) AS `pos`, 
+                    SUM(`ss`.`actualinfants`-`ss`.`actualinfantsPOS`) AS `neg`,
                     SUM(`ss`.`pos`+`ss`.`neg`) AS `tests`,
                     SUM(`ss`.`rejected`) AS `rejected`
                   FROM `site_summary` `ss` 

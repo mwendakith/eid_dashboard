@@ -62,6 +62,7 @@ class Trends extends MY_Controller
 
 	function summary($county=NULL){
 		$data['trends'] = $this->trends_model->yearly_summary($county);
+		$data['div_name'] = "national_trends";
 		//$data['trends'] = $this->positivity_model->yearly_summary();
 		//echo json_encode($data);
 		// echo "<pre>";print_r($data);die();
@@ -107,16 +108,17 @@ class Trends extends MY_Controller
 		$data['yAxis'] = "Number of Infant Tests";
 		$this->load->view('quarterly_view', $data);
 
-		
-
-		
-		
-
 		//echo json_encode($obj);
 		//echo "<pr>";print_r($obj);die;
 
 	}
 
+	function quarterly_outcomes($county=NULL){
+		$data['trends'] = $this->trends_model->quarterly_outcomes($county);
+		// echo "<pre>";print_r($data);echo "</pre>";die();
+		$data['div_name'] = "quarterly_trends";
+		$this->load->view('trends_outcomes_view', $data);
+	}
 
 
 

@@ -409,7 +409,7 @@ class Sites_model extends MY_Model
 			$data['title'] = "EID Outcome (" . $year . ", " . $this->resolve_month($month) . " - ".$this->resolve_month($to_month).")";
 		}
 		
-		$sql = "CALL `proc_get_eid_sites_eid`('".$site."', '".$year."', '".$month."','".$to_year."', '".$to_month."')";
+		$sql = "CALL `proc_get_eid_sites_eid`('".$site."', '".$year."','".$to_year."')";
 
 		$result = $this->db->query($sql)->result_array();
 		// echo "<pre>";print_r($result);die();

@@ -117,15 +117,18 @@ class LabPerformance extends MY_Controller
 		$data['yAxis'] = "TAT(Days)";
 		$this->load->view('lab_performance_view', $data);
 
-
-		
-
-		
-		
-
 		//echo json_encode($obj);
 		//echo "<pr>";print_r($obj);die;
 
+	}
+
+	function summary($lab=NULL, $year=NULL){
+		$data['trends'] = $this->performance_model->yearly_summary($lab, $year);
+		$data['div_name'] = "lab_trends_2";
+		//$data['trends'] = $this->positivity_model->yearly_summary();
+		//echo json_encode($data);
+		// echo "<pre>";print_r($data);die();
+		$this->load->view('trends_outcomes_view', $data);
 	}
 
 

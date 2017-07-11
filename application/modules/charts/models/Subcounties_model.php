@@ -86,7 +86,7 @@ class Subcounties_model extends MY_Model
 		}
 
 		
-		$sql = "CALL `proc_get_eid_subcounty_eid`('".$subcounty."', '".$year."', '".$month."','".$to_year."','".$to_month."')";
+		$sql = "CALL `proc_get_eid_subcounty_eid`('".$subcounty."', '".$year."','".$to_year."')";
 		// echo "<pre>";print_r($sql);die();
 		$result = $this->db->query($sql)->result_array();
 		// echo "<pre>";print_r($result);die();

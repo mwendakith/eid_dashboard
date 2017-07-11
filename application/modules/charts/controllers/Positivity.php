@@ -88,5 +88,16 @@ class Positivity extends MY_Controller
 		$this->load->view('positivity_view',$data);
 
 	}
+
+	function county_mixed($year=NULL,$month=NULL,$to_year=NULL,$to_month=NULL)
+	{
+		$data['trends'] = $this->positivity_model->county_mixed($year,$month,$county,$to_year,$to_month);
+		$data['div_name'] = 'county_mixed';
+
+		$this->load->view('trends_outcomes_view',$data);
+
+	}
+
+
 }
 ?>

@@ -171,4 +171,20 @@
 	</div>
 </div>
 
+<div class="row">
+	<div class="col-md-12">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+			  EID County Positivity <div class="display_date"></div>
+			</div>
+		  	<div class="panel-body">
+		  	<div id="county_mixed">
+		  		<div>Loading...</div>
+		  	</div>
+		  	<!-- -->
+		  </div>
+		</div>
+	</div>
+</div>
+
 <?php $this->load->view('positivity_footer_view')?>

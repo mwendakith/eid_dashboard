@@ -1,4 +1,4 @@
-<?php //echo"<pre>";print_r($outcomes); ?>
+
 <div class="panel-body" id="<?= @$div;?>">
 	
 </div>

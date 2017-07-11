@@ -8,10 +8,19 @@ BEGIN
                     SUM(`actualinfantsPOS`) AS `pos`,
                     SUM(`actualinfants`-`actualinfantsPOS`) AS `neg`,
                     ((SUM(`actualinfantsPOS`)/(SUM(`actualinfants`)))*100) AS `pecentage`
-                FROM subcounty_summary `cs`
-                LEFT JOIN districts `c`
+                ";
+
+
+     IF (from_month != 0 && from_month != '') THEN
+      SET @QUERY = CONCAT(@QUERY, " FROM `subcounty_summary` `cs` ");
+    ELSE
+        SET @QUERY = CONCAT(@QUERY, " FROM `subcounty_summary_yearly` `cs` ");
+    END IF;
+
+    SET @QUERY = CONCAT(@QUERY, " LEFT JOIN districts `c`
                     ON c.ID = cs.subcounty 
-                WHERE 1";
+                WHERE 1 ");
+
 
    
     IF (from_month != 0 && from_month != '') THEN

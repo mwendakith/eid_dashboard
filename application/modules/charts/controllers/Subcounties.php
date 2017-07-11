@@ -17,6 +17,8 @@ class Subcounties extends MY_Controller
 	{
 		$data['outcomes'] = $this->subcounties_model->subcounties_outcomes($year,$month,$to_year,$to_month);
 		$data['div'] = 'random_div';
+		$data['yAxisText'] = 'tests';
+		$data['type'] = 'normal';
 
     	$this->load->view('subcounty_outcomes_view',$data);
 	}

@@ -45,7 +45,7 @@
 <!-- <div id='download_link'></div> -->
 <script type="text/javascript" charset="utf-8">
   $(document).ready(function() {
-  	$('table').DataTable();
+  	$('#example').DataTable();
 
     $("table").tablecloth({
       theme: "paper",

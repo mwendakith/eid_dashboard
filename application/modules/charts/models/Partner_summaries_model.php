@@ -77,7 +77,7 @@ class Partner_summaries_model extends MY_Model
 			$to_year = 0;
 		}
 
-		$sql = "CALL `proc_get_eid_partner_eid_outcomes`('".$partner."','".$year."','".$to_year."')";
+		$sql = "CALL `proc_get_eid_partner_eid_outcomes`('".$partner."','".$year."','".$month."','".$to_year."','".$to_month."')";
 		
 		// echo "<pre>";print_r($sql);die();
 		$result = $this->db->query($sql)->result_array();

@@ -7,13 +7,22 @@ BEGIN
                     DISTINCT(`p`.`name`) AS `name`,
                     SUM(`actualinfantsPOS`) AS `pos`,
                     SUM(`actualinfants`-`actualinfantsPOS`) AS `neg`,
-                    ((SUM(`actualinfantsPOS`)/(SUM(`actualinfants`)))*100) AS `pecentage`
-                FROM ip_summary `is`
-                LEFT JOIN `partners` `p` 
+                    ((SUM(`actualinfantsPOS`)/(SUM(`actualinfants`)))*100) AS `pecentage` ";
+
+
+     IF (from_month != 0 && from_month != '') THEN
+      SET @QUERY = CONCAT(@QUERY, " FROM `ip_summary` `is` ");
+    ELSE
+        SET @QUERY = CONCAT(@QUERY, " FROM `ip_summary_yearly` `is` ");
+    END IF;
+
+    SET @QUERY = CONCAT(@QUERY, " LEFT JOIN `partners` `p` 
                   ON `is`.`partner` = `p`.`ID` 
                 LEFT JOIN `view_facilitys` `vf`
                     ON `p`.`ID` = `vf`.`partner`
-                WHERE 1";
+                WHERE 1 ");
+
+
 
    
     IF (from_month != 0 && from_month != '') THEN

@@ -7,10 +7,16 @@ BEGIN
   SET @QUERY =    "SELECT
                     `p`.`name`,
                     SUM(`ps`.`actualinfantsPOS`) AS `positive`,
-                    SUM(`ps`.`actualinfants`-`ps`.`actualinfantsPOS`) AS `negative`
-                FROM `ip_summary` `ps`
-                    JOIN `partners` `p` ON `ps`.`partner` = `p`.`ID`
-                WHERE 1";
+                    SUM(`ps`.`actualinfants`-`ps`.`actualinfantsPOS`) AS `negative`";
+
+    IF (from_month != 0 && from_month != '') THEN
+      SET @QUERY = CONCAT(@QUERY, " FROM `ip_summary` `ps` ");
+    ELSE
+        SET @QUERY = CONCAT(@QUERY, " FROM `ip_summary_yearly` `ps` ");
+    END IF;
+
+    SET @QUERY = CONCAT(@QUERY, " JOIN `partners` `p` ON `ps`.`partner` = `p`.`ID`
+                WHERE 1 ");
 
     IF (from_month != 0 && from_month != '') THEN
       IF (to_month != 0 && to_month != '' && filter_year = to_year) THEN

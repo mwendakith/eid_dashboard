@@ -574,6 +574,7 @@ class Positivity_model extends MY_Model
 		// echo "<pre>";print_r($data);die();
 		return $data;
 	}
+	
 
 	function county_mixed($year=null,$month=null,$to_year=NULL,$to_month=null)
 	{

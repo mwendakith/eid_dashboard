@@ -7,10 +7,19 @@ BEGIN
                     `d`.`name`,
                     `scs`.`subcounty`,
                     SUM(`scs`.`actualinfantsPOS`) AS `positive`,
-                    SUM(`scs`.`actualinfants`-`scs`.`actualinfantsPOS`) AS `negative` 
-                FROM `subcounty_summary` `scs` 
-                JOIN `districts` `d` ON `scs`.`subcounty` = `d`.`ID`
-    WHERE 1";
+                    SUM(`scs`.`actualinfants`-`scs`.`actualinfantsPOS`) AS `negative` ";
+
+
+     IF (from_month != 0 && from_month != '') THEN
+      SET @QUERY = CONCAT(@QUERY, " FROM `subcounty_summary` `scs` ");
+    ELSE
+        SET @QUERY = CONCAT(@QUERY, " FROM `subcounty_summary_yearly` `scs` ");
+    END IF;
+
+    SET @QUERY = CONCAT(@QUERY, " JOIN `districts` `d` ON `scs`.`subcounty` = `d`.`ID`
+    WHERE 1 ");
+
+
 
     IF (from_month != 0 && from_month != '') THEN
       IF (to_month != 0 && to_month != '' && filter_year = to_year) THEN

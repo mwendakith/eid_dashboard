@@ -21,10 +21,17 @@ BEGIN
                   SUM(`infantsless2m`) AS `infantsless2m`, 
                   SUM(`infantsless2mPOS`) AS `infantsless2mpos`, 
                   SUM(`infantsabove2m`) AS `infantsabove2m`, 
-                  SUM(`infantsabove2mPOS`) AS `infantsabove2mpos` 
-            FROM `subcounty_summary` `scs`
-            LEFT JOIN `districts` `d` ON `scs`.`subcounty` = `d`.`ID`
-            LEFT JOIN `countys` `c` ON `d`.`county` = `c`.`ID`  WHERE 1";
+                  SUM(`infantsabove2mPOS`) AS `infantsabove2mpos`   ";
+
+
+     IF (from_month != 0 && from_month != '') THEN
+      SET @QUERY = CONCAT(@QUERY, " FROM `subcounty_summary` `scs` ");
+    ELSE
+        SET @QUERY = CONCAT(@QUERY, " FROM `subcounty_summary_yearly` `scs` ");
+    END IF;
+
+    SET @QUERY = CONCAT(@QUERY, " LEFT JOIN `districts` `d` ON `scs`.`subcounty` = `d`.`ID`
+            LEFT JOIN `countys` `c` ON `d`.`county` = `c`.`ID`  WHERE 1 ");
 
 
     IF (from_month != 0 && from_month != '') THEN

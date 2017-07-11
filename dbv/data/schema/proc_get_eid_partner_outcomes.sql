@@ -6,8 +6,8 @@ CREATE PROCEDURE `proc_get_eid_partner_outcomes`
 BEGIN
   SET @QUERY =    "SELECT
                     `p`.`name`,
-                    SUM(`cs`.`actualinfantsPOS`) AS `positive`,
-                    SUM(`cs`.`actualinfants`-`cs`.`actualinfantsPOS`) AS `negative`
+                    SUM(`ps`.`actualinfantsPOS`) AS `positive`,
+                    SUM(`ps`.`actualinfants`-`ps`.`actualinfantsPOS`) AS `negative`
                 FROM `ip_summary` `ps`
                     JOIN `partners` `p` ON `ps`.`partner` = `p`.`ID`
                 WHERE 1";

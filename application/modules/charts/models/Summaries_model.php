@@ -421,7 +421,7 @@ class Summaries_model extends MY_Model
 				if ($county==null || $county=='null') {
 					$sql = "CALL `proc_get_eid_national_yearly_hei`('".$year."')";
 				} else {
-					$sql = "CALL `proc_get_eid_county_yearly_hei`('".$county."','".$year."')";
+					$sql = "CALL `proc_get_eid_county_yearly_hei`('".$county."','".$year."','".$month."','".$to_year."','".$to_month."')";
 				}
 			}
 		} else {

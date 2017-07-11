@@ -28,9 +28,10 @@
     <div class="col-md-3">
         <form action="<?php echo base_url();?>template/filter_county_data" method="post" id="filter_form">
             <select class="btn btn-primary js-example-basic-single" style="background-color: #C5EFF7;" name="county">
-                <option value="0" disabled="true" selected="true">Select a Sub County:</option>
-                <option value="48">National</option>
+                <option disabled="true" selected="true">Select a Sub County:</option>
+                <option value="0">National</option>
                 <?php echo $subCounty; ?>
+
             </select>
         </form>
     </div>

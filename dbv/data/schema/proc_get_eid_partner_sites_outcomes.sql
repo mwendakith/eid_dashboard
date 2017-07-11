@@ -5,8 +5,8 @@ CREATE PROCEDURE `proc_get_eid_partner_sites_outcomes`
 BEGIN
   SET @QUERY =    "SELECT 
 					`vf`.`name`,
-					SUM(`cs`.`actualinfantsPOS`) AS `positive`,
-          SUM(`cs`.`actualinfants`-`cs`.`actualinfantsPOS`) AS `negative` 
+					SUM(`ss`.`actualinfantsPOS`) AS `positive`,
+          SUM(`ss`.`actualinfants`-`ss`.`actualinfantsPOS`) AS `negative` 
 					FROM `site_summary` `ss` 
 					LEFT JOIN `view_facilitys` `vf` 
 					ON `ss`.`facility` = `vf`.`ID`  

@@ -8,10 +8,19 @@ BEGIN
                         SUM(`vss`.`actualinfants`) AS `alltests`,
                         ((SUM(`vss`.`actualinfantsPOS`)/SUM(`vss`.`actualinfants`))*100) AS `positivity`, 
                         `vf`.`ID`, 
-                        `vf`.`name` 
-					FROM `site_summary` `vss` LEFT JOIN `view_facilitys` `vf` 
+                        `vf`.`name` ";
+
+     IF (from_month != 0 && from_month != '') THEN
+      SET @QUERY = CONCAT(@QUERY, " FROM `site_summary` `vss` ");
+    ELSE
+        SET @QUERY = CONCAT(@QUERY, " FROM `site_summary_yearly` `vss` ");
+    END IF;
+
+    SET @QUERY = CONCAT(@QUERY, " LEFT JOIN `view_facilitys` `vf` 
                     ON `vss`.`facility`=`vf`.`ID` 
-                    WHERE 1";
+                    WHERE 1 ");
+
+
 
   
     IF (from_month != 0 && from_month != '') THEN

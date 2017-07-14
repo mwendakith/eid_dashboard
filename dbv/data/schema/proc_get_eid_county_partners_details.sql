@@ -21,12 +21,19 @@ BEGIN
                   SUM(`infantsless2m`) AS `infantsless2m`, 
                   SUM(`infantsless2mPOS`) AS `infantsless2mpos`, 
                   SUM(`infantsabove2m`) AS `infantsabove2m`, 
-                  SUM(`infantsabove2mPOS`) AS `infantsabove2mpos` 
-                  FROM `site_summary` `is`
-                    LEFT JOIN `view_facilitys` `vf` ON `vf`.`ID` = `is`.`facility`
+                  SUM(`infantsabove2mPOS`) AS `infantsabove2mpos`     ";
+
+
+     IF (from_month != 0 && from_month != '') THEN
+      SET @QUERY = CONCAT(@QUERY, " FROM `site_summary` `is` ");
+    ELSE
+        SET @QUERY = CONCAT(@QUERY, " FROM `site_summary_yearly` `is` ");
+    END IF;
+
+    SET @QUERY = CONCAT(@QUERY, " LEFT JOIN `view_facilitys` `vf` ON `vf`.`ID` = `is`.`facility`
                     LEFT JOIN `partners` `p` ON `p`.`ID` = `vf`.`partner`
                     LEFT JOIN `countys` `c` ON `c`.`ID` = `vf`.`county`
-                  WHERE 1";
+                  WHERE 1 ");
 
 
     IF (from_month != 0 && from_month != '') THEN

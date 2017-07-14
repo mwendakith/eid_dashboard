@@ -5,12 +5,19 @@ CREATE PROCEDURE `proc_get_eid_partner_sites_outcomes`
 BEGIN
   SET @QUERY =    "SELECT 
 					`vf`.`name`,
-					SUM(`cs`.`actualinfantsPOS`) AS `positive`,
-          SUM(`cs`.`actualinfants`-`cs`.`actualinfantsPOS`) AS `negative` 
-					FROM `site_summary` `ss` 
-					LEFT JOIN `view_facilitys` `vf` 
-					ON `ss`.`facility` = `vf`.`ID`  
-                  WHERE 1";
+					SUM(`ss`.`actualinfantsPOS`) AS `positive`,
+          SUM(`ss`.`actualinfants`-`ss`.`actualinfantsPOS`) AS `negative`";
+
+
+    IF (from_month != 0 && from_month != '') THEN
+      SET @QUERY = CONCAT(@QUERY, " FROM `site_summary` ss ");
+    ELSE
+        SET @QUERY = CONCAT(@QUERY, " FROM `site_summary_yearly` ss ");
+    END IF;
+
+    SET @QUERY = CONCAT(@QUERY, " 
+      LEFT JOIN `view_facilitys` `vf` ON `ss`.`facility` = `vf`.`ID` 
+      LEFT JOIN `countys` ON `vf`.`county` = `countys`.`ID`  WHERE 1 ");
 
 
     IF (from_month != 0 && from_month != '') THEN

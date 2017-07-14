@@ -11,6 +11,7 @@ class Summaries_model extends MY_Model
 	{
 		parent:: __construct();
 	}
+	
 
 	function turnaroundtime($year=null,$month=null,$county=null,$to_year=null,$to_month=null)
 	{
@@ -151,14 +152,14 @@ class Summaries_model extends MY_Model
 		}
 
 		if ($partner) {
-			$sql = "CALL `proc_get_eid_partner_eid_outcomes`('".$partner."','".$year."','".$to_year."')";
+			$sql = "CALL `proc_get_eid_partner_eid_outcomes`('".$partner."','".$year."','".$month."','".$to_year."','".$to_month."')";
 			// $sql2 = "CALL `proc_get_partner_sitessending`('".$partner."','".$year."','".$month."')";
 		} else {
 			if ($county==null || $county=='null') {
-				$sql = "CALL `proc_get_eid_national_eid_outcomes`('".$year."','".$to_year."')";
+				$sql = "CALL `proc_get_eid_national_eid_outcomes`('".$year."','".$month."','".$to_year."','".$to_month."')";
 				// $sql2 = "CALL `proc_get_national_sitessending`('".$year."','".$month."')";
 			} else {
-				$sql = "CALL `proc_get_eid_county_eid_outcomes`('".$county."','".$year."','".$to_year."')";
+				$sql = "CALL `proc_get_eid_county_eid_outcomes`('".$county."','".$year."','".$month."','".$to_year."','".$to_month."')";
 				// $sql2 = "CALL `proc_get_regional_sitessending`('".$county."','".$year."','".$month."')";
 			}
 		}
@@ -421,7 +422,7 @@ class Summaries_model extends MY_Model
 				if ($county==null || $county=='null') {
 					$sql = "CALL `proc_get_eid_national_yearly_hei`('".$year."')";
 				} else {
-					$sql = "CALL `proc_get_eid_county_yearly_hei`('".$county."','".$year."')";
+					$sql = "CALL `proc_get_eid_county_yearly_hei`('".$county."','".$year."','".$month."','".$to_year."','".$to_month."')";
 				}
 			}
 		} else {

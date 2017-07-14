@@ -574,5 +574,73 @@ class Positivity_model extends MY_Model
 		// echo "<pre>";print_r($data);die();
 		return $data;
 	}
+	
+
+	function county_mixed($year=null,$month=null,$to_year=NULL,$to_month=null)
+	{
+		
+		if ($to_year==null || $to_year=='null') {
+			$to_year = 0;
+		}
+		if ($to_month==null || $to_month=='null') {
+			$to_month = 0;
+		}
+
+		if ($year==null || $year=='null') {
+			$year = $this->session->userdata('filter_year');
+		}
+		if ($month==null || $month=='null') {
+			if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
+				$month = 0;
+			}else {
+				$month = $this->session->userdata('filter_month');
+			}
+		}
+
+		$sql = "CALL `proc_get_eid_counties_positivity_mixed`('".$year."','".$month."','".$to_year."','".$to_month."')";
+		// echo "<pre>";print_r($sql);die();
+		$result = $this->db->query($sql)->result_array();
+		// echo "<pre>";print_r($result);die();
+
+		$data['outcomes'][0]['name'] = "Positive";
+		$data['outcomes'][1]['name'] = "Negative";
+		$data['outcomes'][2]['name'] = "Positivity";
+
+		$data['outcomes'][0]['color'] = '#E26A6A';
+		$data['outcomes'][1]['color'] = '#257766';
+		$data['outcomes'][2]['color'] = '#913D88';
+
+		$data['outcomes'][0]['type'] = "column";
+		$data['outcomes'][1]['type'] = "column";
+		$data['outcomes'][2]['type'] = "spline";
+
+		$data['outcomes'][0]['yAxis'] = 1;
+		$data['outcomes'][1]['yAxis'] = 1;
+
+		$data['outcomes'][0]['tooltip'] = array("valueSuffix" => ' ');
+		$data['outcomes'][1]['tooltip'] = array("valueSuffix" => ' ');
+		$data['outcomes'][2]['tooltip'] = array("valueSuffix" => ' %');
+
+		$data['title'] = "Outcomes";
+
+
+
+		$data['positivity'][0]['name'] = 'Positives';
+		$data['positivity'][1]['name'] = 'Negatives';
+
+		
+
+		foreach ($result as $key => $value) {
+			$data['categories'][$key] 					= $value['name'];
+
+			$data['outcomes'][0]['data'][$key] = (int) $value['pos'];
+			$data['outcomes'][1]['data'][$key] = (int) $value['neg'];
+			$data['outcomes'][2]['data'][$key] = round($value['pecentage'], 2);
+		}
+		// echo "<pre>";print_r($data);die();
+		return $data;
+	}
+
+
 }
 ?>

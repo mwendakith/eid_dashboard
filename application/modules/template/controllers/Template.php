@@ -51,6 +51,8 @@ class Template extends MY_Controller
 		// echo "<pre>";print_r($data);die();
 		$this->filter_sub_county($data);
 
+		// echo $this->input->post('subCounty');
+
 		echo $this->session->userdata('sub_county_filter');
 		
 	}

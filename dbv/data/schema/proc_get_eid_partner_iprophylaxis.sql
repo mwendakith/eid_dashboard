@@ -6,8 +6,8 @@ CREATE PROCEDURE `proc_get_eid_partner_iprophylaxis`
 BEGIN
   SET @QUERY =    "SELECT 
                         `p`.`name`, 
-                        SUM(`actualinfantsPOS`) AS `positive`, 
-                        SUM(`actualinfants`-`actualinfantsPOS`) AS `negative` 
+                        SUM(`pos`) AS `positive`, 
+                        SUM(`neg`) AS `negative` 
                     FROM `ip_iprophylaxis` `nip` 
                     JOIN `prophylaxis` `p` ON `nip`.`prophylaxis` = `p`.`ID`
                 WHERE 1";

@@ -159,7 +159,7 @@
 		$("#partners").html("<center><div class='loader'></div></center>");
 
 		// Actual graphs being loaded
-		$("#notification").load("<?php echo base_url('charts/positivity/turnaroundtime'); ?>/"+year+"/"+month);
+		$("#notification").load("<?php echo base_url('charts/positivity/notification'); ?>/"+year+"/"+month);
 		$("#ageCat").load("<?php echo base_url('charts/positivity/age'); ?>/"+year);
 		$("#iprophylaxis").load("<?php echo base_url('charts/positivity/i_prophylaxis');?>/"+year+"/"+month);
 		$("#mprophylaxis").load("<?php echo base_url('charts/positivity/m_prophylaxis');?>/"+year+"/"+month);

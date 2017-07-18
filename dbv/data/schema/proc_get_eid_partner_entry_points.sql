@@ -6,8 +6,8 @@ CREATE PROCEDURE `proc_get_eid_partner_entry_points`
 BEGIN
   SET @QUERY =    "SELECT 
                         `ep`.`name`, 
-                        SUM(`actualinfantsPOS`) AS `positive`, 
-                        SUM(`actualinfants`-`actualinfantsPOS`) AS `negative`  
+                        SUM(`pos`) AS `positive`, 
+                        SUM(`neg`) AS `negative`  
                     FROM `ip_entrypoint` `nep` 
                     JOIN `entry_points` `ep` 
                     ON `nep`.`entrypoint` = `ep`.`ID`

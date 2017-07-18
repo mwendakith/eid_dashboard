@@ -64,7 +64,7 @@ class Positivity_model extends MY_Model
 		// echo "<pre>";print_r($result);die();
 		
 		foreach ($result as $key => $value) {
-			$data['rate'] = (int) $value['positivity_rate'];
+			$data['rate'] = round($value['positivity_rate'], 1);
 			$data['sustxfail'] = number_format((int) $value['positive']);
 			if ((int) $value['positivity_rate']=0) {
 				$data['color'] = '#E4F1FE';

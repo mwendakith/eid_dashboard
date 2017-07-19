@@ -21,9 +21,11 @@ class Summaries extends MY_Controller
 	
 	function testing_trends($year=NULL,$county=NULL,$partner=NULL)
 	{
-		$data['outcomes'] = $this->summaries_model->test_trends($year,$county,$partner);
+		$data['trends'] = $this->summaries_model->test_trends($year,$county,$partner);
+		$data['div_name'] = "summary_yearly_summary";
 
-		$this->load->view('testing_trends_view', $data);
+		$this->load->view('trends_outcomes_view', $data);
+
 	}
 
 	function eid_outcomes($year=NULL,$month=NULL,$county=NULL,$partner=NULL,$to_year=NULL,$to_month=NULL)
@@ -82,9 +84,11 @@ class Summaries extends MY_Controller
 
 	function county_outcomes($year=NULL,$month=NULL,$pfil=NULL,$partner=NULL,$county=NULL,$to_year=NULL,$to_month=NULL)
 	{
-		$data['outcomes'] = $this->summaries_model->county_outcomes($year,$month,$pfil,$partner,$county,$to_year,$to_month);
+		$data['trends'] = $this->summaries_model->county_outcomes($year,$month,$pfil,$partner,$county,$to_year,$to_month);
+		$data['div_name'] = "summary_counties_summary";
 
-    	$this->load->view('county_outcomes_view',$data);
+		$this->load->view('trends_outcomes_view', $data);
+
 	}
 
 }

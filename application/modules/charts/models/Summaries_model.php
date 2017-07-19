@@ -104,21 +104,39 @@ class Summaries_model extends MY_Model
 		$result = $this->db->query($sql)->result_array();
 		
 		// echo "<pre>";print_r($result);die();
-		$data['testing_trends'][0]['name'] = 'Positive';
-		$data['testing_trends'][1]['name'] = 'Negative';
 
-		$count = 0;
+		$data['outcomes'][0]['name'] = "Positive";
+		$data['outcomes'][1]['name'] = "Negative";
+		$data['outcomes'][2]['name'] = "Positivity";
+
+		//$data['outcomes'][0]['color'] = '#52B3D9';
+		// $data['outcomes'][0]['color'] = '#E26A6A';
+		// $data['outcomes'][1]['color'] = '#257766';
+		$data['outcomes'][2]['color'] = '#913D88';
+
+		$data['outcomes'][0]['type'] = "column";
+		$data['outcomes'][1]['type'] = "column";
+		$data['outcomes'][2]['type'] = "spline";
+
+		$data['outcomes'][0]['yAxis'] = 1;
+		$data['outcomes'][1]['yAxis'] = 1;
+
+		$data['outcomes'][0]['tooltip'] = array("valueSuffix" => ' ');
+		$data['outcomes'][1]['tooltip'] = array("valueSuffix" => ' ');
+		$data['outcomes'][2]['tooltip'] = array("valueSuffix" => ' %');
+
+		$data['title'] = "";
 		
 		$data['categories'][0] = 'No Data';
-		$data["testing_trends"][0]["data"][0]	= $count;
-		$data["testing_trends"][1]["data"][0]	= $count;
 
 		foreach ($result as $key => $value) {
 			
 				$data['categories'][$key] = $this->resolve_month($value['month']).'-'.$value['year'];
 
-				$data["testing_trends"][0]["data"][$key]	= (int) $value['pos'];
-				$data["testing_trends"][1]["data"][$key]	= (int) $value['neg'];
+				$data["outcomes"][0]["data"][$key]	= (int) $value['pos'];
+				$data["outcomes"][1]["data"][$key]	= (int) $value['neg'];
+				$data["outcomes"][2]["data"][$key]	= round(@( ((int) $value['pos']*100) /((int) $value['neg']+(int) $value['pos'])),1);
+
 			
 		}
 		// echo "<pre>";print_r($data);die();
@@ -799,20 +817,40 @@ class Summaries_model extends MY_Model
 		// echo "<pre>";print_r($sql);echo "</pre>";die();
 		$result = $this->db->query($sql)->result_array();
 		// echo "<pre>";print_r($result);die();
-		$data['county_outcomes'][0]['name'] = 'Positive';
-		$data['county_outcomes'][1]['name'] = 'Negative';
 
-		$count = 0;
+		$data['outcomes'][0]['name'] = "Positive";
+		$data['outcomes'][1]['name'] = "Negative";
+		$data['outcomes'][2]['name'] = "Positivity";
+
+		//$data['outcomes'][0]['color'] = '#52B3D9';
+		// $data['outcomes'][0]['color'] = '#E26A6A';
+		// $data['outcomes'][1]['color'] = '#257766';
+		$data['outcomes'][2]['color'] = '#913D88';
+
+		$data['outcomes'][0]['type'] = "column";
+		$data['outcomes'][1]['type'] = "column";
+		$data['outcomes'][2]['type'] = "spline";
+
+		$data['outcomes'][0]['yAxis'] = 1;
+		$data['outcomes'][1]['yAxis'] = 1;
+
+		$data['outcomes'][0]['tooltip'] = array("valueSuffix" => ' ');
+		$data['outcomes'][1]['tooltip'] = array("valueSuffix" => ' ');
+		$data['outcomes'][2]['tooltip'] = array("valueSuffix" => ' %');
+
+		$data['title'] = "";
 		
-		$data["county_outcomes"][0]["data"][0]	= $count;
-		$data["county_outcomes"][1]["data"][0]	= $count;
-		$data['categories'][0]					= 'No Data';
+		$data['categories'][0] = 'No Data';
 
 		foreach ($result as $key => $value) {
-			$data['categories'][$key] 					= $value['name'];
-			$data["county_outcomes"][0]["data"][$key]	=  (int) $value['positive'];
-			$data["county_outcomes"][1]["data"][$key]	=  (int) $value['negative'];
+			
+				$data['categories'][$key] = $value['name'];
+				$data["outcomes"][0]["data"][$key]	= (int) $value['positive'];
+				$data["outcomes"][1]["data"][$key]	= (int) $value['negative'];
+				$data["outcomes"][2]["data"][$key]	= round(@( ((int) $value['positive']*100) /((int) $value['positive']+(int) $value['negative'])),1);
+			
 		}
+
 		// echo "<pre>";print_r($data);die();
 		return $data;
 	}

@@ -15,12 +15,10 @@ class Subcounties extends MY_Controller
 
 	function subcounties_outcomes($year=NULL,$month=NULL,$to_year=NULL,$to_month=NULL)
 	{
-		$data['outcomes'] = $this->subcounties_model->subcounties_outcomes($year,$month,$to_year,$to_month);
-		$data['div'] = 'random_div';
-		$data['yAxisText'] = 'tests';
-		$data['type'] = 'normal';
+		$data['trends'] = $this->subcounties_model->subcounties_outcomes($year,$month,$to_year,$to_month);
+		$data['div_name'] = "subcounties_subcounties_summary";
 
-    	$this->load->view('subcounty_outcomes_view',$data);
+		$this->load->view('trends_outcomes_view', $data);
 	}
 
 	function subcounties_eid($sub_county=NULL,$year=NULL,$month=NULL,$to_year=NULL,$to_month=NULL)

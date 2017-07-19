@@ -35,20 +35,39 @@ class Subcounties_model extends MY_Model
 		// echo "<pre>";print_r($sql);die();
 		$result = $this->db->query($sql)->result_array();
 
-		$data['sub_county_outcomes'][0]['name'] = 'Positive';
-		$data['sub_county_outcomes'][1]['name'] = 'Negative';
+		$data['outcomes'][0]['name'] = "Positive";
+		$data['outcomes'][1]['name'] = "Negative";
+		$data['outcomes'][2]['name'] = "Positivity";
 
-		$count = 0;
+		//$data['outcomes'][0]['color'] = '#52B3D9';
+		// $data['outcomes'][0]['color'] = '#E26A6A';
+		// $data['outcomes'][1]['color'] = '#257766';
+		$data['outcomes'][2]['color'] = '#913D88';
+
+		$data['outcomes'][0]['type'] = "column";
+		$data['outcomes'][1]['type'] = "column";
+		$data['outcomes'][2]['type'] = "spline";
+
+		$data['outcomes'][0]['yAxis'] = 1;
+		$data['outcomes'][1]['yAxis'] = 1;
+
+		$data['outcomes'][0]['tooltip'] = array("valueSuffix" => ' ');
+		$data['outcomes'][1]['tooltip'] = array("valueSuffix" => ' ');
+		$data['outcomes'][2]['tooltip'] = array("valueSuffix" => ' %');
+
+		$data['title'] = "";
 		
-		$data["sub_county_outcomes"][0]["data"][0]	= $count;
-		$data["sub_county_outcomes"][1]["data"][0]	= $count;
-		$data['categories'][0]					= 'No Data';
+		$data['categories'][0] = 'No Data';
 
 		foreach ($result as $key => $value) {
-			$data['categories'][$key] 					= $value['name'];
-			$data["sub_county_outcomes"][0]["data"][$key]	=  (int) $value['positive'];
-			$data["sub_county_outcomes"][1]["data"][$key]	=  (int) $value['negative'];
+			
+				$data['categories'][$key] = $value['name'];
+				$data["outcomes"][0]["data"][$key]	= (int) $value['positive'];
+				$data["outcomes"][1]["data"][$key]	= (int) $value['negative'];
+				$data["outcomes"][2]["data"][$key]	= round(@( ((int) $value['positive']*100) /((int) $value['positive']+(int) $value['negative'])),1);
+			
 		}
+		
 		// echo "<pre>";print_r($data);die();
 		return $data;
 	}

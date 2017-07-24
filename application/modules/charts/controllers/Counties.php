@@ -16,6 +16,7 @@ class Counties extends MY_Controller
 	function counties_details($year=NULL,$month=NULL,$to_year=NULL,$to_month=NULL)
 	{
 		$data['outcomes'] = $this->counties_model->counties_details($year,$month,$to_year,$to_month);
+		
 
 		$link = $year . '/' . $month . '/' . $to_year . '/' . $to_month;
 

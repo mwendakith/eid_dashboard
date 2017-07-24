@@ -15,6 +15,7 @@ BEGIN
                   SUM(`adults`) AS `adults`, 
                   SUM(`adultsPOS`) AS `adultspos`, 
                   AVG(`medage`) AS `medage`, 
+                  AVG(`sitessending`) AS `sitessending`, 
                   SUM(`rejected`) AS `rejected`, 
                   SUM(`infantsless2w`) AS `infantsless2w`, 
                   SUM(`infantsless2wPOS`) AS `infantsless2wpos`, 

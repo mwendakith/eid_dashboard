@@ -40,7 +40,13 @@ class Counties_model extends MY_Model
 			$table .= '<tr>';
 			$table .= '<td>'.$count.'</td>';
 			$table .= '<td>'.$value['county'].'</td>';
+			$table .= '<td>'.number_format(round($value['sitessending'])).'</td>';
 			$table .= '<td>'.number_format($value['tests']).'</td>';
+			if ($year == '2016' || $year == '2017') {
+				$table .= '<td>'.number_format($value['pmtctneed']).'</td>';
+			} else {
+				$table .= '<td>0</td>';
+			}
 			$table .= '<td>'.number_format($value['actualinfants']).'</td>';
 			$table .= '<td>'.number_format($value['confirmdna']).'</td>';
 			$table .= '<td>'.number_format($value['positive']).'</td>';
@@ -233,6 +239,7 @@ class Counties_model extends MY_Model
 			$table .= '<tr>';
 			$table .= '<td>'.$count.'</td>';
 			$table .= '<td>'.$value['subcounty'].'</td>';
+			$table .= '<td>'.number_format(round($value['sitessending'])).'</td>';
 			$table .= '<td>'.number_format($value['tests']).'</td>';
 			$table .= '<td>'.number_format($value['actualinfants']).'</td>';
 			$table .= '<td>'.number_format($value['confirmdna']).'</td>';

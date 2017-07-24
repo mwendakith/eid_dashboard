@@ -102,6 +102,9 @@ class Template extends MY_Controller
 		if ($data=='null'||$data==null) {
 			$data = NULL;
 		}
+		if ($sub_county=='null'||$sub_county==null) {
+			$sub_county = NULL;
+		}
 		$this->load->model('template_model');
 		// echo "<pre>";print_r($data."<___>".$partner."<___>".$site."<___>".$sub_county);die();
 		if ($partner) {

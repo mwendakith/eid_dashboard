@@ -44,7 +44,7 @@ class Performance_model extends MY_Model
 						<td>".number_format((int) $value['sitesending'])."</td>
 						<td>".number_format((int) $value['received'])."</td>
 						<td>".number_format((int) $value['rejected']) . " (" . 
-							round(@(($value['rejected']*100)/$value['tests']), 2, PHP_ROUND_HALF_UP)."%)</td>
+							round(@(($value['rejected']*100)/$value['tests']), 1, PHP_ROUND_HALF_UP)."%)</td>
 						<td>".number_format((int) $value['redraw'])."</td>
 
 						<td>".number_format((int) $value['alltests'])."</td>
@@ -53,11 +53,11 @@ class Performance_model extends MY_Model
 						<td>".number_format((int) $value['eqa'])."</td>
 						<td>".number_format((int) $value['alltests'] + (int) $value['eqa'] + (int) $value['confirmdna'] + (int) $value['repeatspos'])."</td>
 						<td>".number_format((int) $value['pos'])."</td>
-						<td>".round(@(($value['pos']*100)/$value['tests']), 2, PHP_ROUND_HALF_UP)."</td>
+						<td>".round(@(($value['pos']*100)/$value['tests']), 1, PHP_ROUND_HALF_UP)."</td>
 						<td>".number_format((int) $value['neg'])."</td>
-						<td>".round(@(($value['neg']*100)/$value['tests']), 2, PHP_ROUND_HALF_UP)."</td>
+						<td>".round(@(($value['neg']*100)/$value['tests']), 1, PHP_ROUND_HALF_UP)."</td>
 						<td>".number_format((int) $value['redraw'])."</td>
-						<td>".round(@(($value['redraw']*100)/$value['tests']), 2, PHP_ROUND_HALF_UP)."</td>
+						<td>".round(@(($value['redraw']*100)/$value['tests']), 1, PHP_ROUND_HALF_UP)."</td>
 					</tr>";
 					
 		}
@@ -107,7 +107,7 @@ class Performance_model extends MY_Model
 			$data[$key]['sitesending'] = (int) $value['sitesending']; 
 			$data[$key]['received'] = $value['received'];
 			$data[$key]['rejected'] = $value['rejected']. " (" . 
-							round(@(($value['rejected']*100)/$value['tests']), 2, PHP_ROUND_HALF_UP)."%)"; 
+							round(@(($value['rejected']*100)/$value['tests']), 1, PHP_ROUND_HALF_UP)."%)"; 
 			$data[$key]['redrawal'] =  $value['redraw'];
 			$data[$key]['alltests'] = $value['alltests'];
 			$data[$key]['tests'] = $value['tests'];  
@@ -115,11 +115,11 @@ class Performance_model extends MY_Model
 			$data[$key]['eqa'] = $value['eqa']; 
 			$data[$key]['total_tests'] = (int) $value['alltests'] + (int) $value['eqa'] + (int) $value['confirmdna'] + (int) $value['repeatspos']; 
 			$data[$key]['pos'] = $value['pos']; 
-			$data[$key]['pos_percentage'] = round(@(($value['pos']*100)/$value['tests']), 2, PHP_ROUND_HALF_UP); 
+			$data[$key]['pos_percentage'] = round(@(($value['pos']*100)/$value['tests']), 1, PHP_ROUND_HALF_UP); 
 			$data[$key]['neg'] = $value['neg']; 
-			$data[$key]['neg_percentage'] = round(@(($value['neg']*100)/$value['tests']), 2, PHP_ROUND_HALF_UP); 
+			$data[$key]['neg_percentage'] = round(@(($value['neg']*100)/$value['tests']), 1, PHP_ROUND_HALF_UP); 
 			$data[$key]['redraw'] = $value['redraw']; 
-			$data[$key]['redraw_percentage'] = round(@(($value['redraw']*100)/$value['tests']), 2, PHP_ROUND_HALF_UP); 
+			$data[$key]['redraw_percentage'] = round(@(($value['redraw']*100)/$value['tests']), 1, PHP_ROUND_HALF_UP); 
 		}
 
 		// $this->load->helper('download');
@@ -213,7 +213,7 @@ class Performance_model extends MY_Model
 				$data['rejected_trends'][$lab]['data'][$month] = 0;
 			}else{
 				$data['rejected_trends'][$lab]['data'][$month] =  
-				 round(($value['rejected'] / $tests * 100), 2);
+				 round(($value['rejected'] / $tests * 100), 1);
 			}
 
 			$data['positivity_trends'][$lab]['name'] = $value['name'];
@@ -235,7 +235,7 @@ class Performance_model extends MY_Model
 		foreach ($result2 as $key => $value) {
 					
 			$data['rejected_trends'][$i]['name'] = 'National Rejection Rate';
-			$data['rejected_trends'][$i]['data'][$count] = round(@((int) $value['rejected'] * 100 / (int) $value['tests']), 2);
+			$data['rejected_trends'][$i]['data'][$count] = round(@((int) $value['rejected'] * 100 / (int) $value['tests']), 1);
 			$count++;
 		}
 

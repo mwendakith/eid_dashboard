@@ -635,7 +635,7 @@ class Positivity_model extends MY_Model
 
 			$data['outcomes'][0]['data'][$key] = (int) $value['pos'];
 			$data['outcomes'][1]['data'][$key] = (int) $value['neg'];
-			$data['outcomes'][2]['data'][$key] = round($value['pecentage'], 2);
+			$data['outcomes'][2]['data'][$key] = round($value['pecentage'], 1);
 		}
 		// echo "<pre>";print_r($data);die();
 		return $data;

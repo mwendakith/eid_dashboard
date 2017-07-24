@@ -10,6 +10,7 @@
 			$(".display_range").html("( "+obj['prev_year']+" - "+obj['year']+" )");
     	});
 		$.get("<?php echo base_url();?>template/breadcrum/"+null+"/"+null+"/"+null+"/"+1, function(data){
+			// console.log(data);
 	        	$("#breadcrum").html(data);
 	       });
 		$("#second").hide();
@@ -24,7 +25,9 @@
 	     
 	        // Put the results in a div
 	        posting.done(function( data ) {
-	        	console.log(data);
+	        	if (data == ""){
+	        		data = null;
+	        	}
 	        	$.get("<?php echo base_url();?>template/breadcrum/"+data+"/"+null+"/"+null+"/"+1, function(data){
 	        		$("#breadcrum").html(data);
 	        	});
@@ -37,7 +40,7 @@
 						$(".display_date").html("( "+obj['year']+" "+obj['month']+" )");
 						$(".display_range").html("( "+obj['prev_year']+" - "+obj['year']+" )");
 		        	});
-	        	if (data=="") {
+	        	if (data=="" || data==null) {
 	        		$("#second").hide();
 	        		$("#first").show();
 					$("#county_outcomes").load("<?php echo base_url('charts/subcounties/subcounties_outcomes');?>");

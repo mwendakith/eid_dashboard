@@ -28,6 +28,7 @@ class County extends MY_Controller
 		$this->data['sub_county'] = TRUE;
 		$this->clear_all_session_data();
 		$this->data['content_view'] = 'county/subCounty_view';
+		// echo "<pre>";print_r($this->data);die();
 		$this->template($this->data);
 	}
 

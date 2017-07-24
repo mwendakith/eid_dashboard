@@ -9,6 +9,7 @@
 		<tr class="colhead">
 			<th rowspan="2">#</th>
 			<th rowspan="2">Sub-County</th>
+			<th rowspan="2">Sites</th>
 			<th rowspan="2">All Tests</th>
 			<th rowspan="2">Actual Infants Tested</th>
 			<th rowspan="2">Repeat Confirmatory Tests</th>

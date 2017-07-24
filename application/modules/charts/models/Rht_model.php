@@ -190,8 +190,8 @@ class Rht_model extends MY_Model
 		$neg = 0;
 
 		if($result3->tests != 0){
-			$pos = round((( (int) $result2->tests / (int) $result3->tests) * 100),2);
-			$neg = round((( (int) $result->tests / (int) $result3->tests) * 100),2);
+			$pos = round((( (int) $result2->tests / (int) $result3->tests) * 100),1);
+			$neg = round((( (int) $result->tests / (int) $result3->tests) * 100),1);
 		}
 
 		$data['ul'] .= '

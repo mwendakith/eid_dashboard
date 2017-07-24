@@ -4,8 +4,9 @@ CREATE PROCEDURE `proc_get_eid_countys_details`
 (IN filter_year INT(11), IN from_month INT(11), IN to_year INT(11), IN to_month INT(11))
 BEGIN
   SET @QUERY =    "SELECT 
-                  `countys`.`name` AS `county`, 
+                  `countys`.`name` AS `county`,  
                   SUM(`tests`) AS `tests`, 
+                  `countys`.`pmtctneed1617` AS `pmtctneed`,
                   SUM(`actualinfants`) AS `actualinfants`, 
                   SUM(`confirmdna` + `repeatspos`) AS `confirmdna`,
                   SUM(`actualinfantsPOS`) AS `positive`, 
@@ -14,6 +15,7 @@ BEGIN
                   SUM(`adults`) AS `adults`, 
                   SUM(`adultsPOS`) AS `adultspos`, 
                   AVG(`medage`) AS `medage`, 
+                  AVG(`sitessending`) AS `sitessending`, 
                   SUM(`rejected`) AS `rejected`, 
                   SUM(`infantsless2w`) AS `infantsless2w`, 
                   SUM(`infantsless2wPOS`) AS `infantsless2wpos`, 

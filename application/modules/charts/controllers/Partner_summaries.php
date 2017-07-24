@@ -14,9 +14,10 @@ class Partner_summaries extends MY_Controller
 
 	function testing_trends($year=NULL,$partner=NULL)
 	{
-		$data['outcomes'] = $this->partner_summaries_model->test_trends($year,$partner);
+		$data['trends'] = $this->partner_summaries_model->test_trends($year,$partner);
+		$data['div_name'] = "partner_yearly_summary";
 
-		$this->load->view('testing_trends_view', $data);
+		$this->load->view('trends_outcomes_view', $data);
 	}
 
 	function eid_outcomes($year=NULL,$month=NULL,$partner=NULL,$to_year=NULL,$to_month=NULL)
@@ -70,16 +71,18 @@ class Partner_summaries extends MY_Controller
 
 	function partner_outcomes($year=NULL,$month=NULL,$partner=NULL,$to_year=NULL,$to_month=NULL)
 	{
-		$data['outcomes'] = $this->partner_summaries_model->partner_outcomes($year,$month,$partner,$to_year,$to_month);
+		$data['trends'] = $this->partner_summaries_model->partner_outcomes($year,$month,$partner,$to_year,$to_month);
+		$data['div_name'] = "partner_outcomes_summary";
 
-    	$this->load->view('county_outcomes_view',$data);
+		$this->load->view('trends_outcomes_view', $data);
 	}
 
 	function partner_county($year=NULL,$month=NULL,$partner=NULL,$to_year=NULL,$to_month=NULL)
 	{
-		$data['outcomes'] = $this->partner_summaries_model->partner_counties($year,$month,$partner,$to_year,$to_month);
+		$data['trends'] = $this->partner_summaries_model->partner_counties($year,$month,$partner,$to_year,$to_month);
+		$data['div_name'] = "partner_counties_summary";
 
-    	$this->load->view('testing_trends_view',$data);
+		$this->load->view('trends_outcomes_view', $data);
 	}
 
 	function partner_counties($year=NULL,$month=NULL,$partner=NULL,$to_year=NULL,$to_month=NULL)

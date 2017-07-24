@@ -15,9 +15,10 @@ class Sites extends MY_Controller
 
 	function site_outcomes($year=NULL,$month=NULL,$to_year=NULL,$to_month=NULL)
 	{
-		$data['outcomes'] = $this->sites_model->sites_outcomes($year,$month,$to_year,$to_month);
+		$data['trends'] = $this->sites_model->sites_outcomes($year,$month,$to_year,$to_month);
+		$data['div_name'] = "sites_outcomes_summary";
 
-    	$this->load->view('site_outcomes_view',$data);
+		$this->load->view('trends_outcomes_view', $data);
 	}
 
 	function unsupported_sites()

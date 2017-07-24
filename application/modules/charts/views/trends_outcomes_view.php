@@ -25,7 +25,7 @@
                         return this.value +'%';
                     },
                     style: {
-                        color: '#89A54E'
+                        
                     }
                 },
                 title: {
@@ -68,6 +68,10 @@
                 floating: true,
                 backgroundColor: '#FFFFFF'
             },
+            colors: [
+                '#F2784B',
+                '#1BA39C'
+            ],     
             series: <?php echo json_encode($trends['outcomes']);?>
         });
     });

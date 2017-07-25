@@ -516,7 +516,7 @@ class Subcounties_model extends MY_Model
 		$sql = "CALL `proc_get_eid_subcounty_sites_details`('".$subcounty."','".$year."','".$month."','".$to_year."','".$to_month."')";
 		// echo "<pre>";print_r($sql);die();
 		$result = $this->db->query($sql)->result_array();
-		// echo "<pre>";print_r($sql);die();
+		// echo "<pre>";print_r($result);die();
 		foreach ($result as $key => $value) {
 			$table .= '<tr>';
 			$table .= '<td>'.$count.'</td>';
@@ -600,7 +600,6 @@ class Subcounties_model extends MY_Model
 	      
 	 //      // define output directoy 
 	 //    $output_file_dir = __DIR__ ."/tmp/";
-	 //     // echo "<pre>";print_r("Still working");die();
 
 	 //    $output_file_excel = $output_file_dir  . "subcounty_sites.xlsx";
 	 //    //download excel sheet with data in /tmp folder
@@ -616,7 +615,7 @@ class Subcounties_model extends MY_Model
 	    $f = fopen('php://memory', 'w');
 	    /** loop through array  */
 
-	    $b = array('MFL Code', 'Name', 'County', 'Subcounty', 'Tests', '1st DNA PCR', 'Repeat Confirmatory PCR', '+', '-', 'Redraws', 'Adults Tests', 'Adults Tests Positives', 'Median Age', 'Rejected', 'Infants < 2m', 'Infants < 2m +');
+	    $b = array('MFL Code', 'Name', 'County', 'Subcounty', 'All Tests', 'Actual Infants Tested', 'Repeat Confirmatory Tests', 'Positives', 'Negatives', 'Redraws', 'Infants < 2weeks Tests', 'Infants < 2weeks Positives', 'Infants <= 2M Tests', 'Infants <= 2M Positives', 'Infants >= 2M Tests', 'Infants >= 2M Positives', 'Median Age', 'Rejected');
 
 	    fputcsv($f, $b, $delimiter);
 

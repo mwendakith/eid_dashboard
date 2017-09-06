@@ -64,6 +64,20 @@ class Template_model extends MY_Model
 		return $dropdown;
 	}
 
+	function get_regimen_dropdown()
+	{
+		$dropdown = '';
+		$this->db->where('ptype',2);
+		$this->db->order_by("name","asc");
+		$lab_data = $this->db->get('prophylaxis')->result_array();
+
+		foreach ($lab_data as $key => $value) {
+			$dropdown .= '<option value="'.$value['ID'].'">'.$value['name'].'</option>';
+		}
+		
+		return $dropdown;
+	}
+
 	function get_site_dropdown()
 	{
 		$dropdown = '';
@@ -107,6 +121,15 @@ class Template_model extends MY_Model
 	{
 		$this->db->where('ID', $site_id);
 		$data = $this->db->get('view_facilitys')->result_array();
+		$name = $data[0]["name"];
+
+		return $name;
+	}
+
+	function get_regimen_name($regimen_id)
+	{
+		$this->db->where('ID', $regimen_id);
+		$data = $this->db->get('prophylaxis')->result_array();
 		$name = $data[0]["name"];
 
 		return $name;

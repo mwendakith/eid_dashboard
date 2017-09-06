@@ -12,6 +12,307 @@ class Ages_model extends MY_Model
 		parent:: __construct();
 	}
 
+	function age_testing_trends($year=null,$age=null)
+	{
+		if ($age==null || $age=='null') {
+			$age = $this->session->userdata('age_filter');
+		}
+
+		if ($year==null || $year=='null') {
+			$to = $this->session->userdata('filter_year');
+		}else {
+			$to = $year;
+		}
+		$from = $to-1;
+
+		$sql = "CALL `proc_get_eid_age_testing_trends`('".$from."','".$to."')";
+
+		$result = $this->db->query($sql)->result();
+
+		foreach ($result as $key => $value) {
+			if ($age == 1) {//No Data
+				$Newdata[] = array(
+							'year' => $value->year,
+							'month' => $value->month,
+							'pos' => $value->nodatapos,
+							'neg' => $value->nodataneg
+					);
+			} elseif ($age == 2) {// Less than 2 Weeks
+				$Newdata[] = array(
+							'year' => $value->year,
+							'month' => $value->month,
+							'pos' => $value->less2wpos,
+							'neg' => $value->less2wneg
+					);
+			} elseif ($age == 3) {//2 - 6 Weeks
+				$Newdata[] = array(
+							'year' => $value->year,
+							'month' => $value->month,
+							'pos' => $value->twoto6wpos,
+							'neg' => $value->twoto6wneg
+					);
+			} elseif ($age == 4) {//6 - 8 Weeks
+				$Newdata[] = array(
+							'year' => $value->year,
+							'month' => $value->month,
+							'pos' => $value->sixto8wpos,
+							'neg' => $value->sixto8wneg
+					);
+			} elseif ($age == 5) {//6 Months
+				$Newdata[] = array(
+							'year' => $value->year,
+							'month' => $value->month,
+							'pos' => $value->sixmonthpos,
+							'neg' => $value->sixmonthneg
+					);
+			} elseif ($age == 6) {//9 Months
+				$Newdata[] = array(
+							'year' => $value->year,
+							'month' => $value->month,
+							'pos' => $value->ninemonthpos,
+							'neg' => $value->ninemonthneg
+					);
+			} elseif ($age == 7) {//12 Months
+				$Newdata[] = array(
+							'year' => $value->year,
+							'month' => $value->month,
+							'pos' => $value->twelvemonthpos,
+							'neg' => $value->twelvemonthneg
+					);
+			}
+		}
+		$data['outcomes'][0]['name'] = "Positive";
+		$data['outcomes'][1]['name'] = "Negative";
+		$data['outcomes'][2]['name'] = "Positivity";
+
+		//$data['outcomes'][0]['color'] = '#52B3D9';
+		// $data['outcomes'][0]['color'] = '#E26A6A';
+		// $data['outcomes'][1]['color'] = '#257766';
+		$data['outcomes'][2]['color'] = '#913D88';
+
+		$data['outcomes'][0]['type'] = "column";
+		$data['outcomes'][1]['type'] = "column";
+		$data['outcomes'][2]['type'] = "spline";
+
+		$data['outcomes'][0]['yAxis'] = 1;
+		$data['outcomes'][1]['yAxis'] = 1;
+
+		$data['outcomes'][0]['tooltip'] = array("valueSuffix" => ' ');
+		$data['outcomes'][1]['tooltip'] = array("valueSuffix" => ' ');
+		$data['outcomes'][2]['tooltip'] = array("valueSuffix" => ' %');
+
+		$data['title'] = "";
+		
+		$data['categories'][0] = 'No Data';
+
+		foreach ($Newdata as $key => $value) {
+			
+				$data['categories'][$key] = $this->resolve_month($value['month']).'-'.$value['year'];
+
+				$data["outcomes"][0]["data"][$key]	= (int) $value['pos'];
+				$data["outcomes"][1]["data"][$key]	= (int) $value['neg'];
+				$data["outcomes"][2]["data"][$key]	= round(@( ((int) $value['pos']*100) /((int) $value['neg']+(int) $value['pos'])),1);
+
+			
+		}
+		// echo "<pre>";print_r($data);die();
+		return $data;
+	}
+
+	function get_agebreakdown($year=null,$month=null,$to_year=null,$to_month=null,$age=null,$county=null,$subcounty=null,$partner=null)
+	{
+		if ($county == null || $county == 'null') {
+			$county = 0;
+		}else {
+			$modal_name = 'countyModal';
+			$div_name = 'countyDiv';
+		}
+		if ($subcounty == null || $subcounty == 'null') {
+			$subcounty = 0;
+		} else {
+			$modal_name = 'subCountyModal';
+			$div_name			 = 'subCountyDiv';
+		}
+		if ($partner == null || $partner == 'null') {
+			$partner = 0;
+		} else {
+			$modal_name = 'partnerModal';
+			$div_name = 'partnerDiv';
+		}
+		if ($age == null || $age == 'null') {
+			$age = $this->session->userdata('age_filter');
+		}
+		if ($year==null || $year=='null') {
+			$year = $this->session->userdata('filter_year');
+		}
+		if ($month==null || $month=='null') {
+			if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
+				$month = 0;
+			}else {
+				$month = $this->session->userdata('filter_month');
+			}
+		}
+		if ($to_year==null || $to_year=='null') {
+			$to_year = 0;
+		}
+		if ($to_month==null || $to_month=='null') {
+			$to_month = 0;
+		}
+
+		$sql = "CALL `proc_get_eid_age_breakdown`('".$year."','".$month."','".$to_year."','".$to_month."','".$county."','".$subcounty."','".$partner."')";
+		// echo "<pre>";print_r($sql);die();
+		$data = $this->db->query($sql)->result();
+		$Newdata = $this->format_agebreakdown($data,$age);
+		
+		$li = '';
+		$table = '';
+		$count = 1;
+		if($Newdata)
+			{
+				foreach ($Newdata as $key => $value) {
+					$percentage = @round((@$value['pos']/@(@$value['pos']+@$value['neg']))*100,1);
+					if ($count<16) {
+						$li .= '<a href="#" class="list-group-item"><strong>'.$count.'.</strong>&nbsp;'.$value['name'].'.&nbsp;'.$percentage.'%&nbsp;('.number_format($value['pos']).')</a>';
+					}
+					$table .= '<tr>';
+					$table .= '<td>'.$count.'</td>';
+					$table .= '<td>'.$value['name'].'</td>';
+					$table .= '<td>'.$percentage.'%</td>';
+					$table .= '<td>'.number_format((int) $value['pos']).'</td>';
+					$table .= '</tr>';
+				$count++;
+				}
+			}else{
+				$li = 'No Data';
+			}
+
+		$data = array(
+					'ul' => $li,
+					'table' => $table,
+					'modal_name' => $modal_name,
+					'div_name' => $div_name);
+		return $data;
+		// echo "<pre>";print_r($data);die();
+	}
+
+	function get_counties_agebreakdown($year=null,$month=null,$to_year=null,$to_month=null,$age=null)
+	{
+		if ($age == null || $age == 'null') {
+			$age = $this->session->userdata('age_filter');
+		}
+		if ($year==null || $year=='null') {
+			$year = $this->session->userdata('filter_year');
+		}
+		if ($month==null || $month=='null') {
+			if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
+				$month = 0;
+			}else {
+				$month = $this->session->userdata('filter_month');
+			}
+		}
+		if ($to_year==null || $to_year=='null') {
+			$to_year = 0;
+		}
+		if ($to_month==null || $to_month=='null') {
+			$to_month = 0;
+		}
+		$county = 1;
+		$zeros = 0;
+		$sql = "CALL `proc_get_eid_age_breakdown`('".$year."','".$month."','".$to_year."','".$to_month."','".$county."','','')";
+		// echo "<pre>";print_r($sql);die();
+		$data = $this->db->query($sql)->result();
+
+		$returnData = $this->format_agebreakdown($data,$age);
+		
+		$data['outcomes'][0]['name'] = "Positive";
+		$data['outcomes'][1]['name'] = "Negative";
+		$data['outcomes'][2]['name'] = "Positivity";
+
+		//$data['outcomes'][0]['color'] = '#52B3D9';
+		// $data['outcomes'][0]['color'] = '#E26A6A';
+		// $data['outcomes'][1]['color'] = '#257766';
+		$data['outcomes'][2]['color'] = '#913D88';
+
+		$data['outcomes'][0]['type'] = "column";
+		$data['outcomes'][1]['type'] = "column";
+		$data['outcomes'][2]['type'] = "spline";
+
+		$data['outcomes'][0]['yAxis'] = 1;
+		$data['outcomes'][1]['yAxis'] = 1;
+
+		$data['outcomes'][0]['tooltip'] = array("valueSuffix" => ' ');
+		$data['outcomes'][1]['tooltip'] = array("valueSuffix" => ' ');
+		$data['outcomes'][2]['tooltip'] = array("valueSuffix" => ' %');
+
+		$data['title'] = "";
+		
+		$data['categories'][0] = 'No Data';
+
+		foreach ($returnData as $key => $value) {
+			
+				$data['categories'][$key] = $value['name'];
+
+				$data["outcomes"][0]["data"][$key]	= (int) $value['pos'];
+				$data["outcomes"][1]["data"][$key]	= (int) $value['neg'];
+				$data["outcomes"][2]["data"][$key]	= round(@( ((int) $value['pos']*100) /((int) $value['neg']+(int) $value['pos'])),1);
+
+			
+		}
+		// echo "<pre>";print_r($data);die();
+		return $data;
+	}
+
+	function format_agebreakdown($data,$age)
+	{
+		$Newdata = array();
+		foreach ($data as $key => $value) {
+			if ($age == 1) {//No Data
+				$Newdata[] = array(
+							'name' => $value->name,
+							'pos' => $value->nodatapos,
+							'neg' => $value->nodataneg
+					);
+			} elseif ($age == 2) {// Less than 2 Weeks
+				$Newdata[] = array(
+							'name' => $value->name,
+							'pos' => $value->less2wpos,
+							'neg' => $value->less2wneg
+					);
+			} elseif ($age == 3) {//2 - 6 Weeks
+				$Newdata[] = array(
+							'name' => $value->name,
+							'pos' => $value->twoto6wpos,
+							'neg' => $value->twoto6wneg
+					);
+			} elseif ($age == 4) {//6 - 8 Weeks
+				$Newdata[] = array(
+							'name' => $value->name,
+							'pos' => $value->sixto8wpos,
+							'neg' => $value->sixto8wneg
+					);
+			} elseif ($age == 5) {//6 Months
+				$Newdata[] = array(
+							'name' => $value->name,
+							'pos' => $value->sixmonthpos,
+							'neg' => $value->sixmonthneg
+					);
+			} elseif ($age == 6) {//9 Months
+				$Newdata[] = array(
+							'name' => $value->name,
+							'pos' => $value->ninemonthpos,
+							'neg' => $value->ninemonthneg
+					);
+			} elseif ($age == 7) {//12 Months
+				$Newdata[] = array(
+							'name' => $value->name,
+							'pos' => $value->twelvemonthpos,
+							'neg' => $value->twelvemonthneg
+					);
+			}
+		}
+		return $Newdata;
+	}
+
 	function ages_summary($year=null,$month=null,$toYear=null,$toMonth=null,$county=null,$subCounty=null){
 		$result = $this->get_summary_data($year,$month,$toYear,$toMonth,$county,$subCounty);
 		// echo "<pre>";print_r($result);echo "</pre>";

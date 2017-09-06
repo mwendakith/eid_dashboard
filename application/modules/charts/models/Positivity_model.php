@@ -339,12 +339,13 @@ class Positivity_model extends MY_Model
 			foreach ($result as $key => $value)
 			{
 				if ($count<16) {
-					$li .= '<a href="javascript:void(0);" class="list-group-item" ><strong>'.$count.'.</strong>&nbsp;'.$value['name'].':&nbsp;'.round($value['pecentage'],1).'%</a>';
+					$li .= '<a href="javascript:void(0);" class="list-group-item" ><strong>'.$count.'.</strong>&nbsp;'.$value['name'].':&nbsp;'.round($value['pecentage'],1).'%&nbsp;('.number_format($value['pos']).')</a>';
 				}
 					$table .= '<tr>';
 					$table .= '<td>'.$count.'</td>';
 					$table .= '<td>'.$value['name'].'</td>';
 					$table .= '<td>'.round($value['pecentage'],1).'%</td>';
+					$table .= '<td>'.number_format((int) $value['pos']).'</td>';
 					$table .= '</tr>';
 					$count++;
 			}
@@ -395,12 +396,13 @@ class Positivity_model extends MY_Model
 			{
 				foreach ($result as $key => $value) {
 					if ($count<16) {
-						$li .= '<a href="#" class="list-group-item"><strong>'.$count.'.</strong>&nbsp;'.$value['name'].'.&nbsp;'.(int) $value['pecentage'].'%</a>';
+						$li .= '<a href="#" class="list-group-item"><strong>'.$count.'.</strong>&nbsp;'.$value['name'].'.&nbsp;'.round($value['pecentage'],1).'%&nbsp;('.number_format($value['pos']).')</a>';
 					}
 					$table .= '<tr>';
 					$table .= '<td>'.$count.'</td>';
 					$table .= '<td>'.$value['name'].'</td>';
-					$table .= '<td>'.(int) $value['pecentage'].'%</td>';
+					$table .= '<td>'.round($value['pecentage'],1).'%</td>';
+					$table .= '<td>'.number_format((int) $value['pos']).'</td>';
 					$table .= '</tr>';
 					$count++;
 				}
@@ -451,12 +453,13 @@ class Positivity_model extends MY_Model
 			{
 				foreach ($result as $key => $value) {
 					if ($count<16) {
-						$li .= '<a href="#" class="list-group-item"><strong>'.$count.'.</strong>&nbsp;'.$value['name'].'.&nbsp;'.(int) $value['pecentage'].'%</a>';
+						$li .= '<a href="#" class="list-group-item"><strong>'.$count.'.</strong>&nbsp;'.$value['name'].'.&nbsp;'.round($value['pecentage'],1).'%&nbsp;('.number_format($value['pos']).')</a>';
 					}
 					$table .= '<tr>';
 					$table .= '<td>'.$count.'</td>';
 					$table .= '<td>'.$value['name'].'</td>';
-					$table .= '<td>'.(int) $value['pecentage'].'%</td>';
+					$table .= '<td>'.round($value['pecentage'],1).'%</td>';
+					$table .= '<td>'.number_format((int) $value['pos']).'</td>';
 					$table .= '</tr>';
 				$count++;
 				}
@@ -511,12 +514,13 @@ class Positivity_model extends MY_Model
 				
 				foreach ($result as $key => $value) {
 					if ($count<16) {
-						$li .= '<a href="#" class="list-group-item"><strong>'.$count.'.</strong>&nbsp;'.$value['name'].'.&nbsp;'.(int) $value['positivity'].'%</a>';
+						$li .= '<a href="#" class="list-group-item"><strong>'.$count.'.</strong>&nbsp;'.$value['name'].'.&nbsp;'.round($value['positivity'],1).'%&nbsp;('.number_format($value['pos']).')</a>';
 					}
 					$table .= '<tr>';
 					$table .= '<td>'.$count.'</td>';
 					$table .= '<td>'.$value['name'].'</td>';
-					$table .= '<td>'.(int) $value['positivity'].'%</td>';
+					$table .= '<td>'.round($value['positivity'],1).'%</td>';
+					$table .= '<td>'.number_format((int) $value['pos']).'</td>';
 					$table .= '</tr>';
 					$count++;
 				}

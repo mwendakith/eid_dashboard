@@ -21,7 +21,8 @@
                 if(isset($countys['requests'])){
                   echo "<th># of Requests</th>";
                 }else{
-                  echo "<th>% Non-suppression</th>";
+                  echo "<th>% Positivity</th>";
+                  echo "<th>Positives</th>";
                 }
               ?>
         		</tr>

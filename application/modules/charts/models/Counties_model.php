@@ -100,7 +100,7 @@ class Counties_model extends MY_Model
 	    $f = fopen('php://memory', 'w');
 	    /** loop through array  */
 
-	    $b = array('County', 'Tests', '1st DNA PCR', 'Repeat Confirmatory PCR', '+', '-', 'Redraws', 'Adults Tests', 'Adults Tests Positives', 'Median Age', 'Rejected', 'Infants < 2m', 'Infants < 2m +');
+	    $b = array('County','Average sites sending', 'All Tests', 'PMTCT Need', 'Actual Infants Tested', 'Repeat Confirmatory Tests', 'Positives', 'Negatives', 'Redraws', 'Infants < 2Weeks', 'Infants < 2Weeks  Positives', 'Infants <= 2M', 'Infants <= 2m Positives', 'Infants >= 2M', 'Infants >= 2m Positives', 'Median Age', 'Rejected');
 
 	    fputcsv($f, $b, $delimiter);
 

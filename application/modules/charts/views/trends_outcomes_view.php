@@ -34,7 +34,7 @@
                         color: '#89A54E'
                     }
                 },
-               opposite: true
+                opposite: true
     
             }, { // Secondary yAxis
                 gridLineWidth: 0,
@@ -67,7 +67,12 @@
                 y: 40,
                 floating: true,
                 backgroundColor: '#FFFFFF'
-            },
+            },navigation: {
+                        buttonOptions: {
+                            verticalAlign: 'bottom',
+                            y: -20
+                        }
+                    },
             colors: [
                 '#F2784B',
                 '#1BA39C'

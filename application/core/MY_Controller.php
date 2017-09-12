@@ -16,6 +16,8 @@ if(!defined("BASEPATH")) exit("No direct script access allowed!");
 			$this->data['county'] = FALSE;
 			$this->data['contacts'] = FALSE;
 			$this->data['sub_county'] = FALSE;
+			$this->data['age'] = FALSE;
+			$this->data['reg'] = FALSE;
 			$this->session->unset_userdata('filter_month');
 		}
 
@@ -82,7 +84,9 @@ if(!defined("BASEPATH")) exit("No direct script access allowed!");
 								'partner_filter',
 								'site_filter',
 								'filter_year',
-								'filter_month'
+								'filter_month',
+								'age_filter',
+								'regimen_filter'
 								);
 			$this->session->unset_userdata($filter_data);
 		}
@@ -97,7 +101,9 @@ if(!defined("BASEPATH")) exit("No direct script access allowed!");
 								'partner_filter' => null,
 								'site_filter' => null,
 								'filter_year' => Date('Y'),
-								'filter_month' => null
+								'filter_month' => null,
+								'age_filter' => null,
+								'regimen_filter' => null
 								);
 				$this->session->set_userdata($filter_data);
 			}
@@ -143,6 +149,7 @@ if(!defined("BASEPATH")) exit("No direct script access allowed!");
 					$this->session->set_userdata('filter_month', null);
 					$this->session->set_userdata('partner_filter', null);
 					$this->session->unset_userdata('site_filter');
+					$this->session->unset_userdata('age_filter');
 				}
 			}
 			
@@ -162,6 +169,8 @@ if(!defined("BASEPATH")) exit("No direct script access allowed!");
 					$this->session->unset_userdata('filter_month');
 					$this->session->unset_userdata('partner_filter');
 					$this->session->unset_userdata('site_filter');
+					$this->session->unset_userdata('age_filter');
+					$this->session->unset_userdata('regimen_filter');
 				}
 			}
 			
@@ -179,12 +188,16 @@ if(!defined("BASEPATH")) exit("No direct script access allowed!");
 					$this->session->unset_userdata('filter_month');
 					$this->session->unset_userdata('county_filter');
 					$this->session->unset_userdata('site_filter');
+					$this->session->unset_userdata('age_filter');
+					$this->session->unset_userdata('regimen_filter');
 				}else{
 					$this->session->set_userdata('partner_filter', $data['partner']);
 					$this->session->unset_userdata('sub_county_filter');
 					$this->session->unset_userdata('filter_month');
 					$this->session->unset_userdata('county_filter');
 					$this->session->unset_userdata('site_filter');
+					$this->session->unset_userdata('age_filter');
+					$this->session->unset_userdata('regimen_filter');
 				}
 			}
 			
@@ -203,15 +216,75 @@ if(!defined("BASEPATH")) exit("No direct script access allowed!");
 					$this->session->set_userdata('filter_month', null);
 					$this->session->set_userdata('county_filter', null);
 					$this->session->unset_userdata('sub_county_filter');
+					$this->session->unset_userdata('age_filter');
+					$this->session->unset_userdata('regimen_filter');
 				}else{
 					$this->session->set_userdata('site_filter', $data['site']);
 					$this->session->set_userdata('partner_filter', null);
 					$this->session->set_userdata('filter_month', null);
 					$this->session->set_userdata('county_filter', null);
 					$this->session->unset_userdata('sub_county_filter');
+					$this->session->unset_userdata('age_filter');
+					$this->session->unset_userdata('regimen_filter');
 				}
 			}
 			// print_r($this->session->all_userdata());die();
+			return TRUE;
+		}
+
+		function filter_age($data=null)
+		{
+			if (!$data) {
+				# code...
+			} else {
+				if ($data['age'] == '8' || $data['age'] == 8) {
+					$this->session->unset_userdata('age_filter');
+					$this->session->unset_userdata('site_filter');
+					$this->session->unset_userdata('partner_filter');
+					$this->session->unset_userdata('filter_month');
+					$this->session->unset_userdata('county_filter');
+					$this->session->unset_userdata('sub_county_filter');
+					$this->session->unset_userdata('regimen_filter');
+				} else {
+					$this->session->set_userdata('age_filter', $data['age']);
+					$this->session->unset_userdata('site_filter');
+					$this->session->unset_userdata('partner_filter');
+					$this->session->unset_userdata('filter_month');
+					$this->session->unset_userdata('county_filter');
+					$this->session->unset_userdata('sub_county_filter');
+					$this->session->unset_userdata('regimen_filter');
+				}
+				
+			}
+
+			return TRUE;
+		}
+
+		function filter_regimen($data=null)
+		{
+			if (!$data) {
+				# code...
+			} else {
+				if ($data['regimen'] == '48' || $data['regimen'] == 48) {
+					$this->session->unset_userdata('regimen_filter');
+					$this->session->unset_userdata('age_filter');
+					$this->session->unset_userdata('site_filter');
+					$this->session->unset_userdata('partner_filter');
+					$this->session->unset_userdata('filter_month');
+					$this->session->unset_userdata('county_filter');
+					$this->session->unset_userdata('sub_county_filter');
+				} else {
+					$this->session->set_userdata('regimen_filter', $data['regimen']);
+					$this->session->unset_userdata('age_filter');
+					$this->session->unset_userdata('site_filter');
+					$this->session->unset_userdata('partner_filter');
+					$this->session->unset_userdata('filter_month');
+					$this->session->unset_userdata('county_filter');
+					$this->session->unset_userdata('sub_county_filter');
+				}
+				
+			}
+
 			return TRUE;
 		}
 

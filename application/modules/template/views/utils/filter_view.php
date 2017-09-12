@@ -26,13 +26,46 @@
 </style>
 <div class="row" id="filter">
     <div class="col-md-2">
-        <form action="<?php echo base_url();?>template/filter_county_data" method="post" id="filter_form">
-            <select class="btn btn-primary js-example-basic-single col-md-12" style="background-color: #C5EFF7;" name="county">
-                <option value="0" disabled="true" selected="true">Select County:</option>
-                <option value="48">National</option>
-                <?php echo $filter; ?>
-            </select>
-        </form>
+        <?php
+            if ($age == TRUE) {
+        ?>
+            <form action="<?php echo base_url();?>template/filter_age_data" method="post" id="filter_form">
+                <select class="btn btn-primary js-example-basic-single col-md-12" style="background-color: #C5EFF7;" name="county">
+                    <option value="0" disabled="true" selected="true">Select Age Group:</option>
+                    <option value="8">All Age Groups</option>
+                    <option value="2">Less than 2 Weeks</option>
+                    <option value="3">2 - 6 Weeks</option>
+                    <option value="4">6 - 8 Weeks</option>
+                    <option value="5">6 Months</option>
+                    <option value="6">9 Months</option>
+                    <option value="7">12 Months</option>
+                    <option value="1">No Data</option>
+                </select>
+            </form>
+        <?php
+            } elseif ($reg == TRUE) {
+        ?>
+            <form action="<?php echo base_url();?>template/filter_regimen_data" method="post" id="filter_form">
+                <select class="btn btn-primary js-example-basic-single col-md-12" style="background-color: #C5EFF7;" name="regimen">
+                    <option value="0" disabled="true" selected="true">Select Regimen:</option>
+                    <option value="48">All Regimen</option>
+                    <?php echo $regimen; ?>
+                </select>
+            </form>
+        <?php
+            } else {
+        ?>
+            <form action="<?php echo base_url();?>template/filter_county_data" method="post" id="filter_form">
+                <select class="btn btn-primary js-example-basic-single col-md-12" style="background-color: #C5EFF7;" name="county">
+                    <option value="0" disabled="true" selected="true">Select County:</option>
+                    <option value="48">National</option>
+                    <?php echo $filter; ?>
+                </select>
+            </form>
+        <?php
+            }
+        ?>
+        
     </div>
     <div class="col-md-2">
         <div id="breadcrum" class="alert" style="background-color: #1BA39C;/*display:none;"></div>

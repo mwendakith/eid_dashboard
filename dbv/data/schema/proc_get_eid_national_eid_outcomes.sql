@@ -13,6 +13,9 @@ BEGIN
         SUM(`confirmdna`) AS `confirmdna`,
         SUM(`confirmedPOS`) AS `confirmpos`,
         SUM(`repeatspos`) AS `repeatspos`,
+        SUM(`pos`) AS `pos`,
+        SUM(`neg`) AS `neg`,
+        SUM(`repeatposPOS`) AS `repeatsposPOS`,
         SUM(`actualinfants`) AS `actualinfants`,
         SUM(`actualinfantsPOS`) AS `actualinfantspos`,
         SUM(`infantsless2m`) AS `infantsless2m`,
@@ -21,7 +24,7 @@ BEGIN
         SUM(`adultsPOS`) AS `adultsPOS`,
         SUM(`redraw`) AS `redraw`,
         SUM(`tests`) AS `tests`,
-        SUM(`rejected`) AS `rejected`, 
+        SUM(`rejected`) AS `rejected`,  
         AVG(`sitessending`) AS `sitessending`";
 
 

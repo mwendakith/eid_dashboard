@@ -1660,22 +1660,22 @@ CREATE PROCEDURE `proc_get_eid_countys_details`
 BEGIN
   SET @QUERY =    "SELECT 
                   `countys`.`name` AS `county`, 
+                  AVG(`sitessending`) AS `sitessending`,   
                   SUM(`tests`) AS `tests`, 
+                  `countys`.`pmtctneed1617` AS `pmtctneed`,
                   SUM(`actualinfants`) AS `actualinfants`, 
                   SUM(`confirmdna` + `repeatspos`) AS `confirmdna`,
                   SUM(`actualinfantsPOS`) AS `positive`, 
                   SUM(`actualinfants`-`actualinfantsPOS`) AS `negative`, 
                   SUM(`redraw`) AS `redraw`, 
-                  SUM(`adults`) AS `adults`, 
-                  SUM(`adultsPOS`) AS `adultspos`, 
-                  AVG(`medage`) AS `medage`, 
-                  SUM(`rejected`) AS `rejected`, 
                   SUM(`infantsless2w`) AS `infantsless2w`, 
                   SUM(`infantsless2wPOS`) AS `infantsless2wpos`, 
                   SUM(`infantsless2m`) AS `infantsless2m`, 
                   SUM(`infantsless2mPOS`) AS `infantsless2mpos`, 
                   SUM(`infantsabove2m`) AS `infantsabove2m`, 
-                  SUM(`infantsabove2mPOS`) AS `infantsabove2mpos`
+                  SUM(`infantsabove2mPOS`) AS `infantsabove2mpos` 
+                  AVG(`medage`) AS `medage`,
+                  SUM(`rejected`) AS `rejected`,
                   FROM `county_summary` 
                   LEFT JOIN `countys` ON `county_summary`.`county` = `countys`.`ID`  WHERE 1";
 
@@ -2858,16 +2858,14 @@ BEGIN
                   SUM(`actualinfantsPOS`) AS `positive`, 
                   SUM(`actualinfants`-`actualinfantsPOS`) AS `negative`, 
                   SUM(`redraw`) AS `redraw`, 
-                  SUM(`adults`) AS `adults`, 
-                  SUM(`adultsPOS`) AS `adultspos`, 
-                  AVG(`medage`) AS `medage`, 
-                  SUM(`rejected`) AS `rejected`, 
                   SUM(`infantsless2w`) AS `infantsless2w`, 
                   SUM(`infantsless2wPOS`) AS `infantsless2wpos`, 
                   SUM(`infantsless2m`) AS `infantsless2m`, 
                   SUM(`infantsless2mPOS`) AS `infantsless2mpos`, 
                   SUM(`infantsabove2m`) AS `infantsabove2m`, 
-                  SUM(`infantsabove2mPOS`) AS `infantsabove2mpos` ";
+                  SUM(`infantsabove2mPOS`) AS `infantsabove2mpos`, 
+                  AVG(`medage`) AS `medage`, 
+                  SUM(`rejected`) AS `rejected`  ";
 
 
     IF (from_month != 0 && from_month != '') THEN
@@ -3183,15 +3181,14 @@ BEGIN
                   SUM(`actualinfants`-`actualinfantsPOS`) AS `negative`, 
                   SUM(`redraw`) AS `redraw`, 
                   SUM(`adults`) AS `adults`, 
-                  SUM(`adultsPOS`) AS `adultspos`, 
                   AVG(`medage`) AS `medage`, 
-                  SUM(`rejected`) AS `rejected`, 
                   SUM(`infantsless2w`) AS `infantsless2w`, 
                   SUM(`infantsless2wPOS`) AS `infantsless2wpos`, 
                   SUM(`infantsless2m`) AS `infantsless2m`, 
                   SUM(`infantsless2mPOS`) AS `infantsless2mpos`, 
                   SUM(`infantsabove2m`) AS `infantsabove2m`, 
-                  SUM(`infantsabove2mPOS`) AS `infantsabove2mpos`";
+                  SUM(`infantsabove2mPOS`) AS `infantsabove2mpos`, 
+                  SUM(`rejected`) AS `rejected`";
 
 
     IF (from_month != 0 && from_month != '') THEN
@@ -3820,16 +3817,14 @@ BEGIN
                   SUM(`actualinfantsPOS`) AS `positive`, 
                   SUM(`actualinfants`-`actualinfantsPOS`) AS `negative`, 
                   SUM(`redraw`) AS `redraw`, 
-                  SUM(`adults`) AS `adults`, 
-                  SUM(`adultsPOS`) AS `adultspos`, 
-                  AVG(`medage`) AS `medage`, 
-                  SUM(`rejected`) AS `rejected`, 
                   SUM(`infantsless2w`) AS `infantsless2w`, 
                   SUM(`infantsless2wPOS`) AS `infantsless2wpos`, 
                   SUM(`infantsless2m`) AS `infantsless2m`, 
                   SUM(`infantsless2mPOS`) AS `infantsless2mpos`, 
                   SUM(`infantsabove2m`) AS `infantsabove2m`, 
-                  SUM(`infantsabove2mPOS`) AS `infantsabove2mpos`
+                  SUM(`infantsabove2mPOS`) AS `infantsabove2mpos`,  
+                  AVG(`medage`) AS `medage`, 
+                  SUM(`rejected`) AS `rejected`
                   FROM `site_summary`
                   LEFT JOIN `view_facilitys` ON `site_summary`.`facility` = `view_facilitys`.`ID`
                   JOIN `districts` ON  `view_facilitys`.`district` = `districts`.`ID` 
@@ -3859,6 +3854,7 @@ BEGIN
      EXECUTE stmt;
 END //
 DELIMITER ;  
+
 DROP PROCEDURE IF EXISTS `proc_get_eid_subcounty_yearly_hei_follow_up`;
 DELIMITER //
 CREATE PROCEDURE `proc_get_eid_subcounty_yearly_hei_follow_up`

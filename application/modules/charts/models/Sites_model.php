@@ -278,7 +278,7 @@ class Sites_model extends MY_Model
 	    $f = fopen('php://memory', 'w');
 	    /** loop through array  */
 
-	    $b = array('MFL Code', 'Name', 'County', 'Tests', '1st DNA PCR', 'Confirmed PCR', '+', '-', 'Redraws', 'Adults Tests', 'Adults Tests Positives', 'Median Age', 'Rejected', 'Infants < 2m', 'Infants < 2m +');
+	    $b = array('MFL Code', 'Name', 'County', 'All Tests', 'Actual Infants Tested', 'Repeat Confirmatory Tests', 'Positives', 'Negatives', 'Redraws', 'Infants < 2weeks Tests', 'Infants < 2weeks Positives', 'Infants <= 2M Tests', 'Infants <= 2M Positives', 'Infants >= 2M Tests', 'Infants >= 2M Positives', 'Median Age', 'Rejected');
 
 	    fputcsv($f, $b, $delimiter);
 
@@ -442,27 +442,30 @@ class Sites_model extends MY_Model
 
 		foreach ($result as $key => $value) {
 			$data['ul'] .= '<tr>
-		    	<td>Actual Tests With Valid Results:</td>
-		    		<td>'.number_format((int) $value['tests']).'</td>
+					<td>Total EID Tests</td>
+					<td>'.number_format((int) ($value['firstdna']+$value['confirmdna']+$value['repeatspos'])).'</td>
+					<td>Positive Outcomes</td>
+					<td>'.number_format((int) ($value['confirmpos']+$value['repeatsposPOS']+$value['pos'])).'('.round((((int) ($value['confirmpos']+$value['repeatsposPOS']+$value['pos'])/(int) ($value['firstdna']+$value['confirmdna']+$value['repeatspos']))*100),1).'%)</td>
+				</tr>
+				<tr>
+		    		<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Initial PCR:</td>
+		    		<td>'.number_format((int) $value['firstdna']).'</td>
 		    		<td>Positive Outcomes:</td>
-		    		<td>'.number_format((int) $value['pos']).'('.round((((int) $value['pos']/(int) $value['tests'])*100),1).'%)</td>
+		    		<td>'.number_format((int) $value['pos']).'('.round((((int) $value['pos']/(int) $value['firstdna'])*100),1).'%)</td>
 		    	</tr>
-
 		    	<tr>
-		    		<td>First DNA PCR With Valid Results:</td>
-		    		<td>'. number_format((int) $value['firstdna']).'</td>
-		    		<td></td>
-		    		<td></td>
+		    		<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Repeat PCR:</td>
+		    		<td>'.number_format((int) $value['repeatspos']).'</td>
+		    		<td>Positive Outcomes:</td>
+		    		<td>'.number_format((int) $value['repeatsposPOS']).'('.round((((int) $value['repeatsposPOS']/(int) $value['repeatspos'])*100),1).'%)</td>
 		    	</tr>
-
 		    	<tr>
-		    		<td>Repeat Confirmatory Tests:</td>
-		    		<td>'. number_format((int) $value['confirmdna'] + (int) $value['repeatspos']) .'</td>
-		    		<td>Repeat Confirmatory Tests POS</td>
-		    		<td>'. number_format((int) $value['confirmpos']) .'('. round(((int) $value['confirmpos'])/((int) $value['confirmdna'] + (int) $value['repeatspos'])*100,1) .'%)</td>
+		    		<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Confirmatory PCR:</td>
+		    		<td>'.number_format((int) $value['confirmdna']).'</td>
+		    		<td>Positive Outcomes:</td>
+		    		<td>'.number_format((int) $value['confirmpos']).'('.round((((int) $value['confirmpos']/(int) $value['confirmdna'])*100),1).'%)</td>
 		    	</tr>
-
-		    	<tr>
+				<tr>
 		    		<td></td>
 		    		<td></td>
 		    		<td></td>
@@ -509,7 +512,7 @@ class Sites_model extends MY_Model
 
 		    	<tr>
 		    		<td>Median Age of Testing:</td>
-		    		<td>'.round($value['medage'],1).'</td>
+		    		<td>'.round($value['medage']).'</td>
 		    		<td>Average Sites sending:</td>
 		    		<td>'.number_format((int) $value['sitessending']).'</td>
 		    	</tr>';

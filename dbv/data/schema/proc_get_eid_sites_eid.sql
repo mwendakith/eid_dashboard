@@ -13,6 +13,7 @@ BEGIN
                     SUM(`confirmdna`) AS `confirmdna`,
                     SUM(`confirmedPOS`) AS `confirmpos`,
                     SUM(`repeatspos`) AS `repeatspos`,
+                    SUM(`repeatposPOS`) AS `repeatsposPOS`,
                     SUM(`actualinfants`) AS `actualinfants`,
                     SUM(`actualinfantsPOS`) AS `actualinfantspos`,
                     SUM(`infantsless2m`) AS `infantsless2m`,

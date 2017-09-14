@@ -876,6 +876,206 @@ class Summaries_model extends MY_Model
 
 		// echo "<pre>";print_r($data);die();
 		return $data;
+	} 
+
+
+
+	function get_patients($year=null,$month=null,$county=null,$partner=null,$to_year=null,$to_month=null)
+	{
+		$type = 0;
+		$params;
+
+		if ($county==null || $county=='null') {
+			$county = $this->session->userdata('county_filter');
+		}
+		if ($partner==null || $partner=='null') {
+			$partner = $this->session->userdata('partner_filter');
+		}
+
+		if ($year==null || $year=='null') {
+			$year = $this->session->userdata('filter_year');
+		}
+		if ($month==null || $month=='null') {
+			if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
+				$month = 0;
+				$type = 1;
+			}else {
+				$month = $this->session->userdata('filter_month');
+				$type = 3;
+			}
+		}
+		
+		if ($to_year==null || $to_year=='null') {
+			$to_year = 0;
+		}
+		if ($to_month==null || $to_month=='null') {
+			$to_month = 0;
+		}
+
+		if ($type == 0) {
+			if($to_year == 0){
+				$type = 3;
+			}
+			else{
+				$type = 5;
+			}
+		}	
+
+		if ($partner) {
+			$params = "patient/partner/{$partner}/{$type}/{$year}/{$month}/{$to_year}/{$to_month}";
+		} else {
+			if ($county==null || $county=='null') {
+				$params = "patient/national/{$type}/{$year}/{$month}/{$to_year}/{$to_month}";
+			} else {
+				$query = $this->db->get_where('CountyMFLCode', array('id' => $county), 1)->row();
+				$c = $query->CountyMFLCode;
+
+				$params = "patient/county/{$c}/{$type}/{$year}/{$month}/{$to_year}/{$to_month}";
+			}
+		}
+
+		$result = $this->req($params);
+
+		// echo "<pre>";print_r($result);die();
+
+		$data['stats'] = "<tr><td>" . $result->total_tests . "</td><td>" . $result->one . "</td><td>" . $result->two . "</td><td>" . $result->three . "</td><td>" . $result->three_g . "</td></tr>";
+
+		$data['tests'] = $result->total_tests;
+		$data['patients'] = $result->total_patients;
+
+		return $data;
+	}
+
+	function get_patients_outcomes($year=null,$month=null,$county=null,$partner=null,$to_year=null,$to_month=null)
+	{
+		$type = 0;
+		$params;
+
+		if ($county==null || $county=='null') {
+			$county = $this->session->userdata('county_filter');
+		}
+		if ($partner==null || $partner=='null') {
+			$partner = $this->session->userdata('partner_filter');
+		}
+
+		if ($year==null || $year=='null') {
+			$year = $this->session->userdata('filter_year');
+		}
+		if ($month==null || $month=='null') {
+			if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
+				$month = 0;
+				$type = 1;
+			}else {
+				$month = $this->session->userdata('filter_month');
+				$type = 3;
+			}
+		}
+		
+		if ($to_year==null || $to_year=='null') {
+			$to_year = 0;
+		}
+		if ($to_month==null || $to_month=='null') {
+			$to_month = 0;
+		}
+
+		if ($type == 0) {
+			if($to_year == 0){
+				$type = 3;
+			}
+			else{
+				$type = 5;
+			}
+		}		
+
+		if ($partner) {
+			$params = "patient/partner/{$partner}/{$type}/{$year}/{$month}/{$to_year}/{$to_month}";
+		} else {
+			if ($county==null || $county=='null') {
+				$params = "patient/national/{$type}/{$year}/{$month}/{$to_year}/{$to_month}";
+			} else {
+				$query = $this->db->get_where('CountyMFLCode', array('id' => $county), 1)->row();
+				$c = $query->CountyMFLCode;
+
+				$params = "patient/county/{$c}/{$type}/{$year}/{$month}/{$to_year}/{$to_month}";
+			}
+		}
+
+		$result = $this->req($params);
+
+		$data['categories'] = array('Total Patients', "Tests Done");
+		$data['outcomes']['name'] = 'Tests';
+		$data['outcomes']['data'][0] = (int) $result->total_patients;
+		$data['outcomes']['data'][1] = (int) $result->total_tests;
+		$data["outcomes"]["color"] =  '#1BA39C';
+
+		return $data;
+	}
+
+	function get_patients_graph($year=null,$month=null,$county=null,$partner=null,$to_year=null,$to_month=null)
+	{
+		$type = 0;
+		$params;
+
+		if ($county==null || $county=='null') {
+			$county = $this->session->userdata('county_filter');
+		}
+		if ($partner==null || $partner=='null') {
+			$partner = $this->session->userdata('partner_filter');
+		}
+
+		if ($year==null || $year=='null') {
+			$year = $this->session->userdata('filter_year');
+		}
+		if ($month==null || $month=='null') {
+			if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
+				$month = 0;
+				$type = 1;
+			}else {
+				$month = $this->session->userdata('filter_month');
+				$type = 3;
+			}
+		}
+		
+		if ($to_year==null || $to_year=='null') {
+			$to_year = 0;
+		}
+		if ($to_month==null || $to_month=='null') {
+			$to_month = 0;
+		}
+
+		if ($type == 0) {
+			if($to_year == 0){
+				$type = 3;
+			}
+			else{
+				$type = 5;
+			}
+		}		
+
+		if ($partner) {
+			$params = "patient/partner/{$partner}/{$type}/{$year}/{$month}/{$to_year}/{$to_month}";
+		} else {
+			if ($county==null || $county=='null') {
+				$params = "patient/national/{$type}/{$year}/{$month}/{$to_year}/{$to_month}";
+			} else {
+				$query = $this->db->get_where('CountyMFLCode', array('id' => $county), 1)->row();
+				$c = $query->CountyMFLCode;
+
+				$params = "patient/county/{$c}/{$type}/{$year}/{$month}/{$to_year}/{$to_month}";
+			}
+		}
+
+		$result = $this->req($params);
+
+		$data['categories'] = array('1 Test', '2 Test', '3 Test', '> 3 Test');
+		$data['outcomes']['name'] = 'Tests';
+		$data['outcomes']['data'][0] = (int) $result->one;
+		$data['outcomes']['data'][1] = (int) $result->two;
+		$data['outcomes']['data'][2] = (int) $result->three;
+		$data['outcomes']['data'][3] = (int) $result->three_g;
+		$data["outcomes"]["color"] =  '#1BA39C';
+
+		return $data;
 	}
 }
 ?>

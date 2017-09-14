@@ -47,11 +47,19 @@
 					$("#heiOutcomes").html("<center><div class='loader'></div></center>");
 					$("#heiFollowUp").html("<center><div class='loader'></div></center>");
 
+					$("#pat_stats").html("<center><div class='loader'></div></center>");
+					$("#pat_out").html("<center><div class='loader'></div></center>");
+					$("#pat_graph").html("<center><div class='loader'></div></center>");
+
 					$("#tsttrends").load("<?php echo base_url('charts/sites/site_trends');?>/"+data);
 					$("#stoutcomes").load("<?php echo base_url('charts/sites/site_positivity');?>/"+data);
 					$("#eidOutcomes").load("<?php echo base_url('charts/sites/site_eid');?>/"+data);
 					$("#heiOutcomes").load("<?php echo base_url('charts/sites/site_hei_validation');?>/"+data);
 					$("#heiFollowUp").load("<?php echo base_url('charts/sites/site_hei');?>/"+data);
+
+					$("#pat_stats").load("<?php echo base_url('charts/sites/get_patients');?>/"+null+"/"+null+"/"+data);
+					$("#pat_out").load("<?php echo base_url('charts/sites/get_patients_outcomes');?>/"+null+"/"+null+"/"+data);
+					$("#pat_graph").load("<?php echo base_url('charts/sites/get_patients_graph');?>/"+null+"/"+null+"/"+data);
 
 				}
 	        });
@@ -87,11 +95,21 @@
 					$("#eidOutcomes").html("<center><div class='loader'></div></center>");
 					$("#heiOutcomes").html("<center><div class='loader'></div></center>");
 					$("#heiFollowUp").html("<center><div class='loader'></div></center>");
+
+
+					$("#pat_stats").html("<center><div class='loader'></div></center>");
+					$("#pat_out").html("<center><div class='loader'></div></center>");
+					$("#pat_graph").html("<center><div class='loader'></div></center>");
+
 					$("#tsttrends").load("<?php echo base_url('charts/sites/site_trends');?>/"+site+"/"+from[1]);
 					$("#stoutcomes").load("<?php echo base_url('charts/sites/site_positivity');?>/"+site+"/"+from[1]);
 					$("#eidOutcomes").load("<?php echo base_url('charts/sites/site_eid');?>/"+site+"/"+from[1]+"/"+from[0]+"/"+to[1]+"/"+to[0]);
 					$("#heiOutcomes").load("<?php echo base_url('charts/sites/site_hei_validation');?>/"+site+"/"+from[1]+"/"+from[0]+"/"+to[1]+"/"+to[0]);
 					$("#heiFollowUp").load("<?php echo base_url('charts/sites/site_hei');?>/"+site+"/"+from[1]+"/"+from[0]+"/"+to[1]+"/"+to[0]);
+
+					$("#pat_stats").load("<?php echo base_url('charts/sites/get_patients');?>/"+from[1]+"/"+from[0]+"/"+site+"/"+to[1]+"/"+to[0]);
+					$("#pat_out").load("<?php echo base_url('charts/sites/get_patients_outcomes');?>/"+from[1]+"/"+from[0]+"/"+site+"/"+to[1]+"/"+to[0]);
+					$("#pat_graph").load("<?php echo base_url('charts/sites/get_patients_graph');?>/"+from[1]+"/"+from[0]+"/"+site+"/"+to[1]+"/"+to[0]);
 
 				}
 	    	});
@@ -137,11 +155,20 @@
 				$("#eidOutcomes").html("<center><div class='loader'></div></center>");
 				$("#heiOutcomes").html("<center><div class='loader'></div></center>");
 				$("#heiFollowUp").html("<center><div class='loader'></div></center>");
+
+				$("#pat_stats").html("<center><div class='loader'></div></center>");
+				$("#pat_out").html("<center><div class='loader'></div></center>");
+				$("#pat_graph").html("<center><div class='loader'></div></center>");
+
 				$("#tsttrends").load("<?php echo base_url('charts/sites/site_trends');?>/"+null+"/"+year);
 				$("#stoutcomes").load("<?php echo base_url('charts/sites/site_positivity');?>/"+null+"/"+year);
 				$("#eidOutcomes").load("<?php echo base_url('charts/sites/site_eid');?>/"+null+"/"+year+"/"+month);
 				$("#heiOutcomes").load("<?php echo base_url('charts/sites/site_hei_validation');?>/"+null+"/"+year+"/"+month);
 				$("#heiFollowUp").load("<?php echo base_url('charts/sites/site_hei');?>/"+null+"/"+year+"/"+month);
+				
+				$("#pat_stats").load("<?php echo base_url('charts/sites/get_patients');?>/"+year+"/"+month+"/"+site);
+				$("#pat_out").load("<?php echo base_url('charts/sites/get_patients_outcomes');?>/"+year+"/"+month+"/"+site);
+				$("#pat_graph").load("<?php echo base_url('charts/sites/get_patients_graph');?>/"+year+"/"+month+"/"+site);
 
 			}
     	});

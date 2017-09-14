@@ -91,5 +91,26 @@ class Summaries extends MY_Controller
 
 	}
 
+	function get_patients($year=NULL,$month=NULL,$county=NULL,$partner=NULL,$to_year=NULL,$to_month=NULL)
+	{
+		$data = $this->summaries_model->get_patients($year,$month,$county,$partner,$to_year,$to_month);
+
+    	$this->load->view('patients_view',$data);
+	}
+
+	function get_patients_outcomes($year=NULL,$month=NULL,$county=NULL,$partner=NULL,$to_year=NULL,$to_month=NULL)
+	{
+		$data = $this->summaries_model->get_patients_outcomes($year,$month,$county,$partner,$to_year,$to_month);
+
+    	$this->load->view('patients_outcomes_graph',$data);
+	}
+
+	function get_patients_graph($year=NULL,$month=NULL,$county=NULL,$partner=NULL,$to_year=NULL,$to_month=NULL)
+	{
+		$data = $this->summaries_model->get_patients_graph($year,$month,$county,$partner,$to_year,$to_month);
+
+    	$this->load->view('patients_graph',$data);
+	}
+
 }
 ?>

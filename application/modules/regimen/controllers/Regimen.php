@@ -1,9 +1,7 @@
 <?php
 (defined('BASEPATH') OR exit('No direct script access allowed'));
 
-/**
-* 
-*/
+
 class Regimen extends MY_Controller
 {
 	
@@ -19,7 +17,7 @@ class Regimen extends MY_Controller
 	{
 		$this->clear_all_session_data();
  		$this->data['content_view'] = 'regimen/regimen_view';
-		// echo "<pre>";print_r($this->data);die();
+		echo "<pre>";print_r($this->data);die();
 		$this -> template($this->data);
 	}
 

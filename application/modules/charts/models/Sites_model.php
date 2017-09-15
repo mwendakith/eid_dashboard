@@ -747,6 +747,169 @@ class Sites_model extends MY_Model
 		return $data;
 	}
 
+	function get_patients($site=null,$year=null,$month=null,$to_year=NULL,$to_month=NULL)
+	{
+		$type = 0;
+
+		if ($site==null || $site=='null') {
+			$site = $this->session->userdata('site_filter');
+		}
+
+		if ($year==null || $year=='null') {
+			$year = $this->session->userdata('filter_year');
+		}
+		if ($month==null || $month=='null') {
+			if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
+				$month = 0;
+				$type = 1;
+			}else {
+				$month = $this->session->userdata('filter_month');
+				$type = 3;
+			}
+		}
+		
+		if ($to_year==null || $to_year=='null') {
+			$to_year = 0;
+		}
+		if ($to_month==null || $to_month=='null') {
+			$to_month = 0;
+		}
+
+		if ($type == 0) {
+			if($to_year == 0){
+				$type = 3;
+			}
+			else{
+				$type = 5;
+			}
+		}		
+
+		$query = $this->db->get_where('facilitys', array('id' => $site), 1)->row();
+
+		$facility = $query->facilitycode;
+
+		$params = "patient/facility/{$facility}/{$type}/{$year}/{$month}/{$to_year}/{$to_month}";
+
+		$result = $this->req($params);
+
+		$data['stats'] = "<tr><td>" . $result->total_tests . "</td><td>" . $result->one . "</td><td>" . $result->two . "</td><td>" . $result->three . "</td><td>" . $result->three_g . "</td></tr>";
+
+		$data['tests'] = $result->total_tests;
+		$data['patients'] = $result->total_patients;
+
+		return $data;
+	}
+
+	function get_patients_outcomes($site=null,$year=null,$month=null,$to_year=NULL,$to_month=NULL)
+	{
+		$type = 0;
+
+		if ($site==null || $site=='null') {
+			$site = $this->session->userdata('site_filter');
+		}
+
+		if ($year==null || $year=='null') {
+			$year = $this->session->userdata('filter_year');
+		}
+		if ($month==null || $month=='null') {
+			if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
+				$month = 0;
+				$type = 1;
+			}else {
+				$month = $this->session->userdata('filter_month');
+				$type = 3;
+			}
+		}
+		
+		if ($to_year==null || $to_year=='null') {
+			$to_year = 0;
+		}
+		if ($to_month==null || $to_month=='null') {
+			$to_month = 0;
+		}
+
+		if ($type == 0) {
+			if($to_year == 0){
+				$type = 3;
+			}
+			else{
+				$type = 5;
+			}
+		}		
+
+		$query = $this->db->get_where('facilitys', array('id' => $site), 1)->row();
+
+		$facility = $query->facilitycode;
+
+		$params = "patient/facility/{$facility}/{$type}/{$year}/{$month}/{$to_year}/{$to_month}";
+
+		$result = $this->req($params);
+
+		$data['categories'] = array('Total Patients', "Tests Done");
+		$data['outcomes']['name'] = 'Tests';
+		$data['outcomes']['data'][0] = (int) $result->total_patients;
+		$data['outcomes']['data'][1] = (int) $result->total_tests;
+		$data["outcomes"]["color"] =  '#1BA39C';
+
+		return $data;
+	}
+
+	function get_patients_graph($site=null,$year=null,$month=null,$to_year=NULL,$to_month=NULL)
+	{
+		$type = 0;
+
+		if ($site==null || $site=='null') {
+			$site = $this->session->userdata('site_filter');
+		}
+
+		if ($year==null || $year=='null') {
+			$year = $this->session->userdata('filter_year');
+		}
+		if ($month==null || $month=='null') {
+			if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
+				$month = 0;
+				$type = 1;
+			}else {
+				$month = $this->session->userdata('filter_month');
+				$type = 3;
+			}
+		}
+		
+		if ($to_year==null || $to_year=='null') {
+			$to_year = 0;
+		}
+		if ($to_month==null || $to_month=='null') {
+			$to_month = 0;
+		}
+
+		if ($type == 0) {
+			if($to_year == 0){
+				$type = 3;
+			}
+			else{
+				$type = 5;
+			}
+		}		
+
+		$query = $this->db->get_where('facilitys', array('id' => $site), 1)->row();
+
+		$facility = $query->facilitycode;
+
+		$params = "patient/facility/{$facility}/{$type}/{$year}/{$month}/{$to_year}/{$to_month}";
+
+		$result = $this->req($params);
+
+		$data['categories'] = array('1 Test', '2 Tests', '3 Tests', '> 3 Tests');
+		$data['outcomes']['name'] = 'Tests';
+		$data['outcomes']['data'][0] = (int) $result->one;
+		$data['outcomes']['data'][1] = (int) $result->two;
+		$data['outcomes']['data'][2] = (int) $result->three;
+		$data['outcomes']['data'][3] = (int) $result->three_g;
+		$data["outcomes"]["color"] =  '#1BA39C';
+
+		return $data;
+	}
+
 	
 }
 ?>

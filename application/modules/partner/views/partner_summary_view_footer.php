@@ -53,6 +53,11 @@
 					$("#iprophilaxis").html("<center><div class='loader'></div></center>");
 					$("#county_outcomes").html("<center><div class='loader'></div></center>");
 
+					$("#pat_stats").html("<center><div class='loader'></div></center>");
+					$("#pat_out").html("<center><div class='loader'></div></center>");
+					$("#pat_graph").html("<center><div class='loader'></div></center>");
+					
+
 					// Actual graphs being loaded
 					$("#testing_trends").load("<?php echo base_url('charts/partner_summaries/testing_trends'); ?>/"+null+"/"+data);
 					$("#eidOutcomes").load("<?php echo base_url('charts/partner_summaries/eid_outcomes');?>/"+null+"/"+null+"/"+data);
@@ -65,6 +70,11 @@
 					$("#iprophilaxis").load("<?php echo base_url('charts/partner_summaries/iprophyalxis');?>/"+null+"/"+null+"/"+data);
 					
 					$("#county_outcomes").load("<?php echo base_url('charts/partner_summaries/partner_outcomes'); ?>/"+null+"/"+null+"/"+data); 
+					
+
+					$("#pat_stats").load("<?php echo base_url('charts/partner_summaries/get_patients');?>/"+null+"/"+null+"/"+null+"/"+data);
+					$("#pat_out").load("<?php echo base_url('charts/partner_summaries/get_patients_outcomes');?>/"+null+"/"+null+"/"+null+"/"+data);
+					$("#pat_graph").load("<?php echo base_url('charts/partner_summaries/get_patients_graph');?>/"+null+"/"+null+"/"+null+"/"+data);
 		        });
 			}
 	        
@@ -113,6 +123,10 @@
 						$("#iprophilaxis").html("<center><div class='loader'></div></center>");
 						$("#county_outcomes").html("<center><div class='loader'></div></center>");
 
+						$("#pat_stats").html("<center><div class='loader'></div></center>");
+						$("#pat_out").html("<center><div class='loader'></div></center>");
+						$("#pat_graph").html("<center><div class='loader'></div></center>");
+
 						// Actual graphs being loaded
 						$("#testing_trends").load("<?php echo base_url('charts/partner_summaries/testing_trends'); ?>/"+from[1]+"/"+partner);
 						$("#eidOutcomes").load("<?php echo base_url('charts/partner_summaries/eid_outcomes');?>/"+from[1]+"/"+from[0]+"/"+partner+"/"+to[1]+"/"+to[0]);
@@ -126,6 +140,10 @@
 						// $("#feeding").load("<?php //echo base_url('charts/summaries/agegroup');?>");
 						
 						$("#county_outcomes").load("<?php echo base_url('charts/partner_summaries/partner_outcomes'); ?>/"+from[1]+"/"+from[0]+"/"+partner+"/"+to[1]+"/"+to[0]);
+
+						$("#pat_stats").load("<?php echo base_url('charts/partner_summaries/get_patients');?>/"+from[1]+"/"+from[0]+"/"+null+"/"+partner+"/"+to[1]+"/"+to[0]);
+						$("#pat_out").load("<?php echo base_url('charts/partner_summaries/get_patients_outcomes');?>/"+from[1]+"/"+from[0]+"/"+null+"/"+partner+"/"+to[1]+"/"+to[0]);
+						$("#pat_graph").load("<?php echo base_url('charts/partner_summaries/get_patients_graph');?>/"+from[1]+"/"+from[0]+"/"+null+"/"+partner+"/"+to[1]+"/"+to[0]);
 					}
 				});
 			}
@@ -178,6 +196,10 @@
 					$("#iprophilaxis").html("<center><div class='loader'></div></center>");
 					$("#county_outcomes").html("<center><div class='loader'></div></center>");
 
+					$("#pat_stats").html("<center><div class='loader'></div></center>");
+					$("#pat_out").html("<center><div class='loader'></div></center>");
+					$("#pat_graph").html("<center><div class='loader'></div></center>");
+
 					// Actual graphs being loaded
 					$("#testing_trends").load("<?php echo base_url('charts/partner_summaries/testing_trends'); ?>/"+year+"/"+partner);
 					$("#eidOutcomes").load("<?php echo base_url('charts/partner_summaries/eid_outcomes');?>/"+year+"/"+month+"/"+partner);
@@ -191,6 +213,10 @@
 					// $("#feeding").load("<?php //echo base_url('charts/summaries/agegroup');?>");
 					
 					$("#county_outcomes").load("<?php echo base_url('charts/partner_summaries/partner_outcomes'); ?>/"+year+"/"+month+"/"+partner);
+
+					$("#pat_stats").load("<?php echo base_url('charts/partner_summaries/get_patients');?>/"+year+"/"+month+"/"+null+"/"+partner);
+					$("#pat_out").load("<?php echo base_url('charts/partner_summaries/get_patients_outcomes');?>/"+year+"/"+month+"/"+null+"/"+partner);
+					$("#pat_graph").load("<?php echo base_url('charts/partner_summaries/get_patients_graph');?>/"+year+"/"+month+"/"+null+"/"+partner);
 				}
 			});
 		});

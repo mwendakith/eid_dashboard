@@ -90,5 +90,21 @@ class Sites extends MY_Controller
 	{
 		return $this->sites_model->partner_sites_outcomes(null,null,null,$partner);
 	}
+
+
+	function get_patients($year=null,$month=null,$site=null,$to_year=NULL,$to_month=NULL){
+		$data = $this->sites_model->get_patients($site,$year,$month,$to_year,$to_month);
+		$this->load->view('patients_view',$data);
+	}
+
+	function get_patients_outcomes($year=null,$month=null,$site=null,$to_year=NULL,$to_month=NULL){
+		$data = $this->sites_model->get_patients_outcomes($site,$year,$month,$to_year,$to_month);
+		$this->load->view('patients_outcomes_graph',$data);
+	}
+
+	function get_patients_graph($year=null,$month=null,$site=null,$to_year=NULL,$to_month=NULL){
+		$data = $this->sites_model->get_patients_graph($site,$year,$month,$to_year,$to_month);
+		$this->load->view('patients_graph',$data);
+	}
 }
 ?>

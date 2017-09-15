@@ -12,7 +12,7 @@ class Ages_model extends MY_Model
 		parent:: __construct();
 	}
 
-	function age_testing_trends($year=null,$age=null)
+	function get_testing_trends($year=null,$age=null)
 	{
 		if ($age==null || $age=='null') {
 			$age = $this->session->userdata('age_filter');
@@ -81,6 +81,13 @@ class Ages_model extends MY_Model
 					);
 			}
 		}
+		return $Newdata;
+	}
+
+	function age_testing_trends($year=null,$age=null)
+	{
+		$Newdata = $this->get_testing_trends($year,$age);
+
 		$data['outcomes'][0]['name'] = "Positive";
 		$data['outcomes'][1]['name'] = "Negative";
 		$data['outcomes'][2]['name'] = "Positivity";
@@ -117,6 +124,36 @@ class Ages_model extends MY_Model
 		}
 		// echo "<pre>";print_r($data);die();
 		return $data;
+	}
+
+	function download_testing_trends($year=null,$age=null)
+	{
+		$data = $this->get_testing_trends($year,$age);
+		// echo "<pre>";print_r($result);die();
+		$this->load->helper('file');
+        $this->load->helper('download');
+        $delimiter = ",";
+        $newline = "\r\n";
+
+	    /** open raw memory as file, no need for temp files, be careful not to run out of memory thought */
+	    $f = fopen('php://memory', 'w');
+	    /** loop through array  */
+
+	    $b = array('Year', 'Month', 'Positive', 'Negative');
+
+	    fputcsv($f, $b, $delimiter);
+
+	    foreach ($data as $line) {
+	        /** default php csv handler **/
+	        fputcsv($f, $line, $delimiter);
+	    }
+	    /** rewrind the "file" with the csv lines **/
+	    fseek($f, 0);
+	    /** modify header to be downloadable csv file **/
+	    header('Content-Type: application/csv');
+	    header('Content-Disposition: attachement; filename="'.Date('YmdH:i:s').'EID Age Group Trends.csv";');
+	    /** Send file to browser for download */
+	    fpassthru($f);
 	}
 
 	function get_agebreakdown($year=null,$month=null,$to_year=null,$to_month=null,$age=null,$county=null,$subcounty=null,$partner=null)
@@ -452,7 +489,7 @@ class Ages_model extends MY_Model
 		$data['outcomes'][1]['tooltip'] = array("resultSuffix" => ' ');
 		$data['outcomes'][2]['tooltip'] = array("resultSuffix" => ' %');
 
-		$data['title'] = "Outcomes by Age Groups";
+		$data['title'] = "";
 
 		return $data;
 	}

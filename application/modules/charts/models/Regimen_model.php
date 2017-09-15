@@ -72,7 +72,7 @@ class Regimen_model extends MY_Model
 		return $data;
 	}
 
-	function regimen_testing_trends($year=null,$regimen=null)
+	function get_testing_trends($year=null,$regimen=null)
 	{
 		if ($regimen==null || $regimen=='null') {
 			$regimen = $this->session->userdata('regimen_filter');
@@ -87,7 +87,13 @@ class Regimen_model extends MY_Model
 
 		$sql = "CALL `proc_get_eid_iproph_testing_trends`('".$regimen."','".$from."','".$to."')";
 
-		$result = $this->db->query($sql)->result();
+		return $this->db->query($sql)->result();
+	}
+
+	function regimen_testing_trends($year=null,$regimen=null)
+	{
+		
+		$result = $this->get_testing_trends($year,$regimen);
 
 		$data['outcomes'][0]['name'] = "Positive";
 		$data['outcomes'][1]['name'] = "Negative";
@@ -125,6 +131,36 @@ class Regimen_model extends MY_Model
 		}
 		// echo "<pre>";print_r($data);die();
 		return $data;
+	}
+
+	function download_testing_trends($year=null,$regimen=null)
+	{
+		$data = $this->get_testing_trends($year,$regimen);
+		// echo "<pre>";print_r((array) $data);die();
+		$this->load->helper('file');
+        $this->load->helper('download');
+        $delimiter = ",";
+        $newline = "\r\n";
+
+	    /** open raw memory as file, no need for temp files, be careful not to run out of memory thought */
+	    $f = fopen('php://memory', 'w');
+	    /** loop through array  */
+
+	    $b = array('Year', 'Month', 'Tests', 'Positive', 'Negative', 'Redraw');
+
+	    fputcsv($f, $b, $delimiter);
+
+	    foreach ($data as $line) {
+	        /** default php csv handler **/
+	        fputcsv($f, (array)$line, $delimiter);
+	    }
+	    /** rewrind the "file" with the csv lines **/
+	    fseek($f, 0);
+	    /** modify header to be downloadable csv file **/
+	    header('Content-Type: application/csv');
+	    header('Content-Disposition: attachement; filename="'.Date('YmdH:i:s').'EID Regimen Trends.csv";');
+	    /** Send file to browser for download */
+	    fpassthru($f);
 	}
 
 	function get_regimen_breakdown($year=null,$month=null,$to_year=null,$to_month=null,$regimen=null,$county=null,$subcounty=null,$partner=null)

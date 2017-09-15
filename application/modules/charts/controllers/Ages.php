@@ -17,8 +17,17 @@ class Ages extends MY_Controller
 	{
 		$data['trends'] = $this->ages_model->age_testing_trends($year,$age);
 		$data['div_name'] = "age_testing_trends";
+		$data['export'] = TRUE;
+		$link = $year . '/' . $age;
 
+		$data['link'] = base_url('charts/ages/download_testing_trends/' . $link);
+		
 		$this->load->view('trends_outcomes_view', $data);
+	}
+
+	function download_testing_trends($year=NULL,$age=NULL)
+	{
+		$this->ages_model->download_testing_trends($year,$age);
 	}
 
 	function age_breakdowns($year=null,$month=null,$toYear=null,$toMonth=null,$age=null,$county=null,$subCounty=null,$partner=null)

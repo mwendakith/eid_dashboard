@@ -12,8 +12,7 @@ class Partner_summaries_model extends MY_Model
 		parent:: __construct();
 	}
 
-
-	function test_trends($year=null,$partner=null)
+	function get_testing_trends($year=null,$partner=null)
 	{
 		if ($partner==null || $partner=='null') {
 			$partner = $this->session->userdata('partner_filter');
@@ -27,13 +26,16 @@ class Partner_summaries_model extends MY_Model
 		$from = $to-1;
 		
 		$sql = "CALL `proc_get_eid_partner_testing_trends`('".$partner."','".$from."','".$to."')";
-			// $sql2 = "CALL `proc_get_partner_sitessending`('".$partner."','".$year."','".$month."')";
 		
-		// echo "<pre>";print_r($sql);die();
-		$result = $this->db->query($sql)->result_array();
-		
-		// echo "<pre>";print_r($result);die();
+		return $this->db->query($sql)->result_array();
+	}
 
+
+	function test_trends($year=null,$partner=null)
+	{
+		
+		$result = $this->get_testing_trends($year,$partner);
+		
 		$data['outcomes'][0]['name'] = "Positive";
 		$data['outcomes'][1]['name'] = "Negative";
 		$data['outcomes'][2]['name'] = "Positivity";
@@ -70,6 +72,36 @@ class Partner_summaries_model extends MY_Model
 		}
 		// echo "<pre>";print_r($data);die();
 		return $data;
+	}
+
+	function download_testing_trends($year=null,$partner=null)
+	{
+		$data = $this->get_testing_trends($year,$partner);
+		// echo "<pre>";print_r($result);die();
+		$this->load->helper('file');
+        $this->load->helper('download');
+        $delimiter = ",";
+        $newline = "\r\n";
+
+	    /** open raw memory as file, no need for temp files, be careful not to run out of memory thought */
+	    $f = fopen('php://memory', 'w');
+	    /** loop through array  */
+
+	    $b = array('Year', 'Month', 'Positive', 'Negative');
+
+	    fputcsv($f, $b, $delimiter);
+
+	    foreach ($data as $line) {
+	        /** default php csv handler **/
+	        fputcsv($f, $line, $delimiter);
+	    }
+	    /** rewrind the "file" with the csv lines **/
+	    fseek($f, 0);
+	    /** modify header to be downloadable csv file **/
+	    header('Content-Type: application/csv');
+	    header('Content-Disposition: attachement; filename="'.Date('YmdH:i:s').'EID Partner Testing Trends.csv";');
+	    /** Send file to browser for download */
+	    fpassthru($f);
 	}
 
 	function eid_outcomes($year=null,$month=null,$partner=null,$to_year=null,$to_month=null)
@@ -126,15 +158,15 @@ class Partner_summaries_model extends MY_Model
 		    	</tr>
 		    	<tr>
 		    		<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Repeat PCR:</td>
-		    		<td>'.number_format((int) $value['repeatspos']).'</td>
-		    		<td>Positive Outcomes:</td>
-		    		<td>'.number_format((int) $value['repeatsposPOS']).'('.round((((int) $value['repeatsposPOS']/(int) $value['repeatspos'])*100),1).'%)</td>
-		    	</tr>
-		    	<tr>
-		    		<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Confirmatory PCR:</td>
 		    		<td>'.number_format((int) $value['confirmdna']).'</td>
 		    		<td>Positive Outcomes:</td>
 		    		<td>'.number_format((int) $value['confirmpos']).'('.round((((int) $value['confirmpos']/(int) $value['confirmdna'])*100),1).'%)</td>
+		    	</tr>
+		    	<tr>
+		    		<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Confirmatory PCR:</td>
+		    		<td>'.number_format((int) $value['repeatspos']).'</td>
+		    		<td>Positive Outcomes:</td>
+		    		<td>'.number_format((int) $value['repeatsposPOS']).'('.round((((int) $value['repeatsposPOS']/(int) $value['repeatspos'])*100),1).'%)</td>
 		    	</tr>
 				<tr>
 		    		<td></td>

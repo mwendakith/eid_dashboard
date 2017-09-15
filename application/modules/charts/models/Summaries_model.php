@@ -72,7 +72,7 @@ class Summaries_model extends MY_Model
 		return $data;
 	}
 
-	function test_trends($year=null,$county=null,$partner=null)
+	function get_testing_trends($year=null,$county=null,$partner=null)
 	{
 		if ($county==null || $county=='null') {
 			$county = $this->session->userdata('county_filter');
@@ -101,8 +101,12 @@ class Summaries_model extends MY_Model
 			}
 		}
 		// echo "<pre>";print_r($sql);die();
-		$result = $this->db->query($sql)->result_array();
-		
+		return $this->db->query($sql)->result_array();
+	}
+
+	function test_trends($year=null,$county=null,$partner=null)
+	{
+		$result = $this->get_testing_trends($year,$county,$partner);
 		// echo "<pre>";print_r($result);die();
 
 		$data['outcomes'][0]['name'] = "Positive";
@@ -141,6 +145,36 @@ class Summaries_model extends MY_Model
 		}
 		// echo "<pre>";print_r($data);die();
 		return $data;
+	}
+
+	function download_testing_trends($year=null,$county=null,$partner=null)
+	{
+		$data = $this->get_testing_trends($year,$county,$partner);
+		// echo "<pre>";print_r($result);die();
+		$this->load->helper('file');
+        $this->load->helper('download');
+        $delimiter = ",";
+        $newline = "\r\n";
+
+	    /** open raw memory as file, no need for temp files, be careful not to run out of memory thought */
+	    $f = fopen('php://memory', 'w');
+	    /** loop through array  */
+
+	    $b = array('Year', 'Month', 'Positive', 'Negative');
+
+	    fputcsv($f, $b, $delimiter);
+
+	    foreach ($data as $line) {
+	        /** default php csv handler **/
+	        fputcsv($f, $line, $delimiter);
+	    }
+	    /** rewrind the "file" with the csv lines **/
+	    fseek($f, 0);
+	    /** modify header to be downloadable csv file **/
+	    header('Content-Type: application/csv');
+	    header('Content-Disposition: attachement; filename="'.Date('YmdH:i:s').'EID Testing Trends.csv";');
+	    /** Send file to browser for download */
+	    fpassthru($f);
 	}
 
 	function eid_outcomes($year=null,$month=null,$county=null,$partner=null,$to_year=null,$to_month=null)
@@ -236,15 +270,15 @@ class Summaries_model extends MY_Model
 		    	</tr>
 		    	<tr>
 		    		<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Repeat PCR:</td>
-		    		<td>'.number_format((int) $value['repeatspos']).'</td>
-		    		<td>Positive Outcomes:</td>
-		    		<td>'.number_format((int) $value['repeatsposPOS']).'('.round((((int) $value['repeatsposPOS']/(int) $value['repeatspos'])*100),1).'%)</td>
-		    	</tr>
-		    	<tr>
-		    		<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Confirmatory PCR:</td>
 		    		<td>'.number_format((int) $value['confirmdna']).'</td>
 		    		<td>Positive Outcomes:</td>
 		    		<td>'.number_format((int) $value['confirmpos']).'('.round((((int) $value['confirmpos']/(int) $value['confirmdna'])*100),1).'%)</td>
+		    	</tr>
+		    	<tr>
+		    		<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Confirmatory PCR:</td>
+		    		<td>'.number_format((int) $value['repeatspos']).'</td>
+		    		<td>Positive Outcomes:</td>
+		    		<td>'.number_format((int) $value['repeatsposPOS']).'('.round((((int) $value['repeatsposPOS']/(int) $value['repeatspos'])*100),1).'%)</td>
 		    	</tr>
 				<tr>
 		    		<td></td>

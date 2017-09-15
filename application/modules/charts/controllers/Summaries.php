@@ -23,9 +23,18 @@ class Summaries extends MY_Controller
 	{
 		$data['trends'] = $this->summaries_model->test_trends($year,$county,$partner);
 		$data['div_name'] = "summary_yearly_summary";
+		$data['export'] = TRUE;
+		$link = $year . '/' . $county . '/' . $partner;
+
+		$data['link'] = base_url('charts/summaries/download_testing_trends/' . $link);
 
 		$this->load->view('trends_outcomes_view', $data);
 
+	}
+
+	function download_testing_trends($year=NULL,$county=NULL,$partner=NULL)
+	{
+		$this->summaries_model->download_testing_trends($year,$county,$partner);
 	}
 
 	function eid_outcomes($year=NULL,$month=NULL,$county=NULL,$partner=NULL,$to_year=NULL,$to_month=NULL)

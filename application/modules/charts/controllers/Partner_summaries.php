@@ -16,8 +16,17 @@ class Partner_summaries extends MY_Controller
 	{
 		$data['trends'] = $this->partner_summaries_model->test_trends($year,$partner);
 		$data['div_name'] = "partner_yearly_summary";
+		$data['export'] = TRUE;
+		$link = $year . '/' . $partner;
+
+		$data['link'] = base_url('charts/partner_summaries/download_testing_trends/' . $link);
 
 		$this->load->view('trends_outcomes_view', $data);
+	}
+
+	function download_testing_trends($year=NULL,$partner=NULL)
+	{
+		$this->partner_summaries_model->download_testing_trends($year,$partner);
 	}
 
 	function eid_outcomes($year=NULL,$month=NULL,$partner=NULL,$to_year=NULL,$to_month=NULL)

@@ -57,7 +57,17 @@
                 // tickInterval: 1
             }],
             tooltip: {
-                shared: true
+                borderRadius: 2,
+                borderWidth: 1,
+                borderColor: '#999',
+                shadow: false,
+                shared: true,
+                useHTML: true,
+                yDecimals: 0,
+                valueDecimale: 0,
+                headerFormat: '<table class="tip"><caption>{point.key}</caption>'+'<tbody>',
+                pointFormat: '<tr><th style="color:{series.color}">{series.name}:</th>'+'<td style="text-align:right">{point.y}</td></tr>',
+                footerFormat: '<tr><th>Total:</th>'+'<td style="text-align:right"><b>{point.total}</b></td></tr>'+'</tbody></table>'
             },
             legend: {
                 layout: 'vertical',

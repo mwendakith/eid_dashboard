@@ -105,7 +105,7 @@
 						$("#outcomesBypartner").html("<center><div class='loader'></div></center>");
 						$("#coutnyAgeOutcomes").html("<center><div class='loader'></div></center>");
 
-						$("#outcomesAgeGroup").load("<?= base_url('charts/ages/testing_trends'); ?>/"+to[1]+"/"+data);
+						$("#outcomesAgeGroup").load("<?= base_url('charts/ages/testing_trends'); ?>/"+to[1]);
 						$("#outcomesBycounty").load("<?= base_url('charts/ages/age_breakdowns');?>/"+from[1]+"/"+from[0]+"/"+to[1]+"/"+to[0]+"/"+null+"/"+1);
 						$("#outcomesBysubcounty").load("<?= base_url('charts/ages/age_breakdowns');?>/"+from[1]+"/"+from[0]+"/"+to[1]+"/"+to[0]+"/"+null+"/"+null+"/"+1);
 						$("#outcomesBypartner").load("<?= base_url('charts/ages/age_breakdowns');?>/"+from[1]+"/"+from[0]+"/"+to[1]+"/"+to[0]+"/"+null+"/"+null+"/"+null+"/"+1);

@@ -20,12 +20,7 @@
 		<style type="text/css">
 			@import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700");
 			@import url("https://fonts.googleapis.com/css?family=Roboto:400,300,500,700");
-			/*
-			 *
-			 *   INSPINIA - Responsive Admin Theme
-			 *   version 2.6.2
-			 *
-			*/
+			
 			h1,
 			h2,
 			h3,
@@ -133,7 +128,7 @@
 								<li><a href="<?php echo base_url();?>county/subCounty">Sub-County</a></li>
 							</ul>
 						</li>
-						<li><a href="<?php echo base_url();?>age">Age</a></li>
+						<!-- <li><a href="<?php echo base_url();?>age">Age</a></li> -->
 						<li class="dropdown">
 							<a href="bootstrap-elements.html" data-target="#" class="dropdown-toggle" data-toggle="dropdown">Partners
 							<b class="caret"></b></a>
@@ -147,7 +142,15 @@
 						<li><a href="<?php echo base_url();?>labPerformance">Lab Performance</a></li>
 						<!-- <li><a href="<?php echo base_url();?>rht">RHT Testing</a></li> -->
 						<li><a href="<?php echo base_url();?>sites">Facilities</a></li>
-						<li><a href="<?php echo base_url();?>positivity">Positivity</a></li>
+						<li class="dropdown">
+							<a href="bootstrap-elements.html" data-target="#" class="dropdown-toggle" data-toggle="dropdown">Positivity
+							<b class="caret"></b></a>
+							<ul class="dropdown-menu">
+								<li><a href="<?php echo base_url();?>positivity">Positivity</a></li>
+								<li><a href="<?php echo base_url();?>age">Age Analysis</a></li>
+								<li><a href="<?php echo base_url();?>regimen">Regimen Analysis</a></li>
+							</ul>
+						</li>
 						<li><a href="<?php echo base_url();?>contacts">Contact Us</a></li>
 						<li><a href="http://eiddash.nascop.org/login.php">Login</a></li>
 						<li><a href="http://viralload.nascop.org">VL View</a></li>

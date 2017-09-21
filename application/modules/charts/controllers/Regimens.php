@@ -23,8 +23,17 @@ class Regimens extends MY_Controller
 	{
 		$data['trends'] = $this->regimen_model->regimen_testing_trends($year,$regimen);
 		$data['div_name'] = "regimen_testing_trends";
+		$data['export'] = TRUE;
+		$link = $year . '/' . $regimen;
+
+		$data['link'] = base_url('charts/regimens/download_testing_trends/' . $link);
 
 		$this->load->view('trends_outcomes_view', $data);
+	}
+
+	function download_testing_trends($year=NULL,$regimen=NULL)
+	{
+		$this->regimen_model->download_testing_trends($year,$regimen);
 	}
 
 	function get_regimen_breakdown($year=null,$month=null,$to_year=null,$to_month=null,$regimen=null,$county=null,$subcounty=null,$partner=null)

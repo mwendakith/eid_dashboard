@@ -16,8 +16,17 @@ class Partner_summaries extends MY_Controller
 	{
 		$data['trends'] = $this->partner_summaries_model->test_trends($year,$partner);
 		$data['div_name'] = "partner_yearly_summary";
+		$data['export'] = TRUE;
+		$link = $year . '/' . $partner;
+
+		$data['link'] = base_url('charts/partner_summaries/download_testing_trends/' . $link);
 
 		$this->load->view('trends_outcomes_view', $data);
+	}
+
+	function download_testing_trends($year=NULL,$partner=NULL)
+	{
+		$this->partner_summaries_model->download_testing_trends($year,$partner);
 	}
 
 	function eid_outcomes($year=NULL,$month=NULL,$partner=NULL,$to_year=NULL,$to_month=NULL)
@@ -102,6 +111,28 @@ class Partner_summaries extends MY_Controller
 	function download_partner_counties($year=NULL,$month=NULL,$partner=NULL,$to_year=NULL,$to_month=NULL)
 	{
 		$this->partner_summaries_model->partner_counties_download($year,$month,$partner,$to_year,$to_month);
+	}
+	
+
+	function get_patients($year=NULL,$month=NULL,$county=NULL,$partner=NULL,$to_year=NULL,$to_month=NULL)
+	{
+		$data = $this->partner_summaries_model->get_patients($year,$month,$county,$partner,$to_year,$to_month);
+
+    	$this->load->view('patients_view',$data);
+	}
+
+	function get_patients_outcomes($year=NULL,$month=NULL,$county=NULL,$partner=NULL,$to_year=NULL,$to_month=NULL)
+	{
+		$data = $this->partner_summaries_model->get_patients_outcomes($year,$month,$county,$partner,$to_year,$to_month);
+
+    	$this->load->view('patients_outcomes_graph',$data);
+	}
+
+	function get_patients_graph($year=NULL,$month=NULL,$county=NULL,$partner=NULL,$to_year=NULL,$to_month=NULL)
+	{
+		$data = $this->partner_summaries_model->get_patients_graph($year,$month,$county,$partner,$to_year,$to_month);
+
+    	$this->load->view('patients_graph',$data);
 	}
 
 

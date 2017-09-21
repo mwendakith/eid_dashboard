@@ -520,7 +520,7 @@ class Performance_model extends MY_Model
 		$data['outcomes'][0]['yAxis'] = 1;
 
 		foreach ($result as $key => $value) {
-			$data['categories'][$key] = $value['alias'];
+			$data['categories'][$key] = $value['name'];
 		
 			$data['outcomes'][0]['data'][$key] = (int) $value['total'];
 		}

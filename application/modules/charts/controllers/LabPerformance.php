@@ -131,5 +131,13 @@ class LabPerformance extends MY_Controller
 		$this->load->view('trends_outcomes_view', $data);
 	}
 
+	function rejections($lab=NULL, $year=NULL,$month=NULL,$to_year=NULL,$to_month=NULL)
+	{
+		$data['trends'] = $this->performance_model->rejections($lab, $year,$month,$to_year,$to_month);
+		$data['div_name'] = "total_lab_rejections";
+		
+		$this->load->view('trends_outcomes_view', $data);
+	}
+
 
 }

@@ -62,7 +62,7 @@ class MY_Model extends CI_Model
 		// $headers = array('X-Auth-Token' => 'jhWXc65gZUI=yG5ndWkpAGNsaW50b85oZWFsdGhhY2Nlc3Mub3Jn');
 		$headers = null;
 		$my_url = "https://api.nascop.org/eid/ver2.0/" . $url;
-		$request = $this->requests->get($my_url, $headers);
+		$request = $this->requests->get($my_url);
 
 		// return json_decode(json_encode(json_decode($request->body)), true);
 		return json_decode($request->body);

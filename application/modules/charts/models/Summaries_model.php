@@ -270,15 +270,15 @@ class Summaries_model extends MY_Model
 		    	</tr>
 		    	<tr>
 		    		<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Repeat PCR:</td>
-		    		<td>'.number_format((int) $value['confirmdna']).'</td>
-		    		<td>Positive Outcomes:</td>
-		    		<td>'.number_format((int) $value['confirmpos']).'('.round((((int) $value['confirmpos']/(int) $value['confirmdna'])*100),1).'%)</td>
-		    	</tr>
-		    	<tr>
-		    		<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Confirmatory PCR:</td>
 		    		<td>'.number_format((int) $value['repeatspos']).'</td>
 		    		<td>Positive Outcomes:</td>
 		    		<td>'.number_format((int) $value['repeatsposPOS']).'('.round((((int) $value['repeatsposPOS']/(int) $value['repeatspos'])*100),1).'%)</td>
+		    	</tr>
+		    	<tr>
+		    		<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Confirmatory PCR:</td>
+		    		<td>'.number_format((int) $value['confirmdna']).'</td>
+		    		<td>Positive Outcomes:</td>
+		    		<td>'.number_format((int) $value['confirmpos']).'('.round((((int) $value['confirmpos']/(int) $value['confirmdna'])*100),1).'%)</td>
 		    	</tr>
 				<tr>
 		    		<td></td>

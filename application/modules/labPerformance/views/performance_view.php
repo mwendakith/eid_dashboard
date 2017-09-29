@@ -40,23 +40,42 @@
   </div>
 </div>
 
+<div id="third">
+  <div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          Samples Rejections <div class="display_date"></div>
+        </div>
+        <div class="panel-body" id="lab_rejections">
+          <center><div class="loader"></div></center>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+</div>
+
 
 <script type="text/javascript">
 
   $().ready(function() {
     $.get("<?php echo base_url();?>template/dates", function(data){
-        obj = $.parseJSON(data);
-  
-      if(obj['month'] == "null" || obj['month'] == null){
-        obj['month'] = "";
-      }
-      $(".display_date").html("( "+obj['year']+" "+obj['month']+" )");
-      });
+      obj = $.parseJSON(data);
+
+    if(obj['month'] == "null" || obj['month'] == null){
+      obj['month'] = "";
+    }
+    $(".display_date").html("( "+obj['year']+" "+obj['month']+" )");
+    });
+
+    localStorage.setItem("my_lab", 0);
 
     $("#graphs").load("<?php echo base_url();?>charts/LabPerformance/testing_trends");
     $("#stacked_graph").load("<?php echo base_url();?>charts/LabPerformance/lab_outcomes");
     $("#lineargauge").load("<?php echo base_url();?>charts/LabPerformance/lab_turnaround");
     $("#lab_perfomance_stats").load("<?php echo base_url();?>charts/LabPerformance/lab_performance_stats");
+    $("#lab_rejections").load("<?php echo base_url();?>charts/LabPerformance/rejections/0");
 
     $("button").click(function () {
         var first, second;
@@ -75,6 +94,10 @@
           $("#stacked_graph").load("<?php echo base_url();?>charts/LabPerformance/lab_outcomes/"+from[1]+"/"+from[0]+"/"+to[1]+"/"+to[0]);
           $("#lineargauge").load("<?php echo base_url();?>charts/LabPerformance/lab_turnaround/"+from[1]+"/"+from[0]+"/"+to[1]+"/"+to[0]);
           $("#lab_perfomance_stats").load("<?php echo base_url();?>charts/LabPerformance/lab_performance_stats/"+from[1]+"/"+from[0]+"/"+to[1]+"/"+to[0]);
+
+          var em = localStorage.getItem("my_lab");
+
+          $("#lab_rejections").load("<?php echo base_url();?>charts/LabPerformance/rejections/"+em+"/"+from[1]+"/"+from[0]+"/"+to[1]+"/"+to[0]);
         }
             
     });
@@ -82,6 +105,7 @@
     $("select").change(function(){
       em = $(this).val();
       em = parseInt(em);
+      localStorage.setItem("my_lab", em);
 
       if(em == 0){
       
@@ -98,7 +122,7 @@
 
       }
       else{
-        localStorage.setItem("my_lab", em);
+        
         $("#first").hide();
         $("#second").show();
         $("#breadcrum").show();
@@ -108,6 +132,9 @@
         $("#trends_lab").load("<?php echo base_url();?>charts/LabPerformance/lab_trends/"+em);
         
       }
+
+      $("#lab_rejections").html("<div>Loading...</div>");
+      $("#lab_rejections").load("<?php echo base_url();?>charts/LabPerformance/rejections/"+em);
       
       });
 
@@ -142,6 +169,8 @@ function date_filter(criteria, id)
     $("#stacked_graph").html("<div>Loading...</div>");
     $("#lineargauge").html("<div>Loading...</div>");
 
+    var em = localStorage.getItem("my_lab");
+    
     if (criteria === "monthly") {
       $("#stacked_graph").load("<?php echo base_url();?>charts/LabPerformance/lab_outcomes/"+year+"/"+month);
       $("#lineargauge").load("<?php echo base_url();?>charts/LabPerformance/lab_turnaround/"+year+"/"+month);
@@ -157,12 +186,15 @@ function date_filter(criteria, id)
       $("#lineargauge").load("<?php echo base_url();?>charts/LabPerformance/lab_turnaround/"+year+"/"+month);
       $("#lab_perfomance_stats").load("<?php echo base_url();?>charts/LabPerformance/lab_performance_stats/"+year+"/"+month);
 
-      var em = localStorage.getItem("my_lab");
+      
       $("#lab_summary_two_years").html("<div>Loading...</div>");
 
       $("#lab_summary_two_years").load("<?php echo base_url();?>charts/LabPerformance/summary/"+em+"/"+year);
 
     }
+      
+      $("#lab_rejections").html("<div>Loading...</div>");
+      $("#lab_rejections").load("<?php echo base_url();?>charts/LabPerformance/rejections/"+em+"/"+year+"/"+month);
 
 
     

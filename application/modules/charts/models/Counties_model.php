@@ -90,7 +90,7 @@ class Counties_model extends MY_Model
 		$sql = "CALL `proc_get_eid_countys_details`('".$year."','".$month."','".$to_year."','".$to_month."')";
 		// echo "<pre>";print_r($sql);die();
 		$result = $this->db->query($sql)->result_array();
-
+		// echo "<pre>";print_r($result);die();
 		$this->load->helper('file');
         $this->load->helper('download');
         $delimiter = ",";
@@ -100,7 +100,7 @@ class Counties_model extends MY_Model
 	    $f = fopen('php://memory', 'w');
 	    /** loop through array  */
 
-	    $b = array('County','Average sites sending', 'All Tests', 'PMTCT Need', 'Actual Infants Tested', 'Repeat Confirmatory Tests', 'Positives', 'Negatives', 'Redraws', 'Infants < 2Weeks', 'Infants < 2Weeks  Positives', 'Infants <= 2M', 'Infants <= 2m Positives', 'Infants >= 2M', 'Infants >= 2m Positives', 'Median Age', 'Rejected');
+	    $b = array('County', 'All Tests', 'PMTCT Need', 'Actual Infants Tested', 'Repeat Confirmatory Tests', 'Positives', 'Negatives', 'Redraws', 'Adults Tests', 'Adults Positives', 'Median Age', 'Average sites sending', 'Rejected', 'Infants < 2Weeks', 'Infants < 2Weeks  Positives', 'Infants <= 2M', 'Infants <= 2m Positives', 'Infants >= 2M', 'Infants >= 2m Positives');
 
 	    fputcsv($f, $b, $delimiter);
 
@@ -112,7 +112,7 @@ class Counties_model extends MY_Model
 	    fseek($f, 0);
 	    /** modify header to be downloadable csv file **/
 	    header('Content-Type: application/csv');
-	    header('Content-Disposition: attachement; filename="county_details.csv";');
+	    header('Content-Disposition: attachement; filename="'.Date('Ymd H:i:s').' county_details.csv";');
 	    /** Send file to browser for download */
 	    fpassthru($f);
 	}

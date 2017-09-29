@@ -172,7 +172,7 @@ class Summaries_model extends MY_Model
 	    fseek($f, 0);
 	    /** modify header to be downloadable csv file **/
 	    header('Content-Type: application/csv');
-	    header('Content-Disposition: attachement; filename="'.Date('YmdH:i:s').'EID Testing Trends.csv";');
+	    header('Content-Disposition: attachement; filename="'.Date('YmdH:i:s').' EID Testing Trends.csv";');
 	    /** Send file to browser for download */
 	    fpassthru($f);
 	}
@@ -409,21 +409,6 @@ class Summaries_model extends MY_Model
 		$data['hei']['data'][0]['y'] = $count;
 
 		foreach ($result as $key => $value) {
-			// echo "<pre>";print_r($value);die();
-
-			// $data['ul'] .= '<tr>
-   //              <td>Validated Positives:</td>
-   //                  <td>'.number_format((int) $value['followup_positives']).'<b>('.round((((int) $value['followup_positives']/(int) $value['positives'])*100),1).'%)</b></td>
-   //                  <td></td>
-   //                  <td></td>
-   //              </tr>
- 
-   //              <tr>
-   //                  <td>Confirmed Actual positive Infants:</td>
-   //                  <td>'.number_format((int) $value['Confirmed Positive']).'<b>('.round((((int) $value['Confirmed Positive']/(int) $value['true_tests'])*100),1).'%)</b></td>
-   //                  <td></td>
-   //                  <td></td>
-   //              </tr>';
 				$data['ul'] .= '<tr>
                  <td>Positve Outcomes (Actual Infants):</td>
                      <td>'.number_format((int) $value['positives']).'</td>

@@ -514,17 +514,26 @@ class Performance_model extends MY_Model
 		// echo "<pre>";print_r($result);die();
 
 		$data['outcomes'][0]['name'] = "Rejected Samples";
+		$data['outcomes'][1]['name'] = "% Rejected";
 
 		$data['outcomes'][0]['type'] = "column";
+		$data['outcomes'][1]['type'] = "spline";
 
 		$data['outcomes'][0]['yAxis'] = 1;
+
+		$total = 0;
+		foreach ($result as $key => $value) {
+			$total += $value['total'];
+		}
 
 		foreach ($result as $key => $value) {
 			$data['categories'][$key] = $value['name'];
 		
 			$data['outcomes'][0]['data'][$key] = (int) $value['total'];
+			$data['outcomes'][1]['data'][$key] = round(($value['total']/$total)*100,1);
 		}
 		$data['outcomes'][0]['tooltip'] = array("valueSuffix" => ' ');
+		$data['outcomes'][1]['tooltip'] = array("valueSuffix" => ' %');
 
 		if($lab == 0){
 			$data['title'] = "National Rejections";

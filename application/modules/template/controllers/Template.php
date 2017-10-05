@@ -26,7 +26,6 @@ class Template extends MY_Controller
 		$data['laborotories'] = $this->template_model->get_lab_dropdown();
 		$data['regimen'] = $this->template_model->get_regimen_dropdown();
 		// $data['breadcrum'] = $this->breadcrum();
-		// echo "<pre>";print_r($data);die();
 		$this->load->view('template_view',$data);
 	}
 

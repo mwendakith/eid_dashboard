@@ -302,7 +302,7 @@ class Summaries_model extends MY_Model
 		    	</tr>
 
 		    	<tr>
-		    		<td>Adults Tested:</td>
+		    		<td>Above 2years Tested:</td>
 		    		<td>'.number_format((int) $value['adults']).'</td>
 		    		<td>Positive Outcomes:</td>
 		    		<td>'.number_format((int) $value['adultsPOS']).'('.round((((int) $value['adultsPOS']/(int) $value['adults'])*100),1).'%)</td>
@@ -326,7 +326,7 @@ class Summaries_model extends MY_Model
 
 
 		    	<tr>
-		    		<td>Median Age of Testing:</td>
+		    		<td>Median Age of Testing at Initial PCR:</td>
 		    		<td>'.round($value['medage']).'</td>
 		    		<td>Average Sites sending:</td>
 		    		<td>'.number_format((int) $value['sitessending']).'</td>
@@ -410,7 +410,7 @@ class Summaries_model extends MY_Model
 
 		foreach ($result as $key => $value) {
 				$data['ul'] .= '<tr>
-                 <td>Positve Outcomes (Actual Infants):</td>
+                 <td>Positive Outcomes (Actual Infants):</td>
                      <td>'.number_format((int) $value['positives']).'</td>
                      <td></td>
                      <td></td>

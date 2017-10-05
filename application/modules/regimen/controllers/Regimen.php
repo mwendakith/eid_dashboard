@@ -8,7 +8,7 @@ class Regimen extends MY_Controller
 	function __construct()
 	{
 		parent:: __construct();
-		$this->data	=	array_merge($this->data,$this->load_libraries(array('material','highstock','highmaps','highcharts','custom','select2','tablecloth')));
+		$this->data	=	array_merge($this->data,$this->load_libraries(array('material','highstock','highmaps','highcharts','custom','select2')));
  		$this->load->module('charts/regimens');
  		$this->data['reg'] = TRUE;
 	}
@@ -17,7 +17,7 @@ class Regimen extends MY_Controller
 	{
 		$this->clear_all_session_data();
  		$this->data['content_view'] = 'regimen/regimen_view';
-		echo "<pre>";print_r($this->data);die();
+		// echo "<pre>";print_r($this->data);die();
 		$this -> template($this->data);
 	}
 

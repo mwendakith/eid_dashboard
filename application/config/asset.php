@@ -85,6 +85,7 @@ $config['plugin_js_files']	=	array(
 									array('title'=> 'tablecloth',		'file'	=>	'tablecloth/js/jquery.tablesorter.min.js'),
 									array('title'=> 'tablecloth',		'file'	=>	'tablecloth/js/jquery.tablecloth.js'),
 									array('title'=> 'select2',			'file'	=>	'select2/js/select2.min.js')
+									// array('title' => 'datatables',	'file' => 'DataTables/datatables.min.js')
 								);	
 $config['plugin_css_files']	=	array(
 									array('title'=> 'jquery-ui',	'file'	=>	'jquery-ui/jquery-ui.min.css'),
@@ -98,6 +99,7 @@ $config['plugin_css_files']	=	array(
 									array('title'=> 'tablecloth',	'file'	=>	'tablecloth/css/tablecloth.css'),
 									array('title'=> 'tablecloth',	'file'	=>	'tablecloth/css/prettify.css'),
 									array('title'=> 'select2',		'file'	=>	'select2/css/select2.min.css')
+									//array('title' => 'datatables',	'file' => 'DataTables/datatables.min.css')
 								);
 $config['plugin_php_files']	=	array(
 									// array('title'	=> 	'phpexcel'		,			'file'	=>	'PHPExcel/PHPExcel.php'),

@@ -47,12 +47,12 @@
   $(document).ready(function() {
   	$('#example').DataTable();
 
-    $("table").tablecloth({
-      theme: "paper",
-      striped: true,
-      sortable: true,
-      condensed: true
-    });
+    // $("table").tablecloth({
+    //   theme: "paper",
+    //   striped: true,
+    //   sortable: true,
+    //   condensed: true
+    // });
 
     //$('#download_link').empty().append("<?php echo $link;?>");
     

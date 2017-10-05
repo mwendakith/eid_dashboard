@@ -302,7 +302,7 @@ class Summaries_model extends MY_Model
 		    	</tr>
 
 		    	<tr>
-		    		<td>Adults Tested:</td>
+		    		<td>Above 2years Tested:</td>
 		    		<td>'.number_format((int) $value['adults']).'</td>
 		    		<td>Positive Outcomes:</td>
 		    		<td>'.number_format((int) $value['adultsPOS']).'('.round((((int) $value['adultsPOS']/(int) $value['adults'])*100),1).'%)</td>

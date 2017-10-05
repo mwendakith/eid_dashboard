@@ -189,7 +189,7 @@ class Subcounties_model extends MY_Model
 
 
 		    	<tr>
-		    		<td>Median Age of Testing:</td>
+		    		<td>Median Age of Testing at Initial PCR:</td>
 		    		<td>'.round($value['medage']).'</td>
 		    		<td>Average Sites sending:</td>
 		    		<td>'.number_format((int) $value['sitessending']).'</td>

@@ -465,7 +465,7 @@ class Sites_model extends MY_Model
 		    		<td>Positive Outcomes:</td>
 		    		<td>'.number_format((int) $value['confirmpos']).'('.round((((int) $value['confirmpos']/(int) $value['confirmdna'])*100),1).'%)</td>
 		    	</tr>
-				<tr>
+				<tr style="height:14px;background-color:#ABB7B7;">
 		    		<td></td>
 		    		<td></td>
 		    		<td></td>
@@ -473,7 +473,7 @@ class Sites_model extends MY_Model
 		    	</tr>
 
 		    	<tr>
-		    		<td>Actual Infants Tested:</td>
+		    		<td>Actual Infants Tested <br />(Based on Unique IDs):</td>
 		    		<td>'.number_format((int) $value['actualinfants']).'</td>
 		    		<td>Positive Outcomes:</td>
 		    		<td>'.number_format((int) $value['actualinfantspos']).'('. round((((int) $value['actualinfantspos']/(int) $value['actualinfants'])*100),1)  .'%)</td>
@@ -554,7 +554,7 @@ class Sites_model extends MY_Model
 			$year = $this->session->userdata('filter_year');
 		}
 		
-		$data['title'] = "HEI Validation Outcomes (" . $year . ", " . $this->resolve_month($month) . ")";
+		$data['title'] = "Actual Infants Tested Positive Validation at Site Outcomes (" . $year . ", " . $this->resolve_month($month) . ")";
 	
 		
 		if ($site==null || $site=='null') {
@@ -562,7 +562,7 @@ class Sites_model extends MY_Model
 		}
 
 		if ($month==null || $month=='null') {
-			$data['title'] = "HEI Validation Outcomes (" . $year . ")";
+			$data['title'] = "Actual Infants Tested Positive Validation at Site Outcomes (" . $year . ")";
 			if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
 				$month = 0;
 			}else {
@@ -575,7 +575,7 @@ class Sites_model extends MY_Model
 		if ($to_year==null || $to_year=='null') {
 			$to_year = 0;
 		}else {
-			$data['title'] = "HEI Validation Outcomes (" . $year . ", " . $this->resolve_month($month) . " - ".$this->resolve_month($to_month).")";
+			$data['title'] = "Actual Infants Tested Positive Validation at Site Outcomes (" . $year . ", " . $this->resolve_month($month) . " - ".$this->resolve_month($to_month).")";
 		}
 
 		if ($month == 0) {
@@ -612,18 +612,18 @@ class Sites_model extends MY_Model
    //                  <td></td>
    //              </tr>';
 				$data['ul'] .= '<tr>
-                 <td>Positve Outcomes Actual Infants:</td>
+                 <td>Actual Infants Tested Positive:</td>
                      <td>'.number_format((int) $value['positives']).'</td>
                      <td></td>
                      <td></td>
                 </tr><tr>
-                 <td>Followed Up HEIs:</td>
+                 <td>Actual Positives Validated at Site:</td>
                      <td>'.number_format((int) $value['followup_hei']).'<b>('.round((((int) $value['followup_hei']/(int) $value['positives'])*100),1).'%)</b></td>
                      <td></td>
                      <td></td>
                 </tr>
                	<tr>
-                   <td>Confirmed Positives:</td>
+                   <td>Actual Confirmed Positives at Site:</td>
                      <td>'.number_format((int) $value['Confirmed Positive']).'<b>('.round((((int) $value['Confirmed Positive']/(int) $value['true_tests'])*100),1).'%)</b></td>
                      <td></td>
                      <td></td>
@@ -658,14 +658,14 @@ class Sites_model extends MY_Model
 			$year = $this->session->userdata('filter_year');
 		}
 		
-		$data['title'] = "HEI Follow Up (" . $year . ", " . $this->resolve_month($month) . ")";
+		$data['title'] = "Status of Actual Confirmed Positives at Site (" . $year . ", " . $this->resolve_month($month) . ")";
 
 		if ($site==null || $site=='null') {
 			$site = $this->session->userdata('site_filter');
 		}
 
 		if ($month==null || $month=='null') {
-			$data['title'] = "HEI Follow Up (" . $year . ")";
+			$data['title'] = "Status of Actual Confirmed Positives at Site (" . $year . ")";
 			if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
 				$month = 0;
 			}else {

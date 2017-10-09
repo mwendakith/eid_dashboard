@@ -94,7 +94,7 @@
 	<div class="col-md-3 col-sm-3 col-xs-12">
 		<div class="panel panel-default">
 		  <div class="panel-heading">
-		  	Positives Validation at Site Outcomes <div class="display_date" ></div>
+		  	Actual Infants Tested Positive Validation at Site Outcomes <div class="display_date" ></div>
 		  </div>
 		  <div class="panel-body" id="hei_outcomes" style="height:660px;">
 		  	<center><div class="loader"></div></center>
@@ -107,7 +107,7 @@
 	<div class="col-md-2 col-sm-4 col-xs-12">
 		<div class="panel panel-default">
 		  <div class="panel-heading">
-			  Confirmed Positives Follow Up Outcomes <div class="display_date"></div>
+			  Status of Actual Confirmed Positives at Site <div class="display_date"></div>
 		  </div>
 		  <div class="panel-body" id="hei_follow_up" style="height:660px;">
 		    <center><div class="loader"></div></center>
@@ -121,7 +121,7 @@
 	<div class="col-md-3">
 		<div class="panel panel-default">
 		  <div class="panel-heading">
-		    Age <div class="display_date"></div>
+		    EID Outcomes by Age  (Initial PCR) <div class="display_date"></div>
 		  </div>
 		  <div class="panel-body" id="ageGroups" style="height:660px;">
 		    <center><div class="loader"></div></center>
@@ -138,7 +138,7 @@
 	<div class="col-md-4 col-sm-3 col-xs-12">
 		<div class="panel panel-default">
 		  <div class="panel-heading">
-		  	Entry Point <div class="display_date" ></div>
+		  	EID Outcomes by Entry Point (Initial PCR) <div class="display_date" ></div>
 		  </div>
 		  <div class="panel-body" id="entry_point">
 		  	<center><div class="loader"></div></center>
@@ -151,7 +151,7 @@
 	<div class="col-md-4 col-sm-4 col-xs-12">
 		<div class="panel panel-default">
 		  <div class="panel-heading">
-			  Mother Prophylaxis <div class="display_date"></div>
+			  EID Outcomes by Mother PMTCT Regimen (Initial PCR)<div class="display_date"></div>
 		  </div>
 		  <div class="panel-body" id="mprophilaxis" style="/*height:500px;">
 		    <center><div class="loader"></div></center>
@@ -165,7 +165,7 @@
 	<div class="col-md-4 col-sm-4 col-xs-12">
 		<div class="panel panel-default">
 		  <div class="panel-heading">
-			  Infant Prophylaxis <div class="display_date"></div>
+			  EID Outcomes  by Infant Prophylaxis (Initial PCR) <div class="display_date"></div>
 		  </div>
 		  <div class="panel-body" id="iprophilaxis" style="/*height:500px;">
 		    <center><div class="loader"></div></center>

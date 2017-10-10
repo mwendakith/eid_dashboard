@@ -12,10 +12,9 @@
 			<th rowspan="2">Sites</th>
 			<th rowspan="2">All Tests</th>
 			<th rowspan="2">Actual Infants Tested</th>
-			<th rowspan="2">Repeat Confirmatory Tests</th>
-			<th rowspan="2">Pos</th>
-			<th rowspan="2">Neg</th>
-			<th rowspan="2">Redraws</th>
+			<th colspan="2">Initial PCR</th>
+			<th colspan="2">Repeat PCR</th>
+			<th colspan="2">Confirmatory PCR</th>
 			<th colspan="2">Infants &lt;2Weeks</th>
 			<th colspan="2">Infants &lt;=2M</th>
 			<th colspan="2">Infants &gt;=2M</th>
@@ -23,6 +22,12 @@
 			<th rowspan="2">Rejected</th>
 		</tr>
 		<tr>
+			<th>Tests</th>
+			<th>Pos</th>
+			<th>Tests</th>
+			<th>Pos</th>
+			<th>Tests</th>
+			<th>Pos</th>
 			<th>Tests</th>
 			<th>Pos</th>
 			<th>Tests</th>

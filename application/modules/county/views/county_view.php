@@ -3,7 +3,7 @@
 		<div class="col-md-12 col-sm-12 col-xs-12">
 			<div class="panel panel-default">
 			  <div class="panel-heading" id="heading">
-			  	County Outcomes <div class="display_date"></div>
+			  	County Outcomes (Initial PCR) <div class="display_date"></div>
 			  </div>
 			  <div class="panel-body" id="county_outcomes">
 			    <center><div class="loader"></div></center>

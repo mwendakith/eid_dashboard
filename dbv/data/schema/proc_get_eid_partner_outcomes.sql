@@ -6,8 +6,8 @@ CREATE PROCEDURE `proc_get_eid_partner_outcomes`
 BEGIN
   SET @QUERY =    "SELECT
                     `p`.`name`,
-                    SUM(`ps`.`actualinfantsPOS`) AS `positive`,
-                    SUM(`ps`.`actualinfants`-`ps`.`actualinfantsPOS`) AS `negative`";
+                    SUM(`ps`.`pos`) AS `positive`,
+                    SUM(`ps`.`neg`) AS `negative`";
 
     IF (from_month != 0 && from_month != '') THEN
       SET @QUERY = CONCAT(@QUERY, " FROM `ip_summary` `ps` ");

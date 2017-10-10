@@ -5,22 +5,24 @@ CREATE PROCEDURE `proc_get_eid_countys_details`
 BEGIN
   SET @QUERY =    "SELECT 
                   `countys`.`name` AS `county`, 
-                  AVG(`sitessending`) AS `sitessending`,   
-                  SUM(`tests`) AS `tests`, 
+                  AVG(`sitessending`) AS `sitessending`,
+                  SUM(`alltests`) AS `alltests`, 
                   `countys`.`pmtctneed1617` AS `pmtctneed`,
                   SUM(`actualinfants`) AS `actualinfants`, 
-                  SUM(`confirmdna` + `repeatspos`) AS `confirmdna`,
-                  SUM(`actualinfantsPOS`) AS `positive`, 
-                  SUM(`actualinfants`-`actualinfantsPOS`) AS `negative`, 
-                  SUM(`redraw`) AS `redraw`, 
+                   SUM(`pos`) AS `positive`, 
+                  SUM(`neg`) AS `negative`, 
+                  SUM(`repeatspos`) AS `repeatspos`,
+                  SUM(`repeatposPOS`) AS `repeatsposPOS`,
+                  SUM(`confirmdna`) AS `confirmdna`,
+                  SUM(`confirmedPOS`) AS `confirmedPOS`,
                   SUM(`infantsless2w`) AS `infantsless2w`, 
                   SUM(`infantsless2wPOS`) AS `infantsless2wpos`, 
                   SUM(`infantsless2m`) AS `infantsless2m`, 
                   SUM(`infantsless2mPOS`) AS `infantsless2mpos`, 
                   SUM(`infantsabove2m`) AS `infantsabove2m`, 
-                  SUM(`infantsabove2mPOS`) AS `infantsabove2mpos` 
+                  SUM(`infantsabove2mPOS`) AS `infantsabove2mpos`,  
                   AVG(`medage`) AS `medage`,
-                  SUM(`rejected`) AS `rejected`,
+                  SUM(`rejected`) AS `rejected`
                   FROM `county_summary` 
                   LEFT JOIN `countys` ON `county_summary`.`county` = `countys`.`ID`  WHERE 1";
 

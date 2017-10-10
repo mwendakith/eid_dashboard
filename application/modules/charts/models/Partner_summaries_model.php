@@ -790,19 +790,21 @@ class Partner_summaries_model extends MY_Model
 		$sql = "CALL `proc_get_eid_partner_county_details`('".$partner."','".$year."','".$month."','".$to_year."','".$to_month."')";
 		// echo "<pre>";print_r($sql);die();
 		$result = $this->db->query($sql)->result_array();
-		// echo "<pre>";print_r($sql);die();
+		// echo "<pre>";print_r($result);die();
 		foreach ($result as $key => $value) {
 			$table .= '<tr>';
 			$table .= '<td>'.$count.'</td>';
 
 			$table .= '<td>'.$value['county'].'</td>';
 			$table .= '<td>'.$value['facilities'].'</td>';
-			$table .= '<td>'.number_format($value['tests']).'</td>';
+			$table .= '<td>'.number_format($value['alltests']).'</td>';
 			$table .= '<td>'.number_format($value['actualinfants']).'</td>';
-			$table .= '<td>'.number_format($value['confirmdna']).'</td>';
+			$table .= '<td>'.number_format($value['positive']+$value['negative']).'</td>';
 			$table .= '<td>'.number_format($value['positive']).'</td>';
-			$table .= '<td>'.number_format($value['negative']).'</td>';
-			$table .= '<td>'.number_format($value['redraw']).'</td>';
+			$table .= '<td>'.number_format($value['repeatspos']).'</td>';
+			$table .= '<td>'.number_format($value['repeatsposPOS']).'</td>';
+			$table .= '<td>'.number_format($value['confirmdna']).'</td>';
+			$table .= '<td>'.number_format($value['confirmedPOS']).'</td>';
 			$table .= '<td>'.number_format($value['infantsless2w']).'</td>';
 			$table .= '<td>'.number_format($value['infantsless2wpos']).'</td>';
 			$table .= '<td>'.number_format($value['infantsless2m']).'</td>';

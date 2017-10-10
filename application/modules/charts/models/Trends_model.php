@@ -143,7 +143,7 @@ class Trends_model extends MY_Model
 		$data['outcomes'][2]['tooltip'] = array("valueSuffix" => ' ');
 		$data['outcomes'][3]['tooltip'] = array("valueSuffix" => ' %');
 
-		$data['title'] = "Outcomes";
+		$data['title'] = "Outcomes (Initial PCR)";
 
 		return $data;
 	}

@@ -410,18 +410,18 @@ class Summaries_model extends MY_Model
 
 		foreach ($result as $key => $value) {
 				$data['ul'] .= '<tr>
-                 <td>Actual Infants Tested Positive:</td>
+                 <td><center>Actual Infants Tested Positive:</center></td>
                      <td>'.number_format((int) $value['positives']).'</td>
                      <td></td>
                      <td></td>
                 </tr><tr>
-                 <td>Actual Positives Validated at Site:</td>
+                 <td><center>&nbsp;&nbsp;Actual Positives Validated at Site:</center></td>
                      <td>'.number_format((int) $value['followup_hei']).'<b>('.round((((int) $value['followup_hei']/(int) $value['positives'])*100),1).'%)</b></td>
                      <td></td>
                      <td></td>
                 </tr>
                	<tr>
-                   <td>Actual Confirmed Positives at Site:</td>
+                   <td><center>&nbsp;&nbsp;&nbsp;Actual Confirmed Positives at Site:</center></td>
                      <td>'.number_format((int) $value['Confirmed Positive']).'<b>('.round((((int) $value['Confirmed Positive']/(int) $value['true_tests'])*100),1).'%)</b></td>
                      <td></td>
                      <td></td>
@@ -510,13 +510,13 @@ class Summaries_model extends MY_Model
 		$data['hei']['data'][0]['y'] = $count;
 
 		foreach ($result as $key => $value) {
-			/*$total = (int) ($value['enrolled']+$value['dead']+$value['ltfu']+$value['adult']+$value['transout']+$value['other']);
+			$total = (int) ($value['enrolled']+$value['dead']+$value['ltfu']+$value['adult']+$value['transout']+$value['other']);
 			$data['ul'] .= '<li>Initiated On Treatment: '.(int) $value['enrolled'].' <strong>('.(int) (($value['enrolled']/$total)*100).'%)</strong></li>';
 			$data['ul'] .= '<li>Lost to Follow Up: '.$value['ltfu'].' <strong>('.(int) (($value['ltfu']/$total)*100).'%)</strong></li>';
 			$data['ul'] .= '<li>Dead: '.(int) $value['dead'].' <strong>('.(int) (($value['dead']/$total)*100).'%)</strong></li>';
 			$data['ul'] .= '<li>Adult Samples: '.$value['adult'].' <strong>('.(int) (($value['adult']/$total)*100).'%)</strong></li>';
 			$data['ul'] .= '<li>Transferred Out: '.$value['transout'].' <strong>('.(int) (($value['transout']/$total)*100).'%)</strong></li>';
-			$data['ul'] .= '<li>Other Reasons(e.g denial): '.$value['other'].' <strong>('.(int) (($value['other']/$total)*100).'%)</strong></li>';*/
+			$data['ul'] .= '<li>Other Reasons(e.g denial): '.$value['other'].' <strong>('.(int) (($value['other']/$total)*100).'%)</strong></li>';
 			// if($value['name'] == ''){
 			// 	$data['hei']['data'][$key]['color'] = '#5C97BF';
 			// }

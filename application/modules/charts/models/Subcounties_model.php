@@ -165,7 +165,7 @@ class Subcounties_model extends MY_Model
 		    	</tr>
 
 		    	<tr>
-		    		<td>Adults Tested:</td>
+		    		<td>Above 2 yrs Tested:</td>
 		    		<td>'.number_format((int) $value['adults']).'</td>
 		    		<td>Positive (+):</td>
 		    		<td>'.number_format((int) $value['adultsPOS']).'('.round((((int) $value['adultsPOS']/(int) $value['adults'])*100),1).'%)</td>
@@ -277,13 +277,13 @@ class Subcounties_model extends MY_Model
                      <td></td>
                      <td></td>
                 </tr><tr>
-                 <td>Actual Positives Validated at Site:</td>
+                 <td><center>&nbsp;&nbsp;Actual Positives Validated at Site:</center></td>
                      <td>'.number_format((int) $value['followup_hei']).'<b>('.round((((int) $value['followup_hei']/(int) $value['positives'])*100),1).'%)</b></td>
                      <td></td>
                      <td></td>
                 </tr>
                	<tr>
-                   <td>Actual Confirmed Positives at Site:</td>
+                   <td><center>&nbsp;&nbsp;&nbsp;&nbsp;Actual Confirmed Positives at Site:</center></td>
                      <td>'.number_format((int) $value['Confirmed Positive']).'<b>('.round((((int) $value['Confirmed Positive']/(int) $value['true_tests'])*100),1).'%)</b></td>
                      <td></td>
                      <td></td>

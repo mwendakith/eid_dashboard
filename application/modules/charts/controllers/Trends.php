@@ -17,7 +17,7 @@ class Trends extends MY_Controller
 		$obj = $this->trends_model->yearly_trends($county);
 		// echo "<pre>";print_r($obj);echo "</pre>";die();
 		$data['trends'] = $obj['test_trends'];
-		$data['title'] = "Testing Trends";
+		$data['title'] = "Testing Trends (Initial PCR)";
 		$data['div_name'] = "tests";
 		$data['suffix'] = "";
 		$data['yAxis'] = "Number of Tests";
@@ -73,7 +73,7 @@ class Trends extends MY_Controller
 		$obj = $this->trends_model->quarterly_trends($county);
 		// echo "<pre>";print_r($obj);echo "</pre>";die();
 		$data['trends'] = $obj['test_trends'];
-		$data['title'] = "Testing Trends";
+		$data['title'] = "Testing Trends (Initial PCR)";
 		$data['div_name'] = "tests_q";
 		$data['suffix'] = "";
 		$data['yAxis'] = "Number of Tests";

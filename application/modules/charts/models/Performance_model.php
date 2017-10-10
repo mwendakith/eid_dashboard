@@ -210,6 +210,7 @@ class Performance_model extends MY_Model
 			$lab = (int) $value['ID'];
 			$lab--;
 			$tests = (int) $value['tests'];
+			$received = (int) $value['received'];
 
 			$data['test_trends'][$lab]['name'] = $value['name'];
 			$data['test_trends'][$lab]['data'][$month] = (int) $tests;
@@ -219,7 +220,7 @@ class Performance_model extends MY_Model
 				$data['rejected_trends'][$lab]['data'][$month] = 0;
 			}else{
 				$data['rejected_trends'][$lab]['data'][$month] =  
-				 round(($value['rejected'] / $tests * 100), 1);
+				 round(($value['rejected'] / $received * 100), 1);
 			}
 
 			$data['positivity_trends'][$lab]['name'] = $value['name'];

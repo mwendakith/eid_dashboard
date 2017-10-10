@@ -45,7 +45,7 @@ class LabPerformance extends MY_Controller
 		$this->load->view('lab_performance_view', $data);
 
 		$data['trends'] = $obj['trends']['positivity_trends'];
-		$data['title'] = "Positivity Trends (" . $obj['trends']['year'] . ")";
+		$data['title'] = "Positivity Trends - Initial PCR(" . $obj['trends']['year'] . ")";
 		$data['div'] = "#positivity";
 		$data['div_name'] = "positivity";
 		$data['suffix'] = "%";

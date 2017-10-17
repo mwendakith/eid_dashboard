@@ -35,7 +35,7 @@ class Performance_model extends MY_Model
 		$sql = "CALL `proc_get_eid_lab_performance_stats`('".$year."','".$month."','".$to_year."','".$to_month."');";
 
 		$result = $this->db->query($sql)->result_array();
-		// echo "<pre>";print_r($sql);echo "</pre>";die();
+		// echo "<pre>";print_r($result);echo "</pre>";die();
 		$ul = '';
 		foreach ($result as $key => $value) {
 			$ul .= "<tr>
@@ -44,21 +44,27 @@ class Performance_model extends MY_Model
 						<td>".number_format((int) $value['sitesending'])."</td>
 						<td>".number_format((int) $value['received'])."</td>
 						<td>".number_format((int) $value['rejected']) . " (" . 
-							round(@(($value['rejected']*100)/$value['tests']), 1, PHP_ROUND_HALF_UP)."%)</td>
-						<td>".number_format((int) $value['redraw'])."</td>
-
+							round(@(($value['rejected']*100)/$value['received']), 1, PHP_ROUND_HALF_UP)."%)</td>
 						<td>".number_format((int) $value['alltests'])."</td>
-						<td>".number_format((int) $value['tests'])."</td>
-						<td>".number_format((int) $value['confirmdna'] + (int) $value['repeatspos'])."</td>
-						<td>".number_format((int) $value['eqa'])."</td>
-						<td>".number_format((int) $value['alltests'] + (int) $value['eqa'] + (int) $value['confirmdna'] + (int) $value['repeatspos'])."</td>
-						<td>".number_format((int) $value['pos'])."</td>
-						<td>".round(@(($value['pos']*100)/$value['tests']), 1, PHP_ROUND_HALF_UP)."</td>
-						<td>".number_format((int) $value['neg'])."</td>
-						<td>".round(@(($value['neg']*100)/$value['tests']), 1, PHP_ROUND_HALF_UP)."</td>
 						<td>".number_format((int) $value['redraw'])."</td>
-						<td>".round(@(($value['redraw']*100)/$value['tests']), 1, PHP_ROUND_HALF_UP)."</td>
+						<td>".number_format((int) $value['eqa'])."</td>
+						<td>".number_format((int) ($value['pos']+$value['neg']))."</td>
+						<td>".number_format((int) $value['pos'])."</td>
+						<td>".number_format((int) $value['repeatspos'])."</td>
+						<td>".number_format((int) $value['repeatspospos'])."</td>
+						<td>".number_format((int) $value['confirmdna'])."</td>
+						<td>".number_format((int) $value['confirmedpos'])."</td>
+						<td>".number_format((int) ($value['pos']+$value['neg']+$value['confirmdna'] + $value['repeatspos']))."</td>
+						<td>".number_format((int) ($value['pos']+$value['confirmedpos'] + $value['repeatspospos']))."</td>
+						
 					</tr>";
+					// <td>".number_format((int) $value['alltests'] + (int) $value['eqa'] + (int) $value['confirmdna'] + (int) $value['repeatspos'])."</td>
+					// 	<td>".number_format((int) $value['pos'])."</td>
+					// 	<td>".round(@(($value['pos']*100)/$value['tests']), 1, PHP_ROUND_HALF_UP)."</td>
+					// 	<td>".number_format((int) $value['neg'])."</td>
+					// 	<td>".round(@(($value['neg']*100)/$value['tests']), 1, PHP_ROUND_HALF_UP)."</td>
+					// 	<td>".number_format((int) $value['redraw'])."</td>
+					// 	<td>".round(@(($value['redraw']*100)/$value['tests']), 1, PHP_ROUND_HALF_UP)."</td>
 					
 		}
 
@@ -204,6 +210,7 @@ class Performance_model extends MY_Model
 			$lab = (int) $value['ID'];
 			$lab--;
 			$tests = (int) $value['tests'];
+			$received = (int) $value['received'];
 
 			$data['test_trends'][$lab]['name'] = $value['name'];
 			$data['test_trends'][$lab]['data'][$month] = (int) $tests;
@@ -213,7 +220,7 @@ class Performance_model extends MY_Model
 				$data['rejected_trends'][$lab]['data'][$month] = 0;
 			}else{
 				$data['rejected_trends'][$lab]['data'][$month] =  
-				 round(($value['rejected'] / $tests * 100), 1);
+				 round(($value['rejected'] / $received * 100), 1);
 			}
 
 			$data['positivity_trends'][$lab]['name'] = $value['name'];

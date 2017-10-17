@@ -31,7 +31,7 @@
 		<div class="col-md-3 col-sm-3 col-xs-12">
 			<div class="panel panel-default">
 			  <div class="panel-heading">
-			  	HEI Validation Outcomes <div class="display_date" ></div>
+			  	Actual Infants Tested Positive Validation at  <div class="display_date" ></div>
 			  </div>
 			  <div class="panel-body" id="subcounty_hei_outcomes">
 			  	<center><div class="loader"></div></center>
@@ -43,7 +43,7 @@
 		<div class="col-md-2 col-sm-4 col-xs-12">
 			<div class="panel panel-default">
 			  <div class="panel-heading">
-				  HEI Follow up <div class="display_date"></div>
+				  Status of Actual Confirmed Positives at Site <div class="display_date"></div>
 			  </div>
 			  <div class="panel-body" id="subcounty_hei" style="/*height:500px;">
 			    <center><div class="loader"></div></center>
@@ -54,7 +54,7 @@
 		<div class="col-md-3">
 			<div class="panel panel-default">
 			  <div class="panel-heading">
-			    Age <div class="display_date"></div>
+			    EID Outcomes by Age  (Initial PCR) <div class="display_date"></div>
 			  </div>
 			  <div class="panel-body" id="subcounty_age" style="height:560px;">
 			    <center><div class="loader"></div></center>

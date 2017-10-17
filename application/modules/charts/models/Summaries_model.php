@@ -259,28 +259,28 @@ class Summaries_model extends MY_Model
 			$data['ul'] .= '<tr>
 					<td>Total EID Tests</td>
 					<td>'.number_format((int) ($value['firstdna']+$value['confirmdna']+$value['repeatspos'])).'</td>
-					<td>Positive Outcomes</td>
+					<td>Positive (+)</td>
 					<td>'.number_format((int) ($value['confirmpos']+$value['repeatsposPOS']+$value['pos'])).'('.round((((int) ($value['confirmpos']+$value['repeatsposPOS']+$value['pos'])/(int) ($value['firstdna']+$value['confirmdna']+$value['repeatspos']))*100),1).'%)</td>
 				</tr>
 				<tr>
 		    		<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Initial PCR:</td>
 		    		<td>'.number_format((int) $value['firstdna']).'</td>
-		    		<td>Positive Outcomes:</td>
+		    		<td>Positive (+):</td>
 		    		<td>'.number_format((int) $value['pos']).'('.round((((int) $value['pos']/(int) $value['firstdna'])*100),1).'%)</td>
 		    	</tr>
 		    	<tr>
 		    		<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Repeat PCR:</td>
 		    		<td>'.number_format((int) $value['repeatspos']).'</td>
-		    		<td>Positive Outcomes:</td>
+		    		<td>Positive (+):</td>
 		    		<td>'.number_format((int) $value['repeatsposPOS']).'('.round((((int) $value['repeatsposPOS']/(int) $value['repeatspos'])*100),1).'%)</td>
 		    	</tr>
 		    	<tr>
 		    		<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Confirmatory PCR:</td>
 		    		<td>'.number_format((int) $value['confirmdna']).'</td>
-		    		<td>Positive Outcomes:</td>
+		    		<td>Positive (+):</td>
 		    		<td>'.number_format((int) $value['confirmpos']).'('.round((((int) $value['confirmpos']/(int) $value['confirmdna'])*100),1).'%)</td>
 		    	</tr>
-				<tr>
+				<tr style="height:14px;background-color:#ABB7B7;">
 		    		<td></td>
 		    		<td></td>
 		    		<td></td>
@@ -288,9 +288,9 @@ class Summaries_model extends MY_Model
 		    	</tr>
 
 		    	<tr>
-		    		<td>Actual Infants Tested:</td>
+		    		<td>Actual Infants Tested <br />(Based on Unique IDs):</td>
 		    		<td>'.number_format((int) $value['actualinfants']).'</td>
-		    		<td>Positive Outcomes:</td>
+		    		<td>Positive (+):</td>
 		    		<td>'.number_format((int) $value['actualinfantspos']).'('. round((((int) $value['actualinfantspos']/(int) $value['actualinfants'])*100),1)  .'%)</td>
 		    	</tr>
 
@@ -304,7 +304,7 @@ class Summaries_model extends MY_Model
 		    	<tr>
 		    		<td>Above 2years Tested:</td>
 		    		<td>'.number_format((int) $value['adults']).'</td>
-		    		<td>Positive Outcomes:</td>
+		    		<td>Positive (+):</td>
 		    		<td>'.number_format((int) $value['adultsPOS']).'('.round((((int) $value['adultsPOS']/(int) $value['adults'])*100),1).'%)</td>
 		    	</tr>
 
@@ -410,18 +410,18 @@ class Summaries_model extends MY_Model
 
 		foreach ($result as $key => $value) {
 				$data['ul'] .= '<tr>
-                 <td>Positive Outcomes (Actual Infants):</td>
+                 <td><center>Actual Infants Tested Positive:</center></td>
                      <td>'.number_format((int) $value['positives']).'</td>
                      <td></td>
                      <td></td>
                 </tr><tr>
-                 <td>Followed Up HEIs:</td>
+                 <td><center>&nbsp;&nbsp;Actual Positives Validated at Site:</center></td>
                      <td>'.number_format((int) $value['followup_hei']).'<b>('.round((((int) $value['followup_hei']/(int) $value['positives'])*100),1).'%)</b></td>
                      <td></td>
                      <td></td>
                 </tr>
                	<tr>
-                   <td>Confirmed Positives:</td>
+                   <td><center>&nbsp;&nbsp;&nbsp;Actual Confirmed Positives at Site:</center></td>
                      <td>'.number_format((int) $value['Confirmed Positive']).'<b>('.round((((int) $value['Confirmed Positive']/(int) $value['true_tests'])*100),1).'%)</b></td>
                      <td></td>
                      <td></td>
@@ -510,13 +510,13 @@ class Summaries_model extends MY_Model
 		$data['hei']['data'][0]['y'] = $count;
 
 		foreach ($result as $key => $value) {
-			/*$total = (int) ($value['enrolled']+$value['dead']+$value['ltfu']+$value['adult']+$value['transout']+$value['other']);
+			$total = (int) ($value['enrolled']+$value['dead']+$value['ltfu']+$value['adult']+$value['transout']+$value['other']);
 			$data['ul'] .= '<li>Initiated On Treatment: '.(int) $value['enrolled'].' <strong>('.(int) (($value['enrolled']/$total)*100).'%)</strong></li>';
 			$data['ul'] .= '<li>Lost to Follow Up: '.$value['ltfu'].' <strong>('.(int) (($value['ltfu']/$total)*100).'%)</strong></li>';
 			$data['ul'] .= '<li>Dead: '.(int) $value['dead'].' <strong>('.(int) (($value['dead']/$total)*100).'%)</strong></li>';
 			$data['ul'] .= '<li>Adult Samples: '.$value['adult'].' <strong>('.(int) (($value['adult']/$total)*100).'%)</strong></li>';
 			$data['ul'] .= '<li>Transferred Out: '.$value['transout'].' <strong>('.(int) (($value['transout']/$total)*100).'%)</strong></li>';
-			$data['ul'] .= '<li>Other Reasons(e.g denial): '.$value['other'].' <strong>('.(int) (($value['other']/$total)*100).'%)</strong></li>';*/
+			$data['ul'] .= '<li>Other Reasons(e.g denial): '.$value['other'].' <strong>('.(int) (($value['other']/$total)*100).'%)</strong></li>';
 			// if($value['name'] == ''){
 			// 	$data['hei']['data'][$key]['color'] = '#5C97BF';
 			// }

@@ -6,8 +6,8 @@ BEGIN
   SET @QUERY =    "SELECT
                     `c`.`name`,
                     `cs`.`county`,
-                    SUM(`cs`.`actualinfantsPOS`) AS `positive`,
-                    SUM(`cs`.`actualinfants`-`cs`.`actualinfantsPOS`) AS `negative` 
+                    SUM(`cs`.`pos`) AS `positive`,
+                    SUM(`cs`.`neg`) AS `negative` 
                 FROM `county_summary` `cs`
                     JOIN `countys` `c` ON `cs`.`county` = `c`.`ID`
     WHERE 1";

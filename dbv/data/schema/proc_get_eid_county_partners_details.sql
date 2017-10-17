@@ -6,22 +6,22 @@ BEGIN
   SET @QUERY =    "SELECT 
                   `p`.name AS `partner`, 
                   `c`.name AS `county`,
-                  SUM(`tests`) AS `tests`, 
-                  SUM(`actualinfants`) AS `actualinfants`, 
-                  SUM(`confirmdna` + `repeatspos`) AS `confirmdna`,
-                  SUM(`actualinfantsPOS`) AS `positive`, 
-                  SUM(`actualinfants`-`actualinfantsPOS`) AS `negative`, 
-                  SUM(`redraw`) AS `redraw`, 
-                  SUM(`adults`) AS `adults`, 
-                  SUM(`adultsPOS`) AS `adultspos`, 
-                  AVG(`medage`) AS `medage`, 
-                  SUM(`rejected`) AS `rejected`, 
+                  SUM(`alltests`) AS `alltests`, 
+                  SUM(`actualinfants`) AS `actualinfants`,
+                  SUM(`pos`) AS `positive`, 
+                  SUM(`neg`) AS `negative`, 
+                  SUM(`repeatspos`) AS `repeatspos`,
+                  SUM(`repeatposPOS`) AS `repeatsposPOS`,
+                  SUM(`confirmdna`) AS `confirmdna`,
+                  SUM(`confirmedPOS`) AS `confirmedPOS`,
                   SUM(`infantsless2w`) AS `infantsless2w`, 
                   SUM(`infantsless2wPOS`) AS `infantsless2wpos`, 
                   SUM(`infantsless2m`) AS `infantsless2m`, 
                   SUM(`infantsless2mPOS`) AS `infantsless2mpos`, 
                   SUM(`infantsabove2m`) AS `infantsabove2m`, 
-                  SUM(`infantsabove2mPOS`) AS `infantsabove2mpos`     ";
+                  SUM(`infantsabove2mPOS`) AS `infantsabove2mpos`, 
+                  AVG(`medage`) AS `medage`,
+                  SUM(`rejected`) AS `rejected`     ";
 
 
      IF (from_month != 0 && from_month != '') THEN

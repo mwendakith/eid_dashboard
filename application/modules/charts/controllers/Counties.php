@@ -17,7 +17,6 @@ class Counties extends MY_Controller
 	{
 		$data['outcomes'] = $this->counties_model->counties_details($year,$month,$to_year,$to_month);
 		
-
 		$link = $year . '/' . $month . '/' . $to_year . '/' . $to_month;
 
 		$data['link'] = base_url('charts/counties/download_counties_details/' . $link);

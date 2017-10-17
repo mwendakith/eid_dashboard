@@ -5,8 +5,8 @@ CREATE PROCEDURE `proc_get_eid_partner_sites_outcomes`
 BEGIN
   SET @QUERY =    "SELECT 
 					`vf`.`name`,
-					SUM(`ss`.`actualinfantsPOS`) AS `positive`,
-          SUM(`ss`.`actualinfants`-`ss`.`actualinfantsPOS`) AS `negative`";
+					SUM(`ss`.`pos`) AS `positive`,
+          SUM(`ss`.`neg`) AS `negative`";
 
 
     IF (from_month != 0 && from_month != '') THEN

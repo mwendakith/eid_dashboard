@@ -41,17 +41,19 @@ class Counties_model extends MY_Model
 			$table .= '<td>'.$count.'</td>';
 			$table .= '<td>'.$value['county'].'</td>';
 			$table .= '<td>'.number_format(round($value['sitessending'])).'</td>';
-			$table .= '<td>'.number_format($value['tests']).'</td>';
+			$table .= '<td>'.number_format($value['alltests']).'</td>';
 			if ($year == '2016' || $year == '2017') {
 				$table .= '<td>'.number_format($value['pmtctneed']).'</td>';
 			} else {
 				$table .= '<td>0</td>';
 			}
 			$table .= '<td>'.number_format($value['actualinfants']).'</td>';
-			$table .= '<td>'.number_format($value['confirmdna']).'</td>';
+			$table .= '<td>'.number_format($value['positive']+$value['negative']).'</td>';
 			$table .= '<td>'.number_format($value['positive']).'</td>';
-			$table .= '<td>'.number_format($value['negative']).'</td>';
-			$table .= '<td>'.number_format($value['redraw']).'</td>';
+			$table .= '<td>'.number_format($value['repeatspos']).'</td>';
+			$table .= '<td>'.number_format($value['repeatsposPOS']).'</td>';
+			$table .= '<td>'.number_format($value['confirmdna']).'</td>';
+			$table .= '<td>'.number_format($value['confirmedPOS']).'</td>';
 			$table .= '<td>'.number_format($value['infantsless2w']).'</td>';
 			$table .= '<td>'.number_format($value['infantsless2wpos']).'</td>';
 			$table .= '<td>'.number_format($value['infantsless2m']).'</td>';
@@ -100,7 +102,7 @@ class Counties_model extends MY_Model
 	    $f = fopen('php://memory', 'w');
 	    /** loop through array  */
 
-	    $b = array('County', 'All Tests', 'PMTCT Need', 'Actual Infants Tested', 'Repeat Confirmatory Tests', 'Positives', 'Negatives', 'Redraws', 'Adults Tests', 'Adults Positives', 'Median Age', 'Average sites sending', 'Rejected', 'Infants < 2Weeks', 'Infants < 2Weeks  Positives', 'Infants <= 2M', 'Infants <= 2m Positives', 'Infants >= 2M', 'Infants >= 2m Positives');
+	    $b = array('County', 'Average sites sending', 'All Tests', 'PMTCT Need', 'Actual Infants Tested', 'Initial PCR Tests', 'Initial PCR Positives', 'Repeat PCR Tests', 'Repeat PCR Positives', 'Confirmatory PCR Tests', 'Confirmatory PCR Positives', 'Infants < 2Weeks', 'Infants < 2Weeks  Positives', 'Infants <= 2M', 'Infants <= 2m Positives', 'Infants >= 2M', 'Infants >= 2m Positives', 'Median Age', 'Rejected');
 
 	    fputcsv($f, $b, $delimiter);
 
@@ -240,12 +242,14 @@ class Counties_model extends MY_Model
 			$table .= '<td>'.$count.'</td>';
 			$table .= '<td>'.$value['subcounty'].'</td>';
 			$table .= '<td>'.number_format(round($value['sitessending'])).'</td>';
-			$table .= '<td>'.number_format($value['tests']).'</td>';
+			$table .= '<td>'.number_format($value['alltests']).'</td>';
 			$table .= '<td>'.number_format($value['actualinfants']).'</td>';
-			$table .= '<td>'.number_format($value['confirmdna']).'</td>';
+			$table .= '<td>'.number_format($value['positive']+$value['negative']).'</td>';
 			$table .= '<td>'.number_format($value['positive']).'</td>';
-			$table .= '<td>'.number_format($value['negative']).'</td>';
-			$table .= '<td>'.number_format($value['redraw']).'</td>';
+			$table .= '<td>'.number_format($value['repeatspos']).'</td>';
+			$table .= '<td>'.number_format($value['repeatsposPOS']).'</td>';
+			$table .= '<td>'.number_format($value['confirmdna']).'</td>';
+			$table .= '<td>'.number_format($value['confirmedPOS']).'</td>';
 			$table .= '<td>'.number_format($value['infantsless2w']).'</td>';
 			$table .= '<td>'.number_format($value['infantsless2wpos']).'</td>';
 			$table .= '<td>'.number_format($value['infantsless2m']).'</td>';
@@ -298,7 +302,7 @@ class Counties_model extends MY_Model
 	    $f = fopen('php://memory', 'w');
 	    /** loop through array  */
 
-	    $b = array('Subcounty', 'County', 'Tests', '1st DNA PCR', 'Confirmed PCR', '+', '-', 'Redraws', 'Adults Tests', 'Adults Tests Positives', 'Median Age', 'Rejected', 'Infants < 2m', 'Infants < 2m +');
+	    $b = array('Subcounty', 'County',  'All Tests', 'Average Sites Sending', 'Actual Infants Tested', 'Initial PCR Tests', 'Initial PCR Positives', 'Repeat PCR Tests', 'Repeat PCR Positives', 'Confirmatory PCR Tests', 'Confirmatory PCR Positives', 'Infants < 2Weeks', 'Infants < 2Weeks  Positives', 'Infants <= 2M', 'Infants <= 2m Positives', 'Infants >= 2M', 'Infants >= 2m Positives', 'Median Age', 'Rejected');
 
 	    fputcsv($f, $b, $delimiter);
 
@@ -310,7 +314,7 @@ class Counties_model extends MY_Model
 	    fseek($f, 0);
 	    /** modify header to be downloadable csv file **/
 	    header('Content-Type: application/csv');
-	    header('Content-Disposition: attachement; filename="county_subcounty_details.csv";');
+	    header('Content-Disposition: attachement; filename="'.Date('Ymd H:i:s').'county_subcounty_details.csv";');
 	    /** Send file to browser for download */
 	    fpassthru($f);
 		
@@ -343,7 +347,7 @@ class Counties_model extends MY_Model
 		$sql = "CALL `proc_get_eid_county_partners_details`('".$county."','".$year."','".$month."','".$to_year."','".$to_month."')";
 		// echo "<pre>";print_r($sql);die();
 		$result = $this->db->query($sql)->result_array();
-		// echo "<pre>";print_r($sql);die();
+		// echo "<pre>";print_r($result);die();
 		foreach ($result as $key => $value) {
 			if ($value['partner'] == NULL || $value['partner'] == 'NULL') {
 				$value['partner'] = 'No Partner';
@@ -351,12 +355,14 @@ class Counties_model extends MY_Model
 			$table .= '<tr>';
 			$table .= '<td>'.$count.'</td>';
 			$table .= '<td>'.$value['partner'].'</td>';
-			$table .= '<td>'.number_format($value['tests']).'</td>';
+			$table .= '<td>'.number_format($value['alltests']).'</td>';
 			$table .= '<td>'.number_format($value['actualinfants']).'</td>';
-			$table .= '<td>'.number_format($value['confirmdna']).'</td>';
+			$table .= '<td>'.number_format($value['positive']+$value['negative']).'</td>';
 			$table .= '<td>'.number_format($value['positive']).'</td>';
-			$table .= '<td>'.number_format($value['negative']).'</td>';
-			$table .= '<td>'.number_format($value['redraw']).'</td>';
+			$table .= '<td>'.number_format($value['repeatspos']).'</td>';
+			$table .= '<td>'.number_format($value['repeatsposPOS']).'</td>';
+			$table .= '<td>'.number_format($value['confirmdna']).'</td>';
+			$table .= '<td>'.number_format($value['confirmedPOS']).'</td>';
 			$table .= '<td>'.number_format($value['infantsless2w']).'</td>';
 			$table .= '<td>'.number_format($value['infantsless2wpos']).'</td>';
 			$table .= '<td>'.number_format($value['infantsless2m']).'</td>';
@@ -409,7 +415,7 @@ class Counties_model extends MY_Model
 	    $f = fopen('php://memory', 'w');
 	    /** loop through array  */
 
-	    $b = array('Subcounty', 'County', 'Tests', '1st DNA PCR', 'Confirmed PCR', '+', '-', 'Redraws', 'Adults Tests', 'Adults Tests Positives', 'Median Age', 'Rejected', 'Infants < 2m', 'Infants < 2m +');
+	    $b = array('Partner', 'County', 'All Tests', 'Actual Infants Tested', 'Initial PCR Tests', 'Initial PCR Positives', 'Repeat PCR Tests', 'Repeat PCR Positives', 'Confirmatory PCR Tests', 'Confirmatory PCR Positives', 'Infants < 2Weeks', 'Infants < 2Weeks  Positives', 'Infants <= 2M', 'Infants <= 2m Positives', 'Infants >= 2M', 'Infants >= 2m Positives', 'Median Age', 'Rejected');
 
 	    fputcsv($f, $b, $delimiter);
 
@@ -421,7 +427,7 @@ class Counties_model extends MY_Model
 	    fseek($f, 0);
 	    /** modify header to be downloadable csv file **/
 	    header('Content-Type: application/csv');
-	    header('Content-Disposition: attachement; filename="county_subcounty_details.csv";');
+	    header('Content-Disposition: attachement; filename="'.Date('Ymd H:i:s').'county_partners_details.csv";');
 	    /** Send file to browser for download */
 	    fpassthru($f);
 		

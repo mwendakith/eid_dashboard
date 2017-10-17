@@ -147,28 +147,28 @@ class Partner_summaries_model extends MY_Model
 			$data['ul'] .= '<tr>
 					<td>Total EID Tests</td>
 					<td>'.number_format((int) ($value['firstdna']+$value['confirmdna']+$value['repeatspos'])).'</td>
-					<td>Positive Outcomes</td>
+					<td>Positive (+)</td>
 					<td>'.number_format((int) ($value['confirmpos']+$value['repeatsposPOS']+$value['pos'])).'('.round((((int) ($value['confirmpos']+$value['repeatsposPOS']+$value['pos'])/(int) ($value['firstdna']+$value['confirmdna']+$value['repeatspos']))*100),1).'%)</td>
 				</tr>
 				<tr>
 		    		<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Initial PCR:</td>
 		    		<td>'.number_format((int) $value['firstdna']).'</td>
-		    		<td>Positive Outcomes:</td>
+		    		<td>Positive (+):</td>
 		    		<td>'.number_format((int) $value['pos']).'('.round((((int) $value['pos']/(int) $value['firstdna'])*100),1).'%)</td>
 		    	</tr>
 		    	<tr>
 		    		<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Repeat PCR:</td>
 		    		<td>'.number_format((int) $value['repeatspos']).'</td>
-		    		<td>Positive Outcomes:</td>
+		    		<td>Positive (+):</td>
 		    		<td>'.number_format((int) $value['repeatsposPOS']).'('.round((((int) $value['repeatsposPOS']/(int) $value['repeatspos'])*100),1).'%)</td>
 		    	</tr>
 		    	<tr>
 		    		<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Confirmatory PCR:</td>
 		    		<td>'.number_format((int) $value['confirmdna']).'</td>
-		    		<td>Positive Outcomes:</td>
+		    		<td>Positive (+):</td>
 		    		<td>'.number_format((int) $value['confirmpos']).'('.round((((int) $value['confirmpos']/(int) $value['confirmdna'])*100),1).'%)</td>
 		    	</tr>
-				<tr>
+				<tr style="height:14px;background-color:#ABB7B7;">
 		    		<td></td>
 		    		<td></td>
 		    		<td></td>
@@ -176,9 +176,9 @@ class Partner_summaries_model extends MY_Model
 		    	</tr>
 
 		    	<tr>
-		    		<td>Actual Infants Tested:</td>
+		    		<td>Actual Infants Tested <br />(Based on Unique IDs):</td>
 		    		<td>'.number_format((int) $value['actualinfants']).'</td>
-		    		<td>Positive Outcomes:</td>
+		    		<td>Positive (+):</td>
 		    		<td>'.number_format((int) $value['actualinfantspos']).'('. round((((int) $value['actualinfantspos']/(int) $value['actualinfants'])*100),1)  .'%)</td>
 		    	</tr>
 
@@ -190,9 +190,9 @@ class Partner_summaries_model extends MY_Model
 		    	</tr>
 
 		    	<tr>
-		    		<td>Adults Tested:</td>
+		    		<td>Above 2 yrs Tested:</td>
 		    		<td>'.number_format((int) $value['adults']).'</td>
-		    		<td>Positive Outcomes:</td>
+		    		<td>Positive (+):</td>
 		    		<td>'.number_format((int) $value['adultsPOS']).'('.round((((int) $value['adultsPOS']/(int) $value['adults'])*100),1).'%)</td>
 		    	</tr>
 
@@ -293,18 +293,18 @@ class Partner_summaries_model extends MY_Model
    //                  <td></td>
    //              </tr>';
 				$data['ul'] .= '<tr>
-                 <td>Positve Outcomes Actual Infants:</td>
+                 <td><center>Actual Infants Tested Positive :</center></td>
                      <td>'.number_format((int) $value['positives']).'</td>
                      <td></td>
                      <td></td>
                 </tr><tr>
-                 <td>Followed Up HEIs:</td>
+                 <td><center>&nbsp;&nbsp;Actual Positives Validated at Site:</center></td>
                      <td>'.number_format((int) $value['followup_hei']).'<b>('.round((((int) $value['followup_hei']/(int) $value['positives'])*100),1).'%)</b></td>
                      <td></td>
                      <td></td>
                 </tr>
                	<tr>
-                   <td>Confirmed Positives:</td>
+                   <td><center>&nbsp;&nbsp;&nbsp;&nbsp;Actual Confirmed Positives at Site :</center></td>
                      <td>'.number_format((int) $value['Confirmed Positive']).'<b>('.round((((int) $value['Confirmed Positive']/(int) $value['true_tests'])*100),1).'%)</b></td>
                      <td></td>
                      <td></td>
@@ -790,19 +790,21 @@ class Partner_summaries_model extends MY_Model
 		$sql = "CALL `proc_get_eid_partner_county_details`('".$partner."','".$year."','".$month."','".$to_year."','".$to_month."')";
 		// echo "<pre>";print_r($sql);die();
 		$result = $this->db->query($sql)->result_array();
-		// echo "<pre>";print_r($sql);die();
+		// echo "<pre>";print_r($result);die();
 		foreach ($result as $key => $value) {
 			$table .= '<tr>';
 			$table .= '<td>'.$count.'</td>';
 
 			$table .= '<td>'.$value['county'].'</td>';
 			$table .= '<td>'.$value['facilities'].'</td>';
-			$table .= '<td>'.number_format($value['tests']).'</td>';
+			$table .= '<td>'.number_format($value['alltests']).'</td>';
 			$table .= '<td>'.number_format($value['actualinfants']).'</td>';
-			$table .= '<td>'.number_format($value['confirmdna']).'</td>';
+			$table .= '<td>'.number_format($value['positive']+$value['negative']).'</td>';
 			$table .= '<td>'.number_format($value['positive']).'</td>';
-			$table .= '<td>'.number_format($value['negative']).'</td>';
-			$table .= '<td>'.number_format($value['redraw']).'</td>';
+			$table .= '<td>'.number_format($value['repeatspos']).'</td>';
+			$table .= '<td>'.number_format($value['repeatsposPOS']).'</td>';
+			$table .= '<td>'.number_format($value['confirmdna']).'</td>';
+			$table .= '<td>'.number_format($value['confirmedPOS']).'</td>';
 			$table .= '<td>'.number_format($value['infantsless2w']).'</td>';
 			$table .= '<td>'.number_format($value['infantsless2wpos']).'</td>';
 			$table .= '<td>'.number_format($value['infantsless2m']).'</td>';

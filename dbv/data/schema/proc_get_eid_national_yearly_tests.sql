@@ -4,7 +4,7 @@ CREATE PROCEDURE `proc_get_eid_national_yearly_tests`
 ()
 BEGIN
   SET @QUERY =    "SELECT
-                    `ns`.`year`, `ns`.`month`, SUM(`ns`.`tests`) AS `tests`, 
+                    `ns`.`year`, `ns`.`month`, SUM(`ns`.`firstdna`) AS `tests`, 
                     SUM(`ns`.`pos`) AS `positive`,
                     SUM(`ns`.`neg`) AS `negative`,
                     SUM(`ns`.`rejected`) AS `rejected`,

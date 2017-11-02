@@ -479,6 +479,56 @@ class Partner_summaries_model extends MY_Model
 		return $data;
 	}
 
+	function age2($year=null,$month=null,$partner=null,$to_year=null,$to_month=null)
+	{
+		
+		if ($partner==null || $partner=='null') {
+			$partner = $this->session->userdata('partner_filter');
+		}
+
+		if ($year==null || $year=='null') {
+			$year = $this->session->userdata('filter_year');
+		}
+		if ($month==null || $month=='null') {
+			if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
+				$month = 0;
+			}else {
+				$month = $this->session->userdata('filter_month');
+			}
+		}
+		if ($to_month==null || $to_month=='null') {
+			$to_month = 0;
+		}
+		if ($to_year==null || $to_year=='null') {
+			$to_year = 0;
+		}
+
+		$sql = "CALL `proc_get_eid_partner_age_range`(0, '".$partner."','".$year."','".$month."','".$to_year."','".$to_month."')";
+		
+		// echo "<pre>";print_r($sql);die();
+		$result = $this->db->query($sql)->result_array();
+		// echo "<pre>";print_r($result);die();
+		$count = 0;
+				
+		// echo "<pre>";print_r($result);die();
+		$data['ageGnd'][0]['name'] = 'Positive';
+		$data['ageGnd'][1]['name'] = 'Negative';
+
+		$count = 0;
+
+		foreach ($result as $key => $value) {
+			$data['categories'][$key] 			= $value['age_range'];
+
+			$data["ageGnd"][0]["data"][$key]	=  (int) $value['pos'];
+			$data["ageGnd"][1]["data"][$key]	=  (int) $value['neg'];
+		}
+		$data['ageGnd'][0]['drilldown']['color'] = '#913D88';
+		$data['ageGnd'][1]['drilldown']['color'] = '#96281B';
+
+		// echo "<pre>";print_r($data);die();
+		return $data;
+	}
+
 	function entry_points($year=null,$month=null,$partner=null,$to_year=null,$to_month=null)
 	{
 		if ($partner==null || $partner=='null') {

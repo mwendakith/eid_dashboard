@@ -44,7 +44,7 @@ class Subcounties extends MY_Controller
 
 	function subcounties_age($sub_county=NULL,$year=NULL,$month=NULL,$to_year=NULL,$to_month=NULL)
 	{
-		$data['outcomes'] = $this->subcounties_model->age($sub_county,$year,$month,$to_year,$to_month);
+		$data['outcomes'] = $this->subcounties_model->age2($sub_county,$year,$month,$to_year,$to_month);
 
     	$this->load->view('agegroup_view',$data);
 	}

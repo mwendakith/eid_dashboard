@@ -52,7 +52,7 @@ class Partner_summaries extends MY_Controller
 
 	function agegroup($year=NULL,$month=NULL,$partner=NULL,$to_year=NULL,$to_month=NULL)
 	{
-		$data['outcomes'] =$this->partner_summaries_model->age($year,$month,$partner,$to_year,$to_month);
+		$data['outcomes'] =$this->partner_summaries_model->age2($year,$month,$partner,$to_year,$to_month);
 
 		$this->load->view('agegroup_view', $data);
 	}

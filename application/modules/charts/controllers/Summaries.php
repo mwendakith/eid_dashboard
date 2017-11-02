@@ -65,7 +65,7 @@ class Summaries extends MY_Controller
 
 	function agegroup($year=NULL,$month=NULL,$county=NULL,$partner=NULL,$to_year=NULL,$to_month=NULL)
 	{
-		$data['outcomes'] =$this->summaries_model->age($year,$month,$county,$partner,$to_year,$to_month);
+		$data['outcomes'] =$this->summaries_model->age2($year,$month,$county,$partner,$to_year,$to_month);
 
 		$this->load->view('agegroup_view', $data);
 	}

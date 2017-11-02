@@ -13,6 +13,7 @@
 		$cssTag="link";
 		$cssTagType=" type='text/css'";
 		
+		
 	if(is_array($css_files)){
 		foreach($css_files as $file){
 			echo "<".$cssTag." rel='stylesheet' href='".base_url()."assets/css/".$file."'".$cssTagType."></".$cssTag.">\n";
@@ -24,6 +25,7 @@
 		}
 	}
 	echo "<".$cssTag." rel='stylesheet' href='//cdn.datatables.net/1.10.12/css/jquery.dataTables.css'".$cssTagType."></".$cssTag.">\n";
+	echo "<".$cssTag." rel='stylesheet' href='//cdn.datatables.net/buttons/1.4.2/css/buttons.dataTables.min.css'".$cssTagType."></".$cssTag.">\n";
 	echo "<".$cssTag." rel='stylesheet' href='//cdn.datatables.net/responsive/2.1.1/css/responsive.bootstrap.css'".$cssTagType."></".$cssTag.">\n";
 	
 	if(is_array($js_plugin_files)){
@@ -38,5 +40,6 @@
 
 	}
 	echo "<".$jsTag." src='//cdn.datatables.net/1.10.12/js/jquery.dataTables.js'".$jsTagType."></".$jsTag.">\n";
+	echo "<".$jsTag." src='//cdn.datatables.net/buttons/1.4.2/js/dataTables.buttons.min.js'".$jsTagType."></".$jsTag.">\n";
 	echo "<".$jsTag." src='//cdn.datatables.net/responsive/2.1.1/js/dataTables.responsive.js'".$jsTagType."></".$jsTag.">\n";
 	

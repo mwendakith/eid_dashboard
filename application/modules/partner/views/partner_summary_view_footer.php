@@ -1,6 +1,7 @@
 <script type="text/javascript">
 	$().ready(function(){
 		$("#second").hide();
+		localStorage.setItem("my_var", 1);
 		$.get("<?php echo base_url();?>template/dates", function(data){
     		obj = $.parseJSON(data);
 	
@@ -15,6 +16,7 @@
 		//Function when the prtner is selected
 		$("select").change(function(){
 			em = $(this).val();
+			var all = localStorage.getItem("my_var");
 			
 			// Send the data using post
 			var posting = $.post( "<?php echo base_url();?>template/filter_partner_data", { partner: em } );
@@ -59,7 +61,7 @@
 					
 
 					// Actual graphs being loaded
-					$("#testing_trends").load("<?php echo base_url('charts/partner_summaries/testing_trends'); ?>/"+null+"/"+data);
+					$("#testing_trends").load("<?php echo base_url('charts/partner_summaries/testing_trends'); ?>/"+null+"/"+all+"/"+data);
 					$("#eidOutcomes").load("<?php echo base_url('charts/partner_summaries/eid_outcomes');?>/"+null+"/"+null+"/"+data);
 					$("#hei_outcomes").load("<?php echo base_url('charts/partner_summaries/hei_validation');?>/"+null+"/"+null+"/"+data);
 					$("#hei_follow_up").load("<?php echo base_url('charts/partner_summaries/hei_follow');?>/"+null+"/"+null+"/"+data);
@@ -87,6 +89,7 @@
 		    second = $(".date-picker[name=endDate]").val();
 		    
 		    var new_title = set_multiple_date(first, second);
+		    var all = localStorage.getItem("my_var");
 
 		    $(".display_date").html(new_title);
 		    
@@ -128,7 +131,7 @@
 						$("#pat_graph").html("<center><div class='loader'></div></center>");
 
 						// Actual graphs being loaded
-						$("#testing_trends").load("<?php echo base_url('charts/partner_summaries/testing_trends'); ?>/"+from[1]+"/"+partner);
+						$("#testing_trends").load("<?php echo base_url('charts/partner_summaries/testing_trends'); ?>/"+from[1]+"/"+all+"/"+partner);
 						$("#eidOutcomes").load("<?php echo base_url('charts/partner_summaries/eid_outcomes');?>/"+from[1]+"/"+from[0]+"/"+partner+"/"+to[1]+"/"+to[0]);
 						$("#hei_outcomes").load("<?php echo base_url('charts/partner_summaries/hei_validation');?>/"+from[1]+"/"+from[0]+"/"+partner+"/"+to[1]+"/"+to[0]);
 						$("#hei_follow_up").load("<?php echo base_url('charts/partner_summaries/hei_follow');?>/"+from[1]+"/"+from[0]+"/"+partner+"/"+to[1]+"/"+to[0]);
@@ -160,6 +163,7 @@
  		}
 
  		var posting = $.post( '<?php echo base_url();?>template/filter_date_data', { 'year': year, 'month': month } );
+	    var all = localStorage.getItem("my_var");
 
  		// Put the results in a div
 		posting.done(function( data ) {
@@ -201,7 +205,7 @@
 					$("#pat_graph").html("<center><div class='loader'></div></center>");
 
 					// Actual graphs being loaded
-					$("#testing_trends").load("<?php echo base_url('charts/partner_summaries/testing_trends'); ?>/"+year+"/"+partner);
+					$("#testing_trends").load("<?php echo base_url('charts/partner_summaries/testing_trends'); ?>/"+year+"/"+all+"/"+partner);
 					$("#eidOutcomes").load("<?php echo base_url('charts/partner_summaries/eid_outcomes');?>/"+year+"/"+month+"/"+partner);
 					$("#hei_outcomes").load("<?php echo base_url('charts/partner_summaries/hei_validation');?>/"+year+"/"+month+"/"+partner);
 					$("#hei_follow_up").load("<?php echo base_url('charts/partner_summaries/hei_follow');?>/"+year+"/"+month+"/"+partner);
@@ -220,6 +224,34 @@
 				}
 			});
 		});
+	}
+
+	function switch_source(){
+		var all = localStorage.getItem("my_var");
+
+		if(all == 1){
+			localStorage.setItem("my_var", 2);
+			all=2;
+			$("#samples_heading").html('(Repeat PCR)');
+			$("#switchButton").val('Click to Switch to All Tests');
+		}
+
+		else if(all == 2){
+			localStorage.setItem("my_var", 3);
+			all=3;
+			$("#samples_heading").html('(All Tests)');
+			$("#switchButton").val('Click to Switch to Inital PCR');
+		}
+
+		else{
+			localStorage.setItem("my_var", 1);
+			all=1;
+			$("#samples_heading").html('(Initial PCR)');
+			$("#switchButton").val('Click to Switch to Repeat PCR');
+		}
+
+		$("#testing_trends").load("<?php echo base_url('charts/partner_summaries/testing_trends'); ?>/"+null+"/"+all);
+
 	}
 
 	

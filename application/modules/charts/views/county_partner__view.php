@@ -34,7 +34,7 @@
 		<?php echo $outcomes;?>
 	</tbody>
 </table>
-<div class="row" id="exc">
+<div class="row" id="exc" style="display: none;">
 	
 	<div class="col-md-12">
 		<center><a href="<?php  echo $link; ?>"><button id="download_link" class="btn btn-primary" style="background-color: #009688;color: white;">Export To Excel</button></a></center>
@@ -42,7 +42,18 @@
 </div>
 <script type="text/javascript" charset="utf-8">
   $(document).ready(function() {
-  	$('table').DataTable();
+
+  	$('table').DataTable({
+  		dom: '<"btn btn-primary"B>lTfgtip',
+		responsive: true,
+	    buttons : [
+	        {
+	          text:  'Export to Excel',
+	          extend: 'csvHtml5',
+	          title: 'Download'
+	        }
+	      ]
+  	});
 
     // $("table").tablecloth({
     //   theme: "paper",

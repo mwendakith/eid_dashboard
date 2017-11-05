@@ -7,7 +7,11 @@ BEGIN
             `year`, 
             `month`, 
             `pos`, 
-            `neg` 
+            `neg`,
+            `rpos`, 
+            `rneg`,
+            `allpos`, 
+            `allneg` 
             FROM `county_summary`
                 WHERE 1";
 

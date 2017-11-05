@@ -1,5 +1,6 @@
 <script type="text/javascript">
 	$().ready(function(){
+		localStorage.setItem("my_var", 1);
 		$.get("<?php echo base_url();?>template/dates", function(data){
     		obj = $.parseJSON(data);
 	
@@ -10,7 +11,7 @@
 			$(".display_range").html("( "+obj['prev_year']+" - "+obj['year']+" )");
     	});
 		$("#nattat").load("<?php echo base_url('charts/summaries/turnaroundtime'); ?>");
-		$("#testing_trends").load("<?php echo base_url('charts/summaries/testing_trends'); ?>");
+		$("#testing_trends").load("<?php echo base_url('charts/summaries/testing_trends'); ?>/null/1");
 		$("#eidOutcomes").load("<?php echo base_url('charts/summaries/eid_outcomes');?>");
 		$("#hei_outcomes").load("<?php echo base_url('charts/summaries/hei_validation');?>");
 		$("#hei_follow_up").load("<?php echo base_url('charts/summaries/hei_follow');?>");
@@ -26,6 +27,7 @@
 		//Function when the county is selected
 		$("select").change(function(){
 			em = $(this).val();
+			var all = localStorage.getItem("my_var");
 
 			// Send the data using post
 	        var posting = $.post( "<?php echo base_url();?>template/filter_county_data", { county: em } );
@@ -56,7 +58,7 @@
 				$("#county_outcomes").html("<center><div class='loader'></div></center>");
 
 				// Actual graphs being loaded
-				$("#testing_trends").load("<?php echo base_url('charts/summaries/testing_trends'); ?>/"+null+"/"+data);
+				$("#testing_trends").load("<?php echo base_url('charts/summaries/testing_trends'); ?>/"+null+"/"+all+"/"+data);
 				$("#eidOutcomes").load("<?php echo base_url('charts/summaries/eid_outcomes');?>/"+null+"/"+null+"/"+data);
 				$("#hei_outcomes").load("<?php echo base_url('charts/summaries/hei_validation');?>/"+null+"/"+null+"/"+data);
 				$("#hei_follow_up").load("<?php echo base_url('charts/summaries/hei_follow');?>/"+null+"/"+null+"/"+data);
@@ -134,6 +136,8 @@
  		}
 
  		var posting = $.post( '<?php echo base_url();?>template/filter_date_data', { 'year': year, 'month': month } );
+ 		
+		var all = localStorage.getItem("my_var");
 
  		// Put the results in a div
 		posting.done(function( data ) {
@@ -159,7 +163,7 @@
 
 		// Actual graphs being loaded
 		$("#nattat").load("<?php echo base_url('charts/summaries/turnaroundtime'); ?>/"+year+"/"+month);
-		$("#testing_trends").load("<?php echo base_url('charts/summaries/testing_trends'); ?>/"+year);
+		$("#testing_trends").load("<?php echo base_url('charts/summaries/testing_trends'); ?>/"+year+"/"+all);
 		$("#eidOutcomes").load("<?php echo base_url('charts/summaries/eid_outcomes');?>/"+year+"/"+month);
 		$("#hei_outcomes").load("<?php echo base_url('charts/summaries/hei_validation');?>/"+year+"/"+month);
 		$("#hei_follow_up").load("<?php echo base_url('charts/summaries/hei_follow');?>/"+year+"/"+month);
@@ -171,5 +175,33 @@
 		// $("#feeding").load("<?php //echo base_url('charts/summaries/agegroup');?>");
 		
 		$("#county_outcomes").load("<?php echo base_url('charts/summaries/county_outcomes');?>/"+year+"/"+month); 
+	}
+
+	function switch_source(){
+		var all = localStorage.getItem("my_var");
+
+		if(all == 1){
+			localStorage.setItem("my_var", 2);
+			all=2;
+			$("#samples_heading").html('(Repeat PCR)');
+			$("#switchButton").val('Click to Switch to All Tests');
+		}
+
+		else if(all == 2){
+			localStorage.setItem("my_var", 3);
+			all=3;
+			$("#samples_heading").html('(All Tests)');
+			$("#switchButton").val('Click to Switch to Inital PCR');
+		}
+
+		else{
+			localStorage.setItem("my_var", 1);
+			all=1;
+			$("#samples_heading").html('(Initial PCR)');
+			$("#switchButton").val('Click to Switch to Repeat PCR');
+		}
+
+		$("#testing_trends").load("<?php echo base_url('charts/summaries/testing_trends'); ?>/"+null+"/"+all);
+
 	}
 </script>

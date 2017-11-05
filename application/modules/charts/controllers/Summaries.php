@@ -19,9 +19,9 @@ class Summaries extends MY_Controller
 		$this->load->view('turnaroundtime_view',$data);
 	}
 	
-	function testing_trends($year=NULL,$county=NULL,$partner=NULL)
+	function testing_trends($year=NULL,$type=NULL,$county=NULL,$partner=NULL)
 	{
-		$data['trends'] = $this->summaries_model->test_trends($year,$county,$partner);
+		$data['trends'] = $this->summaries_model->test_trends($year,$type,$county,$partner);
 		$data['div_name'] = "summary_yearly_summary";
 		$data['export'] = TRUE;
 		$link = $year . '/' . $county . '/' . $partner;

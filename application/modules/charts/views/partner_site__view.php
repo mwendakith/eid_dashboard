@@ -52,11 +52,22 @@
 <!-- <div id='download_link'></div> -->
 <script type="text/javascript" charset="utf-8">
   $(document).ready(function() {
-  	$('#unsupported').html("<?php echo $link2; ?>")
-  	$('#download_link').html("<?php echo $link;?>");
+  	$('#unsupported').html("<?php echo $link2; ?>");
+  	// $('#download_link').html("<?php // echo $link;?>");
   	$('#download_link > a').css("color","white");
   	$('#unsupported > a').css("color","white");
-  	$('#example').DataTable();
+
+  	$('#example').DataTable({
+  		dom: '<"btn btn-primary"B>lTfgtip',
+		responsive: true,
+	    buttons : [
+	        {
+	          text:  'Export to Excel',
+	          extend: 'csvHtml5',
+	          title: 'Download'
+	        }
+	      ]
+  	});
 
     $("table").tablecloth({
       theme: "paper",

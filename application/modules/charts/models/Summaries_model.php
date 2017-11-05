@@ -104,7 +104,7 @@ class Summaries_model extends MY_Model
 		return $this->db->query($sql)->result_array();
 	}
 
-	function test_trends($year=null,$county=null,$partner=null)
+	function test_trends($year=null, $type=1, $county=null,$partner=null)
 	{
 		$result = $this->get_testing_trends($year,$county,$partner);
 		// echo "<pre>";print_r($result);die();
@@ -137,10 +137,23 @@ class Summaries_model extends MY_Model
 			
 				$data['categories'][$key] = $this->resolve_month($value['month']).'-'.$value['year'];
 
-				$data["outcomes"][0]["data"][$key]	= (int) $value['pos'];
-				$data["outcomes"][1]["data"][$key]	= (int) $value['neg'];
-				$data["outcomes"][2]["data"][$key]	= round(@( ((int) $value['pos']*100) /((int) $value['neg']+(int) $value['pos'])),1);
+				if($type==1){
+					$data["outcomes"][0]["data"][$key]	= (int) $value['pos'];
+					$data["outcomes"][1]["data"][$key]	= (int) $value['neg'];
+					$data["outcomes"][2]["data"][$key]	= round(@( ((int) $value['pos']*100) /((int) $value['neg']+(int) $value['pos'])),1);
+				}
 
+				else if($type==2){
+					$data["outcomes"][0]["data"][$key]	= (int) $value['rpos'];
+					$data["outcomes"][1]["data"][$key]	= (int) $value['rneg'];
+					$data["outcomes"][2]["data"][$key]	= round(@( ((int) $value['rpos']*100) /((int) $value['rneg']+(int) $value['rpos'])),1);
+				}
+
+				else{
+					$data["outcomes"][0]["data"][$key]	= (int) $value['allpos'];
+					$data["outcomes"][1]["data"][$key]	= (int) $value['allneg'];
+					$data["outcomes"][2]["data"][$key]	= round(@( ((int) $value['allpos']*100) /((int) $value['allneg']+(int) $value['allpos'])),1);
+				}
 			
 		}
 		// echo "<pre>";print_r($data);die();
@@ -160,7 +173,7 @@ class Summaries_model extends MY_Model
 	    $f = fopen('php://memory', 'w');
 	    /** loop through array  */
 
-	    $b = array('Year', 'Month', 'Positive', 'Negative');
+	    $b = array('Year', 'Month', 'Positive', 'Negative', 'Repeat Positives', 'Repeat Negatives', 'All Positives', 'All Negatives');
 
 	    fputcsv($f, $b, $delimiter);
 

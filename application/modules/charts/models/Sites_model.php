@@ -100,10 +100,10 @@ class Sites_model extends MY_Model
 		// $data = $this->db->query($sql)->result_array();
 
 		// $this->load->helper('download');
-  //       $this->load->library('PHPReport/PHPReport');
+        // $this->load->library('PHPReport/PHPReport');
 
 
-  //       $template = 'unsupported_sites_template.xlsx';
+        // $template = 'unsupported_sites_template.xlsx';
 
 	 //    //set absolute path to directory with template files
 	 //    $templateDir = __DIR__ . "/";
@@ -234,13 +234,13 @@ class Sites_model extends MY_Model
 		// echo "<pre>";print_r($data);die();
 
 		// $this->load->helper('download');
-  //       $this->load->library('PHPReport/PHPReport');
+        // $this->load->library('PHPReport/PHPReport');
 
-  //       ini_set('memory_limit','-1');
+        // ini_set('memory_limit','-1');
 	 //    ini_set('max_execution_time', 900);
 
 
-  //       $template = 'partner_sites.xlsx';
+        // $template = 'partner_sites.xlsx';
 
 	 //    //set absolute path to directory with template files
 	 //    $templateDir = __DIR__ . "/";
@@ -601,18 +601,18 @@ class Sites_model extends MY_Model
 		foreach ($result as $key => $value) {
 			// echo "<pre>";print_r($value);die();
 			// $data['ul'] .= '<tr>
-   //              <td>Validated Positives:</td>
-   //                  <td>'.number_format((int) $value['followup_positives']).'<b>('.round((((int) $value['followup_positives']/(int) $value['positives'])*100),1).'%)</b></td>
-   //                  <td></td>
-   //                  <td></td>
-   //              </tr>
+                // <td>Validated Positives:</td>
+                //     <td>'.number_format((int) $value['followup_positives']).'<b>('.round((((int) $value['followup_positives']/(int) $value['positives'])*100),1).'%)</b></td>
+                //     <td></td>
+                //     <td></td>
+                // </tr>
  
-   //              <tr>
-   //                  <td>Confirmed Actual positive Infants:</td>
-   //                  <td>'.number_format((int) $value['Confirmed Positive']).'<b>('.round((((int) $value['Confirmed Positive']/(int) $value['true_tests'])*100),1).'%)</b></td>
-   //                  <td></td>
-   //                  <td></td>
-   //              </tr>';
+                // <tr>
+                //     <td>Confirmed Actual positive Infants:</td>
+                //     <td>'.number_format((int) $value['Confirmed Positive']).'<b>('.round((((int) $value['Confirmed Positive']/(int) $value['true_tests'])*100),1).'%)</b></td>
+                //     <td></td>
+                //     <td></td>
+                // </tr>';
 				$data['ul'] .= '<tr>
                  <td>Actual Infants Tested Positive:</td>
                      <td>'.number_format((int) $value['positives']).'</td>

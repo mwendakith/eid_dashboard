@@ -12,9 +12,9 @@ class Partner_summaries extends MY_Controller
 		$this->load->model('partner_summaries_model');
 	}
 
-	function testing_trends($year=NULL,$partner=NULL)
+	function testing_trends($year=NULL,$type=NULL,$partner=NULL)
 	{
-		$data['trends'] = $this->partner_summaries_model->test_trends($year,$partner);
+		$data['trends'] = $this->partner_summaries_model->test_trends($year,$type,$partner);
 		$data['div_name'] = "partner_yearly_summary";
 		$data['export'] = TRUE;
 		$link = $year . '/' . $partner;

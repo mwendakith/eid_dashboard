@@ -4,7 +4,7 @@
 		padding-bottom: 2em;
 	}
 </style>
-<table id="example" cellspacing="1" cellpadding="3" class="tablehead table table-striped table-bordered" style="background:#CCC;">
+<table id="c_subcounty" cellspacing="1" cellpadding="3" class="tablehead table table-striped table-bordered" style="background:#CCC;">
 	<thead>
 		<tr class="colhead">
 			<th rowspan="2">#</th>
@@ -50,7 +50,7 @@
   $(document).ready(function() {
   	// $('table').DataTable();
 
-  	$('table').DataTable({
+  	$('#c_subcounty').DataTable({
   		dom: '<"btn btn-primary"B>lTfgtip',
 		responsive: true,
 	    buttons : [

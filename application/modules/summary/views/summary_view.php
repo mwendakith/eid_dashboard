@@ -69,9 +69,13 @@
 	<div class="col-md-12 col-sm-12 col-xs-12">
 		<div class="panel panel-default">
 		  <div class="panel-heading" style="min-height: 5em;">
-		  	<div class="col-sm-3">
-			    Testing Trends <div id="samples_heading">(Initial PCR)</div> 
+		  	<div class="col-sm-4">
+			    Testing Trends
 			    <div class="display_range"></div>
+			</div>
+
+			<div class="col-sm-5">
+			    <h3> <div id="samples_heading">(Initial PCR)</div> </h3>
 			</div>
 		    
 		    <div class="col-sm-3">

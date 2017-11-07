@@ -191,7 +191,7 @@
 			localStorage.setItem("my_var", 3);
 			all=3;
 			$("#samples_heading").html('(All Tests)');
-			$("#switchButton").val('Click to Switch to Inital PCR');
+			$("#switchButton").val('Click to Switch to Initial PCR');
 		}
 
 		else{

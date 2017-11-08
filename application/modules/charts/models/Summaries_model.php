@@ -104,7 +104,7 @@ class Summaries_model extends MY_Model
 		return $this->db->query($sql)->result_array();
 	}
 
-	function test_trends($year=null,$county=null,$partner=null)
+	function test_trends($year=null, $type=1, $county=null,$partner=null)
 	{
 		$result = $this->get_testing_trends($year,$county,$partner);
 		// echo "<pre>";print_r($result);die();
@@ -137,10 +137,23 @@ class Summaries_model extends MY_Model
 			
 				$data['categories'][$key] = $this->resolve_month($value['month']).'-'.$value['year'];
 
-				$data["outcomes"][0]["data"][$key]	= (int) $value['pos'];
-				$data["outcomes"][1]["data"][$key]	= (int) $value['neg'];
-				$data["outcomes"][2]["data"][$key]	= round(@( ((int) $value['pos']*100) /((int) $value['neg']+(int) $value['pos'])),1);
+				if($type==1){
+					$data["outcomes"][0]["data"][$key]	= (int) $value['pos'];
+					$data["outcomes"][1]["data"][$key]	= (int) $value['neg'];
+					$data["outcomes"][2]["data"][$key]	= round(@( ((int) $value['pos']*100) /((int) $value['neg']+(int) $value['pos'])),1);
+				}
 
+				else if($type==2){
+					$data["outcomes"][0]["data"][$key]	= (int) $value['rpos'];
+					$data["outcomes"][1]["data"][$key]	= (int) $value['rneg'];
+					$data["outcomes"][2]["data"][$key]	= round(@( ((int) $value['rpos']*100) /((int) $value['rneg']+(int) $value['rpos'])),1);
+				}
+
+				else{
+					$data["outcomes"][0]["data"][$key]	= (int) $value['allpos'];
+					$data["outcomes"][1]["data"][$key]	= (int) $value['allneg'];
+					$data["outcomes"][2]["data"][$key]	= round(@( ((int) $value['allpos']*100) /((int) $value['allneg']+(int) $value['allpos'])),1);
+				}
 			
 		}
 		// echo "<pre>";print_r($data);die();
@@ -160,7 +173,7 @@ class Summaries_model extends MY_Model
 	    $f = fopen('php://memory', 'w');
 	    /** loop through array  */
 
-	    $b = array('Year', 'Month', 'Positive', 'Negative');
+	    $b = array('Year', 'Month', 'Positive', 'Negative', 'Repeat Positives', 'Repeat Negatives', 'All Positives', 'All Negatives');
 
 	    fputcsv($f, $b, $delimiter);
 
@@ -618,6 +631,65 @@ class Summaries_model extends MY_Model
 			// $data["ageGnd"][1]["data"][4]	=  (int) $value['above18mneg'];
 		}
 		// die();
+		$data['ageGnd'][0]['drilldown']['color'] = '#913D88';
+		$data['ageGnd'][1]['drilldown']['color'] = '#96281B';
+
+		// echo "<pre>";print_r($data);die();
+		return $data;
+	}
+
+	function age2($year=null,$month=null,$county=null,$partner=null,$to_year=null,$to_month=null)
+	{
+		if ($county==null || $county=='null') {
+			$county = $this->session->userdata('county_filter');
+		}
+		if ($partner==null || $partner=='null') {
+			$partner = $this->session->userdata('partner_filter');
+		}
+
+		if ($year==null || $year=='null') {
+			$year = $this->session->userdata('filter_year');
+		}
+		if ($month==null || $month=='null') {
+			if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
+				$month = 0;
+			}else {
+				$month = $this->session->userdata('filter_month');
+			}
+		}
+		if ($to_month==null || $to_month=='null') {
+			$to_month = 0;
+		}
+		if ($to_year==null || $to_year=='null') {
+			$to_year = 0;
+		}
+
+		if ($partner) {
+			$sql = "CALL `proc_get_eid_partner_age_range`(0, '".$partner."','".$year."','".$month."','".$to_year."','".$to_month."')";
+		} else {
+			if ($county==null || $county=='null') {
+				$sql = "CALL `proc_get_eid_national_age_range`(0, '".$year."','".$month."','".$to_year."','".$to_month."')";
+			} else {
+				$sql = "CALL `proc_get_eid_county_age_range`(0, '".$county."','".$year."','".$month."','".$to_year."','".$to_month."')";
+			}
+		}
+		// echo "<pre>";print_r($sql);die();
+		$result = $this->db->query($sql)->result_array();
+		// echo "<pre>";print_r($result);die();
+		$count = 0;
+				
+		// echo "<pre>";print_r($result);die();
+		$data['ageGnd'][0]['name'] = 'Positive';
+		$data['ageGnd'][1]['name'] = 'Negative';
+
+		$count = 0;
+
+		foreach ($result as $key => $value) {
+			$data['categories'][$key] 			= $value['age_range'];
+
+			$data["ageGnd"][0]["data"][$key]	=  (int) $value['pos'];
+			$data["ageGnd"][1]["data"][$key]	=  (int) $value['neg'];
+		}
 		$data['ageGnd'][0]['drilldown']['color'] = '#913D88';
 		$data['ageGnd'][1]['drilldown']['color'] = '#96281B';
 

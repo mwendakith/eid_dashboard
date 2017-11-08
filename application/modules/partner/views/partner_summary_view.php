@@ -12,8 +12,15 @@
 	<div class="row">
 		<div class="col-md-12 col-sm-12 col-xs-12">
 			<div class="panel panel-default">
-			  <div class="panel-heading">
-			    Testing Trends <div class="display_range"></div>
+			  <div class="panel-heading" style="min-height: 5em;">
+			  	<div class="col-sm-3">
+				    Testing Trends <div id="samples_heading">(Initial PCR)</div>
+				    <div class="display_range"></div>
+			    </div> 
+			    
+			    <div class="col-sm-3">
+			    	<input type="submit" class="btn btn-primary" id="switchButton" onclick="switch_source()" value="Click to Switch To Repeat PCR">
+			    </div>
 			  </div>
 			  <div class="panel-body" id="testing_trends">
 			    <center><div class="loader"></div></center>
@@ -122,7 +129,7 @@
 
 	</div>
 	
-  <div class="row">
+  <div class="row" style="display: none;">
     <div class="col-md-6 col-sm-12 col-xs-12">
       <div class="panel panel-default">
         <div class="panel-heading">

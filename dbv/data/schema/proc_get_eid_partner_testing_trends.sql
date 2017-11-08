@@ -7,7 +7,11 @@ BEGIN
             `year`, 
             `month`, 
             `pos`, 
-            `neg` 
+            `neg`,
+            `rpos`, 
+            `rneg`,
+            `allpos`, 
+            `allneg` 
             FROM `ip_summary`
                 WHERE 1";
 

@@ -8,7 +8,12 @@ BEGIN
             `year`, 
             `month`, 
             `pos`, 
-            `neg` 
+            `neg`,
+            `rpos`, 
+            `rneg`,
+            `allpos`, 
+            `allneg`
+
             FROM `national_summary`
                 WHERE 1";
 

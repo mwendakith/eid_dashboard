@@ -60,6 +60,7 @@ class Template_model extends MY_Model
 		foreach ($lab_data as $key => $value) {
 			$dropdown .= '<option value="'.$value['ID'].'">'.$value['labname'].'</option>';
 		}
+		$dropdown .= '<option value="11">POC Sites</option>';
 		
 		return $dropdown;
 	}

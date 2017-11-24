@@ -26,11 +26,13 @@ class Survey extends MY_Controller {
 			'poc' => $this->input->post('poc'),
 			'name' => $this->input->post('name'),
 			'survey_date' => $this->input->post('dos')
-		);
+		);		
 
-		$this->db->insert('survey', $data);
+		$db1 = $this->load->database('eid_survey', true);
 
-		$id = $this->db->insert_id();
+		$this->db1->insert('survey', $data);
+
+		$id = $this->db1->insert_id();
 
 		redirect('/survey/survey_details/' . $id);
 	}
@@ -56,9 +58,11 @@ class Survey extends MY_Controller {
 			'result' => $this->input->post('result'),
 			'art-initiated' => $this->input->post('art'),
 			'date-art' => $this->input->post('do-art')
-		);
+		);		
 
-		$this->db->insert('survey_details', $data);
+		$db1 = $this->load->database('eid_survey', true);
+
+		$this->db1->insert('survey_details', $data);
 
 		redirect('/survey/survey_details/' . $this->input->post('survey_id'));
 	}

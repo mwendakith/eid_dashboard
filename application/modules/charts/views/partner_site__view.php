@@ -58,15 +58,20 @@
   	$('#unsupported > a').css("color","white");
 
   	$('#example').DataTable({
-  		dom: '<"btn btn-primary"B>lTfgtip',
-		responsive: true,
-	    buttons : [
-	        {
-	          text:  'Export to Excel',
-	          extend: 'csvHtml5',
-	          title: 'Download'
-	        }
-	      ]
+      dom: '<"btn btn-primary"B>lTfgtip',
+      responsive: true,
+        buttons : [
+            {
+              text:  'Export to CSV',
+              extend: 'csvHtml5',
+              title: 'Download'
+            },
+            {
+              text:  'Export to Excel',
+              extend: 'excelHtml5',
+              title: 'Download'
+            }
+          ]
   	});
 
     $("table").tablecloth({

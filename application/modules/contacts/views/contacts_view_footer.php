@@ -13,41 +13,43 @@
 				}
 			});
 
-			$("form").submit(function(event){
-				event.preventDefault();
-				//Values from the form received
-				name 	= $("#name").val();
-				email 	= $("#email").val();
-				phone 	= $("#phone").val();
-				subject = $("#subject").val();
-				message = $("#message").val();
-				//Setting the loader
-				$("#loading").html("<div class='loader'></div>");
-				//Posting the contact details provided
-				var posting = $.post( "<?php echo base_url();?>contacts/submit",
-								{
-									cname	: name,
-									cemail	: email,
-									cphone	: phone,
-									csubject: subject,
-									cmessage: message 
-								});
-				posting.done(function( data ) {
-					if (data==0) {
-						// Error occured the email was not sent
-						setTimeout(function(){
-						  $("#loading").html("<div style='color:red;' style='height:36px;'>Error occured, the email was not sent!</div>");
-						}, 2000);
-						// console.log("Error occured, the email was not sent");
-					} else {
-						// Email sent very well
-						setTimeout(function(){
-						  $("#loading").html("<div style='color:green;' style='height:36px;'>Email sent successfully!</div>");
-						}, 2000);
-						// console.log("Email sent successfully");
-					}
-				});
-			});
+			// $("form").submit(function(event){
+			// 	event.preventDefault();
+			// 	//Values from the form received
+			// 	name 	= $("#name").val();
+			// 	email 	= $("#email").val();
+			// 	phone 	= $("#phone").val();
+			// 	subject = $("#subject").val();
+			// 	message = $("#message").val();
+			// 	g_recaptcha_response = $(".g-recaptcha").val();
+			// 	//Setting the loader
+			// 	$("#loading").html("<div class='loader'></div>");
+			// 	//Posting the contact details provided
+			// 	var posting = $.post( "<?php echo base_url();?>contacts/submit",
+			// 					{
+			// 						cname	: name,
+			// 						cemail	: email,
+			// 						cphone	: phone,
+			// 						csubject: subject,
+			// 						cmessage: message 
+			// 					});
+			// 	posting.done(function( data ) {
+			// 		console.log(data);
+			// 		if (data==0) {
+			// 			// Error occured the email was not sent
+			// 			setTimeout(function(){
+			// 			  $("#loading").html("<div style='color:red;' style='height:36px;'>Error occured, the email was not sent!</div>");
+			// 			}, 2000);
+			// 			// console.log("Error occured, the email was not sent");
+			// 		} else {
+			// 			// Email sent very well
+			// 			setTimeout(function(){
+			// 			  $("#loading").html("<div style='color:green;' style='height:36px;'>Email sent successfully!</div>");
+			// 			}, 2000);
+			// 			// console.log("Email sent successfully");
+			// 		}
+			// 	});
+			// });
 		});
 	});
 </script>

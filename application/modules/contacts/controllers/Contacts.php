@@ -28,23 +28,29 @@ class Contacts extends MY_Controller
 
 	function submit()
 	{
-		print_r($this->input->post());die();
+		// print_r($this->input->post());die();
 		require_once __DIR__ . '/../../../libraries/autoload.php';
-		$secret = '6LfymQsUAAAAAFay69bbyGSjTH4ofVgFxv7kyuGQ';
+		$secret = '6LcQyDkUAAAAAF68FPslD3B0Lh3WefOIl0HvOY4T';
 		$recaptcha = new \ReCaptcha\ReCaptcha($secret);
 		$resp = $recaptcha->verify($_POST['g-recaptcha-response'], $_SERVER['REMOTE_ADDR']);
-		print_r($resp);die();
+		if($resp->isSuccess()){
+			$data = array();
+			$name = trim($this->input->post('cname'));
+			$email = trim($this->input->post('cemail'));
+			$subject = trim($this->input->post('csubject'));
+			$message = trim($this->input->post('cmessage')."\n\n".$name." ".$this->input->post('cphone'));
 
-		$data = array();
-		$name = $this->input->post('cname');
-		$email = $this->input->post('cemail');
-		$subject = $this->input->post('csubject');
-		$message = $this->input->post('cmessage')."\n\n".$name." ".$this->input->post('cphone');
-
-		$responce = $this->smtpmailer($email, $name, $subject, $message);
-		if ($responce) {
-			$sent = 1;
-		} else {
+			if ($name != '' || $email != '' || $subject != '' || $message != '') {
+				$responce = $this->smtpmailer($email, $name, $subject, $message);
+				if ($responce) {
+					$sent = 1;
+				} else {
+					$sent = 0;
+				}
+			} else {
+				$sent = 0;
+			}
+		}else {
 			$sent = 0;
 		}
 		
@@ -73,7 +79,7 @@ class Contacts extends MY_Controller
 		// $mail->AddAddress('jlusike@clintonhealthaccess.org');
 		// $mail->AddAddress('tngugi@clintonhealthaccess.org');
 		$mail->AddAddress('baksajoshua09@gmail.com');
-		$mail->AddAddress('joelkith@gmail.com');
+		// $mail->AddAddress('joelkith@gmail.com');
 		if(!$mail->Send()) {
 			$error = 'Mail error: '.$mail->ErrorInfo; 
 			return false;

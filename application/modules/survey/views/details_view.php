@@ -1,5 +1,5 @@
-<?php $siteKey = '6LfymQsUAAAAAG7YlfJ12gGnmFNRUZJ6JSkPEFiT';
-$lang = 'en';?>
+<?php $this->load->view('header_clerk'); ?>
+
 <div class="row">
 	<div class="col-md-6 col-md-offset-3">
 		<div class="panel panel-default">

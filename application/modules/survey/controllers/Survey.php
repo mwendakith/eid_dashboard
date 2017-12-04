@@ -36,7 +36,7 @@ class Survey extends MY_Controller {
 			if($user->type == 1){
 				redirect('/survey/create_user');
 			}
-			redirect('/survey');
+			redirect('/survey/surveys');
 		}
 		else{
 			redirect('/survey/login/1');
@@ -98,6 +98,41 @@ class Survey extends MY_Controller {
 		$this->session->set_userdata('survey_id', $id);
 
 		redirect('/survey/survey_details/' . $id);
+	}
+
+	public function surveys()
+	{
+		$this->check_auth();
+		$this->data['content_view'] = 'survey/survey_details_view';
+
+		$this->db->select('survey.*, view_facilitys.name, view_facilitys.countyname');
+		$this->db->where('surveyor_id', $this->session->userdata('user_id'));
+		$this->db->join('view_facilitys', 'view_facilitys.id = survey.facility');
+		$surveys = $this->db->get('survey')->result_array();
+
+		$ul = "";
+
+		foreach ($surveys as  $key => $value) {
+			$ul .= "<tr>";
+			$ul .= "<td>" . $value['name'] . "</td>";
+			$ul .= "<td>" . $value['countyname'] . "</td>";
+			$ul .= "<td>" . $this->resolve_poc($value['poc']) . "</td>";
+			$ul .= "<td>" . $value['survey_date'] . "</td>";
+			$ul .= "<td> <a href='" . base_url('survey/survey_details/' . $value['id']) . "'> Add Survey</a> </td>";
+			$ul .= "<td> <a href='" . base_url('survey/delete_survey_det/' . $value['id']) . "'> Delete</a> </td>";
+			$ul .= "</tr>";
+		}
+
+		$this->data['surveys'] = $ul;
+		$this -> template($this->data);
+	}
+
+	public function delete_survey_det($id=NULL)
+	{
+		$this->check_auth();
+		$db1 = $this->load->database('eid_survey', true);
+		$db1->delete('survey', array('id' => $id));
+		redirect('/survey/surveys/');
 	}
 
 
@@ -208,6 +243,92 @@ class Survey extends MY_Controller {
 		redirect('/survey/survey_details/' . $this->session->userdata('survey_id'));
 	}
 
+	public function view_users(){
+		$this->check_auth(1);
+		$sql = "SELECT surveyors.*, COUNT(survey_details.id) AS surveys_done ";
+		$sql .= "FROM surveyors LEFT JOIN survey ON surveyors.id = survey.surveyor_id ";
+		$sql .= "LEFT JOIN survey_details ON survey.id = survey_details.survey_id ";
+		$sql .= "GROUP BY surveyors.id";
+
+		$result = $this->db->query($sql)->result_array();
+
+		$ul = "";
+
+		foreach ($result as  $key => $value) {
+			$ul .= "<tr>";
+			$ul .= "<td>" . $value['name'] . "</td>";
+			$ul .= "<td>" . $this->resolve_user($value['admin']) . "</td>";
+			$ul .= "<td>" . $value['surveys_done'] . "</td>";
+			$ul .= "<td>" . $value['username'] . "</td>";
+			$ul .= "<td> <a href='" . base_url('survey/delete_user/' . $value['id']) . "'> Delete</a> </td>";
+			$ul .= "</tr>";
+		}
+
+		$this->data['surveys'] = $ul;
+		$this->data['content_view'] = 'survey/user';
+		$this -> template($this->data);
+
+
+	}
+
+	public function view_surveys(){
+		$this->check_auth(1);
+		// $sql = "SELECT * ";
+		// $sql .= "FROM surveyors LEFT JOIN survey ON surveyors.id = survey.surveyor_id ";
+		// $sql .= "LEFT JOIN survey_details ON survey.id = survey_details.survey_id ";
+		// $sql .= "LEFT JOIN survey_details ON survey.id = survey_details.survey_id ";
+
+		// $result = $this->db->query($sql)->result_array();
+
+
+		$this->db->select('survey.*, survey_details.*, surveyors.*, view_facilitys.name as facility_name, view_facilitys.countyname');
+		$this->db->join('survey_details', 'survey.id = survey_details.survey_id');
+		$this->db->join('view_facilitys', 'view_facilitys.id = survey.facility');
+		$this->db->join('surveyors', 'surveyors.id = survey.surveyor_id');
+		$result = $this->db->get('survey')->result_array();
+
+		$ul = "";
+
+		foreach ($result as  $key => $value) {
+			$ul .= "<tr>";
+			$ul .= "<td>" . $value['facility_name'] . "</td>";
+			$ul .= "<td>" . $value['countyname'] . "</td>";
+			$ul .= "<td>" . $this->resolve_poc($value['poc']) . "</td>";
+			$ul .= "<td>" . $value['survey_date'] . "</td>";
+
+			$ul .= "<td>" . $value['name'] . "</td>";
+
+			$ul .= "<td>" . $value['date-of-birth'] . "</td>";
+			$ul .= "<td>" . $this->resolve_gender($value['gender']) . "</td>";
+			$ul .= "<td>" . $this->resolve_entry($value['entrypoint']) . "</td>";
+			$ul .= "<td>" . $value['date-of-visit'] . "</td>";
+			$ul .= "<td>" . $value['date-collected'] . "</td>";
+			$ul .= "<td>" . $value['date-tested'] . "</td>";
+			$ul .= "<td>" . $value['date-dispatch'] . "</td>";
+			$ul .= "<td>" . $this->resolve_result($value['result']) . "</td>";
+			$ul .= "<td>" . $this->resolve_art($value['art-initiated']) . "</td>";
+			$ul .= "<td>" . $value['date-art'] . "</td>";
+
+			$ul .= "</tr>";
+		}
+
+		$this->data['surveys'] = $ul;
+		$this->data['content_view'] = 'survey/view_surveys';
+		$this -> template($this->data);
+
+
+	}
+
+
+
+	public function delete_user($id=NULL)
+	{
+		$this->check_auth(1);
+		$db1 = $this->load->database('eid_survey', true);
+		$db1->delete('surveyors', array('id' => $id));
+		redirect('/survey/view_users/');
+	}
+
 	private function check_auth($admin = null){
 		$user_id = $this->session->userdata('user_id');
 		$user_type = $this->session->userdata('user_type');
@@ -256,6 +377,22 @@ class Survey extends MY_Controller {
 			return "Male";
 		}else{
 			return "Female";
+		}
+	}
+
+	private function resolve_user($id){
+		if($id == 1){
+			return "Administrator";
+		}else{
+			return "Data Clerk";
+		}
+	}
+
+	private function resolve_poc($id){
+		if($id == 1){
+			return "POC";
+		}else{
+			return "Non POC";
 		}
 	}
 

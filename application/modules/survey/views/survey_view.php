@@ -1,5 +1,4 @@
-<?php $siteKey = '6LfymQsUAAAAAG7YlfJ12gGnmFNRUZJ6JSkPEFiT';
-$lang = 'en';?>
+<?php $this->load->view('header_clerk'); ?>
 
 <div class="row">
     <div class="col-md-12 col-sm-12 col-xs-12">
@@ -34,12 +33,6 @@ $lang = 'en';?>
         
       </div>
     </div>	
-</div>
-
-<div class="row">
-	<div class="col-md-12">
-		<center><a href="<?php  echo base_url('survey/logout'); ?>"><button class="btn btn-primary" style="background-color: #009688;color: white;">Logout</button></a></center>
-	</div>
 </div>
 
 

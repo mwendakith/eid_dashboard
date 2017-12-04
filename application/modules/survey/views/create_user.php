@@ -1,5 +1,5 @@
-<?php $siteKey = '6LfymQsUAAAAAG7YlfJ12gGnmFNRUZJ6JSkPEFiT';
-$lang = 'en';?>
+
+<?php $this->load->view('header_admin'); ?>
 <div class="row">
 	<div class="col-md-6 col-md-offset-3">
 		<div class="panel panel-default">
@@ -21,7 +21,7 @@ $lang = 'en';?>
 						<label for="admin" class="col-sm-2 control-label" style="color: black;">User Type:</label>
 						<div class="col-sm-10">
 							<input type="radio" name="admin" value=1>Admin
-							<input type="radio" name="admin" value=0>Ordinary
+							<input type="radio" name="admin" value=0>Data Clerk
 						</div>
 					</div>
 

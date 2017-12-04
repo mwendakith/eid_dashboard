@@ -2,48 +2,6 @@
 $lang = 'en';?>
 
 <div class="row">
-    <div class="col-md-12 col-sm-12 col-xs-12">
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          Survey Details 
-        </div>
-        <div class="panel-body">
-        	<table id="example" cellspacing="1" cellpadding="3" class="tablehead table table-striped table-bordered">
-					<thead>
-						<tr class="colhead">
-							<th>Date of Birth</th>
-							<th>Gender</th>
-							<th>Entry Point</th>
-							<th>Date of Visit</th>
-							<th>Date of Collection</th>
-							<th>Date of Testing</th>
-							<th>Date of Result Return</th>
-							<th>Result</th>
-							<th>Art Initiation</th>
-							<th>Date of ART Initiation</th>
-							<th>Update</th>
-							<th>Delete</th>
-						</tr>
-					</thead>
-					<tbody>
-						<?php echo $surveys;?>
-					</tbody>
-				</table>
-            </div>
-        </div>
-        
-      </div>
-    </div>	
-</div>
-
-<div class="row">
-	<div class="col-md-12">
-		<center><a href="<?php  echo base_url('survey/logout'); ?>"><button class="btn btn-primary" style="background-color: #009688;color: white;">Logout</button></a></center>
-	</div>
-</div>
-
-
-<div class="row">
 	<div class="col-md-6 col-md-offset-3">
 		<div class="panel panel-default">
 			<div class="panel-heading">
@@ -51,26 +9,38 @@ $lang = 'en';?>
 			</div>
 			<div class="panel-body" id="contact_us">
 				<center><div id="error_div"></div></center>
-			    <form class="form-horizontal" role="form" method="post" action="<?php echo base_url();?>survey/details">
+			    <form class="form-horizontal" role="form" method="post" action="<?php echo base_url('survey/update_survey/' . $survey['id']);?>">
 
-			    	<input type="hidden"  name="survey_id" value="<?php echo $survey_id ?>" >
+			    	<input type="hidden"  name="survey_id" value="<?= $survey['survey_id'] ?>" >
 
 					<div class="form-group">
 						<label for="dob" class="col-sm-2 control-label" style="color: black;">DOB:</label>
 						<div class="col-sm-10">
-							<input type="text" class="form-control dt-picker" name="dob" placeholder="Date of Birth" required>
+							<input type="text" class="form-control dt-picker" name="dob" placeholder="Date of Birth" required value="<?= $survey['date-of-birth'] ?>">
 						</div>
 					</div>
 
 					<div class="form-group">
 						<label for="gender" class="col-sm-2 control-label" style="color: black;">Gender:</label>
 						<div class="col-sm-10">
-							<input type="radio" name="gender" value="M">Male
-							<input type="radio" name="gender" value="F">Female
+							<input type="radio" name="gender" value="M"
+								<?php
+									if($survey['gender'] == "M"){
+										echo "checked";
+									}
+								?>
+							>Male
+							<input type="radio" name="gender" value="F"
+								<?php
+									if($survey['gender'] == "F"){
+										echo "checked";
+									}
+								?>
+							>Female
 						</div>
 					</div>
 
-					<div class="form-group">
+					<!-- <div class="form-group">
 						<label for="entry" class="col-sm-2 control-label" style="color: black;">Entry Point:</label>
 						<div class="col-sm-10">
 							<select class="form-control survey-select" name="entry" placeholder="Entry Point" required>
@@ -84,12 +54,33 @@ $lang = 'en';?>
 								<option value=7 > No Data </option>
 							</select>
 						</div>
+					</div> -->
+
+
+					<div class="form-group">
+						<label for="entry" class="col-sm-2 control-label" style="color: black;">Entry Point:</label>
+						<div class="col-sm-10">
+							<select class="form-control survey-select" name="entry" placeholder="Entry Point" required>
+								<option disabled="true" selected="true"> Please Select an Entry Point </option>
+								<?php 
+									foreach ($entrypoints as $entrypoint) {
+										echo "<option value='" . $entrypoint['ID'] . "' ";
+										if($entrypoint['ID'] == $survey['entrypoint']){
+											echo "selected ";
+										}
+										echo "> " . $entrypoint['name'] . '</option>';
+									}
+								?>
+							</select>
+						</div>
 					</div>
+
+
 
 					<div class="form-group">
 						<label for="dov" class="col-sm-2 control-label" style="color: black;">Patient visit for EID:</label>
 						<div class="col-sm-10">
-							<input type="text" class="form-control dt-picker" name="dov" placeholder="Date of Visit" required>
+							<input type="text" class="form-control dt-picker" name="dov" placeholder="Date of Visit" required value="<?= $survey['date-of-visit'] ?>">
 						</div>
 					</div>
 
@@ -98,44 +89,68 @@ $lang = 'en';?>
 					<div class="form-group">
 						<label for="doc" class="col-sm-2 control-label" style="color: black;">Sample Collected:</label>
 						<div class="col-sm-10">
-							<input type="text" class="form-control dt-picker" name="doc" placeholder="Date of Collection" required>
+							<input type="text" class="form-control dt-picker" name="doc" placeholder="Date of Collection" required value="<?= $survey['date-collected'] ?>">
 						</div>
 					</div>
 
 					<div class="form-group">
 						<label for="dot" class="col-sm-2 control-label" style="color: black;">Eid test performed:</label>
 						<div class="col-sm-10">
-							<input type="text" class="form-control dt-picker" name="dot" placeholder="Date of Testing" required>
+							<input type="text" class="form-control dt-picker" name="dot" placeholder="Date of Testing" required value="<?= $survey['date-tested'] ?>">
 						</div>
 					</div>
 
 					<div class="form-group">
 						<label for="dor" class="col-sm-2 control-label" style="color: black;">Result Returned to Patient:</label>
 						<div class="col-sm-10">
-							<input type="text" class="form-control dt-picker" name="dor" placeholder="Date of Return of Result" required>
+							<input type="text" class="form-control dt-picker" name="dor" placeholder="Date of Return of Result" required value="<?= $survey['date-dispatch'] ?>">
 						</div>
 					</div>
 
 					<div class="form-group">
 						<label for="result" class="col-sm-2 control-label" style="color: black;">Result:</label>
 						<div class="col-sm-10">
-							<input type="radio" name="result" value="2" required>Positive
-							<input type="radio" name="result" value="1">Negative
+							<input type="radio" name="result" value="2" required
+								<?php
+									if($survey['result'] == "2" || $survey['result'] == 2){
+										echo "checked";
+									}
+								?>
+							>Positive
+							<input type="radio" name="result" value="1"
+								<?php
+									if($survey['result'] == "1" || $survey['result'] == 1){
+										echo "checked";
+									}
+								?>
+							>Negative
 						</div>
 					</div>
 
 					<div class="form-group">
 						<label for="art" class="col-sm-2 control-label" style="color: black;">Art Initiated:</label>
 						<div class="col-sm-10">
-							<input type="radio" name="art" value="1" required>Yes
-							<input type="radio" name="art" value="0">No
+							<input type="radio" name="art" value="1" required
+								<?php
+									if($survey['art-initiated'] == "1" || $survey['art-initiated'] == 1){
+										echo "checked";
+									}
+								?>
+							>Yes
+							<input type="radio" name="art" value="0"
+								<?php
+									if($survey['art-initiated'] == "0" || $survey['art-initiated'] == 0){
+										echo "checked";
+									}
+								?>
+							>No
 						</div>
 					</div>
 
 					<div class="form-group">
 						<label for="do-art" class="col-sm-2 control-label" style="color: black;">Date Initiated:</label>
 						<div class="col-sm-10">
-							<input type="text" class="form-control dt-picker" name="do-art" placeholder="Date of ART Initiation">
+							<input type="text" class="form-control dt-picker" name="do-art" placeholder="Date of ART Initiation" value="<?= $survey['date-art'] ?>">
 						</div>
 					</div>
 
@@ -163,10 +178,6 @@ $lang = 'en';?>
 	    });
 
 	    $(".survey-select").select2();
-
-	    $('#example').DataTable({
-	      responsive: true
-	  	});
     
 	});
 </script>

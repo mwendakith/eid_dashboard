@@ -301,7 +301,7 @@ class Positivity_model extends MY_Model
 		return $data;
 	}
 
-	function county_listings($year=NULL,$month=NULL,$county=NULL,$to_year=NULL,$to_month=null)
+	function county_listings($year=NULL,$month=NULL,$to_year=NULL,$to_month=null)
 	{
 		$li = '';
 		$table = '';

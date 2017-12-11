@@ -33,7 +33,7 @@ class Survey extends MY_Controller {
 		if(isset($user)){
 			$this->session->set_userdata('user_id', $user->id);
 			$this->session->set_userdata('user_type', $user->admin);
-			if($user->type == 1){
+			if($user->admin == 1){
 				redirect('/survey/create_user');
 			}
 			redirect('/survey/surveys');
@@ -105,9 +105,11 @@ class Survey extends MY_Controller {
 		$this->check_auth();
 		$this->data['content_view'] = 'survey/survey_details_view';
 
-		$this->db->select('survey.*, view_facilitys.name, view_facilitys.countyname');
-		$this->db->where('surveyor_id', $this->session->userdata('user_id'));
+		$this->db->select('survey.*, view_facilitys.name, view_facilitys.countyname, count(survey_details.id) as my_count');
 		$this->db->join('view_facilitys', 'view_facilitys.id = survey.facility');
+		$this->db->join('survey_details', 'survey.id = survey_details.survey_id');
+		$this->db->where('survey.surveyor_id', $this->session->userdata('user_id'));
+		$this->db->group_by("survey.id");
 		$surveys = $this->db->get('survey')->result_array();
 
 		$ul = "";
@@ -118,6 +120,7 @@ class Survey extends MY_Controller {
 			$ul .= "<td>" . $value['countyname'] . "</td>";
 			$ul .= "<td>" . $this->resolve_poc($value['poc']) . "</td>";
 			$ul .= "<td>" . $value['survey_date'] . "</td>";
+			$ul .= "<td>" . $value['my_count'] . "</td>";
 			$ul .= "<td> <a href='" . base_url('survey/survey_details/' . $value['id']) . "'> Add Survey</a> </td>";
 			$ul .= "<td> <a href='" . base_url('survey/delete_survey_det/' . $value['id']) . "'> Delete</a> </td>";
 			$ul .= "</tr>";
@@ -272,7 +275,7 @@ class Survey extends MY_Controller {
 	}
 
 	public function view_surveys(){
-		$this->check_auth(1);
+		$this->check_auth();
 		// $sql = "SELECT * ";
 		// $sql .= "FROM surveyors LEFT JOIN survey ON surveyors.id = survey.surveyor_id ";
 		// $sql .= "LEFT JOIN survey_details ON survey.id = survey_details.survey_id ";
@@ -285,6 +288,14 @@ class Survey extends MY_Controller {
 		$this->db->join('survey_details', 'survey.id = survey_details.survey_id');
 		$this->db->join('view_facilitys', 'view_facilitys.id = survey.facility');
 		$this->db->join('surveyors', 'surveyors.id = survey.surveyor_id');
+
+		$this->data['admin'] = true;
+
+		if ($this->session->userdata('user_type') != 1) {
+			$this->db->where('survey.surveyor_id', $this->session->userdata('user_id'));
+			$this->data['admin'] = false;
+		}
+
 		$result = $this->db->get('survey')->result_array();
 
 		$ul = "";

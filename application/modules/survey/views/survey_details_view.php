@@ -14,6 +14,7 @@
 							<th>County</th>
 							<th>POC</th>
 							<th>Survey Date</th>
+							<th>Number of Entries</th>
 							<th>Add Survey</th>
 							<th>Delete</th>
 						</tr>

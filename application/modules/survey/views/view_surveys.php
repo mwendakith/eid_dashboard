@@ -1,4 +1,14 @@
-<?php $this->load->view('header_admin'); ?>
+<?php 
+
+if($admin){
+	$this->load->view('header_admin');
+}
+
+else{
+	$this->load->view('header_clerk');
+}
+
+ ?>
 
 <div class="row">
     <div class="col-md-12 col-sm-12 col-xs-12">

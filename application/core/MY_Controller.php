@@ -237,7 +237,7 @@ if(!defined("BASEPATH")) exit("No direct script access allowed!");
 			if (!$data) {
 				# code...
 			} else {
-				if ($data['age'] == '8' || $data['age'] == 8) {
+				if ($data['age'] == '0' || $data['age'] == 0) {
 					$this->session->unset_userdata('age_filter');
 					$this->session->unset_userdata('site_filter');
 					$this->session->unset_userdata('partner_filter');

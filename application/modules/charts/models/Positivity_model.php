@@ -305,9 +305,6 @@ class Positivity_model extends MY_Model
 	{
 		$li = '';
 		$table = '';
-		if ($county==null || $county=='null') {
-			$county = $this->session->userdata('county_filter');
-		}
 		if ($to_year==null || $to_year=='null') {
 			$to_year = 0;
 		}
@@ -346,6 +343,7 @@ class Positivity_model extends MY_Model
 					$table .= '<td>'.$value['name'].'</td>';
 					$table .= '<td>'.round($value['pecentage'],1).'%</td>';
 					$table .= '<td>'.number_format((int) $value['pos']).'</td>';
+					$table .= '<td>'.number_format((int) $value['neg']).'</td>';
 					$table .= '</tr>';
 					$count++;
 			}
@@ -403,6 +401,7 @@ class Positivity_model extends MY_Model
 					$table .= '<td>'.$value['name'].'</td>';
 					$table .= '<td>'.round($value['pecentage'],1).'%</td>';
 					$table .= '<td>'.number_format((int) $value['pos']).'</td>';
+					$table .= '<td>'.number_format((int) $value['neg']).'</td>';
 					$table .= '</tr>';
 					$count++;
 				}
@@ -460,6 +459,7 @@ class Positivity_model extends MY_Model
 					$table .= '<td>'.$value['name'].'</td>';
 					$table .= '<td>'.round($value['pecentage'],1).'%</td>';
 					$table .= '<td>'.number_format((int) $value['pos']).'</td>';
+					$table .= '<td>'.number_format((int) $value['neg']).'</td>';
 					$table .= '</tr>';
 				$count++;
 				}
@@ -521,6 +521,7 @@ class Positivity_model extends MY_Model
 					$table .= '<td>'.$value['name'].'</td>';
 					$table .= '<td>'.round($value['positivity'],1).'%</td>';
 					$table .= '<td>'.number_format((int) $value['pos']).'</td>';
+					$table .= '<td>'.number_format((int) $value['neg']).'</td>';
 					$table .= '</tr>';
 					$count++;
 				}

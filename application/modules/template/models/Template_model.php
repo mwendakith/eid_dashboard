@@ -79,6 +79,19 @@ class Template_model extends MY_Model
 		return $dropdown;
 	}
 
+	function get_ages_dropdown()
+	{
+		$dropdown = '';
+		$this->db->order_by("ID","asc");
+		$lab_data = $this->db->get('age_bands')->result_array();
+
+		foreach ($lab_data as $key => $value) {
+			$dropdown .= '<option value="'.$value['ID'].'">'.$value['name'].'</option>';
+		}
+		
+		return $dropdown;
+	}
+
 	function get_site_dropdown()
 	{
 		$dropdown = '';
@@ -131,6 +144,15 @@ class Template_model extends MY_Model
 	{
 		$this->db->where('ID', $regimen_id);
 		$data = $this->db->get('prophylaxis')->result_array();
+		$name = $data[0]["name"];
+
+		return $name;
+	}
+
+	function get_age_name($age_id)
+	{
+		$this->db->where('ID', $age_id);
+		$data = $this->db->get('age_bands')->result_array();
 		$name = $data[0]["name"];
 
 		return $name;

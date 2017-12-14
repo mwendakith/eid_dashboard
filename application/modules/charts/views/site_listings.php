@@ -22,6 +22,7 @@
                 }else{
                   echo "<th>% Positivity</th>";
                   echo "<th>Positives</th>";
+                  echo "<th>Negatives</th>";
                 }
               ?>
         		</tr>

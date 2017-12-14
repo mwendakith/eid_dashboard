@@ -5,6 +5,7 @@ CREATE PROCEDURE `proc_get_eid_sites_positivity`
 BEGIN
   SET @QUERY =    "SELECT 
 						            SUM(`vss`.`actualinfantsPOS`) AS `pos`, 
+                        SUM(`actualinfants`-`actualinfantsPOS`) AS `neg`,
                         SUM(`vss`.`actualinfants`) AS `alltests`,
                         ((SUM(`vss`.`actualinfantsPOS`)/SUM(`vss`.`actualinfants`))*100) AS `positivity`, 
                         `vf`.`ID`, 

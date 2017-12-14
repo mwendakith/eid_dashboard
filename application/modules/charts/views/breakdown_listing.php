@@ -21,6 +21,7 @@
         			<th>Name</th>
         			<th>Positivity</th>
               <th>Positives</th>
+              <th>Negatives</th>
         		</tr>
         	</thead>
         	<tbody>

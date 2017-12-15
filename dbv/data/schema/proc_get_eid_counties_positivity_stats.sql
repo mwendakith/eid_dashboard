@@ -9,7 +9,7 @@ BEGIN
                     SUM(`actualinfants`-`actualinfantsPOS`) AS `neg`,
                     ((SUM(`actualinfantsPOS`)/(SUM(`actualinfants`)))*100) AS `pecentage`";
 
-     IF (from_month != 0 && from_month != '') THEN
+    IF (from_month != 0 && from_month != '') THEN
       SET @QUERY = CONCAT(@QUERY, " FROM `county_summary` `cs` ");
     ELSE
         SET @QUERY = CONCAT(@QUERY, " FROM `county_summary_yearly` `cs` ");

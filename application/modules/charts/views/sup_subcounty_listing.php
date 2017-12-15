@@ -22,6 +22,7 @@
                 }else{
                   echo "<th>% Positivity</th>";
                   echo "<th>Positives</th>";
+                  echo "<th>Negatives</th>";
                 }
               ?>
         		</tr>
@@ -38,7 +39,20 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 		$('#subList').DataTable({
-			responsive: true
+      dom: '<"btn btn-primary"B>lTfgtip',
+      responsive: true,
+        buttons : [
+            {
+              text:  'Export to CSV',
+              extend: 'csvHtml5',
+              title: 'Download'
+            },
+            {
+              text:  'Export to Excel',
+              extend: 'excelHtml5',
+              title: 'Download'
+            }
+          ]
 		});
 
 		// $("table").tablecloth({

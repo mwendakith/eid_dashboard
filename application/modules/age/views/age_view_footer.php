@@ -21,7 +21,7 @@
 		//Function when the Age category is selected
 		$("select").change(function(){
 			em = $(this).val();
-			if (em == 8 || em == '8') {
+			if (em == 0 || em == '0') {
 				$.get("<?php echo base_url();?>template/breadcrum/"+null+"/"+null+"/"+null+"/"+null+"/"+1, function(data){
 	        		$("#breadcrum").html(data);
 	        	});

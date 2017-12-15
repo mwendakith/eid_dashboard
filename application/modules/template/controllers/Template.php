@@ -25,6 +25,7 @@ class Template extends MY_Controller
 		$data['subCounty'] = $this->template_model->get_sub_county_dropdown();
 		$data['laborotories'] = $this->template_model->get_lab_dropdown();
 		$data['regimen'] = $this->template_model->get_regimen_dropdown();
+		$data['ages'] = $this->template_model->get_ages_dropdown();
 		// $data['breadcrum'] = $this->breadcrum();
 		$this->load->view('template_view',$data);
 	}
@@ -174,7 +175,19 @@ class Template extends MY_Controller
 			}
 			
 		} else if ($age) {
-			if ($data == 1 || $data == '1') {
+			if (!$data) {
+				if (!$this->session->userdata('age_filter')) {
+					echo "<a href='javascript:void(0)' class='alert-link'><strong>All Ages</strong></a>";
+				} else {
+					$age_name = $this->template_model->get_age_name($this->session->userdata('age_filter'));
+					echo "<a href='javascript:void(0)' class='alert-link'><strong>".$age_name."</strong></a>";
+				}
+			} else {
+				$age_name = $this->template_model->get_age_name($data);
+				echo "<a href='javascript:void(0)' class='alert-link'><strong>".$age_name."</strong></a>";
+			}
+
+			/*if ($data == 1 || $data == '1') {
 				echo "<a href='javascript:void(0)' class='alert-link'><strong>No Data</strong></a>";
 			} elseif($data == 2 || $data == '2') {
 				echo "<a href='javascript:void(0)' class='alert-link'><strong>Less than 2 Weeks</strong></a>";
@@ -192,7 +205,7 @@ class Template extends MY_Controller
 				echo "<a href='javascript:void(0)' class='alert-link'><strong>All Age Groups</strong></a>";
 			} else {
 				echo "<a href='javascript:void(0)' class='alert-link'><strong>All Age Groups</strong></a>";
-			}
+			}*/
 			
 		} else if ($regimen) {
 			// echo "Regimen Found";

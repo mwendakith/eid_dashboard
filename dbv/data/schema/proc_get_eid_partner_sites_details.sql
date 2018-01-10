@@ -6,7 +6,8 @@ BEGIN
   SET @QUERY =    "SELECT 
                   `view_facilitys`.`facilitycode` AS `MFLCode`, 
                   `view_facilitys`.`name`, 
-                  `countys`.`name` AS `county`, 
+                  `view_facilitys`.`countyname` AS `county`, 
+                  `view_facilitys`.`subcounty` AS `subcounty`, 
                   SUM(`alltests`) AS `alltests`, 
                   SUM(`actualinfants`) AS `actualinfants`, 
                    SUM(`pos`) AS `positive`, 
@@ -20,7 +21,11 @@ BEGIN
                   SUM(`infantsless2m`) AS `infantsless2m`, 
                   SUM(`infantsless2mPOS`) AS `infantsless2mpos`, 
                   SUM(`infantsabove2m`) AS `infantsabove2m`, 
-                  SUM(`infantsabove2mPOS`) AS `infantsabove2mpos`,  
+                  SUM(`infantsabove2mPOS`) AS `infantsabove2mpos`,
+
+                  SUM(`noage`) AS `noage`,
+                  SUM(`adults`) AS `adults`,
+
                   AVG(`medage`) AS `medage`,
                   SUM(`rejected`) AS `rejected` ";
 
@@ -33,7 +38,7 @@ BEGIN
 
     SET @QUERY = CONCAT(@QUERY, " 
       LEFT JOIN `view_facilitys` ON `ss`.`facility` = `view_facilitys`.`ID` 
-      LEFT JOIN `countys` ON `view_facilitys`.`county` = `countys`.`ID`  WHERE 1 ");
+      WHERE 1 ");
 
 
 

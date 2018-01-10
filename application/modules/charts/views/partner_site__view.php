@@ -11,6 +11,7 @@
 			<th rowspan="2">MFL Code</th>
 			<th rowspan="2">Facilities</th>
 			<th rowspan="2">County</th>
+			<th rowspan="2">Subcounty</th>
 			<th rowspan="2">All Tests</th>
 			<th rowspan="2">Actual Infants Tested</th>
 			<th colspan="2">Initial PCR</th>
@@ -19,6 +20,8 @@
 			<th colspan="2">Infants &lt;2Weeks</th>
 			<th colspan="2">Infants &lt;=2M</th>
 			<th colspan="2">Infants &gt;=2M</th>
+			<th rowspan="2">No Age</th>
+			<th rowspan="2">Adult</th>
 			<th rowspan="2">Median Age</th>
 			<th rowspan="2">Rejected</th>
 		</tr>

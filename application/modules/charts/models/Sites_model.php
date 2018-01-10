@@ -181,9 +181,11 @@ class Sites_model extends MY_Model
 			$table .= '<tr>';
 			$table .= '<td>'.$count.'</td>';
 
+
 			$table .= '<td>'.$value['MFLCode'].'</td>';
 			$table .= '<td>'.$value['name'].'</td>';
 			$table .= '<td>'.$value['county'].'</td>';
+			$table .= '<td>'.$value['subcounty'].'</td>';
 			$table .= '<td>'.number_format($value['alltests']).'</td>';
 			$table .= '<td>'.number_format($value['actualinfants']).'</td>';
 			$table .= '<td>'.number_format($value['positive']+$value['negative']).'</td>';
@@ -198,6 +200,8 @@ class Sites_model extends MY_Model
 			$table .= '<td>'.number_format($value['infantsless2mpos']).'</td>';
 			$table .= '<td>'.number_format($value['infantsabove2m']).'</td>';
 			$table .= '<td>'.number_format($value['infantsabove2mpos']).'</td>';
+			$table .= '<td>'.number_format($value['noage']).'</td>';
+			$table .= '<td>'.number_format($value['adult']).'</td>';
 			$table .= '<td>'.number_format($value['medage']).'</td>';
 			$table .= '<td>'.number_format($value['rejected']).'</td>';
 			$table .= '</tr>';

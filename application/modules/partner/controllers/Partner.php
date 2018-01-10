@@ -10,7 +10,7 @@ class Partner extends MY_Controller
 	{
 		parent:: __construct();
 		$this->load->module('summaries');
-		$this->data	=	array_merge($this->data,$this->load_libraries(array('material','highstock','highmaps','highcharts','custom','select2','tablecloth')));
+		$this->data	=	array_merge($this->data,$this->load_libraries(array('material','custom','select2','tablecloth')));
 		$this->session->unset_userdata('county_filter');
 		$this->data['part'] = TRUE;
 	}

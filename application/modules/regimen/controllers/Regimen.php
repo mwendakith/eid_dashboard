@@ -8,7 +8,7 @@ class Regimen extends MY_Controller
 	function __construct()
 	{
 		parent:: __construct();
-		$this->data	=	array_merge($this->data,$this->load_libraries(array('material','highstock','highmaps','highcharts','custom','select2')));
+		$this->data	=	array_merge($this->data,$this->load_libraries(array('material','custom','select2')));
  		$this->load->module('charts/regimens');
  		$this->data['reg'] = TRUE;
 	}

@@ -9,7 +9,7 @@ defined('BASEPATH') or exit('No direct script acces allowed!');
  	function __construct()
  	{
  		parent:: __construct();
- 		$this->data	=	array_merge($this->data,$this->load_libraries(array('material','highstock','highmaps','highcharts','custom','select2','tablecloth')));
+ 		$this->data	=	array_merge($this->data,$this->load_libraries(array('material','custom','select2','tablecloth')));
  		$this->load->module('charts/rht');
  	}
 

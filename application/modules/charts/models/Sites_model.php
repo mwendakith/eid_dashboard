@@ -335,11 +335,13 @@ class Sites_model extends MY_Model
 		$data;
 
 		$data['year'] = $year;
+
 		
 		$data['trends'][0]['name'] = "Tests";
-		$data['trends'][1]['name'] = "Rejected";
-		$data['trends'][2]['name'] = "Positives";
-		$data['trends'][3]['name'] = "Negatives";
+		$data['trends'][1]['name'] = "Initial PCR";
+		$data['trends'][2]['name'] = "Rejected";
+		$data['trends'][3]['name'] = "Positives";
+		$data['trends'][4]['name'] = "Negatives";
 
 		foreach ($result as $key => $value) {
 
@@ -348,9 +350,10 @@ class Sites_model extends MY_Model
 
 
 			$data['trends'][0]['data'][$month] = (int) $value['tests'];
-			$data['trends'][1]['data'][$month] = (int) $value['rejected'];
-			$data['trends'][2]['data'][$month] = (int) $value['pos'];
-			$data['trends'][3]['data'][$month] = (int) $value['neg'];
+			$data['trends'][1]['data'][$month] = (int) $value['initial_pcr'];
+			$data['trends'][2]['data'][$month] = (int) $value['rejected'];
+			$data['trends'][3]['data'][$month] = (int) $value['pos'];
+			$data['trends'][4]['data'][$month] = (int) $value['neg'];
 		}
 		
 		$data['title'] = "Test Trends (" . $year . ")";

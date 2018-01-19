@@ -13,6 +13,7 @@ BEGIN
                     SUM(`ls`.`rejected`) AS `rejected`,  
                     SUM(`ls`.`confirmdna`) AS `confirmdna`,  
                     SUM(`ls`.`confirmedPOs`) AS `confirmedpos`,
+                    SUM(`ls`.`fake_confirmatory`) AS `fake_confirmatory`,
                     SUM(`ls`.`repeatspos`) AS `repeatspos`,  
                     SUM(`ls`.`repeatposPOS`) AS `repeatspospos`,
                     SUM(`ls`.`eqatests`) AS `eqa`,  

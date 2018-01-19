@@ -7,7 +7,8 @@ BEGIN
                     `ss`.`month`, 
                     SUM((`ss`.`actualinfantsPOS`)) AS `pos`, 
                     SUM(`ss`.`actualinfants`-`ss`.`actualinfantsPOS`) AS `neg`,
-                    SUM(`ss`.`pos`+`ss`.`neg`) AS `tests`,
+                    SUM(`ss`.`pos`+`ss`.`neg`) AS `initial_pcr`,
+                    SUM(`ss`.`allpos`+`ss`.`allneg`) AS `tests`,
                     SUM(`ss`.`rejected`) AS `rejected`
                   FROM `site_summary` `ss` 
                   LEFT JOIN `view_facilitys` `vf` 

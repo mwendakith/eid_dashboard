@@ -56,6 +56,22 @@
   
 </div>
 
+<div id="fourth">
+  <div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          Mapping <div class="display_date"></div>
+        </div>
+        <div class="panel-body" id="mapping" style="height: 700px">
+          <center><div class="loader"></div></center>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+</div>
+
 
 <script type="text/javascript">
 
@@ -98,6 +114,7 @@
           var em = localStorage.getItem("my_lab");
 
           $("#lab_rejections").load("<?php echo base_url();?>charts/LabPerformance/rejections/"+em+"/"+from[1]+"/"+from[0]+"/"+to[1]+"/"+to[0]);
+          $("#mapping").load("<?php echo base_url();?>charts/LabPerformance/lab_mapping/"+em+"/"+from[1]+"/"+from[0]+"/"+to[1]+"/"+to[0]);
         }
             
     });
@@ -130,6 +147,7 @@
         $("#breadcrum").html(t);
         $("#lab_summary_two_years").load("<?php echo base_url();?>charts/LabPerformance/summary/"+em);
         $("#trends_lab").load("<?php echo base_url();?>charts/LabPerformance/lab_trends/"+em);
+        $("#mapping").load("<?php echo base_url();?>charts/LabPerformance/lab_mapping/"+em);
         
       }
 
@@ -195,6 +213,7 @@ function date_filter(criteria, id)
       
       $("#lab_rejections").html("<div>Loading...</div>");
       $("#lab_rejections").load("<?php echo base_url();?>charts/LabPerformance/rejections/"+em+"/"+year+"/"+month);
+      $("#mapping").load("<?php echo base_url();?>charts/LabPerformance/lab_mapping/"+em+"/"+year+"/"+month);
 
 
     

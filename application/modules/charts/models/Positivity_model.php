@@ -105,48 +105,70 @@ class Positivity_model extends MY_Model
 			}
 		}
 
-		if ($county==null || $county=='null') {
-			$sql = "CALL `proc_get_eid_national_age_positivity`('".$year."','".$month."','".$to_year."','".$to_month."')";
-		} else {
-			$sql = "CALL `proc_get_eid_county_age_positivity`('".$county."','".$year."','".$month."','".$to_year."','".$to_month."')";
-		}
+		// if ($county==null || $county=='null') {
+		// 	$sql = "CALL `proc_get_eid_national_age_positivity`('".$year."','".$month."','".$to_year."','".$to_month."')";
+		// } else {
+		// 	$sql = "CALL `proc_get_eid_county_age_positivity`('".$county."','".$year."','".$month."','".$to_year."','".$to_month."')";
+		// }
 		
 		// echo "<pre>";print_r($sql);die();
-		$result = $this->db->query($sql)->result_array();
+		// $result = $this->db->query($sql)->result_array();
 		// echo "<pre>";print_r($result);die();
 
-		$data['positivity'][0]['name'] = 'Positives';
-		$data['positivity'][1]['name'] = 'Negatives';
+		// $data['positivity'][0]['name'] = 'Positives';
+		// $data['positivity'][1]['name'] = 'Negatives';
 
-		$count = 0;
+		// $count = 0;
 		
-		$data["positivity"][0]["data"][0]	= $count;
-		$data["positivity"][1]["data"][0]	= $count;
-		$data['categories'][0]				= 'No Data';
-		$data['categories'][1]				= '< 2 Weeks';
-		$data['categories'][2]				= '2 - 6 Weeks';
-		$data['categories'][3]				= '6 - 8 Weeks';
-		$data['categories'][4]				= '6 Months';
-		$data['categories'][5]				= '9 Months';
-		$data['categories'][6]				= '12 Months';
+		// $data["positivity"][0]["data"][0]	= $count;
+		// $data["positivity"][1]["data"][0]	= $count;
+		// $data['categories'][0]				= 'No Data';
+		// $data['categories'][1]				= '< 2 Weeks';
+		// $data['categories'][2]				= '2 - 6 Weeks';
+		// $data['categories'][3]				= '6 - 8 Weeks';
+		// $data['categories'][4]				= '6 Months';
+		// $data['categories'][5]				= '9 Months';
+		// $data['categories'][6]				= '12 Months';
+
+		// foreach ($result as $key => $value) {
+		// 	$data["positivity"][0]["data"][0]	=  (int) $value['nodatapos'];
+		// 	$data["positivity"][1]["data"][0]	=  (int) $value['nodataneg'];
+		// 	$data["positivity"][0]["data"][1]	=  (int) $value['less2wpos'];
+		// 	$data["positivity"][1]["data"][1]	=  (int) $value['less2wneg'];
+		// 	$data["positivity"][0]["data"][2]	=  (int) $value['twoto6wpos'];
+		// 	$data["positivity"][1]["data"][2]	=  (int) $value['twoto6wneg'];
+		// 	$data["positivity"][0]["data"][3]	=  (int) $value['sixto8wpos'];
+		// 	$data["positivity"][1]["data"][3]	=  (int) $value['sixto8wneg'];
+		// 	$data["positivity"][0]["data"][4]	=  (int) $value['sixmonthpos'];
+		// 	$data["positivity"][1]["data"][4]	=  (int) $value['sixmonthneg'];
+		// 	$data["positivity"][0]["data"][5]	=  (int) $value['ninemonthpos'];
+		// 	$data["positivity"][1]["data"][5]	=  (int) $value['ninemonthneg'];
+		// 	$data["positivity"][0]["data"][6]	=  (int) $value['twelvemonthpos'];
+		// 	$data["positivity"][1]["data"][6]	=  (int) $value['twelvemonthneg'];
+		// }
+		// echo "<pre>";print_r($data);die();
+
+		if ($county==null || $county=='null') {
+			$sql = "CALL `proc_get_eid_national_age_range`(0, '".$year."','".$month."','".$to_year."','".$to_month."')";
+		} else {
+			$sql = "CALL `proc_get_eid_county_age_range`(0, '".$county."','".$year."','".$month."','".$to_year."','".$to_month."')";
+		}
+				
+		// echo "<pre>";print_r($result);die();
+		$data['ageGnd'][0]['name'] = 'Positive';
+		$data['ageGnd'][1]['name'] = 'Negative';
 
 		foreach ($result as $key => $value) {
-			$data["positivity"][0]["data"][0]	=  (int) $value['nodatapos'];
-			$data["positivity"][1]["data"][0]	=  (int) $value['nodataneg'];
-			$data["positivity"][0]["data"][1]	=  (int) $value['less2wpos'];
-			$data["positivity"][1]["data"][1]	=  (int) $value['less2wneg'];
-			$data["positivity"][0]["data"][2]	=  (int) $value['twoto6wpos'];
-			$data["positivity"][1]["data"][2]	=  (int) $value['twoto6wneg'];
-			$data["positivity"][0]["data"][3]	=  (int) $value['sixto8wpos'];
-			$data["positivity"][1]["data"][3]	=  (int) $value['sixto8wneg'];
-			$data["positivity"][0]["data"][4]	=  (int) $value['sixmonthpos'];
-			$data["positivity"][1]["data"][4]	=  (int) $value['sixmonthneg'];
-			$data["positivity"][0]["data"][5]	=  (int) $value['ninemonthpos'];
-			$data["positivity"][1]["data"][5]	=  (int) $value['ninemonthneg'];
-			$data["positivity"][0]["data"][6]	=  (int) $value['twelvemonthpos'];
-			$data["positivity"][1]["data"][6]	=  (int) $value['twelvemonthneg'];
+			$data['categories'][$key] 			= $value['age_range'];
+
+			$data["ageGnd"][0]["data"][$key]	=  (int) $value['pos'];
+			$data["ageGnd"][1]["data"][$key]	=  (int) $value['neg'];
 		}
-		// echo "<pre>";print_r($data);die();
+		$data['ageGnd'][0]['drilldown']['color'] = '#913D88';
+		$data['ageGnd'][1]['drilldown']['color'] = '#96281B';
+
+		$result = $this->db->query($sql)->result_array();
+
 		return $data;
 	}
 

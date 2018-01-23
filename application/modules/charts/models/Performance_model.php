@@ -40,7 +40,19 @@ class Performance_model extends MY_Model
 		foreach ($result as $key => $value) {
 			$ul .= "<tr>
 						<td>".($key+1)."</td>
-						<td>".$value['name']."</td>
+						<td>";
+
+			
+
+			if($value['name'] == NULL){
+				$ul .= "POC Sites";
+			}
+			else{
+				$ul .= $value['name'];
+			}
+
+
+			$ul .= "</td>
 						<td>".number_format((int) $value['sitesending'])."</td>
 						<td>".number_format((int) $value['received'])."</td>
 						<td>".number_format((int) $value['rejected']) . " (" . 

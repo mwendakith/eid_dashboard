@@ -153,21 +153,22 @@ class Positivity_model extends MY_Model
 		} else {
 			$sql = "CALL `proc_get_eid_county_age_range`(0, '".$county."','".$year."','".$month."','".$to_year."','".$to_month."')";
 		}
+
+		$result = $this->db->query($sql)->result_array();
 				
 		// echo "<pre>";print_r($result);die();
-		$data['ageGnd'][0]['name'] = 'Positive';
-		$data['ageGnd'][1]['name'] = 'Negative';
+		$data['positivity'][0]['name'] = 'Positive';
+		$data['positivity'][1]['name'] = 'Negative';
 
 		foreach ($result as $key => $value) {
 			$data['categories'][$key] 			= $value['age_range'];
 
-			$data["ageGnd"][0]["data"][$key]	=  (int) $value['pos'];
-			$data["ageGnd"][1]["data"][$key]	=  (int) $value['neg'];
+			$data["positivity"][0]["data"][$key]	=  (int) $value['pos'];
+			$data["positivity"][1]["data"][$key]	=  (int) $value['neg'];
 		}
-		$data['ageGnd'][0]['drilldown']['color'] = '#913D88';
-		$data['ageGnd'][1]['drilldown']['color'] = '#96281B';
-
-		$result = $this->db->query($sql)->result_array();
+		$data['positivity'][0]['drilldown']['color'] = '#913D88';
+		$data['positivity'][1]['drilldown']['color'] = '#96281B';
+		
 
 		return $data;
 	}

@@ -39,10 +39,13 @@
                 }
             ],
 
-            colorAxis: {},
+            colorAxis: {
+                minColor : "#f2bae",
+                maxColor : "#ff2015"
+            },
 
             mapNavigation: {
-                enabled: true,
+                enabled: false,
                 enableButtons: true
             },
        

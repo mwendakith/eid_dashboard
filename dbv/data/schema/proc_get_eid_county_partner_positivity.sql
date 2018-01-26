@@ -4,22 +4,21 @@ CREATE PROCEDURE `proc_get_eid_county_partner_positivity`
 (IN C_id INT(11), IN filter_year INT(11), IN from_month INT(11), IN to_year INT(11), IN to_month INT(11))
 BEGIN
   SET @QUERY =  "SELECT 
-                    DISTINCT(`p`.`name`) AS `name`,
+                    `vf`.`partnername` AS `name`,
                     SUM(`actualinfantsPOS`) AS `pos`,
                     SUM(`actualinfants`-`actualinfantsPOS`) AS `neg`,
                     ((SUM(`actualinfantsPOS`)/(SUM(`actualinfants`)))*100) AS `pecentage` ";
 
 
      IF (from_month != 0 && from_month != '') THEN
-      SET @QUERY = CONCAT(@QUERY, " FROM `ip_summary` `is` ");
+      SET @QUERY = CONCAT(@QUERY, " FROM `site_summary` `ss` ");
     ELSE
-        SET @QUERY = CONCAT(@QUERY, " FROM `ip_summary_yearly` `is` ");
+        SET @QUERY = CONCAT(@QUERY, " FROM `site_summary_yearly` `ss` ");
     END IF;
 
-    SET @QUERY = CONCAT(@QUERY, " LEFT JOIN `partners` `p` 
-                  ON `is`.`partner` = `p`.`ID` 
+    SET @QUERY = CONCAT(@QUERY, "  
                 LEFT JOIN `view_facilitys` `vf`
-                    ON `p`.`ID` = `vf`.`partner`
+                    ON `ss`.`facility` = `vf`.`ID`
                 WHERE 1 ");
 
 
@@ -38,7 +37,7 @@ BEGIN
         SET @QUERY = CONCAT(@QUERY, " AND `year` = '",filter_year,"' ");
     END IF;
 
-    SET @QUERY = CONCAT(@QUERY, " AND `vf`.`county` = '",C_id,"' GROUP BY `name` ORDER BY `pecentage` DESC ");
+    SET @QUERY = CONCAT(@QUERY, " AND `vf`.`county` = '",C_id,"' GROUP BY `vf`.`partner` ORDER BY `pecentage` DESC ");
 
     PREPARE stmt FROM @QUERY;
     EXECUTE stmt;

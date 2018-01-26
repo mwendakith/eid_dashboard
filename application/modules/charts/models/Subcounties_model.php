@@ -365,8 +365,7 @@ class Subcounties_model extends MY_Model
 		$data['trend'][1]['y'] = (int) $result->dead;
 		$data['trend'][2]['y'] = (int) $result->ltfu;
 		$data['trend'][3]['y'] = (int) $result->transout;
-		$data['trend'][4]['y'] = (int) $result->adult;
-		$data['trend'][5]['y'] = (int) $result->other;
+		$data['trend'][4]['y'] = (int) $result->other;
 
 		$data['trend'][0]['sliced'] = true;
 		$data['trend'][0]['selected'] = true;
@@ -382,20 +381,11 @@ class Subcounties_model extends MY_Model
 		$data['per'][1] = (int) ($result->dead / $per * 100);
 		$data['per'][2] = (int) ($result->ltfu / $per * 100);
 		$data['per'][3] = (int) ($result->transout / $per * 100);
-		$data['per'][4] = (int) ($result->adult / $per * 100);
-		$data['per'][5] = (int) ($result->other / $per * 100);
-
-		$str = "Initiated On Treatment: " . $data['trend'][0]['y'] . " <b>(" . $data['per'][0] . "%)</b>";
-		$str .= "<br />Lost to Follow Up: " . $data['trend'][2]['y'] . " <b>(" . $data['per'][2] . "%)</b>";
-		$str .= "<br />Dead: " . $data['trend'][1]['y'] . " <b>(" . $data['per'][1] . "%)</b>";
-		$str .= "<br />Adult Samples: " . $data['other'][0] . " <b>(" . $data['per'][4] . "%)</b>";
-		$str .= "<br />Transferred out: " . $data['trend'][3]['y'] . " <b>(" . $data['per'][3] . "%)</b>";
-		$str .= "<br />Other Reasons(e.g denial): " . $data['other'][1] . " <b>(" . $data['per'][5] . "%)</b>";
+		$data['per'][4] = (int) ($result->other / $per * 100);
 
 		$str = '<li>Initiated On Treatment: '.number_format((int) $data['trend'][0]['y']).' <strong>('.(int) $data['per'][0].'%)</strong></li>';
 		$str .= '<li>Lost to Follow Up: '.number_format((int) $data['trend'][2]['y']).' <strong>('.(int) $data['per'][2].'%)</strong></li>';
 		$str .= '<li>Dead: '.number_format((int) $data['trend'][1]['y']).' <strong>('.(int) $data['per'][1].'%)</strong></li>';
-		$str .= '<li>Adult Samples: '.number_format((int) $data['other'][0]).' <strong>('.(int) $data['per'][4].'%)</strong></li>';
 		$str .= '<li>Transferred Out: '.number_format((int) $data['trend'][3]['y']).' <strong>('.(int) $data['per'][3].'%)</strong></li>';
 		$str .= '<li>Other Reasons(e.g denial): '.number_format((int) $data['other'][1]).' <strong>('.(int) $data['per'][5].'%)</strong></li>';
 

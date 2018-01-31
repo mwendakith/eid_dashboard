@@ -16,6 +16,11 @@ class Summaries_model extends MY_Model
 	function turnaroundtime($year=null,$month=null,$county=null,$to_year=null,$to_month=null)
 	{
 		$toMonth = 0;
+		$type = 0;
+		$id = 0;
+		
+		if ($county != null) {$type = 1; $id = $county;}
+		
 		if ($year==null || $year=='null') {
 			$year = $this->session->userdata('filter_year');
 		}
@@ -33,7 +38,7 @@ class Summaries_model extends MY_Model
 			$to_year = 0;
 		}
 
-		$sql = "CALL `proc_get_eid_national_tat`('".$year."','".$month."','".$to_year."','".$to_month."')";
+		$sql = "CALL `proc_get_eid_national_tat`('".$year."','".$month."','".$to_year."','".$to_month."','".$type."','".$id."')";
 		// echo "<pre>";print_r($sql);die();
 		$result = $this->db->query($sql)->result_array();
 		// echo "<pre>";print_r($result);die();

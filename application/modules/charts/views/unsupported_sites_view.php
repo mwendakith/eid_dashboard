@@ -21,7 +21,7 @@
 </div>
 <script type="text/javascript" charset="utf-8">
   $(document).ready(function() {
-  	$('table').DataTable(
+  	$('#example2').DataTable({
       dom: '<"btn btn-primary"B>lTfgtip',
       responsive: true,
         buttons : [
@@ -36,7 +36,9 @@
               title: 'Download'
             }
           ]
-  	);
+  	});
+
+
 
     // $("table").tablecloth({
     //   theme: "paper",

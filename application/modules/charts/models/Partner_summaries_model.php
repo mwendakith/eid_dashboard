@@ -391,7 +391,6 @@ class Partner_summaries_model extends MY_Model
 			$data['ul'] .= '<li>Initiated On Treatment: '.(int) $value['enrolled'].' <strong>('.(int) (($value['enrolled']/$total)*100).'%)</strong></li>';
 			$data['ul'] .= '<li>Lost to Follow Up: '.$value['ltfu'].' <strong>('.(int) (($value['ltfu']/$total)*100).'%)</strong></li>';
 			$data['ul'] .= '<li>Dead: '.(int) $value['dead'].' <strong>('.(int) (($value['dead']/$total)*100).'%)</strong></li>';
-			$data['ul'] .= '<li>Adult Samples: '.$value['adult'].' <strong>('.(int) (($value['adult']/$total)*100).'%)</strong></li>';
 			$data['ul'] .= '<li>Transferred Out: '.$value['transout'].' <strong>('.(int) (($value['transout']/$total)*100).'%)</strong></li>';
 			$data['ul'] .= '<li>Other Reasons(e.g denial): '.$value['other'].' <strong>('.(int) (($value['other']/$total)*100).'%)</strong></li>';
 			// if($value['name'] == ''){
@@ -403,15 +402,13 @@ class Partner_summaries_model extends MY_Model
 			$data['hei']['data'][1]['name'] = 'Dead';
 			$data['hei']['data'][2]['name'] = 'Lost to Follow up';
 			$data['hei']['data'][3]['name'] = 'Transferred out';
-			$data['hei']['data'][4]['name'] = 'Adult Samples';
-			$data['hei']['data'][5]['name'] = 'Other Reasons';
+			$data['hei']['data'][4]['name'] = 'Other Reasons';
 
 			$data['hei']['data'][0]['y'] = (int) $value['enrolled'];
 			$data['hei']['data'][1]['y'] = (int) $value['dead'];
 			$data['hei']['data'][2]['y'] = (int) $value['ltfu'];
 			$data['hei']['data'][3]['y'] = (int) $value['transout'];
-			$data['hei']['data'][4]['y'] = (int) $value['adult'];
-			$data['hei']['data'][5]['y'] = (int) $value['other'];
+			$data['hei']['data'][4]['y'] = (int) $value['other'];
 		}
 
 		$data['hei']['data'][0]['sliced'] = true;

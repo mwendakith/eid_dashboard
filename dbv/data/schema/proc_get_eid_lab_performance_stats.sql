@@ -13,13 +13,14 @@ BEGIN
                     SUM(`ls`.`rejected`) AS `rejected`,  
                     SUM(`ls`.`confirmdna`) AS `confirmdna`,  
                     SUM(`ls`.`confirmedPOs`) AS `confirmedpos`,
+                    SUM(`ls`.`fake_confirmatory`) AS `fake_confirmatory`,
                     SUM(`ls`.`repeatspos`) AS `repeatspos`,  
                     SUM(`ls`.`repeatposPOS`) AS `repeatspospos`,
                     SUM(`ls`.`eqatests`) AS `eqa`,  
                     SUM(`ls`.`pos`) AS `pos`, 
                     SUM(`ls`.`neg`) AS `neg`, 
                     SUM(`ls`.`redraw`) AS `redraw` 
-                  FROM `lab_summary` `ls` JOIN `labs` `l` ON `ls`.`lab` = `l`.`ID` 
+                  FROM `lab_summary` `ls` LEFT JOIN `labs` `l` ON `ls`.`lab` = `l`.`ID` 
                 WHERE 1 ";
 
 
@@ -36,7 +37,7 @@ BEGIN
         SET @QUERY = CONCAT(@QUERY, " AND `year` = '",filter_year,"' ");
     END IF;
 
-      SET @QUERY = CONCAT(@QUERY, " GROUP BY `l`.`ID` ORDER BY `alltests` DESC ");
+      SET @QUERY = CONCAT(@QUERY, " GROUP BY `ls`.`lab` ORDER BY `alltests` DESC ");
       
 
     PREPARE stmt FROM @QUERY;

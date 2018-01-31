@@ -40,7 +40,19 @@ class Performance_model extends MY_Model
 		foreach ($result as $key => $value) {
 			$ul .= "<tr>
 						<td>".($key+1)."</td>
-						<td>".$value['name']."</td>
+						<td>";
+
+			
+
+			if($value['name'] == NULL){
+				$ul .= "POC Sites";
+			}
+			else{
+				$ul .= $value['name'];
+			}
+
+
+			$ul .= "</td>
 						<td>".number_format((int) $value['sitesending'])."</td>
 						<td>".number_format((int) $value['received'])."</td>
 						<td>".number_format((int) $value['rejected']) . " (" . 
@@ -54,6 +66,7 @@ class Performance_model extends MY_Model
 						<td>".number_format((int) $value['repeatspospos'])."</td>
 						<td>".number_format((int) $value['confirmdna'])."</td>
 						<td>".number_format((int) $value['confirmedpos'])."</td>
+						<td>".number_format((int) $value['fake_confirmatory'])."</td>
 						<td>".number_format((int) ($value['pos']+$value['neg']+$value['confirmdna'] + $value['repeatspos']))."</td>
 						<td>".number_format((int) ($value['pos']+$value['confirmedpos'] + $value['repeatspospos']))."</td>
 						
@@ -547,6 +560,51 @@ class Performance_model extends MY_Model
 		}
 		else{
 			$data['title'] = "Lab Rejections";
+		}
+
+
+		return $data;
+	}
+
+
+	function lab_mapping($lab=NULL, $year=NULL,$month=NULL,$to_year=NULL,$to_month=NULL){	
+
+		if($lab == NULL || $lab == 'null'){
+			$lab = 0;
+		}
+
+		if ($year==null || $year=='null') {
+			$year = $this->session->userdata('filter_year');
+		}
+		if ($to_month==null || $to_month=='null') {
+			$to_month = 0;
+		}
+		if ($to_year==null || $to_year=='null') {
+			$to_year = 0;
+		}
+		if ($month==null || $month=='null') {
+			if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
+				$month = $this->session->userdata('filter_month');
+			}else {
+				$month = 0;
+			}
+		}
+		
+		$sql = "CALL `proc_get_eid_lab_site_mapping`({$lab}, '{$year}', '{$month}', '{$to_year}', '{$to_month}' );";
+		
+		// echo "<pre>";print_r($sql);die();
+		
+		$result = $this->db->query($sql)->result_array();
+		// echo "<pre>";print_r($result);die();
+
+		$data['title'] = "Tests";
+		foreach ($result as $key => $value) {
+			
+				$data['outcomes'][$key]['id'] = (int) $value['county'];
+				
+				$data['outcomes'][$key]['value'] = (int) $value['value'];
+				
+			
 		}
 
 

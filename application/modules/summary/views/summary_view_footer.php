@@ -47,6 +47,7 @@
 						$(".display_range").html("( "+obj['prev_year']+" - "+obj['year']+" )");
 		        	});
 	        	// Loader displaying
+	        	$("#nattat").html("<center><div class='loader'></div></center>");
 	        	$("#testing_trends").html("<center><div class='loader'></div></center>");
 	        	$("#eidOutcomes").html("<center><div class='loader'></div></center>");
 		        $("#hei_outcomes").html("<center><div class='loader'></div></center>");
@@ -58,6 +59,7 @@
 				$("#county_outcomes").html("<center><div class='loader'></div></center>");
 
 				// Actual graphs being loaded
+				$("#nattat").load("<?php echo base_url('charts/summaries/turnaroundtime'); ?>/"+null+"/"+null+"/"+data);
 				$("#testing_trends").load("<?php echo base_url('charts/summaries/testing_trends'); ?>/"+null+"/"+all+"/"+data);
 				$("#eidOutcomes").load("<?php echo base_url('charts/summaries/eid_outcomes');?>/"+null+"/"+null+"/"+data);
 				$("#hei_outcomes").load("<?php echo base_url('charts/summaries/hei_validation');?>/"+null+"/"+null+"/"+data);

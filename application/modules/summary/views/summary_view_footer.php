@@ -23,7 +23,6 @@
 		// $("#feeding").load("<?php //echo base_url('charts/summaries/agegroup');?>");
 		
 		$("#county_outcomes").load("<?php echo base_url('charts/summaries/county_outcomes'); ?>");
-		$("#county_tat_outcomes").load("<?= @base_url('charts/summaries/county_tat_outcomes'); ?>");
 
 		//Function when the county is selected
 		$("select").change(function(){

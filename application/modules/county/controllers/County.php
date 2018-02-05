@@ -48,6 +48,15 @@ class County extends MY_Controller
 		echo json_encode($county);
 	}
 
+
+	public function tat()
+	{
+		$this->clear_all_session_data();
+		$this->load->module('charts/counties');
+		$this->data['content_view'] = 'county/counties_tat_view';
+		$this->template($this->data);
+	}
+
 	public function check_subcounty_select()
 	{
 		if ($this->session->userdata('sub_county_filter')) {

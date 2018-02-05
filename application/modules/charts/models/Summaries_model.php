@@ -1021,7 +1021,7 @@ class Summaries_model extends MY_Model
 		$data['outcomes'][0]['tooltip'] = array("valueSuffix" => ' ');
 		$data['outcomes'][1]['tooltip'] = array("valueSuffix" => ' ');
 		$data['outcomes'][2]['tooltip'] = array("valueSuffix" => ' ');
-		$data['outcomes'][3]['tooltip'] = array("valueSuffix" => ' %');
+		$data['outcomes'][3]['tooltip'] = array("valueSuffix" => ' Days');
 
 		$data['title'] = "";
 		

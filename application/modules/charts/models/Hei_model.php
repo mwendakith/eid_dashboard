@@ -46,8 +46,8 @@ class Hei_model extends MY_Model
 			$table .= '<tr>';
 			$table .= '<td>'.$count.'</td>';
 			$table .= '<td>'.$value->name.'</td>';
-			$table .= '<td>'.$value->positives.'</td>';
-			$table .= '<td>'.$value->Confirmed_Positive.'</td>';
+			$table .= '<td>'.number_format($value->positives).'</td>';
+			$table .= '<td>'.number_format($value->Confirmed_Positive).'</td>';
 			$table .= '<td>'.round(@($value->Confirmed_Positive/$value->positives)*100,1).'%</td>';
 			$table .= '</tr>';
 			$count++;

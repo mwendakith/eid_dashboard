@@ -44,7 +44,7 @@ BEGIN
   SET @QUERY =    "SELECT
         SUM(`validation_confirmedpos`) AS `Confirmed Positive`,
         SUM(`validation_repeattest`) AS `Repeat Test`,
-        AVG(`validation_viralload`) AS `Viral Load`,
+        SUM(`validation_viralload`) AS `Viral Load`,
         SUM(`validation_adult`) AS `Adult`,
         SUM(`validation_unknownsite`) AS `Unknown Facility`,
         SUM(`enrolled`+`ltfu`+`adult`+`transout`+`dead`+`other`) AS `followup_hei`, 
@@ -82,7 +82,7 @@ BEGIN
   SET @QUERY =    "SELECT
         SUM(`validation_confirmedpos`) AS `Confirmed Positive`,
         SUM(`validation_repeattest`) AS `Repeat Test`,
-        AVG(`validation_viralload`) AS `Viral Load`,
+        SUM(`validation_viralload`) AS `Viral Load`,
         SUM(`validation_adult`) AS `Adult`,
         SUM(`validation_unknownsite`) AS `Unknown Facility`,
         SUM(`enrolled`+`ltfu`+`adult`+`transout`+`dead`+`other`) AS `followup_hei`, 
@@ -118,7 +118,7 @@ BEGIN
   SET @QUERY =    "SELECT
         SUM(`validation_confirmedpos`) AS `Confirmed Positive`,
         SUM(`validation_repeattest`) AS `Repeat Test`,
-        AVG(`validation_viralload`) AS `Viral Load`,
+        SUM(`validation_viralload`) AS `Viral Load`,
         SUM(`validation_adult`) AS `Adult`,
         SUM(`validation_unknownsite`) AS `Unknown Facility`,
         SUM(`enrolled`+`ltfu`+`adult`+`transout`+`dead`+`other`) AS `followup_hei`, 
@@ -155,13 +155,13 @@ BEGIN
   SET @QUERY =    "SELECT
         SUM(`validation_confirmedpos`) AS `Confirmed Positive`,
         SUM(`validation_repeattest`) AS `Repeat Test`,
-        AVG(`validation_viralload`) AS `Viral Load`,
+        SUM(`validation_viralload`) AS `Viral Load`,
         SUM(`validation_adult`) AS `Adult`,
         SUM(`validation_unknownsite`) AS `Unknown Facility`,
         SUM(`enrolled`+`ltfu`+`adult`+`transout`+`dead`+`other`) AS `followup_hei`, 
         sum(`actualinfantsPOS`) AS `positives`, 
         SUM(`actualinfants`-((`enrolled`+`ltfu`+`adult`+`transout`+`dead`+`other`)-(`validation_repeattest`+`validation_unknownsite`+`validation_adult`+`validation_viralload`))) AS `true_tests` 
-                  FROM `subcounty_summary` 
+    FROM `subcounty_summary` 
     WHERE 1";
 
 
@@ -194,7 +194,7 @@ BEGIN
   SET @QUERY =    "SELECT
        SUM(`validation_confirmedpos`) AS `Confirmed Positive`,
         SUM(`validation_repeattest`) AS `Repeat Test`,
-        AVG(`validation_viralload`) AS `Viral Load`,
+        SUM(`validation_viralload`) AS `Viral Load`,
         SUM(`validation_adult`) AS `Adult`,
         SUM(`validation_unknownsite`) AS `Unknown Facility`,
         SUM(`enrolled`+`ltfu`+`adult`+`transout`+`dead`+`other`) AS `followup_hei`, 
@@ -236,7 +236,7 @@ BEGIN
   SET @QUERY =    "SELECT
         SUM(`validation_confirmedpos`) AS `Confirmed Positive`,
         SUM(`validation_repeattest`) AS `Repeat Test`,
-        AVG(`validation_viralload`) AS `Viral Load`,
+        SUM(`validation_viralload`) AS `Viral Load`,
         SUM(`validation_adult`) AS `Adult`,
         SUM(`validation_unknownsite`) AS `Unknown Facility`,
         SUM(`enrolled`+`ltfu`+`adult`+`transout`+`dead`+`other`) AS `followup_hei`, 
@@ -260,7 +260,7 @@ BEGIN
   SET @QUERY =    "SELECT
         SUM(`validation_confirmedpos`) AS `Confirmed Positive`,
         SUM(`validation_repeattest`) AS `Repeat Test`,
-        AVG(`validation_viralload`) AS `Viral Load`,
+        SUM(`validation_viralload`) AS `Viral Load`,
         SUM(`validation_adult`) AS `Adult`,
         SUM(`validation_unknownsite`) AS `Unknown Facility`,
         SUM(`enrolled`+`ltfu`+`adult`+`transout`+`dead`+`other`) AS `followup_hei`, 
@@ -285,7 +285,7 @@ BEGIN
   SET @QUERY =    "SELECT
         SUM(`validation_confirmedpos`) AS `Confirmed Positive`,
         SUM(`validation_repeattest`) AS `Repeat Test`,
-        AVG(`validation_viralload`) AS `Viral Load`,
+        SUM(`validation_viralload`) AS `Viral Load`,
         SUM(`validation_adult`) AS `Adult`,
         SUM(`validation_unknownsite`) AS `Unknown Facility`,
         SUM(`enrolled`+`ltfu`+`adult`+`transout`+`dead`+`other`) AS `followup_hei`, 
@@ -309,7 +309,7 @@ BEGIN
   SET @QUERY =    "SELECT
                     SUM(`validation_confirmedpos`) AS `Confirmed Positive`,
                     SUM(`validation_repeattest`) AS `Repeat Test`,
-                    AVG(`validation_viralload`) AS `Viral Load`,
+                    SUM(`validation_viralload`) AS `Viral Load`,
                     SUM(`validation_adult`) AS `Adult`,
                     SUM(`validation_unknownsite`) AS `Unknown Facility`,
                     SUM(`enrolled`+`ltfu`+`adult`+`transout`+`dead`+`other`) AS `followup_hei`, 
@@ -333,7 +333,7 @@ BEGIN
   SET @QUERY =    "SELECT
                     SUM(`validation_confirmedpos`) AS `Confirmed Positive`,
                     SUM(`validation_repeattest`) AS `Repeat Test`,
-                    AVG(`validation_viralload`) AS `Viral Load`,
+                    SUM(`validation_viralload`) AS `Viral Load`,
                     SUM(`validation_adult`) AS `Adult`,
                     SUM(`validation_unknownsite`) AS `Unknown Facility`,
                     SUM(`enrolled`+`ltfu`+`adult`+`transout`+`dead`+`other`) AS `followup_hei`, 

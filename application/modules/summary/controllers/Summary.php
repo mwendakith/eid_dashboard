@@ -19,4 +19,10 @@ class Summary extends MY_Controller {
 		// echo "<pre>";print_r($this->data);die();
 		$this -> template($this->data);
 	}
+
+	public function heivalidation()
+	{
+		$this->data['content_view'] = 'summary/hei_validation_view';
+		$this->template($this->data);
+	}
 }

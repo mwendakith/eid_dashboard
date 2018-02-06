@@ -119,7 +119,15 @@
 						</div>
 					</form> -->
 					<ul class="nav navbar-nav navbar-right">
-						<li><a href="<?php echo base_url();?>">Summary</a></li>
+						<!-- <li><a href="<?php echo base_url();?>">Summary</a></li> -->
+						<li class="dropdown">
+							<a href="bootstrap-elements.html" data-target="#" class="dropdown-toggle" data-toggle="dropdown">Summaries
+							<b class="caret"></b></a>
+							<ul class="dropdown-menu">
+								<li><a href="<?php echo base_url();?>">Summary</a></li>
+								<li><a href="<?php echo base_url();?>summary/heivalidation">HEI Validation Summary</a></li>
+							</ul>
+						</li>
 						<li><a href="<?php echo base_url();?>trends">Trends</a></li>
 						<li class="dropdown">
 							<a href="bootstrap-elements.html" data-target="#" class="dropdown-toggle" data-toggle="dropdown">County/Sub-County
@@ -139,6 +147,7 @@
 								<li><a href="<?php echo base_url();?>partner/trends">Trends</a></li>
 								<li><a href="<?php echo base_url();?>partner/sites">Partner Facilities</a></li>
 								<li><a href="<?php echo base_url();?>partner/counties">Partner Counties</a></li>
+								<li><a href="<?php echo base_url();?>partner/heivalidation">HEI Validation</a></li>
 							</ul>
 						</li>
 						<li><a href="<?php echo base_url();?>labPerformance">Lab Performance</a></li>

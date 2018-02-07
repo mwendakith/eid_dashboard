@@ -41,6 +41,20 @@ BEGIN
             SET @QUERY = CONCAT(@QUERY, " FROM `ip_summary_yearly` `main` JOIN `partners` `join` ON `join`.`ID` = `main`.`partner` ");
         END IF;
     END IF;
+    IF (type = 2) THEN
+        IF (from_month != 0 && from_month != '') THEN
+          SET @QUERY = CONCAT(@QUERY, " FROM `subcounty_summary` `main` JOIN `districts` `join` ON `join`.`ID` = `main`.`subcounty` ");
+        ELSE
+            SET @QUERY = CONCAT(@QUERY, " FROM `subcounty_summary_yearly` `main` JOIN `districts` `join` ON `join`.`ID` = `main`.`subcounty` ");
+        END IF;
+    END IF;
+    IF (type = 3) THEN
+        IF (from_month != 0 && from_month != '') THEN
+          SET @QUERY = CONCAT(@QUERY, " FROM `site_summary` `main` JOIN `facilitys` `join` ON `join`.`ID` = `main`.`facility` ");
+        ELSE
+            SET @QUERY = CONCAT(@QUERY, " FROM `site_summary_yearly` `main` JOIN `facilitys` `join` ON `join`.`ID` = `main`.`facility` ");
+        END IF;
+    END IF;
 
     SET @QUERY = CONCAT(@QUERY, " WHERE 1 ");
 

@@ -8,7 +8,7 @@
 			<th rowspan="2">Rejected Samples (on receipt at lab)</th>
 			<th rowspan="2">All Tests (plus reruns) Done at Lab</th>
 			<th rowspan="2">Redraws (after testing)</th>
-			<th rowspan="2">EQA QA/IQC Tests</th>
+			<th rowspan="2">EQA Tests</th>
 			<th colspan="2">Initial PCR</th>
 			<th colspan="2">Repeat PCR</th>
 			<th colspan="3">Confirmatory PCR</th>

@@ -16,7 +16,8 @@ BEGIN
                     SUM(`ls`.`fake_confirmatory`) AS `fake_confirmatory`,
                     SUM(`ls`.`repeatspos`) AS `repeatspos`,  
                     SUM(`ls`.`repeatposPOS`) AS `repeatspospos`,
-                    SUM(`ls`.`eqatests`) AS `eqa`,  
+                    SUM(`ls`.`eqatests`) AS `eqa`, 
+                    SUM(`ls`.`controls`) AS `controls`,  
                     SUM(`ls`.`pos`) AS `pos`, 
                     SUM(`ls`.`neg`) AS `neg`, 
                     SUM(`ls`.`redraw`) AS `redraw` 

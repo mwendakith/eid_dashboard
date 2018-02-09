@@ -498,9 +498,9 @@ class Counties_model extends MY_Model
 		foreach ($result as $key => $value) {
 			
 				$data['categories'][$key] = $value['name'];
-				$data["outcomes"][0]["data"][$key]	= round($value['tat1'],1);
+				$data["outcomes"][0]["data"][$key]	= round($value['tat3'],1);
 				$data["outcomes"][1]["data"][$key]	= round($value['tat2'],1);
-				$data["outcomes"][2]["data"][$key]	= round($value['tat3'],1);
+				$data["outcomes"][2]["data"][$key]	= round($value['tat1'],1);
 				$data["outcomes"][3]["data"][$key]	= round($value['tat4'],1);
 			
 		}

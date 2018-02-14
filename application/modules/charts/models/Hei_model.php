@@ -51,16 +51,15 @@ class Hei_model extends MY_Model
 			$table .= '<td>'.$value->name.'</td>';
 			$table .= '<td>'.number_format($value->positives).'</td>';
 			$table .= '<td>'.number_format($value->Followup_Hei).'</td>';
-			$table .= '<td>'.round($followup_percentage, 1).'%</td>';
+			$table .= '<td>'.$followup_percentage.'%</td>';
 			$table .= '<td>'.number_format($value->Confirmed_Positive).'</td>';
-			$table .= '<td>'.round($confirmed_percentage, 1).'%</td>';
-			// if ($percentage > 69) {
-			// 	$table .= '<td><span class="alert alert-success" style="color:black;">'.$percentage.'%</span></td>';
-			// } else if ($percentage < 70 && $percentage > 39) {
-			// 	$table .= '<td><span class="alert alert-warning" style="color:black;">'.$percentage.'%</span></td>';
-			// } else {
-			// 	$table .= '<td><span class="alert alert-danger" style="color:black;">'.$percentage.'%</span></td>';
-			// }
+			if ($confirmed_percentage > 69) {
+				$table .= '<td><span class="alert alert-success" style="color:black;">'.$confirmed_percentage.'%</span></td>';
+			} else if ($confirmed_percentage < 70 && $confirmed_percentage > 39) {
+				$table .= '<td><span class="alert alert-warning" style="color:black;">'.$confirmed_percentage.'%</span></td>';
+			} else {
+				$table .= '<td><span class="alert alert-danger" style="color:black;">'.$confirmed_percentage.'%</span></td>';
+			}
 			$table .= '</tr>';
 			$count++;
 		}

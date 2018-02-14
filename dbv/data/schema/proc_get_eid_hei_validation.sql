@@ -16,30 +16,62 @@ BEGIN
     
     IF (type = 0) THEN
         IF (ID = 0) THEN 
-            SET @QUERY = CONCAT(@QUERY, " FROM `county_summary` `main` JOIN `countys` `join` ON `join`.`ID` = `main`.`county` WHERE 1 ");
+            IF (from_month != 0 && from_month != '') THEN
+              SET @QUERY = CONCAT(@QUERY, " FROM `county_summary` `main` JOIN `countys` `join` ON `join`.`ID` = `main`.`county` WHERE 1 ");
+            ELSE
+                SET @QUERY = CONCAT(@QUERY, " FROM `county_summary_yearly` `main` JOIN `countys` `join` ON `join`.`ID` = `main`.`county` WHERE 1 ");
+            END IF;
         ELSE
-            SET @QUERY = CONCAT(@QUERY, " FROM `county_summary` `main` JOIN `countys` `join` ON `join`.`ID` = `main`.`county` WHERE `main`.`county` = '",ID,"' ");
+            IF (from_month != 0 && from_month != '') THEN
+              SET @QUERY = CONCAT(@QUERY, " FROM `county_summary` `main` JOIN `countys` `join` ON `join`.`ID` = `main`.`county` WHERE `main`.`county` = '",ID,"' ");
+            ELSE
+                SET @QUERY = CONCAT(@QUERY, " FROM `county_summary_yearly` `main` JOIN `countys` `join` ON `join`.`ID` = `main`.`county` WHERE `main`.`county` = '",ID,"' ");
+            END IF;
         END IF;
     END IF;
     IF (type = 1) THEN
         IF (ID = 0) THEN 
-            SET @QUERY = CONCAT(@QUERY, " FROM `ip_summary` `main` JOIN `partners` `join` ON `join`.`ID` = `main`.`partner` WHERE 1 ");
+            IF (from_month != 0 && from_month != '') THEN
+              SET @QUERY = CONCAT(@QUERY, " FROM `ip_summary` `main` JOIN `partners` `join` ON `join`.`ID` = `main`.`partner` WHERE 1 ");
+            ELSE
+                SET @QUERY = CONCAT(@QUERY, " FROM `ip_summary_yearly` `main` JOIN `partners` `join` ON `join`.`ID` = `main`.`partner` WHERE 1 ");
+            END IF;
         ELSE
-            SET @QUERY = CONCAT(@QUERY, " FROM `ip_summary` `main` JOIN `partners` `join` ON `join`.`ID` = `main`.`partner` WHERE `main`.`partner` = '",ID,"' ");
+            IF (from_month != 0 && from_month != '') THEN
+              SET @QUERY = CONCAT(@QUERY, " FROM `ip_summary` `main` JOIN `partners` `join` ON `join`.`ID` = `main`.`partner` WHERE `main`.`partner` = '",ID,"' ");
+            ELSE
+                SET @QUERY = CONCAT(@QUERY, " FROM `ip_summary_yearly` `main` JOIN `partners` `join` ON `join`.`ID` = `main`.`partner` WHERE `main`.`partner` = '",ID,"' ");
+            END IF;
         END IF;
     END IF;
     IF (type = 2) THEN
         IF (ID = 0) THEN 
-            SET @QUERY = CONCAT(@QUERY, " FROM `subcounty_summary` `main` JOIN `districts` `join` ON `join`.`ID` = `main`.`subcounty` WHERE 1 ");
+            IF (from_month != 0 && from_month != '') THEN
+              SET @QUERY = CONCAT(@QUERY, " FROM `subcounty_summary` `main` JOIN `districts` `join` ON `join`.`ID` = `main`.`subcounty` WHERE 1 ");
+            ELSE
+                SET @QUERY = CONCAT(@QUERY, " FROM `subcounty_summary_yearly` `main` JOIN `districts` `join` ON `join`.`ID` = `main`.`subcounty` WHERE 1 ");
+            END IF;
         ELSE
-            SET @QUERY = CONCAT(@QUERY, " FROM `subcounty_summary` `main` JOIN `districts` `join` ON `join`.`ID` = `main`.`subcounty` WHERE `main`.`subcounty` = '",ID,"' ");
+            IF (from_month != 0 && from_month != '') THEN
+              SET @QUERY = CONCAT(@QUERY, " FROM `subcounty_summary` `main` JOIN `districts` `join` ON `join`.`ID` = `main`.`subcounty` WHERE `main`.`subcounty` = '",ID,"' ");
+            ELSE
+                SET @QUERY = CONCAT(@QUERY, " FROM `subcounty_summary_yearly` `main` JOIN `districts` `join` ON `join`.`ID` = `main`.`subcounty` WHERE `main`.`subcounty` = '",ID,"' ");
+            END IF;
         END IF;
     END IF;
     IF (type = 3) THEN
         IF (ID = 0) THEN 
-            SET @QUERY = CONCAT(@QUERY, " FROM `site_summary` `main` JOIN `facilitys` `join` ON `join`.`ID` = `main`.`facility` WHERE 1 ");
+            IF (from_month != 0 && from_month != '') THEN
+              SET @QUERY = CONCAT(@QUERY, " FROM `site_summary` `main` JOIN `facilitys` `join` ON `join`.`ID` = `main`.`facility` WHERE 1 ");
+            ELSE
+                SET @QUERY = CONCAT(@QUERY, " FROM `site_summary_yearly` `main` JOIN `facilitys` `join` ON `join`.`ID` = `main`.`facility` WHERE 1 ");
+            END IF;
         ELSE
-            SET @QUERY = CONCAT(@QUERY, " FROM `site_summary` `main` JOIN `facilitys` `join` ON `join`.`ID` = `main`.`facility` WHERE `main`.`facility` = '",ID,"' ");
+            IF (from_month != 0 && from_month != '') THEN
+              SET @QUERY = CONCAT(@QUERY, " FROM `site_summary` `main` JOIN `facilitys` `join` ON `join`.`ID` = `main`.`facility` WHERE `main`.`facility` = '",ID,"' ");
+            ELSE
+                SET @QUERY = CONCAT(@QUERY, " FROM `site_summary_yearly` `main` JOIN `facilitys` `join` ON `join`.`ID` = `main`.`facility` WHERE `main`.`facility` = '",ID,"' ");
+            END IF;
         END IF;
     END IF;
     
@@ -59,7 +91,7 @@ BEGIN
     SET @QUERY = CONCAT(@QUERY, " GROUP BY `name` ORDER BY `actualinfants_tests` DESC ");
 
     PREPARE stmt FROM @QUERY;
-    EXECUTE stmt;
+    SHOW stmt;
      
 END //
 DELIMITER ;

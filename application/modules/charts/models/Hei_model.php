@@ -36,19 +36,31 @@ class Hei_model extends MY_Model
 		}
 	
 		if ($id==null || $id=='null') $id = 0;
-
+		$id = 0;
 		$sql = "CALL `proc_get_eid_hei_validation`('".$year."','".$month."','".$to_year."','".$to_month."','".$type."','".$id."')";
 		
 		$result = $this->db->query($sql)->result();
+		// echo "<pre>";print_r($result);die();
 		$count = 1;
 		$table = '';
 		foreach ($result as $key => $value) {
+			$followup_percentage = round(@($value->Followup_Hei/$value->positives)*100,1);
+			$confirmed_percentage = round(@($value->Confirmed_Positive/$value->Followup_Hei)*100,1);
 			$table .= '<tr>';
 			$table .= '<td>'.$count.'</td>';
 			$table .= '<td>'.$value->name.'</td>';
 			$table .= '<td>'.number_format($value->positives).'</td>';
+			$table .= '<td>'.number_format($value->Followup_Hei).'</td>';
+			$table .= '<td>'.round($followup_percentage, 1).'%</td>';
 			$table .= '<td>'.number_format($value->Confirmed_Positive).'</td>';
-			$table .= '<td>'.round(@($value->Confirmed_Positive/$value->positives)*100,1).'%</td>';
+			$table .= '<td>'.round($confirmed_percentage, 1).'%</td>';
+			// if ($percentage > 69) {
+			// 	$table .= '<td><span class="alert alert-success" style="color:black;">'.$percentage.'%</span></td>';
+			// } else if ($percentage < 70 && $percentage > 39) {
+			// 	$table .= '<td><span class="alert alert-warning" style="color:black;">'.$percentage.'%</span></td>';
+			// } else {
+			// 	$table .= '<td><span class="alert alert-danger" style="color:black;">'.$percentage.'%</span></td>';
+			// }
 			$table .= '</tr>';
 			$count++;
 		}

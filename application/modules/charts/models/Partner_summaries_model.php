@@ -357,7 +357,7 @@ class Partner_summaries_model extends MY_Model
                      <td></td>
                      <td></td>
                 </tr><tr>
-                 <td><center>&nbsp;&nbsp;Actual Positives Validated at Site:</center></td>
+                 <td><center>&nbsp;&nbsp;Actual Infants Validated at Site:</center></td>
                      <td>'.number_format((int) $value['followup_hei']).'<b>('.round((((int) $value['followup_hei']/(int) $value['positives'])*100),1).'%)</b></td>
                      <td></td>
                      <td></td>

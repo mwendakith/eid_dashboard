@@ -23,8 +23,10 @@ class Hei extends MY_Controller
 							<th>#</th>
 							<th>'.$title.'</th>
 							<th>Actual Infants Tested Positive</th>
-							<th>Actual Positives Validated at Site</th>
-							<th>% Validated at Site</th>
+							<th>Actual Infants Validated at Site</th>
+							<th>% Infants Validated at Site</th>
+							<th>Actual Infants Confirmed Positive</th>
+							<th>% Infants Confirmed Positive</th>
 						</tr>';
 		$data['outcomes'] = $this->hei_model->validation($year, $month, $to_year, $to_month, $type, $id);
 		// echo "<pre>";print_r($data);die();

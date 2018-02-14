@@ -433,7 +433,7 @@ class Summaries_model extends MY_Model
                      <td></td>
                      <td></td>
                 </tr><tr>
-                 <td><center>&nbsp;&nbsp;Actual Positives Validated at Site:</center></td>
+                 <td><center>&nbsp;&nbsp;Actual Infants Validated at Site:</center></td>
                      <td>'.number_format((int) $value['followup_hei']).'<b>('.round((((int) $value['followup_hei']/(int) $value['positives'])*100),1).'%)</b></td>
                      <td></td>
                      <td></td>
@@ -500,7 +500,7 @@ class Summaries_model extends MY_Model
 				if ($county==null || $county=='null') {
 					$sql = "CALL `proc_get_eid_national_yearly_hei`('".$year."')";
 				} else {
-					$sql = "CALL `proc_get_eid_county_yearly_hei`('".$county."','".$year."','".$month."','".$to_year."','".$to_month."')";
+					$sql = "CALL `proc_get_eid_county_yearly_hei`('".$county."','".$year."')";
 				}
 			}
 		} else {

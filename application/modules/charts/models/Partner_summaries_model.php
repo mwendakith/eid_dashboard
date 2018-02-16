@@ -146,17 +146,18 @@ class Partner_summaries_model extends MY_Model
 		$count = 1;
 		$table = '';
 		foreach ($result as $key => $value) {
+			$tests = (int) ($value->firstdna+$value->confirmdna+$value->repeatspos);
 			$table .= '<tr>';
 			$table .= '<td>'.$count.'</td>';
 			$table .= '<td>'.$value->name.'</td>';
-			$table .= '<td>'.number_format($value->tests).'</td>';
+			$table .= '<td>'.number_format($tests).'</td>';
 			$table .= '<td>'.number_format($value->firstdna).'</td>';
 			$table .= '<td>'.number_format($value->infantsless2m).'</td>';
 			$table .= '<td><center>'.round(@($value->infantsless2m/$value->firstdna)*100, 1).'%</center></td>';
 			$table .= '<td>'.number_format($value->repeatspos).'</td>';
-			$table .= '<td><center>'.round(@($value->repeatspos/$value->tests)*100, 1).'%</center></td>';
+			$table .= '<td><center>'.round(@($value->repeatspos/$tests)*100, 1).'%</center></td>';
 			$table .= '<td>'.number_format($value->confirmdna).'</td>';
-			$table .= '<td><center>'.round(@($value->confirmdna/$value->tests)*100, 1).'%</center></td>';
+			$table .= '<td><center>'.round(@($value->confirmdna/$tests)*100, 1).'%</center></td>';
 			$table .= '</tr>';
 			$count++;
 		}

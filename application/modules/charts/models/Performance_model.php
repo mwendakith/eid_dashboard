@@ -68,8 +68,12 @@ class Performance_model extends MY_Model
 						<td>".number_format((int) $value['confirmdna'])."</td>
 						<td>".number_format((int) $value['confirmedpos'])."</td>
 						<td>".number_format((int) $value['fake_confirmatory'])."</td>
-						<td>".number_format((int) ($value['pos']+$value['neg']+$value['confirmdna'] + $value['repeatspos']))."</td>
-						<td>".number_format((int) ($value['pos']+$value['confirmedpos'] + $value['repeatspospos']))."</td>
+
+						<td>".number_format((int) $value['tiebreaker'])."</td>
+						<td>".number_format((int) $value['tiebreakerPOS'])."</td>
+						
+						<td>".number_format((int) ($value['pos']+$value['neg']+$value['confirmdna'] + $value['repeatspos'] + $value['tiebreaker']))."</td>
+						<td>".number_format((int) ($value['pos']+$value['confirmedpos'] + $value['repeatspospos'] + $value['tiebreakerPOS']))."</td>
 						
 					</tr>";
 					// <td>".number_format((int) $value['alltests'] + (int) $value['eqa'] + (int) $value['confirmdna'] + (int) $value['repeatspos'])."</td>

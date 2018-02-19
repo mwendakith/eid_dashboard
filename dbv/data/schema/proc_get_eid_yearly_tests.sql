@@ -8,8 +8,13 @@ BEGIN
                     `cs`.`year`, `cs`.`month`, SUM(`cs`.`firstdna`) AS `tests`, 
                     SUM(`cs`.`pos`) AS `positive`,
                     SUM(`cs`.`neg`) AS `negative`,
+                    SUM(`ns`.`allpos`) AS `allpositive`,
+                    SUM(`ns`.`allneg`) AS `allnegative`,
+                    SUM(`ns`.`rpos`) AS `rpos`,
+                    SUM(`ns`.`rneg`) AS `rneg`,
                     SUM(`cs`.`rejected`) AS `rejected`,
                     SUM(`cs`.`infantsless2m`) AS `infants`,
+                    SUM(`ns`.`infantsless2mPOS`) AS `infantspos`,
                     SUM(`cs`.`redraw`) AS `redraw`,
                     SUM(`cs`.`tat4`) AS `tat4`
                 FROM `county_summary` `cs`

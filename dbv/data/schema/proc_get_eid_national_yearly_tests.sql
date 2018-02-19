@@ -7,8 +7,13 @@ BEGIN
                     `ns`.`year`, `ns`.`month`, SUM(`ns`.`firstdna`) AS `tests`, 
                     SUM(`ns`.`pos`) AS `positive`,
                     SUM(`ns`.`neg`) AS `negative`,
+                    SUM(`ns`.`allpos`) AS `allpositive`,
+                    SUM(`ns`.`allneg`) AS `allnegative`,
+                    SUM(`ns`.`rpos`) AS `rpos`,
+                    SUM(`ns`.`rneg`) AS `rneg`,
                     SUM(`ns`.`rejected`) AS `rejected`,
                     SUM(`ns`.`infantsless2m`) AS `infants`,
+                    SUM(`ns`.`infantsless2mPOS`) AS `infantspos`,
                     SUM(`ns`.`redraw`) AS `redraw`,
                     SUM(`ns`.`tat4`) AS `tat4`
                 FROM `national_summary` `ns`

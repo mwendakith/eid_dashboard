@@ -14,6 +14,22 @@
 
     </div>
 
+    <div id="repeat_q" class="col-md-12">
+
+    </div>
+
+    <div id="alltests_q" class="col-md-12">
+
+    </div>
+
+    <div id="infants_q" class="col-md-12">
+
+    </div>
+
+    <div id="less2m_q" class="col-md-12">
+
+    </div>
+
     <div id="graphs">
     
     </div>
@@ -45,6 +61,10 @@
     $("#year-month-filter").hide();
     $("#graphs").load("<?php echo base_url();?>charts/trends/positive_trends");
     $("#stacked_graph").load("<?php echo base_url();?>charts/trends/summary");
+    $("#alltests_q").load("<?php echo base_url();?>charts/trends/alltests_q");
+    $("#repeat_q").load("<?php echo base_url();?>charts/trends/repeat_q");
+    $("#infants_q").load("<?php echo base_url();?>charts/trends/infants_q");
+    $("#less2m_q").load("<?php echo base_url();?>charts/trends/less2m_q");
     localStorage.setItem("my_var", 0);
 
 
@@ -66,6 +86,9 @@
 
         $("#graphs").load("<?php echo base_url();?>charts/trends/positive_trends/"+county_id);
         $("#stacked_graph").load("<?php echo base_url();?>charts/trends/summary/"+county_id);
+        $("#alltests_q").load("<?php echo base_url();?>charts/trends/alltests_q/"+county_id);
+        $("#repeat_q").load("<?php echo base_url();?>charts/trends/repeat_q/"+county_id);
+        $("#infants_q").load("<?php echo base_url();?>charts/trends/infants_q/"+county_id);
       }
       else{
         $("#first").hide();

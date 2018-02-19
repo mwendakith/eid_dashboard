@@ -117,6 +117,53 @@ class Partner_summaries_model extends MY_Model
 	    fpassthru($f);
 	}
 
+	function tests_analysis($year=null,$month=null,$to_year=null,$to_month=null,$type=null)
+	{
+		if ($year==null || $year=='null') $year = $this->session->userdata('filter_year');
+		if ($month==null || $month=='null') {
+			if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
+				$month = 0;
+			}else {
+				$month = $this->session->userdata('filter_month');
+			}
+		}
+		if ($to_month==null || $to_month=='null') $to_month = 0;
+		if ($to_year==null || $to_year=='null') $to_year = 0;
+		if ($type==null || $type=='null') $type = 0;
+		if ($type == 0 || $type == '0') {
+			if (null !== $this->session->userdata('county_filter')) $id = $this->session->userdata('county_filter');
+		} else if ($type == 1 || $type == '1') {
+			if (null !== $this->session->userdata('partner_filter')) $id = $this->session->userdata('partner_filter');
+		} else if ($type == 2 || $type == '2') {
+			if (null !== $this->session->userdata('sub_county_filter')) $id = $this->session->userdata('sub_county_filter');
+		} else if ($type == 3 || $type == '3') {
+			if (null !== $this->session->userdata('site_filter')) $id = $this->session->userdata('site_filter');
+		}
+
+		$sql = "CALL `proc_get_eid_tests_analysis`('".$year."','".$month."','".$to_year."','".$to_month."','".$type."')";
+		
+		$result = $this->db->query($sql)->result();
+		$count = 1;
+		$table = '';
+		foreach ($result as $key => $value) {
+			$tests = (int) ($value->firstdna+$value->confirmdna+$value->repeatspos);
+			$table .= '<tr>';
+			$table .= '<td>'.$count.'</td>';
+			$table .= '<td>'.$value->name.'</td>';
+			$table .= '<td>'.number_format($tests).'</td>';
+			$table .= '<td>'.number_format($value->firstdna).'</td>';
+			$table .= '<td>'.number_format($value->infantsless2m).'</td>';
+			$table .= '<td><center>'.round(@($value->infantsless2m/$value->firstdna)*100, 1).'%</center></td>';
+			$table .= '<td>'.number_format($value->repeatspos).'</td>';
+			$table .= '<td><center>'.round(@($value->repeatspos/$tests)*100, 1).'%</center></td>';
+			$table .= '<td>'.number_format($value->confirmdna).'</td>';
+			$table .= '<td><center>'.round(@($value->confirmdna/$tests)*100, 1).'%</center></td>';
+			$table .= '</tr>';
+			$count++;
+		}
+		return $table;
+	}
+
 	function eid_outcomes($year=null,$month=null,$partner=null,$to_year=null,$to_month=null)
 	{
 		if ($partner==null || $partner=='null') {
@@ -311,7 +358,7 @@ class Partner_summaries_model extends MY_Model
                      <td></td>
                      <td></td>
                 </tr><tr>
-                 <td><center>&nbsp;&nbsp;Actual Positives Validated at Site:</center></td>
+                 <td><center>&nbsp;&nbsp;Actual Infants Validated at Site:</center></td>
                      <td>'.number_format((int) $value['followup_hei']).'<b>('.round((((int) $value['followup_hei']/(int) $value['positives'])*100),1).'%)</b></td>
                      <td></td>
                      <td></td>

@@ -626,7 +626,7 @@ class Sites_model extends MY_Model
                      <td></td>
                      <td></td>
                 </tr><tr>
-                 <td>Actual Positives Validated at Site:</td>
+                 <td>Actual Infants Validated at Site:</td>
                      <td>'.number_format((int) $value['followup_hei']).'<b>('.round((((int) $value['followup_hei']/(int) $value['positives'])*100),1).'%)</b></td>
                      <td></td>
                      <td></td>

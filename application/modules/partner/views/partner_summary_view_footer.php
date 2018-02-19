@@ -12,6 +12,7 @@
 			$(".display_range").html("( "+obj['prev_year']+" - "+obj['year']+" )");
     	});
 		$("#partner").load("<?php echo base_url('charts/partner_summaries/partner_outcomes'); ?>");
+		$("#partner_test_analysis").load("<?= @base_url('charts/partner_summaries/tests_analysis'); ?>");
 
 		//Function when the prtner is selected
 		$("select").change(function(){
@@ -111,6 +112,8 @@
 						// fetching the partner outcomes
 						$("#partner").html("<center><div class='loader'></div></center>");
 						$("#partner").load("<?php echo base_url('charts/partner_summaries/partner_outcomes'); ?>/"+from[1]+"/"+from[0]+"/"+null+"/"+to[1]+"/"+to[0]);
+						$("#partner_test_analysis").html("<center><div class='loader'></div></center>");
+						$("#partner_test_analysis").load("<?= @base_url('charts/partner_summaries/tests_analysis'); ?>/"+from[1]+"/"+from[0]+"/"+to[1]+"/"+to[0]);
 					} else {
 						partner = $.parseJSON(partner);
 						$("#first").hide();
@@ -185,6 +188,8 @@
 					// fetching the partner outcomes
 					$("#partner").html("<center><div class='loader'></div></center>");
 					$("#partner").load("<?php echo base_url('charts/partner_summaries/partner_outcomes'); ?>/"+year+"/"+month);
+					$("#partner_test_analysis").html("<center><div class='loader'></div></center>");
+					$("#partner_test_analysis").load("<?= @base_url('charts/partner_summaries/tests_analysis'); ?>/"+year+"/"+month);
 				} else {
 					partner = $.parseJSON(partner);
 					$("#first").hide();

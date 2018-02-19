@@ -167,6 +167,14 @@ class Counties extends MY_Controller
 	
 	}
 
+	function county_tat_outcomes($year=NULL, $month=NULL, $to_year=NULL, $to_month=NULL)
+	{
+		$data['trends'] = $this->counties_model->county_tat_outcomes($year,$month,$to_year,$to_month);
+		$data['div_name'] = "summary_counties_tat_summary";
+		$data['tat'] = true;
+		$this->load->view('trends_outcomes_view', $data);
+	}
+
 
 	
 }

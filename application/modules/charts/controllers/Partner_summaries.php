@@ -29,6 +29,28 @@ class Partner_summaries extends MY_Controller
 		$this->partner_summaries_model->download_testing_trends($year,$partner);
 	}
 
+	function tests_analysis($year=NULL,$month=NULL,$to_year=NULL,$to_month=NULL,$type=1)
+	{
+		if ($type == 0 || $type == '0') $title = 'Countys';
+		if ($type == 1 || $type == '1') $title = 'Partners';
+		if ($type == 2 || $type == '2') $title = 'Sub-countys';
+		if ($type == 3 || $type == '3') $title = 'Facilitys';
+		$data['th']	= '<tr class="colhead">
+							<th>#</th>
+							<th>'.$title.'</th>
+							<th>Total Tests</th>
+							<th>Initial PCR</th>
+							<th>&lt;=2M</th>
+							<th>&lt;=2M(% of Initial PCR)</th>
+							<th>Repeat PCR</th>
+							<th>% Repeat PCR</th>
+							<th>Confirmatory PCR</th>
+							<th>% Confirmatory PCR</th>
+						</tr>';
+		$data['outcomes'] = $this->partner_summaries_model->tests_analysis($year,$month,$to_year,$to_month,$type);
+		$this->load->view('counties_details_view',$data);
+	}
+
 	function eid_outcomes($year=NULL,$month=NULL,$partner=NULL,$to_year=NULL,$to_month=NULL)
 	{
 		$data['outcomes'] =$this->partner_summaries_model->eid_outcomes($year,$month,$partner,$to_year,$to_month);

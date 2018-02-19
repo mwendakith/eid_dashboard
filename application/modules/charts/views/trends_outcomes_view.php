@@ -31,14 +31,14 @@
             yAxis: [{ // Primary yAxis
                 labels: {
                     formatter: function() {
-                        return this.value +'%';
+                        return this.value +'<?= (isset($tat) ? @"": @"%"); ?>';
                     },
                     style: {
                         
                     }
                 },
                 title: {
-                    text: 'Percentage',
+                    text: '<?= (isset($tat) ? @"Days": @"Percentage"); ?>',
                     style: {
                         color: '#89A54E'
                     }
@@ -48,7 +48,7 @@
             }, { // Secondary yAxis
                 gridLineWidth: 0,
                 title: {
-                    text: 'Tests',
+                    text: '<?= (isset($tat) ? @"Days": @"Tests"); ?>',
                     style: {
                         color: '#4572A7'
                     }

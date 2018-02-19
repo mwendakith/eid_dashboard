@@ -193,6 +193,17 @@
 		  </div>
 		</div>
 	</div>
+
+	<div class="col-md-12 col-sm-12 col-xs-12">
+		<div class="panel panel-default">
+		  <div class="panel-heading">
+		  	Partner Test Analysis <div class="display_date"></div>
+		  </div>
+		  <div class="panel-body" id="partner_test_analysis">
+		    <center><div class="loader"></div></center>
+		  </div>
+		</div>
+	</div>
 </div>
 
 

@@ -1,18 +1,19 @@
-DROP PROCEDURE IF EXISTS `proc_get_eid_national_tat`;
+DROP PROCEDURE IF EXISTS `proc_get_eid_tat_ranking`;
 DELIMITER //
-CREATE PROCEDURE `proc_get_eid_national_tat`
-(IN filter_year INT(11), IN from_month INT(11), IN to_year INT(11), IN to_month INT(11), IN type INT(11), IN ID INT(11))
+CREATE PROCEDURE `proc_get_eid_tat_ranking`
+(IN filter_year INT(11), IN from_month INT(11), IN to_year INT(11), IN to_month INT(11), IN type INT(11))
 BEGIN
   SET @QUERY =    "SELECT 
-                        `vls`.`tat1`, 
-                        `vls`.`tat2`, 
-                        `vls`.`tat3`, 
-                        `vls`.`tat4`";
-    IF (type = 0) THEN
-      SET @QUERY = CONCAT(@QUERY, " FROM `national_summary` `vls` WHERE 1 ");
+                    `jt`.`name`, 
+                    AVG(`mt`.`tat1`) AS `tat1`, 
+                    AVG(`mt`.`tat2`) AS `tat2`, 
+                    AVG(`mt`.`tat3`) AS `tat3`, 
+                    AVG(`mt`.`tat4`) AS `tat4`";
+    IF (type = 0 && type = '') THEN
+      SET @QUERY = CONCAT(@QUERY, " FROM `county_summary` `mt` JOIN `countys` `jt` ON `jt`.`ID` = `mt`.`county` WHERE 1 ");
     END IF;
     IF (type = 1) THEN
-      SET @QUERY = CONCAT(@QUERY, " , `c`.`name` FROM `county_summary` `vls` JOIN `countys` `c` ON `c`.`ID` = `vls`.`county` WHERE `vls`.`county` = '",ID,"' ");
+      SET @QUERY = CONCAT(@QUERY, " FROM `ip_summary` `mt` JOIN `partners` `jt` ON `jt`.`ID` = `mt`.`partner` WHERE 1 ");
     END IF;
     IF (from_month != 0 && from_month != '') THEN
       IF (to_month != 0 && to_month != '' && filter_year = to_year) THEN
@@ -27,8 +28,9 @@ BEGIN
         SET @QUERY = CONCAT(@QUERY, " AND `year` = '",filter_year,"' ");
     END IF;
     
+    SET @QUERY = CONCAT(@QUERY, " GROUP BY `name` ORDER BY `tat4` DESC ");
 
-     PREPARE stmt FROM @QUERY;
-     EXECUTE stmt;
+    PREPARE stmt FROM @QUERY;
+    EXECUTE stmt;
 END //
 DELIMITER ;

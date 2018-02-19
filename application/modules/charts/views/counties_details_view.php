@@ -1,5 +1,8 @@
 <table id="example" cellspacing="1" cellpadding="3" class="tablehead table table-striped table-bordered" style="background:#CCC;">
 	<thead>
+		<?php if(isset($th)) { 
+			echo $th; 
+		} else {?>
 		<tr class="colhead">
 			<th rowspan="2">#</th>
 			<th rowspan="2">County</th>
@@ -30,17 +33,18 @@
 			<th>Tests</th>
 			<th>Pos</th>
 		</tr>
+		<?php } ?>
 	</thead>
 	<tbody>
 		<?php echo $outcomes;?>
 	</tbody>
 </table>
-<div class="row" id="excels" style="display: none;">
+<!-- <div class="row" id="excels" style="display: none;">
 	
 	<div class="col-md-12">
-		<center><a href="<?php  echo $link; ?>"><button id="download_link" class="btn btn-primary" style="background-color: #009688;color: white;">Export To Excel</button></a></center>
+		<center><a href="<?php  //echo $link; ?>"><button id="download_link" class="btn btn-primary" style="background-color: #009688;color: white;">Export To Excel</button></a></center>
 	</div>
-</div>
+</div> -->
 <script type="text/javascript" charset="utf-8">
   $(document).ready(function() {
   	
@@ -48,7 +52,7 @@
 
   	$('#example').DataTable({
       dom: '<"btn btn-primary"B>lTfgtip',
-      responsive: true,
+      responsive: false,
         buttons : [
             {
               text:  'Export to CSV',

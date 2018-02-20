@@ -433,9 +433,12 @@ class Counties_model extends MY_Model
 		
 	}
 
-	function county_tat_outcomes($year=null, $month=null, $to_year=null, $to_month=null)
+	function county_tat_outcomes($year=null, $month=null, $to_year=null, $to_month=null,$county=null)
 	{
 		$type = 0;
+		if ($county==null || $county=='null') {
+			$county = $this->session->userdata('county_filter');
+		}
 		//Initializing the value of the Year to the selected year or the default year which is current year
 		if ($year==null || $year=='null') {
 			$year = $this->session->userdata('filter_year');
@@ -454,8 +457,8 @@ class Counties_model extends MY_Model
 		if ($to_year==null || $to_year=='null') {
 			$to_year = 0;
 		}
-				
-		$sql = "CALL `proc_get_eid_tat_ranking`('".$year."','".$month."','".$to_year."','".$to_month."','".$type."')";
+		if ($county==null) $county = 0;
+		$sql = "CALL `proc_get_eid_tat_ranking`('".$year."','".$month."','".$to_year."','".$to_month."','".$type."','".$county."')";
 		// echo "<pre>";print_r($sql);echo "</pre>";die();
 		$result = $this->db->query($sql)->result_array();
 		// echo "<pre>";print_r($result);die();

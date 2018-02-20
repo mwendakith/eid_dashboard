@@ -1,7 +1,7 @@
 DROP PROCEDURE IF EXISTS `proc_get_eid_tat_ranking`;
 DELIMITER //
 CREATE PROCEDURE `proc_get_eid_tat_ranking`
-(IN filter_year INT(11), IN from_month INT(11), IN to_year INT(11), IN to_month INT(11), IN type INT(11))
+(IN filter_year INT(11), IN from_month INT(11), IN to_year INT(11), IN to_month INT(11), IN type INT(11), IN ID INT(11))
 BEGIN
   SET @QUERY =    "SELECT 
                     `jt`.`name`, 
@@ -10,7 +10,11 @@ BEGIN
                     AVG(`mt`.`tat3`) AS `tat3`, 
                     AVG(`mt`.`tat4`) AS `tat4`";
     IF (type = 0 && type = '') THEN
-      SET @QUERY = CONCAT(@QUERY, " FROM `county_summary` `mt` JOIN `countys` `jt` ON `jt`.`ID` = `mt`.`county` WHERE 1 ");
+        IF (ID != 0 && ID != '') THEN 
+            SET @QUERY = CONCAT(@QUERY, " FROM `subcounty_summary` `mt` JOIN `districts` `jt` ON `jt`.`ID` = `mt`.`subcounty` JOIN `view_facilitys` `vf` ON `vf`.`district` = `jt`.`ID` WHERE `vf`.`county` = '",ID,"' ");
+        ELSE 
+            SET @QUERY = CONCAT(@QUERY, " FROM `county_summary` `mt` JOIN `countys` `jt` ON `jt`.`ID` = `mt`.`county` WHERE 1 ");
+        END IF;
     END IF;
     IF (type = 1) THEN
       SET @QUERY = CONCAT(@QUERY, " FROM `ip_summary` `mt` JOIN `partners` `jt` ON `jt`.`ID` = `mt`.`partner` WHERE 1 ");

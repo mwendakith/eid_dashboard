@@ -13,6 +13,7 @@
 			<th colspan="2">Initial PCR</th>
 			<th colspan="2">Repeat PCR</th>
 			<th colspan="3">Confirmatory PCR</th>
+			<th colspan="2">Tiebreaker PCR</th>
 			<th colspan="2">Tests with Valid Outcomes</th>
 			<!-- <th rowspan="2">Valid Test Results</th>
 			<th rowspan="2">Repeat +ve Confirmatory Tests</th>
@@ -34,6 +35,8 @@
 			<th>Tests</th>
 			<th>Positives</th>
 			<th>Confirmatory Without Previous Positive</th>
+			<th>Tests</th>
+			<th>Positives</th>
 			<th>Tests</th>
 			<th>Positives</th>
 		</tr>

@@ -113,6 +113,30 @@ class Trends extends MY_Controller
 
 	}
 
+	function alltests_q($county=NULL){
+		$data['trends'] = $this->trends_model->alltests($county);
+		$data['div_name'] = "all_q_trends";
+		$this->load->view('trends_outcomes_view', $data);
+	}
+
+	function repeat_q($county=NULL){
+		$data['trends'] = $this->trends_model->rtests($county);
+		$data['div_name'] = "repeat_q_trends";
+		$this->load->view('trends_outcomes_view', $data);
+	}
+
+	function infants_q($county=NULL){
+		$data['trends'] = $this->trends_model->infant_tests($county);
+		$data['div_name'] = "infants_q_trends";
+		$this->load->view('trends_outcomes_view', $data);
+	}
+
+	function less2m_q($county=NULL){
+		$data['trends'] = $this->trends_model->ages_2m_quarterly($county);
+		$data['div_name'] = "less2m_q_trends";
+		$this->load->view('trends_view2', $data);
+	}
+
 	function quarterly_outcomes($county=NULL){
 		$data['trends'] = $this->trends_model->quarterly_outcomes($county);
 		// echo "<pre>";print_r($data);echo "</pre>";die();

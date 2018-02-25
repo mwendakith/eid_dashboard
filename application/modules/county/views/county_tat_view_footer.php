@@ -34,10 +34,19 @@
 						$(".display_date").html("( "+obj['year']+" "+obj['month']+" )");
 						$(".display_range").html("( "+obj['prev_year']+" - "+obj['year']+" )");
 		        	});
-	        	// Loader displaying
-	        	$("#county_tat_outcomes").html("<center><div class='loader'></div></center>");
+	        	
+	        	if (data ==  '') {
+	        		// Loader displaying
+		        	$("#county_tat_outcomes").html("<center><div class='loader'></div></center>");
 
-				$("#county_tat_outcomes").load("<?php echo base_url('charts/counties/county_tat_outcomes'); ?>"); 
+					$("#county_tat_outcomes").load("<?php echo base_url('charts/counties/county_tat_outcomes'); ?>");
+	        	} else {
+	        		// Loader displaying
+		        	$("#county_tat_outcomes").html("<center><div class='loader'></div></center>");
+
+					$("#county_tat_outcomes").load("<?php echo base_url('charts/counties/county_tat_outcomes'); ?>/"+null+"/"+null+"/"+null+"/"+null+"/"+data);
+	        	}
+	        	 
 	        });
 		});
 

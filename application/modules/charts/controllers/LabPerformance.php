@@ -65,7 +65,7 @@ class LabPerformance extends MY_Controller
 
 	function lab_outcomes($year=NULL, $month=NULL,$to_year=NULL,$to_month=NULL){
 		$data['trends'] = $this->performance_model->lab_outcomes($year,$month,$to_year,$to_month);
-		//echo json_encode($data);
+		// echo json_encode($data);die();
 		$this->load->view('lab_outcomes_view', $data);
 
 	}

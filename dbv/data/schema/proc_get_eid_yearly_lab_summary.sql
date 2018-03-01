@@ -6,8 +6,8 @@ BEGIN
   SET @QUERY =    "SELECT
                     `ls`.`year`,  
                     `ls`.`month`,  
-                    `ls`.`neg`, 
-                    `ls`.`pos`, 
+                    (`ls`.`neg` + (`ls`.`confirmdna`-`ls`.`confirmedPOs`) + (`ls`.`repeatspos`-`ls`.`repeatposPOS`) + (`ls`.`tiebreaker`-`ls`.`tiebreakerPOS`)) AS `neg`, 
+                    (`ls`.`pos` + `ls`.`confirmedPOs` + `ls`.`repeatposPOS` + `ls`.`tiebreakerPOS`) AS `pos`, 
                     `ls`.`redraw`
                 FROM `lab_summary` `ls`
                 WHERE 1 ";

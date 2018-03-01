@@ -385,9 +385,8 @@ class Performance_model extends MY_Model
 
 
 		$sql = "CALL `proc_get_eid_yearly_lab_tests`(" . $lab . ");";
-		
-		
 		$result = $this->db->query($sql)->result_array();
+		// echo "<pre>";print_r($result);echo "</pre>";die();
 		
 		$year;
 		$i = 0;
@@ -465,9 +464,9 @@ class Performance_model extends MY_Model
 
 		
 		$sql = "CALL `proc_get_eid_yearly_lab_summary`(" . $lab . ",'" . $from . "','" . $year . "');";
+		// echo "<pre>";print_r($sql);die();
 		
 		$result = $this->db->query($sql)->result_array();
-		// echo "<pre>";print_r($result);die();
 
 		$data['outcomes'][0]['name'] = "Redraws";
 		$data['outcomes'][1]['name'] = "Positive";

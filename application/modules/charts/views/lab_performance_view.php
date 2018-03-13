@@ -1,6 +1,6 @@
 
 <?php
-    echo "<div id=" . $div_name . " class='col-md-6'>
+    echo "<div id=" . $div_name . " >
 
 </div>";
 
@@ -12,7 +12,7 @@
   
     $("#<?php echo $div_name; ?>").highcharts({
         title: {
-            text: "<?php echo $title; ?>",
+            text: "",
             x: -20 //center
         },
         xAxis: {

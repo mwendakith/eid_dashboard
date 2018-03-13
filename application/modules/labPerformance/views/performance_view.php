@@ -1,77 +1,107 @@
 <div id="first">
-  <div class="row">
-    <div class="col-md-12 col-sm-12 col-xs-12">
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          LAB PERFORMANCE STATS ON EID <div class="display_date"></div>
-        </div>
-        <div class="panel-body">
-          <div id="lab_perfomance_stats"><center><div class="loader"></div></center></div>
-          <div class="col-md-12" style="margin-top: 1em;margin-bottom: 1em;">
-              
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    LAB PERFORMANCE STATS ON EID <div class="display_date"></div>
+                </div>
+                <div class="panel-body">
+                    <div id="lab_perfomance_stats"><center><div class="loader"></div></center></div>
+                    <div class="col-md-12" style="margin-top: 1em;margin-bottom: 1em;">
+                    </div>
+                </div>
             </div>
         </div>
-        
-      </div>
     </div>
-  </div>
-  <div class="row">
-    <div id="graphs">
-    	
+    <div class="row">
+        <div class="col-md-6 col-sm-6 col-xs-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Tests with valid outcomes (Trends) <div class="display_date"></div>
+                </div>
+                <div class="panel-body">
+                    <div id="test_trends"><center><div class="loader"></div></center></div>
+                    <div class="col-md-12" style="margin-top: 1em;margin-bottom: 1em;">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-6 col-xs-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Tests with valid outcomes <div class="display_date"></div>
+                </div>
+                <div class="panel-body">
+                    <div id="test_outcomes"><center><div class="loader"></div></center></div>
+                    <div class="col-md-12" style="margin-top: 1em;margin-bottom: 1em;">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-6 col-xs-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Positivity Trends (Initial PCR) <div class="display_date"></div>
+                </div>
+                <div class="panel-body">
+                    <div id="positivity_trends"><center><div class="loader"></div></center></div>
+                    <div class="col-md-12" style="margin-top: 1em;margin-bottom: 1em;">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-6 col-xs-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Rejected Trends <div class="display_date"></div>
+                </div>
+                <div class="panel-body">
+                    <div id="rejected_trends"><center><div class="loader"></div></center></div>
+                    <div class="col-md-12" style="margin-top: 1em;margin-bottom: 1em;">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="graphs"></div>
+        <div id="stacked_graph" class="col-md-6"></div>
     </div>
-
-    <div id="stacked_graph" class="col-md-6">
-
-    </div>
-  </div>
-
-  <div id="lineargauge">
-
-  </div>
+    <div id="lineargauge"></div>
 </div>
 
 <div id="second">
-  <div id="lab_summary_two_years">
-      
-  </div>
-
-  <div id="trends_lab">
-      
-  </div>
+    <div id="lab_summary_two_years"></div>
+    <div id="trends_lab"></div>
 </div>
 
 <div id="third">
-  <div class="row">
-    <div class="col-md-12 col-sm-12 col-xs-12">
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          Samples Rejections <div class="display_date"></div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Samples Rejections <div class="display_date"></div>
+                </div>
+                <div class="panel-body" id="lab_rejections">
+                    <center><div class="loader"></div></center>
+                </div>
+            </div>
         </div>
-        <div class="panel-body" id="lab_rejections">
-          <center><div class="loader"></div></center>
-        </div>
-      </div>
     </div>
-  </div>
-  
 </div>
 
 <div id="fourth">
-  <div class="row">
-    <div class="col-md-12 col-sm-12 col-xs-12">
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          Mapping <div class="display_date"></div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Mapping <div class="display_date"></div>
+                </div>
+                <div class="panel-body" id="mapping" style="height: 700px">
+                    <center><div class="loader"></div></center>
+                </div>
+            </div>
         </div>
-        <div class="panel-body" id="mapping" style="height: 700px">
-          <center><div class="loader"></div></center>
-        </div>
-      </div>
     </div>
-  </div>
-  
 </div>
-
 
 <script type="text/javascript">
 
@@ -86,7 +116,10 @@
     });
 
     localStorage.setItem("my_lab", 0);
-
+    $("#test_trends").load("<?php echo base_url();?>charts/LabPerformance/lab_testing_trends");
+    $("#test_outcomes").load("<?php echo base_url();?>charts/LabPerformance/lab_outcomes");
+    $("#positivity_trends").load("<?php echo base_url();?>charts/LabPerformance/lab_positivity_trends");
+    $("#rejected_trends").load("<?php echo base_url();?>charts/LabPerformance/lab_rejected_trends");
     $("#graphs").load("<?php echo base_url();?>charts/LabPerformance/testing_trends");
     $("#stacked_graph").load("<?php echo base_url();?>charts/LabPerformance/lab_outcomes");
     $("#lineargauge").load("<?php echo base_url();?>charts/LabPerformance/lab_turnaround");

@@ -6,6 +6,7 @@ BEGIN
   SET @QUERY =    "SELECT 
                     `year`, `month`,
                     AVG(`tests`) AS `tests`, 
+                    AVG(`received`) AS `received`, 
                     AVG(`rejected`) AS `rejected`
                   FROM `national_summary` 
                   WHERE 1";

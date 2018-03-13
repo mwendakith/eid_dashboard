@@ -218,7 +218,7 @@ class Performance_model extends MY_Model
 		$sql = "CALL `proc_get_eid_lab_performance`('".$year."')";
 
 		$result = $this->db->query($sql)->result_array();
-		// echo "<pre>";print_r($sql);die();
+		// echo "<pre>";print_r($result);die();
 		$categories = array();
 		foreach ($result as $key => $value) {
 
@@ -227,7 +227,7 @@ class Performance_model extends MY_Model
 
 			$lab = (int) $value['ID'];
 			$lab--;
-			$tests = (int) $value['tests'];
+			$tests = (int) $value['new_tests'];
 			$received = (int) $value['received'];
 
 			$data['test_trends'][$lab]['name'] = $value['name'];
@@ -254,13 +254,14 @@ class Performance_model extends MY_Model
 		$this->db->close();
 
 		$sql2 = "CALL `proc_get_eid_average_rejection`('".$year."')";
+		// echo "<pre>";print_r($sql2);die();
 		$result2 = $this->db->query($sql2)->result_array();
 			$i = count($data['rejected_trends']);
 		$count = 0;
 		foreach ($result2 as $key => $value) {
 					
 			$data['rejected_trends'][$i]['name'] = 'National Rejection Rate';
-			$data['rejected_trends'][$i]['data'][$count] = round(@((int) $value['rejected'] * 100 / (int) $value['tests']), 1);
+			$data['rejected_trends'][$i]['data'][$count] = round(@((int) $value['rejected'] * 100 / (int) $value['received']), 1);
 			$count++;
 		}
 
@@ -549,7 +550,9 @@ class Performance_model extends MY_Model
 		foreach ($result as $key => $value) {
 			$total += $value['total'];
 		}
-
+		$data['categories'][0] = 'No Data';
+		$data['outcomes'][0]['data'][0] = 0;
+		$data['outcomes'][1]['data'][0] = 0;
 		foreach ($result as $key => $value) {
 			$data['categories'][$key] = $value['name'];
 		

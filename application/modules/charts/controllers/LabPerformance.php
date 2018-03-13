@@ -27,40 +27,48 @@ class LabPerformance extends MY_Controller
 	function download_lab_performance_stats($year=NULL,$month=NULL,$to_year=NULL,$to_month=NULL)
 	{
 		$this->performance_model->download_lab_performance_stat($year,$month,$to_year,$to_month);
-	}	
+	}
 
-	function testing_trends($year=NULL)
+	function lab_testing_trends($year=NULL)
 	{
 		$obj['trends'] = $this->performance_model->lab_testing_trends($year);
-		//echo "<pr>";print_r($data);die;
-		//
-		//echo json_encode($data);
-
+		
 		$data['trends'] = $obj['trends']['test_trends'];
-		$data['title'] = "Test Trends (" . $obj['trends']['year'] . ")";
-		$data['div'] = "#tests";
-		$data['div_name'] = "tests";
+		$data['div'] = "#labs_test_trends";
+		$data['div_name'] = "labs_test_trends";
 		$data['suffix'] = "";
 		$data['yAxis'] = "Number of Tests";
-		$this->load->view('lab_performance_view', $data);
 
+		// echo "<pre>";print_r($data);die();
+		$this->load->view('lab_performance_view', $data);
+	}
+
+	function lab_positivity_trends($year=NULL)
+	{
+		$obj['trends'] = $this->performance_model->lab_testing_trends($year);
+		
 		$data['trends'] = $obj['trends']['positivity_trends'];
-		$data['title'] = "Positivity Trends - Initial PCR(" . $obj['trends']['year'] . ")";
 		$data['div'] = "#positivity";
 		$data['div_name'] = "positivity";
 		$data['suffix'] = "%";
 		$data['yAxis'] = "Positivity (%)";
-		$this->load->view('lab_performance_view', $data);
 
+		// echo "<pre>";print_r($data);die();
+		$this->load->view('lab_performance_view', $data);
+	}
+
+	function lab_rejected_trends($year=NULL)
+	{
+		$obj['trends'] = $this->performance_model->lab_testing_trends($year);
+		
 		$data['trends'] = $obj['trends']['rejected_trends'];
-		$data['title'] = "Rejection Rate Trends (" . $obj['trends']['year'] . ")";
 		$data['div'] = "#rejects";
 		$data['div_name'] = "rejects";
 		$data['suffix'] = "%";
 		$data['yAxis'] = "Rejection (%)";
-		$this->load->view('lab_performance_view', $data);
 
-		
+		// echo "<pre>";print_r($data);die();
+		$this->load->view('lab_performance_view', $data);
 	}
 
 	function lab_outcomes($year=NULL, $month=NULL,$to_year=NULL,$to_month=NULL){

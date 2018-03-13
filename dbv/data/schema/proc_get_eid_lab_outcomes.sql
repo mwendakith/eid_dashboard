@@ -5,8 +5,8 @@ CREATE PROCEDURE `proc_get_eid_lab_outcomes`
 BEGIN
   SET @QUERY =    "SELECT
                     `l`.`ID`, `l`.`labname` AS `name`, 
-                    SUM(`ls`.`pos`) AS `pos`,
-                    SUM(`ls`.`neg`) AS `neg`,
+                    SUM(`ls`.`pos`+`ls`.`confirmedPOs`+`ls`.`tiebreakerPOS`+`ls`.`repeatposPOS`) AS `pos`,
+                    SUM(`ls`.`neg`+(`ls`.`confirmdna`-`ls`.`confirmedPOs`)+(`ls`.`tiebreaker`-`ls`.`tiebreakerPOS`)+(`ls`.`repeatspos`-`ls`.`repeatposPOS`)) AS `neg`,
                     SUM(`redraw`) AS `redraw`
                 FROM `lab_summary` `ls`
                 JOIN `labs` `l`

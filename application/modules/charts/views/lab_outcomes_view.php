@@ -9,7 +9,7 @@
                         type: 'column'
                     },
                     title: {
-                        text: "<?php echo $trends['title'];?>"
+                        text: ""
                     },
                     xAxis: {
                         categories: <?php echo json_encode($trends['categories']);?>
@@ -20,7 +20,7 @@
                             text: 'Tests'
                         },
                         stackLabels: {
-                            rotation: -75,
+                            rotation: 0,
                             enabled: true,
                             style: {
                                 fontWeight: 'bold',

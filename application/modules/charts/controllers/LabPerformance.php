@@ -34,6 +34,7 @@ class LabPerformance extends MY_Controller
 		$obj['trends'] = $this->performance_model->lab_testing_trends($year);
 		
 		$data['trends'] = $obj['trends']['test_trends'];
+		$data['title'] = "";
 		$data['div'] = "#labs_test_trends";
 		$data['div_name'] = "labs_test_trends";
 		$data['suffix'] = "";
@@ -48,6 +49,7 @@ class LabPerformance extends MY_Controller
 		$obj['trends'] = $this->performance_model->lab_testing_trends($year);
 		
 		$data['trends'] = $obj['trends']['positivity_trends'];
+		$data['title'] = "";
 		$data['div'] = "#positivity";
 		$data['div_name'] = "positivity";
 		$data['suffix'] = "%";
@@ -62,6 +64,7 @@ class LabPerformance extends MY_Controller
 		$obj['trends'] = $this->performance_model->lab_testing_trends($year);
 		
 		$data['trends'] = $obj['trends']['rejected_trends'];
+		$data['title'] = "";
 		$data['div'] = "#rejects";
 		$data['div_name'] = "rejects";
 		$data['suffix'] = "%";
@@ -92,6 +95,7 @@ class LabPerformance extends MY_Controller
 
 	function lab_trends($lab=NULL){
 		$obj = $this->performance_model->yearly_trends($lab);
+		$data['class'] = "class='col-md-6'";
 		// echo "<pre>";print_r($obj);echo "</pre>";die();
 		$data['trends'] = $obj['test_trends'];
 		$data['title'] = "Testing Trends";

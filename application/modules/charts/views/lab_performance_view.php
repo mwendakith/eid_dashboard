@@ -1,6 +1,7 @@
 
 <?php
-    echo "<div id=" . $div_name . " >
+    isset($class) ? $cls = $class : $cls = '';
+    echo "<div id=" . $div_name . " ".$cls.">
 
 </div>";
 
@@ -12,7 +13,7 @@
   
     $("#<?php echo $div_name; ?>").highcharts({
         title: {
-            text: "",
+            text: "<?= @$title; ?>",
             x: -20 //center
         },
         xAxis: {

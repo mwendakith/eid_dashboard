@@ -50,9 +50,7 @@ class Trends extends MY_Controller
 		$data['div_name'] = "positivity";
 		$data['suffix'] = "%";
 		$data['yAxis'] = "Positivity (%)";
-		$this->load->view('lab_performance_wide_view', $data);
-
-		
+		$this->load->view('lab_performance_wide_view', $data);		
 		
 
 		//echo json_encode($obj);

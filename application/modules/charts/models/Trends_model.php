@@ -261,18 +261,17 @@ class Trends_model extends MY_Model
 		$prev_year = date('Y') - 1;
 		$cur_month = date('m');
 
-		$columns =  ceil($cur_month / 3);
-		$columns += 8;
-		$i = $columns-1;
 		$b = true;
 		$limit = 0;
 		$quarter = 1;
-		
-		// $year;
-		// $i = 8;
-		// $b = true;
-		// $limit = 0;
-		// $quarter = 1;
+
+		$extra = ceil($cur_month / 3);
+		$i = 8;
+
+		if($extra == 4){
+			$i = 9;
+		}
+		$columns = 8 + $extra;
 
 		$data['outcomes'][0]['name'] = "Redraws";
 		$data['outcomes'][1]['name'] = "Positive";
@@ -295,11 +294,11 @@ class Trends_model extends MY_Model
 
 		$data['title'] = "Outcomes (Initial PCR)";
 
-		$data['categories'] = array_fill(0, $columns, "Null");
-		$data['outcomes'][0]['data'] = array_fill(0, $columns, 0);
-		$data['outcomes'][1]['data'] = array_fill(0, $columns, 0);
-		$data['outcomes'][2]['data'] = array_fill(0, $columns, 0);
-		$data['outcomes'][3]['data'] = array_fill(0, $columns, 0);
+		$data['categories'] = array_fill(0, 8, "Null");
+		$data['outcomes'][0]['data'] = array_fill(0, 8, 0);
+		$data['outcomes'][1]['data'] = array_fill(0, 8, 0);
+		$data['outcomes'][2]['data'] = array_fill(0, 8, 0);
+		$data['outcomes'][3]['data'] = array_fill(0, 8, 0);
 
 
 		foreach ($result as $key => $value) {
@@ -315,8 +314,10 @@ class Trends_model extends MY_Model
 				$year--;
 
 				if($year == $prev_year){
-					$data['outcomes'][3]['data'][$i] += round(@(( $data['outcomes'][1]['data'][$i]*100)/
-					($data['outcomes'][0]['data'][$i]+$data['outcomes'][1]['data'][$i]+$data['outcomes'][2]['data'][$i])),1);
+					if($modulo != 0){						
+						$data['outcomes'][3]['data'][$i] += round(@(( $data['outcomes'][1]['data'][$i]*100)/
+						($data['outcomes'][0]['data'][$i]+$data['outcomes'][1]['data'][$i]+$data['outcomes'][2]['data'][$i])),1);
+					}
 					$i = 4;
 					$quarter=1;
 					$limit++;
@@ -341,17 +342,13 @@ class Trends_model extends MY_Model
 				$quarter++;
 				$limit++;
 
-				if($i == 8){
-					$i == 0;
-				}
-
 			}
 			if($quarter == 5){
 				$quarter = 1;
 				$i = 0;
 			}	
 
-			if ($limit == $columns) {
+			if ($limit == ($columns+1)) {
 				break;
 			}
 
@@ -396,12 +393,17 @@ class Trends_model extends MY_Model
 		$prev_year = date('Y') - 1;
 		$cur_month = date('m');
 
-		$columns =  ceil($cur_month / 3);
-		$columns += 8;
-		$i = $columns-1;
 		$b = true;
 		$limit = 0;
 		$quarter = 1;
+
+		$extra = ceil($cur_month / 3);
+		$i = 8;
+
+		if($extra == 4){
+			$i = 9;
+		}
+		$columns = 8 + $extra;
 
 		$data['outcomes'][0]['name'] = "Positive";
 		$data['outcomes'][1]['name'] = "Negative";
@@ -444,8 +446,10 @@ class Trends_model extends MY_Model
 				$year--;
 
 				if($year == $prev_year){
-					$data['outcomes'][2]['data'][$i] = round(@(( $data['outcomes'][0]['data'][$i]*100)/
-					( $data['outcomes'][0]['data'][$i] + $data['outcomes'][1]['data'][$i] )),1);
+					if($modulo != 0){	
+						$data['outcomes'][2]['data'][$i] = round(@(( $data['outcomes'][0]['data'][$i]*100)/
+						( $data['outcomes'][0]['data'][$i] + $data['outcomes'][1]['data'][$i] )),1);
+					}
 					$i = 4;
 					$quarter=1;
 					$limit++;
@@ -474,11 +478,6 @@ class Trends_model extends MY_Model
 				$i++;
 				$quarter++;
 				$limit++;
-
-				if($i == 8){
-					$i == 0;
-				}
-
 			}
 
 			if($quarter == 5){
@@ -486,16 +485,12 @@ class Trends_model extends MY_Model
 				$i = 0;
 			}
 
-
-			if ($limit == $columns) {
+			if ($limit == ($columns+1)) {
 				break;
 			}
 
-
 		}
-
 		return $data;
-
 	}
 
 
@@ -509,8 +504,9 @@ class Trends_model extends MY_Model
 		if ($county == 0) {
 			$sql = "CALL `proc_get_eid_national_yearly_tests_age`();";
 		} else {
-			$sql = "CALL `proc_get_eid_yearly_tests`(" . $county . ");";
+			$sql = "CALL `proc_get_eid_county_yearly_tests_age`(" . $county . ");";
 		}
+
 		
 		$result = $this->db->query($sql)->result_array();
 		
@@ -518,12 +514,17 @@ class Trends_model extends MY_Model
 		$prev_year = date('Y') - 1;
 		$cur_month = date('m');
 
-		$columns =  ceil($cur_month / 3);
-		$columns += 8;
-		$i = $columns-1;
 		$b = true;
 		$limit = 0;
 		$quarter = 1;
+
+		$extra = ceil($cur_month / 3);
+		$i = 8;
+
+		if($extra == 4){
+			$i = 9;
+		}
+		$columns = 8 + $extra;
 
 		$data['outcomes'][0]['name'] = "No Data";
 		$data['outcomes'][1]['name'] = ">24m";
@@ -582,9 +583,11 @@ class Trends_model extends MY_Model
 
 				if($year == $prev_year){
 
-					$total = $data['outcomes'][0]['data'][$i] + $data['outcomes'][1]['data'][$i] + $data['outcomes'][2]['data'][$i] + $data['outcomes'][3]['data'][$i] + $data['outcomes'][4]['data'][$i] + $data['outcomes'][5]['data'][$i];
+					if($modulo != 0){	
+						$total = $data['outcomes'][0]['data'][$i] + $data['outcomes'][1]['data'][$i] + $data['outcomes'][2]['data'][$i] + $data['outcomes'][3]['data'][$i] + $data['outcomes'][4]['data'][$i] + $data['outcomes'][5]['data'][$i];
 
-					$data['outcomes'][6]['data'][$i] = round(@( $data['outcomes'][5]['data'][$i]*100 / $total ),1);
+						$data['outcomes'][6]['data'][$i] = round(@( $data['outcomes'][5]['data'][$i]*100 / $total ),1);
+					}
 
 					$i = 4;
 					$quarter=1;
@@ -632,10 +635,6 @@ class Trends_model extends MY_Model
 				$i++;
 				$quarter++;
 				$limit++;
-
-				if($i == 8){
-					$i == 0;
-				}
 			}
 
 			if($quarter == 5){
@@ -643,7 +642,7 @@ class Trends_model extends MY_Model
 				$i = 0;
 			}
 
-			if ($limit == $columns) {
+			if ($limit == ($columns+1)) {
 				break;
 			}
 		}

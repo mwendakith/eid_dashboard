@@ -16,7 +16,7 @@ BEGIN
     END IF;
 
     SET @QUERY = CONCAT(@QUERY, " JOIN `partners` `p` ON `ps`.`partner` = `p`.`ID`
-                WHERE 1 ");
+                WHERE `p`.`flag` = '1' ");
 
     IF (from_month != 0 && from_month != '') THEN
       IF (to_month != 0 && to_month != '' && filter_year = to_year) THEN

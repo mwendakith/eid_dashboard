@@ -18,7 +18,7 @@ BEGIN
 
     SET @QUERY = CONCAT(@QUERY, " LEFT JOIN `partners` `p` 
                   ON `is`.`partner` = `p`.`ID` 
-                WHERE 1 ");
+                WHERE `p`.`flag` = '1' ");
 
 
 

@@ -33,7 +33,7 @@ BEGIN
     SET @QUERY = CONCAT(@QUERY, " LEFT JOIN `view_facilitys` `vf` ON `vf`.`ID` = `is`.`facility`
                     LEFT JOIN `partners` `p` ON `p`.`ID` = `vf`.`partner`
                     LEFT JOIN `countys` `c` ON `c`.`ID` = `vf`.`county`
-                  WHERE 1 ");
+                  WHERE `p`.`flag` = '1' ");
 
 
     IF (from_month != 0 && from_month != '') THEN

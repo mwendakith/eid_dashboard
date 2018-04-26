@@ -379,6 +379,65 @@ class Counties_model extends MY_Model
 		return $table;
 	}
 
+	function county_facilities_details($year=null,$month=null,$county=null,$to_year=null,$to_month=null)
+	{
+		$table = '';
+		$count = 1;
+		if ($county==null || $county=='null') {
+			$county = $this->session->userdata('county_filter');
+		}
+		if ($year==null || $year=='null') {
+			$year = $this->session->userdata('filter_year');
+		}
+		if ($month==null || $month=='null') {
+			if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
+				$month = 0;
+			}else {
+				$month = $this->session->userdata('filter_month');
+			}
+		}
+		if ($to_month==null || $to_month=='null') {
+			$to_month = 0;
+		}
+		if ($to_year==null || $to_year=='null') {
+			$to_year = 0;
+		}
+
+		$type = 1;
+
+		$sql = "CALL `proc_get_eid_sites_details`('".$year."','".$month."','".$to_year."','".$to_month."','".$type."','".$county."')";
+		// echo "<pre>";print_r($sql);die();
+		$result = $this->db->query($sql)->result_array();
+		// echo "<pre>";print_r($result);die();
+		foreach ($result as $key => $value) {
+			$table .= '<tr>';
+			$table .= '<td>'.$count.'</td>';
+			$table .= '<td>'.$value['facility'].'</td>';
+			$table .= '<td>'.$value['subcounty'].'</td>';
+			$table .= '<td>'.number_format($value['alltests']).'</td>';
+			$table .= '<td>'.number_format($value['actualinfants']).'</td>';
+			$table .= '<td>'.number_format($value['positive']+$value['negative']).'</td>';
+			$table .= '<td>'.number_format($value['positive']).'</td>';
+			$table .= '<td>'.number_format($value['repeatspos']).'</td>';
+			$table .= '<td>'.number_format($value['repeatsposPOS']).'</td>';
+			$table .= '<td>'.number_format($value['confirmdna']).'</td>';
+			$table .= '<td>'.number_format($value['confirmedPOS']).'</td>';
+			$table .= '<td>'.number_format($value['infantsless2w']).'</td>';
+			$table .= '<td>'.number_format($value['infantsless2wpos']).'</td>';
+			$table .= '<td>'.number_format($value['infantsless2m']).'</td>';
+			$table .= '<td>'.number_format($value['infantsless2mpos']).'</td>';
+			$table .= '<td>'.number_format($value['infantsabove2m']).'</td>';
+			$table .= '<td>'.number_format($value['infantsabove2mpos']).'</td>';
+			$table .= '<td>'.number_format($value['medage']).'</td>';
+			$table .= '<td>'.number_format($value['rejected']).'</td>';
+			$table .= '</tr>';
+			$count++;
+		}
+		
+
+		return $table;
+	}
+
 	function download_county_partners_outcomes($year=null,$month=null,$county=null,$to_year=null,$to_month=null)
 	{
 		

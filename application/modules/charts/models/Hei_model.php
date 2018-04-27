@@ -38,7 +38,7 @@ class Hei_model extends MY_Model
 		if ($id==null || $id=='null') $id = 0;
 		$id = 0;
 		$sql = "CALL `proc_get_eid_hei_validation`('".$year."','".$month."','".$to_year."','".$to_month."','".$type."','".$id."')";
-		
+		// echo "<pre>";print_r($sql);die();
 		$result = $this->db->query($sql)->result();
 		// echo "<pre>";print_r($result);die();
 		$count = 1;
@@ -60,6 +60,12 @@ class Hei_model extends MY_Model
 			} else {
 				$table .= '<td><span class="alert alert-danger" style="color:black;">'.$confirmed_percentage.'%</span></td>';
 			}
+			$table .= '<td>'.number_format($value->enrolled).'</td>';
+			$table .= '<td>'.number_format($value->ltfu).'</td>';
+			$table .= '<td>'.number_format($value->adult).'</td>';
+			$table .= '<td>'.number_format($value->transout).'</td>';
+			$table .= '<td>'.number_format($value->dead).'</td>';
+			$table .= '<td>'.number_format($value->other).'</td>';
 			$table .= '</tr>';
 			$count++;
 		}

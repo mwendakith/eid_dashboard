@@ -11,6 +11,12 @@ BEGIN
         SUM(`validation_adult`) AS `Adult`,
         SUM(`validation_unknownsite`) AS `Unknown_Facility`,
         SUM(`enrolled`+`ltfu`+`adult`+`transout`+`dead`+`other`) AS `Followup_Hei`, 
+        SUM(`enrolled`) AS `enrolled`, 
+        SUM(`ltfu`) AS `ltfu`, 
+        SUM(`adult`) AS `adult`, 
+        SUM(`transout`) AS `transout`, 
+        SUM(`dead`) AS `dead`, 
+        SUM(`other`) AS `other`, 
         sum(`actualinfantsPOS`) AS `positives`, 
         SUM(`actualinfants`-((`enrolled`+`ltfu`+`adult`+`transout`+`dead`+`other`)-(`validation_repeattest`+`validation_unknownsite`+`validation_adult`+`validation_viralload`))) AS `actualinfants_tests` ";
     

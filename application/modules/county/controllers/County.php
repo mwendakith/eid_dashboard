@@ -57,6 +57,15 @@ class County extends MY_Controller
 		$this->template($this->data);
 	}
 
+	public function subCountytat()
+	{
+		$this->clear_all_session_data();
+		$this->data['sub_county'] = TRUE;
+		$this->data['content_view'] = 'county/subcounty_tat_view';
+
+		$this->template($this->data);
+	}
+
 	public function check_subcounty_select()
 	{
 		if ($this->session->userdata('sub_county_filter')) {

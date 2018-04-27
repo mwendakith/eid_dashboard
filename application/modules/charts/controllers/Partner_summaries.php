@@ -157,7 +157,13 @@ class Partner_summaries extends MY_Controller
     	$this->load->view('patients_graph',$data);
 	}
 
-
+	function partner_tat_outcomes($year=NULL, $month=NULL, $to_year=NULL, $to_month=NULL,$partner=NULL)
+	{
+		$data['trends'] = $this->partner_summaries_model->partner_tat_outcomes($year,$month,$to_year,$to_month,$partner);
+		$data['div_name'] = "summary_partner_tat_summary";
+		$data['tat'] = true;
+		$this->load->view('trends_outcomes_view', $data);
+	}
 
 }
 ?>

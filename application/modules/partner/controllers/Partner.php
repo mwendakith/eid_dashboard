@@ -66,6 +66,14 @@ class Partner extends MY_Controller
 		$this -> template($this->data);
 	}
 
+	function tat()
+	{
+		$this->clear_all_session_data();
+		$this->data['content_view'] = 'partner/partner_tat_view';
+
+		$this->template($this->data);
+	}
+
 	public function get_selected_partner()
 	{
 		if ($this->session->userdata('partner_filter')) {

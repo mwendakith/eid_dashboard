@@ -44,13 +44,14 @@ class Hei_model extends MY_Model
 		$count = 1;
 		$table = '';
 		foreach ($result as $key => $value) {
-			$followup_percentage = round(@($value->Followup_Hei/$value->positives)*100,1);
-			$confirmed_percentage = round(@($value->Confirmed_Positive/$value->Followup_Hei)*100,1);
+			$followup_hei = (int) $value->Confirmed_Positive+(int) $value->Repeat_Test+(int) $value->Viral_Load+(int) $value->Adult+(int) $value->Unknown_Facility;
+			$followup_percentage = round(@($followup_hei/$value->positives)*100,1);
+			$confirmed_percentage = round(@($value->Confirmed_Positive/$followup_hei)*100,1);
 			$table .= '<tr>';
 			$table .= '<td>'.$count.'</td>';
 			$table .= '<td>'.$value->name.'</td>';
 			$table .= '<td>'.number_format($value->positives).'</td>';
-			$table .= '<td>'.number_format($value->Followup_Hei).'</td>';
+			$table .= '<td>'.number_format($followup_hei).'</td>';
 			$table .= '<td>'.$followup_percentage.'%</td>';
 			$table .= '<td>'.number_format($value->Confirmed_Positive).'</td>';
 			if ($confirmed_percentage > 69) {

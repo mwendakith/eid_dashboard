@@ -10,7 +10,8 @@
 			$(".display_date").html("( "+obj['year']+" "+obj['month']+" )");
 			$(".display_range").html("( "+obj['prev_year']+" - "+obj['year']+" )");
     	});
-		$("#county_tat_outcomes").load("<?= @base_url('charts/counties/county_tat_outcomes'); ?>");
+		$("#county_tat_outcomes").load("<?= @base_url('charts/tat/outcomes'); ?>");
+		$("#county_tat_details").load("<?= @base_url('charts/tat/details'); ?>");
 
 		//Function when the county is selected
 		$("select").change(function(){
@@ -38,13 +39,17 @@
 	        	if (data ==  '') {
 	        		// Loader displaying
 		        	$("#county_tat_outcomes").html("<center><div class='loader'></div></center>");
+					$("#county_tat_details").html("<center><div class='loader'></div></center>");
 
-					$("#county_tat_outcomes").load("<?php echo base_url('charts/counties/county_tat_outcomes'); ?>");
+					$("#county_tat_outcomes").load("<?php echo base_url('charts/tat/outcomes'); ?>");
+					$("#county_tat_details").load("<?= @base_url('charts/tat/details'); ?>");
 	        	} else {
 	        		// Loader displaying
 		        	$("#county_tat_outcomes").html("<center><div class='loader'></div></center>");
+		        	$("#county_tat_details").html("<center><div class='loader'></div></center>");
 
-					$("#county_tat_outcomes").load("<?php echo base_url('charts/counties/county_tat_outcomes'); ?>/"+null+"/"+null+"/"+null+"/"+null+"/"+data);
+					$("#county_tat_outcomes").load("<?php echo base_url('charts/tat/outcomes'); ?>/"+null+"/"+null+"/"+null+"/"+null+"/"+0+"/"+data);
+					$("#county_tat_details").load("<?php echo base_url('charts/tat/details'); ?>/"+null+"/"+null+"/"+null+"/"+null+"/"+0+"/"+data);
 	        	}
 	        	 
 	        });
@@ -69,8 +74,10 @@
 		    
 		    if (!error_check) {
 			    $("#county_tat_outcomes").html("<center><div class='loader'></div></center>");
+			    $("#county_tat_details").html("<center><div class='loader'></div></center>");
 		        
-				$("#county_tat_outcomes").load("<?php echo base_url('charts/counties/county_tat_outcomes'); ?>/"+from[1]+"/"+from[0]+"/"+to[1]+"/"+to[0]);
+				$("#county_tat_outcomes").load("<?php echo base_url('charts/tat/outcomes'); ?>/"+from[1]+"/"+from[0]+"/"+to[1]+"/"+to[0]+"/"+0);
+				$("#county_tat_details").load("<?php echo base_url('charts/tat/details'); ?>/"+from[1]+"/"+from[0]+"/"+to[1]+"/"+to[0]+"/"+0);
 			}
 		    
 		});
@@ -100,7 +107,9 @@
 			
 		});
  		$("#county_tat_outcomes").html("<center><div class='loader'></div></center>");
+ 		$("#county_tat_details").html("<center><div class='loader'></div></center>");
     	
-		$("#county_tat_outcomes").load("<?php echo base_url('charts/counties/county_tat_outcomes');?>/"+year+"/"+month); 
+		$("#county_tat_outcomes").load("<?php echo base_url('charts/tat/outcomes');?>/"+year+"/"+month+"/"+null+"/"+null+"/"+0); 
+		$("#county_tat_details").load("<?php echo base_url('charts/tat/details');?>/"+year+"/"+month+"/"+null+"/"+null+"/"+0); 
 	}
 </script>

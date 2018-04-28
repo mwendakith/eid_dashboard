@@ -427,6 +427,7 @@ class Summaries_model extends MY_Model
 		$data['hei']['data'][0]['y'] = $count;
 
 		foreach ($result as $key => $value) {
+			$followup_hei = (int) $value['Confirmed Positive']+(int) $value['Repeat Test']+(int) $value['Viral Load']+(int) $value['Adult']+(int) $value['Unknown Facility'];
 				$data['ul'] .= '<tr>
                  <td><center>Actual Infants Tested Positive:</center></td>
                      <td>'.number_format((int) $value['positives']).'</td>
@@ -434,7 +435,7 @@ class Summaries_model extends MY_Model
                      <td></td>
                 </tr><tr>
                  <td><center>&nbsp;&nbsp;Actual Infants Validated at Site:</center></td>
-                     <td>'.number_format((int) $value['followup_hei']).'<b>('.round((((int) $value['followup_hei']/(int) $value['positives'])*100),1).'%)</b></td>
+                     <td>'.number_format((int) $followup_hei).'<b>('.round((((int) $followup_hei/(int) $value['positives'])*100),1).'%)</b></td>
                      <td></td>
                      <td></td>
                 </tr>

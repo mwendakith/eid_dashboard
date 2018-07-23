@@ -15,10 +15,10 @@
 			<th rowspan="2">All Tests</th>
 			<th rowspan="2">Actual Infants Tested</th>
 			<th colspan="2">Initial PCR</th>
-			<th colspan="2">Repeat PCR</th>
+			<th colspan="2">2nd/3rd PCR</th>
 			<th colspan="2">Confirmatory PCR</th>
 			<th colspan="2">Infants &lt;2Weeks</th>
-			<th colspan="2">Infants &lt;=2M</th>
+			<th colspan="3">Infants &lt;=2M</th>
 			<th colspan="2">Infants &gt;=2M</th>
 			<th rowspan="2">No Age</th>
 			<th rowspan="2">Adult</th>
@@ -36,6 +36,7 @@
 			<th>Pos</th>
 			<th>Tests</th>
 			<th>Pos</th>
+			<th>% of Initial PCR</th>
 			<th>Tests</th>
 			<th>Pos</th>
 		</tr>

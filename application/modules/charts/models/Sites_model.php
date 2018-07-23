@@ -178,17 +178,16 @@ class Sites_model extends MY_Model
 		$result = $this->db->query($sql)->result_array();
 		// echo "<pre>";print_r($sql);die();
 		foreach ($result as $key => $value) {
+			$initial = $value['positive']+$value['negative'];
 			$table .= '<tr>';
 			$table .= '<td>'.$count.'</td>';
-
-
 			$table .= '<td>'.$value['MFLCode'].'</td>';
 			$table .= '<td>'.$value['name'].'</td>';
 			$table .= '<td>'.$value['county'].'</td>';
 			$table .= '<td>'.$value['subcounty'].'</td>';
 			$table .= '<td>'.number_format($value['alltests']).'</td>';
 			$table .= '<td>'.number_format($value['actualinfants']).'</td>';
-			$table .= '<td>'.number_format($value['positive']+$value['negative']).'</td>';
+			$table .= '<td>'.number_format($initial).'</td>';
 			$table .= '<td>'.number_format($value['positive']).'</td>';
 			$table .= '<td>'.number_format($value['repeatspos']).'</td>';
 			$table .= '<td>'.number_format($value['repeatsposPOS']).'</td>';
@@ -198,6 +197,7 @@ class Sites_model extends MY_Model
 			$table .= '<td>'.number_format($value['infantsless2wpos']).'</td>';
 			$table .= '<td>'.number_format($value['infantsless2m']).'</td>';
 			$table .= '<td>'.number_format($value['infantsless2mpos']).'</td>';
+			$table .= '<td>'.round(($value['infantsless2m']/$initial)*100, 2).'%</td>';
 			$table .= '<td>'.number_format($value['infantsabove2m']).'</td>';
 			$table .= '<td>'.number_format($value['infantsabove2mpos']).'</td>';
 			$table .= '<td>'.number_format($value['noage']).'</td>';
@@ -463,7 +463,7 @@ class Sites_model extends MY_Model
 		    		<td>'.number_format((int) $value['pos']).'('.round((((int) $value['pos']/(int) $value['firstdna'])*100),1).'%)</td>
 		    	</tr>
 		    	<tr>
-		    		<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Repeat PCR:</td>
+		    		<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2nd/3rd PCR:</td>
 		    		<td>'.number_format((int) $value['repeatspos']).'</td>
 		    		<td>Positive Outcomes:</td>
 		    		<td>'.number_format((int) $value['repeatsposPOS']).'('.round((((int) $value['repeatsposPOS']/(int) $value['repeatspos'])*100),1).'%)</td>
@@ -638,7 +638,7 @@ class Sites_model extends MY_Model
                      <td></td>
                  </tr>';
 			$data['hei']['data'][0]['name'] = 'Confirmed Positive';
-			$data['hei']['data'][1]['name'] = 'Repeat Test';
+			$data['hei']['data'][1]['name'] = '2nd/3rd Test';
 			$data['hei']['data'][2]['name'] = 'Viral Load';
 			$data['hei']['data'][3]['name'] = 'Adult';
 			$data['hei']['data'][4]['name'] = 'Unknown Facility';

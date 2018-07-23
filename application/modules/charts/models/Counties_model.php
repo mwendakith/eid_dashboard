@@ -102,7 +102,7 @@ class Counties_model extends MY_Model
 	    $f = fopen('php://memory', 'w');
 	    /** loop through array  */
 
-	    $b = array('County', 'Average sites sending', 'All Tests', 'PMTCT Need', 'Actual Infants Tested', 'Initial PCR Tests', 'Initial PCR Positives', 'Repeat PCR Tests', 'Repeat PCR Positives', 'Confirmatory PCR Tests', 'Confirmatory PCR Positives', 'Infants < 2Weeks', 'Infants < 2Weeks  Positives', 'Infants <= 2M', 'Infants <= 2m Positives', 'Infants >= 2M', 'Infants >= 2m Positives', 'Median Age', 'Rejected');
+	    $b = array('County', 'Average sites sending', 'All Tests', 'PMTCT Need', 'Actual Infants Tested', 'Initial PCR Tests', 'Initial PCR Positives', '2nd/3rd PCR Tests', '2nd/3rd PCR Positives', 'Confirmatory PCR Tests', 'Confirmatory PCR Positives', 'Infants < 2Weeks', 'Infants < 2Weeks  Positives', 'Infants <= 2M', 'Infants <= 2m Positives', 'Infants >= 2M', 'Infants >= 2m Positives', 'Median Age', 'Rejected');
 
 	    fputcsv($f, $b, $delimiter);
 
@@ -302,7 +302,7 @@ class Counties_model extends MY_Model
 	    $f = fopen('php://memory', 'w');
 	    /** loop through array  */
 
-	    $b = array('Subcounty', 'County',  'All Tests', 'Average Sites Sending', 'Actual Infants Tested', 'Initial PCR Tests', 'Initial PCR Positives', 'Repeat PCR Tests', 'Repeat PCR Positives', 'Confirmatory PCR Tests', 'Confirmatory PCR Positives', 'Infants < 2Weeks', 'Infants < 2Weeks  Positives', 'Infants <= 2M', 'Infants <= 2m Positives', 'Infants >= 2M', 'Infants >= 2m Positives', 'Median Age', 'Rejected');
+	    $b = array('Subcounty', 'County',  'All Tests', 'Average Sites Sending', 'Actual Infants Tested', 'Initial PCR Tests', 'Initial PCR Positives', '2nd/3rd PCR Tests', '2nd/3rd PCR Positives', 'Confirmatory PCR Tests', 'Confirmatory PCR Positives', 'Infants < 2Weeks', 'Infants < 2Weeks  Positives', 'Infants <= 2M', 'Infants <= 2m Positives', 'Infants >= 2M', 'Infants >= 2m Positives', 'Median Age', 'Rejected');
 
 	    fputcsv($f, $b, $delimiter);
 
@@ -474,7 +474,7 @@ class Counties_model extends MY_Model
 	    $f = fopen('php://memory', 'w');
 	    /** loop through array  */
 
-	    $b = array('Partner', 'County', 'All Tests', 'Actual Infants Tested', 'Initial PCR Tests', 'Initial PCR Positives', 'Repeat PCR Tests', 'Repeat PCR Positives', 'Confirmatory PCR Tests', 'Confirmatory PCR Positives', 'Infants < 2Weeks', 'Infants < 2Weeks  Positives', 'Infants <= 2M', 'Infants <= 2m Positives', 'Infants >= 2M', 'Infants >= 2m Positives', 'Median Age', 'Rejected');
+	    $b = array('Partner', 'County', 'All Tests', 'Actual Infants Tested', 'Initial PCR Tests', 'Initial PCR Positives', '2nd/3rd PCR Tests', '2nd/3rd PCR Positives', 'Confirmatory PCR Tests', 'Confirmatory PCR Positives', 'Infants < 2Weeks', 'Infants < 2Weeks  Positives', 'Infants <= 2M', 'Infants <= 2m Positives', 'Infants >= 2M', 'Infants >= 2m Positives', 'Median Age', 'Rejected');
 
 	    fputcsv($f, $b, $delimiter);
 

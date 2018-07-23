@@ -178,7 +178,7 @@ class Summaries_model extends MY_Model
 	    $f = fopen('php://memory', 'w');
 	    /** loop through array  */
 
-	    $b = array('Year', 'Month', 'Positive', 'Negative', 'Repeat Positives', 'Repeat Negatives', 'All Positives', 'All Negatives');
+	    $b = array('Year', 'Month', 'Positive', 'Negative', '2nd/3rd Positives', '2nd/3rd Negatives', 'All Positives', 'All Negatives');
 
 	    fputcsv($f, $b, $delimiter);
 
@@ -287,7 +287,7 @@ class Summaries_model extends MY_Model
 		    		<td>'.number_format((int) $value['pos']).'('.round((((int) $value['pos']/(int) $value['firstdna'])*100),1).'%)</td>
 		    	</tr>
 		    	<tr>
-		    		<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Repeat PCR:</td>
+		    		<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2nd/3rd PCR:</td>
 		    		<td>'.number_format((int) $value['repeatspos']).'</td>
 		    		<td>Positive (+):</td>
 		    		<td>'.number_format((int) $value['repeatsposPOS']).'('.round((((int) $value['repeatsposPOS']/(int) $value['repeatspos'])*100),1).'%)</td>
@@ -446,7 +446,7 @@ class Summaries_model extends MY_Model
                      <td></td>
                  </tr>';
 			$data['hei']['data'][0]['name'] = 'Confirmed Positive';
-			$data['hei']['data'][1]['name'] = 'Repeat Test';
+			$data['hei']['data'][1]['name'] = '2nd/3rd Test';
 			$data['hei']['data'][2]['name'] = 'Viral Load';
 			$data['hei']['data'][3]['name'] = 'Adult';
 			$data['hei']['data'][4]['name'] = 'Unknown Facility';

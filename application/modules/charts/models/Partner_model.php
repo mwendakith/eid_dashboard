@@ -374,7 +374,7 @@ class Partner_model extends MY_Model
 	}
 
 	function rtests($partner=NULL){
-		return $this->any_quarterly('rpos', 'rneg', 'Outcomes (Repeat Tests)', $partner);
+		return $this->any_quarterly('rpos', 'rneg', 'Outcomes (2nd/3rd Tests)', $partner);
 	}
 
 	function infant_tests($partner=NULL){

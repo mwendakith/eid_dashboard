@@ -132,7 +132,7 @@ class Subcounties_model extends MY_Model
 		    		<td>'.number_format((int) $value['pos']).'('.round((((int) $value['pos']/(int) $value['firstdna'])*100),1).'%)</td>
 		    	</tr>
 		    	<tr>
-		    		<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Repeat PCR:</td>
+		    		<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2nd/3rd PCR:</td>
 		    		<td>'.number_format((int) $value['repeatspos']).'</td>
 		    		<td>Positive (+):</td>
 		    		<td>'.number_format((int) $value['repeatsposPOS']).'('.round((((int) $value['repeatsposPOS']/(int) $value['repeatspos'])*100),1).'%)</td>
@@ -289,7 +289,7 @@ class Subcounties_model extends MY_Model
                      <td></td>
                  </tr>';
 			$data['hei']['data'][0]['name'] = 'Confirmed Positive';
-			$data['hei']['data'][1]['name'] = 'Repeat Test';
+			$data['hei']['data'][1]['name'] = '2nd/3rd Test';
 			$data['hei']['data'][2]['name'] = 'Viral Load';
 			$data['hei']['data'][3]['name'] = 'Adult';
 			$data['hei']['data'][4]['name'] = 'Unknown Facility';

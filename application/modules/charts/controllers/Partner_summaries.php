@@ -42,8 +42,8 @@ class Partner_summaries extends MY_Controller
 							<th>Initial PCR</th>
 							<th>&lt;=2M</th>
 							<th>&lt;=2M(% of Initial PCR)</th>
-							<th>Repeat PCR</th>
-							<th>% Repeat PCR</th>
+							<th>2nd/3rd PCR</th>
+							<th>% 2nd/3rd PCR</th>
 							<th>Confirmatory PCR</th>
 							<th>% Confirmatory PCR</th>
 						</tr>';

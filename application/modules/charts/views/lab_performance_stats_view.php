@@ -12,8 +12,8 @@
 			<th>Controls Run</th>
 			<th>Initial PCR Tests</th>
 			<th>Initial PCR Positives</th>
-			<th>Repeat PCR Tests</th>
-			<th>Repeat PCR Positives</th>
+			<th>2nd/3rd PCR Tests</th>
+			<th>2nd/3rd PCR Positives</th>
 			<th>Confirmatory PCR Tests</th>
 			<th>Confirmatory PCR Positives</th>
 			<th>Confirmatory Without Previous Positive</th>

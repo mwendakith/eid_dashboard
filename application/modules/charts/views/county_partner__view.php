@@ -24,8 +24,8 @@
 			<th rowspan="2">Actual Infants Tested</th>
 			<th rowspan="2">Initial PCR</th>
 			<th rowspan="2">Initial PCR Pos</th>
-			<th rowspan="2">Repeat PCR</th>
-			<th rowspan="2">Repeat PCR Pos</th>
+			<th rowspan="2">2nd/3rd PCR</th>
+			<th rowspan="2">2nd/3rd PCR Pos</th>
 			<th rowspan="2">Confirmatory PCR</th>
 			<th rowspan="2">Confirmatory PCR Pos</th>
 			<th colspan="2">Infants &lt;2Weeks</th>

@@ -164,6 +164,7 @@
 								<li><a href="<?php echo base_url();?>regimen">Regimen Analysis</a></li>
 							</ul>
 						</li>
+						<li><a href="<?php echo base_url();?>assets/downloads/EID_LAB_REQUISITION_FORM.pdf">EID Request Form</a></li>
 						<li><a href="<?php echo base_url();?>contacts">Contact Us</a></li>
 						<li><a href="http://eiddash.nascop.org/login.php">Login</a></li>
 						<li><a href="http://viralload.nascop.org">VL View</a></li>

@@ -13,6 +13,7 @@
 			?>
 			<th rowspan="2">Facility Name</th>
 			<th rowspan="2">Sub-County</th>
+			<th rowspan="2">MFL Code</th>
 			<?php 
 				} else {
 			?>

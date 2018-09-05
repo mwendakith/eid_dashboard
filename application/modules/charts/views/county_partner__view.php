@@ -12,8 +12,8 @@
 				if(isset($sub_county)){
 			?>
 			<th rowspan="2">Facility Name</th>
-			<th rowspan="2">Sub-County</th>
 			<th rowspan="2">MFL Code</th>
+			<th rowspan="2">Sub-County</th>
 			<?php 
 				} else {
 			?>

@@ -11,6 +11,12 @@ BEGIN
         SUM(`validation_adult`) AS `Adult`,
         SUM(`validation_unknownsite`) AS `Unknown_Facility`,
         SUM(`enrolled`+`ltfu`+`adult`+`transout`+`dead`+`other`) AS `Followup_Hei`, 
+        SUM(`enrolled`) AS `enrolled`, 
+        SUM(`ltfu`) AS `ltfu`, 
+        SUM(`adult`) AS `adult`, 
+        SUM(`transout`) AS `transout`, 
+        SUM(`dead`) AS `dead`, 
+        SUM(`other`) AS `other`, 
         sum(`actualinfantsPOS`) AS `positives`, 
         SUM(`actualinfants`-((`enrolled`+`ltfu`+`adult`+`transout`+`dead`+`other`)-(`validation_repeattest`+`validation_unknownsite`+`validation_adult`+`validation_viralload`))) AS `actualinfants_tests` ";
     
@@ -32,15 +38,15 @@ BEGIN
     IF (type = 1) THEN
         IF (ID = 0) THEN 
             IF (from_month != 0 && from_month != '') THEN
-              SET @QUERY = CONCAT(@QUERY, " FROM `ip_summary` `main` JOIN `partners` `join` ON `join`.`ID` = `main`.`partner` WHERE 1 ");
+              SET @QUERY = CONCAT(@QUERY, " FROM `ip_summary` `main` JOIN `partners` `join` ON `join`.`ID` = `main`.`partner` WHERE `join`.`flag` = '1' ");
             ELSE
-                SET @QUERY = CONCAT(@QUERY, " FROM `ip_summary_yearly` `main` JOIN `partners` `join` ON `join`.`ID` = `main`.`partner` WHERE 1 ");
+                SET @QUERY = CONCAT(@QUERY, " FROM `ip_summary_yearly` `main` JOIN `partners` `join` ON `join`.`ID` = `main`.`partner` WHERE `join`.`flag` = '1' ");
             END IF;
         ELSE
             IF (from_month != 0 && from_month != '') THEN
-              SET @QUERY = CONCAT(@QUERY, " FROM `ip_summary` `main` JOIN `partners` `join` ON `join`.`ID` = `main`.`partner` WHERE `main`.`partner` = '",ID,"' ");
+              SET @QUERY = CONCAT(@QUERY, " FROM `ip_summary` `main` JOIN `partners` `join` ON `join`.`ID` = `main`.`partner` WHERE `main`.`partner` = '",ID,"' AND `join`.`flag` = '1' ");
             ELSE
-                SET @QUERY = CONCAT(@QUERY, " FROM `ip_summary_yearly` `main` JOIN `partners` `join` ON `join`.`ID` = `main`.`partner` WHERE `main`.`partner` = '",ID,"' ");
+                SET @QUERY = CONCAT(@QUERY, " FROM `ip_summary_yearly` `main` JOIN `partners` `join` ON `join`.`ID` = `main`.`partner` WHERE `main`.`partner` = '",ID,"' AND `join`.`flag` = '1' ");
             END IF;
         END IF;
     END IF;
@@ -91,7 +97,7 @@ BEGIN
     SET @QUERY = CONCAT(@QUERY, " GROUP BY `name` ORDER BY `actualinfants_tests` DESC ");
 
     PREPARE stmt FROM @QUERY;
-    SHOW stmt;
+    EXECUTE stmt;
      
 END //
 DELIMITER ;

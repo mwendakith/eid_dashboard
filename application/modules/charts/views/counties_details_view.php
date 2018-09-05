@@ -11,7 +11,7 @@
 			<th rowspan="2">PMTCT Need</th>
 			<th rowspan="2">Actual Infants Tested</th>
 			<th colspan="2">Initial PCR</th>
-			<th colspan="2">Repeat PCR</th>
+			<th colspan="2">2nd/3rd PCR</th>
 			<th colspan="2">Confirmatory PCR</th>
 			<th colspan="2">Infants &lt;2Weeks</th>
 			<th colspan="2">Infants &lt;=2M</th>

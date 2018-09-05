@@ -21,7 +21,7 @@ BEGIN
                   FROM `county_summary` `cs`
                   JOIN `view_facilitys` `vf` ON `vf`.county = `cs`.county 
                   JOIN `countys` `c` ON `c`.ID = `cs`.county 
-                  JOIN `partners` `p` ON `p`.ID = `vf`.partner  WHERE 1";
+                  JOIN `partners` `p` ON `p`.ID = `vf`.partner  WHERE `p`.`flag` = '1'";
 
 
 

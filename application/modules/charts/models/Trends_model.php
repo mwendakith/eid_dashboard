@@ -366,7 +366,7 @@ class Trends_model extends MY_Model
 	}
 
 	function rtests($county=NULL){
-		return $this->any_quarterly('rpos', 'rneg', 'Outcomes (Repeat Tests)', $county);
+		return $this->any_quarterly('rpos', 'rneg', 'Outcomes (2nd/3rd Tests)', $county);
 	}
 
 	function infant_tests($county=NULL){

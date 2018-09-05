@@ -79,7 +79,7 @@
 			</div>
 		    
 		    <div class="col-sm-3">
-		    	<input type="submit" class="btn btn-primary" id="switchButton" onclick="switch_source()" value="Click to Switch To Repeat PCR">
+		    	<input type="submit" class="btn btn-primary" id="switchButton" onclick="switch_source()" value="Click to Switch To 2nd/3rd PCR">
 		    </div>
 
 

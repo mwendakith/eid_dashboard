@@ -17,7 +17,7 @@ BEGIN
         SET @QUERY = CONCAT(@QUERY, "FROM `subcounty_iprophylaxis` LEFT JOIN `districts` `com` ON `subcounty_iprophylaxis`.`subcounty` = `com`.`ID` WHERE 1");
     END IF;
     IF (partner != 0 || partner != '') THEN
-        SET @QUERY = CONCAT(@QUERY, "FROM `ip_iprophylaxis` LEFT JOIN `partners` `com` ON `ip_iprophylaxis`.`partner` = `com`.`ID` WHERE 1");
+        SET @QUERY = CONCAT(@QUERY, "FROM `ip_iprophylaxis` LEFT JOIN `partners` `com` ON `ip_iprophylaxis`.`partner` = `com`.`ID` WHERE `p`.`flag` = '1'");
     END IF;
 
 

@@ -237,7 +237,7 @@
 		if(all == 1){
 			localStorage.setItem("my_var", 2);
 			all=2;
-			$("#samples_heading").html('(Repeat PCR)');
+			$("#samples_heading").html('(2nd/3rd PCR)');
 			$("#switchButton").val('Click to Switch to All Tests');
 		}
 
@@ -252,7 +252,7 @@
 			localStorage.setItem("my_var", 1);
 			all=1;
 			$("#samples_heading").html('(Initial PCR)');
-			$("#switchButton").val('Click to Switch to Repeat PCR');
+			$("#switchButton").val('Click to Switch to 2nd/3rd PCR');
 		}
 
 		$("#testing_trends").load("<?php echo base_url('charts/partner_summaries/testing_trends'); ?>/"+null+"/"+all);

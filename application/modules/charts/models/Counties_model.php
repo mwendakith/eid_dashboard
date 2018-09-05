@@ -102,7 +102,7 @@ class Counties_model extends MY_Model
 	    $f = fopen('php://memory', 'w');
 	    /** loop through array  */
 
-	    $b = array('County', 'Average sites sending', 'All Tests', 'PMTCT Need', 'Actual Infants Tested', 'Initial PCR Tests', 'Initial PCR Positives', 'Repeat PCR Tests', 'Repeat PCR Positives', 'Confirmatory PCR Tests', 'Confirmatory PCR Positives', 'Infants < 2Weeks', 'Infants < 2Weeks  Positives', 'Infants <= 2M', 'Infants <= 2m Positives', 'Infants >= 2M', 'Infants >= 2m Positives', 'Median Age', 'Rejected');
+	    $b = array('County', 'Average sites sending', 'All Tests', 'PMTCT Need', 'Actual Infants Tested', 'Initial PCR Tests', 'Initial PCR Positives', '2nd/3rd PCR Tests', '2nd/3rd PCR Positives', 'Confirmatory PCR Tests', 'Confirmatory PCR Positives', 'Infants < 2Weeks', 'Infants < 2Weeks  Positives', 'Infants <= 2M', 'Infants <= 2m Positives', 'Infants >= 2M', 'Infants >= 2m Positives', 'Median Age', 'Rejected');
 
 	    fputcsv($f, $b, $delimiter);
 
@@ -302,7 +302,7 @@ class Counties_model extends MY_Model
 	    $f = fopen('php://memory', 'w');
 	    /** loop through array  */
 
-	    $b = array('Subcounty', 'County',  'All Tests', 'Average Sites Sending', 'Actual Infants Tested', 'Initial PCR Tests', 'Initial PCR Positives', 'Repeat PCR Tests', 'Repeat PCR Positives', 'Confirmatory PCR Tests', 'Confirmatory PCR Positives', 'Infants < 2Weeks', 'Infants < 2Weeks  Positives', 'Infants <= 2M', 'Infants <= 2m Positives', 'Infants >= 2M', 'Infants >= 2m Positives', 'Median Age', 'Rejected');
+	    $b = array('Subcounty', 'County',  'All Tests', 'Average Sites Sending', 'Actual Infants Tested', 'Initial PCR Tests', 'Initial PCR Positives', '2nd/3rd PCR Tests', '2nd/3rd PCR Positives', 'Confirmatory PCR Tests', 'Confirmatory PCR Positives', 'Infants < 2Weeks', 'Infants < 2Weeks  Positives', 'Infants <= 2M', 'Infants <= 2m Positives', 'Infants >= 2M', 'Infants >= 2m Positives', 'Median Age', 'Rejected');
 
 	    fputcsv($f, $b, $delimiter);
 
@@ -379,6 +379,65 @@ class Counties_model extends MY_Model
 		return $table;
 	}
 
+	function county_facilities_details($year=null,$month=null,$county=null,$to_year=null,$to_month=null)
+	{
+		$table = '';
+		$count = 1;
+		if ($county==null || $county=='null') {
+			$county = $this->session->userdata('county_filter');
+		}
+		if ($year==null || $year=='null') {
+			$year = $this->session->userdata('filter_year');
+		}
+		if ($month==null || $month=='null') {
+			if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
+				$month = 0;
+			}else {
+				$month = $this->session->userdata('filter_month');
+			}
+		}
+		if ($to_month==null || $to_month=='null') {
+			$to_month = 0;
+		}
+		if ($to_year==null || $to_year=='null') {
+			$to_year = 0;
+		}
+
+		$type = 1;
+
+		$sql = "CALL `proc_get_eid_sites_details`('".$year."','".$month."','".$to_year."','".$to_month."','".$type."','".$county."')";
+		// echo "<pre>";print_r($sql);die();
+		$result = $this->db->query($sql)->result_array();
+		// echo "<pre>";print_r($result);die();
+		foreach ($result as $key => $value) {
+			$table .= '<tr>';
+			$table .= '<td>'.$count.'</td>';
+			$table .= '<td>'.$value['facility'].'</td>';
+			$table .= '<td>'.$value['subcounty'].'</td>';
+			$table .= '<td>'.number_format($value['alltests']).'</td>';
+			$table .= '<td>'.number_format($value['actualinfants']).'</td>';
+			$table .= '<td>'.number_format($value['positive']+$value['negative']).'</td>';
+			$table .= '<td>'.number_format($value['positive']).'</td>';
+			$table .= '<td>'.number_format($value['repeatspos']).'</td>';
+			$table .= '<td>'.number_format($value['repeatsposPOS']).'</td>';
+			$table .= '<td>'.number_format($value['confirmdna']).'</td>';
+			$table .= '<td>'.number_format($value['confirmedPOS']).'</td>';
+			$table .= '<td>'.number_format($value['infantsless2w']).'</td>';
+			$table .= '<td>'.number_format($value['infantsless2wpos']).'</td>';
+			$table .= '<td>'.number_format($value['infantsless2m']).'</td>';
+			$table .= '<td>'.number_format($value['infantsless2mpos']).'</td>';
+			$table .= '<td>'.number_format($value['infantsabove2m']).'</td>';
+			$table .= '<td>'.number_format($value['infantsabove2mpos']).'</td>';
+			$table .= '<td>'.number_format($value['medage']).'</td>';
+			$table .= '<td>'.number_format($value['rejected']).'</td>';
+			$table .= '</tr>';
+			$count++;
+		}
+		
+
+		return $table;
+	}
+
 	function download_county_partners_outcomes($year=null,$month=null,$county=null,$to_year=null,$to_month=null)
 	{
 		
@@ -415,7 +474,7 @@ class Counties_model extends MY_Model
 	    $f = fopen('php://memory', 'w');
 	    /** loop through array  */
 
-	    $b = array('Partner', 'County', 'All Tests', 'Actual Infants Tested', 'Initial PCR Tests', 'Initial PCR Positives', 'Repeat PCR Tests', 'Repeat PCR Positives', 'Confirmatory PCR Tests', 'Confirmatory PCR Positives', 'Infants < 2Weeks', 'Infants < 2Weeks  Positives', 'Infants <= 2M', 'Infants <= 2m Positives', 'Infants >= 2M', 'Infants >= 2m Positives', 'Median Age', 'Rejected');
+	    $b = array('Partner', 'County', 'All Tests', 'Actual Infants Tested', 'Initial PCR Tests', 'Initial PCR Positives', '2nd/3rd PCR Tests', '2nd/3rd PCR Positives', 'Confirmatory PCR Tests', 'Confirmatory PCR Positives', 'Infants < 2Weeks', 'Infants < 2Weeks  Positives', 'Infants <= 2M', 'Infants <= 2m Positives', 'Infants >= 2M', 'Infants >= 2m Positives', 'Median Age', 'Rejected');
 
 	    fputcsv($f, $b, $delimiter);
 
@@ -432,86 +491,6 @@ class Counties_model extends MY_Model
 	    fpassthru($f);
 		
 	}
-
-	function county_tat_outcomes($year=null, $month=null, $to_year=null, $to_month=null,$county=null)
-	{
-		$type = 0;
-		if ($county==null || $county=='null') {
-			$county = $this->session->userdata('county_filter');
-		}
-		//Initializing the value of the Year to the selected year or the default year which is current year
-		if ($year==null || $year=='null') {
-			$year = $this->session->userdata('filter_year');
-		}
-		//Assigning the value of the month or setting it to the selected value
-		if ($month==null || $month=='null') {
-			if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
-				$month = 0;
-			}else {
-				$month = $this->session->userdata('filter_month');
-			}
-		}
-		if ($to_month==null || $to_month=='null') {
-			$to_month = 0;
-		}
-		if ($to_year==null || $to_year=='null') {
-			$to_year = 0;
-		}
-		if ($county==null) $county = 0;
-		$sql = "CALL `proc_get_eid_tat_ranking`('".$year."','".$month."','".$to_year."','".$to_month."','".$type."','".$county."')";
-		// echo "<pre>";print_r($sql);echo "</pre>";die();
-		$result = $this->db->query($sql)->result_array();
-		// echo "<pre>";print_r($result);die();
-
-		$data['outcomes'][0]['name'] = "Processing-Dispatch (P-D)";
-		$data['outcomes'][1]['name'] = "Receipt to-Processing (R-P)";
-		$data['outcomes'][2]['name'] = "Collection-Receipt (C-R)";
-		$data['outcomes'][3]['name'] = "Collection-Dispatch (C-D)";
-
-		$data['outcomes'][0]['color'] = 'rgba(0, 255, 0, 0.498039)';
-		$data['outcomes'][1]['color'] = 'rgba(255, 255, 0, 0.498039)';
-		$data['outcomes'][2]['color'] = 'rgba(255, 0, 0, 0.498039)';
-		// $data['outcomes'][0]['color'] = '#26C281';
-		// $data['outcomes'][1]['color'] = '#FABE58';
-		// $data['outcomes'][2]['color'] = '#EF4836';
-		$data['outcomes'][3]['color'] = '#913D88';
-
-		$data['outcomes'][0]['type'] = "column";
-		$data['outcomes'][1]['type'] = "column";
-		$data['outcomes'][2]['type'] = "column";
-		$data['outcomes'][3]['type'] = "spline";
-
-		$data['outcomes'][0]['yAxis'] = 1;
-		$data['outcomes'][1]['yAxis'] = 1;
-		$data['outcomes'][2]['yAxis'] = 1;
-
-		$data['outcomes'][0]['tooltip'] = array("valueSuffix" => ' ');
-		$data['outcomes'][1]['tooltip'] = array("valueSuffix" => ' ');
-		$data['outcomes'][2]['tooltip'] = array("valueSuffix" => ' ');
-		$data['outcomes'][3]['tooltip'] = array("valueSuffix" => ' Days');
-
-		$data['title'] = "";
-		
-		$data['categories'][0] = 'No Data';
-		$data["outcomes"][0]["data"][0]	= 0;
-		$data["outcomes"][1]["data"][0]	= 0;
-		$data["outcomes"][2]["data"][0]	= 0;
-		$data["outcomes"][3]["data"][0]	= 0;
-
-		foreach ($result as $key => $value) {
-			
-				$data['categories'][$key] = $value['name'];
-				$data["outcomes"][0]["data"][$key]	= round($value['tat3'],1);
-				$data["outcomes"][1]["data"][$key]	= round($value['tat2'],1);
-				$data["outcomes"][2]["data"][$key]	= round($value['tat1'],1);
-				$data["outcomes"][3]["data"][$key]	= round($value['tat4'],1);
-			
-		}
-
-		// echo "<pre>";print_r($data);die();
-		return $data;
-	}
-
 
 
 	// function country_tests($year=NULL,$month=NULL)

@@ -4,17 +4,28 @@
 		padding-bottom: 2em;
 	}
 </style>
-<table id="c_partner" cellspacing="1" cellpadding="3" class="tablehead table table-striped table-bordered" style="background:#CCC;">
+<table id="<?= (isset($sub_county)) ? @'c_facilities' : @'c_partner';?>" cellspacing="1" cellpadding="3" class="tablehead table table-striped table-bordered" style="background:#CCC;">
 	<thead>
 		<tr class="colhead">
 			<th rowspan="2">#</th>
+			<?php 
+				if(isset($sub_county)){
+			?>
+			<th rowspan="2">Facility Name</th>
+			<th rowspan="2">Sub-County</th>
+			<?php 
+				} else {
+			?>
 			<th rowspan="2">Partner</th>
+			<?php
+				}
+			?>
 			<th rowspan="2">All Tests</th>
 			<th rowspan="2">Actual Infants Tested</th>
 			<th rowspan="2">Initial PCR</th>
 			<th rowspan="2">Initial PCR Pos</th>
-			<th rowspan="2">Repeat PCR</th>
-			<th rowspan="2">Repeat PCR Pos</th>
+			<th rowspan="2">2nd/3rd PCR</th>
+			<th rowspan="2">2nd/3rd PCR Pos</th>
 			<th rowspan="2">Confirmatory PCR</th>
 			<th rowspan="2">Confirmatory PCR Pos</th>
 			<th colspan="2">Infants &lt;2Weeks</th>
@@ -45,7 +56,7 @@
 <script type="text/javascript" charset="utf-8">
   $(document).ready(function() {
 
-  	$('#c_partner').DataTable({
+  	$('#<?= (isset($sub_county)) ? @'c_facilities' : @'c_partner';?>').DataTable({
       dom: '<"btn btn-primary"B>lTfgtip',
       responsive: true,
         buttons : [

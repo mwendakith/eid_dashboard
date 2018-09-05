@@ -77,6 +77,20 @@ class Counties extends MY_Controller
     	$this->load->view('county_partner__view',$data);
 	}
 
+
+	function county_facilities_details($year=NULL,$month=NULL,$county=NULL,$to_year=NULL,$to_month=NULL)
+	{
+		$data['outcomes'] = $this->counties_model->county_facilities_details($year,$month,$county,$to_year,$to_month);
+
+		$link = $year . '/' . $month . '/' . $county . '/' . $to_month;
+
+		$data['link'] = $link;
+		$data['sub_county'] = true;
+
+
+    	$this->load->view('county_partner__view',$data);
+	}
+
 	function download_county_partners_outcomes($year=NULL,$month=NULL,$county=NULL,$to_year=NULL,$to_month=NULL)
 	{
 		$this->counties_model->download_county_partners_outcomes($year,$month,$county,$to_year,$to_month);
@@ -166,16 +180,6 @@ class Counties extends MY_Controller
 	// echo $this->table->generate($data);
 	
 	}
-
-	function county_tat_outcomes($year=NULL, $month=NULL, $to_year=NULL, $to_month=NULL,$county=NULL)
-	{
-		$data['trends'] = $this->counties_model->county_tat_outcomes($year,$month,$to_year,$to_month,$county);
-		$data['div_name'] = "summary_counties_tat_summary";
-		$data['tat'] = true;
-		$this->load->view('trends_outcomes_view', $data);
-	}
-
-
 	
 }
 ?>

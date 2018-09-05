@@ -64,5 +64,13 @@ class Subcounties extends MY_Controller
 	{
 		$this->subcounties_model->subcounty_sites_outcomes_download($sub_county,$year,$month,$to_year,$to_month);
 	}
+
+	function subcounty_tat_outcomes($year=NULL, $month=NULL, $to_year=NULL, $to_month=NULL,$subcounty=NULL)
+	{
+		$data['trends'] = $this->subcounties_model->subcounty_tat_outcomes($year,$month,$to_year,$to_month,$subcounty);
+		$data['div_name'] = "summary_subcounties_tat_summary";
+		$data['tat'] = true;
+		$this->load->view('trends_outcomes_view', $data);
+	}
 }
 ?>

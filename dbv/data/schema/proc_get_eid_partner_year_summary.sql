@@ -10,7 +10,7 @@ BEGIN
                 FROM `ip_summary` `ip`
                 JOIN `partners` `p`
                 ON `p`.`ID` = `ip`.`partner` 
-                WHERE 1 ";
+                WHERE `p`.`flag` = '1' ";
 
          IF (filter_partner != 0 && filter_partner != '') THEN
            SET @QUERY = CONCAT(@QUERY, " AND `p`.`ID` = '",filter_partner,"' ");

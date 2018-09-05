@@ -1,6 +1,10 @@
-
 <div id="jstification_pie">
 
+</div>
+<div>
+    <ul>
+        <?php echo $outcomes['ul'];?>
+    </ul>
 </div>
 <script type="text/javascript">
 	$(function(){
@@ -15,7 +19,7 @@
                 text: ''
             },
             tooltip: {
-                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                pointFormat: 'Percentage: <b>{point.percentage:.1f}%</b><br/>{series.name}:<b>{point.y:.1f}</b>'
             },
             plotOptions: {
                 pie: {

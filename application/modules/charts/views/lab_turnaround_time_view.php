@@ -25,27 +25,21 @@
 </style>
 <div>
     
-    <div class="col-md-6" id="container1" style="height:100px;"></div>
+   <!--  <div class="col-md-6" id="container1" style="height:100px;"></div>
     <div class="col-md-6" id="container2" style="height:100px;"></div>
     <div class="col-md-6" id="container3" style="height:100px;"></div>
     <div class="col-md-6" id="container4" style="height:100px;"></div>
     <div class="col-md-6" id="container5" style="height:100px;"></div>
     <div class="col-md-6" id="container6" style="height:100px;"></div>
     <div class="col-md-6" id="container7" style="height:100px;"></div>
-    <div class="col-md-6" id="container8" style="height:100px;"></div>
-    <div class="col-md-6" style="border: 1px solid black">
-        <div class="title-name">Key</div>
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="key cr"><center>Collection Receipt (C-R)</center></div>
-                    <div class="key rp"><center>Receipt to Processing (R-P)</center></div>
-                </div>
-                <div class="col-md-6">
-                    <div class="key pd"><center>Processing Dispatch (P-D)</center></div>
-                    <div class="key"><center><div class="cd"></div>Collection Dispatch (C-D)</center></div>
-                </div>
-            </div>
-    </div>
+    <div class="col-md-6" id="container8" style="height:100px;"></div> -->
+
+    <?php
+        echo "<div class='col-md-6' id='" . $div_name . "' style='height:100px;''></div>";
+
+    ?>
+
+    
 </div>
 
 
@@ -122,7 +116,7 @@
         },
         yAxis: {
             min: 0,
-            max: <?php echo $tat3;?>,
+            max: <?php echo $tat4;?>,
             tickLength: 5,
             tickWidth: 1,
             tickColor: '#C0C0C0',

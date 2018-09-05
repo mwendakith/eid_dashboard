@@ -9,7 +9,7 @@ BEGIN
                     SUM((`ps`.`neg`)) AS `negative`
                 FROM `ip_summary` `ps`
                     JOIN `partners` `p` ON `ps`.`partner` = `p`.`ID`
-                WHERE 1";
+                WHERE `p`.`flag` = '1' ";
 
     IF (filter_month != 0 && filter_month != '') THEN
        SET @QUERY = CONCAT(@QUERY, " AND `ps`.`year` = '",filter_year,"' AND `ps`.`month`='",filter_month,"' ");

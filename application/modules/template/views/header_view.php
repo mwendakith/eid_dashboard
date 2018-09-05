@@ -18,6 +18,41 @@
 			Dashboard
 		</title>
 		<style type="text/css">
+			@import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700");
+			@import url("https://fonts.googleapis.com/css?family=Roboto:400,300,500,700");
+			
+			h1,
+			h2,
+			h3,
+			h4,
+			h5,
+			h6 {
+			  font-weight: 100;
+			}
+			h1 {
+			  font-size: 30px;
+			}
+			h2 {
+			  font-size: 24px;
+			}
+			h3 {
+			  font-size: 16px;
+			}
+			h4 {
+			  font-size: 14px;
+			}
+			h5 {
+			  font-size: 12px;
+			}
+			h6 {
+			  font-size: 10px;
+			}
+			h3,
+			h4,
+			h5 {
+			  margin-top: 5px;
+			  font-weight: 600;
+			}
 			.navbar-inverse {
 				border-radius: 0px;
 			}
@@ -58,6 +93,8 @@
 				color: black;
 			}
 		</style>
+		<!-- <script src='https://www.google.com/recaptcha/api.js'></script> -->
+		<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 	</head>
 	<body>
 	<?php //echo "<pre>";print_r($_SERVER['REQUEST_URI']);die();?>
@@ -70,7 +107,7 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="javascript:void(0)" style="padding:0px;padding-top:4px;padding-left:4px;"><img src="<?php echo base_url();?>assets/img/nascoplogo.png" style="width:300px;height:auto;"/></a>
+					<a class="navbar-brand" href="javascript:void(0)" style="padding:0px;padding-top:4px;padding-left:4px;"><img src="<?php echo base_url();?>assets/img/nascop_pepfar_logo.jpg" style="width:280px;height:52px;"/></a>
 				</div>
 				<div class="navbar-collapse collapse navbar-responsive-collapse">
 					<ul class="nav navbar-nav">
@@ -82,21 +119,57 @@
 						</div>
 					</form> -->
 					<ul class="nav navbar-nav navbar-right">
-						<li><a href="<?php echo base_url();?>">Summary</a></li>
+						<!-- <li><a href="<?php echo base_url();?>">Summary</a></li> -->
+						<li class="dropdown">
+							<a href="bootstrap-elements.html" data-target="#" class="dropdown-toggle" data-toggle="dropdown">Summaries
+							<b class="caret"></b></a>
+							<ul class="dropdown-menu">
+								<li><a href="<?php echo base_url();?>">Summary</a></li>
+								<li><a href="<?php echo base_url();?>summary/heivalidation">HEI Validation Summary</a></li>
+							</ul>
+						</li>
 						<li><a href="<?php echo base_url();?>trends">Trends</a></li>
+						<li class="dropdown">
+							<a href="bootstrap-elements.html" data-target="#" class="dropdown-toggle" data-toggle="dropdown">County/Sub-County
+							<b class="caret"></b></a>
+							<ul class="dropdown-menu">
+								<li><a href="<?php echo base_url();?>county">County</a></li>
+								<li><a href="<?php echo base_url();?>county/tat">County TAT</a></li>
+								<li><a href="<?php echo base_url();?>county/subCounty">Sub-County</a></li>
+								<li><a href="<?php echo base_url();?>county/subCountytat">Sub-County TAT</a></li>
+							</ul>
+						</li>
+						<!-- <li><a href="<?php echo base_url();?>age">Age</a></li> -->
 						<li class="dropdown">
 							<a href="bootstrap-elements.html" data-target="#" class="dropdown-toggle" data-toggle="dropdown">Partners
 							<b class="caret"></b></a>
 							<ul class="dropdown-menu">
 								<li><a href="<?php echo base_url();?>partner">Summary</a></li>
 								<li><a href="<?php echo base_url();?>partner/trends">Trends</a></li>
-								<!-- <li><a href="<?php echo base_url();?>partner/sites">Partner Sites</a></li> -->
+								<li><a href="<?php echo base_url();?>partner/sites">Partner Facilities</a></li>
+								<li><a href="<?php echo base_url();?>partner/counties">Partner Counties</a></li>
+								<li><a href="<?php echo base_url();?>partner/heivalidation">HEI Validation</a></li>
+								<li><a href="<?php echo base_url();?>partner/tat">Partner TAT</a></li>
 							</ul>
 						</li>
 						<li><a href="<?php echo base_url();?>labPerformance">Lab Performance</a></li>
-						<!-- <li><a href="<?php echo base_url();?>sites">Sites</a></li> -->
-						<li><a href="<?php echo base_url();?>country">County View</a></li>
-						<!-- <li><a href="http://eid.nascop.org/vreports.php">Reports</a></li>
+						<!-- <li><a href="<?php echo base_url();?>rht">RHT Testing</a></li> -->
+						<li><a href="<?php echo base_url();?>sites">Facilities</a></li>
+						<li class="dropdown">
+							<a href="bootstrap-elements.html" data-target="#" class="dropdown-toggle" data-toggle="dropdown">Positivity
+							<b class="caret"></b></a>
+							<ul class="dropdown-menu">
+								<li><a href="<?php echo base_url();?>positivity">Positivity</a></li>
+								<li><a href="<?php echo base_url();?>age">Age Analysis</a></li>
+								<li><a href="<?php echo base_url();?>regimen">Regimen Analysis</a></li>
+							</ul>
+						</li>
+						<li><a href="<?php echo base_url();?>assets/downloads/EID_LAB_REQUISITION_FORM.pdf">EID Request Form</a></li>
+						<li><a href="<?php echo base_url();?>contacts">Contact Us</a></li>
+						<li><a href="http://eiddash.nascop.org/login.php">Login</a></li>
+						<li><a href="http://viralload.nascop.org">VL View</a></li>
+						<!-- <li><a href="<?php echo base_url();?>county">County View</a></li>
+						<li><a href="http://eid.nascop.org/vreports.php">Reports</a></li>
 						<li><a href="http://eid.nascop.org/login.php">Login</a></li>
 						<li><a href="http://eid.nascop.org">EID View</a></li> -->
 						<!-- <li><a href="javascript:void(0)">Link</a></li> -->

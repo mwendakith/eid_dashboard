@@ -4,12 +4,12 @@ CREATE PROCEDURE `proc_get_eid_lab_outcomes`
 (IN filter_year INT(11), IN from_month INT(11), IN to_year INT(11), IN to_month INT(11))
 BEGIN
   SET @QUERY =    "SELECT
-                    `l`.`ID`, `l`.`labname` AS `name`, 
-                    SUM(`ls`.`pos`+`ls`.`confirmedPOs`+`ls`.`tiebreakerPOS`+`ls`.`repeatposPOS`) AS `pos`,
+                    `ls`.`lab`, `l`.`labname` AS `name`, 
+                    (SUM(`ls`.`pos`)+SUM(`ls`.`confirmedPOs`)+SUM(`ls`.`tiebreakerPOS`)+SUM(`ls`.`repeatposPOS`)) AS `pos`,
                     SUM(`ls`.`neg`+(`ls`.`confirmdna`-`ls`.`confirmedPOs`)+(`ls`.`tiebreaker`-`ls`.`tiebreakerPOS`)+(`ls`.`repeatspos`-`ls`.`repeatposPOS`)) AS `neg`,
                     SUM(`redraw`) AS `redraw`
                 FROM `lab_summary` `ls`
-                JOIN `labs` `l`
+                LEFT JOIN `labs` `l`
                 ON `l`.`ID` = `ls`.`lab` 
                 WHERE 1 ";
 
@@ -28,8 +28,8 @@ BEGIN
     END IF;
       
 
-    SET @QUERY = CONCAT(@QUERY, " GROUP BY `l`.`ID` ");    
-    SET @QUERY = CONCAT(@QUERY, " ORDER BY `l`.`ID` ");
+    SET @QUERY = CONCAT(@QUERY, " GROUP BY `ls`.`lab` ");    
+    SET @QUERY = CONCAT(@QUERY, " ORDER BY `ls`.`lab`  ");
 
     PREPARE stmt FROM @QUERY;
     EXECUTE stmt;

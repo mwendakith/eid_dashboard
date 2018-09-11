@@ -225,6 +225,7 @@ class Performance_model extends MY_Model
 			$data['test_trends'][$lab]['data'][$month] = (int) $tests;
 
 			$data['rejected_trends'][$lab]['name'] = $value['name'];
+			if(!$data['rejected_trends'][$lab]['name']) $data['rejected_trends'][$lab]['name'] = "POC Sites";
 			if($tests == 0){
 				$data['rejected_trends'][$lab]['data'][$month] = 0;
 			}else{
@@ -233,6 +234,7 @@ class Performance_model extends MY_Model
 			}
 
 			$data['positivity_trends'][$lab]['name'] = $value['name'];
+			if(!$data['positivity_trends'][$lab]['name']) $data['positivity_trends'][$lab]['name'] = "POC Sites";
 			if($value['pos'] == 0){
 				$data['positivity_trends'][$lab]['data'][$month] = 0;
 			}else{
@@ -299,10 +301,11 @@ class Performance_model extends MY_Model
 		
 		foreach ($result as $key => $value) {
 
-			$lab = (int) $value['ID'];
+			$lab = (int) $value['lab'];
 			$lab--;
 
 			$data['categories'][$lab] = $value['name'];
+			if(!$data['categories'][$lab]) $data['categories'][$lab] = "POC Sites";
 
 			$data['outcomes'][0]['name'] = "Positive";
 			$data['outcomes'][0]['data'][$lab] = (int) $value['pos'];
@@ -357,12 +360,14 @@ class Performance_model extends MY_Model
 		$result = $this->db->query($sql)->result_array();
 		$data;
 		foreach ($result as $key => $value) {
-			$lab = (int) $value['ID'];
+			$lab = (int) $value['lab'];
 			$lab--;
 
 			$data[$lab]['div'] = "#container" . ($lab+1);	
 			$data[$lab]['div_name'] = "container" . ($lab+1);	
-			$data[$lab]['name'] = $value['name'] . $title;	
+			$name = $value['name'];
+			if(!$name) $name = "POC Sites";
+			$data[$lab]['name'] = $name . $title;	
 			$data[$lab]['tat1'] = (int) $value['tat1'];	
 			$data[$lab]['tat2'] = (int) $value['tat2'] + $data[$lab]['tat1'];	
 			$data[$lab]['tat3'] = (int) $value['tat3'] + $data[$lab]['tat2'];	

@@ -38,21 +38,11 @@ class Performance_model extends MY_Model
 		// echo "<pre>";print_r($result);echo "</pre>";die();
 		$ul = '';
 		foreach ($result as $key => $value) {
+			$name = $value['name'];
+			if(!$name) $name = "POC Sites";
 			$ul .= "<tr>
 						<td>".($key+1)."</td>
-						<td>";
-
-			
-
-			if($value['name'] == NULL){
-				$ul .= "POC Sites";
-			}
-			else{
-				$ul .= $value['name'];
-			}
-
-
-			$ul .= "</td>
+						<td>" . $name . "</td>
 						<td>".number_format((int) $value['sitesending'])."</td>
 						<td>".number_format((int) $value['received'])."</td>
 						<td>".number_format((int) $value['rejected']) . " (" . 

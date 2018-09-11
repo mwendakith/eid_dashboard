@@ -37,6 +37,7 @@
 
   	$('#example').DataTable({
       dom: '<"btn btn-primary"B>lTfgtip',
+      pageLength: 50,
       responsive: true,
         buttons : [
             {

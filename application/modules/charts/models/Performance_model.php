@@ -368,10 +368,10 @@ class Performance_model extends MY_Model
 			$name = $value['name'];
 			if(!$name) $name = "POC Sites";
 			$data[$lab]['name'] = $name . $title;	
-			$data[$lab]['tat1'] = (int) $value['tat1'];	
-			$data[$lab]['tat2'] = (int) $value['tat2'] + $data[$lab]['tat1'];	
-			$data[$lab]['tat3'] = (int) $value['tat3'] + $data[$lab]['tat2'];	
-			$data[$lab]['tat4'] = (int) $value['tat4'];	
+			$data[$lab]['tat1'] = round($value['tat1']);	
+			$data[$lab]['tat2'] = round($value['tat2']) + $data[$lab]['tat1'];	
+			$data[$lab]['tat3'] = round($value['tat3']) + $data[$lab]['tat2'];	
+			$data[$lab]['tat4'] = round($value['tat4']);	
 			
 		}
 		echo "<pre>";print_r($data);die();

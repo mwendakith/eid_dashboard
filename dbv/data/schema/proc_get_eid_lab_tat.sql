@@ -8,7 +8,7 @@ BEGIN
                     AVG(`ls`.`tat2`) AS `tat2`, AVG(`ls`.`tat3`) AS `tat3`,
                     AVG(`ls`.`tat4`) AS `tat4`
                 FROM `lab_summary` `ls`
-                JOIN `labs` `l`
+                LEFT JOIN `labs` `l`
                 ON `l`.`ID` = `ls`.`lab` 
                 WHERE 1 ";
 

@@ -215,7 +215,7 @@ class Performance_model extends MY_Model
 			$month = (int) $value['month'];
 			$month--;
 
-			$lab = (int) $value['ID'];
+			$lab = (int) $value['lab'];
 			$lab--;
 			$tests = (int) $value['new_tests'];
 			$received = (int) $value['received'];

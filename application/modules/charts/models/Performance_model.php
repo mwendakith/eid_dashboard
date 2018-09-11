@@ -374,7 +374,7 @@ class Performance_model extends MY_Model
 			$data[$lab]['tat4'] = round($value['tat4']);	
 			
 		}
-		echo "<pre>";print_r($data);die();
+		// echo "<pre>";print_r($data);die();
 		return $data;		
 	}
 

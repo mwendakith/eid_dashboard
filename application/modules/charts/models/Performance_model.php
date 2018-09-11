@@ -137,41 +137,41 @@ class Performance_model extends MY_Model
 		}
 
 		// $this->load->helper('download');
-  //       $this->load->library('PHPReport/PHPReport');
+        // $this->load->library('PHPReport/PHPReport');
 
-  //       ini_set('memory_limit','-1');
-	 //    ini_set('max_execution_time', 900);
+        // ini_set('memory_limit','-1');
+	    // ini_set('max_execution_time', 900);
 
-  //       $template = 'lab_performance_template.xlsx';
+        // $template = 'lab_performance_template.xlsx';
 
-	 //    //set absolute path to directory with template files
-	 //    $templateDir = __DIR__ . "/";
+	    //set absolute path to directory with template files
+	    // $templateDir = __DIR__ . "/";
 	    
-	 //    //set config for report
-	 //    $config = array(
-	 //        'template' => $template,
-	 //        'templateDir' => $templateDir
-	 //    );
+	    // //set config for report
+	    // $config = array(
+	    //     'template' => $template,
+	    //     'templateDir' => $templateDir
+	    // );
 
 
-	 //      //load template
-	 //    $R = new PHPReport($config);
+	    //   //load template
+	    // $R = new PHPReport($config);
 	    
-	 //    $R->load(array(
-	 //            'id' => 'data',
-	 //            'repeat' => TRUE,
-	 //            'data' => $data   
-	 //        )
-	 //    );
+	    // $R->load(array(
+	    //         'id' => 'data',
+	    //         'repeat' => TRUE,
+	    //         'data' => $data   
+	    //     )
+	    // );
 	      
-	 //      // define output directoy 
-	 //    $output_file_dir = __DIR__ ."/tmp/";
-	 //     // echo "<pre>";print_r("Still working");die();
+	    //   // define output directoy 
+	    // $output_file_dir = __DIR__ ."/tmp/";
+	    //  // echo "<pre>";print_r("Still working");die();
 
-	 //    $output_file_excel = $output_file_dir  . "lab_performance.xlsx";
-	 //    //download excel sheet with data in /tmp folder
-	 //    $result = $R->render('excel', $output_file_excel);
-	 //    force_download($output_file_excel, null);
+	    // $output_file_excel = $output_file_dir  . "lab_performance.xlsx";
+	    // //download excel sheet with data in /tmp folder
+	    // $result = $R->render('excel', $output_file_excel);
+	    // force_download($output_file_excel, null);
 
 		
 
@@ -221,6 +221,7 @@ class Performance_model extends MY_Model
 			$received = (int) $value['received'];
 
 			$data['test_trends'][$lab]['name'] = $value['name'];
+			if(!$data['test_trends'][$lab]['name']) $data['test_trends'][$lab]['name'] = "POC Sites";
 			$data['test_trends'][$lab]['data'][$month] = (int) $tests;
 
 			$data['rejected_trends'][$lab]['name'] = $value['name'];

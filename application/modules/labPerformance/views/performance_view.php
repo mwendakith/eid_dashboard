@@ -116,6 +116,18 @@
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    POC Outcomes <div class="display_date"></div>
+                </div>
+                <div class="panel-body" id="poc_outcomes" style="height: 700px">
+                    <center><div class="loader"></div></center>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <script type="text/javascript">
@@ -134,7 +146,7 @@
     $("#fifth").hide();
 
     localStorage.setItem("my_lab", 0);
-    // $("#test_trends").load("<?php //echo base_url();?>charts/LabPerformance/lab_testing_trends");
+    $("#test_trends").load("<?php echo base_url();?>charts/LabPerformance/lab_testing_trends");
     $("#test_outcomes").load("<?php echo base_url();?>charts/LabPerformance/lab_outcomes");
     $("#positivity_trends").load("<?php echo base_url();?>charts/LabPerformance/lab_positivity_trends");
     $("#rejected_trends").load("<?php echo base_url();?>charts/LabPerformance/lab_rejected_trends");

@@ -8,9 +8,6 @@
 			<th>Received Samples at Lab</th>
 			<th>Rejected Samples (on receipt at lab)</th>
 			<th>All Tests (plus reruns) Done at Lab</th>
-			<th>Redraws (after testing)</th>
-			<th>EQA Tests</th>
-			<th>Controls Run</th>
 			<th>Initial PCR Tests</th>
 			<th>Initial PCR Positives</th>
 			<th>2nd/3rd PCR Tests</th>

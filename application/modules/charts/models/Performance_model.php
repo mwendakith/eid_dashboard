@@ -116,9 +116,6 @@ class Performance_model extends MY_Model
 						<td>".number_format((int) $value['rejected']) . " (" . 
 							round(@(($value['rejected']*100)/$value['received']), 1, PHP_ROUND_HALF_UP)."%)</td>
 						<td>".number_format((int) $value['alltests'])."</td>
-						<td>".number_format((int) $value['redraw'])."</td>
-						<td>".number_format((int) $value['eqa'])."</td>
-						<td>".number_format((int) $value['controls'])."</td>
 						<td>".number_format((int) ($value['pos']+$value['neg']))."</td>
 						<td>".number_format((int) $value['pos'])."</td>
 						<td>".number_format((int) $value['repeatspos'])."</td>

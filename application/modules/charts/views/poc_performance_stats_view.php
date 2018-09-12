@@ -1,4 +1,4 @@
-<table id="example" cellspacing="1" cellpadding="3" class="tablehead table table-striped table-bordered" style="/*background:#CCC;">
+<table id="poc_table" cellspacing="1" cellpadding="3" class="tablehead table table-striped table-bordered" style="/*background:#CCC;">
 	<thead>
 		<tr class="colhead">
 			<th>No</th>
@@ -29,7 +29,7 @@
 <script type="text/javascript" charset="utf-8">
   $(document).ready(function() {
 
-  	$('#example').DataTable({
+  	$('#poc_table').DataTable({
       dom: '<"btn btn-primary"B>lTfgtip',
       pageLength: 50,
       responsive: true,

@@ -110,6 +110,7 @@ class Performance_model extends MY_Model
 			$ul .= "<tr>
 						<td>".($key+1)."</td>
 						<td>" . $name . "</td>
+						<td>" . $value['facilitycode'] . "</td>
 						<td>".number_format((int) $value['sitesending'])."</td>
 						<td>".number_format((int) $value['received'])."</td>
 						<td>".number_format((int) $value['rejected']) . " (" . 

@@ -174,6 +174,7 @@
           $("#lineargauge").load("<?php echo base_url();?>charts/LabPerformance/lab_turnaround/"+from[1]+"/"+from[0]+"/"+to[1]+"/"+to[0]);
           $("#lab_perfomance_stats").load("<?php echo base_url();?>charts/LabPerformance/lab_performance_stats/"+from[1]+"/"+from[0]+"/"+to[1]+"/"+to[0]);
           $("#poc").load("<?php echo base_url();?>charts/LabPerformance/poc_performance_stats/"+from[1]+"/"+from[0]+"/"+to[1]+"/"+to[0]);
+          $("#poc_outcomes").load("<?php echo base_url();?>charts/LabPerformance/poc_outcomes/"+from[1]+"/"+from[0]+"/"+to[1]+"/"+to[0]);
 
           var em = localStorage.getItem("my_lab");
 
@@ -224,6 +225,7 @@
         $("#trends_lab").load("<?php echo base_url();?>charts/LabPerformance/lab_trends/"+em);
         $("#mapping").load("<?php echo base_url();?>charts/LabPerformance/lab_mapping/"+em);
         $("#poc").load("<?php echo base_url();?>charts/LabPerformance/poc_performance_stats");
+        $("#poc_outcomes").load("<?php echo base_url();?>charts/LabPerformance/poc_performance_stats");
         
       }
 
@@ -270,6 +272,7 @@ function date_filter(criteria, id)
       $("#lineargauge").load("<?php echo base_url();?>charts/LabPerformance/lab_turnaround/"+year+"/"+month);
       $("#lab_perfomance_stats").load("<?php echo base_url();?>charts/LabPerformance/lab_performance_stats/"+year+"/"+month);
       $("#poc").load("<?php echo base_url();?>charts/LabPerformance/poc_performance_stats/"+year+"/"+month);
+      $("#poc_outcomes").load("<?php echo base_url();?>charts/LabPerformance/poc_outcomes/"+year+"/"+month);
 
     }
 
@@ -281,6 +284,7 @@ function date_filter(criteria, id)
       $("#lineargauge").load("<?php echo base_url();?>charts/LabPerformance/lab_turnaround/"+year+"/"+month);
       $("#lab_perfomance_stats").load("<?php echo base_url();?>charts/LabPerformance/lab_performance_stats/"+year+"/"+month);
       $("#poc").load("<?php echo base_url();?>charts/LabPerformance/poc_performance_stats/"+year+"/"+month);
+      $("#poc_outcomes").load("<?php echo base_url();?>charts/LabPerformance/poc_outcomes/"+year+"/"+month);
 
       
       $("#lab_summary_two_years").html("<div>Loading...</div>");

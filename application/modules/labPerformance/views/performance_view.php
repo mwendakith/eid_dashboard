@@ -225,7 +225,7 @@
         $("#trends_lab").load("<?php echo base_url();?>charts/LabPerformance/lab_trends/"+em);
         $("#mapping").load("<?php echo base_url();?>charts/LabPerformance/lab_mapping/"+em);
         $("#poc").load("<?php echo base_url();?>charts/LabPerformance/poc_performance_stats");
-        $("#poc_outcomes").load("<?php echo base_url();?>charts/LabPerformance/poc_performance_stats");
+        $("#poc_outcomes").load("<?php echo base_url();?>charts/LabPerformance/poc_outcomes");
         
       }
 

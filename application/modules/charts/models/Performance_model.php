@@ -79,6 +79,69 @@ class Performance_model extends MY_Model
 		return $ul;
 	}
 
+	function poc_performance_stat($year=NULL,$month=NULL,$to_year=null,$to_month=null)
+	{
+		// echo round(3.6451895227869, 2, PHP_ROUND_HALF_UP);die();
+		if ($year==null || $year=='null') {
+			$year = $this->session->userdata('filter_year');
+		}
+		if ($month==null || $month=='null') {
+			if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
+				$month = 0;
+			}else {
+				$month = $this->session->userdata('filter_month');
+			}
+		}
+		if ($to_month==null || $to_month=='null') {
+			$to_month = 0;
+		}
+		if ($to_year==null || $to_year=='null') {
+			$to_year = 0;
+		}
+
+		$sql = "CALL `proc_get_eid_poc_performance_stats`('".$year."','".$month."','".$to_year."','".$to_month."');";
+
+		$result = $this->db->query($sql)->result_array();
+		// echo "<pre>";print_r($result);echo "</pre>";die();
+		$ul = '';
+		foreach ($result as $key => $value) {
+			$name = $value['name'];
+			if(!$name) $name = "POC Sites";
+			$ul .= "<tr>
+						<td>".($key+1)."</td>
+						<td>" . $name . "</td>
+						<td>".number_format((int) $value['sitesending'])."</td>
+						<td>".number_format((int) $value['received'])."</td>
+						<td>".number_format((int) $value['rejected']) . " (" . 
+							round(@(($value['rejected']*100)/$value['received']), 1, PHP_ROUND_HALF_UP)."%)</td>
+						<td>".number_format((int) $value['alltests'])."</td>
+						<td>".number_format((int) $value['redraw'])."</td>
+						<td>".number_format((int) $value['eqa'])."</td>
+						<td>".number_format((int) $value['controls'])."</td>
+						<td>".number_format((int) ($value['pos']+$value['neg']))."</td>
+						<td>".number_format((int) $value['pos'])."</td>
+						<td>".number_format((int) $value['repeatspos'])."</td>
+						<td>".number_format((int) $value['repeatspospos'])."</td>
+						<td>".number_format((int) $value['confirmdna'])."</td>
+						<td>".number_format((int) $value['confirmedpos'])."</td>
+						
+						<td>".number_format((int) ($value['pos']+$value['neg']+$value['confirmdna'] + $value['repeatspos'] + $value['tiebreaker']))."</td>
+						<td>".number_format((int) ($value['pos']+$value['confirmedpos'] + $value['repeatspospos'] + $value['tiebreakerPOS']))."</td>
+						
+					</tr>";
+					// <td>".number_format((int) $value['alltests'] + (int) $value['eqa'] + (int) $value['confirmdna'] + (int) $value['repeatspos'])."</td>
+					// 	<td>".number_format((int) $value['pos'])."</td>
+					// 	<td>".round(@(($value['pos']*100)/$value['tests']), 1, PHP_ROUND_HALF_UP)."</td>
+					// 	<td>".number_format((int) $value['neg'])."</td>
+					// 	<td>".round(@(($value['neg']*100)/$value['tests']), 1, PHP_ROUND_HALF_UP)."</td>
+					// 	<td>".number_format((int) $value['redraw'])."</td>
+					// 	<td>".round(@(($value['redraw']*100)/$value['tests']), 1, PHP_ROUND_HALF_UP)."</td>
+					
+		}
+
+		return $ul;
+	}
+
 
 	function download_lab_performance_stat($year=NULL,$month=NULL,$to_year=null,$to_month=null)
 	{

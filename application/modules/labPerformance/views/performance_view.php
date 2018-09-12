@@ -134,7 +134,7 @@
     $("#fifth").hide();
 
     localStorage.setItem("my_lab", 0);
-    $("#test_trends").load("<?php echo base_url();?>charts/LabPerformance/lab_testing_trends");
+    // $("#test_trends").load("<?php //echo base_url();?>charts/LabPerformance/lab_testing_trends");
     $("#test_outcomes").load("<?php echo base_url();?>charts/LabPerformance/lab_outcomes");
     $("#positivity_trends").load("<?php echo base_url();?>charts/LabPerformance/lab_positivity_trends");
     $("#rejected_trends").load("<?php echo base_url();?>charts/LabPerformance/lab_rejected_trends");

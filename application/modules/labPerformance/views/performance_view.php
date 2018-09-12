@@ -103,6 +103,21 @@
     </div>
 </div>
 
+<div id="fifth">
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    POC STATS <div class="display_date"></div>
+                </div>
+                <div class="panel-body" id="poc" style="height: 700px">
+                    <center><div class="loader"></div></center>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script type="text/javascript">
 
   $().ready(function() {
@@ -114,6 +129,9 @@
     }
     $(".display_date").html("( "+obj['year']+" "+obj['month']+" )");
     });
+
+    $("#fourth").hide();
+    $("#fifth").hide();
 
     localStorage.setItem("my_lab", 0);
     $("#test_trends").load("<?php echo base_url();?>charts/LabPerformance/lab_testing_trends");
@@ -158,9 +176,12 @@
       localStorage.setItem("my_lab", em);
 
       if(em == 0){
+
       
         $("#first").show();
         $("#second").hide();
+        $("#fourth").hide();
+        $("#fifth").hide();
         $("#breadcrum").hide();
 
         $("#graphs").load("<?php echo base_url();?>charts/LabPerformance/testing_trends");
@@ -175,12 +196,21 @@
         
         $("#first").hide();
         $("#second").show();
+        $("#fourth").show();
+        $("#fifth").hide();
         $("#breadcrum").show();
+
+        if(em==11 || em =='11'){
+          $("#fourth").hide();
+          $("#fifth").show();          
+        }
+
         var t = $("#my_list option:selected").text();
         $("#breadcrum").html(t);
         $("#lab_summary_two_years").load("<?php echo base_url();?>charts/LabPerformance/summary/"+em);
         $("#trends_lab").load("<?php echo base_url();?>charts/LabPerformance/lab_trends/"+em);
         $("#mapping").load("<?php echo base_url();?>charts/LabPerformance/lab_mapping/"+em);
+        $("#poc").load("<?php echo base_url();?>charts/LabPerformance/poc_performance_stats/"+em);
         
       }
 

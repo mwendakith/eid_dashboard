@@ -1,0 +1,59 @@
+<table id="example" cellspacing="1" cellpadding="3" class="tablehead table table-striped table-bordered" style="/*background:#CCC;">
+	<thead>
+		<tr class="colhead">
+			<th>No</th>
+			<th>Facility</th>
+			<th>MFL</th>
+			<th>Facilities Sending Samples</th>
+			<th>Received Samples at Lab</th>
+			<th>Rejected Samples (on receipt at lab)</th>
+			<th>All Tests (plus reruns) Done at Lab</th>
+			<th>Redraws (after testing)</th>
+			<th>EQA Tests</th>
+			<th>Controls Run</th>
+			<th>Initial PCR Tests</th>
+			<th>Initial PCR Positives</th>
+			<th>2nd/3rd PCR Tests</th>
+			<th>2nd/3rd PCR Positives</th>
+			<th>Confirmatory PCR Tests</th>
+			<th>Confirmatory PCR Positives</th>
+			<th>Tests with Valid Outcomes</th>
+			<th>Tests with Valid Outcomes - Positives</th>
+		</tr>
+	</thead>
+	<tbody>
+		<?php echo $stats;?>
+	</tbody>
+</table>
+
+<script type="text/javascript" charset="utf-8">
+  $(document).ready(function() {
+
+  	$('#example').DataTable({
+      dom: '<"btn btn-primary"B>lTfgtip',
+      pageLength: 50,
+      responsive: true,
+        buttons : [
+            {
+              text:  'Export to CSV',
+              extend: 'csvHtml5',
+              title: 'Download'
+            },
+            {
+              text:  'Export to Excel',
+              extend: 'excelHtml5',
+              title: 'Download'
+            }
+          ]
+  	});
+
+    // $("table").tablecloth({
+    //   theme: "paper",
+    //   striped: true,
+    //   sortable: true,
+    //   condensed: true
+    // });
+
+
+  });
+</script>

@@ -210,7 +210,7 @@
         $("#lab_summary_two_years").load("<?php echo base_url();?>charts/LabPerformance/summary/"+em);
         $("#trends_lab").load("<?php echo base_url();?>charts/LabPerformance/lab_trends/"+em);
         $("#mapping").load("<?php echo base_url();?>charts/LabPerformance/lab_mapping/"+em);
-        $("#poc").load("<?php echo base_url();?>charts/LabPerformance/poc_performance_stats/"+em);
+        $("#poc").load("<?php echo base_url();?>charts/LabPerformance/poc_performance_stats");
         
       }
 
@@ -256,6 +256,7 @@ function date_filter(criteria, id)
       $("#stacked_graph").load("<?php echo base_url();?>charts/LabPerformance/lab_outcomes/"+year+"/"+month);
       $("#lineargauge").load("<?php echo base_url();?>charts/LabPerformance/lab_turnaround/"+year+"/"+month);
       $("#lab_perfomance_stats").load("<?php echo base_url();?>charts/LabPerformance/lab_performance_stats/"+year+"/"+month);
+      $("#poc").load("<?php echo base_url();?>charts/LabPerformance/poc_performance_stats/"+year+"/"+month);
 
     }
 
@@ -266,6 +267,7 @@ function date_filter(criteria, id)
       $("#stacked_graph").load("<?php echo base_url();?>charts/LabPerformance/lab_outcomes/"+year+"/"+month);
       $("#lineargauge").load("<?php echo base_url();?>charts/LabPerformance/lab_turnaround/"+year+"/"+month);
       $("#lab_perfomance_stats").load("<?php echo base_url();?>charts/LabPerformance/lab_performance_stats/"+year+"/"+month);
+      $("#poc").load("<?php echo base_url();?>charts/LabPerformance/poc_performance_stats/"+year+"/"+month);
 
       
       $("#lab_summary_two_years").html("<div>Loading...</div>");

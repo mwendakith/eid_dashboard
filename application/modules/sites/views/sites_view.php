@@ -30,19 +30,18 @@
     </div>
   </div>
  
-  <div class="row">
-    <div class="col-md-12">
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          Facilities Without Supporting Partner <div class="display_date"></div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Facilities Without Supporting Partner <div class="display_date"></div>
+                </div>
+                <div class="panel-body" id="unsupportedSites">
+                    <center><div class="loader"></div></center>
+                </div>
+            </div>
         </div>
-          <div class="panel-body" id="unsupportedSites">
-            <center><div class="loader"></div></center>
-          </div>
-          
-      </div>
     </div>
-  </div>
 </div>
 
 <div id="second">
@@ -105,7 +104,7 @@
       </div>
     </div>
     <!-- Entry Point; Mother Prophylazis; Infant Prophylaxis -->
-    <div class="col-md-4">
+    <!-- <div class="col-md-4">
       <div class="panel panel-default">
         <div class="panel-body" id="entrypoint">
           <center><div class="loader"></div></center>
@@ -125,7 +124,7 @@
           <center><div class="loader"></div></center>
         </div>
       </div>
-    </div>
+    </div> -->
     <!-- Entry Point; Mother Prophylazis; Infant Prophylaxis -->   
   </div>
   <div class="row" style="display: none;">

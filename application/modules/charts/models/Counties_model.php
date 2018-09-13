@@ -413,6 +413,7 @@ class Counties_model extends MY_Model
 			$table .= '<tr>';
 			$table .= '<td>'.$count.'</td>';
 			$table .= '<td>'.$value['facility'].'</td>';
+			$table .= '<td>'.$value['facilitycode'].'</td>';
 			$table .= '<td>'.$value['subcounty'].'</td>';
 			$table .= '<td>'.number_format($value['alltests']).'</td>';
 			$table .= '<td>'.number_format($value['actualinfants']).'</td>';

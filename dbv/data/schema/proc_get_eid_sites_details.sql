@@ -21,6 +21,7 @@ BEGIN
                   AVG(`medage`) AS `medage`,
                   SUM(`rejected`) AS `rejected`,  
                   `vf`.`name` as `facility` ,
+                  `vf`.`facilitycode` as `facilitycode` ,
                   `vf`.`subcounty` 
                   FROM `site_summary` `ss` 
                   JOIN `view_facilitys` `vf` ON `vf`.`ID` = `ss`.`facility`

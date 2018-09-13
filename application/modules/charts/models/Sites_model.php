@@ -937,6 +937,7 @@ class Sites_model extends MY_Model
 
 		$sql = "CALL `proc_get_eid_site_age_range`(0, '".$site."','".$year."','".$month."','".$to_year."','".$to_month."')";
 		$result = $this->db->query($sql)->result_array();
+		echo "<pre>";print_r($result);die();
 				
 		$data['ageGnd'][0]['name'] = 'Positive';
 		$data['ageGnd'][1]['name'] = 'Negative';

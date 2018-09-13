@@ -25,7 +25,7 @@ BEGIN
         SET @QUERY = CONCAT(@QUERY, " AND `year` = '",filter_year,"' ");
     END IF;
 
-    SET @QUERY = CONCAT(@QUERY, " AND `site` = '",S_id,"' ");
+    SET @QUERY = CONCAT(@QUERY, " AND `facility` = '",S_id,"' ");
 
     IF (band_type = 1) THEN
         SET @QUERY = CONCAT(@QUERY, " GROUP BY `a`.`ID`  ");

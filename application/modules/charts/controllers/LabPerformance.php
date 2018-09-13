@@ -24,6 +24,13 @@ class LabPerformance extends MY_Controller
 		$this->load->view('lab_performance_stats_view', $data);
 	}
 
+	function poc_performance_stats($year=NULL,$month=NULL,$to_year=NULL,$to_month=NULL)
+	{
+		$data['stats'] = $this->performance_model->poc_performance_stat($year,$month,$to_year,$to_month);
+
+		$this->load->view('poc_performance_stats_view', $data);
+	}
+
 	function download_lab_performance_stats($year=NULL,$month=NULL,$to_year=NULL,$to_month=NULL)
 	{
 		$this->performance_model->download_lab_performance_stat($year,$month,$to_year,$to_month);
@@ -140,6 +147,12 @@ class LabPerformance extends MY_Controller
 		//$data['trends'] = $this->positivity_model->yearly_summary();
 		//echo json_encode($data);
 		// echo "<pre>";print_r($data);die();
+		$this->load->view('trends_outcomes_view', $data);
+	}
+
+	function poc_outcomes($year=NULL,$month=NULL,$to_year=NULL,$to_month=NULL){
+		$data['trends'] = $this->performance_model->poc_outcomes($year,$month,$to_year,$to_month);
+		$data['div_name'] = "poc_outcomes_summary";
 		$this->load->view('trends_outcomes_view', $data);
 	}
 

@@ -46,6 +46,7 @@
 					$("#eidOutcomes").html("<center><div class='loader'></div></center>");
 					$("#heiOutcomes").html("<center><div class='loader'></div></center>");
 					$("#heiFollowUp").html("<center><div class='loader'></div></center>");
+					$("#agebreakdown").html("<center><div class='loader'></div></center>");
 
 					$("#pat_stats").html("<center><div class='loader'></div></center>");
 					$("#pat_out").html("<center><div class='loader'></div></center>");
@@ -56,6 +57,7 @@
 					$("#eidOutcomes").load("<?php echo base_url('charts/sites/site_eid');?>/"+data);
 					$("#heiOutcomes").load("<?php echo base_url('charts/sites/site_hei_validation');?>/"+data);
 					$("#heiFollowUp").load("<?php echo base_url('charts/sites/site_hei');?>/"+data);
+					$("#agebreakdown").load("<?= @base_url('charts/sites/agegroup');?>/"+data);
 
 					$("#pat_stats").load("<?php echo base_url('charts/sites/get_patients');?>/"+null+"/"+null+"/"+data);
 					$("#pat_out").load("<?php echo base_url('charts/sites/get_patients_outcomes');?>/"+null+"/"+null+"/"+data);
@@ -95,6 +97,7 @@
 					$("#eidOutcomes").html("<center><div class='loader'></div></center>");
 					$("#heiOutcomes").html("<center><div class='loader'></div></center>");
 					$("#heiFollowUp").html("<center><div class='loader'></div></center>");
+					$("#agebreakdown").html("<center><div class='loader'></div></center>");
 
 
 					$("#pat_stats").html("<center><div class='loader'></div></center>");
@@ -106,6 +109,7 @@
 					$("#eidOutcomes").load("<?php echo base_url('charts/sites/site_eid');?>/"+site+"/"+from[1]+"/"+from[0]+"/"+to[1]+"/"+to[0]);
 					$("#heiOutcomes").load("<?php echo base_url('charts/sites/site_hei_validation');?>/"+site+"/"+from[1]+"/"+from[0]+"/"+to[1]+"/"+to[0]);
 					$("#heiFollowUp").load("<?php echo base_url('charts/sites/site_hei');?>/"+site+"/"+from[1]+"/"+from[0]+"/"+to[1]+"/"+to[0]);
+					$("#agebreakdown").load("<?= @base_url('charts/sites/agegroup');?>/"+site+"/"+from[1]+"/"+from[0]+"/"+to[1]+"/"+to[0]);
 
 					$("#pat_stats").load("<?php echo base_url('charts/sites/get_patients');?>/"+from[1]+"/"+from[0]+"/"+site+"/"+to[1]+"/"+to[0]);
 					$("#pat_out").load("<?php echo base_url('charts/sites/get_patients_outcomes');?>/"+from[1]+"/"+from[0]+"/"+site+"/"+to[1]+"/"+to[0]);
@@ -155,6 +159,7 @@
 				$("#eidOutcomes").html("<center><div class='loader'></div></center>");
 				$("#heiOutcomes").html("<center><div class='loader'></div></center>");
 				$("#heiFollowUp").html("<center><div class='loader'></div></center>");
+				$("#agebreakdown").html("<center><div class='loader'></div></center>");
 
 				$("#pat_stats").html("<center><div class='loader'></div></center>");
 				$("#pat_out").html("<center><div class='loader'></div></center>");
@@ -165,6 +170,7 @@
 				$("#eidOutcomes").load("<?php echo base_url('charts/sites/site_eid');?>/"+null+"/"+year+"/"+month);
 				$("#heiOutcomes").load("<?php echo base_url('charts/sites/site_hei_validation');?>/"+null+"/"+year+"/"+month);
 				$("#heiFollowUp").load("<?php echo base_url('charts/sites/site_hei');?>/"+null+"/"+year+"/"+month);
+				$("#agebreakdown").load("<?= @base_url('charts/sites/agegroup');?>/"+null+"/"+year+"/"+month);
 				
 				$("#pat_stats").load("<?php echo base_url('charts/sites/get_patients');?>/"+year+"/"+month+"/"+site);
 				$("#pat_out").load("<?php echo base_url('charts/sites/get_patients_outcomes');?>/"+year+"/"+month+"/"+site);

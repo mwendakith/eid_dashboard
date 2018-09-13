@@ -106,5 +106,13 @@ class Sites extends MY_Controller
 		$data = $this->sites_model->get_patients_graph($site,$year,$month,$to_year,$to_month);
 		$this->load->view('patients_graph',$data);
 	}
+
+	function agegroup($site=NULL,$year=NULL,$month=NULL,$to_year=NULL,$to_month=NULL)
+	{
+		$data['outcomes'] = $this->sites_model->age_breakdown($site,$year,$month,$to_year,$to_month);
+		$data['title'] = 'Age Breakdown';
+		// echo "<pre>";print_r($data);die();
+		$this->load->view('agegroup_view', $data);
+	}
 }
 ?>

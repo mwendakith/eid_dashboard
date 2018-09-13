@@ -30,19 +30,18 @@
     </div>
   </div>
  
-  <div class="row">
-    <div class="col-md-12">
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          Facilities Without Supporting Partner <div class="display_date"></div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Facilities Without Supporting Partner <div class="display_date"></div>
+                </div>
+                <div class="panel-body" id="unsupportedSites">
+                    <center><div class="loader"></div></center>
+                </div>
+            </div>
         </div>
-          <div class="panel-body" id="unsupportedSites">
-            <center><div class="loader"></div></center>
-          </div>
-          
-      </div>
     </div>
-  </div>
 </div>
 
 <div id="second">
@@ -66,7 +65,7 @@
   </div>
   <div class="row">
     <!-- Map of the country -->
-    <div class="col-md-5 col-sm-12 col-xs-12">
+    <div class="col-md-4 col-sm-12 col-xs-12">
       <div class="panel panel-default">
        
         <div id="eidOutcomes">
@@ -76,7 +75,7 @@
       </div>
     </div>
 
-    <div class="col-md-4 col-sm-12 col-xs-12">
+    <div class="col-md-3 col-sm-12 col-xs-12">
       <div class="panel panel-default">
        
         <div id="heiOutcomes">
@@ -86,7 +85,7 @@
       </div>
     </div>
     
-    <div class="col-md-3">
+    <div class="col-md-2">
       <div class="panel panel-default">
         
         <div class="panel-body" id="heiFollowUp">
@@ -95,8 +94,38 @@
         
       </div>
     </div>
-    
-   
+    <div class="col-md-3">
+      <div class="panel panel-default">
+        
+        <div class="panel-body" id="agebreakdown">
+          <center><div class="loader"></div></center>
+        </div>
+        
+      </div>
+    </div>
+    <!-- Entry Point; Mother Prophylazis; Infant Prophylaxis -->
+    <!-- <div class="col-md-4">
+      <div class="panel panel-default">
+        <div class="panel-body" id="entrypoint">
+          <center><div class="loader"></div></center>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="panel panel-default">
+        <div class="panel-body" id="mprophylaxis">
+          <center><div class="loader"></div></center>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="panel panel-default">
+        <div class="panel-body" id="iprpophylaxis">
+          <center><div class="loader"></div></center>
+        </div>
+      </div>
+    </div> -->
+    <!-- Entry Point; Mother Prophylazis; Infant Prophylaxis -->   
   </div>
   <div class="row" style="display: none;">
     <div class="col-md-6 col-sm-12 col-xs-12">

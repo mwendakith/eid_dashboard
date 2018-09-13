@@ -8,7 +8,7 @@
                         type: 'column'
                     },
                     title: {
-                        text: ''
+                        text: <?= (isset($title)) ? @$title : ''; ?>
                     },
                     xAxis: {
                         categories: <?php echo json_encode($outcomes['categories']);?>,

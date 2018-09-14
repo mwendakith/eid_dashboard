@@ -21,12 +21,10 @@ BEGIN
                   SUM(`infantsabove2m`) AS `infantsabove2m`, 
                   SUM(`infantsabove2mPOS`) AS `infantsabove2mpos`,  
                   AVG(`medage`) AS `medage`,
-                  SUM(`rejected`) AS `rejected`
-                  FROM `subcounty_summary` 
-                  LEFT JOIN `districts` ON `subcounty_summary`.`subcounty` = `districts`.`id`  WHERE 1";
-
+                  SUM(`rejected`) AS `rejected`";
 
     IF (from_month != 0 && from_month != '') THEN
+      SET @QUERY = CONCAT(@QUERY, " FROM `subcounty_summary` LEFT JOIN `districts` ON `subcounty_summary`.`subcounty` = `districts`.`id`  WHERE 1 ");
       IF (to_month != 0 && to_month != '' && filter_year = to_year) THEN
             SET @QUERY = CONCAT(@QUERY, " AND `year` = '",filter_year,"' AND `month` BETWEEN '",from_month,"' AND '",to_month,"' ");
         ELSE IF(to_month != 0 && to_month != '' && filter_year != to_year) THEN
@@ -36,10 +34,15 @@ BEGIN
         END IF;
     END IF;
     ELSE
+        SET @QUERY = CONCAT(@QUERY, " FROM `subcounty_summary_yearly` LEFT JOIN `districts` ON `subcounty_summary_yearly`.`subcounty` = `districts`.`id`  WHERE 1 ");
         SET @QUERY = CONCAT(@QUERY, " AND `year` = '",filter_year,"' ");
     END IF;
 
-    SET @QUERY = CONCAT(@QUERY, " GROUP BY `subcounty_summary`.`subcounty` ORDER BY `tests` DESC ");
+    IF (from_month != 0 && from_month != '') THEN
+      SET @QUERY = CONCAT(@QUERY, " GROUP BY `subcounty_summary`.`subcounty` ORDER BY `tests` DESC ");
+    ELSE
+      SET @QUERY = CONCAT(@QUERY, " GROUP BY `subcounty_summary_yearly`.`subcounty` ORDER BY `tests` DESC ");
+    END IF;
 
      PREPARE stmt FROM @QUERY;
      EXECUTE stmt;

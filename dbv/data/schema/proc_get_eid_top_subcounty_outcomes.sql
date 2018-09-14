@@ -7,7 +7,7 @@ BEGIN
                     `d`.`name`,
                     `scs`.`subcounty`,
                     SUM(`scs`.`actualinfantsPOS`) AS `positive`,
-                    SUM(`scs`.`actualinfants`-`scs`.`actualinfantsPOS`) AS `negative` ";
+                    SUM(`scs`.`actualinfants`) AS `actual` ";
 
 
      IF (from_month != 0 && from_month != '') THEN
@@ -36,7 +36,7 @@ BEGIN
 
 
 
-    SET @QUERY = CONCAT(@QUERY, " GROUP BY `scs`.`subcounty` ORDER BY `negative` DESC, `positive` DESC ");
+    SET @QUERY = CONCAT(@QUERY, " GROUP BY `scs`.`subcounty` ORDER BY `actual` DESC, `positive` DESC ");
     SET @QUERY = CONCAT(@QUERY, " LIMIT 50 ");
 
      PREPARE stmt FROM @QUERY;

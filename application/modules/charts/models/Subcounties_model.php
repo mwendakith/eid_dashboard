@@ -63,13 +63,67 @@ class Subcounties_model extends MY_Model
 			
 				$data['categories'][$key] = $value['name'];
 				$data["outcomes"][0]["data"][$key]	= (int) $value['positive'];
-				$data["outcomes"][1]["data"][$key]	= (int) $value['negative'];
-				$data["outcomes"][2]["data"][$key]	= round(@( ((int) $value['positive']*100) /((int) $value['positive']+(int) $value['negative'])),1);
+				$data["outcomes"][1]["data"][$key]	= (int) ($value['actual']-$value['positive']);
+				$data["outcomes"][2]["data"][$key]	= round(@( ((int) $value['positive']*100) /((int) $value['actual'])),1);
 			
 		}
 		
 		// echo "<pre>";print_r($data);die();
 		return $data;
+	}
+
+	function subcounties_outcomes($year=null,$month=null,$to_year=null,$to_month=null)
+	{
+		$table = '';
+		$count = 1;
+		if ($year==null || $year=='null') 
+			$year = $this->session->userdata('filter_year');
+		
+		if ($month==null || $month=='null') {
+			if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
+				$month = 0;
+			}else {
+				$month = $this->session->userdata('filter_month');
+			}
+		}
+		if ($to_month==null || $to_month=='null') 
+			$to_month = 0;
+		
+		if ($to_year==null || $to_year=='null') 
+			$to_year = 0;
+		
+		$sql = "CALL `proc_get_eid_subcountys_details`('".$year."','".$month."','".$to_year."','".$to_month."')";
+		// echo "<pre>";print_r($sql);die();
+		$result = $this->db->query($sql)->result_array();
+		// echo "<pre>";print_r($result);die();
+		foreach ($result as $key => $value) {
+			$table .= '<tr>';
+			$table .= '<td>'.$count.'</td>';
+			$table .= '<td>'.$value['subcounty'].'</td>';
+			$table .= '<td>'.number_format(round($value['sitessending'])).'</td>';
+			$table .= '<td>'.number_format($value['alltests']).'</td>';
+			$table .= '<td>'.number_format($value['actualinfants']).'</td>';
+			$table .= '<td>'.number_format($value['positive']+$value['negative']).'</td>';
+			$table .= '<td>'.number_format($value['positive']).'</td>';
+			$table .= '<td>'.number_format($value['repeatspos']).'</td>';
+			$table .= '<td>'.number_format($value['repeatsposPOS']).'</td>';
+			$table .= '<td>'.number_format($value['confirmdna']).'</td>';
+			$table .= '<td>'.number_format($value['confirmedPOS']).'</td>';
+			$table .= '<td>'.number_format($value['infantsless2w']).'</td>';
+			$table .= '<td>'.number_format($value['infantsless2wpos']).'</td>';
+			$table .= '<td>'.number_format($value['infantsless2m']).'</td>';
+			$table .= '<td>'.number_format($value['infantsless2mpos']).'</td>';
+			$table .= '<td>'.number_format($value['infantsabove2m']).'</td>';
+			$table .= '<td>'.number_format($value['infantsabove2mpos']).'</td>';
+			$table .= '<td>'.number_format($value['medage']).'</td>';
+			$table .= '<td>'.number_format($value['rejected']).'</td>';
+
+			$table .= '</tr>';
+			$count++;
+		}
+		
+		// echo "<pre>";print_r($table);die();
+		return $table;
 	}
 
 	function get_eid($subcounty=null, $year=null, $month=null,$to_year=null,$to_month=null){

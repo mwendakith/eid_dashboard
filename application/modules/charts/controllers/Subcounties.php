@@ -13,9 +13,9 @@ class Subcounties extends MY_Controller
 		$this->load->model('subcounties_model');
 	}
 
-	function subcounties_outcomes($year=NULL,$month=NULL,$to_year=NULL,$to_month=NULL)
+	function subcounties_positivity($year=NULL,$month=NULL,$to_year=NULL,$to_month=NULL)
 	{
-		$data['trends'] = $this->subcounties_model->subcounties_outcomes($year,$month,$to_year,$to_month);
+		$data['trends'] = $this->subcounties_model->subcounties_positivity($year,$month,$to_year,$to_month);
 		$data['div_name'] = "subcounties_subcounties_summary";
 
 		$this->load->view('trends_outcomes_view', $data);

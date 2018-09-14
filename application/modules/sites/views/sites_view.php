@@ -104,7 +104,7 @@
       </div>
     </div>
     <!-- Entry Point; Mother Prophylazis; Infant Prophylaxis -->
-    <!-- <div class="col-md-4">
+    <div class="col-md-4">
       <div class="panel panel-default">
         <div class="panel-body" id="entrypoint">
           <center><div class="loader"></div></center>
@@ -124,7 +124,7 @@
           <center><div class="loader"></div></center>
         </div>
       </div>
-    </div> -->
+    </div>
     <!-- Entry Point; Mother Prophylazis; Infant Prophylaxis -->   
   </div>
   <div class="row" style="display: none;">

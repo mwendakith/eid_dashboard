@@ -4,7 +4,7 @@
 		<div class="col-md-12 col-sm-12 col-xs-12">
 			<div class="panel panel-default">
 			  <div class="panel-heading" id="heading">
-			  	Sub-County Outcomes (Actual Infants) <div class="display_date"></div>
+			  	Sub-County Positivity (Actual Infants) <div class="display_date"></div>
 			  </div>
 			  <div class="panel-body" id="subcounty_positivity">
 			    <center><div class="loader"></div></center>

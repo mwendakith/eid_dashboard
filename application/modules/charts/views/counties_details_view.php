@@ -5,10 +5,10 @@
 		} else {?>
 		<tr class="colhead">
 			<th rowspan="2">#</th>
-			<th rowspan="2">County</th>
+			<th rowspan="2"><?= (isset($subcounty)) ? @'Sub-County' : @'County'; ?></th>
 			<th rowspan="2"># Sites</th>
 			<th rowspan="2">All Tests</th>
-			<th rowspan="2">PMTCT Need</th>
+			<?php if (!isset($subcounty)) {?><th rowspan="2">PMTCT Need</th><?php } ?>
 			<th rowspan="2">Actual Infants Tested</th>
 			<th colspan="2">Initial PCR</th>
 			<th colspan="2">2nd/3rd PCR</th>

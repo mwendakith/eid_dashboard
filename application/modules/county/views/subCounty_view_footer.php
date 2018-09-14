@@ -14,7 +14,7 @@
 	        	$("#breadcrum").html(data);
 	       });
 		$("#second").hide();
-		$("#subcounty_positivity").load("<?php echo base_url('charts/subcounties/subcounty_positivity');?>");
+		$("#subcounty_positivity").load("<?php echo base_url('charts/subcounties/subcounties_positivity');?>");
 		$("#subcounty_outcomes").load("<?= @base_url('charts/partner_summaries/tests_analysis'); ?>/"+null+"/"+null+"/"+null+"/"+null+"/"+2);
 
 
@@ -44,7 +44,7 @@
 	        	if (data=="" || data==null) {
 	        		$("#second").hide();
 	        		$("#first").show();
-					$("#subcounty_positivity").load("<?php echo base_url('charts/subcounties/subcounty_positivity');?>");
+					$("#subcounty_positivity").load("<?php echo base_url('charts/subcounties/subcounties_positivity');?>");
 					$("#subcounty_outcomes").load("<?= @base_url('charts/partner_summaries/tests_analysis'); ?>/"+null+"/"+null+"/"+null+"/"+null+"/"+2);
 	        	}else {
 	        		$("#first").hide();
@@ -101,7 +101,7 @@
 					$("#subcounty_positivity").html("<center><div class='loader'></div></center>");
 					$("#subcounty_outcomes").html("<center><div class='loader'></div></center>");
 					
-					$("#subcounty_positivity").load("<?php echo base_url('charts/subcounties/subcounty_positivity'); ?>/"+from[1]+"/"+from[0]+"/"+to[1]+"/"+to[0]);
+					$("#subcounty_positivity").load("<?php echo base_url('charts/subcounties/subcounties_positivity'); ?>/"+from[1]+"/"+from[0]+"/"+to[1]+"/"+to[0]);
 					$("#subcounty_outcomes").load("<?= @base_url('charts/partner_summaries/tests_analysis'); ?>/"+from[1]+"/"+from[0]+"/"+to[1]+"/"+to[0]+"/"+2);
 				} else {
 					// subcounty = "<?php echo json_decode("+subcounty+")?>";
@@ -169,7 +169,7 @@
 					$("#subcounty_positivity").html("<center><div class='loader'></div></center>");
 					$("#subcounty_outcomes").html("<center><div class='loader'></div></center>");
 
-					$("#subcounty_positivity").load("<?php echo base_url('charts/subcounties/subcounty_positivity'); ?>/"+year+"/"+month);
+					$("#subcounty_positivity").load("<?php echo base_url('charts/subcounties/subcounties_positivity'); ?>/"+year+"/"+month);
 					$("#subcounty_outcomes").load("<?= @base_url('charts/partner_summaries/tests_analysis'); ?>/"+year+"/"+month+"/"+null+"/"+null+"/"+2);
 				} else {
 					// subcounty = "<?php echo json_decode("+subcounty+")?>";

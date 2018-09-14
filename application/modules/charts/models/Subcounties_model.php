@@ -11,7 +11,7 @@ class Subcounties_model extends MY_Model
 		parent:: __construct();;
 	}
 
-	function subcounties_outcomes($year=null,$month=null,$to_year=null,$to_month=null)
+	function subcounties_positivity($year=null,$month=null,$to_year=null,$to_month=null)
 	{
 
 		if ($year==null || $year=='null') {

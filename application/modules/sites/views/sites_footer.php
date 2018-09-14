@@ -47,6 +47,9 @@
 					$("#heiOutcomes").html("<center><div class='loader'></div></center>");
 					$("#heiFollowUp").html("<center><div class='loader'></div></center>");
 					$("#agebreakdown").html("<center><div class='loader'></div></center>");
+					$("#entrypoint").html("<center><div class='loader'></div></center>");
+					$("#mprophylaxis").html("<center><div class='loader'></div></center>");
+					$("#iprpophylaxis").html("<center><div class='loader'></div></center>");
 
 					$("#pat_stats").html("<center><div class='loader'></div></center>");
 					$("#pat_out").html("<center><div class='loader'></div></center>");
@@ -58,6 +61,9 @@
 					$("#heiOutcomes").load("<?php echo base_url('charts/sites/site_hei_validation');?>/"+data);
 					$("#heiFollowUp").load("<?php echo base_url('charts/sites/site_hei');?>/"+data);
 					$("#agebreakdown").load("<?= @base_url('charts/sites/agegroup');?>/"+data);
+					$("#entrypoint").load("<?= @base_url('charts/sites/entry_points');?>/"+data);
+					$("#mprophylaxis").load("<?= @base_url('charts/sites/mprophyalxis');?>/"+data);
+					$("#iprpophylaxis").load("<?= @base_url('charts/sites/iprophyalxis');?>/"+data);
 
 					$("#pat_stats").load("<?php echo base_url('charts/sites/get_patients');?>/"+null+"/"+null+"/"+data);
 					$("#pat_out").load("<?php echo base_url('charts/sites/get_patients_outcomes');?>/"+null+"/"+null+"/"+data);
@@ -98,6 +104,9 @@
 					$("#heiOutcomes").html("<center><div class='loader'></div></center>");
 					$("#heiFollowUp").html("<center><div class='loader'></div></center>");
 					$("#agebreakdown").html("<center><div class='loader'></div></center>");
+					$("#entrypoint").html("<center><div class='loader'></div></center>");
+					$("#mprophylaxis").html("<center><div class='loader'></div></center>");
+					$("#iprpophylaxis").html("<center><div class='loader'></div></center>");
 
 
 					$("#pat_stats").html("<center><div class='loader'></div></center>");
@@ -110,6 +119,9 @@
 					$("#heiOutcomes").load("<?php echo base_url('charts/sites/site_hei_validation');?>/"+site+"/"+from[1]+"/"+from[0]+"/"+to[1]+"/"+to[0]);
 					$("#heiFollowUp").load("<?php echo base_url('charts/sites/site_hei');?>/"+site+"/"+from[1]+"/"+from[0]+"/"+to[1]+"/"+to[0]);
 					$("#agebreakdown").load("<?= @base_url('charts/sites/agegroup');?>/"+site+"/"+from[1]+"/"+from[0]+"/"+to[1]+"/"+to[0]);
+					$("#entrypoint").load("<?= @base_url('charts/sites/entry_points');?>/"+site+"/"+from[1]+"/"+from[0]+"/"+to[1]+"/"+to[0]);
+					$("#mprophylaxis").load("<?= @base_url('charts/sites/mprophyalxis');?>/"+site+"/"+from[1]+"/"+from[0]+"/"+to[1]+"/"+to[0]);
+					$("#iprpophylaxis").load("<?= @base_url('charts/sites/iprophyalxis');?>/"+site+"/"+from[1]+"/"+from[0]+"/"+to[1]+"/"+to[0]);
 
 					$("#pat_stats").load("<?php echo base_url('charts/sites/get_patients');?>/"+from[1]+"/"+from[0]+"/"+site+"/"+to[1]+"/"+to[0]);
 					$("#pat_out").load("<?php echo base_url('charts/sites/get_patients_outcomes');?>/"+from[1]+"/"+from[0]+"/"+site+"/"+to[1]+"/"+to[0]);
@@ -160,6 +172,9 @@
 				$("#heiOutcomes").html("<center><div class='loader'></div></center>");
 				$("#heiFollowUp").html("<center><div class='loader'></div></center>");
 				$("#agebreakdown").html("<center><div class='loader'></div></center>");
+				$("#entrypoint").html("<center><div class='loader'></div></center>");
+				$("#mprophylaxis").html("<center><div class='loader'></div></center>");
+				$("#iprpophylaxis").html("<center><div class='loader'></div></center>");
 
 				$("#pat_stats").html("<center><div class='loader'></div></center>");
 				$("#pat_out").html("<center><div class='loader'></div></center>");
@@ -171,6 +186,9 @@
 				$("#heiOutcomes").load("<?php echo base_url('charts/sites/site_hei_validation');?>/"+null+"/"+year+"/"+month);
 				$("#heiFollowUp").load("<?php echo base_url('charts/sites/site_hei');?>/"+null+"/"+year+"/"+month);
 				$("#agebreakdown").load("<?= @base_url('charts/sites/agegroup');?>/"+null+"/"+year+"/"+month);
+				$("#entrypoint").load("<?= @base_url('charts/sites/entry_points');?>/"+null+"/"+year+"/"+month);
+				$("#mprophylaxis").load("<?= @base_url('charts/sites/mprophyalxis');?>/"+null+"/"+year+"/"+month);
+				$("#iprpophylaxis").load("<?= @base_url('charts/sites/iprophyalxis');?>/"+null+"/"+year+"/"+month);
 				
 				$("#pat_stats").load("<?php echo base_url('charts/sites/get_patients');?>/"+year+"/"+month+"/"+site);
 				$("#pat_out").load("<?php echo base_url('charts/sites/get_patients_outcomes');?>/"+year+"/"+month+"/"+site);

@@ -42,7 +42,7 @@ class Counties_model extends MY_Model
 			$table .= '<td>'.$value['county'].'</td>';
 			$table .= '<td>'.number_format(round($value['sitessending'])).'</td>';
 			$table .= '<td>'.number_format($value['alltests']).'</td>';
-			if ($year == '2016' || $year == '2017') {
+			if ($year > '2015') {
 				$table .= '<td>'.number_format($value['pmtctneed']).'</td>';
 			} else {
 				$table .= '<td>0</td>';

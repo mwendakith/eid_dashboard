@@ -68,7 +68,7 @@
     <div class="col-md-4 col-sm-12 col-xs-12">
       <div class="panel panel-default">
        
-        <div id="eidOutcomes">
+        <div id="eidOutcomes" style="height: 623px;">
           <center><div class="loader"></div></center>
         </div>
         
@@ -78,7 +78,7 @@
     <div class="col-md-3 col-sm-12 col-xs-12">
       <div class="panel panel-default">
        
-        <div id="heiOutcomes">
+        <div id="heiOutcomes" style="height: 623px;">
           <center><div class="loader"></div></center>
         </div>
         
@@ -88,7 +88,7 @@
     <div class="col-md-2">
       <div class="panel panel-default">
         
-        <div class="panel-body" id="heiFollowUp">
+        <div class="panel-body" id="heiFollowUp" style="height: 623px;">
           <center><div class="loader"></div></center>
         </div>
         
@@ -97,7 +97,7 @@
     <div class="col-md-3">
       <div class="panel panel-default">
         
-        <div class="panel-body" id="agebreakdown">
+        <div class="panel-body" id="agebreakdown" style="height: 623px;">
           <center><div class="loader"></div></center>
         </div>
         

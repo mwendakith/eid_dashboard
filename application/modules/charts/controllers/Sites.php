@@ -114,5 +114,26 @@ class Sites extends MY_Controller
 		// echo "<pre>";print_r($data);die();
 		$this->load->view('agegroup_view', $data);
 	}
+
+	function entry_points($site=NULL,$year=NULL,$month=NULL,$to_year=NULL,$to_month=NULL)
+	{
+		$data['outcomes'] = $this->sites_model->entry_points($site,$year,$month,$to_year,$to_month);
+
+		$this->load->view('entry_point_view', $data);
+	}
+
+	function mprophyalxis($site=NULL,$year=NULL,$month=NULL,$to_year=NULL,$to_month=NULL)
+	{
+		$data['outcomes'] = $this->sites_model->mprophylaxis($site,$year,$month,$to_year,$to_month);
+
+		$this->load->view('mprophylaxis_view', $data);
+	}
+
+	function iprophyalxis($site=NULL,$year=NULL,$month=NULL,$to_year=NULL,$to_month=NULL)
+	{
+		$data['outcomes'] = $this->sites_model->iprophylaxis($site,$year,$month,$to_year,$to_month);
+
+		$this->load->view('iprophylaxis_view', $data);
+	}
 }
 ?>

@@ -44,15 +44,15 @@ if   ( $sampleId !=''   )
 			
 function Checkifrecordexists($sampleId,$startTime,$endTime,$vldb)
 {
-$strQuery=mysql_query("SELECT ID FROM genexperttests WHERE  startTime='$startTime' and endTime='$endTime' and sampleId='$sampleId' ",$vldb)or die(mysql_error());
-$numrows=mysql_num_rows($strQuery);
+$strQuery=mysqli_query($vldb, "SELECT ID FROM genexperttests WHERE  startTime='$startTime' and endTime='$endTime' and sampleId='$sampleId' ")or die(mysqli_error($vldb));
+$numrows=mysqli_num_rows($strQuery);
 return $numrows; 
 }
 			
 			
-			$runby=mysql_real_escape_string($runby);
+			$runby=mysqli_real_escape_string($vldb, $runby);
 			$facility=addslashes($facility);
-			$facility=mysql_real_escape_string($facility);
+			$facility=mysqli_real_escape_string($vldb, $facility);
 			
 			if ($rundate != "")
 			{
@@ -76,7 +76,7 @@ return $numrows;
 	$query = "INSERT INTO genexperttests
 	(password,systemName,exportedDate ,assay ,assayVersion,sampleId ,patientId ,user,status ,startTime ,endTime ,errorStatus,reagentLotId ,cartridgeExpirationDate ,cartridgeSerial,moduleName ,moduleSerial ,instrumentSerial ,softwareVersion,resultId ,resultIdinterpretation,dateuploaded)
 		VALUES ('$password','$systemName','$exportedDate ' ,'$assay' ,'$assayVersion','$sampleId' ,'$patientId' ,'$user','$status' ,'$startTime' ,'$endTime' ,'$errorStatus','$reagentLotId' ,'$cartridgeExpirationDate' ,'$cartridgeSerial','$moduleName' ,'$moduleSerial' ,'$instrumentSerial' ,'$softwareVersion','$resultId' ,'$resultIdinterpretation','$today')";
-			$import = mysql_query($query,$vldb) or die(mysql_error());	
+			$import = mysqli_query($vldb,$query) or die(mysqli_error($vldb));	
 			
 				if ($import)
 				{// If the sample was saved return the sample data

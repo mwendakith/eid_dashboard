@@ -32,8 +32,8 @@ $resultIdinterpretation = $order->resultIdinterpretation;
 
 	
 //echo    json_encode('vl').$testtype;
-$vldb = mysql_connect("10.230.50.11:3307", "root", "FnP5FjbnMrzXCm."); 
-mysql_select_db('nodedata', $vldb);
+$vldb = mysqli_connect("10.230.50.11:3307", "root", "FnP5FjbnMrzXCm.", "nodedata"); 
+// mysql_select_db('', $vldb);
 
 
 

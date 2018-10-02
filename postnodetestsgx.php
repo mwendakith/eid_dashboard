@@ -1,5 +1,5 @@
 <?php
-error_reporting(0);
+// error_reporting(0);
 
 $data = trim(file_get_contents('php://input'),'<?xml version="1.0" encoding="UTF-8"?> ');
 $order = json_decode($data);

@@ -150,6 +150,7 @@
 								<li><a href="<?php echo base_url();?>partner/counties">Partner Counties</a></li>
 								<li><a href="<?php echo base_url();?>partner/heivalidation">HEI Validation</a></li>
 								<li><a href="<?php echo base_url();?>partner/tat">Partner TAT</a></li>
+								<li><a href="<?php echo base_url();?>partner/agencies">Funding Agencies</a></li>
 							</ul>
 						</li>
 						<li><a href="<?php echo base_url();?>labPerformance">Lab Performance</a></li>

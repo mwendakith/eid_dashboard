@@ -104,6 +104,17 @@ class Template_model extends MY_Model
 		return $dropdown;
 	}
 
+	function funding_agencies_dropdown() {
+		$dropdown = '';
+		
+		$funding_agencies = $this->db->get('funding_agencies')->result_array();
+		foreach ($funding_agencies as $key => $value) {
+			$dropdown .= '<option value="'.$value['id'].'">'.$value['name'].'</option>';
+		}
+		
+		return $dropdown;
+	}
+
 	function get_county_name($county_id)
 	{
 		$this->db->where('ID', $county_id);
@@ -154,6 +165,14 @@ class Template_model extends MY_Model
 		$this->db->where('ID', $age_id);
 		$data = $this->db->get('age_bands')->result_array();
 		$name = $data[0]["name"];
+
+		return $name;
+	}
+
+	function get_funding_agency($funding_agency) {
+		$this->db->where('id', $funding_agency);
+		$data = $this->db->get('funding_agencies')->result_array();
+		$name = $data[0]['name'];
 
 		return $name;
 	}

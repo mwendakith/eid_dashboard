@@ -73,7 +73,6 @@ $active_group = 'default';
 $query_builder = TRUE;
 $db['default'] = array(
 	'dsn'	=> '',
-	//'hostname' => 'mysql',
 	'hostname' => '10.230.50.11',
 	'username' => 'root',
 	'password' => 'FnP5FjbnMrzXCm.',
@@ -93,7 +92,6 @@ $db['default'] = array(
 	'failover' => array(),
 	'save_queries' => TRUE
 );
-
 $db['eid_survey'] = array(
 	'dsn'	=> '',
 	'hostname' => 'mysql',
@@ -113,7 +111,9 @@ $db['eid_survey'] = array(
 	'compress' => FALSE,
 	'stricton' => FALSE,
 	'failover' => array(),
-	'save_queries' => TRUE,
-	'port' => 3307
+	'save_queries' => TRUE
 );
+
+
+
 

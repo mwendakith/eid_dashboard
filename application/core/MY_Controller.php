@@ -288,6 +288,28 @@ if(!defined("BASEPATH")) exit("No direct script access allowed!");
 			return TRUE;
 		}
 
+		function filter_funding_agency($data=NULL) {
+			$session_data = $this->session->all_userdata();
+			
+			if(!$data){}
+			else {
+				if ($data['funding_agency'] == 'NA') {
+					foreach ($session_data as $key => $value) {
+				        if (!($key == 'filter_year' || $key == '__ci_last_regenerate'))
+				            $this->session->unset_userdata($key);
+				    }
+				} else {
+					$this->session->set_userdata('funding_agency_filter', $data['funding_agency']);
+					foreach ($session_data as $key => $value) {
+						if (!($key == 'filter_year' || $key == 'funding_agency_filter' || $key == '__ci_last_regenerate'))
+				            $this->session->unset_userdata($key);
+				    }
+				}
+			}
+			
+			return TRUE;
+		}
+
 		function display_time_period()
 		{
 			$display = array('year' => $this->session->userdata('filter_year'), 'month' => $this->session->userdata('filter_month') );

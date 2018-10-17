@@ -1,16 +1,25 @@
 DROP PROCEDURE IF EXISTS `proc_get_eid_agencies_outcomes`;
 DELIMITER //
 CREATE PROCEDURE `proc_get_eid_agencies_outcomes`
-(IN filter_year INT(11), IN from_month INT(11), IN to_year INT(11), IN to_month INT(11))
+(IN filter_year INT(11), IN from_month INT(11), IN to_year INT(11), IN to_month INT(11), IN type INT(11), IN agency INT(11))
 BEGIN
-  SET @QUERY =    "SELECT 
-                        fa.name as `agency`,
-                        SUM(`ips`.`pos`) AS `positive`, 
-                        SUM(`ips`.`neg`) AS `negative` 
-                        FROM ip_summary ips
-                    JOIN partners p on p.ID = ips.partner
-                    JOIN funding_agencies fa on fa.id = p.funding_agency_id";
+    SET @QUERY = "SELECT";
+    
+    IF (type = 0) THEN
+        SET @QUERY = CONCAT(@QUERY, " fa.name as `agency`,");
+    ELSE
+        SET @QUERY = CONCAT(@QUERY, " p.name as `agency`,");
+    END IF;
 
+    SET @QUERY = CONCAT(@QUERY, " SUM(`ips`.`pos`) AS `positive`, 
+                   SUM(`ips`.`neg`) AS `negative` 
+                   FROM ip_summary ips
+                JOIN partners p on p.ID = ips.partner");
+    IF (type = 0) THEN
+        SET @QUERY = CONCAT(@QUERY, " JOIN funding_agencies fa on fa.id = p.funding_agency_id WHERE 1");
+    ELSE
+        SET @QUERY = CONCAT(@QUERY, " WHERE `p`.`funding_agency_id` =  '",agency,"'");
+    END IF;
  
     IF (from_month != 0 && from_month != '') THEN
       IF (to_month != 0 && to_month != '' && filter_year = to_year) THEN

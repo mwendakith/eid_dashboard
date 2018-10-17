@@ -42,6 +42,48 @@
 		  </div>
 		</div>
 	</div>
+	<div class="col-md-4 col-sm-3 col-xs-12">
+		<div class="panel panel-default">
+		 	<div class="panel-heading">
+		  		EID Outcomes <div class="display_date" ></div>
+			</div>
+		  	<div class="panel-body" id="eidOutcomes">
+		  		<center><div class="loader"></div></center>
+		  	</div>
+		  
+		</div>
+	</div>
+	<div class="col-md-3 col-sm-3 col-xs-12">
+		<div class="panel panel-default">
+		  <div class="panel-heading">
+		  	Actual Infants Tested Positive Validation at Site Outcomes  <div class="display_date" ></div>
+		  </div>
+		  <div class="panel-body" id="hei_outcomes">
+		  	<center><div class="loader"></div></center>
+		  </div>
+		  
+		</div>
+	</div>
+	<div class="col-md-2 col-sm-4 col-xs-12">
+		<div class="panel panel-default">
+		  	<div class="panel-heading">
+			 	Status of Actual Confirmed Positives at Site <div class="display_date"></div>
+		  	</div>
+		  	<div class="panel-body" id="hei_follow_up" style="/*height:500px;">
+		    	<center><div class="loader"></div></center>
+		  	</div>
+		</div>
+	</div>
+	<div class="col-md-3">
+		<div class="panel panel-default">
+		  	<div class="panel-heading">
+		    	EID Outcomes by Age  (Initial PCR) <div class="display_date"></div>
+		  	</div>
+		  	<div class="panel-body" id="ageGroups" style="height:560px;">
+		    	<center><div class="loader"></div></center>
+		  	</div>
+		</div>
+	</div>
 </div>
 		
 <?php $this->load->view('partner_agencies_view_footer'); ?>

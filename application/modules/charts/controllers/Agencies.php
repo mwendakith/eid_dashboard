@@ -20,6 +20,33 @@ class Agencies extends MY_Controller
 
 		$this->load->view('trends_outcomes_view', $data);
 	}
+
+	public function outcomes($year=null,$month=null,$to_year=null,$to_month=null,$type=null,$agency_id=null) {
+		$data['outcomes'] =$this->agencies_model->outcomes($year,$month,$to_year,$to_month,$type,$agency_id);
+
+		$this->load->view('eid_outcomes_view', $data);
+	}
+
+	function hei_validation($year=null,$month=null,$to_year=null,$to_month=null,$type=null,$agency_id=null)
+	{
+		$data['outcomes'] =$this->agencies_model->hei_validation($year,$month,$to_year,$to_month,$type,$agency_id);
+
+		$this->load->view('hei_validation_pie', $data);
+	}
+
+	function hei_follow($year=null,$month=null,$to_year=null,$to_month=null,$type=null,$agency_id=null)
+	{
+		$data['outcomes'] =$this->agencies_model->hei_follow($year,$month,$to_year,$to_month,$type,$agency_id);
+
+		$this->load->view('hei_view', $data);
+	}
+
+	function agegroup($year=null,$month=null,$to_year=null,$to_month=null,$type=null,$agency_id=null)
+	{
+		$data['outcomes'] =$this->agencies_model->age2($year,$month,$to_year,$to_month,$type,$agency_id);
+
+		$this->load->view('agegroup_view', $data);
+	}
 }
 
 ?>

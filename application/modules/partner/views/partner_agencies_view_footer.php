@@ -33,8 +33,16 @@
 				$("#second").show();
 
 				$("#partner_positivity").html("<center><div class='loader'></div></center>");
-				$("#partner_positivity").load("<?php echo base_url('charts/agencies/positivity');?>/"+null+"/"+null+"/"+null+"/"+null+"/"+1+"/"+em);
-
+				$("#eidOutcomes").html("<center><div class='loader'></div></center>");
+				$("#hei_outcomes").html("<center><div class='loader'></div></center>");
+				$("#hei_follow_up").html("<center><div class='loader'></div></center>");
+				$("#ageGroups").html("<center><div class='loader'></div></center>");
+				
+				$("#partner_positivity").load("<?= @base_url('charts/agencies/positivity');?>/"+null+"/"+null+"/"+null+"/"+null+"/"+1+"/"+em);
+				$("#eidOutcomes").load("<?= @base_url('charts/agencies/outcomes');?>/"+null+"/"+null+"/"+null+"/"+null+"/"+1+"/"+em);
+				$("#hei_outcomes").load("<?= @base_url('charts/agencies/hei_validation');?>/"+null+"/"+null+"/"+null+"/"+null+"/"+1+"/"+em);
+				$("#hei_follow_up").load("<?= @base_url('charts/agencies/hei_follow');?>/"+null+"/"+null+"/"+null+"/"+null+"/"+1+"/"+em);
+				$("#ageGroups").load("<?= @base_url('charts/agencies/agegroup');?>/"+null+"/"+null+"/"+null+"/"+null+"/"+1+"/"+em);
 			}
 		});
 
@@ -71,7 +79,16 @@
 						$("#second").show();
 
 						$("#partner_positivity").html("<center><div class='loader'></div></center>");
-						$("#partner_positivity").load("<?php echo base_url('charts/agencies/positivity');?>/"+from[1]+"/"+from[0]+"/"+to[1]+"/"+to[0]+"/"+1+"/"+agency);
+						$("#eidOutcomes").html("<center><div class='loader'></div></center>");
+						$("#hei_outcomes").html("<center><div class='loader'></div></center>");
+						$("#hei_follow_up").html("<center><div class='loader'></div></center>");
+						$("#ageGroups").html("<center><div class='loader'></div></center>");
+						
+						$("#partner_positivity").load("<?= @base_url('charts/agencies/positivity');?>/"+from[1]+"/"+from[0]+"/"+to[1]+"/"+to[0]+"/"+1+"/"+agency);
+						$("#eidOutcomes").load("<?= @base_url('charts/agencies/outcomes');?>/"+from[1]+"/"+from[0]+"/"+to[1]+"/"+to[0]+"/"+1+"/"+agency);
+						$("#hei_outcomes").load("<?= @base_url('charts/agencies/hei_validation');?>/"+from[1]+"/"+from[0]+"/"+to[1]+"/"+to[0]+"/"+1+"/"+agency);
+						$("#hei_follow_up").load("<?= @base_url('charts/agencies/hei_follow');?>/"+from[1]+"/"+from[0]+"/"+to[1]+"/"+to[0]+"/"+1+"/"+agency);
+						$("#ageGroups").load("<?= @base_url('charts/agencies/agegroup');?>/"+from[1]+"/"+from[0]+"/"+to[1]+"/"+to[0]+"/"+1+"/"+agency);
 					}
 		    	});
 		    }
@@ -113,7 +130,16 @@
 					$("#second").show();
 
 					$("#partner_positivity").html("<center><div class='loader'></div></center>");
+					$("#eidOutcomes").html("<center><div class='loader'></div></center>");
+					$("#hei_outcomes").html("<center><div class='loader'></div></center>");
+					$("#hei_follow_up").html("<center><div class='loader'></div></center>");
+					$("#ageGroups").html("<center><div class='loader'></div></center>");
+					
 					$("#partner_positivity").load("<?php echo base_url('charts/agencies/positivity');?>/"+year+"/"+month+"/"+null+"/"+null+"/"+1+"/"+agency);
+					$("#eidOutcomes").load("<?= @base_url('charts/agencies/outcomes');?>/"+year+"/"+month+"/"+null+"/"+null+"/"+1+"/"+agency);
+					$("#hei_outcomes").load("<?= @base_url('charts/agencies/hei_validation');?>/"+year+"/"+month+"/"+null+"/"+null+"/"+1+"/"+agency);
+					$("#hei_follow_up").load("<?= @base_url('charts/agencies/hei_follow');?>/"+year+"/"+month+"/"+null+"/"+null+"/"+1+"/"+agency);
+					$("#ageGroups").load("<?= @base_url('charts/agencies/agegroup');?>/"+year+"/"+month+"/"+null+"/"+null+"/"+1+"/"+agency);
 				}
 			});
 		});

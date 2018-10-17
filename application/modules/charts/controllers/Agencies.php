@@ -12,6 +12,17 @@ class Agencies extends MY_Controller
 		$this->load->model('agencies_model');
 	}
 
+	public function testing_trends($year=null,$type=null,$agency_id=null) {
+		$data['trends'] = $this->agencies_model->test_trends($year,$type,$agency_id);
+		$data['div_name'] = "funding_agency_yearly_summary";
+		$data['export'] = TRUE;
+		$link = $year . '/' . $agency_id;
+
+		$data['link'] = base_url('charts/agencies_model/download_testing_trends/' . $link);
+
+		$this->load->view('trends_outcomes_view', $data);
+	}
+
 	public function positivity($year=null,$month=null,$to_year=null,$to_month=null,$type=null,$agency_id=null) {
 		$data['trends'] = $this->agencies_model->positivity($year,$month,$to_year,$to_month,$type,$agency_id);
 		$data['div_name'] = "funding_agencies_positivity";

@@ -34,10 +34,17 @@
 <div class="row" id="second">
 	<div class="col-md-12 col-sm-12 col-xs-12">
 		<div class="panel panel-default">
-		  <div class="panel-heading">
-		  	Funding Agency Partner Positivity (Initial PCR) <div class="display_date"></div>
+		  <div class="panel-heading" style="min-height: 5em;">
+		  	<div class="col-sm-3">
+			    Testing Trends <div id="samples_heading">(Initial PCR)</div>
+			    <div class="display_range"></div>
+		    </div> 
+		    
+		    <div class="col-sm-3">
+		    	<input type="submit" class="btn btn-primary" id="switchButton" onclick="switch_source()" value="Click to Switch To 2nd/3rd PCR">
+		    </div>
 		  </div>
-		  <div class="panel-body" id="partner_positivity">
+		  <div class="panel-body" id="testing_trends">
 		    <center><div class="loader"></div></center>
 		  </div>
 		</div>
@@ -82,6 +89,18 @@
 		  	<div class="panel-body" id="ageGroups" style="height:560px;">
 		    	<center><div class="loader"></div></center>
 		  	</div>
+		</div>
+	</div>
+
+	
+	<div class="col-md-12 col-sm-12 col-xs-12">
+		<div class="panel panel-default">
+		  <div class="panel-heading">
+		  	Funding Agency Partner Positivity (Initial PCR) <div class="display_date"></div>
+		  </div>
+		  <div class="panel-body" id="partner_positivity">
+		    <center><div class="loader"></div></center>
+		  </div>
 		</div>
 	</div>
 </div>

@@ -11,6 +11,71 @@ class Agencies_model extends MY_Model
 		parent:: __construct();
 	}
 
+	function test_trends($year=null, $type=1, $agency_id=null)
+	{
+		if ($agency_id==null || $agency_id == 'null')
+			$agency_id = $this->session->userdata('funding_agency_filter');
+
+		if ($year==null || $year=='null') {
+			$to = $this->session->userdata('filter_year');
+		}else {
+			$to = $year;
+		}
+		$from = $to-1;
+		
+		$sql = "CALL `proc_get_eid_fundingagency_testing_trends`('".$agency_id."','".$from."','".$to."')";
+		$result = $this->db->query($sql)->result_array();
+		
+		$data['outcomes'][0]['name'] = "Positive";
+		$data['outcomes'][1]['name'] = "Negative";
+		$data['outcomes'][2]['name'] = "Positivity";
+
+		//$data['outcomes'][0]['color'] = '#52B3D9';
+		// $data['outcomes'][0]['color'] = '#E26A6A';
+		// $data['outcomes'][1]['color'] = '#257766';
+		$data['outcomes'][2]['color'] = '#913D88';
+
+		$data['outcomes'][0]['type'] = "column";
+		$data['outcomes'][1]['type'] = "column";
+		$data['outcomes'][2]['type'] = "spline";
+
+		$data['outcomes'][0]['yAxis'] = 1;
+		$data['outcomes'][1]['yAxis'] = 1;
+
+		$data['outcomes'][0]['tooltip'] = array("valueSuffix" => ' ');
+		$data['outcomes'][1]['tooltip'] = array("valueSuffix" => ' ');
+		$data['outcomes'][2]['tooltip'] = array("valueSuffix" => ' %');
+
+		$data['title'] = "";
+		
+		$data['categories'][0] = 'No Data';
+
+		foreach ($result as $key => $value) {
+			
+				$data['categories'][$key] = $this->resolve_month($value['month']).'-'.$value['year'];
+
+				if($type==1){
+					$data["outcomes"][0]["data"][$key]	= (int) $value['pos'];
+					$data["outcomes"][1]["data"][$key]	= (int) $value['neg'];
+					$data["outcomes"][2]["data"][$key]	= round(@( ((int) $value['pos']*100) /((int) $value['neg']+(int) $value['pos'])),1);
+				}
+
+				else if($type==2){
+					$data["outcomes"][0]["data"][$key]	= (int) $value['rpos'];
+					$data["outcomes"][1]["data"][$key]	= (int) $value['rneg'];
+					$data["outcomes"][2]["data"][$key]	= round(@( ((int) $value['rpos']*100) /((int) $value['rneg']+(int) $value['rpos'])),1);
+				}
+
+				else{
+					$data["outcomes"][0]["data"][$key]	= (int) $value['allpos'];
+					$data["outcomes"][1]["data"][$key]	= (int) $value['allneg'];
+					$data["outcomes"][2]["data"][$key]	= round(@( ((int) $value['allpos']*100) /((int) $value['allneg']+(int) $value['allpos'])),1);
+				}
+			
+		}
+		return $data;
+	}
+
 
 	function positivity($year=null,$month=null,$to_year=null,$to_month=null,$type=null,$agency_id) {
 		if ($year==null || $year=='null') 

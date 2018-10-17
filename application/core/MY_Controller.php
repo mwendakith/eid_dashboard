@@ -86,7 +86,8 @@ if(!defined("BASEPATH")) exit("No direct script access allowed!");
 								'filter_year',
 								'filter_month',
 								'age_filter',
-								'regimen_filter'
+								'regimen_filter',
+								'funding_agency_filter'
 								);
 			$this->session->unset_userdata($filter_data);
 		}
@@ -150,6 +151,7 @@ if(!defined("BASEPATH")) exit("No direct script access allowed!");
 					$this->session->set_userdata('partner_filter', null);
 					$this->session->unset_userdata('site_filter');
 					$this->session->unset_userdata('age_filter');
+					$this->session->unset_userdata('funding_agency_filter');
 				}
 			}
 			
@@ -171,6 +173,7 @@ if(!defined("BASEPATH")) exit("No direct script access allowed!");
 					$this->session->unset_userdata('site_filter');
 					$this->session->unset_userdata('age_filter');
 					$this->session->unset_userdata('regimen_filter');
+					$this->session->unset_userdata('funding_agency_filter');
 				}
 			}
 			
@@ -190,6 +193,7 @@ if(!defined("BASEPATH")) exit("No direct script access allowed!");
 					$this->session->unset_userdata('site_filter');
 					$this->session->unset_userdata('age_filter');
 					$this->session->unset_userdata('regimen_filter');
+					$this->session->unset_userdata('funding_agency_filter');
 				}else{
 					$this->session->set_userdata('partner_filter', $data['partner']);
 					$this->session->unset_userdata('sub_county_filter');
@@ -198,6 +202,7 @@ if(!defined("BASEPATH")) exit("No direct script access allowed!");
 					$this->session->unset_userdata('site_filter');
 					$this->session->unset_userdata('age_filter');
 					$this->session->unset_userdata('regimen_filter');
+					$this->session->unset_userdata('funding_agency_filter');
 				}
 			}
 			
@@ -218,6 +223,7 @@ if(!defined("BASEPATH")) exit("No direct script access allowed!");
 					$this->session->unset_userdata('sub_county_filter');
 					$this->session->unset_userdata('age_filter');
 					$this->session->unset_userdata('regimen_filter');
+					$this->session->unset_userdata('funding_agency_filter');
 				}else{
 					$this->session->set_userdata('site_filter', $data['site']);
 					$this->session->set_userdata('partner_filter', null);
@@ -226,6 +232,7 @@ if(!defined("BASEPATH")) exit("No direct script access allowed!");
 					$this->session->unset_userdata('sub_county_filter');
 					$this->session->unset_userdata('age_filter');
 					$this->session->unset_userdata('regimen_filter');
+					$this->session->unset_userdata('funding_agency_filter');
 				}
 			}
 			// print_r($this->session->all_userdata());die();
@@ -245,6 +252,7 @@ if(!defined("BASEPATH")) exit("No direct script access allowed!");
 					$this->session->unset_userdata('county_filter');
 					$this->session->unset_userdata('sub_county_filter');
 					$this->session->unset_userdata('regimen_filter');
+					$this->session->unset_userdata('funding_agency_filter');
 				} else {
 					$this->session->set_userdata('age_filter', $data['age']);
 					$this->session->unset_userdata('site_filter');
@@ -253,6 +261,7 @@ if(!defined("BASEPATH")) exit("No direct script access allowed!");
 					$this->session->unset_userdata('county_filter');
 					$this->session->unset_userdata('sub_county_filter');
 					$this->session->unset_userdata('regimen_filter');
+					$this->session->unset_userdata('funding_agency_filter');
 				}
 				
 			}
@@ -273,6 +282,7 @@ if(!defined("BASEPATH")) exit("No direct script access allowed!");
 					$this->session->unset_userdata('filter_month');
 					$this->session->unset_userdata('county_filter');
 					$this->session->unset_userdata('sub_county_filter');
+					$this->session->unset_userdata('funding_agency_filter');
 				} else {
 					$this->session->set_userdata('regimen_filter', $data['regimen']);
 					$this->session->unset_userdata('age_filter');
@@ -281,6 +291,7 @@ if(!defined("BASEPATH")) exit("No direct script access allowed!");
 					$this->session->unset_userdata('filter_month');
 					$this->session->unset_userdata('county_filter');
 					$this->session->unset_userdata('sub_county_filter');
+					$this->session->unset_userdata('funding_agency_filter');
 				}
 				
 			}

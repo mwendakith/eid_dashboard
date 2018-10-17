@@ -29,13 +29,23 @@
     <form action="<?php echo base_url();?>template/filter_partner_data" method="post" id="filter_form">
       <div class="row">
         <div class="col-md-12">
-          <select class="btn js-example-basic-single" style="width:220px;background-color: #C5EFF7;" name="partner">
-            <option value="0" disabled="true" selected="true">Select Partner:</option>
-            <option value="NA">All Partners</option>
-            <!-- <optgroup value="Counties"> -->
-            <?php echo $partner; ?>
-            <!-- </optgroup> -->
-          </select>
+          <?php if(isset($agencies_flag)) { ?>
+            <select class="btn js-example-basic-single" style="width:220px;background-color: #C5EFF7;" id="agency" name="agency">
+              <option disabled="true" selected="true">Select Funding Agency:</option>
+              <option value="NA">All Funding Agencies</option>
+              <!-- <optgroup value="Counties"> -->
+              <?php echo $agencies; ?>
+              <!-- </optgroup> -->
+            </select>
+          <?php } else { ?>
+            <select class="btn js-example-basic-single" style="width:220px;background-color: #C5EFF7;" name="partner">
+              <option value="0" disabled="true" selected="true">Select Partner:</option>
+              <option value="NA">All Partners</option>
+              <!-- <optgroup value="Counties"> -->
+              <?php echo $partner; ?>
+              <!-- </optgroup> -->
+            </select>
+          <?php } ?>
         </div>
       </div>
     </form>
@@ -110,13 +120,16 @@
     var url = $(location).attr('href');
     // Getting the file name i.e last segment of URL (i.e. example.html)
     var fn = url.split('/').indexOf("partner");
-    
-    if (fn > -1) {
-      var trends = url.split('/').indexOf("trends");
-      if (trends > -1) {
-        $('#year-month-filter').hide();
-          $('#date-range-filter').hide();
+    <?php if(isset($agencies)) { ?>
+        $("#breadcrum").html("<strong>All Funding Agencies</strong>");
+    <?php } else { ?>
+      if (fn > -1) {
+        var trends = url.split('/').indexOf("trends");
+        if (trends > -1) {
+          $('#year-month-filter').hide();
+            $('#date-range-filter').hide();
+        }
       }
-    }
+    <?php } ?>
   });
 </script>

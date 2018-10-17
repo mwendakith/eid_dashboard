@@ -30,13 +30,15 @@ class Agencies_model extends MY_Model
 		if ($to_year==null || $to_year=='null') 
 			$to_year = 0;
 
-		if ($type==null || $type == 'null')
-			$type = 0;
-
 		if ($agency_id==null || $agency_id == 'null')
 			$agency_id = $this->session->userdata('funding_agency_filter');
 
-		$sql = "CALL `proc_get_eid_agencies_outcomes`('".$year."','".$month."','".$to_year."','".$to_month."')";
+		if ($type==null || $type == 'null'){
+			$type = 0;
+			$agency_id = 0;
+		}
+
+		$sql = "CALL `proc_get_eid_agencies_outcomes`('".$year."','".$month."','".$to_year."','".$to_month."','".$type."','".$agency_id."')";
 
 		$result = $this->db->query($sql)->result_array();
 

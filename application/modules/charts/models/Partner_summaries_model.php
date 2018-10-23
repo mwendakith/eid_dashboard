@@ -140,7 +140,7 @@ class Partner_summaries_model extends MY_Model
 			if (null !== $this->session->userdata('site_filter')) $id = $this->session->userdata('site_filter');
 		}
 
-		$sql = "CALL `proc_get_eid_tests_analysis`('".$year."','".$month."','".$to_year."','".$to_month."','".$type."')";
+		$sql = "CALL `proc_get_eid_tests_analysis`('".$year."','".$month."','".$to_year."','".$to_month."','".$type."','0')";
 		
 		$result = $this->db->query($sql)->result();
 		$count = 1;

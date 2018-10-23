@@ -1,7 +1,7 @@
 DROP PROCEDURE IF EXISTS `proc_get_eid_tests_analysis`;
 DELIMITER //
 CREATE PROCEDURE `proc_get_eid_tests_analysis`
-(IN filter_year INT(11), IN from_month INT(11), IN to_year INT(11), IN to_month INT(11), IN type INT(11))
+(IN filter_year INT(11), IN from_month INT(11), IN to_year INT(11), IN to_month INT(11), IN type INT(11), IN ID INT(11))
 BEGIN
   SET @QUERY =    "SELECT
         `join`.`name`,
@@ -55,7 +55,21 @@ BEGIN
             SET @QUERY = CONCAT(@QUERY, " FROM `site_summary_yearly` `main` JOIN `facilitys` `join` ON `join`.`ID` = `main`.`facility` WHERE 1 ");
         END IF;
     END IF;
-
+    IF (type = 4) THEN
+        IF (ID = 0) THEN
+            IF (from_month != 0 && from_month != '') THEN
+              SET @QUERY = CONCAT(@QUERY, " FROM `ip_summary` `main` JOIN `partners` `trans` ON `trans`.`ID` = `main`.`partner` JOIN `funding_agencies` `join` ON `join`.`ID` = `trans`.`funding_agency_id` WHERE 1 ");
+            ELSE
+                SET @QUERY = CONCAT(@QUERY, " FROM `ip_summary_yearly` `main` JOIN `partners` `trans` ON `trans`.`ID` = `main`.`partner` JOIN `funding_agencies` `join` ON `join`.`ID` = `trans`.`funding_agency_id` WHERE 1 ");
+            END IF;
+        ELSE
+            IF (from_month != 0 && from_month != '') THEN
+              SET @QUERY = CONCAT(@QUERY, " FROM `ip_summary` `main` JOIN `partners` `join` ON `join`.`ID` = `main`.`partner` WHERE `join`.`funding_agency_id` = '",ID,"' ");
+            ELSE
+                SET @QUERY = CONCAT(@QUERY, " FROM `ip_summary_yearly` `main` JOIN `partners` `join` ON `join`.`ID` = `main`.`partner` WHERE `join`.`funding_agency_id` = '",ID,"' ");
+            END IF;
+        END IF;
+    END IF;
 
     IF (from_month != 0 && from_month != '') THEN
       IF (to_month != 0 && to_month != '' && filter_year = to_year) THEN

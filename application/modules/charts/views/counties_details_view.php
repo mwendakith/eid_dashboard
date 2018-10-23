@@ -1,4 +1,4 @@
-<table id="example" cellspacing="1" cellpadding="3" class="tablehead table table-striped table-bordered" style="background:#CCC;">
+<table id="<?= (isset($div_name)) ? @$div_name : @'example'; ?>" cellspacing="1" cellpadding="3" class="tablehead table table-striped table-bordered" style="background:#CCC;">
 	<thead>
 		<?php if(isset($th)) { 
 			echo $th; 
@@ -50,7 +50,7 @@
   	
   	// $('#example').DataTable();
 
-  	$('#example').DataTable({
+  	$("#<?= (isset($div_name)) ? @$div_name : @'example'; ?>").DataTable({
       dom: '<"btn btn-primary"B>lTfgtip',
       responsive: false,
         buttons : [

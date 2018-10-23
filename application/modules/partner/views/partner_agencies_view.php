@@ -19,6 +19,16 @@
 		  </div>
 		</div>
 	</div>
+	<div class="col-md-12 col-sm-12 col-xs-12">
+		<div class="panel panel-default">
+		  <div class="panel-heading">
+		  	Funding Agencies Testing Analysis <div class="display_date"></div>
+		  </div>
+		  <div class="panel-body" id="test_analysis">
+		    <center><div class="loader"></div></center>
+		  </div>
+		</div>
+	</div>
 
 	<!-- <div class="col-md-12 col-sm-12 col-xs-12">
 		<div class="panel panel-default">
@@ -91,7 +101,6 @@
 		  	</div>
 		</div>
 	</div>
-
 	
 	<div class="col-md-12 col-sm-12 col-xs-12">
 		<div class="panel panel-default">
@@ -99,6 +108,17 @@
 		  	Funding Agency Partner Positivity (Initial PCR) <div class="display_date"></div>
 		  </div>
 		  <div class="panel-body" id="partner_positivity">
+		    <center><div class="loader"></div></center>
+		  </div>
+		</div>
+	</div>
+
+	<div class="col-md-12 col-sm-12 col-xs-12">
+		<div class="panel panel-default">
+		  <div class="panel-heading">
+		  	Funding Agencies Partner Testing Analysis <div class="display_date"></div>
+		  </div>
+		  <div class="panel-body" id="partner_test_analysis">
 		    <center><div class="loader"></div></center>
 		  </div>
 		</div>

@@ -23,6 +23,28 @@ class Agencies extends MY_Controller
 		$this->load->view('trends_outcomes_view', $data);
 	}
 
+	function tests_analysis($year=NULL,$month=NULL,$to_year=NULL,$to_month=NULL,$type=0,$agency_id=null)
+	{
+		if ($type == 0 || $type == '0'){ $title = 'Agencies'; $type = 4; $data['div_name'] = 'funding_agencies'; }
+		if ($type == 1 || $type == '1'){ $title = 'Partners'; $type = 4; $data['div_name'] = 'partner_funding_agencies'; }
+		if ($type == 2 || $type == '2'){ $title = 'Sub-countys'; }
+		if ($type == 3 || $type == '3'){ $title = 'Facilitys'; }
+		$data['th']	= '<tr class="colhead">
+							<th>#</th>
+							<th>'.$title.'</th>
+							<th>Total Tests</th>
+							<th>Initial PCR</th>
+							<th>&lt;=2M</th>
+							<th>&lt;=2M(% of Initial PCR)</th>
+							<th>2nd/3rd PCR</th>
+							<th>% 2nd/3rd PCR</th>
+							<th>Confirmatory PCR</th>
+							<th>% Confirmatory PCR</th>
+						</tr>';
+		$data['outcomes'] = $this->agencies_model->tests_analysis($year,$month,$to_year,$to_month,$type,$agency_id);
+		$this->load->view('counties_details_view',$data);
+	}
+
 	public function positivity($year=null,$month=null,$to_year=null,$to_month=null,$type=null,$agency_id=null) {
 		$data['trends'] = $this->agencies_model->positivity($year,$month,$to_year,$to_month,$type,$agency_id);
 		$data['div_name'] = "funding_agencies_positivity";

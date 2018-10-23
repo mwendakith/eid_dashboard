@@ -76,6 +76,50 @@ class Agencies_model extends MY_Model
 		return $data;
 	}
 
+	function tests_analysis($year=null,$month=null,$to_year=null,$to_month=null,$type=null,$agency_id=null)
+	{
+		if ($year==null || $year=='null') $year = $this->session->userdata('filter_year');
+		if ($month==null || $month=='null') {
+			if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
+				$month = 0;
+			}else {
+				$month = $this->session->userdata('filter_month');
+			}
+		}
+
+		$agency_id = 0;
+		
+		if ($to_month==null || $to_month=='null') $to_month = 0;
+		if ($to_year==null || $to_year=='null') $to_year = 0;
+		if ($type==null || $type=='null') $type = 4;
+		if ($type == 4 || $type == '4') {
+			if (null !== $this->session->userdata('funding_agency_filter')) $agency_id = $this->session->userdata('funding_agency_filter');
+		}
+
+		$sql = "CALL `proc_get_eid_tests_analysis`('".$year."','".$month."','".$to_year."','".$to_month."','".$type."','".$agency_id."')";
+		
+		$result = $this->db->query($sql)->result();
+		$count = 1;
+		$table = '';
+		foreach ($result as $key => $value) {
+			$tests = (int) ($value->firstdna+$value->confirmdna+$value->repeatspos);
+			$table .= '<tr>';
+			$table .= '<td>'.$count.'</td>';
+			$table .= '<td>'.$value->name.'</td>';
+			$table .= '<td>'.number_format($tests).'</td>';
+			$table .= '<td>'.number_format($value->firstdna).'</td>';
+			$table .= '<td>'.number_format($value->infantsless2m).'</td>';
+			$table .= '<td><center>'.round(@($value->infantsless2m/$value->firstdna)*100, 1).'%</center></td>';
+			$table .= '<td>'.number_format($value->repeatspos).'</td>';
+			$table .= '<td><center>'.round(@($value->repeatspos/$tests)*100, 1).'%</center></td>';
+			$table .= '<td>'.number_format($value->confirmdna).'</td>';
+			$table .= '<td><center>'.round(@($value->confirmdna/$tests)*100, 1).'%</center></td>';
+			$table .= '</tr>';
+			$count++;
+		}
+		return $table;
+	}
+
 
 	function positivity($year=null,$month=null,$to_year=null,$to_month=null,$type=null,$agency_id) {
 		if ($year==null || $year=='null') 

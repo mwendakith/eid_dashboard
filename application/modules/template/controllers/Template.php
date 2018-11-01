@@ -243,7 +243,7 @@ class Template extends MY_Controller
 			
 		} else if($type) {
 			if ($type == 5 || $type == '5') {
-				if ($data == null || $data == 'null') {
+				if ($data == null || $data == 'null' || $data == 'NA') {
 					echo "<a href='javascript:void(0)' class='alert-link'><strong>All Funding Agencies</strong></a>";
 				} else {
 					$agency = $this->template_model->get_funding_agency($data);

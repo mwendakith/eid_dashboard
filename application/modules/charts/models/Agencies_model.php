@@ -103,8 +103,8 @@ class Agencies_model extends MY_Model
 		$data['outcomes'][1]['name'] = "> 2M Tests (of Initial PCR)";
 		$data['outcomes'][2]['name'] = "<= 2M Tests (% of Initial PCR)";
 
-		//$data['outcomes'][0]['color'] = '#52B3D9';
-		// $data['outcomes'][0]['color'] = '#E26A6A';
+		$data['outcomes'][0]['color'] = '#1BA39C';
+		$data['outcomes'][1]['color'] = '#F2784B';
 		// $data['outcomes'][1]['color'] = '#257766';
 		$data['outcomes'][2]['color'] = '#913D88';
 
@@ -130,7 +130,7 @@ class Agencies_model extends MY_Model
 			$data["outcomes"][1]["data"][$key]	= (int) $above2m;
 			$data["outcomes"][2]["data"][$key]	= round(@( ((int) $value->infantsless2m*100) /((int) $value->firstdna)),1);
 		}
-		
+
 		return $data;
 	}
 

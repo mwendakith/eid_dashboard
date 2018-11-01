@@ -51,6 +51,7 @@
 				$("#ageGroups").load("<?= @base_url('charts/agencies/agegroup');?>/"+null+"/"+null+"/"+null+"/"+null+"/"+1+"/"+em);
 				$("#partner_positivity").load("<?= @base_url('charts/agencies/positivity');?>/"+null+"/"+null+"/"+null+"/"+null+"/"+1+"/"+em);
 				$("#partner_test_analysis").load("<?= @base_url('charts/agencies/tests_analysis');?>/"+null+"/"+null+"/"+null+"/"+null+"/"+1+"/"+em);
+				$("#partner_test_analysis_trends").load("<?= @base_url('charts/agencies/test_trends_analysis');?>/"+null+"/"+null+"/"+null+"/"+null+"/"+null+"/"+em);
 			}
 		});
 
@@ -105,6 +106,7 @@
 						$("#ageGroups").load("<?= @base_url('charts/agencies/agegroup');?>/"+from[1]+"/"+from[0]+"/"+to[1]+"/"+to[0]+"/"+1+"/"+agency);
 						$("#partner_positivity").load("<?= @base_url('charts/agencies/positivity');?>/"+from[1]+"/"+from[0]+"/"+to[1]+"/"+to[0]+"/"+1+"/"+agency);
 						$("#partner_test_analysis").load("<?= @base_url('charts/agencies/tests_analysis');?>/"+from[1]+"/"+from[0]+"/"+to[1]+"/"+to[0]+"/"+1+"/"+agency);
+						$("#partner_test_analysis_trends").load("<?= @base_url('charts/agencies/test_trends_analysis');?>/"+from[1]+"/"+from[0]+"/"+to[1]+"/"+to[0]+"/"+null+"/"+agency);
 					}
 		    	});
 		    }
@@ -164,6 +166,7 @@
 					$("#ageGroups").load("<?= @base_url('charts/agencies/agegroup');?>/"+year+"/"+month+"/"+null+"/"+null+"/"+1+"/"+agency);
 					$("#partner_positivity").load("<?= @base_url('charts/agencies/positivity');?>/"+year+"/"+month+"/"+null+"/"+null+"/"+1+"/"+agency);
 					$("#partner_test_analysis").load("<?= @base_url('charts/agencies/tests_analysis');?>/"+year+"/"+month+"/"+null+"/"+null+"/"+1+"/"+agency);
+					$("#partner_test_analysis_trends").load("<?= @base_url('charts/agencies/test_trends_analysis');?>/"+year+"/"+month+"/"+null+"/"+null+"/"+null+"/"+agency);
 				}
 			});
 		});

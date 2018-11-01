@@ -76,6 +76,64 @@ class Agencies_model extends MY_Model
 		return $data;
 	}
 
+	function test_analysis_trends($year=null,$month=null,$to_year=null,$to_month=null,$type=null,$agency_id=null) {
+		if ($year==null || $year=='null') $year = $this->session->userdata('filter_year');
+		if ($month==null || $month=='null') {
+			if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
+				$month = 0;
+			}else {
+				$month = $this->session->userdata('filter_month');
+			}
+		}
+
+		$agency_id = 0;
+		
+		if ($to_month==null || $to_month=='null') $to_month = 0;
+		if ($to_year==null || $to_year=='null') $to_year = 0;
+		if ($type==null || $type=='null') $type = 4;
+		if ($type == 4 || $type == '4') {
+			if (null !== $this->session->userdata('funding_agency_filter')) $agency_id = $this->session->userdata('funding_agency_filter');
+		}
+
+		$sql = "CALL `proc_get_eid_tests_analysis`('".$year."','".$month."','".$to_year."','".$to_month."','".$type."','".$agency_id."')";
+
+		$result = $this->db->query($sql)->result();
+		
+		$data['outcomes'][0]['name'] = "<= 2M Tests (of Initial PCR)";
+		$data['outcomes'][1]['name'] = "> 2M Tests (of Initial PCR)";
+		$data['outcomes'][2]['name'] = "<= 2M Tests (% of Initial PCR)";
+
+		//$data['outcomes'][0]['color'] = '#52B3D9';
+		// $data['outcomes'][0]['color'] = '#E26A6A';
+		// $data['outcomes'][1]['color'] = '#257766';
+		$data['outcomes'][2]['color'] = '#913D88';
+
+		$data['outcomes'][0]['type'] = "column";
+		$data['outcomes'][1]['type'] = "column";
+		$data['outcomes'][2]['type'] = "spline";
+
+		$data['outcomes'][0]['yAxis'] = 1;
+		$data['outcomes'][1]['yAxis'] = 1;
+
+		$data['outcomes'][0]['tooltip'] = array("valueSuffix" => ' ');
+		$data['outcomes'][1]['tooltip'] = array("valueSuffix" => ' ');
+		$data['outcomes'][2]['tooltip'] = array("valueSuffix" => ' %');
+
+		$data['title'] = "";
+		
+		$data['categories'][0] = 'No Data';
+
+		foreach ($result as $key => $value) {
+			$above2m = $value->firstdna - $value->infantsless2m;
+			$data['categories'][$key] = $value->name;
+			$data["outcomes"][0]["data"][$key]	= (int) $value->infantsless2m;
+			$data["outcomes"][1]["data"][$key]	= (int) $above2m;
+			$data["outcomes"][2]["data"][$key]	= round(@( ((int) $value->infantsless2m*100) /((int) $value->firstdna)),1);
+		}
+		
+		return $data;
+	}
+
 	function tests_analysis($year=null,$month=null,$to_year=null,$to_month=null,$type=null,$agency_id=null)
 	{
 		if ($year==null || $year=='null') $year = $this->session->userdata('filter_year');

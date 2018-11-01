@@ -18,6 +18,9 @@
 		$("select").change(function(){
 			em = $(this).val();
 			var all = localStorage.getItem("my_var");
+        	$.get("<?php echo base_url();?>template/breadcrum/"+em+"/"+null+"/"+null+"/"+null+"/"+null+"/"+null+"/"+5, function(data){
+        		$("#breadcrum").html(data);
+        	});
 			
 			// Send the data using post
 			var posting = $.post( "<?php echo base_url();?>template/filter_funding_agency_data", { agency: em } );

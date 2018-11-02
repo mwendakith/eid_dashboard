@@ -27,78 +27,45 @@ $software = $order->DeviceSoftware;
 $devicemode = $order->DeviceMode;
 $status = $order->Status;
 
-
-
-	
 //echo    json_encode('vl').$testtype;
-$vldb = mysql_connect("10.230.50.11:3307", "root", "FnP5FjbnMrzXCm."); 
-mysql_select_db('nodedata', $vldb);
+$vldb = mysqli_connect("10.230.50.11:3307", "root", "FnP5FjbnMrzXCm.", "nodedata");
 
+if ($patientid !='' &&  $rundate !='' && $serialno !='') {
+	function Checkifrecordexists($runid,$patientid,$rundate,$vldb) {
+		$strQuery=mysqli_query($vldb, "SELECT ResultNo,RunDate,SampleID FROM alereqtests WHERE ResultNo='$runid' and RunDate='$rundate' and SampleID='$patientid' ")or die(mysqli_error($vldb));
+		$numrows=mysqli_num_rows($strQuery);
+		return $numrows; 
+	}
 
+	$runby=mysqli_real_escape_string($vldb, $runby);
+	$facility=addslashes($facility);
+	$facility=mysqli_real_escape_string($vldb, $facility);
 
+	if ($rundate != "") {
+		$rundate=date("Y-m-d",strtotime($rundate));
+	} else {
+		$rundate="";
+	}
 
-
-if   ( $patientid !='' &&  $rundate !='' && $serialno !=''   )
-		{
-			
-function Checkifrecordexists($runid,$patientid,$rundate,$vldb)
-{
-$strQuery=mysql_query("SELECT ResultNo,RunDate,SampleID FROM alereqtests WHERE ResultNo='$runid' and RunDate='$rundate' and SampleID='$patientid' ",$vldb)or die(mysql_error());
-$numrows=mysql_num_rows($strQuery);
-return $numrows; 
-}
-			
-			
-			$runby=mysql_real_escape_string($runby);
-			$facility=addslashes($facility);
-			$facility=mysql_real_escape_string($facility);
-			
-			if ($rundate != "")
-			{
-	 			$rundate=date("Y-m-d",strtotime($rundate));
-			}
-			else
-			{
-				$rundate="";
-			}
-			$today=date("Y-m-d");				
-				$labelexists=Checkifrecordexists($runid,$patientid,$rundate,$vldb);
-				if ($labelexists > 0 )
-				{
-			
-						echo  'Sample ID '.$patientid .' Run On '.$rundate.' already exists in database.';
-								
-				}
-				else
-				{
-			     		
-	$query = "INSERT INTO alereqtests(ResultNo,Instrumentserialno,TestName,CartridgeID,SampleID,HIV1MN,HIV1O,HIV2,ErrorCode,Operator,RunDate,SampleDetection,Device	,HIV1PositiveControl,HIV2PositiveControl,NegativeControl,Analysis,DeviceSoftware,DeviceMode,Status,dateuploaded)
+	$today=date("Y-m-d");				
+	$labelexists=Checkifrecordexists($runid,$patientid,$rundate,$vldb);
+	if ($labelexists > 0 ) {
+		echo  'Sample ID '.$patientid .' Run On '.$rundate.' already exists in database.';
+	} else {
+		$query = "INSERT INTO alereqtests(ResultNo,Instrumentserialno,TestName,CartridgeID,SampleID,HIV1MN,HIV1O,HIV2,ErrorCode,Operator,RunDate,SampleDetection,Device	,HIV1PositiveControl,HIV2PositiveControl,NegativeControl,Analysis,DeviceSoftware,DeviceMode,Status,dateuploaded)
 		VALUES ('$runid','$serialno','$assay','$catridgeid','$patientid','$result','$result2','$result3','$errorcode','$runby','$rundate','$sampledetection','$device','$hiv1control','$hiv2control','$negcontrol','$analysis','$software','$devicemode','$status','$today')";
-			$import = mysql_query($query,$vldb) or die(mysql_error());	
-			
-				if ($import)
-				{// If the sample was saved return the sample data
-					echo json_encode($import);
-					$count=$count+1;
-				}
-				else
-				{//Else return an error message
-					echo json_encode('an error occured, could not save');
-				}	
-			
-				}//end if record exists
-			  
-			
-        
-		  
-		  }
-		 else
-		  
-		 {
-		 echo    json_encode('Error, ALL Key Varibales{ e.g. Run ID, Patient ID, Run Date} Variables Must be Provided');
-		 
-	//	
-		  }
+		$import = mysqli_query($vldb, $query) or die(mysqli_error($vldb));	
+
+		if ($import) {// If the sample was saved return the sample data
+			echo json_encode($import);
+			$count=$count+1;
+		} else {//Else return an error message
+			echo json_encode('an error occured, could not save');
+		}	
+	}//end if record exists
+} else {
+	echo json_encode('Error, ALL Key Varibales{ e.g. Run ID, Patient ID, Run Date} Variables Must be Provided');
+}
 		  
 		  
 

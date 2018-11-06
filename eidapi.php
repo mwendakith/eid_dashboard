@@ -7,14 +7,10 @@ $patient  = $_GET['samplecode'];
 $mflcode  = $_GET['mflcode'];
 $apikey=$_GET['apikey'];
 
-if ($apikey !='uT!7x5e3aw')
-{
-echo '<h1>401 Unauthorized</h1>';
- //header("HTTP/1.1 401 Unauthorized");
-
-}
-else
-{
+if ($apikey !='uT!7x5e3aw') {
+	echo '<h1>401 Unauthorized</h1>';
+	//header("HTTP/1.1 401 Unauthorized");
+} else {
 	
 $table='samples';	
 	

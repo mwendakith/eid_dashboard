@@ -51,7 +51,7 @@ class Agencies_model extends MY_Model
 		$data['categories'][0] = 'No Data';
 
 		foreach ($result as $key => $value) {
-			
+			if (!((int) $value['pos'] == 0 && (int) $value['neg'] == 0)){
 				$data['categories'][$key] = $this->resolve_month($value['month']).'-'.$value['year'];
 
 				if($type==1){
@@ -71,7 +71,7 @@ class Agencies_model extends MY_Model
 					$data["outcomes"][1]["data"][$key]	= (int) $value['allneg'];
 					$data["outcomes"][2]["data"][$key]	= round(@( ((int) $value['allpos']*100) /((int) $value['allneg']+(int) $value['allpos'])),1);
 				}
-			
+			}
 		}
 		return $data;
 	}
@@ -124,13 +124,14 @@ class Agencies_model extends MY_Model
 		$data['categories'][0] = 'No Data';
 
 		foreach ($result as $key => $value) {
-			$above2m = $value->firstdna - $value->infantsless2m;
-			$data['categories'][$key] = $value->name;
-			$data["outcomes"][0]["data"][$key]	= (int) $value->infantsless2m;
-			$data["outcomes"][1]["data"][$key]	= (int) $above2m;
-			$data["outcomes"][2]["data"][$key]	= round(@( ((int) $value->infantsless2m*100) /((int) $value->firstdna)),1);
+			if (!((int) $value->infantsless2m == 0 && (int) $value->firstdna == 0)){
+				$above2m = $value->firstdna - $value->infantsless2m;
+				$data['categories'][$key] = $value->name;
+				$data["outcomes"][0]["data"][$key]	= (int) $value->infantsless2m;
+				$data["outcomes"][1]["data"][$key]	= (int) $above2m;
+				$data["outcomes"][2]["data"][$key]	= round(@( ((int) $value->infantsless2m*100) /((int) $value->firstdna)),1);
+			}
 		}
-
 		return $data;
 	}
 
@@ -160,20 +161,22 @@ class Agencies_model extends MY_Model
 		$count = 1;
 		$table = '';
 		foreach ($result as $key => $value) {
-			$tests = (int) ($value->firstdna+$value->confirmdna+$value->repeatspos);
-			$table .= '<tr>';
-			$table .= '<td>'.$count.'</td>';
-			$table .= '<td>'.$value->name.'</td>';
-			$table .= '<td>'.number_format($tests).'</td>';
-			$table .= '<td>'.number_format($value->firstdna).'</td>';
-			$table .= '<td>'.number_format($value->infantsless2m).'</td>';
-			$table .= '<td><center>'.round(@($value->infantsless2m/$value->firstdna)*100, 1).'%</center></td>';
-			$table .= '<td>'.number_format($value->repeatspos).'</td>';
-			$table .= '<td><center>'.round(@($value->repeatspos/$tests)*100, 1).'%</center></td>';
-			$table .= '<td>'.number_format($value->confirmdna).'</td>';
-			$table .= '<td><center>'.round(@($value->confirmdna/$tests)*100, 1).'%</center></td>';
-			$table .= '</tr>';
-			$count++;
+			if (!((int) $value->infantsless2m == 0 && (int) $value->firstdna == 0)){
+				$tests = (int) ($value->firstdna+$value->confirmdna+$value->repeatspos);
+				$table .= '<tr>';
+				$table .= '<td>'.$count.'</td>';
+				$table .= '<td>'.$value->name.'</td>';
+				$table .= '<td>'.number_format($tests).'</td>';
+				$table .= '<td>'.number_format($value->firstdna).'</td>';
+				$table .= '<td>'.number_format($value->infantsless2m).'</td>';
+				$table .= '<td><center>'.round(@($value->infantsless2m/$value->firstdna)*100, 1).'%</center></td>';
+				$table .= '<td>'.number_format($value->repeatspos).'</td>';
+				$table .= '<td><center>'.round(@($value->repeatspos/$tests)*100, 1).'%</center></td>';
+				$table .= '<td>'.number_format($value->confirmdna).'</td>';
+				$table .= '<td><center>'.round(@($value->confirmdna/$tests)*100, 1).'%</center></td>';
+				$table .= '</tr>';
+				$count++;
+			}
 		}
 		return $table;
 	}
@@ -233,12 +236,12 @@ class Agencies_model extends MY_Model
 		$data["outcomes"][2]["data"][0]	= 0;
 
 		foreach ($result as $key => $value) {
-			
+			if (!((int) $value['positive'] == 0 && (int) $value['negative'] == 0)){
 				$data['categories'][$key] = $value['agency'];
 				$data["outcomes"][0]["data"][$key]	= (int) $value['positive'];
 				$data["outcomes"][1]["data"][$key]	= (int) $value['negative'];
 				$data["outcomes"][2]["data"][$key]	= round(@( ((int) $value['positive']*100) /((int) $value['positive']+(int) $value['negative'])),1);
-			
+			}
 		}
 		return $data;
 	}

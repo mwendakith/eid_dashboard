@@ -263,16 +263,17 @@ class Partner_model extends MY_Model
 		}
 		
 		$result = $this->db->query($sql)->result_array();
-		
+		// echo "<pre>";print_r($result);die();
 		$year;
 		$prev_year = date('Y') - 1;
 		$cur_month = date('m');
-
+		
 		$b = true;
 		$limit = 0;
 		$quarter = 1;
 
 		$extra = ceil($cur_month / 3);
+		
 		$i = 8;
 
 		if($extra == 4){
@@ -301,7 +302,7 @@ class Partner_model extends MY_Model
 
 		$data['title'] = "Outcomes (Initial PCR)";
 
-		$data['categories'] = array_fill(0, $columns, "Null");
+		$data['categories'] = array_fill(0, $columns, "No Data");
 		$data['outcomes'][0]['data'] = array_fill(0, $columns, 0);
 		$data['outcomes'][1]['data'] = array_fill(0, $columns, 0);
 		$data['outcomes'][2]['data'] = array_fill(0, $columns, 0);
@@ -659,7 +660,151 @@ class Partner_model extends MY_Model
 		return $data;
 	}
 
+	function some_quarters($partner=NULL){
 
+		if($partner == NULL || $partner == 'NA'){
+			$partner = NULL;
+		}
+
+		if ($partner) {
+			$sql = "CALL `proc_get_eid_partner_performance`(" . $partner . ");";
+		} else {
+			$sql = "CALL `proc_get_eid_national_yearly_tests`();";
+		}
+		$year = null;
+		$quarter = null;
+		$count = 0;
+		$newdata[] = ['year'=>null, 
+					'quarter'=>null, 'tests'=>0, 'positive'=>0, 'negative'=>0, 'allpositive'=>0, 
+					'allnegative'=>0, 'rpos'=>0, 'rneg'=>0, 'rejected'=>0, 'infants'=>0, 'infantspos'=>0, 
+					'redraw'=>0, 'tat4' => 0];
+		$result = $this->db->query($sql)->result();
+
+		foreach ($result as $key => $value) {
+			if ($year == null || $year != $value->year) {
+				$year = $value->year;
+			}
+
+			if ($quarter != null && $quarter != $this->getQuarter($value->month))
+				$count++;
+
+			$quarter = $this->getQuarter($value->month);
+			$newdata[$count]['year'] = $year;
+			$newdata[$count]['quarter'] = $quarter;
+			$newdata[$count]['tests'] += $value->tests;
+			$newdata[$count]['positive'] += $value->positive;
+			$newdata[$count]['negative'] += $value->negative;
+			$newdata[$count]['allpositive'] += $value->allpositive;
+			$newdata[$count]['allnegative'] += $value->allnegative;
+			$newdata[$count]['rpos'] += $value->rpos;
+			$newdata[$count]['rneg'] += $value->rneg;
+			$newdata[$count]['rejected'] += $value->rejected;
+			$newdata[$count]['infants'] += $value->infants;
+			$newdata[$count]['infantspos'] += $value->infantspos;
+			$newdata[$count]['redraw'] += $value->redraw;
+			$newdata[$count]['tat4'] = $value->tat4;
+  			
+		}
+				
+		$data['outcomes'][0]['name'] = "Redraws";
+		$data['outcomes'][1]['name'] = "Positive";
+		$data['outcomes'][2]['name'] = "Negative";
+		$data['outcomes'][3]['name'] = "Positivity";
+
+		$data['outcomes'][0]['color'] = '#52B3D9';
+		$data['outcomes'][1]['color'] = '#E26A6A';
+		$data['outcomes'][2]['color'] = '#257766';
+		$data['outcomes'][3]['color'] = '#913D88';
+
+		$data['outcomes'][0]['type'] = "column";
+		$data['outcomes'][1]['type'] = "column";
+		$data['outcomes'][2]['type'] = "column";
+		$data['outcomes'][3]['type'] = "spline";
+
+		$data['outcomes'][0]['yAxis'] = 1;
+		$data['outcomes'][1]['yAxis'] = 1;
+		$data['outcomes'][2]['yAxis'] = 1;
+
+		$data['title'] = "Outcomes (Initial PCR)";
+
+		$data['categories'] = "No Data";
+		$data['outcomes'][0]['data'][0] = 0;
+		$data['outcomes'][1]['data'][0] = 0;
+		$data['outcomes'][2]['data'][0] = 0;
+		$data['outcomes'][3]['data'][0] = 0;
+
+
+		foreach ($newdata as $key => $value) {
+			
+
+		// 	if($b){
+		// 		$b = false;
+		// 		$year = (int) $value['year'];
+		// 	}
+
+		// 	$y = (int) $value['year'];
+		// 	$name = $y . ' Q' . $quarter;
+		// 	if($value['year'] != $year){
+		// 		$year--;
+
+		// 		if($year == $prev_year){
+
+		// 			if($modulo != 0){	
+		// 				$data['outcomes'][3]['data'][$i] += round(@(( $data['outcomes'][1]['data'][$i]*100)/
+		// 				($data['outcomes'][0]['data'][$i]+$data['outcomes'][1]['data'][$i]+$data['outcomes'][2]['data'][$i])),1);
+		// 			}
+		// 			$i = 4;
+		// 			$quarter=1;
+		// 			$limit++;
+
+		// 		}
+		// 	}
+
+		// 	$month = (int) $value['month'];
+		// 	$modulo = ($month % 3);
+
+			$data['categories'][$key] = $name;
+
+			$data['outcomes'][0]['data'][$key] = (int) $value['redraw'];
+			$data['outcomes'][1]['data'][$key] = (int) $value['positive'];
+			$data['outcomes'][2]['data'][$key] = (int) $value['negative'];
+			$data['outcomes'][3]['data'][$key] = round(((int) $value['positive']/(int)$value['tests']), 1);
+
+		// 	if($modulo == 0){
+		// 		$data['outcomes'][3]['data'][$i] += round(@(( $data['outcomes'][1]['data'][$i]*100)/
+		// 			($data['outcomes'][0]['data'][$i]+$data['outcomes'][1]['data'][$i]+$data['outcomes'][2]['data'][$i])),1);
+
+		// 		$i++;
+		// 		$quarter++;
+		// 		$limit++;
+
+		// 	}
+		// 	if($quarter == 5){
+		// 		$quarter = 1;
+		// 		$i = 0;
+		// 	}	
+
+		// 	if ($limit == ($columns+1)) {
+		// 		break;
+		// 	}
+
+
+		}
+
+		return $data;
+
+	}
+
+	function getQuarter($month){
+		$quarters = ['1' => [1,2,3], '2' => [4,5,6], '3' => [7,8,9], '4' => [10,11,12]];
+		foreach ($quarters as $key => $value) {
+			if (in_array($month, $value)) {
+				$quarter = $key;
+				break;
+			}
+		}
+		return $quarter;
+	}
 
 
 }

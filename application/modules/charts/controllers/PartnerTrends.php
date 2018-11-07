@@ -132,5 +132,10 @@ class PartnerTrends extends MY_Controller
 		$this->load->view('trends_outcomes_view', $data);
 	}
 
+	function some_test($partner=null) {
+		$data['trends'] = $this->partner_model->some_quarters($partner);
+		echo "<pre>";print_r($data);die();
+	}
+
 
 }

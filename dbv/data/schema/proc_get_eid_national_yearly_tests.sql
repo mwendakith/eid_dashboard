@@ -23,7 +23,7 @@ BEGIN
       SET @QUERY = CONCAT(@QUERY, " GROUP BY `ns`.`month`, `ns`.`year` ");
 
      
-      SET @QUERY = CONCAT(@QUERY, " ORDER BY `ns`.`year` DESC, `ns`.`month` ASC ");
+      SET @QUERY = CONCAT(@QUERY, " ORDER BY `ns`.`year` ASC, `ns`.`month` ASC ");
       
 
     PREPARE stmt FROM @QUERY;

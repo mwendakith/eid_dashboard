@@ -31,7 +31,7 @@ BEGIN
 
     SET @QUERY = CONCAT(@QUERY, " GROUP BY `ip`.`month`, `ip`.`year` ");
   
-    SET @QUERY = CONCAT(@QUERY, " ORDER BY `ip`.`year` DESC, `ip`.`month` ASC ");
+    SET @QUERY = CONCAT(@QUERY, " ORDER BY `ip`.`year` ASC, `ip`.`month` ASC ");
 
 
   

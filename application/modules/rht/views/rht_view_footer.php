@@ -123,20 +123,19 @@
 			$(".display_year").html("( "+obj['year']+" )");
 			$(".display_range").html("( "+obj['prev_year']+" - "+obj['year']+" )");
 			
+			$("#trends").html("<center><div class='loader'></div></center>");
+			$("#outcomes").html("<center><div class='loader'></div></center>");
+			$("#gender").html("<center><div class='loader'></div></center>");
+			$("#positivity").html("<center><div class='loader'></div></center>");
+			$("#negativity").html("<center><div class='loader'></div></center>");
+			$("#facilities").html("<center><div class='loader'></div></center>");
+
+			$("#trends").load("<?= base_url('charts/rht/get_trends');?>/"+null+"/"+year);
+			$("#outcomes").load("<?= base_url('charts/rht/get_outcomes');?>/"+null+"/"+year+"/"+month);
+			$("#gender").load("<?= base_url('charts/rht/get_gender');?>/"+null+"/"+year+"/"+month);
+			$("#positivity").load("<?= base_url('charts/rht/get_positivity');?>/"+null+"/"+year);
+			$("#negativity").load("<?= base_url('charts/rht/get_negativity');?>/"+null+"/"+year);
+			$("#facilities").load("<?= base_url('charts/rht/get_facilities');?>/"+null+"/"+year+"/"+month);
 		});
-
-		$("#trends").html("<center><div class='loader'></div></center>");
-		$("#outcomes").html("<center><div class='loader'></div></center>");
-		$("#gender").html("<center><div class='loader'></div></center>");
-		$("#positivity").html("<center><div class='loader'></div></center>");
-		$("#negativity").html("<center><div class='loader'></div></center>");
-		$("#facilities").html("<center><div class='loader'></div></center>");
-
-		$("#trends").load("<?= base_url('charts/rht/get_trends');?>/"+null+"/"+year);
-		$("#outcomes").load("<?= base_url('charts/rht/get_outcomes');?>/"+null+"/"+year+"/"+month);
-		$("#gender").load("<?= base_url('charts/rht/get_gender');?>/"+null+"/"+year+"/"+month);
-		$("#positivity").load("<?= base_url('charts/rht/get_positivity');?>/"+null+"/"+year);
-		$("#negativity").load("<?= base_url('charts/rht/get_negativity');?>/"+null+"/"+year);
-		$("#facilities").load("<?= base_url('charts/rht/get_facilities');?>/"+null+"/"+year+"/"+month);
 	}
 </script>

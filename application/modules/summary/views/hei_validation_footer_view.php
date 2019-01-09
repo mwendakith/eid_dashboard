@@ -90,9 +90,8 @@
 			$(".display_date").html("( "+obj['year']+" "+obj['month']+" )");
 			$(".display_range").html("( "+obj['prev_year']+" - "+obj['year']+" )");
 			
+	 		$("#hei_validation_table").html("<div>Loading...</div>");
+			$("#hei_validation_table").load("<?php echo base_url('charts/hei/validation');?>/"+year+"/"+month); 
 		});
- 		$("#hei_validation_table").html("<div>Loading...</div>");
-		
-		$("#hei_validation_table").load("<?php echo base_url('charts/hei/validation');?>/"+year+"/"+month); 
 	}
 </script>

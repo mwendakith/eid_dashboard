@@ -260,43 +260,41 @@ function date_filter(criteria, id)
       }
       $(".display_date").html("( "+obj['year']+" "+obj['month']+" )");
       
-    });
-    
-    
-    $("#stacked_graph").html("<div>Loading...</div>");
-    $("#lineargauge").html("<div>Loading...</div>");
+      $("#stacked_graph").html("<div>Loading...</div>");
+      $("#lineargauge").html("<div>Loading...</div>");
 
-    var em = localStorage.getItem("my_lab");
-    
-    if (criteria === "monthly") {
-      $("#stacked_graph").load("<?php echo base_url();?>charts/LabPerformance/lab_outcomes/"+year+"/"+month);
-      $("#lineargauge").load("<?php echo base_url();?>charts/LabPerformance/lab_turnaround/"+year+"/"+month);
-      $("#lab_perfomance_stats").load("<?php echo base_url();?>charts/LabPerformance/lab_performance_stats/"+year+"/"+month);
-      $("#poc").load("<?php echo base_url();?>charts/LabPerformance/poc_performance_stats/"+year+"/"+month);
-      $("#poc_outcomes").load("<?php echo base_url();?>charts/LabPerformance/poc_outcomes/"+year+"/"+month);
-
-    }
-
-    else{
-      $("#graphs").html("<div>Loading...</div>");
-
-      $("#graphs").load("<?php echo base_url();?>charts/LabPerformance/testing_trends/"+year);
-      $("#stacked_graph").load("<?php echo base_url();?>charts/LabPerformance/lab_outcomes/"+year+"/"+month);
-      $("#lineargauge").load("<?php echo base_url();?>charts/LabPerformance/lab_turnaround/"+year+"/"+month);
-      $("#lab_perfomance_stats").load("<?php echo base_url();?>charts/LabPerformance/lab_performance_stats/"+year+"/"+month);
-      $("#poc").load("<?php echo base_url();?>charts/LabPerformance/poc_performance_stats/"+year+"/"+month);
-      $("#poc_outcomes").load("<?php echo base_url();?>charts/LabPerformance/poc_outcomes/"+year+"/"+month);
-
+      var em = localStorage.getItem("my_lab");
       
-      $("#lab_summary_two_years").html("<div>Loading...</div>");
+      if (criteria === "monthly") {
+        $("#stacked_graph").load("<?php echo base_url();?>charts/LabPerformance/lab_outcomes/"+year+"/"+month);
+        $("#lineargauge").load("<?php echo base_url();?>charts/LabPerformance/lab_turnaround/"+year+"/"+month);
+        $("#lab_perfomance_stats").load("<?php echo base_url();?>charts/LabPerformance/lab_performance_stats/"+year+"/"+month);
+        $("#poc").load("<?php echo base_url();?>charts/LabPerformance/poc_performance_stats/"+year+"/"+month);
+        $("#poc_outcomes").load("<?php echo base_url();?>charts/LabPerformance/poc_outcomes/"+year+"/"+month);
 
-      $("#lab_summary_two_years").load("<?php echo base_url();?>charts/LabPerformance/summary/"+em+"/"+year);
+      } else {
+        $("#graphs").html("<div>Loading...</div>");
 
-    }
-      
-      $("#lab_rejections").html("<div>Loading...</div>");
-      $("#lab_rejections").load("<?php echo base_url();?>charts/LabPerformance/rejections/"+em+"/"+year+"/"+month);
-      $("#mapping").load("<?php echo base_url();?>charts/LabPerformance/lab_mapping/"+em+"/"+year+"/"+month);
+        $("#graphs").load("<?php echo base_url();?>charts/LabPerformance/testing_trends/"+year);
+        $("#stacked_graph").load("<?php echo base_url();?>charts/LabPerformance/lab_outcomes/"+year+"/"+month);
+        $("#lineargauge").load("<?php echo base_url();?>charts/LabPerformance/lab_turnaround/"+year+"/"+month);
+        $("#lab_perfomance_stats").load("<?php echo base_url();?>charts/LabPerformance/lab_performance_stats/"+year+"/"+month);
+        $("#poc").load("<?php echo base_url();?>charts/LabPerformance/poc_performance_stats/"+year+"/"+month);
+        $("#poc_outcomes").load("<?php echo base_url();?>charts/LabPerformance/poc_outcomes/"+year+"/"+month);
+
+        
+        $("#lab_summary_two_years").html("<div>Loading...</div>");
+
+        $("#lab_summary_two_years").load("<?php echo base_url();?>charts/LabPerformance/summary/"+em+"/"+year);
+
+      }
+        
+        $("#lab_rejections").html("<div>Loading...</div>");
+        $("#lab_rejections").load("<?php echo base_url();?>charts/LabPerformance/rejections/"+em+"/"+year+"/"+month);
+        $("#mapping").load("<?php echo base_url();?>charts/LabPerformance/lab_mapping/"+em+"/"+year+"/"+month);
+      });
+    
+    
 
 
     

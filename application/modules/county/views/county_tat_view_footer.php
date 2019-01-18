@@ -108,8 +108,8 @@
 	 		$("#county_tat_outcomes").html("<center><div class='loader'></div></center>");
 	 		$("#county_tat_details").html("<center><div class='loader'></div></center>");
 	    	
-			$("#county_tat_outcomes").load("<?php echo base_url('charts/tat/outcomes');?>/"+year+"/"+month+"/"+null+"/"+null+"/"+0); 
-			$("#county_tat_details").load("<?php echo base_url('charts/tat/details');?>/"+year+"/"+month+"/"+null+"/"+null+"/"+0); 
+			$("#county_tat_outcomes").load("<?php echo base_url('charts/tat/outcomes');?>/"+obj['year']+"/"+obj['monthNo']+"/"+null+"/"+null+"/"+0); 
+			$("#county_tat_details").load("<?php echo base_url('charts/tat/details');?>/"+obj['year']+"/"+obj['monthNo']+"/"+null+"/"+null+"/"+0); 
 		});
 	}
 </script>

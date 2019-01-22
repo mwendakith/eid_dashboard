@@ -266,7 +266,7 @@ function date_filter(criteria, id)
       var em = localStorage.getItem("my_lab");
       
         $("#graphs").html("<div>Loading...</div>");
-
+        console.log(year);
         $("#graphs").load("<?php echo base_url();?>charts/LabPerformance/testing_trends/"+year);
         $("#stacked_graph").load("<?php echo base_url();?>charts/LabPerformance/lab_outcomes/"+year+"/"+month);
         $("#lineargauge").load("<?php echo base_url();?>charts/LabPerformance/lab_turnaround/"+year+"/"+month);

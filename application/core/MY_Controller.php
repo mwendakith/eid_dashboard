@@ -131,7 +131,7 @@ if(!defined("BASEPATH")) exit("No direct script access allowed!");
 			if(!$month)
 				$month = $this->session->userdata('filter_month');
 			
-			echo json_encode(array('year' => $year, 'prev_year' => $year-1, 'month' => $this->template_model->resolve_month($month), 'monthNo' => $month - 1 ));
+			echo json_encode(array('year' => $year, 'prev_year' => $year-1, 'month' => $this->template_model->resolve_month($month), 'monthNo' => $month ));
 		}
 
 		function template($data)

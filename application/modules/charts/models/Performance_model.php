@@ -33,7 +33,7 @@ class Performance_model extends MY_Model
 		}
 
 		$sql = "CALL `proc_get_eid_lab_performance_stats`('".$year."','".$month."','".$to_year."','".$to_month."');";
-		echo "<pre>";print_r($sql);die();
+		// echo "<pre>";print_r($sql);die();
 		$result = $this->db->query($sql)->result_array();
 		// echo "<pre>";print_r($result);echo "</pre>";die();
 		$ul = '';
@@ -100,7 +100,7 @@ class Performance_model extends MY_Model
 		}
 
 		$sql = "CALL `proc_get_eid_poc_performance_stats`('".$year."','".$month."','".$to_year."','".$to_month."');";
-		echo "<pre>";print_r($sql);die();
+		// echo "<pre>";print_r($sql);die();
 
 		$result = $this->db->query($sql)->result_array();
 		// echo "<pre>";print_r($result);echo "</pre>";die();
@@ -164,7 +164,7 @@ class Performance_model extends MY_Model
 		}
 
 		$sql = "CALL `proc_get_eid_lab_performance_stats`('".$year."','".$month."','".$to_year."','".$to_month."');";
-		echo "<pre>";print_r($sql);die();		
+		// echo "<pre>";print_r($sql);die();		
 
 		$this->load->dbutil();
         $this->load->helper('file');
@@ -268,7 +268,7 @@ class Performance_model extends MY_Model
 		$data['year'] = $year;
 
 		$sql = "CALL `proc_get_eid_lab_performance`('".$year."')";
-		echo "<pre>";print_r($sql);die();
+		// echo "<pre>";print_r($sql);die();
 
 		$result = $this->db->query($sql)->result_array();
 		// echo "<pre>";print_r($result);die();
@@ -310,7 +310,7 @@ class Performance_model extends MY_Model
 		$this->db->close();
 
 		$sql2 = "CALL `proc_get_eid_average_rejection`('".$year."')";
-		echo "<pre>";print_r($sql);die();
+		// echo "<pre>";print_r($sql);die();
 		// echo "<pre>";print_r($sql2);die();
 		$result2 = $this->db->query($sql2)->result_array();
 			$i = count($data['rejected_trends']);
@@ -357,7 +357,7 @@ class Performance_model extends MY_Model
 		} 
 		
 		$sql = "CALL `proc_get_eid_lab_outcomes`('".$year."','".$month."','".$to_year."','".$to_month."')";
-		echo "<pre>";print_r($sql);die();
+		// echo "<pre>";print_r($sql);die();
 		$result = $this->db->query($sql)->result_array();
 		
 
@@ -419,7 +419,7 @@ class Performance_model extends MY_Model
 
 		$sql = "CALL `proc_get_eid_lab_tat`('".$year."','".$month."','".$to_year."','".$to_month."')";
 		
-		echo "<pre>";print_r($sql);die();
+		// echo "<pre>";print_r($sql);die();
 		$result = $this->db->query($sql)->result_array();
 		$data;
 		foreach ($result as $key => $value) {
@@ -445,7 +445,7 @@ class Performance_model extends MY_Model
 
 
 		$sql = "CALL `proc_get_eid_yearly_lab_tests`(" . $lab . ");";
-		echo "<pre>";print_r($sql);die();
+		// echo "<pre>";print_r($sql);die();
 		$result = $this->db->query($sql)->result_array();
 		// echo "<pre>";print_r($result);echo "</pre>";die();
 		
@@ -524,7 +524,7 @@ class Performance_model extends MY_Model
 		$from = $year-1;
 		
 		$sql = "CALL `proc_get_eid_yearly_lab_summary`(" . $lab . ",'" . $from . "','" . $year . "');";
-		echo "<pre>";print_r($sql);die();
+		// echo "<pre>";print_r($sql);die();
 		
 		$result = $this->db->query($sql)->result_array();
 
@@ -588,7 +588,7 @@ class Performance_model extends MY_Model
 		}
 
 		$sql = "CALL `proc_get_eid_poc_performance_stats`('".$year."','".$month."','".$to_year."','".$to_month."');";
-		echo "<pre>";print_r($sql);die();
+		// echo "<pre>";print_r($sql);die();
 
 		$result = $this->db->query($sql)->result_array();
 		// echo "<pre>";print_r($result);echo "</pre>";die();
@@ -662,7 +662,7 @@ class Performance_model extends MY_Model
 		
 		$sql = "CALL `proc_get_eid_lab_rejections`({$lab}, '{$year}', '{$month}', '{$to_year}', '{$to_month}' );";
 		
-		echo "<pre>";print_r($sql);die();
+		// echo "<pre>";print_r($sql);die();
 		
 		$result = $this->db->query($sql)->result_array();
 		// echo "<pre>";print_r($result);die();
@@ -728,7 +728,7 @@ class Performance_model extends MY_Model
 		
 		$sql = "CALL `proc_get_eid_lab_site_mapping`({$lab}, '{$year}', '{$month}', '{$to_year}', '{$to_month}' );";
 		
-		echo "<pre>";print_r($sql);die();
+		// echo "<pre>";print_r($sql);die();
 		
 		$result = $this->db->query($sql)->result_array();
 		// echo "<pre>";print_r($result);die();

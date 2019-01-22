@@ -116,21 +116,22 @@ if(!defined("BASEPATH")) exit("No direct script access allowed!");
 			$month = $data['month'];
 			
 			if ($year) {
-				$this->session->unset_userdata('filter_month');
 				$return = $this->session->set_userdata('filter_year', $year);
+				$this->session->unset_userdata('filter_month');
 			} else {
-				$return = $this->session->set_userdata('filter_month', $month);
+				if ($month=='all') {
+					$this->session->unset_userdata('filter_month');
+				}else {
+					$this->session->set_userdata('filter_month', $month);
+				}
 			}
-			// echo "<pre";print_r($this->session->userdata('filter_year'));die();
 			$this->load->model('template/template_model');
-			// if(!$year)
-			// 	$year = $this->session->userdata('filter_year');
-			// if(!$month)
-			// 	$month = $this->session->userdata('filter_month');
-			$year = $this->session->userdata('filter_year');
-			$month = $this->session->userdata('filter_month');
-
-			echo json_encode(['year' => $year, 'prev_year' => $year-1, 'month' => $this->template_model->resolve_month($month), 'monthNo' => $month]);
+			if(!$year)
+				$year = $this->session->userdata('filter_year');
+			if(!$month)
+				$month = $this->session->userdata('filter_month');
+			
+			echo json_encode(array('year' => $year, 'prev_year' => $year-1, 'month' => $this->template_model->resolve_month($month) ));
 		}
 
 		function template($data)

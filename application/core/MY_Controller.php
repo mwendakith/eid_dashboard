@@ -94,7 +94,7 @@ if(!defined("BASEPATH")) exit("No direct script access allowed!");
 
 		function initialize_filter()
 		{
-			if(!isset($this->session->userdata('filter_year')))
+			if(!(null !== $this->session->userdata('filter_year')))
 			{
 				$filter_data = array(
 								'county_filter' => null,

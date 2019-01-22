@@ -112,7 +112,7 @@ if(!defined("BASEPATH")) exit("No direct script access allowed!");
 
 		function set_filter_date($data=null)
 		{
-			echo "<pre";print_r($data);die();
+			// echo "<pre";print_r($data);die();
 			$year = $data['year'];
 			$month = $data['month'];
 			if ($year)

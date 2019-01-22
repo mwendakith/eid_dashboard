@@ -522,7 +522,6 @@ class Performance_model extends MY_Model
 		}
 
 		$from = $year-1;
-
 		
 		$sql = "CALL `proc_get_eid_yearly_lab_summary`(" . $lab . ",'" . $from . "','" . $year . "');";
 		echo "<pre>";print_r($sql);die();
@@ -655,9 +654,9 @@ class Performance_model extends MY_Model
 		}
 		if ($month==null || $month=='null') {
 			if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
-				$month = $this->session->userdata('filter_month');
-			}else {
 				$month = 0;
+			}else {
+				$month = $this->session->userdata('filter_month');
 			}
 		}
 		

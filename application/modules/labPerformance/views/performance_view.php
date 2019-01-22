@@ -241,7 +241,7 @@
 
 function date_filter(criteria, id)
   {
-    if (criteria === "monthly") {
+    if (criteria == "monthly") {
       year = null;
       month = id;
     }else {

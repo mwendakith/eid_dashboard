@@ -265,14 +265,6 @@ function date_filter(criteria, id)
 
       var em = localStorage.getItem("my_lab");
       
-      if (criteria === "monthly") {
-        $("#stacked_graph").load("<?php echo base_url();?>charts/LabPerformance/lab_outcomes/"+year+"/"+month);
-        $("#lineargauge").load("<?php echo base_url();?>charts/LabPerformance/lab_turnaround/"+year+"/"+month);
-        $("#lab_perfomance_stats").load("<?php echo base_url();?>charts/LabPerformance/lab_performance_stats/"+year+"/"+month);
-        $("#poc").load("<?php echo base_url();?>charts/LabPerformance/poc_performance_stats/"+year+"/"+month);
-        $("#poc_outcomes").load("<?php echo base_url();?>charts/LabPerformance/poc_outcomes/"+year+"/"+month);
-
-      } else {
         $("#graphs").html("<div>Loading...</div>");
 
         $("#graphs").load("<?php echo base_url();?>charts/LabPerformance/testing_trends/"+year);
@@ -281,6 +273,16 @@ function date_filter(criteria, id)
         $("#lab_perfomance_stats").load("<?php echo base_url();?>charts/LabPerformance/lab_performance_stats/"+year+"/"+month);
         $("#poc").load("<?php echo base_url();?>charts/LabPerformance/poc_performance_stats/"+year+"/"+month);
         $("#poc_outcomes").load("<?php echo base_url();?>charts/LabPerformance/poc_outcomes/"+year+"/"+month);
+
+      if (criteria == "monthly") {
+        // $("#stacked_graph").load("<?php echo base_url();?>charts/LabPerformance/lab_outcomes/"+year+"/"+month);
+        // $("#lineargauge").load("<?php echo base_url();?>charts/LabPerformance/lab_turnaround/"+year+"/"+month);
+        // $("#lab_perfomance_stats").load("<?php echo base_url();?>charts/LabPerformance/lab_performance_stats/"+year+"/"+month);
+        // $("#poc").load("<?php echo base_url();?>charts/LabPerformance/poc_performance_stats/"+year+"/"+month);
+        // $("#poc_outcomes").load("<?php echo base_url();?>charts/LabPerformance/poc_outcomes/"+year+"/"+month);
+
+      } else {
+        
 
         
         $("#lab_summary_two_years").html("<div>Loading...</div>");

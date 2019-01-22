@@ -119,13 +119,14 @@ if(!defined("BASEPATH")) exit("No direct script access allowed!");
 				echo "Year is set";
 			else
 				echo "year is not set";
-			echo "<pre";print_r($data);die();
+			
 			if ($year) {
 				$this->session->unset_userdata('filter_month');
 				$return = $this->session->set_userdata('filter_year', $year);
 			} else {
 				$return = $this->session->set_userdata('filter_month', $month);
 			}
+			echo "<pre";print_r($this->session->userdata('filter_year'));die();
 			$this->load->model('template/template_model');
 			if(!$year)
 				$year = $this->session->userdata('filter_year');

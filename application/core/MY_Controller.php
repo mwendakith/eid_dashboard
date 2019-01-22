@@ -112,13 +112,8 @@ if(!defined("BASEPATH")) exit("No direct script access allowed!");
 
 		function set_filter_date($data=null)
 		{
-			// echo "<pre";print_r($data);die();
 			$year = $data['year'];
 			$month = $data['month'];
-			if ($year)
-				echo "Year is set";
-			else
-				echo "year is not set";
 			
 			if ($year) {
 				$this->session->unset_userdata('filter_month');
@@ -126,12 +121,14 @@ if(!defined("BASEPATH")) exit("No direct script access allowed!");
 			} else {
 				$return = $this->session->set_userdata('filter_month', $month);
 			}
-			echo "<pre";print_r($this->session->userdata('filter_year'));die();
+			// echo "<pre";print_r($this->session->userdata('filter_year'));die();
 			$this->load->model('template/template_model');
-			if(!$year)
-				$year = $this->session->userdata('filter_year');
-			if(!$month)
-				$month = $this->session->userdata('filter_month');
+			// if(!$year)
+			// 	$year = $this->session->userdata('filter_year');
+			// if(!$month)
+			// 	$month = $this->session->userdata('filter_month');
+			$year = $this->session->userdata('filter_year');
+			$month = $this->session->userdata('filter_month');
 
 			echo json_encode(['year' => $year, 'prev_year' => $year-1, 'month' => $this->template_model->resolve_month($month), 'monthNo' => $month]);
 		}

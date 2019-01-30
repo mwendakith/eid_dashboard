@@ -110,7 +110,7 @@
                 <div class="panel-heading">
                     POC STATS <div class="display_date"></div>
                 </div>
-                <div class="panel-body" id="poc" style="height: 700px">
+                <div class="panel-body" id="poc">
                     <center><div class="loader"></div></center>
                 </div>
             </div>
@@ -179,7 +179,7 @@
 
             localStorage.setItem("to_year", to[1]);
             localStorage.setItem("to_month", to[0]);
-                
+
           $("#stacked_graph").load("<?php echo base_url();?>charts/LabPerformance/lab_outcomes/"+from[1]+"/"+from[0]+"/"+to[1]+"/"+to[0]);
           $("#lineargauge").load("<?php echo base_url();?>charts/LabPerformance/lab_turnaround/"+from[1]+"/"+from[0]+"/"+to[1]+"/"+to[0]);
           $("#lab_perfomance_stats").load("<?php echo base_url();?>charts/LabPerformance/lab_performance_stats/"+from[1]+"/"+from[0]+"/"+to[1]+"/"+to[0]);

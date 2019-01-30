@@ -131,6 +131,8 @@
     </div>
 </div>
 
+<div id="my_empty_div"></div>
+
 <script type="text/javascript">
 
   $().ready(function() {
@@ -171,6 +173,13 @@
         var error_check = check_error_date_range(from, to);
           
         if (!error_check) {
+
+            localStorage.setItem("from_year", from[1]);
+            localStorage.setItem("from_month", from[0]);
+
+            localStorage.setItem("to_year", to[1]);
+            localStorage.setItem("to_month", to[0]);
+                
           $("#stacked_graph").load("<?php echo base_url();?>charts/LabPerformance/lab_outcomes/"+from[1]+"/"+from[0]+"/"+to[1]+"/"+to[0]);
           $("#lineargauge").load("<?php echo base_url();?>charts/LabPerformance/lab_turnaround/"+from[1]+"/"+from[0]+"/"+to[1]+"/"+to[0]);
           $("#lab_perfomance_stats").load("<?php echo base_url();?>charts/LabPerformance/lab_performance_stats/"+from[1]+"/"+from[0]+"/"+to[1]+"/"+to[0]);
@@ -241,12 +250,19 @@
 
 function date_filter(criteria, id)
   {
-    if (criteria == "monthly") {
-      year = null;
-      month = id;
+    localStorage.setItem("to_year", 'null');
+    localStorage.setItem("to_month", 'null');
+
+    if (criteria === "monthly") {
+        localStorage.setItem("from_year", 'null');
+        localStorage.setItem("from_month", id);
+        year = null;
+        month = id;
     }else {
-      year = id;
-      month = null;
+        localStorage.setItem("from_year", id);
+        localStorage.setItem("from_month", 'null');
+        year = id;
+        month = null;
     }
 
     var posting = $.post( '<?php echo base_url();?>template/filter_date_data', { 'year': year, 'month': month } );
@@ -294,12 +310,19 @@ function date_filter(criteria, id)
         $("#lab_rejections").html("<div>Loading...</div>");
         $("#lab_rejections").load("<?php echo base_url();?>charts/LabPerformance/rejections/"+em+"/"+obj['year']+"/"+obj['monthNo']);
         $("#mapping").load("<?php echo base_url();?>charts/LabPerformance/lab_mapping/"+em+"/"+obj['year']+"/"+obj['monthNo']);
-      });
-    
-    
-
-
-    
+      });    
   }
+
+
+    function expand_poc(facility_id)
+    {
+        var year = localStorage.getItem("from_year");
+        var month = localStorage.getItem("from_month");
+
+        var to_year = localStorage.getItem("to_year");
+        var to_month = localStorage.getItem("to_month");
+
+        $("#my_empty_div").load("<?php echo base_url();?>charts/LabPerformance/poc_performance_details/"+facility_id+"/"+year+"/"+month+"/"+to_year+"/"+to_month);
+    }
    
 </script>

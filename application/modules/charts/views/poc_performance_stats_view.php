@@ -15,7 +15,8 @@
 			<th>Confirmatory PCR Tests</th>
 			<th>Confirmatory PCR Positives</th>
 			<th>Tests with Valid Outcomes</th>
-			<th>Tests with Valid Outcomes - Positives</th>
+      <th>Tests with Valid Outcomes - Positives</th>
+			<th>View Details</th>
 		</tr>
 	</thead>
 	<tbody>

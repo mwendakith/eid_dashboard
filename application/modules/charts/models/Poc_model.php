@@ -152,23 +152,19 @@ class Poc_model extends MY_Model
 		    		<td>Positive (+):</td>
 		    		<td>'.number_format((int) $value['adultsPOS']).'('.round((((int) $value['adultsPOS']/(int) $value['adults'])*100),1).'%)</td>
 		    	</tr>
-
-
 		    	<tr>
 		    		<td></td>
 		    		<td></td>
 		    		<td></td>
 		    		<td></td>
 		    	</tr>
-
-
 		    	<tr>
 		    		<td>Rejected Samples:</td>
 		    		<td>'.number_format((int) $value['rejected']).'</td>
 		    		<td>% Rejection:</td>
 		    		<td>'.round((((int) $value['rejected']/(int) $value['alltests'])*100),1).'%</td>
 		    	</tr>';
-		    	
+
 			$data['eid_outcomes']['data'][$key]['y'] = $count;
 
 			$data['eid_outcomes']['data'][0]['name'] = 'Positive';
@@ -185,5 +181,40 @@ class Poc_model extends MY_Model
 		// echo "<pre>";print_r($data);die();
 		return $data;
 	}
+
+
+	function entrypoints($county=null,$year=null,$month=null,$to_year=null,$to_month=null)
+	{
+		if($county == NULL || $county == 48 || $county=='null') $county=0;
+		if ($year==null || $year=='null') $year = $this->session->userdata('filter_year');
+
+		if ($month==null || $month=='null') {
+			if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
+				$month = 0;
+			}else {
+				$month = $this->session->userdata('filter_month');
+			}
+		}
+		if ($to_month==null || $to_month=='null') $to_month = 0;
+		if ($to_year==null || $to_year=='null') $to_year = 0;
+
+
+		$sql = "CALL `proc_get_eid_county_poc_entry_points`('".$county."','".$year."','".$month."','".$to_year."','".$to_month."')";
+		// echo $sql;die();
+		$result = $this->db->query($sql)->result_array();
+				
+		$data['entry'][0]['name'] = 'Positive';
+		$data['entry'][1]['name'] = 'Negative';
+
+		foreach ($result as $key => $value) {
+			$data['categories'][$key] 		= $value['name'];
+
+			$data["entry"][0]["data"][$key]	=  (int) $value['positive'];
+			$data["entry"][1]["data"][$key]	=  (int) $value['negative'];
+			
+		}
+		return $data;
+	}	
+
 
 }

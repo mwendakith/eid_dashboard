@@ -82,13 +82,11 @@
     $(".display_date").html("( "+obj['year']+" "+obj['month']+" )");
     });
 
-    $("#fourth").hide();
-    $("#fifth").hide();
-
     localStorage.setItem("my_lab", 0);
 
     $("#testing_trends").load("<?php echo base_url();?>charts/poc/testing_trends");
     $("#eid_outcomes").load("<?php echo base_url();?>charts/poc/eid_outcomes");
+    $("#entrypoints").load("<?php echo base_url();?>charts/poc/entrypoints");
 
     $("button").click(function () {
         var first, second;
@@ -115,9 +113,11 @@
       
           $("#testing_trends").html("<div>Loading...</div>");
           $("#eid_outcomes").html("<div>Loading...</div>");
+          $("#entrypoints").html("<div>Loading...</div>");
 
           $("#testing_trends").load("<?php echo base_url();?>charts/poc/testing_trends/"+em+"/"+from[1]+"/"+from[0]+"/"+to[1]+"/"+to[0]);
           $("#eid_outcomes").load("<?php echo base_url();?>charts/poc/eid_outcomes/"+em+"/"+from[1]+"/"+from[0]+"/"+to[1]+"/"+to[0]);
+          $("#entrypoints").load("<?php echo base_url();?>charts/poc/entrypoints/"+em+"/"+from[1]+"/"+from[0]+"/"+to[1]+"/"+to[0]);
         }
             
     });
@@ -131,9 +131,11 @@
 
         $("#testing_trends").html("<div>Loading...</div>");
         $("#eid_outcomes").html("<div>Loading...</div>");
-        
+        $("#entrypoints").html("<div>Loading...</div>");
+
         $("#testing_trends").load("<?php echo base_url();?>charts/poc/testing_trends/"+em);
         $("#eid_outcomes").load("<?php echo base_url();?>charts/poc/eid_outcomes/"+em);
+        $("#entrypoints").load("<?php echo base_url();?>charts/poc/entrypoints/"+em);
       
       });
 
@@ -171,11 +173,13 @@ function date_filter(criteria, id)
       
       $("#testing_trends").html("<div>Loading...</div>");
       $("#eid_outcomes").html("<div>Loading...</div>");
+      $("#entrypoints").html("<div>Loading...</div>");
 
       var em = localStorage.getItem("my_lab");
 
         $("#testing_trends").load("<?php echo base_url();?>charts/poc/testing_trends/"+em+"/"+obj['year']+"/"+obj['month']);
         $("#eid_outcomes").load("<?php echo base_url();?>charts/poc/eid_outcomes/"+em+"/"+obj['year']+"/"+obj['month']);
+        $("#entrypoints").load("<?php echo base_url();?>charts/poc/entrypoints/"+em+"/"+obj['year']+"/"+obj['month']);
       });    
   }
    

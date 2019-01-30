@@ -4,8 +4,6 @@ CREATE PROCEDURE `proc_get_eid_poc_summary_outcomes`
 (IN filter_county INT(11), IN filter_year INT(11), IN from_month INT(11), IN to_year INT(11), IN to_month INT(11))
 BEGIN
   SET @QUERY =    "SELECT 
-                    `ssp`.`year`, 
-                    `ssp`.`month`, 
                   SUM(`alltests`) AS `alltests`, 
                   SUM(`tests`) AS `tests`, 
                   SUM(`actualinfants`) AS `actualinfants`, 
@@ -15,13 +13,16 @@ BEGIN
                   SUM(`repeatposPOS`) AS `repeatsposPOS`,
                   SUM(`firstdna`) AS `firstdna`,
                   SUM(`confirmdna`) AS `confirmdna`,
-                  SUM(`confirmedPOS`) AS `confirmedPOS`,
+                  SUM(`confirmedPOS`) AS `confirmpos`,
                   SUM(`infantsless2w`) AS `infantsless2w`, 
                   SUM(`infantsless2wPOS`) AS `infantsless2wpos`, 
                   SUM(`infantsless2m`) AS `infantsless2m`, 
-                  SUM(`infantsless2mPOS`) AS `infantsless2mpos`, 
+                  SUM(`infantsless2mPOS`) AS `infantless2mpos`, 
                   SUM(`infantsabove2m`) AS `infantsabove2m`, 
                   SUM(`infantsabove2mPOS`) AS `infantsabove2mpos`,  
+                  SUM(`adults`) AS `adults`,
+                  SUM(`adultsPOS`) AS `adultsPOS`,
+                  SUM(`redraw`) AS `redraw`,
                   SUM(`rejected`) AS `rejected`
                   FROM `site_summary_poc` `ssp`
                   LEFT JOIN `view_facilitys` `vf` ON `ssp`.`facility` = `vf`.`ID` 

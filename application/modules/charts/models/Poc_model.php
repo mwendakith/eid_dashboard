@@ -302,6 +302,7 @@ class Poc_model extends MY_Model
 			$data["outcomes"][2]["data"][$key]	= round(@( ((int) $value['pos']*100) /((int) $value['pos']+(int) $value['neg'])),1);
 			
 		}
+		echo "<pre>";print_r($data);die();
 		return $data;
 	}	
 

@@ -41,7 +41,7 @@ BEGIN
         SET @QUERY = CONCAT(@QUERY, " AND `year` = '",filter_year,"' ");
     END IF;
 
-    IF (from_month != 0 && from_month != '') THEN
+    IF (filter_county != 0 && filter_county != '') THEN
       SET @QUERY = CONCAT(@QUERY, " AND `county` = '",filter_county,"' ");
     END IF;
 

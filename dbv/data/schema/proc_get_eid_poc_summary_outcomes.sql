@@ -1,6 +1,6 @@
-DROP PROCEDURE IF EXISTS `proc_get_eid_poc_trends`;
+DROP PROCEDURE IF EXISTS `proc_get_eid_poc_summary_outcomes`;
 DELIMITER //
-CREATE PROCEDURE `proc_get_eid_poc_trends`
+CREATE PROCEDURE `proc_get_eid_poc_summary_outcomes`
 (IN filter_county INT(11), IN filter_year INT(11), IN from_month INT(11), IN to_year INT(11), IN to_month INT(11))
 BEGIN
   SET @QUERY =    "SELECT 
@@ -9,8 +9,8 @@ BEGIN
                   SUM(`alltests`) AS `alltests`, 
                   SUM(`tests`) AS `tests`, 
                   SUM(`actualinfants`) AS `actualinfants`, 
-                  SUM(`pos`) AS `positive`, 
-                  SUM(`neg`) AS `negative`, 
+                  SUM(`pos`) AS `pos`, 
+                  SUM(`neg`) AS `neg`, 
                   SUM(`repeatspos`) AS `repeatspos`,
                   SUM(`repeatposPOS`) AS `repeatsposPOS`,
                   SUM(`firstdna`) AS `firstdna`,
@@ -45,8 +45,6 @@ BEGIN
     IF (filter_county != 0 && filter_county != '') THEN
       SET @QUERY = CONCAT(@QUERY, " AND `county` = '",filter_county,"' ");
     END IF;
-
-    SET @QUERY = CONCAT(@QUERY, " GROUP BY `ssp`.`year`, `ssp`.`month` ORDER BY `ssp`.`year` ASC, `ssp`.`month` ASC ");
 
      PREPARE stmt FROM @QUERY;
      EXECUTE stmt;

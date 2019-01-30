@@ -20,7 +20,7 @@
           <div class="panel-heading">
             Summary Outcomes <div class="display_date" ></div>
           </div>
-          <div class="panel-body" id="eidOutcomes">
+          <div class="panel-body" id="eid_outcomes">
             <center><div class="loader"></div></center>
           </div>
           
@@ -32,7 +32,7 @@
           <div class="panel-heading">
             Outcomes By EntryPoint <div class="display_date" ></div>
           </div>
-          <div class="panel-body" id="entrypoints" style="height:660px;">
+          <div class="panel-body" id="entrypoints">
             <center><div class="loader"></div></center>
           </div>
           
@@ -44,7 +44,7 @@
           <div class="panel-heading">
             Outcomes By Age <div class="display_date" ></div>
           </div>
-          <div class="panel-body" id="ages" style="height:660px;">
+          <div class="panel-body" id="ages">
             <center><div class="loader"></div></center>
           </div>
           
@@ -88,6 +88,7 @@
     localStorage.setItem("my_lab", 0);
 
     $("#testing_trends").load("<?php echo base_url();?>charts/poc/testing_trends");
+    $("#eid_outcomes").load("<?php echo base_url();?>charts/poc/eid_outcomes");
 
     $("button").click(function () {
         var first, second;
@@ -113,8 +114,10 @@
             var em = localStorage.getItem("my_lab");
       
           $("#testing_trends").html("<div>Loading...</div>");
+          $("#eid_outcomes").html("<div>Loading...</div>");
 
           $("#testing_trends").load("<?php echo base_url();?>charts/poc/testing_trends/"+em+"/"+from[1]+"/"+from[0]+"/"+to[1]+"/"+to[0]);
+          $("#eid_outcomes").load("<?php echo base_url();?>charts/poc/eid_outcomes/"+em+"/"+from[1]+"/"+from[0]+"/"+to[1]+"/"+to[0]);
         }
             
     });
@@ -127,7 +130,10 @@
         console.log(em);
 
         $("#testing_trends").html("<div>Loading...</div>");
+        $("#eid_outcomes").html("<div>Loading...</div>");
+        
         $("#testing_trends").load("<?php echo base_url();?>charts/poc/testing_trends/"+em);
+        $("#eid_outcomes").load("<?php echo base_url();?>charts/poc/eid_outcomes/"+em);
       
       });
 
@@ -164,10 +170,12 @@ function date_filter(criteria, id)
       $(".display_date").html("( "+obj['year']+" "+obj['month']+" )");
       
       $("#testing_trends").html("<div>Loading...</div>");
+      $("#eid_outcomes").html("<div>Loading...</div>");
 
       var em = localStorage.getItem("my_lab");
 
         $("#testing_trends").load("<?php echo base_url();?>charts/poc/testing_trends/"+em+"/"+obj['year']+"/"+obj['month']);
+        $("#eid_outcomes").load("<?php echo base_url();?>charts/poc/eid_outcomes/"+em+"/"+obj['year']+"/"+obj['month']);
       });    
   }
    

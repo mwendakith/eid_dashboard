@@ -21,11 +21,11 @@ class Poc extends MY_Controller
 		$this->load->view('trends_outcomes_view', $data);
 	}
 
-	function summary($county=null,$year=null,$month=null,$toYear=null,$toMonth=null)
+	function eid_outcomes($county=null,$year=null,$month=null,$toYear=null,$toMonth=null)
 	{
-		$data['outcomes'] = $this->poc_model->get_agebreakdown($county,$year,$month,$toYear,$toMonth);
+		$data['outcomes'] = $this->poc_model->eid_outcomes($county,$year,$month,$toYear,$toMonth);
 
-		$this->load->view('breakdown_listing', $data);
+		$this->load->view('eid_outcomes_view', $data);
 	}
 
 	function entrypoint($county=null,$year=null,$month=null,$toYear=null,$toMonth=null)

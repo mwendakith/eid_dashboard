@@ -177,9 +177,9 @@ class Performance_model extends MY_Model
 						<td>".$value['facilitycode']."</td>
 
 						<td>".number_format((int) $value['alltests'])."</td>
-						<td>".number_format((int) $value['positive'])."</td>
-						<td>".number_format((int) $value['confirmdna'])."</td>
-						<td>".number_format((int) $value['confirmedPOS'])."</td>				
+						<td>".number_format((int) ($value['positive'] + $value['repeatsposPOS'] + $value['confirmedPOS']) )."</td>
+						<td>".number_format((int) ($value['positive'] + $value['negative']))."</td>
+						<td>".number_format((int) $value['positive'])."</td>				
 						<td>".number_format((int) $value['infantsless2m'])."</td>				
 						<td>".number_format((int) $value['infantsless2mpos'])."</td>				
 					</tr>";

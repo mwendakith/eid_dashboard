@@ -23,7 +23,7 @@ class LabPerformance extends MY_Controller {
 
 	public function poc()
 	{
-		$this->data['labs'] = TRUE;
+		// $this->data['labs'] = TRUE;
 		$this->data['content_view'] = 'labPerformance/poc';
 		// echo "<pre>";print_r($this->data);die();
 		$this -> template($this->data);

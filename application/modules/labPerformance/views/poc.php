@@ -89,15 +89,6 @@
 
     $("#testing_trends").load("<?php echo base_url();?>charts/poc/testing_trends");
 
-    $("#test_outcomes").load("<?php echo base_url();?>charts/LabPerformance/lab_outcomes");
-    $("#positivity_trends").load("<?php echo base_url();?>charts/LabPerformance/lab_positivity_trends");
-    $("#rejected_trends").load("<?php echo base_url();?>charts/LabPerformance/lab_rejected_trends");
-    $("#graphs").load("<?php echo base_url();?>charts/LabPerformance/testing_trends");
-    $("#stacked_graph").load("<?php echo base_url();?>charts/LabPerformance/lab_outcomes");
-    $("#lineargauge").load("<?php echo base_url();?>charts/LabPerformance/lab_turnaround");
-    $("#lab_perfomance_stats").load("<?php echo base_url();?>charts/LabPerformance/lab_performance_stats");
-    $("#lab_rejections").load("<?php echo base_url();?>charts/LabPerformance/rejections/0");
-
     $("button").click(function () {
         var first, second;
         first = $(".date-picker[name=startDate]").val();
@@ -119,18 +110,11 @@
             localStorage.setItem("to_year", to[1]);
             localStorage.setItem("to_month", to[0]);
 
-          $("#testing_trends").load("<?php echo base_url();?>charts/poc/testing_trends/null/"+from[1]+"/"+from[0]+"/"+to[1]+"/"+to[0]);
+            var em = localStorage.getItem("my_lab");
+      
+          $("#testing_trends").html("<div>Loading...</div>");
 
-
-          $("#lineargauge").load("<?php echo base_url();?>charts/LabPerformance/lab_turnaround/"+from[1]+"/"+from[0]+"/"+to[1]+"/"+to[0]);
-          $("#lab_perfomance_stats").load("<?php echo base_url();?>charts/LabPerformance/lab_performance_stats/"+from[1]+"/"+from[0]+"/"+to[1]+"/"+to[0]);
-          $("#poc").load("<?php echo base_url();?>charts/LabPerformance/poc_performance_stats/"+from[1]+"/"+from[0]+"/"+to[1]+"/"+to[0]);
-          $("#poc_outcomes").load("<?php echo base_url();?>charts/LabPerformance/poc_outcomes/"+from[1]+"/"+from[0]+"/"+to[1]+"/"+to[0]);
-
-          var em = localStorage.getItem("my_lab");
-
-          $("#lab_rejections").load("<?php echo base_url();?>charts/LabPerformance/rejections/"+em+"/"+from[1]+"/"+from[0]+"/"+to[1]+"/"+to[0]);
-          $("#mapping").load("<?php echo base_url();?>charts/LabPerformance/lab_mapping/"+em+"/"+from[1]+"/"+from[0]+"/"+to[1]+"/"+to[0]);
+          $("#testing_trends").load("<?php echo base_url();?>charts/poc/testing_trends/"+em+"/"+from[1]+"/"+from[0]+"/"+to[1]+"/"+to[0]);
         }
             
     });
@@ -139,6 +123,8 @@
         em = $(this).val();
         em = parseInt(em);
         localStorage.setItem("my_lab", em);
+
+        console.log(em);
 
         $("#testing_trends").html("<div>Loading...</div>");
         $("#testing_trends").load("<?php echo base_url();?>charts/poc/testing_trends/"+em);

@@ -1,6 +1,7 @@
 
 <?php
-    echo "<div id=" . $div_name . " class='col-md-6'>
+	isset($class) ? $cls = $class : $cls = '';
+    echo "<div id=" . $div_name . " ".$cls.">
 
 </div>";
 
@@ -10,9 +11,9 @@
 <script type="text/javascript">
 
   
-    $("<?php echo $div; ?>").highcharts({
+    $("#<?php echo $div_name; ?>").highcharts({
         title: {
-            text: "<?php echo $title; ?>",
+            text: "<?= @$title; ?>",
             x: -20 //center
         },
         xAxis: {
@@ -21,7 +22,7 @@
         },
         yAxis: {
             title: {
-                text: "Number of Tests"
+                text: "<?php echo $yAxis; ?>"
             },
             plotLines: [{
                 value: 0,
@@ -30,12 +31,14 @@
             }]
         },
         tooltip: {
-            valueSuffix: ''
+            valueSuffix: "<?php echo $suffix; ?>",
+
         },
         legend: {
             layout: 'vertical',
             align: 'right',
-            verticalAlign: 'top',
+            verticalAlign: 'bottom',
+            floating: false,
             borderWidth: 0
         },
         series: <?php echo json_encode($trends);?>

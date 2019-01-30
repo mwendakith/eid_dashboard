@@ -6,7 +6,7 @@
 	.display_range {
 		width: 130px;
 		display: inline;
-	}
+	}*/
 	#nattatdiv {
 		background-color: white;
 		margin-right: 1em;
@@ -38,10 +38,10 @@
 		border-left: 8px solid transparent;
 		border-right: 8px solid transparent;
 		border-top: 8px solid black;
-	}*/
+	}
 </style>
 <div class="row">
-	<!-- <div class="col-md-12" id="nattatdiv">
+	<div class="col-md-12" id="nattatdiv">
 		<div class="col-md-6 col-md-offset-3">
 			<div class="col-md-4 title-name" id="title">
 				<center>National TAT <l style="color:red;">(Days)</l></center>
@@ -63,13 +63,26 @@
 				</div>
 			</div>
 		</div>
-	</div> -->
+	</div>
 </div>
 <div class="row">
 	<div class="col-md-12 col-sm-12 col-xs-12">
 		<div class="panel panel-default">
-		  <div class="panel-heading">
-		    Testing Trends <div class="display_range"></div>
+		  <div class="panel-heading" style="min-height: 5em;">
+		  	<div class="col-sm-4">
+			    Testing Trends
+			    <div class="display_range"></div>
+			</div>
+
+			<div class="col-sm-5">
+			    <h3> <div id="samples_heading">(Initial PCR)</div> </h3>
+			</div>
+		    
+		    <div class="col-sm-3">
+		    	<input type="submit" class="btn btn-primary" id="switchButton" onclick="switch_source()" value="Click to Switch To 2nd/3rd PCR">
+		    </div>
+
+
 		  </div>
 		  <div class="panel-body" id="testing_trends">
 		    <center><div class="loader"></div></center>
@@ -79,7 +92,7 @@
 </div>
 <div class="row">
 	<!-- Map of the country -->
-	<div class="col-md-3 col-sm-3 col-xs-12">
+	<div class="col-md-4 col-sm-3 col-xs-12">
 		<div class="panel panel-default">
 		  <div class="panel-heading">
 		  	EID Outcomes <div class="display_date" ></div>
@@ -91,44 +104,12 @@
 		</div>
 	</div>
 
-	<!-- Map of the country -->
-	<div class="col-md-4 col-sm-4 col-xs-12">
-		<div class="panel panel-default">
-		  <div class="panel-heading">
-			  HEI Follow up <div class="display_date"></div>
-		  </div>
-		  <div class="panel-body" id="hei_follow_up" style="/*height:500px;">
-		    <center><div class="loader"></div></center>
-		  </div>
-		  <!-- <div>
-		  	<button class="btn btn-default" onclick="justificationModal();">Click here for breakdown</button>
-		  </div> -->
-		</div>
-	</div>
-
-	<div class="col-md-5">
-		<div class="panel panel-default">
-		  <div class="panel-heading">
-		    Age <div class="display_date"></div>
-		  </div>
-		  <div class="panel-body" id="ageGroups">
-		    <center><div class="loader"></div></center>
-		  </div>
-		  <!-- <div>
-		  	<button class="btn btn-default" onclick="ageModal();">Click here for breakdown</button>
-		  </div> -->
-		</div>
-	</div>
-</div>
-
-<div class="row">
-	<!-- Map of the country -->
 	<div class="col-md-3 col-sm-3 col-xs-12">
 		<div class="panel panel-default">
 		  <div class="panel-heading">
-		  	Entry Point <div class="display_date" ></div>
+		  	Actual Infants Tested Positive Validation at Site Outcomes <div class="display_date" ></div>
 		  </div>
-		  <div class="panel-body" id="entry_point">
+		  <div class="panel-body" id="hei_outcomes" style="height:660px;">
 		  	<center><div class="loader"></div></center>
 		  </div>
 		  
@@ -136,26 +117,12 @@
 	</div>
 
 	<!-- Map of the country -->
-	<div class="col-md-3 col-sm-4 col-xs-12">
+	<div class="col-md-2 col-sm-4 col-xs-12">
 		<div class="panel panel-default">
 		  <div class="panel-heading">
-			  Mother Prophylaxis <div class="display_date"></div>
+			  Status of Actual Confirmed Positives at Site <div class="display_date"></div>
 		  </div>
-		  <div class="panel-body" id="mprophilaxis" style="/*height:500px;">
-		    <center><div class="loader"></div></center>
-		  </div>
-		  <!-- <div>
-		  	<button class="btn btn-default" onclick="justificationModal();">Click here for breakdown</button>
-		  </div> -->
-		</div>
-	</div>
-	<!-- Map of the country -->
-	<div class="col-md-3 col-sm-4 col-xs-12">
-		<div class="panel panel-default">
-		  <div class="panel-heading">
-			  Infant Prophylaxis <div class="display_date"></div>
-		  </div>
-		  <div class="panel-body" id="iprophilaxis" style="/*height:500px;">
+		  <div class="panel-body" id="hei_follow_up" style="height:660px;">
 		    <center><div class="loader"></div></center>
 		  </div>
 		  <!-- <div>
@@ -167,13 +134,57 @@
 	<div class="col-md-3">
 		<div class="panel panel-default">
 		  <div class="panel-heading">
-		    Feeding <div class="display_date"></div>
+		    EID Outcomes by Age  (Initial PCR) <div class="display_date"></div>
 		  </div>
-		  <div class="panel-body" id="feeding">
+		  <div class="panel-body" id="ageGroups" style="height:660px;">
 		    <center><div class="loader"></div></center>
 		  </div>
 		  <!-- <div>
 		  	<button class="btn btn-default" onclick="ageModal();">Click here for breakdown</button>
+		  </div> -->
+		</div>
+	</div>
+</div>
+
+<div class="row">
+	<!-- Map of the country -->
+	<div class="col-md-4 col-sm-3 col-xs-12">
+		<div class="panel panel-default">
+		  <div class="panel-heading">
+		  	EID Outcomes by Entry Point (Initial PCR) <div class="display_date" ></div>
+		  </div>
+		  <div class="panel-body" id="entry_point">
+		  	<center><div class="loader"></div></center>
+		  </div>
+		  
+		</div>
+	</div>
+
+	<!-- Map of the country -->
+	<div class="col-md-4 col-sm-4 col-xs-12">
+		<div class="panel panel-default">
+		  <div class="panel-heading">
+			  EID Outcomes by Mother PMTCT Regimen (Initial PCR)<div class="display_date"></div>
+		  </div>
+		  <div class="panel-body" id="mprophilaxis" style="/*height:500px;">
+		    <center><div class="loader"></div></center>
+		  </div>
+		  <!-- <div>
+		  	<button class="btn btn-default" onclick="justificationModal();">Click here for breakdown</button>
+		  </div> -->
+		</div>
+	</div>
+	<!-- Map of the country -->
+	<div class="col-md-4 col-sm-4 col-xs-12">
+		<div class="panel panel-default">
+		  <div class="panel-heading">
+			  EID Outcomes  by Infant Prophylaxis (Initial PCR) <div class="display_date"></div>
+		  </div>
+		  <div class="panel-body" id="iprophilaxis" style="/*height:500px;">
+		    <center><div class="loader"></div></center>
+		  </div>
+		  <!-- <div>
+		  	<button class="btn btn-default" onclick="justificationModal();">Click here for breakdown</button>
 		  </div> -->
 		</div>
 	</div>

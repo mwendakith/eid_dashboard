@@ -31,10 +31,8 @@
 			        },
 			        legend: {
 			            align: 'right',
-			            x: -30,
-			            verticalAlign: 'top',
-			            y: 25,
-			            floating: true,
+			            verticalAlign: 'bottom',
+			            floating: false,
 			            backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
 			            borderColor: '#CCC',
 			            borderWidth: 1,
@@ -56,9 +54,8 @@
 			                }
 			            }
 			        },colors: [
-				        '#52B3D9',
-				        '#E26A6A',
-				        '#913D88'
+				        '#F2784B',
+                        '#1BA39C'
 				    ],
 			        series: <?php echo json_encode($outcomes['testing_trends']);?>
 			    });

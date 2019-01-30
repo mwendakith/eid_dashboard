@@ -13,6 +13,91 @@ class Counties extends MY_Controller
 		$this->load->model('counties_model');
 	}
 
+	function counties_details($year=NULL,$month=NULL,$to_year=NULL,$to_month=NULL)
+	{
+		$data['outcomes'] = $this->counties_model->counties_details($year,$month,$to_year,$to_month);
+		
+		$link = $year . '/' . $month . '/' . $to_year . '/' . $to_month;
+
+		$data['link'] = base_url('charts/counties/download_counties_details/' . $link);
+
+		$this->load->view('counties_details_view', $data);
+	}
+
+	function download_counties_details($year=NULL,$month=NULL,$to_year=NULL,$to_month=NULL){
+		$this->counties_model->download_counties_details($year,$month,$to_year,$to_month);
+	}
+
+	function subCounties_outcomes($year=NULL,$month=NULL,$county=NULL,$to_year=NULL,$to_month=NULL)
+	{
+		$data['outcomes'] = $this->counties_model->sub_county_outcomes($year,$month,$county,$to_year,$to_month);
+		$data['type'] = 'normal';
+		$data['yAxisText'] = 'Tests';
+		$data['div'] = 'sub_counties_outcomes_chart';
+
+    	$this->load->view('subcounty_outcomes_view',$data);
+	}
+
+	function subCounties_positivity($year=NULL,$month=NULL,$county=NULL,$to_year=NULL,$to_month=NULL)
+	{
+		$data['outcomes'] = $this->counties_model->sub_county_positivity($year,$month,$county,$to_year,$to_month);
+		$data['type'] = 'percent';
+		$data['yAxisText'] = 'Positivity';
+		$data['div'] = 'sub_counties_positivity_chart';
+
+    	$this->load->view('subcounty_outcomes_view',$data);
+	}
+
+	function county_subcounties_details($year=NULL,$month=NULL,$county=NULL,$to_year=NULL,$to_month=NULL)
+	{
+		$data['outcomes'] = $this->counties_model->county_subcounties_details($year,$month,$county,$to_year,$to_month);
+
+		$link = $year . '/' . $month . '/' . $county . '/' . $to_month;
+
+		$data['link'] = base_url('charts/counties/download_county_subcounties_outcomes/' . $link);
+
+
+    	$this->load->view('county_subcounty__view',$data);
+	}
+
+	function download_county_subcounties_outcomes($year=NULL,$month=NULL,$county=NULL,$to_year=NULL,$to_month=NULL)
+	{
+		$this->counties_model->download_county_subcounty_outcomes($year,$month,$county,$to_year,$to_month);
+	}
+
+	function county_partners_details($year=NULL,$month=NULL,$county=NULL,$to_year=NULL,$to_month=NULL)
+	{
+		$data['outcomes'] = $this->counties_model->county_partners_details($year,$month,$county,$to_year,$to_month);
+
+		$link = $year . '/' . $month . '/' . $county . '/' . $to_month;
+
+		$data['link'] = base_url('charts/counties/download_county_partners_outcomes/' . $link);
+
+
+    	$this->load->view('county_partner__view',$data);
+	}
+
+
+	function county_facilities_details($year=NULL,$month=NULL,$county=NULL,$to_year=NULL,$to_month=NULL)
+	{
+		$data['outcomes'] = $this->counties_model->county_facilities_details($year,$month,$county,$to_year,$to_month);
+
+		$link = $year . '/' . $month . '/' . $county . '/' . $to_month;
+
+		$data['link'] = $link;
+		$data['sub_county'] = true;
+
+
+    	$this->load->view('county_partner__view',$data);
+	}
+
+	function download_county_partners_outcomes($year=NULL,$month=NULL,$county=NULL,$to_year=NULL,$to_month=NULL)
+	{
+		$this->counties_model->download_county_partners_outcomes($year,$month,$county,$to_year,$to_month);
+	}
+
+
+
 	function counties_tests($year = NULL, $month = NULL)
 	{
 		$data = $this->counties_model->country_tests($year, $month);
@@ -94,6 +179,14 @@ class Counties extends MY_Controller
 	// $this->table->set_template($template);
 	// echo $this->table->generate($data);
 	
+	}
+
+	function county_tat_outcomes($year=NULL, $month=NULL, $to_year=NULL, $to_month=NULL,$county=NULL)
+	{
+		$data['trends'] = $this->counties_model->county_tat_outcomes($year,$month,$to_year,$to_month,$county);
+		$data['div_name'] = "summary_counties_tat_summary";
+		$data['tat'] = true;
+		$this->load->view('trends_outcomes_view', $data);
 	}
 
 

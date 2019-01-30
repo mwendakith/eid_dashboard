@@ -3,16 +3,23 @@ DELIMITER //
 CREATE PROCEDURE `proc_get_eid_county_poc_age_range`
 (IN band_type INT(11), IN filter_county INT(11),  IN filter_year INT(11), IN from_month INT(11), IN to_year INT(11), IN to_month INT(11))
 BEGIN
-  SET @QUERY =    "SELECT  
-            `a`.`name` AS `name`,
-            `a`.`name` AS `age_band`,
-            `a`.`age_range`,
-            SUM(`pos`) AS `pos`, 
-            SUM(`neg`) AS `neg`
-          FROM `site_age_breakdown_poc` `n`
-          LEFT JOIN `age_bands` `a` ON `a`.`ID` = `n`.`age_band_id`
-          LEFT JOIN `view_facilitys` `vf` ON `n`.`facility` = `vf`.`ID` 
-          WHERE 1";
+  SET @QUERY =    "SELECT  ";
+
+    IF (band_type = 1) THEN
+        SET @QUERY = CONCAT(@QUERY, "  `a`.`name` AS `agename`,  ");
+    ELSE
+        SET @QUERY = CONCAT(@QUERY, " `a`.`age_range` AS `agename`,  ");
+    END IF;
+
+
+    SET @QUERY = CONCAT(@QUERY,   " 
+        
+        SUM(`pos`) AS `pos`, 
+        SUM(`neg`) AS `neg`
+      FROM `site_age_breakdown_poc` `n`
+      LEFT JOIN `age_bands` `a` ON `a`.`ID` = `n`.`age_band_id`
+      LEFT JOIN `view_facilitys` `vf` ON `n`.`facility` = `vf`.`ID` 
+      WHERE 1 ");
   
     IF (from_month != 0 && from_month != '') THEN
       IF (to_month != 0 && to_month != '' && filter_year = to_year) THEN
@@ -32,9 +39,9 @@ BEGIN
     END IF;
 
     IF (band_type = 1) THEN
-        SET @QUERY = CONCAT(@QUERY, " GROUP BY `a`.`ID`  ");
+        SET @QUERY = CONCAT(@QUERY, " GROUP BY `a`.`name`  ");
     ELSE
-        SET @QUERY = CONCAT(@QUERY, " GROUP BY `a`.`age_range_id`  ");
+        SET @QUERY = CONCAT(@QUERY, " GROUP BY `a`.`age_range`  ");
     END IF;
 
     PREPARE stmt FROM @QUERY;

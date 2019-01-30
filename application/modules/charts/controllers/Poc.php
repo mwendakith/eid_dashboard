@@ -44,7 +44,7 @@ class Poc extends MY_Controller
 
 	function county_outcomes($year=null,$month=null,$toYear=null,$toMonth=null)
 	{
-		$data['outcomes'] = $this->poc_model->county_outcomes($year,$month,$toYear,$toMonth);
+		$data['trends'] = $this->poc_model->county_outcomes($year,$month,$toYear,$toMonth);
 		$data['div_name'] = "summary_counties_summary_poc";
 
 		$this->load->view('trends_outcomes_view', $data);

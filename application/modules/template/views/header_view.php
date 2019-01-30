@@ -158,7 +158,7 @@
 							<b class="caret"></b></a>
 							<ul class="dropdown-menu">
 								<li><a href="<?php echo base_url();?>labPerformance">Lab Performance</a></li>
-								<li><a href="<?php echo base_url();?>labPerformance/poc">Lab Performance</a></li>
+								<li><a href="<?php echo base_url();?>labPerformance/poc">POC</a></li>
 							</ul>
 						</li>
 						

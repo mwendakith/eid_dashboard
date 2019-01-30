@@ -177,12 +177,11 @@ function date_filter(criteria, id)
       }
       $(".display_date").html("( "+obj['year']+" "+obj['month']+" )");
       
-      $("#stacked_graph").html("<div>Loading...</div>");
-      $("#lineargauge").html("<div>Loading...</div>");
+      $("#testing_trends").html("<div>Loading...</div>");
 
       var em = localStorage.getItem("my_lab");
 
-        $("#graphs").load("<?php echo base_url();?>charts/poc/testing_trends/"+em+"/"+obj['year']+"/"+obj['month']);
+        $("#testing_trends").load("<?php echo base_url();?>charts/poc/testing_trends/"+em+"/"+obj['year']+"/"+obj['month']);
       });    
   }
    

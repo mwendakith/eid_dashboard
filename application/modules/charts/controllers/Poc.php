@@ -42,11 +42,12 @@ class Poc extends MY_Controller
 		$this->load->view('agegroup_view', $data);
 	}
 
-	function county($county=null,$year=null,$month=null,$toYear=null,$toMonth=null)
+	function county_outcomes($year=null,$month=null,$toYear=null,$toMonth=null)
 	{
-		$data['outcomes'] = $this->poc_model->get_agebreakdown($county,$year,$month,$toYear,$toMonth);
+		$data['outcomes'] = $this->poc_model->county_outcomes($year,$month,$toYear,$toMonth);
+		$data['div_name'] = "summary_counties_summary_poc";
 
-		$this->load->view('breakdown_listing', $data);
+		$this->load->view('trends_outcomes_view', $data);
 	}
 }
 

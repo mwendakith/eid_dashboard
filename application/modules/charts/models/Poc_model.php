@@ -251,6 +251,58 @@ class Poc_model extends MY_Model
 		// $data['ageGnd'][1]['drilldown']['color'] = '#96281B';
 
 		return $data;
+	}		
+
+
+	function county_outcomes($year=null,$month=null,$to_year=null,$to_month=null)
+	{
+		if ($year==null || $year=='null') $year = $this->session->userdata('filter_year');
+
+		if ($month==null || $month=='null') {
+			if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
+				$month = 0;
+			}else {
+				$month = $this->session->userdata('filter_month');
+			}
+		}
+		if ($to_month==null || $to_month=='null') $to_month = 0;
+		if ($to_year==null || $to_year=='null') $to_year = 0;
+
+
+		$sql = "CALL `proc_get_eid_county_poc_outcomes`('".$year."','".$month."','".$to_year."','".$to_month."')";
+		// echo $sql;die();
+		$result = $this->db->query($sql)->result_array();
+				
+		$data['outcomes'][0]['name'] = 'Positive';
+		$data['outcomes'][1]['name'] = 'Negative';
+		$data['outcomes'][2]['name'] = "Positivity";
+		
+		$data['outcomes'][2]['color'] = '#913D88';
+
+		$data['outcomes'][0]['type'] = "column";
+		$data['outcomes'][1]['type'] = "column";
+		$data['outcomes'][2]['type'] = "spline";
+
+		$data['outcomes'][0]['yAxis'] = 1;
+		$data['outcomes'][1]['yAxis'] = 1;
+
+		$data['outcomes'][0]['tooltip'] = array("valueSuffix" => ' ');
+		$data['outcomes'][1]['tooltip'] = array("valueSuffix" => ' ');
+		$data['outcomes'][2]['tooltip'] = array("valueSuffix" => ' %');
+
+		$data['title'] = "";
+		
+		$data['categories'][0] = 'No Data';
+
+		foreach ($result as $key => $value) {
+			$data['categories'][$key] 		= $value['countyname'];
+
+			$data["outcomes"][0]["data"][$key]	=  (int) $value['pos'];
+			$data["outcomes"][1]["data"][$key]	=  (int) $value['neg'];
+			$data["outcomes"][2]["data"][$key]	= round(@( ((int) $value['pos']*100) /((int) $value['pos']+(int) $value['neg'])),1);
+			
+		}
+		return $data;
 	}	
 
 

@@ -243,8 +243,8 @@ class Poc_model extends MY_Model
 		foreach ($result as $key => $value) {
 			$data['categories'][$key] 		= $value['agename'];
 
-			$data["ageGnd"][0]["data"][$key]	=  (int) $value['positive'];
-			$data["ageGnd"][1]["data"][$key]	=  (int) $value['negative'];
+			$data["ageGnd"][0]["data"][$key]	=  (int) $value['pos'];
+			$data["ageGnd"][1]["data"][$key]	=  (int) $value['neg'];
 			
 		}
 		// $data['ageGnd'][0]['drilldown']['color'] = '#913D88';

@@ -217,4 +217,43 @@ class Poc_model extends MY_Model
 	}	
 
 
+	function ages($county=null,$year=null,$month=null,$to_year=null,$to_month=null)
+	{
+		if($county == NULL || $county == 48 || $county=='null') $county=0;
+		if ($year==null || $year=='null') $year = $this->session->userdata('filter_year');
+
+		if ($month==null || $month=='null') {
+			if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
+				$month = 0;
+			}else {
+				$month = $this->session->userdata('filter_month');
+			}
+		}
+		if ($to_month==null || $to_month=='null') $to_month = 0;
+		if ($to_year==null || $to_year=='null') $to_year = 0;
+
+
+		$sql = "CALL `proc_get_eid_county_poc_age_range`(0, '".$county."','".$year."','".$month."','".$to_year."','".$to_month."')";
+		// echo $sql;die();
+		$result = $this->db->query($sql)->result_array();
+				
+		$data['ageGnd'][0]['name'] = 'Positive';
+		$data['ageGnd'][1]['name'] = 'Negative';
+
+		foreach ($result as $key => $value) {
+			$data['categories'][$key] 		= $value['name'];
+
+			$data["ageGnd"][0]["data"][$key]	=  (int) $value['positive'];
+			$data["ageGnd"][1]["data"][$key]	=  (int) $value['negative'];
+			
+		}
+		$data['ageGnd'][0]['drilldown']['color'] = '#913D88';
+		$data['ageGnd'][1]['drilldown']['color'] = '#96281B';
+
+		return $data;
+	}	
+
+
+
+
 }

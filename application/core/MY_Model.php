@@ -62,7 +62,8 @@ class MY_Model extends CI_Model
 		// $headers = array('X-Auth-Token' => 'jhWXc65gZUI=yG5ndWkpAGNsaW50b85oZWFsdGhhY2Nlc3Mub3Jn');
 		$headers = array();
 		$options = array('verify' => false);
-		$my_url = "http://eidapi.nascop.org/eid/ver2.0/" . $url;
+		// $my_url = "http://eidapi.nascop.org/eid/ver2.0/" . $url;
+		$my_url = "https://api.nascop.org/eid/ver2.0/" . $url;
 		// $request = $this->requests->get($my_url, $headers, $options);
 		$request = $this->requests->get($my_url);
 

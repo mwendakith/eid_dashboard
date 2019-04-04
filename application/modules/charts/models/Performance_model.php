@@ -126,7 +126,7 @@ class Performance_model extends MY_Model
 						
 						<td>".number_format((int) ($value['pos']+$value['neg']+$value['confirmdna'] + $value['repeatspos'] + $value['tiebreaker']))."</td>
 						<td>".number_format((int) ($value['pos']+$value['confirmedpos'] + $value['repeatspospos'] + $value['tiebreakerPOS']))."</td>
-						
+						<td> <button class='btn btn-primary'  onclick='expand_poc(" . $value['id'] . ");' style='background-color: #1BA39C;color: white; margin-top: 1em;margin-bottom: 1em;'>View</button> </td>						
 					</tr>";
 					// <td>".number_format((int) $value['alltests'] + (int) $value['eqa'] + (int) $value['confirmdna'] + (int) $value['repeatspos'])."</td>
 					// 	<td>".number_format((int) $value['pos'])."</td>
@@ -141,6 +141,52 @@ class Performance_model extends MY_Model
 		return $ul;
 	}
 
+
+	function poc_performance_details($lab_id=NULL,$year=NULL,$month=NULL,$to_year=null,$to_month=null)
+	{
+		// echo round(3.6451895227869, 2, PHP_ROUND_HALF_UP);die();
+		if ($year==null || $year=='null') {
+			$year = $this->session->userdata('filter_year');
+		}
+		if ($to_month==null || $to_month=='null') {
+			$to_month = 0;
+		}
+		if ($to_year==null || $to_year=='null') {
+			$to_year = 0;
+		}
+		if ($month==null || $month=='null') {
+			if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
+				$month = 0;
+			}else {
+				$month = $this->session->userdata('filter_month');
+			}
+		}
+
+		$sql = "CALL `proc_get_eid_poc_site_details`('".$lab_id."','".$year."','".$month."','".$to_year."','".$to_month."');";
+		// echo "<pre>";print_r($sql);die();
+		$result = $this->db->query($sql)->result_array();
+		// echo "<pre>";print_r($result);echo "</pre>";die();
+						// <td>".round((($routinesup*100)/$routine), 1, PHP_ROUND_HALF_UP)."</td>
+		$ul = '';
+		foreach ($result as $key => $value) {
+			$name = "POC Sites";
+			if($value['name']) $name = $value['name'];
+			$ul .= "<tr>
+						<td>".($key+1)."</td>
+						<td>".$value['name']."</td>
+						<td>".$value['facilitycode']."</td>
+
+						<td>".number_format((int) $value['alltests'])."</td>
+						<td>".number_format((int) ($value['positive'] + $value['repeatsposPOS'] + $value['confirmedPOS']) )."</td>
+						<td>".number_format((int) ($value['positive'] + $value['negative']))."</td>
+						<td>".number_format((int) $value['positive'])."</td>				
+						<td>".number_format((int) $value['infantsless2m'])."</td>				
+						<td>".number_format((int) $value['infantsless2mpos'])."</td>				
+					</tr>";
+		}
+
+		return $ul;
+	}
 
 	function download_lab_performance_stat($year=NULL,$month=NULL,$to_year=null,$to_month=null)
 	{

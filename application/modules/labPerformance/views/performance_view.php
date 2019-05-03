@@ -108,7 +108,7 @@
         <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    POC STATS <div class="display_date"></div>
+                    POC Hub-Spoke Stats <div class="display_date"></div>
                 </div>
                 <div class="panel-body" id="poc">
                     <center><div class="loader"></div></center>

@@ -14,12 +14,24 @@
         			<th>#</th>
               <th>Name</th>
               <th>MFL Code</th>
-              <th>Tests</th>
+              <th>Received Samples at Lab</th>
+              <th>Rejected Samples (on receipt at lab)</th>
+              <th>All Tests (plus reruns) Done at Lab</th>
+              <th>Initial PCR Tests</th>
+              <th>Initial PCR Positives</th>
+              <th>2nd/3rd PCR Tests</th>
+              <th>2nd/3rd PCR Positives</th>
+              <th>Confirmatory PCR Tests</th>
+              <th>Confirmatory PCR Positives</th>
+              <th>Tests with Valid Outcomes</th>
+              <th>Tests with Valid Outcomes - Positives</th>
+              <!-- <th>Tests</th>
               <th>Positives</th>
               <th>Initial PCR</th>
               <th>Initial PCR Positive</th>
               <th>&lt; 2m</th>
-              <th>&lt; 2m Positive</th>
+              <th>&lt; 2m Positive</th> -->
+              
         		</tr>
         	</thead>
         	<tbody>

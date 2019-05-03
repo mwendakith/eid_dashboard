@@ -64,8 +64,8 @@ class MY_Model extends CI_Model
 		$options = array('verify' => false);
 		// $my_url = "http://eidapi.nascop.org/eid/ver2.0/" . $url;
 		$my_url = "https://api.nascop.org/eid/ver2.0/" . $url;
-		// $request = $this->requests->get($my_url, $headers, $options);
-		$request = $this->requests->get($my_url);
+		$request = $this->requests->get($my_url, $headers, $options);
+		// $request = $this->requests->get($my_url);
 
 		// return json_decode(json_encode(json_decode($request->body)), true);
 		return json_decode($request->body);

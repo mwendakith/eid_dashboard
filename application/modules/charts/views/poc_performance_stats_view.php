@@ -17,7 +17,7 @@
   			<th>Confirmatory PCR Positives</th>
   			<th>Tests with Valid Outcomes</th>
         <th>Tests with Valid Outcomes - Positives</th>
-  			<th>View Details</th>
+  			<th>View Spokes</th>
   		</tr>
   	</thead>
   	<tbody>

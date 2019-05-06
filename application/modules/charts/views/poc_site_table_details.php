@@ -14,6 +14,7 @@
         			<th>#</th>
               <th>Name</th>
               <th>MFL Code</th>
+              <th>County</th>
               <th>Received Samples at Hub</th>
               <th>Rejected Samples (on receipt at Hub)</th>
               <th> All Tests Done at Hub</th>

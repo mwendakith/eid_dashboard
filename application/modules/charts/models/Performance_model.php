@@ -111,6 +111,7 @@ class Performance_model extends MY_Model
 						<td>".($key+1)."</td>
 						<td>" . $name . "</td>
 						<td>" . $value['facilitycode'] . "</td>
+						<td>" . $value['countyname'] . "</td>
 						<td>".number_format((int) $value['sitesending'])."</td>
 						<td>".number_format((int) $value['received'])."</td>
 						<td>".number_format((int) $value['rejected']) . " (" . 
@@ -175,6 +176,7 @@ class Performance_model extends MY_Model
 						<td>".($key+1)."</td>
 						<td>".$value['name']."</td>
 						<td>".$value['facilitycode']."</td>
+						<td>" . $value['countyname'] . "</td>
 
 						<td>".number_format((int) $value['received'])."</td>
 						<td>".number_format((int) $value['rejected']) . " (" . 

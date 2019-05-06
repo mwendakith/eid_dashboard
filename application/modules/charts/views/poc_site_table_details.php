@@ -14,9 +14,9 @@
         			<th>#</th>
               <th>Name</th>
               <th>MFL Code</th>
-              <th>Received Samples at Lab</th>
-              <th>Rejected Samples (on receipt at lab)</th>
-              <th>All Tests (plus reruns) Done at Lab</th>
+              <th>Received Samples at Hub</th>
+              <th>Rejected Samples (on receipt at Hub)</th>
+              <th> All Tests Done at Hub</th>
               <th>Initial PCR Tests</th>
               <th>Initial PCR Positives</th>
               <th>2nd/3rd PCR Tests</th>

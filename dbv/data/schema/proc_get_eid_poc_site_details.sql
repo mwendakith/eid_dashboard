@@ -8,6 +8,8 @@ BEGIN
                     `facilitys`.`name`, 
                     `facilitys`.`facilitycode`, 
                   SUM(`alltests`) AS `alltests`, 
+                  SUM(`received`) AS `received`, 
+                  SUM(`rejected`) AS `rejected`,  
                   SUM(`tests`) AS `tests`, 
                   SUM(`actualinfants`) AS `actualinfants`, 
                   SUM(`pos`) AS `positive`, 

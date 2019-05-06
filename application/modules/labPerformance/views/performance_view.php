@@ -216,8 +216,7 @@
         $(".display_date").load("<?php echo base_url('charts/labs/display_date'); ?>");
 
       }
-      else{
-        
+      else{        
         $("#first").hide();
         $("#second").show();
         $("#fourth").show();

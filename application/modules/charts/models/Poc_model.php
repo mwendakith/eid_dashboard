@@ -38,9 +38,9 @@ class Poc_model extends MY_Model
 		$data['outcomes'][3]['name'] = "Initial PCR Positivity";
 		$data['outcomes'][4]['name'] = "&lt; 2m % Contribution";
 
-		//$data['outcomes'][0]['color'] = '#52B3D9';
-		// $data['outcomes'][0]['color'] = '#E26A6A';
-		// $data['outcomes'][1]['color'] = '#257766';
+		$data['outcomes'][0]['color'] = '#52B3D9';
+		$data['outcomes'][1]['color'] = '#E26A6A';
+		$data['outcomes'][2]['color'] = '#257766';
 		$data['outcomes'][3]['color'] = '#913D88';
 
 		$data['outcomes'][0]['type'] = "column";

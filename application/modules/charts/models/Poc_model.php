@@ -32,28 +32,32 @@ class Poc_model extends MY_Model
 		// echo $sql;die();
 		$result = $this->db->query($sql)->result_array();
 
-		$data['outcomes'][0]['name'] = "Other PCRs";
-		$data['outcomes'][1]['name'] = "Initial PCR";
-		$data['outcomes'][2]['name'] = "Positivity";
-		$data['outcomes'][3]['name'] = "&lt; 2m % Contribution";
+		$data['outcomes'][0]['name'] = "Confirmatory PCR";
+		$data['outcomes'][1]['name'] = "2nd/3rd PCR";
+		$data['outcomes'][2]['name'] = "Initial PCR";
+		$data['outcomes'][3]['name'] = "Initial PCR Positivity";
+		$data['outcomes'][4]['name'] = "&lt; 2m % Contribution";
 
-		//$data['outcomes'][0]['color'] = '#52B3D9';
-		// $data['outcomes'][0]['color'] = '#E26A6A';
-		// $data['outcomes'][1]['color'] = '#257766';
-		$data['outcomes'][2]['color'] = '#913D88';
+		$data['outcomes'][0]['color'] = '#52B3D9';
+		$data['outcomes'][1]['color'] = '#E26A6A';
+		$data['outcomes'][2]['color'] = '#257766';
+		$data['outcomes'][3]['color'] = '#913D88';
 
 		$data['outcomes'][0]['type'] = "column";
 		$data['outcomes'][1]['type'] = "column";
-		$data['outcomes'][2]['type'] = "spline";
+		$data['outcomes'][2]['type'] = "column";
 		$data['outcomes'][3]['type'] = "spline";
+		$data['outcomes'][4]['type'] = "spline";
 
 		$data['outcomes'][0]['yAxis'] = 1;
 		$data['outcomes'][1]['yAxis'] = 1;
+		$data['outcomes'][2]['yAxis'] = 1;
 
 		$data['outcomes'][0]['tooltip'] = array("valueSuffix" => ' ');
 		$data['outcomes'][1]['tooltip'] = array("valueSuffix" => ' ');
-		$data['outcomes'][2]['tooltip'] = array("valueSuffix" => ' %');
+		$data['outcomes'][2]['tooltip'] = array("valueSuffix" => ' ');
 		$data['outcomes'][3]['tooltip'] = array("valueSuffix" => ' %');
+		$data['outcomes'][4]['tooltip'] = array("valueSuffix" => ' %');
 
 		$data['title'] = "";
 		
@@ -62,10 +66,11 @@ class Poc_model extends MY_Model
 		foreach ($result as $key => $value) {
 			
 				$data['categories'][$key] = $this->resolve_month($value['month']).'-'.$value['year'];
-				$data["outcomes"][0]["data"][$key]	= (int) ($value['tests'] - $value['firstdna']);
-				$data["outcomes"][1]["data"][$key]	= (int) $value['firstdna'];
-				$data["outcomes"][2]["data"][$key]	= round(@( ((int) $value['positive']*100) /((int) $value['positive']+(int) $value['negative'])),1);
-				$data["outcomes"][3]["data"][$key]	= round(@( ((int) $value['infantsless2m']*100) /((int) $value['tests'])),1);
+				$data["outcomes"][0]["data"][$key]	= (int) $value['confirmdna'];
+				$data["outcomes"][1]["data"][$key]	= (int) $value['repeatspos'];
+				$data["outcomes"][2]["data"][$key]	= (int) $value['firstdna'];
+				$data["outcomes"][3]["data"][$key]	= round(@( ((int) $value['positive']*100) /((int) $value['positive']+(int) $value['negative'])),1);
+				$data["outcomes"][4]["data"][$key]	= round(@( ((int) $value['infantsless2m']*100) /((int) $value['tests'])),1);
 			
 		}
 		// echo "<pre>";print_r($data);die();

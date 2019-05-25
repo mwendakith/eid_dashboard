@@ -5,10 +5,11 @@
   			<th>No</th>
   			<th>Facility</th>
   			<th>MFL</th>
+        <th>County</th>
   			<th>Facilities Sending Samples</th>
-  			<th>Received Samples at Lab</th>
-  			<th>Rejected Samples (on receipt at lab)</th>
-  			<th>All Tests (plus reruns) Done at Lab</th>
+  			<th>Received Samples at Hub</th>
+  			<th>Rejected Samples (on receipt at Hub)</th>
+  			<th>Tests with Valid Outcomes  + Redraws (after testing)</th>
   			<th>Initial PCR Tests</th>
   			<th>Initial PCR Positives</th>
   			<th>2nd/3rd PCR Tests</th>
@@ -17,7 +18,7 @@
   			<th>Confirmatory PCR Positives</th>
   			<th>Tests with Valid Outcomes</th>
         <th>Tests with Valid Outcomes - Positives</th>
-  			<th>View Details</th>
+  			<th>View Spokes</th>
   		</tr>
   	</thead>
   	<tbody>

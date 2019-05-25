@@ -67,6 +67,19 @@
     </div>
 </div>
 
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                POC Hub-Spoke Stats <div class="display_date"></div>
+            </div>
+            <div class="panel-body" id="poc">
+                <center><div class="loader"></div></center>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <div id="my_empty_div"></div>
 
@@ -76,10 +89,10 @@
     $.get("<?php echo base_url();?>template/dates", function(data){
       obj = $.parseJSON(data);
 
-    if(obj['month'] == "null" || obj['month'] == null){
-      obj['month'] = "";
+    if(obj['monthNo'] == "null" || obj['monthNo'] == null){
+      obj['monthNo'] = "";
     }
-    $(".display_date").html("( "+obj['year']+" "+obj['month']+" )");
+    $(".display_date").html("( "+obj['year']+" "+obj['monthNo']+" )");
     });
 
     localStorage.setItem("my_lab", 0);
@@ -89,6 +102,7 @@
     $("#entrypoints").load("<?php echo base_url();?>charts/poc/entrypoints");
     $("#ages").load("<?php echo base_url();?>charts/poc/ages");
     $("#county_outcomes").load("<?php echo base_url();?>charts/poc/county_outcomes");
+    $("#poc").load("<?php echo base_url();?>charts/LabPerformance/poc_performance_stats");
 
     $("button").click(function () {
         var first, second;
@@ -118,12 +132,14 @@
           $("#entrypoints").html("<div>Loading...</div>");
           $("#ages").html("<div>Loading...</div>");
           $("#county_outcomes").html("<div>Loading...</div>");
+          $("#poc").html("<div>Loading...</div>");
 
           $("#testing_trends").load("<?php echo base_url();?>charts/poc/testing_trends/"+em+"/"+from[1]+"/"+from[0]+"/"+to[1]+"/"+to[0]);
           $("#eid_outcomes").load("<?php echo base_url();?>charts/poc/eid_outcomes/"+em+"/"+from[1]+"/"+from[0]+"/"+to[1]+"/"+to[0]);
           $("#entrypoints").load("<?php echo base_url();?>charts/poc/entrypoints/"+em+"/"+from[1]+"/"+from[0]+"/"+to[1]+"/"+to[0]);
           $("#ages").load("<?php echo base_url();?>charts/poc/ages/"+em+"/"+from[1]+"/"+from[0]+"/"+to[1]+"/"+to[0]);
           $("#county_outcomes").load("<?php echo base_url();?>charts/poc/county_outcomes/"+from[1]+"/"+from[0]+"/"+to[1]+"/"+to[0]);
+          $("#poc").load("<?php echo base_url();?>charts/LabPerformance/poc_performance_stats/"+from[1]+"/"+from[0]+"/"+to[1]+"/"+to[0]);
         }
             
     });
@@ -168,30 +184,32 @@ function date_filter(criteria, id)
         month = null;
     }
 
-    var posting = $.post( '<?php echo base_url();?>template/filter_date_data', { 'year': year, 'month': month } );
+    var posting = $.post( '<?php echo base_url();?>template/filter_date_data', { 'year': year, 'monthNo': month } );
 
     // Put the results in a div
     posting.done(function( data ) {
       obj = $.parseJSON(data);
       console.log(obj);
-      if(obj['month'] == "null" || obj['month'] == null){
-        obj['month'] = "";
+      if(obj['monthNo'] == "null" || obj['monthNo'] == null){
+        obj['monthNo'] = "";
       }
-      $(".display_date").html("( "+obj['year']+" "+obj['month']+" )");
+      $(".display_date").html("( "+obj['year']+" "+obj['monthNo']+" )");
       
       $("#testing_trends").html("<div>Loading...</div>");
       $("#eid_outcomes").html("<div>Loading...</div>");
       $("#entrypoints").html("<div>Loading...</div>");
       $("#ages").html("<div>Loading...</div>");
       $("#county_outcomes").html("<div>Loading...</div>");
+      $("#poc").html("<div>Loading...</div>");
 
       var em = localStorage.getItem("my_lab");
 
-        $("#testing_trends").load("<?php echo base_url();?>charts/poc/testing_trends/"+em+"/"+obj['year']+"/"+obj['month']);
-        $("#eid_outcomes").load("<?php echo base_url();?>charts/poc/eid_outcomes/"+em+"/"+obj['year']+"/"+obj['month']);
-        $("#entrypoints").load("<?php echo base_url();?>charts/poc/entrypoints/"+em+"/"+obj['year']+"/"+obj['month']);
-        $("#ages").load("<?php echo base_url();?>charts/poc/ages/"+em+"/"+obj['year']+"/"+obj['month']);
-        $("#county_outcomes").load("<?php echo base_url();?>charts/poc/county_outcomes/"+obj['year']+"/"+obj['month']);
+      $("#testing_trends").load("<?php echo base_url();?>charts/poc/testing_trends/"+em+"/"+obj['year']+"/"+obj['monthNo']);
+      $("#eid_outcomes").load("<?php echo base_url();?>charts/poc/eid_outcomes/"+em+"/"+obj['year']+"/"+obj['monthNo']);
+      $("#entrypoints").load("<?php echo base_url();?>charts/poc/entrypoints/"+em+"/"+obj['year']+"/"+obj['monthNo']);
+      $("#ages").load("<?php echo base_url();?>charts/poc/ages/"+em+"/"+obj['year']+"/"+obj['monthNo']);
+      $("#county_outcomes").load("<?php echo base_url();?>charts/poc/county_outcomes/"+obj['year']+"/"+obj['monthNo']);
+      $("#poc").load("<?php echo base_url();?>charts/LabPerformance/poc_performance_stats/"+obj['year']+"/"+obj['monthNo']);
       });    
   }
    

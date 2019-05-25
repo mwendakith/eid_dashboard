@@ -63,8 +63,7 @@ class Performance_model extends MY_Model
 						<td>".number_format((int) $value['tiebreakerPOS'])."</td>
 						
 						<td>".number_format((int) ($value['pos']+$value['neg']+$value['confirmdna'] + $value['repeatspos'] + $value['tiebreaker']))."</td>
-						<td>".number_format((int) ($value['pos']+$value['confirmedpos'] + $value['repeatspospos'] + $value['tiebreakerPOS']))."</td>
-						
+						<td>".number_format((int) ($value['pos']+$value['confirmedpos'] + $value['repeatspospos'] + $value['tiebreakerPOS']))."</td>						
 					</tr>";
 					// <td>".number_format((int) $value['alltests'] + (int) $value['eqa'] + (int) $value['confirmdna'] + (int) $value['repeatspos'])."</td>
 					// 	<td>".number_format((int) $value['pos'])."</td>
@@ -112,6 +111,7 @@ class Performance_model extends MY_Model
 						<td>".($key+1)."</td>
 						<td>" . $name . "</td>
 						<td>" . $value['facilitycode'] . "</td>
+						<td>" . $value['countyname'] . "</td>
 						<td>".number_format((int) $value['sitesending'])."</td>
 						<td>".number_format((int) $value['received'])."</td>
 						<td>".number_format((int) $value['rejected']) . " (" . 
@@ -128,6 +128,7 @@ class Performance_model extends MY_Model
 						<td>".number_format((int) ($value['pos']+$value['confirmedpos'] + $value['repeatspospos'] + $value['tiebreakerPOS']))."</td>
 						<td> <button class='btn btn-primary'  onclick='expand_poc(" . $value['id'] . ");' style='background-color: #1BA39C;color: white; margin-top: 1em;margin-bottom: 1em;'>View</button> </td>						
 					</tr>";
+
 					// <td>".number_format((int) $value['alltests'] + (int) $value['eqa'] + (int) $value['confirmdna'] + (int) $value['repeatspos'])."</td>
 					// 	<td>".number_format((int) $value['pos'])."</td>
 					// 	<td>".round(@(($value['pos']*100)/$value['tests']), 1, PHP_ROUND_HALF_UP)."</td>
@@ -175,14 +176,30 @@ class Performance_model extends MY_Model
 						<td>".($key+1)."</td>
 						<td>".$value['name']."</td>
 						<td>".$value['facilitycode']."</td>
+						<td>" . $value['countyname'] . "</td>
 
+						<td>".number_format((int) $value['received'])."</td>
+						<td>".number_format((int) $value['rejected']) . " (" . 
+							round(@(($value['rejected']*100)/$value['received']), 1, PHP_ROUND_HALF_UP)."%)</td>
 						<td>".number_format((int) $value['alltests'])."</td>
+						<td>".number_format((int) ($value['pos']+$value['neg']))."</td>
+						<td>".number_format((int) $value['pos'])."</td>
+						<td>".number_format((int) $value['repeatspos'])."</td>
+						<td>".number_format((int) $value['repeatspospos'])."</td>
+						<td>".number_format((int) $value['confirmdna'])."</td>
+						<td>".number_format((int) $value['confirmedpos'])."</td>
+						
+						<td>".number_format((int) ($value['pos']+$value['neg']+$value['confirmdna'] + $value['repeatspos'] + $value['tiebreaker']))."</td>
+						<td>".number_format((int) ($value['pos']+$value['confirmedpos'] + $value['repeatspospos'] + $value['tiebreakerPOS']))."</td>	
+
+					</tr>";
+
+						/*<td>".number_format((int) $value['alltests'])."</td>
 						<td>".number_format((int) ($value['positive'] + $value['repeatsposPOS'] + $value['confirmedPOS']) )."</td>
 						<td>".number_format((int) ($value['positive'] + $value['negative']))."</td>
 						<td>".number_format((int) $value['positive'])."</td>				
 						<td>".number_format((int) $value['infantsless2m'])."</td>				
-						<td>".number_format((int) $value['infantsless2mpos'])."</td>				
-					</tr>";
+						<td>".number_format((int) $value['infantsless2mpos'])."</td>*/
 		}
 
 		return $ul;
@@ -679,7 +696,6 @@ class Performance_model extends MY_Model
 			$data['outcomes'][2]['data'][$key] = $neg;
 			$data['outcomes'][3]['data'][$key] = round(@( ($pos*100)/$tests), 1);					
 		}
-
 		return $data;
 	}
 

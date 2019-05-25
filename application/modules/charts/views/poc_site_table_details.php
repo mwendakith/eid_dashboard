@@ -14,12 +14,25 @@
         			<th>#</th>
               <th>Name</th>
               <th>MFL Code</th>
-              <th>Tests</th>
+              <th>County</th>
+              <th>Received Samples at Hub</th>
+              <th>Rejected Samples (on receipt at Hub)</th>
+              <th> All Tests Done at Hub</th>
+              <th>Initial PCR Tests</th>
+              <th>Initial PCR Positives</th>
+              <th>2nd/3rd PCR Tests</th>
+              <th>2nd/3rd PCR Positives</th>
+              <th>Confirmatory PCR Tests</th>
+              <th>Confirmatory PCR Positives</th>
+              <th>Tests with Valid Outcomes</th>
+              <th>Tests with Valid Outcomes - Positives</th>
+              <!-- <th>Tests</th>
               <th>Positives</th>
               <th>Initial PCR</th>
               <th>Initial PCR Positive</th>
               <th>&lt; 2m</th>
-              <th>&lt; 2m Positive</th>
+              <th>&lt; 2m Positive</th> -->
+              
         		</tr>
         	</thead>
         	<tbody>

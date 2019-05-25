@@ -4,10 +4,13 @@ CREATE PROCEDURE `proc_get_eid_poc_site_details`
 (IN filter_lab INT(11), IN filter_year INT(11), IN from_month INT(11), IN to_year INT(11), IN to_month INT(11))
 BEGIN
   SET @QUERY =    "SELECT 
-                    `facilitys`.`id`, 
-                    `facilitys`.`name`, 
-                    `facilitys`.`facilitycode`, 
+                    `f`.`id`, 
+                    `f`.`name`, 
+                    `f`.`facilitycode`, 
+                    `f`.`countyname`, 
                   SUM(`alltests`) AS `alltests`, 
+                  SUM(`received`) AS `received`, 
+                  SUM(`rejected`) AS `rejected`,  
                   SUM(`tests`) AS `tests`, 
                   SUM(`actualinfants`) AS `actualinfants`, 
                   SUM(`pos`) AS `positive`, 
@@ -24,7 +27,7 @@ BEGIN
                   SUM(`infantsabove2mPOS`) AS `infantsabove2mpos`,  
                   SUM(`rejected`) AS `rejected`
                   FROM `site_summary_poc` 
-                  LEFT JOIN `facilitys` ON `site_summary_poc`.`facility` = `facilitys`.`ID` 
+                  LEFT JOIN `view_facilitys` `f` ON `site_summary_poc`.`facility` = `f`.`ID` 
                   WHERE 1 ";
 
     SET @QUERY = CONCAT(@QUERY, " AND `facility_tested_in` = '",filter_lab,"' ");
@@ -43,7 +46,7 @@ BEGIN
         SET @QUERY = CONCAT(@QUERY, " AND `year` = '",filter_year,"' ");
     END IF;
 
-    SET @QUERY = CONCAT(@QUERY, " GROUP BY `facilitys`.`ID` ORDER BY `tests` DESC ");
+    SET @QUERY = CONCAT(@QUERY, " GROUP BY `f`.`ID` ORDER BY `tests` DESC ");
 
      PREPARE stmt FROM @QUERY;
      EXECUTE stmt;

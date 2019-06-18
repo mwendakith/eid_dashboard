@@ -4,8 +4,10 @@ CREATE PROCEDURE `proc_get_eid_poc_performance_stats`
 (IN filter_year INT(11), IN from_month INT(11), IN to_year INT(11), IN to_month INT(11))
 BEGIN
   SET @QUERY =    "SELECT 
+                    `f`.`id`, 
                     `f`.`name`, 
                     `f`.`facilitycode`, 
+                    `f`.`countyname`, 
                     AVG(`ps`.`sitessending`) AS `sitesending`, 
                     SUM(`ps`.`batches`) AS `batches`, 
                     SUM(`ps`.`received`) AS `received`, 
@@ -24,7 +26,7 @@ BEGIN
                     SUM(`ps`.`pos`) AS `pos`, 
                     SUM(`ps`.`neg`) AS `neg`, 
                     SUM(`ps`.`redraw`) AS `redraw` 
-                  FROM `poc_summary` `ps` LEFT JOIN `facilitys` `f` ON `ps`.`facility` = `f`.`ID` 
+                  FROM `poc_summary` `ps` LEFT JOIN `view_facilitys` `f` ON `ps`.`facility` = `f`.`ID` 
                 WHERE 1 ";
 
 

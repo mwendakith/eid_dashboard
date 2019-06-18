@@ -154,48 +154,49 @@
 			$(".display_date").html("( "+obj['year']+" "+obj['month']+" )");
 			$(".display_range").html("( "+obj['prev_year']+" - "+obj['year']+" )");
 
+				
+			$.get("<?php echo base_url();?>sites/check_site_select", function(data){
+	    		site = $.parseJSON(data);
+	    		// console.log(site);
+	    		//Checking if site was previously selected and calling the relevant views
+				if (!site) {
+					$("#siteOutcomes").html("<center><div class='loader'></div></center>");
+					$("#siteOutcomes").load("<?php echo base_url('charts/sites/site_outcomes');?>/"+year+"/"+month+"/"+null);
+					$("#unsupportedSites").html("<center><div class='loader'></div></center>");
+					$("#unsupportedSites").load("<?php echo base_url('charts/sites/unsupported_sites');?>");
+				} else {
+					$("#tsttrends").html("<center><div class='loader'></div></center>");
+					$("#stoutcomes").html("<center><div class='loader'></div></center>");
+					$("#eidOutcomes").html("<center><div class='loader'></div></center>");
+					$("#heiOutcomes").html("<center><div class='loader'></div></center>");
+					$("#heiFollowUp").html("<center><div class='loader'></div></center>");
+					$("#agebreakdown").html("<center><div class='loader'></div></center>");
+					$("#entrypoint").html("<center><div class='loader'></div></center>");
+					$("#mprophylaxis").html("<center><div class='loader'></div></center>");
+					$("#iprpophylaxis").html("<center><div class='loader'></div></center>");
+
+					$("#pat_stats").html("<center><div class='loader'></div></center>");
+					$("#pat_out").html("<center><div class='loader'></div></center>");
+					$("#pat_graph").html("<center><div class='loader'></div></center>");
+
+					$("#tsttrends").load("<?php echo base_url('charts/sites/site_trends');?>/"+null+"/"+year);
+					$("#stoutcomes").load("<?php echo base_url('charts/sites/site_positivity');?>/"+null+"/"+year);
+					$("#eidOutcomes").load("<?php echo base_url('charts/sites/site_eid');?>/"+null+"/"+year+"/"+month);
+					$("#heiOutcomes").load("<?php echo base_url('charts/sites/site_hei_validation');?>/"+null+"/"+year+"/"+month);
+					$("#heiFollowUp").load("<?php echo base_url('charts/sites/site_hei');?>/"+null+"/"+year+"/"+month);
+					$("#agebreakdown").load("<?= @base_url('charts/sites/agegroup');?>/"+null+"/"+year+"/"+month);
+					$("#entrypoint").load("<?= @base_url('charts/sites/entry_points');?>/"+null+"/"+year+"/"+month);
+					$("#mprophylaxis").load("<?= @base_url('charts/sites/mprophyalxis');?>/"+null+"/"+year+"/"+month);
+					$("#iprpophylaxis").load("<?= @base_url('charts/sites/iprophyalxis');?>/"+null+"/"+year+"/"+month);
+					
+					$("#pat_stats").load("<?php echo base_url('charts/sites/get_patients');?>/"+year+"/"+month+"/"+site);
+					$("#pat_out").load("<?php echo base_url('charts/sites/get_patients_outcomes');?>/"+year+"/"+month+"/"+site);
+					$("#pat_graph").load("<?php echo base_url('charts/sites/get_patients_graph');?>/"+year+"/"+month+"/"+site);
+
+				}
+	    	});
 		});
 		
-		$.get("<?php echo base_url();?>sites/check_site_select", function(data){
-    		site = $.parseJSON(data);
-    		// console.log(site);
-    		//Checking if site was previously selected and calling the relevant views
-			if (!site) {
-				$("#siteOutcomes").html("<center><div class='loader'></div></center>");
-				$("#siteOutcomes").load("<?php echo base_url('charts/sites/site_outcomes');?>/"+year+"/"+month+"/"+null);
-				$("#unsupportedSites").html("<center><div class='loader'></div></center>");
-				$("#unsupportedSites").load("<?php echo base_url('charts/sites/unsupported_sites');?>");
-			} else {
-				$("#tsttrends").html("<center><div class='loader'></div></center>");
-				$("#stoutcomes").html("<center><div class='loader'></div></center>");
-				$("#eidOutcomes").html("<center><div class='loader'></div></center>");
-				$("#heiOutcomes").html("<center><div class='loader'></div></center>");
-				$("#heiFollowUp").html("<center><div class='loader'></div></center>");
-				$("#agebreakdown").html("<center><div class='loader'></div></center>");
-				$("#entrypoint").html("<center><div class='loader'></div></center>");
-				$("#mprophylaxis").html("<center><div class='loader'></div></center>");
-				$("#iprpophylaxis").html("<center><div class='loader'></div></center>");
-
-				$("#pat_stats").html("<center><div class='loader'></div></center>");
-				$("#pat_out").html("<center><div class='loader'></div></center>");
-				$("#pat_graph").html("<center><div class='loader'></div></center>");
-
-				$("#tsttrends").load("<?php echo base_url('charts/sites/site_trends');?>/"+null+"/"+year);
-				$("#stoutcomes").load("<?php echo base_url('charts/sites/site_positivity');?>/"+null+"/"+year);
-				$("#eidOutcomes").load("<?php echo base_url('charts/sites/site_eid');?>/"+null+"/"+year+"/"+month);
-				$("#heiOutcomes").load("<?php echo base_url('charts/sites/site_hei_validation');?>/"+null+"/"+year+"/"+month);
-				$("#heiFollowUp").load("<?php echo base_url('charts/sites/site_hei');?>/"+null+"/"+year+"/"+month);
-				$("#agebreakdown").load("<?= @base_url('charts/sites/agegroup');?>/"+null+"/"+year+"/"+month);
-				$("#entrypoint").load("<?= @base_url('charts/sites/entry_points');?>/"+null+"/"+year+"/"+month);
-				$("#mprophylaxis").load("<?= @base_url('charts/sites/mprophyalxis');?>/"+null+"/"+year+"/"+month);
-				$("#iprpophylaxis").load("<?= @base_url('charts/sites/iprophyalxis');?>/"+null+"/"+year+"/"+month);
-				
-				$("#pat_stats").load("<?php echo base_url('charts/sites/get_patients');?>/"+year+"/"+month+"/"+site);
-				$("#pat_out").load("<?php echo base_url('charts/sites/get_patients_outcomes');?>/"+year+"/"+month+"/"+site);
-				$("#pat_graph").load("<?php echo base_url('charts/sites/get_patients_graph');?>/"+year+"/"+month+"/"+site);
-
-			}
-    	});
 
 		/*if(!$("#second").is(":hidden")){
 			alert('found');

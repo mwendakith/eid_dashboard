@@ -147,30 +147,30 @@
 			$(".display_date").html("( "+obj['year']+" "+obj['month']+" )");
 			$(".display_range").html("( "+obj['prev_year']+" - "+obj['year']+" )");
 			
+	 		$("#notification").html("<div>Loading...</div>");
+	    	$("#ageCat").html("<center><div class='loader'></div></center>");
+	        $("#iprophylaxis").html("<center><div class='loader'></div></center>");
+	        $("#mprophylaxis").html("<center><div class='loader'></div></center>");
+			$("#epoint").html("<center><div class='loader'></div></center>");
+			$("#countys").html("<center><div class='loader'></div></center>");
+			$("#subcounty").html("<center><div class='loader'></div></center>");
+			$("#facilities").html("<center><div class='loader'></div></center>");
+			$("#partners").html("<center><div class='loader'></div></center>");
+
+			// Actual graphs being loaded
+			$("#notification").load("<?php echo base_url('charts/positivity/notification'); ?>/"+year+"/"+month);
+			$("#ageCat").load("<?php echo base_url('charts/positivity/age'); ?>/"+year);
+			$("#iprophylaxis").load("<?php echo base_url('charts/positivity/i_prophylaxis');?>/"+year+"/"+month);
+			$("#mprophylaxis").load("<?php echo base_url('charts/positivity/m_prophylaxis');?>/"+year+"/"+month);
+			$("#epoint").load("<?php echo base_url('charts/positivity/entry_point');?>/"+year+"/"+month);
+
+			$("#countys").load("<?php echo base_url('charts/positivity/counties');?>/"+year+"/"+month);
+			$("#subcounty").load("<?php echo base_url('charts/positivity/subCounties');?>/"+year+"/"+month);
+			$("#facilities").load("<?php echo base_url('charts/positivity/facilites');?>/"+year+"/"+month);
+			$("#partners").load("<?php echo base_url('charts/positivity/partners');?>/"+year+"/"+month);
+			
+			$("#county_outcomes").load("<?php echo base_url('charts/positivity/county_outcomes');?>/"+year+"/"+month); 
+			$("#county_mixed").load("<?php echo base_url('charts/positivity/county_mixed');?>/"+year+"/"+month); 
 		});
- 		$("#notification").html("<div>Loading...</div>");
-    	$("#ageCat").html("<center><div class='loader'></div></center>");
-        $("#iprophylaxis").html("<center><div class='loader'></div></center>");
-        $("#mprophylaxis").html("<center><div class='loader'></div></center>");
-		$("#epoint").html("<center><div class='loader'></div></center>");
-		$("#countys").html("<center><div class='loader'></div></center>");
-		$("#subcounty").html("<center><div class='loader'></div></center>");
-		$("#facilities").html("<center><div class='loader'></div></center>");
-		$("#partners").html("<center><div class='loader'></div></center>");
-
-		// Actual graphs being loaded
-		$("#notification").load("<?php echo base_url('charts/positivity/notification'); ?>/"+year+"/"+month);
-		$("#ageCat").load("<?php echo base_url('charts/positivity/age'); ?>/"+year);
-		$("#iprophylaxis").load("<?php echo base_url('charts/positivity/i_prophylaxis');?>/"+year+"/"+month);
-		$("#mprophylaxis").load("<?php echo base_url('charts/positivity/m_prophylaxis');?>/"+year+"/"+month);
-		$("#epoint").load("<?php echo base_url('charts/positivity/entry_point');?>/"+year+"/"+month);
-
-		$("#countys").load("<?php echo base_url('charts/positivity/counties');?>/"+year+"/"+month);
-		$("#subcounty").load("<?php echo base_url('charts/positivity/subCounties');?>/"+year+"/"+month);
-		$("#facilities").load("<?php echo base_url('charts/positivity/facilites');?>/"+year+"/"+month);
-		$("#partners").load("<?php echo base_url('charts/positivity/partners');?>/"+year+"/"+month);
-		
-		$("#county_outcomes").load("<?php echo base_url('charts/positivity/county_outcomes');?>/"+year+"/"+month); 
-		$("#county_mixed").load("<?php echo base_url('charts/positivity/county_mixed');?>/"+year+"/"+month); 
 	}
 </script>

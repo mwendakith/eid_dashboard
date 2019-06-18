@@ -108,9 +108,9 @@
         <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    POC STATS <div class="display_date"></div>
+                    POC Hub-Spoke Stats <div class="display_date"></div>
                 </div>
-                <div class="panel-body" id="poc" style="height: 700px">
+                <div class="panel-body" id="poc">
                     <center><div class="loader"></div></center>
                 </div>
             </div>
@@ -130,6 +130,8 @@
         </div>
     </div>
 </div>
+
+<div id="my_empty_div"></div>
 
 <script type="text/javascript">
 
@@ -171,6 +173,13 @@
         var error_check = check_error_date_range(from, to);
           
         if (!error_check) {
+
+            localStorage.setItem("from_year", from[1]);
+            localStorage.setItem("from_month", from[0]);
+
+            localStorage.setItem("to_year", to[1]);
+            localStorage.setItem("to_month", to[0]);
+
           $("#stacked_graph").load("<?php echo base_url();?>charts/LabPerformance/lab_outcomes/"+from[1]+"/"+from[0]+"/"+to[1]+"/"+to[0]);
           $("#lineargauge").load("<?php echo base_url();?>charts/LabPerformance/lab_turnaround/"+from[1]+"/"+from[0]+"/"+to[1]+"/"+to[0]);
           $("#lab_perfomance_stats").load("<?php echo base_url();?>charts/LabPerformance/lab_performance_stats/"+from[1]+"/"+from[0]+"/"+to[1]+"/"+to[0]);
@@ -207,8 +216,7 @@
         $(".display_date").load("<?php echo base_url('charts/labs/display_date'); ?>");
 
       }
-      else{
-        
+      else{        
         $("#first").hide();
         $("#second").show();
         $("#fourth").show();
@@ -241,12 +249,19 @@
 
 function date_filter(criteria, id)
   {
+    localStorage.setItem("to_year", 'null');
+    localStorage.setItem("to_month", 'null');
+
     if (criteria === "monthly") {
-      year = null;
-      month = id;
+        localStorage.setItem("from_year", 'null');
+        localStorage.setItem("from_month", id);
+        year = null;
+        month = id;
     }else {
-      year = id;
-      month = null;
+        localStorage.setItem("from_year", id);
+        localStorage.setItem("from_month", 'null');
+        year = id;
+        month = null;
     }
 
     var posting = $.post( '<?php echo base_url();?>template/filter_date_data', { 'year': year, 'month': month } );
@@ -260,46 +275,53 @@ function date_filter(criteria, id)
       }
       $(".display_date").html("( "+obj['year']+" "+obj['month']+" )");
       
-    });
-    
-    
-    $("#stacked_graph").html("<div>Loading...</div>");
-    $("#lineargauge").html("<div>Loading...</div>");
+      $("#stacked_graph").html("<div>Loading...</div>");
+      $("#lineargauge").html("<div>Loading...</div>");
 
-    var em = localStorage.getItem("my_lab");
-    
-    if (criteria === "monthly") {
-      $("#stacked_graph").load("<?php echo base_url();?>charts/LabPerformance/lab_outcomes/"+year+"/"+month);
-      $("#lineargauge").load("<?php echo base_url();?>charts/LabPerformance/lab_turnaround/"+year+"/"+month);
-      $("#lab_perfomance_stats").load("<?php echo base_url();?>charts/LabPerformance/lab_performance_stats/"+year+"/"+month);
-      $("#poc").load("<?php echo base_url();?>charts/LabPerformance/poc_performance_stats/"+year+"/"+month);
-      $("#poc_outcomes").load("<?php echo base_url();?>charts/LabPerformance/poc_outcomes/"+year+"/"+month);
-
-    }
-
-    else{
-      $("#graphs").html("<div>Loading...</div>");
-
-      $("#graphs").load("<?php echo base_url();?>charts/LabPerformance/testing_trends/"+year);
-      $("#stacked_graph").load("<?php echo base_url();?>charts/LabPerformance/lab_outcomes/"+year+"/"+month);
-      $("#lineargauge").load("<?php echo base_url();?>charts/LabPerformance/lab_turnaround/"+year+"/"+month);
-      $("#lab_perfomance_stats").load("<?php echo base_url();?>charts/LabPerformance/lab_performance_stats/"+year+"/"+month);
-      $("#poc").load("<?php echo base_url();?>charts/LabPerformance/poc_performance_stats/"+year+"/"+month);
-      $("#poc_outcomes").load("<?php echo base_url();?>charts/LabPerformance/poc_outcomes/"+year+"/"+month);
-
+      var em = localStorage.getItem("my_lab");
       
-      $("#lab_summary_two_years").html("<div>Loading...</div>");
+        $("#graphs").html("<div>Loading...</div>");
 
-      $("#lab_summary_two_years").load("<?php echo base_url();?>charts/LabPerformance/summary/"+em+"/"+year);
+        $("#graphs").load("<?php echo base_url();?>charts/LabPerformance/testing_trends/"+obj['year']);
+        $("#stacked_graph").load("<?php echo base_url();?>charts/LabPerformance/lab_outcomes/"+obj['year']+"/"+obj['monthNo']);
+        $("#lineargauge").load("<?php echo base_url();?>charts/LabPerformance/lab_turnaround/"+obj['year']+"/"+obj['monthNo']);
+        $("#lab_perfomance_stats").load("<?php echo base_url();?>charts/LabPerformance/lab_performance_stats/"+obj['year']+"/"+obj['monthNo']);
+        $("#poc").load("<?php echo base_url();?>charts/LabPerformance/poc_performance_stats/"+obj['year']+"/"+obj['monthNo']);
+        $("#poc_outcomes").load("<?php echo base_url();?>charts/LabPerformance/poc_outcomes/"+obj['year']+"/"+obj['monthNo']);
 
-    }
-      
-      $("#lab_rejections").html("<div>Loading...</div>");
-      $("#lab_rejections").load("<?php echo base_url();?>charts/LabPerformance/rejections/"+em+"/"+year+"/"+month);
-      $("#mapping").load("<?php echo base_url();?>charts/LabPerformance/lab_mapping/"+em+"/"+year+"/"+month);
+      if (criteria == "monthly") {
+        // $("#stacked_graph").load("<?php echo base_url();?>charts/LabPerformance/lab_outcomes/"+year+"/"+month);
+        // $("#lineargauge").load("<?php echo base_url();?>charts/LabPerformance/lab_turnaround/"+year+"/"+month);
+        // $("#lab_perfomance_stats").load("<?php echo base_url();?>charts/LabPerformance/lab_performance_stats/"+year+"/"+month);
+        // $("#poc").load("<?php echo base_url();?>charts/LabPerformance/poc_performance_stats/"+year+"/"+month);
+        // $("#poc_outcomes").load("<?php echo base_url();?>charts/LabPerformance/poc_outcomes/"+year+"/"+month);
 
+      } else {
+        
 
-    
+        
+        $("#lab_summary_two_years").html("<div>Loading...</div>");
+
+        $("#lab_summary_two_years").load("<?php echo base_url();?>charts/LabPerformance/summary/"+em+"/"+obj['year']);
+
+      }
+        
+        $("#lab_rejections").html("<div>Loading...</div>");
+        $("#lab_rejections").load("<?php echo base_url();?>charts/LabPerformance/rejections/"+em+"/"+obj['year']+"/"+obj['monthNo']);
+        $("#mapping").load("<?php echo base_url();?>charts/LabPerformance/lab_mapping/"+em+"/"+obj['year']+"/"+obj['monthNo']);
+      });    
   }
+
+
+    function expand_poc(facility_id)
+    {
+        var year = localStorage.getItem("from_year");
+        var month = localStorage.getItem("from_month");
+
+        var to_year = localStorage.getItem("to_year");
+        var to_month = localStorage.getItem("to_month");
+
+        $("#my_empty_div").load("<?php echo base_url();?>charts/LabPerformance/poc_performance_details/"+facility_id+"/"+year+"/"+month+"/"+to_year+"/"+to_month);
+    }
    
 </script>

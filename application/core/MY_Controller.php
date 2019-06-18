@@ -9,6 +9,13 @@ if(!defined("BASEPATH")) exit("No direct script access allowed!");
 		function __construct()
 		{
 			parent:: __construct();
+
+			if($this->config->item('maintenance_mode') && $this->config->item('maintenance_mode') == TRUE){
+				// $this->load->view('maintenance_view');
+				echo "We are undergoing maintenance. We apologise for the inconvenience.";							
+				die();
+			}
+			
 			$this->initialize_filter();
 			$this->data['part'] = FALSE;
 			$this->data['labs'] = FALSE;
@@ -94,7 +101,7 @@ if(!defined("BASEPATH")) exit("No direct script access allowed!");
 
 		function initialize_filter()
 		{
-			if(!$this->session->userdata('filter_year'))
+			if(!(null !== $this->session->userdata('filter_year')))
 			{
 				$filter_data = array(
 								'county_filter' => null,
@@ -112,23 +119,26 @@ if(!defined("BASEPATH")) exit("No direct script access allowed!");
 
 		function set_filter_date($data=null)
 		{
-			// echo "<pre";print_r($data);die();
 			$year = $data['year'];
 			$month = $data['month'];
-
+			
 			if ($year) {
-				$this->session->unset_userdata('filter_month');
 				$return = $this->session->set_userdata('filter_year', $year);
+				$this->session->unset_userdata('filter_month');
 			} else {
-				$return = $this->session->set_userdata('filter_month', $month);
+				if ($month=='all') {
+					$this->session->unset_userdata('filter_month');
+				}else {
+					$this->session->set_userdata('filter_month', $month);
+				}
 			}
 			$this->load->model('template/template_model');
 			if(!$year)
 				$year = $this->session->userdata('filter_year');
 			if(!$month)
 				$month = $this->session->userdata('filter_month');
-
-			echo json_encode(array('year' => $year, 'prev_year' => $year-1, 'month' => $this->template_model->resolve_month($month) ));
+			
+			echo json_encode(array('year' => $year, 'prev_year' => $year-1, 'month' => $this->template_model->resolve_month($month), 'monthNo' => $month ));
 		}
 
 		function template($data)

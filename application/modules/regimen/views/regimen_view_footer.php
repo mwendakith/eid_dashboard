@@ -127,28 +127,28 @@
 			$(".display_date").html("( "+obj['year']+" "+obj['month']+" )");
 			$(".display_range").html("( "+obj['prev_year']+" - "+obj['year']+" )");
 			
+	 		$.get("<?= @base_url('regimen/check_Regimen')?>", function(data) {
+	 			obj = JSON.parse(data);
+	 			console.log(obj);
+	 			if (obj == 0) {// No age group selected
+	 				$("#regimen_outcomes").html("<center><div class='loader'></div></center>");
+					$("#regimen_outcomes").load("<?= base_url('charts/regimens/get_regimen_outcomes');?>/"+year+"/"+month);
+	 			} else {// Age group selected
+	 				$("#outcomesRegimen").html("<center><div class='loader'></div></center>");
+					$("#outcomesBycounty").html("<center><div class='loader'></div></center>");
+					$("#outcomesBysubcounty").html("<center><div class='loader'></div></center>");
+					$("#outcomesBypartner").html("<center><div class='loader'></div></center>");
+					$("#coutnyRegimenOutcomes").html("<center><div class='loader'></div></center>");
+
+					$("#outcomesRegimen").load("<?= base_url('charts/regimens/get_regimen_testing_trends'); ?>/"+year);
+					$("#outcomesBycounty").load("<?= base_url('charts/regimens/get_regimen_breakdown');?>/"+year+"/"+month+"/"+null+"/"+null+"/"+"/"+null+"/"+1);
+					$("#outcomesBysubcounty").load("<?= base_url('charts/regimens/get_regimen_breakdown');?>/"+year+"/"+month+"/"+null+"/"+null+"/"+"/"+null+"/"+null+"/"+1);
+					$("#outcomesBypartner").load("<?= base_url('charts/regimens/get_regimen_breakdown');?>/"+year+"/"+month+"/"+null+"/"+null+"/"+"/"+null+"/"+null+"/"+null+"/"+1);
+					$("#coutnyRegimenOutcomes").load("<?= base_url('charts/regimens/get_counties_regimen'); ?>/"+year+"/"+month);
+	 			}
+	 		});
 		});
  		
- 		$.get("<?= @base_url('regimen/check_Regimen')?>", function(data) {
- 			obj = JSON.parse(data);
- 			console.log(obj);
- 			if (obj == 0) {// No age group selected
- 				$("#regimen_outcomes").html("<center><div class='loader'></div></center>");
-				$("#regimen_outcomes").load("<?= base_url('charts/regimens/get_regimen_outcomes');?>/"+year+"/"+month);
- 			} else {// Age group selected
- 				$("#outcomesRegimen").html("<center><div class='loader'></div></center>");
-				$("#outcomesBycounty").html("<center><div class='loader'></div></center>");
-				$("#outcomesBysubcounty").html("<center><div class='loader'></div></center>");
-				$("#outcomesBypartner").html("<center><div class='loader'></div></center>");
-				$("#coutnyRegimenOutcomes").html("<center><div class='loader'></div></center>");
-
-				$("#outcomesRegimen").load("<?= base_url('charts/regimens/get_regimen_testing_trends'); ?>/"+year);
-				$("#outcomesBycounty").load("<?= base_url('charts/regimens/get_regimen_breakdown');?>/"+year+"/"+month+"/"+null+"/"+null+"/"+"/"+null+"/"+1);
-				$("#outcomesBysubcounty").load("<?= base_url('charts/regimens/get_regimen_breakdown');?>/"+year+"/"+month+"/"+null+"/"+null+"/"+"/"+null+"/"+null+"/"+1);
-				$("#outcomesBypartner").load("<?= base_url('charts/regimens/get_regimen_breakdown');?>/"+year+"/"+month+"/"+null+"/"+null+"/"+"/"+null+"/"+null+"/"+null+"/"+1);
-				$("#coutnyRegimenOutcomes").load("<?= base_url('charts/regimens/get_counties_regimen'); ?>/"+year+"/"+month);
- 			}
- 		});
 	}
 	//When single year or month is clicked
 </script>

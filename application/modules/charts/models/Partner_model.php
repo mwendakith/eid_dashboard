@@ -302,7 +302,7 @@ class Partner_model extends MY_Model
 
 		$data['title'] = "Outcomes (Initial PCR)";
 
-		$data['categories'] = array_fill(0, $columns, "No Data");
+		$data['categories'] = array_fill(0, $columns, "Null");
 		$data['outcomes'][0]['data'] = array_fill(0, $columns, 0);
 		$data['outcomes'][1]['data'] = array_fill(0, $columns, 0);
 		$data['outcomes'][2]['data'] = array_fill(0, $columns, 0);

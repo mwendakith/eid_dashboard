@@ -277,5 +277,12 @@ class Template extends MY_Controller
 					'month' => $this->session->userdata('filter_month'));
 		echo json_encode($data);
 	}
+
+
+	function get_site_details($id)
+	{
+		$this->load->model('template_model');
+		echo json_encode($this->template_model->get_site_details($id));
+	}
 }
 ?>

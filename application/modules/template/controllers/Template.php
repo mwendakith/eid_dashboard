@@ -26,6 +26,7 @@ class Template extends MY_Controller
 		$data['laborotories'] = $this->template_model->get_lab_dropdown();
 		$data['regimen'] = $this->template_model->get_regimen_dropdown();
 		$data['ages'] = $this->template_model->get_ages_dropdown();
+		$data['agencies'] = $this->template_model->funding_agencies_dropdown();
 		// $data['breadcrum'] = $this->breadcrum();
 		$this->load->view('template_view',$data);
 	}
@@ -114,8 +115,23 @@ class Template extends MY_Controller
 		echo $this->session->userdata('regimen_filter');
 	}
 
-	function breadcrum($data=null,$partner=NULL,$site=NULL,$sub_county=NULL,$age=NULL,$regimen=NULL)
-	{
+	function filter_funding_agency_data() {
+		$data = array(
+				'funding_agency' => $this->input->post('agency')
+		);
+
+		$response = $this->filter_funding_agency($data);
+		if ($response)
+			echo json_encode($this->session->userdata('funding_agency_filter'));
+	}
+
+	function breadcrum($data=null,$partner=NULL,$site=NULL,$sub_county=NULL,$age=NULL,$regimen=NULL,$type=null) {
+		/*$type ==> 
+			1: county
+			2: Partner
+			3: Sub-County
+			4: Site
+			5: Funding Agency*/
 		if ($partner=='null'||$partner==null) {
 			$partner = NULL;
 		}
@@ -134,6 +150,9 @@ class Template extends MY_Controller
 		if ($regimen=='null'||$regimen==null) {
 			$regimen = NULL;
 		}
+		if ($type=='null'||$type==null) 
+			$type = NULL;
+		
 		$this->load->model('template_model');
 		// echo "<pre>";print_r($data."<_Part__>".$partner."<_Site__>".$site."<_Sub__>".$sub_county."<__Age_>".$age."<__Regimen_>".$regimen);die();
 		if ($partner) {
@@ -222,7 +241,16 @@ class Template extends MY_Controller
 				echo "<a href='javascript:void(0)' class='alert-link'><strong>".$regimen."</strong></a>";
 			}
 			
-		} else {
+		} else if($type) {
+			if ($type == 5 || $type == '5') {
+				if ($data == null || $data == 'null' || $data == 'NA') {
+					echo "<a href='javascript:void(0)' class='alert-link'><strong>All Funding Agencies</strong></a>";
+				} else {
+					$agency = $this->template_model->get_funding_agency($data);
+					echo "<a href='javascript:void(0)' class='alert-link'><strong>".$agency."</strong></a>";
+				}
+			}
+		}  else {
 			if (!$data) {
 				if (!$this->session->userdata('county_filter')) {
 					echo "<a href='javascript:void(0)' class='alert-link'><strong>Kenya</strong></a>";

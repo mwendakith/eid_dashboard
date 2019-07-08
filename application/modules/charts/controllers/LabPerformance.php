@@ -24,44 +24,23 @@ class LabPerformance extends MY_Controller
 		$this->load->view('lab_performance_stats_view', $data);
 	}
 
+	function poc_performance_stats($year=NULL,$month=NULL,$to_year=NULL,$to_month=NULL)
+	{
+		$data['stats'] = $this->performance_model->poc_performance_stat($year,$month,$to_year,$to_month);
+
+		$this->load->view('poc_performance_stats_view', $data);
+	}
+
+	function poc_performance_details($lab_id=NULL,$year=NULL,$month=NULL,$to_year=NULL,$to_month=NULL)
+	{
+		$data['data']['table'] = $this->performance_model->poc_performance_details($lab_id,$year,$month,$to_year,$to_month);
+		$this->load->view('poc_site_table_details', $data);
+	}
+
 	function download_lab_performance_stats($year=NULL,$month=NULL,$to_year=NULL,$to_month=NULL)
 	{
 		$this->performance_model->download_lab_performance_stat($year,$month,$to_year,$to_month);
-	}	
-
-	// function testing_trends($year=NULL)
-	// {
-	// 	$obj['trends'] = $this->performance_model->lab_testing_trends($year);
-	// 	//echo "<pr>";print_r($data);die;
-	// 	//
-	// 	//echo json_encode($data);
-
-	// 	$data['trends'] = $obj['trends']['test_trends'];
-	// 	$data['title'] = "Test Trends (" . $obj['trends']['year'] . ")";
-	// 	$data['div'] = "#tests";
-	// 	$data['div_name'] = "tests";
-	// 	$data['suffix'] = "";
-	// 	$data['yAxis'] = "Number of Tests";
-	// 	$this->load->view('lab_performance_view', $data);
-
-	// 	$data['trends'] = $obj['trends']['positivity_trends'];
-	// 	$data['title'] = "Positivity Trends - Initial PCR(" . $obj['trends']['year'] . ")";
-	// 	$data['div'] = "#positivity";
-	// 	$data['div_name'] = "positivity";
-	// 	$data['suffix'] = "%";
-	// 	$data['yAxis'] = "Positivity (%)";
-	// 	$this->load->view('lab_performance_view', $data);
-
-	// 	$data['trends'] = $obj['trends']['rejected_trends'];
-	// 	$data['title'] = "Rejection Rate Trends (" . $obj['trends']['year'] . ")";
-	// 	$data['div'] = "#rejects";
-	// 	$data['div_name'] = "rejects";
-	// 	$data['suffix'] = "%";
-	// 	$data['yAxis'] = "Rejection (%)";
-	// 	$this->load->view('lab_performance_view', $data);
-
-		
-	// }
+	}
 
 	function lab_testing_trends($year=NULL)
 	{
@@ -110,7 +89,7 @@ class LabPerformance extends MY_Controller
 
 	function lab_outcomes($year=NULL, $month=NULL,$to_year=NULL,$to_month=NULL){
 		$data['trends'] = $this->performance_model->lab_outcomes($year,$month,$to_year,$to_month);
-		//echo json_encode($data);
+		// echo json_encode($data);die();
 		$this->load->view('lab_outcomes_view', $data);
 
 	}
@@ -174,6 +153,12 @@ class LabPerformance extends MY_Controller
 		//$data['trends'] = $this->positivity_model->yearly_summary();
 		//echo json_encode($data);
 		// echo "<pre>";print_r($data);die();
+		$this->load->view('trends_outcomes_view', $data);
+	}
+
+	function poc_outcomes($year=NULL,$month=NULL,$to_year=NULL,$to_month=NULL){
+		$data['trends'] = $this->performance_model->poc_outcomes($year,$month,$to_year,$to_month);
+		$data['div_name'] = "poc_outcomes_summary";
 		$this->load->view('trends_outcomes_view', $data);
 	}
 

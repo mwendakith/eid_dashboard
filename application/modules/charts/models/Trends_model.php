@@ -4,7 +4,7 @@ defined("BASEPATH") or exit("No direct script access allowed");
 /**
 * 
 */
-class Partner_model extends MY_Model
+class Trends_model extends MY_Model
 {
 	
 	function __construct()
@@ -12,42 +12,38 @@ class Partner_model extends MY_Model
 		parent:: __construct();;
 	}
 
-	function yearly_trends($partner=NULL){
+	function yearly_trends($county=NULL){
 
-		if($partner == NULL || $partner == 'NA'){
-			$partner = NULL;
+		if($county == NULL || $county == 48){
+			$county = 0;
 		}
 
-		if ($partner) {
-			$sql = "CALL `proc_get_eid_partner_performance`(" . $partner . ");";
-		} else {
+		if ($county == 0) {
 			$sql = "CALL `proc_get_eid_national_yearly_tests`();";
+		} else {
+			$sql = "CALL `proc_get_eid_yearly_tests`(" . $county . ");";
 		}
-
-
-		// echo "<pre>";print_r($sql);die();
+		
 		$result = $this->db->query($sql)->result_array();
-
-		$i = 0;
-
-		$b = true;
+		
 		$year;
+		$i = 0;
+		$b = true;
 
 		$data;
 
 		$cur_year = date('Y');
 
 		foreach ($result as $key => $value) {
+
 			if((int) $value['year'] > $cur_year || (int) $value['year'] < 2008){
 
 			}
 			else{
-
 				if($b){
 					$b = false;
 					$year = (int) $value['year'];
 				}
-
 
 				$y = (int) $value['year'];
 				if($value['year'] != $year){
@@ -82,28 +78,34 @@ class Partner_model extends MY_Model
 
 				$data['infant_trends'][$i]['name'] = $value['year'];
 				$data['infant_trends'][$i]['data'][$month] = (int) $value['infants'];
-				
+
+				$data['tat4_trends'][$i]['name'] = $value['year'];
+				$data['tat4_trends'][$i]['data'][$month] = (int) $value['tat4'];
 			}
 
-		}		
+		}
+		
 
 		return $data;
 	}
 
-	function yearly_summary($partner=NULL){
+	function yearly_summary($county=NULL){
 
-		if($partner == NULL){
-			$partner = 0;
+		if($county == NULL || $county == 48){
+			$county = 0;
 		}
-
-		$sql = "CALL `proc_get_eid_partner_year_summary`(" . $partner . ");";
-
-		$result = $this->db->query($sql)->result_array();
-
 		
+		if($county==0){
+			$sql = "CALL `proc_get_eid_national_yearly_summary`();";
+		} else {
+			$sql = "CALL `proc_get_eid_yearly_summary`(" . $county . ");";
+		}
+		// echo "<pre>";print_r($sql);die();
+		
+		$result = $this->db->query($sql)->result_array();
+		// echo "<pre>";print_r($result);die();
+		$year = date("Y");
 		$i = 0;
-
-		$data;
 
 		$data['outcomes'][0]['name'] = "Redraws";
 		$data['outcomes'][1]['name'] = "Positive";
@@ -127,20 +129,11 @@ class Partner_model extends MY_Model
 		foreach ($result as $key => $value) {
 			if($value['year'] != 2007){
 				$data['categories'][$i] = $value['year'];
-
-				$total = (int) $value['negative']+(int) $value['positive']+(int) $value['redraws'];
-
+			
 				$data['outcomes'][0]['data'][$i] = (int) $value['redraws'];
 				$data['outcomes'][1]['data'][$i] = (int) $value['positive'];
 				$data['outcomes'][2]['data'][$i] = (int) $value['negative'];
-
-				if($total == 0){
-					$data['outcomes'][3]['data'][$i] = 0;
-				}
-				else{
-					$data['outcomes'][3]['data'][$i] = round(( (int) $value['positive']*100)/$total,1);
-				}
-				
+				$data['outcomes'][3]['data'][$i] = round(((int) $value['positive']*100)/((int) $value['negative']+(int) $value['positive']+(int) $value['redraws']),1);
 				$i++;
 			}
 			
@@ -149,22 +142,22 @@ class Partner_model extends MY_Model
 		$data['outcomes'][1]['tooltip'] = array("valueSuffix" => ' ');
 		$data['outcomes'][2]['tooltip'] = array("valueSuffix" => ' ');
 		$data['outcomes'][3]['tooltip'] = array("valueSuffix" => ' %');
-		
-		$data['title'] = "Outcomes";
+
+		$data['title'] = "Outcomes (Initial PCR)";
 
 		return $data;
 	}
 
-	function quarterly_trends($partner=NULL){
+	function quarterly_trends($county=NULL){
 
-		if($partner == NULL || $partner == 'NA'){
-			$partner = NULL;
+		if($county == NULL || $county == 48){
+			$county = 0;
 		}
 
-		if ($partner) {
-			$sql = "CALL `proc_get_eid_partner_performance`(" . $partner . ");";
-		} else {
+		if ($county == 0) {
 			$sql = "CALL `proc_get_eid_national_yearly_tests`();";
+		} else {
+			$sql = "CALL `proc_get_eid_yearly_tests`(" . $county . ");";
 		}
 		
 		$result = $this->db->query($sql)->result_array();
@@ -250,30 +243,29 @@ class Partner_model extends MY_Model
 		return $data;
 	}
 
-	function quarterly_outcomes($partner=NULL){
+	function quarterly_outcomes($county=NULL){
 
-		if($partner == NULL || $partner == 'NA'){
-			$partner = NULL;
+		if($county == NULL || $county == 48){
+			$county = 0;
 		}
 
-		if ($partner) {
-			$sql = "CALL `proc_get_eid_partner_performance`(" . $partner . ");";
-		} else {
+		if ($county == 0) {
 			$sql = "CALL `proc_get_eid_national_yearly_tests`();";
+		} else {
+			$sql = "CALL `proc_get_eid_yearly_tests`(" . $county . ");";
 		}
 		
 		$result = $this->db->query($sql)->result_array();
-		// echo "<pre>";print_r($result);die();
+		
 		$year;
 		$prev_year = date('Y') - 1;
 		$cur_month = date('m');
-		
+
 		$b = true;
 		$limit = 0;
 		$quarter = 1;
 
 		$extra = ceil($cur_month / 3);
-		
 		$i = 8;
 
 		if($extra == 4){
@@ -302,11 +294,11 @@ class Partner_model extends MY_Model
 
 		$data['title'] = "Outcomes (Initial PCR)";
 
-		$data['categories'] = array_fill(0, $columns, "Null");
-		$data['outcomes'][0]['data'] = array_fill(0, $columns, 0);
-		$data['outcomes'][1]['data'] = array_fill(0, $columns, 0);
-		$data['outcomes'][2]['data'] = array_fill(0, $columns, 0);
-		$data['outcomes'][3]['data'] = array_fill(0, $columns, 0);
+		$data['categories'] = array_fill(0, 8, "Null");
+		$data['outcomes'][0]['data'] = array_fill(0, 8, 0);
+		$data['outcomes'][1]['data'] = array_fill(0, 8, 0);
+		$data['outcomes'][2]['data'] = array_fill(0, 8, 0);
+		$data['outcomes'][3]['data'] = array_fill(0, 8, 0);
 
 
 		foreach ($result as $key => $value) {
@@ -322,8 +314,7 @@ class Partner_model extends MY_Model
 				$year--;
 
 				if($year == $prev_year){
-
-					if($modulo != 0){	
+					if($modulo != 0){						
 						$data['outcomes'][3]['data'][$i] += round(@(( $data['outcomes'][1]['data'][$i]*100)/
 						($data['outcomes'][0]['data'][$i]+$data['outcomes'][1]['data'][$i]+$data['outcomes'][2]['data'][$i])),1);
 					}
@@ -370,30 +361,30 @@ class Partner_model extends MY_Model
 
 	
 
-	function alltests($partner=NULL){
-		return $this->any_quarterly('allpositive', 'allnegative', 'Outcomes (All Tests)', $partner);
+	function alltests($county=NULL){
+		return $this->any_quarterly('allpositive', 'allnegative', 'Outcomes (All Tests)', $county);
 	}
 
-	function rtests($partner=NULL){
-		return $this->any_quarterly('rpos', 'rneg', 'Outcomes (2nd/3rd Tests)', $partner);
+	function rtests($county=NULL){
+		return $this->any_quarterly('rpos', 'rneg', 'Outcomes (2nd/3rd Tests)', $county);
 	}
 
-	function infant_tests($partner=NULL){
-		return $this->any_quarterly('infantspos', 'infants', 'Outcomes (Infants <2m)', $partner);
+	function infant_tests($county=NULL){
+		return $this->any_quarterly('infantspos', 'infants', 'Outcomes (Infants <2m)', $county);
 	}
 
 
 
-	function any_quarterly($pos_c, $neg_c, $title, $partner=NULL){
+	function any_quarterly($pos_c, $neg_c, $title, $county=NULL){
 
-		if($partner == NULL || $partner == 'NA'){
-			$partner = NULL;
+		if($county == NULL || $county == 48){
+			$county = 0;
 		}
 
-		if ($partner) {
-			$sql = "CALL `proc_get_eid_partner_performance`(" . $partner . ");";
-		} else {
+		if ($county == 0) {
 			$sql = "CALL `proc_get_eid_national_yearly_tests`();";
+		} else {
+			$sql = "CALL `proc_get_eid_yearly_tests`(" . $county . ");";
 		}
 		
 		$result = $this->db->query($sql)->result_array();
@@ -455,7 +446,6 @@ class Partner_model extends MY_Model
 				$year--;
 
 				if($year == $prev_year){
-
 					if($modulo != 0){	
 						$data['outcomes'][2]['data'][$i] = round(@(( $data['outcomes'][0]['data'][$i]*100)/
 						( $data['outcomes'][0]['data'][$i] + $data['outcomes'][1]['data'][$i] )),1);
@@ -505,18 +495,18 @@ class Partner_model extends MY_Model
 
 
 
-	function ages_2m_quarterly($partner=NULL){
+	function ages_2m_quarterly($county=NULL){
 
-		if($partner == NULL || $partner == 'NA'){
-			$partner = NULL;
+		if($county == NULL || $county == 48){
+			$county = 0;
 		}
 
-		if ($partner) {
-			$sql = "CALL `proc_get_eid_partner_yearly_tests_age`(" . $partner . ");";
-		} else {
+		if ($county == 0) {
 			$sql = "CALL `proc_get_eid_national_yearly_tests_age`();";
+		} else {
+			$sql = "CALL `proc_get_eid_county_yearly_tests_age`(" . $county . ");";
 		}
-		
+
 		
 		$result = $this->db->query($sql)->result_array();
 		
@@ -594,7 +584,6 @@ class Partner_model extends MY_Model
 				if($year == $prev_year){
 
 					if($modulo != 0){	
-
 						$total = $data['outcomes'][0]['data'][$i] + $data['outcomes'][1]['data'][$i] + $data['outcomes'][2]['data'][$i] + $data['outcomes'][3]['data'][$i] + $data['outcomes'][4]['data'][$i] + $data['outcomes'][5]['data'][$i];
 
 						$data['outcomes'][6]['data'][$i] = round(@( $data['outcomes'][5]['data'][$i]*100 / $total ),1);
@@ -660,133 +649,139 @@ class Partner_model extends MY_Model
 		return $data;
 	}
 
-	function some_quarters($partner=NULL){
 
-		if($partner == NULL || $partner == 'NA'){
-			$partner = NULL;
+
+	function ages_quarterly($county=NULL){
+
+		if($county == NULL || $county == 48){
+			$county = 0;
 		}
 
-		if ($partner) {
-			$sql = "CALL `proc_get_eid_partner_performance`(" . $partner . ");";
+		if ($county == 0) {
+			$sql = "CALL `proc_get_eid_national_yearly_tests_age`();";
 		} else {
-			$sql = "CALL `proc_get_eid_national_yearly_tests`();";
+			$sql = "CALL `proc_get_eid_yearly_tests`(" . $county . ");";
 		}
-		$year = null;
-		$quarter = null;
-		$count = 0;
-		$newdata[] = ['year'=>null, 
-					'quarter'=>null, 'tests'=>0, 'positive'=>0, 'negative'=>0, 'allpositive'=>0, 
-					'allnegative'=>0, 'rpos'=>0, 'rneg'=>0, 'rejected'=>0, 'infants'=>0, 'infantspos'=>0, 
-					'redraw'=>0, 'tat4' => 0];
-		$result = $this->db->query($sql)->result();
+		
+		$result = $this->db->query($sql)->result_array();
+		
+		$year;
+		$i = 8;
+		$b = true;
+		$limit = 0;
+		$quarter = 1;
+
+		$data;
+
+		$data['outcomes'][0]['name'] = "No Data POS";
+		$data['outcomes'][1]['name'] = "No Data NEG";
+		$data['outcomes'][2]['name'] = "<2m POS";
+		$data['outcomes'][3]['name'] = "<2m NEG";
+		$data['outcomes'][4]['name'] = "2-9m POS";
+		$data['outcomes'][5]['name'] = "2-9m NEG";
+		$data['outcomes'][6]['name'] = "9-12m POS";
+		$data['outcomes'][7]['name'] = "9-12m NEG";
+		$data['outcomes'][8]['name'] = "12-24m POS";
+		$data['outcomes'][9]['name'] = "12-24m NEG";
+		$data['outcomes'][10]['name'] = ">24m POS";
+		$data['outcomes'][11]['name'] = ">24m NEG";
+
+		$data['title'] = $title;
+
+		$data['categories'] = array_fill(0, 9, "Null");
+		$data['outcomes'][0]['data'] = array_fill(0, 9, 0);
+		$data['outcomes'][1]['data'] = array_fill(0, 9, 0);
+		$data['outcomes'][2]['data'] = array_fill(0, 9, 0);
+		$data['outcomes'][3]['data'] = array_fill(0, 9, 0);
+		$data['outcomes'][4]['data'] = array_fill(0, 9, 0);
+		$data['outcomes'][5]['data'] = array_fill(0, 9, 0);
+		$data['outcomes'][6]['data'] = array_fill(0, 9, 0);
+		$data['outcomes'][7]['data'] = array_fill(0, 9, 0);
+		$data['outcomes'][8]['data'] = array_fill(0, 9, 0);
+		$data['outcomes'][9]['data'] = array_fill(0, 9, 0);
+		$data['outcomes'][10]['data'] = array_fill(0, 9, 0);
+		$data['outcomes'][11]['data'] = array_fill(0, 9, 0);
+
 
 		foreach ($result as $key => $value) {
-			if ($year == null || $year != $value->year) {
-				$year = $value->year;
+
+			if($b){
+				$b = false;
+				$year = (int) $value['year'];
 			}
 
-			if ($quarter != null && $quarter != $this->getQuarter($value->month))
-				$count++;
+			$y = (int) $value['year'];
+			$name = $y . ' Q' . $quarter;
 
-			$quarter = $this->getQuarter($value->month);
-			$newdata[$count]['year'] = $year;
-			$newdata[$count]['quarter'] = $quarter;
-			$newdata[$count]['tests'] += $value->tests;
-			$newdata[$count]['positive'] += $value->positive;
-			$newdata[$count]['negative'] += $value->negative;
-			$newdata[$count]['allpositive'] += $value->allpositive;
-			$newdata[$count]['allnegative'] += $value->allnegative;
-			$newdata[$count]['rpos'] += $value->rpos;
-			$newdata[$count]['rneg'] += $value->rneg;
-			$newdata[$count]['rejected'] += $value->rejected;
-			$newdata[$count]['infants'] += $value->infants;
-			$newdata[$count]['infantspos'] += $value->infantspos;
-			$newdata[$count]['redraw'] += $value->redraw;
-			$newdata[$count]['tat4'] = $value->tat4;
-  			
-		}
-				
-		$data['outcomes'][0]['name'] = "Redraws";
-		$data['outcomes'][1]['name'] = "Positive";
-		$data['outcomes'][2]['name'] = "Negative";
-		$data['outcomes'][3]['name'] = "Positivity";
+			if($value['year'] != $year){
+				$year--;
 
-		$data['outcomes'][0]['color'] = '#52B3D9';
-		$data['outcomes'][1]['color'] = '#E26A6A';
-		$data['outcomes'][2]['color'] = '#257766';
-		$data['outcomes'][3]['color'] = '#913D88';
+				if($year == 2017){
+					$i = 4;
+					$quarter=1;
+					$limit++;
 
-		$data['outcomes'][0]['type'] = "column";
-		$data['outcomes'][1]['type'] = "column";
-		$data['outcomes'][2]['type'] = "column";
-		$data['outcomes'][3]['type'] = "spline";
+				}
 
-		$data['outcomes'][0]['yAxis'] = 1;
-		$data['outcomes'][1]['yAxis'] = 1;
-		$data['outcomes'][2]['yAxis'] = 1;
+			}
 
-		$data['title'] = "Outcomes (Initial PCR)";
+			$age_range = (int) $value['age_range_id'];
+			$month = (int) $value['month'];
+			$modulo = ($month % 3);
 
-		$data['categories'] = "No Data";
-		$data['outcomes'][0]['data'][0] = 0;
-		$data['outcomes'][1]['data'][0] = 0;
-		$data['outcomes'][2]['data'][0] = 0;
-		$data['outcomes'][3]['data'][0] = 0;
+			$data['categories'][$i] = $name;
 
-
-		foreach ($newdata as $key => $value) {
+			switch ($age_range) {
+				case 0:
+					$data['outcomes'][0]['data'][$i] += (int) $value[$pos];
+					$data['outcomes'][1]['data'][$i] += (int) $value[$neg];
+					break;
+				case 1:
+					$data['outcomes'][2]['data'][$i] += (int) $value[$pos];
+					$data['outcomes'][3]['data'][$i] += (int) $value[$neg];
+					break;
+				case 2:
+					$data['outcomes'][4]['data'][$i] += (int) $value[$pos];
+					$data['outcomes'][5]['data'][$i] += (int) $value[$neg];
+					break;
+				case 3:
+					$data['outcomes'][6]['data'][$i] += (int) $value[$pos];
+					$data['outcomes'][7]['data'][$i] += (int) $value[$neg];
+					break;
+				case 4:
+					$data['outcomes'][8]['data'][$i] += (int) $value[$pos];
+					$data['outcomes'][9]['data'][$i] += (int) $value[$neg];
+					break;
+				case 5:
+					$data['outcomes'][10]['data'][$i] += (int) $value[$pos];
+					$data['outcomes'][11]['data'][$i] += (int) $value[$neg];
+					break;
+				default:
+					break;
+			}
 			
 
-		// 	if($b){
-		// 		$b = false;
-		// 		$year = (int) $value['year'];
-		// 	}
+			if($modulo == 0){
 
-		// 	$y = (int) $value['year'];
-		// 	$name = $y . ' Q' . $quarter;
-		// 	if($value['year'] != $year){
-		// 		$year--;
+				$i++;
+				$quarter++;
+				$limit++;
 
-		// 		if($year == $prev_year){
+				if($i == 8){
+					$i == 0;
+				}
 
-		// 			if($modulo != 0){	
-		// 				$data['outcomes'][3]['data'][$i] += round(@(( $data['outcomes'][1]['data'][$i]*100)/
-		// 				($data['outcomes'][0]['data'][$i]+$data['outcomes'][1]['data'][$i]+$data['outcomes'][2]['data'][$i])),1);
-		// 			}
-		// 			$i = 4;
-		// 			$quarter=1;
-		// 			$limit++;
+			}
 
-		// 		}
-		// 	}
+			if($quarter == 5){
+				$quarter = 1;
+				$i = 0;
+			}
 
-		// 	$month = (int) $value['month'];
-		// 	$modulo = ($month % 3);
 
-			$data['categories'][$key] = $name;
-
-			$data['outcomes'][0]['data'][$key] = (int) $value['redraw'];
-			$data['outcomes'][1]['data'][$key] = (int) $value['positive'];
-			$data['outcomes'][2]['data'][$key] = (int) $value['negative'];
-			$data['outcomes'][3]['data'][$key] = round(((int) $value['positive']/(int)$value['tests']), 1);
-
-		// 	if($modulo == 0){
-		// 		$data['outcomes'][3]['data'][$i] += round(@(( $data['outcomes'][1]['data'][$i]*100)/
-		// 			($data['outcomes'][0]['data'][$i]+$data['outcomes'][1]['data'][$i]+$data['outcomes'][2]['data'][$i])),1);
-
-		// 		$i++;
-		// 		$quarter++;
-		// 		$limit++;
-
-		// 	}
-		// 	if($quarter == 5){
-		// 		$quarter = 1;
-		// 		$i = 0;
-		// 	}	
-
-		// 	if ($limit == ($columns+1)) {
-		// 		break;
-		// 	}
+			if ($limit == 9) {
+				break;
+			}
 
 
 		}
@@ -795,16 +790,8 @@ class Partner_model extends MY_Model
 
 	}
 
-	function getQuarter($month){
-		$quarters = ['1' => [1,2,3], '2' => [4,5,6], '3' => [7,8,9], '4' => [10,11,12]];
-		foreach ($quarters as $key => $value) {
-			if (in_array($month, $value)) {
-				$quarter = $key;
-				break;
-			}
-		}
-		return $quarter;
-	}
-
 
 }
+
+
+?>

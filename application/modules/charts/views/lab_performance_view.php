@@ -1,6 +1,6 @@
 
 <?php
-	isset($class) ? $cls = $class : $cls = '';
+    isset($class) ? $cls = $class : $cls = '';
     echo "<div id=" . $div_name . " ".$cls.">
 
 </div>";

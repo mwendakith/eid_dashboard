@@ -1,14 +1,14 @@
-<table id="example" cellspacing="1" cellpadding="3" class="tablehead table table-striped table-bordered" style="background:#CCC;">
+<table id="<?= (isset($div_name)) ? @$div_name : @'example'; ?>" cellspacing="1" cellpadding="3" class="tablehead table table-striped table-bordered" style="background:#CCC;">
 	<thead>
 		<?php if(isset($th)) { 
 			echo $th; 
 		} else {?>
 		<tr class="colhead">
 			<th rowspan="2">#</th>
-			<th rowspan="2">County</th>
+			<th rowspan="2"><?= (isset($subcounty)) ? @'Sub-County' : @'County'; ?></th>
 			<th rowspan="2"># Sites</th>
 			<th rowspan="2">All Tests</th>
-			<th rowspan="2">PMTCT Need</th>
+			<?php if (!isset($subcounty)) {?><th rowspan="2">PMTCT Need</th><?php } ?>
 			<th rowspan="2">Actual Infants Tested</th>
 			<th colspan="2">Initial PCR</th>
 			<th colspan="2">2nd/3rd PCR</th>
@@ -50,7 +50,7 @@
   	
   	// $('#example').DataTable();
 
-  	$('#example').DataTable({
+  	$("#<?= (isset($div_name)) ? @$div_name : @'example'; ?>").DataTable({
       dom: '<"btn btn-primary"B>lTfgtip',
       responsive: false,
         buttons : [

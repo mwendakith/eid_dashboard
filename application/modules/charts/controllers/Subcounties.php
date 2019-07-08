@@ -13,12 +13,20 @@ class Subcounties extends MY_Controller
 		$this->load->model('subcounties_model');
 	}
 
-	function subcounties_outcomes($year=NULL,$month=NULL,$to_year=NULL,$to_month=NULL)
+	function subcounties_positivity($year=NULL,$month=NULL,$to_year=NULL,$to_month=NULL)
 	{
-		$data['trends'] = $this->subcounties_model->subcounties_outcomes($year,$month,$to_year,$to_month);
+		$data['trends'] = $this->subcounties_model->subcounties_positivity($year,$month,$to_year,$to_month);
 		$data['div_name'] = "subcounties_subcounties_summary";
 
 		$this->load->view('trends_outcomes_view', $data);
+	}
+
+	function subcounties_outcomes($year=NULL,$month=NULL,$to_year=NULL,$to_month=NULL)
+	{
+		$data['outcomes'] = $this->subcounties_model->subcounties_outcomes($year,$month,$to_year,$to_month);
+		$data['subcounty'] = true;
+		
+		$this->load->view('counties_details_view', $data);
 	}
 
 	function subcounties_eid($sub_county=NULL,$year=NULL,$month=NULL,$to_year=NULL,$to_month=NULL)
@@ -64,7 +72,7 @@ class Subcounties extends MY_Controller
 	{
 		$this->subcounties_model->subcounty_sites_outcomes_download($sub_county,$year,$month,$to_year,$to_month);
 	}
-	
+
 	function subcounty_tat_outcomes($year=NULL, $month=NULL, $to_year=NULL, $to_month=NULL,$subcounty=NULL)
 	{
 		$data['trends'] = $this->subcounties_model->subcounty_tat_outcomes($year,$month,$to_year,$to_month,$subcounty);
@@ -72,6 +80,5 @@ class Subcounties extends MY_Controller
 		$data['tat'] = true;
 		$this->load->view('trends_outcomes_view', $data);
 	}
-
 }
 ?>

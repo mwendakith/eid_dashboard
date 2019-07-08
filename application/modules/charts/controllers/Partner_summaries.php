@@ -164,5 +164,6 @@ class Partner_summaries extends MY_Controller
 		$data['tat'] = true;
 		$this->load->view('trends_outcomes_view', $data);
 	}
+
 }
 ?>

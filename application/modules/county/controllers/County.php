@@ -56,7 +56,7 @@ class County extends MY_Controller
 		$this->data['content_view'] = 'county/counties_tat_view';
 		$this->template($this->data);
 	}
-	
+
 	public function subCountytat()
 	{
 		$this->clear_all_session_data();

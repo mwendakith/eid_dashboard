@@ -187,7 +187,7 @@ class Sites_model extends MY_Model
 			$table .= '<td>'.$value['subcounty'].'</td>';
 			$table .= '<td>'.number_format($value['alltests']).'</td>';
 			$table .= '<td>'.number_format($value['actualinfants']).'</td>';
-			$table .= '<td>'.number_format($value['positive']+$value['negative']).'</td>';
+			$table .= '<td>'.number_format($initial).'</td>';
 			$table .= '<td>'.number_format($value['positive']).'</td>';
 			$table .= '<td>'.number_format($value['repeatspos']).'</td>';
 			$table .= '<td>'.number_format($value['repeatsposPOS']).'</td>';
@@ -911,6 +911,182 @@ class Sites_model extends MY_Model
 		$data['outcomes']['data'][3] = (int) $result->three_g;
 		$data["outcomes"]["color"] =  '#1BA39C';
 
+		return $data;
+	}
+
+	public function age_breakdown($site=null,$year=null,$month=null,$to_year=null,$to_month=null) {
+		if ($site==null || $site=='null') 
+			$site = $this->session->userdata('site_filter');
+		
+		if ($year==null || $year=='null') 
+			$year = $this->session->userdata('filter_year');
+
+		if ($month==null || $month=='null') {
+			if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
+				$month = 0;
+			}else {
+				$month = $this->session->userdata('filter_month');
+			}
+		}
+
+		if ($to_month==null || $to_month=='null') 
+			$to_month = 0;
+
+		if ($to_year==null || $to_year=='null')
+			$to_year = 0;
+
+		$sql = "CALL `proc_get_eid_site_age_range`(0, '".$site."','".$year."','".$month."','".$to_year."','".$to_month."')";
+		$result = $this->db->query($sql)->result_array();
+		// echo "<pre>";print_r($result);die();
+				
+		$data['ageGnd'][0]['name'] = 'Positive';
+		$data['ageGnd'][1]['name'] = 'Negative';
+		$data['categories'][0] 			= 'No Data';
+		$data["ageGnd"][0]["data"][0]	=  0;
+		$data["ageGnd"][1]["data"][0]	=  0;
+		foreach ($result as $key => $value) {
+			$data['categories'][$key] 			= $value['age_range'];
+
+			$data["ageGnd"][0]["data"][$key]	=  (int) $value['pos'];
+			$data["ageGnd"][1]["data"][$key]	=  (int) $value['neg'];
+		}
+		$data['ageGnd'][0]['drilldown']['color'] = '#913D88';
+		$data['ageGnd'][1]['drilldown']['color'] = '#96281B';
+
+		return $data;
+	}
+
+	function entry_points($site=null,$year=null,$month=null,$to_year=null,$to_month=null)
+	{
+		if ($site==null || $site=='null') 
+			$site = $this->session->userdata('site_filter');
+
+		if ($year==null || $year=='null') {
+			$year = $this->session->userdata('filter_year');
+		}
+		if ($month==null || $month=='null') {
+			if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
+				$month = 0;
+			}else {
+				$month = $this->session->userdata('filter_month');
+			}
+		}
+		if ($to_month==null || $to_month=='null') {
+			$to_month = 0;
+		}
+		if ($to_year==null || $to_year=='null') {
+			$to_year = 0;
+		}
+
+		$sql = "CALL `proc_get_eid_site_entry_points`('".$site."','".$year."','".$month."','".$to_year."','".$to_month."')";
+		// echo "<pre>";print_r($sql);die();
+		$result = $this->db->query($sql)->result_array();
+		// echo "<pre>";print_r($result);die();
+		$data['entry'][0]['name'] = 'Positive';
+		$data['entry'][1]['name'] = 'Negative';
+
+		$count = 0;
+		$data["entry"][0]["data"][0]	= $count;
+		$data["entry"][1]["data"][0]	= $count;
+		$data['categories'][0]			= 'No Data';
+
+		foreach ($result as $key => $value) {
+			$data['categories'][$key] 		= $value['name'];
+
+			$data["entry"][0]["data"][$key]	=  (int) $value['positive'];
+			$data["entry"][1]["data"][$key]	=  (int) $value['negative'];
+			
+		}
+		// echo "<pre>";print_r($data);die();
+		return $data;
+	}
+
+	function mprophylaxis($site=null,$year=null,$month=null,$to_year=null,$to_month=null)
+	{
+		if ($site==null || $site=='null') 
+			$site = $this->session->userdata('site_filter');
+		
+		if ($year==null || $year=='null') 
+			$year = $this->session->userdata('filter_year');
+		
+		if ($month==null || $month=='null') {
+			if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
+				$month = 0;
+			}else {
+				$month = $this->session->userdata('filter_month');
+			}
+		}
+		if ($to_month==null || $to_month=='null') 
+			$to_month = 0;
+		
+		if ($to_year==null || $to_year=='null') 
+			$to_year = 0;
+		
+		$sql = "CALL `proc_get_eid_site_mprophylaxis`('".$site."','".$year."','".$month."','".$to_year."','".$to_month."')";
+		// echo "<pre>";print_r($sql);die();
+		$result = $this->db->query($sql)->result_array();
+		// echo "<pre>";print_r($result);die();
+		$data['mprophilaxis'][0]['name'] = 'Positive';
+		$data['mprophilaxis'][1]['name'] = 'Negative';
+
+		$count = 0;
+		$data["mprophilaxis"][0]["data"][0]	= $count;
+		$data["mprophilaxis"][1]["data"][0]	= $count;
+		$data['categories'][0]			= 'No Data';
+
+		foreach ($result as $key => $value) {
+			$data['categories'][$key] 		= $value['name'];
+
+			$data["mprophilaxis"][0]["data"][$key]	=  (int) $value['positive'];
+			$data["mprophilaxis"][1]["data"][$key]	=  (int) $value['negative'];
+			
+		}
+		// echo "<pre>";print_r($data);die();
+		return $data;
+	}
+
+	function iprophylaxis($site=null,$year=null,$month=null,$to_year=null,$to_month=null)
+	{
+		if ($site==null || $site=='null') {
+			$site = $this->session->userdata('site_filter');
+		}
+
+		if ($year==null || $year=='null') 
+			$year = $this->session->userdata('filter_year');
+		
+		if ($month==null || $month=='null') {
+			if ($this->session->userdata('filter_month')==null || $this->session->userdata('filter_month')=='null') {
+				$month = 0;
+			}else {
+				$month = $this->session->userdata('filter_month');
+			}
+		}
+		if ($to_month==null || $to_month=='null') 
+			$to_month = 0;
+		
+		if ($to_year==null || $to_year=='null') 
+			$to_year = 0;
+		
+		$sql = "CALL `proc_get_eid_site_iprophylaxis`('".$site."','".$year."','".$month."','".$to_year."','".$to_month."')";
+		// echo "<pre>";print_r($sql);die();
+		$result = $this->db->query($sql)->result_array();
+		// echo "<pre>";print_r($result);die();
+		$data['iprophilaxis'][0]['name'] = 'Positive';
+		$data['iprophilaxis'][1]['name'] = 'Negative';
+
+		$count = 0;
+		$data["iprophilaxis"][0]["data"][0]	= $count;
+		$data["iprophilaxis"][1]["data"][0]	= $count;
+		$data['categories'][0]			= 'No Data';
+
+		foreach ($result as $key => $value) {
+			$data['categories'][$key] 		= $value['name'];
+
+			$data["iprophilaxis"][0]["data"][$key]	=  (int) $value['positive'];
+			$data["iprophilaxis"][1]["data"][$key]	=  (int) $value['negative'];
+			
+		}
+		// echo "<pre>";print_r($data);die();
 		return $data;
 	}
 

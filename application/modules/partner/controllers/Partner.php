@@ -66,12 +66,18 @@ class Partner extends MY_Controller
 		$this -> template($this->data);
 	}
 
-
 	function tat()
 	{
 		$this->clear_all_session_data();
 		$this->data['content_view'] = 'partner/partner_tat_view';
 
+		$this->template($this->data);
+	}
+
+	function agencies() {
+		$this->clear_all_session_data();
+		$this->data['content_view'] = 'partner/partner_agencies_view';
+		$this->data['agencies_flag'] = TRUE;
 		$this->template($this->data);
 	}
 
@@ -93,6 +99,15 @@ class Partner extends MY_Controller
 			$partner = 0;
 		}
 		echo json_encode($partner);
+	}
+
+	public function check_agencies_select() {
+		if ($this->session->userdata('funding_agency_filter')) {
+			$funding_agencies = $this->session->userdata('funding_agency_filter');
+		} else {
+			$funding_agencies = 0;
+		}
+		echo json_encode($funding_agencies);
 	}
 
 	function excel_test($partner=null)

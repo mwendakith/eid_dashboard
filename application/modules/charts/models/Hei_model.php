@@ -38,7 +38,7 @@ class Hei_model extends MY_Model
 		if ($id==null || $id=='null') $id = 0;
 		$id = 0;
 		$sql = "CALL `proc_get_eid_hei_validation`('".$year."','".$month."','".$to_year."','".$to_month."','".$type."','".$id."')";
-		
+		// echo "<pre>";print_r($sql);die();
 		$result = $this->db->query($sql)->result();
 		// echo "<pre>";print_r($result);die();
 		$count = 1;

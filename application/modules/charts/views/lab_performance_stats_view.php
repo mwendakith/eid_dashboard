@@ -1,6 +1,6 @@
 <table id="example" cellspacing="1" cellpadding="3" class="tablehead table table-striped table-bordered" style="/*background:#CCC;">
 	<thead>
-		<tr>
+		<tr class="colhead">
 			<th>No</th>
 			<th>Lab</th>
 			<th>Facilities Sending Samples</th>
@@ -37,6 +37,7 @@
 
   	$('#example').DataTable({
       dom: '<"btn btn-primary"B>lTfgtip',
+      pageLength: 50,
       responsive: true,
         buttons : [
             {

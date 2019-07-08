@@ -79,13 +79,21 @@
                 footerFormat: '<tr><th>Total:</th>'+'<td style="text-align:right"><b>{point.total}</b></td></tr>'+'</tbody></table>'
             },
             legend: {
-                layout: 'vertical',
+                layout: 'horizontal',
                 align: 'right',
                 x: -100,
-                verticalAlign: 'top',
-                y: 40,
-                floating: true,
+                verticalAlign: 'bottom',
+                y: -25,
+                floating: false,
                 backgroundColor: '#FFFFFF'
+                
+                // layout: 'vertical',
+                // align: 'right',
+                // x: -100,
+                // verticalAlign: 'top',
+                // y: 40,
+                // floating: true,
+                // backgroundColor: '#FFFFFF'
             },navigation: {
                         buttonOptions: {
                             verticalAlign: 'bottom',

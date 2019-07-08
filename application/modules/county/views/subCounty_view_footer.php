@@ -14,12 +14,13 @@
 	        	$("#breadcrum").html(data);
 	       });
 		$("#second").hide();
-		$("#county_outcomes").load("<?php echo base_url('charts/subcounties/subcounties_outcomes');?>");
+		$("#subcounty_positivity").load("<?php echo base_url('charts/subcounties/subcounties_positivity');?>");
+		$("#subcounty_outcomes").load("<?= @base_url('charts/subcounties/subcounties_outcomes'); ?>");
 
 
 		$("select").change(function(){
 			em = $(this).val();
-			
+
 			// Send the data using post
 	        var posting = $.post( "<?php echo base_url();?>template/filter_sub_county_data", { subCounty: em } );
 	     
@@ -43,7 +44,8 @@
 	        	if (data=="" || data==null) {
 	        		$("#second").hide();
 	        		$("#first").show();
-					$("#county_outcomes").load("<?php echo base_url('charts/subcounties/subcounties_outcomes');?>");
+					$("#subcounty_positivity").load("<?php echo base_url('charts/subcounties/subcounties_positivity');?>");
+					$("#subcounty_outcomes").load("<?= @base_url('charts/subcounties/subcounties_outcomes'); ?>");
 	        	}else {
 	        		$("#first").hide();
 					$("#second").show();
@@ -96,8 +98,11 @@
 					$("#first").show();
 				
 					// fetching the partner outcomes
-					$("#county_outcomes").html("<center><div class='loader'></div></center>");
-					$("#county_outcomes").load("<?php echo base_url('charts/subcounties/subcounties_outcomes'); ?>/"+from[1]+"/"+from[0]+"/"+to[1]+"/"+to[0]);
+					$("#subcounty_positivity").html("<center><div class='loader'></div></center>");
+					$("#subcounty_outcomes").html("<center><div class='loader'></div></center>");
+
+					$("#subcounty_positivity").load("<?php echo base_url('charts/subcounties/subcounties_positivity'); ?>/"+from[1]+"/"+from[0]+"/"+to[1]+"/"+to[0]);
+					$("#subcounty_outcomes").load("<?= @base_url('charts/subcounties/subcounties_outcomes'); ?>/"+from[1]+"/"+from[0]+"/"+to[1]+"/"+to[0]);
 				} else {
 					// subcounty = "<?php echo json_decode("+subcounty+")?>";
 					// console.log(subcounty);
@@ -161,8 +166,11 @@
 					$("#first").show();
 				
 					// fetching the partner outcomes
-					$("#county_outcomes").html("<center><div class='loader'></div></center>");
-					$("#county_outcomes").load("<?php echo base_url('charts/subcounties/subcounties_outcomes'); ?>/"+year+"/"+month);
+					$("#subcounty_positivity").html("<center><div class='loader'></div></center>");
+					$("#subcounty_outcomes").html("<center><div class='loader'></div></center>");
+
+					$("#subcounty_positivity").load("<?php echo base_url('charts/subcounties/subcounties_positivity'); ?>/"+year+"/"+month);
+					$("#subcounty_outcomes").load("<?= @base_url('charts/subcounties/subcounties_outcomes'); ?>/"+year+"/"+month);
 				} else {
 					// subcounty = "<?php echo json_decode("+subcounty+")?>";
 					// console.log(subcounty);

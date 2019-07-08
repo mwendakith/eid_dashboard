@@ -14,6 +14,10 @@
         			<th>#</th>
               <th>Name</th>
               <th>MFL Code</th>
+<<<<<<< HEAD
+=======
+              <th>County</th>
+>>>>>>> 6f706d757719ba85748ebde050471e61e5ec9556
               <th>Received Samples at Hub</th>
               <th>Rejected Samples (on receipt at Hub)</th>
               <th> All Tests Done at Hub</th>

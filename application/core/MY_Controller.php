@@ -191,26 +191,6 @@ if(!defined("BASEPATH")) exit("No direct script access allowed!");
 			return TRUE;
 		}
 
-		function filter_sub_county($data=NULL)
-		{
-			if (!$data) {//if $data is null
-				
-			} else {//if data is not null
-				if ($data['sub_county']==0||$data['sub_county']=='NA') {
-					$this->clear_all_session_data();
-				}else{
-					$this->session->unset_userdata('county_filter');
-					$this->session->set_userdata('sub_county_filter', $data['sub_county']);
-					$this->session->unset_userdata('filter_month');
-					$this->session->unset_userdata('partner_filter');
-					$this->session->unset_userdata('site_filter');
-					$this->session->unset_userdata('age_filter');
-					$this->session->unset_userdata('regimen_filter');
-				}
-			}
-			
-			return TRUE;
-		}
 
 
 		function filter_partners($data=NULL)

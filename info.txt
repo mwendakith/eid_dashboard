@@ -2,7 +2,11 @@ AddType text/cache-manifest .appcache
 
 <IfModule mod_rewrite.c>
   RewriteEngine On
+<<<<<<< HEAD:info.txt
+  #RewriteBase /vl_dashboard/eid_dashboard
+=======
   #RewriteBase /eid_dashboard
+>>>>>>> 6f706d757719ba85748ebde050471e61e5ec9556:.htaccess
 
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteRule ^ index.php [QSA,L]

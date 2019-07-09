@@ -30,7 +30,7 @@ if(!defined("BASEPATH")) exit("No direct script access allowed!");
 
 		public function load_libraries($arr){
 
-			array_unshift($arr, "jquery", "jquery-ui","bootstrap","datatables");
+		array_unshift($arr, "jquery", "jquery-ui","bootstrap","datatables");
 					
 			$libs['js_files']				=	array();		
 			$libs['css_files']				=	array();			
@@ -123,6 +123,7 @@ if(!defined("BASEPATH")) exit("No direct script access allowed!");
 			$month = $data['month'];
 			
 			if ($year) {
+				$this->session->unset_userdata('filter_month');
 				$return = $this->session->set_userdata('filter_year', $year);
 				$this->session->unset_userdata('filter_month');
 			} else {
@@ -190,6 +191,8 @@ if(!defined("BASEPATH")) exit("No direct script access allowed!");
 			return TRUE;
 		}
 
+
+
 		function filter_partners($data=NULL)
 		{
 			if (!$data) {
@@ -204,6 +207,7 @@ if(!defined("BASEPATH")) exit("No direct script access allowed!");
 					$this->session->unset_userdata('age_filter');
 					$this->session->unset_userdata('regimen_filter');
 					$this->session->unset_userdata('funding_agency_filter');
+
 				}else{
 					$this->session->set_userdata('partner_filter', $data['partner']);
 					$this->session->unset_userdata('sub_county_filter');
@@ -213,6 +217,7 @@ if(!defined("BASEPATH")) exit("No direct script access allowed!");
 					$this->session->unset_userdata('age_filter');
 					$this->session->unset_userdata('regimen_filter');
 					$this->session->unset_userdata('funding_agency_filter');
+
 				}
 			}
 			
@@ -234,6 +239,7 @@ if(!defined("BASEPATH")) exit("No direct script access allowed!");
 					$this->session->unset_userdata('age_filter');
 					$this->session->unset_userdata('regimen_filter');
 					$this->session->unset_userdata('funding_agency_filter');
+
 				}else{
 					$this->session->set_userdata('site_filter', $data['site']);
 					$this->session->set_userdata('partner_filter', null);
@@ -325,9 +331,10 @@ if(!defined("BASEPATH")) exit("No direct script access allowed!");
 						if (!($key == 'filter_year' || $key == 'funding_agency_filter' || $key == '__ci_last_regenerate'))
 				            $this->session->unset_userdata($key);
 				    }
+
 				}
 			}
-			
+			// print_r($this->session->all_userdata());die();
 			return TRUE;
 		}
 

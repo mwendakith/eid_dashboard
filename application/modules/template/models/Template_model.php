@@ -104,6 +104,7 @@ class Template_model extends MY_Model
 		return $dropdown;
 	}
 
+
 	function get_site_details($id)
 	{
 		$site_data = $this->db->query("SELECT * FROM `view_facilitys` WHERE `ID`=$id")->result();

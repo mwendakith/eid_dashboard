@@ -26,7 +26,7 @@ class Summaries extends MY_Controller
 		$link = $year . '/' . $county . '/' . $partner;
 
 		$data['link'] = base_url('charts/summaries/download_testing_trends/' . $link);
-		print_r($data) ; die();
+		// print_r($data) ; die();
 		$this->load->view('trends_outcomes_view', $data);
 
 	}

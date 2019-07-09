@@ -30,11 +30,7 @@ if(!defined("BASEPATH")) exit("No direct script access allowed!");
 
 		public function load_libraries($arr){
 
-<<<<<<< HEAD
-			array_unshift($arr, "jquery", "jquery-ui","bootstrap");
-=======
-			array_unshift($arr, "jquery", "jquery-ui","bootstrap","datatables");
->>>>>>> 6f706d757719ba85748ebde050471e61e5ec9556
+		array_unshift($arr, "jquery", "jquery-ui","bootstrap","datatables");
 					
 			$libs['js_files']				=	array();		
 			$libs['css_files']				=	array();			
@@ -97,12 +93,8 @@ if(!defined("BASEPATH")) exit("No direct script access allowed!");
 								'filter_year',
 								'filter_month',
 								'age_filter',
-<<<<<<< HEAD
-								'regimen_filter'
-=======
 								'regimen_filter',
 								'funding_agency_filter'
->>>>>>> 6f706d757719ba85748ebde050471e61e5ec9556
 								);
 			$this->session->unset_userdata($filter_data);
 		}
@@ -127,30 +119,19 @@ if(!defined("BASEPATH")) exit("No direct script access allowed!");
 
 		function set_filter_date($data=null)
 		{
-<<<<<<< HEAD
-			// echo "<pre";print_r($data);die();
-			$year = $data['year'];
-			$month = $data['month'];
-
-=======
 			$year = $data['year'];
 			$month = $data['month'];
 			
->>>>>>> 6f706d757719ba85748ebde050471e61e5ec9556
 			if ($year) {
 				$this->session->unset_userdata('filter_month');
 				$return = $this->session->set_userdata('filter_year', $year);
 				$this->session->unset_userdata('filter_month');
 			} else {
-<<<<<<< HEAD
-				$return = $this->session->set_userdata('filter_month', $month);
-=======
 				if ($month=='all') {
 					$this->session->unset_userdata('filter_month');
 				}else {
 					$this->session->set_userdata('filter_month', $month);
 				}
->>>>>>> 6f706d757719ba85748ebde050471e61e5ec9556
 			}
 			$this->load->model('template/template_model');
 			if(!$year)
@@ -181,8 +162,6 @@ if(!defined("BASEPATH")) exit("No direct script access allowed!");
 					$this->session->set_userdata('partner_filter', null);
 					$this->session->unset_userdata('site_filter');
 					$this->session->unset_userdata('age_filter');
-<<<<<<< HEAD
-=======
 					$this->session->unset_userdata('funding_agency_filter');
 				}
 			}
@@ -206,14 +185,12 @@ if(!defined("BASEPATH")) exit("No direct script access allowed!");
 					$this->session->unset_userdata('age_filter');
 					$this->session->unset_userdata('regimen_filter');
 					$this->session->unset_userdata('funding_agency_filter');
->>>>>>> 6f706d757719ba85748ebde050471e61e5ec9556
 				}
 			}
 			
 			return TRUE;
 		}
 
-<<<<<<< HEAD
 		function filter_sub_county($data=NULL)
 		{
 			if (!$data) {//if $data is null
@@ -235,8 +212,7 @@ if(!defined("BASEPATH")) exit("No direct script access allowed!");
 			return TRUE;
 		}
 
-=======
->>>>>>> 6f706d757719ba85748ebde050471e61e5ec9556
+
 		function filter_partners($data=NULL)
 		{
 			if (!$data) {
@@ -250,10 +226,8 @@ if(!defined("BASEPATH")) exit("No direct script access allowed!");
 					$this->session->unset_userdata('site_filter');
 					$this->session->unset_userdata('age_filter');
 					$this->session->unset_userdata('regimen_filter');
-<<<<<<< HEAD
-=======
 					$this->session->unset_userdata('funding_agency_filter');
->>>>>>> 6f706d757719ba85748ebde050471e61e5ec9556
+
 				}else{
 					$this->session->set_userdata('partner_filter', $data['partner']);
 					$this->session->unset_userdata('sub_county_filter');
@@ -262,10 +236,8 @@ if(!defined("BASEPATH")) exit("No direct script access allowed!");
 					$this->session->unset_userdata('site_filter');
 					$this->session->unset_userdata('age_filter');
 					$this->session->unset_userdata('regimen_filter');
-<<<<<<< HEAD
-=======
 					$this->session->unset_userdata('funding_agency_filter');
->>>>>>> 6f706d757719ba85748ebde050471e61e5ec9556
+
 				}
 			}
 			
@@ -286,10 +258,8 @@ if(!defined("BASEPATH")) exit("No direct script access allowed!");
 					$this->session->unset_userdata('sub_county_filter');
 					$this->session->unset_userdata('age_filter');
 					$this->session->unset_userdata('regimen_filter');
-<<<<<<< HEAD
-=======
 					$this->session->unset_userdata('funding_agency_filter');
->>>>>>> 6f706d757719ba85748ebde050471e61e5ec9556
+
 				}else{
 					$this->session->set_userdata('site_filter', $data['site']);
 					$this->session->set_userdata('partner_filter', null);
@@ -298,8 +268,6 @@ if(!defined("BASEPATH")) exit("No direct script access allowed!");
 					$this->session->unset_userdata('sub_county_filter');
 					$this->session->unset_userdata('age_filter');
 					$this->session->unset_userdata('regimen_filter');
-<<<<<<< HEAD
-=======
 					$this->session->unset_userdata('funding_agency_filter');
 				}
 			}
@@ -383,7 +351,7 @@ if(!defined("BASEPATH")) exit("No direct script access allowed!");
 						if (!($key == 'filter_year' || $key == 'funding_agency_filter' || $key == '__ci_last_regenerate'))
 				            $this->session->unset_userdata($key);
 				    }
->>>>>>> 6f706d757719ba85748ebde050471e61e5ec9556
+
 				}
 			}
 			// print_r($this->session->all_userdata());die();

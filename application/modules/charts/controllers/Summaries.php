@@ -15,7 +15,6 @@ class Summaries extends MY_Controller
 	function turnaroundtime($year=NULL,$month=NULL,$county=NULL,$to_year=NULL,$to_month=NULL)
 	{
 		$data['outcomes'] = $this->summaries_model->turnaroundtime($year,$month,$county,$to_year,$to_month);
-
 		$this->load->view('turnaroundtime_view',$data);
 	}
 	
@@ -27,7 +26,7 @@ class Summaries extends MY_Controller
 		$link = $year . '/' . $county . '/' . $partner;
 
 		$data['link'] = base_url('charts/summaries/download_testing_trends/' . $link);
-
+		print_r($data) ; die();
 		$this->load->view('trends_outcomes_view', $data);
 
 	}

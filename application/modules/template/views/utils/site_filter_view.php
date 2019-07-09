@@ -84,8 +84,6 @@
         </div>
             <center><div id="errorAlertDateRange"><div id="errorAlert" class="alert alert-danger" role="alert">...</div></div></center>
     </div>
-<<<<<<< HEAD
-=======
 </div>
 <div class="row" id="detail">
   <div class="col-md-4">
@@ -100,7 +98,6 @@
     <p><strong>Partner<label id="partner"></label>:</strong></p>
   </div>
   
->>>>>>> 6f706d757719ba85748ebde050471e61e5ec9556
 </div>
 <script type="text/javascript">
 $(function() {

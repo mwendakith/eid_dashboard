@@ -104,15 +104,13 @@ class Template_model extends MY_Model
 		return $dropdown;
 	}
 
-<<<<<<< HEAD
-=======
+
 	function get_site_details($id)
 	{
 		$site_data = $this->db->query("SELECT * FROM `view_facilitys` WHERE `ID`=$id")->result();
 		return $site_data;
 	}
 
->>>>>>> 6f706d757719ba85748ebde050471e61e5ec9556
 	function funding_agencies_dropdown() {
 		$dropdown = '';
 		

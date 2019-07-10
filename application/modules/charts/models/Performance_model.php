@@ -111,10 +111,7 @@ class Performance_model extends MY_Model
 						<td>".($key+1)."</td>
 						<td>" . $name . "</td>
 						<td>" . $value['facilitycode'] . "</td>
-<<<<<<< HEAD
-=======
 						<td>" . $value['countyname'] . "</td>
->>>>>>> 6f706d757719ba85748ebde050471e61e5ec9556
 						<td>".number_format((int) $value['sitesending'])."</td>
 						<td>".number_format((int) $value['received'])."</td>
 						<td>".number_format((int) $value['rejected']) . " (" . 
@@ -179,11 +176,7 @@ class Performance_model extends MY_Model
 						<td>".($key+1)."</td>
 						<td>".$value['name']."</td>
 						<td>".$value['facilitycode']."</td>
-<<<<<<< HEAD
-=======
 						<td>" . $value['countyname'] . "</td>
->>>>>>> 6f706d757719ba85748ebde050471e61e5ec9556
-
 						<td>".number_format((int) $value['received'])."</td>
 						<td>".number_format((int) $value['rejected']) . " (" . 
 							round(@(($value['rejected']*100)/$value['received']), 1, PHP_ROUND_HALF_UP)."%)</td>

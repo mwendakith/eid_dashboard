@@ -80,7 +80,6 @@
     </div>
 </div>
 
-
 <div id="my_empty_div"></div>
 
 <script type="text/javascript">
@@ -133,7 +132,6 @@
           $("#ages").html("<div>Loading...</div>");
           $("#county_outcomes").html("<div>Loading...</div>");
           $("#poc").html("<div>Loading...</div>");
-
           $("#testing_trends").load("<?php echo base_url();?>charts/poc/testing_trends/"+em+"/"+from[1]+"/"+from[0]+"/"+to[1]+"/"+to[0]);
           $("#eid_outcomes").load("<?php echo base_url();?>charts/poc/eid_outcomes/"+em+"/"+from[1]+"/"+from[0]+"/"+to[1]+"/"+to[0]);
           $("#entrypoints").load("<?php echo base_url();?>charts/poc/entrypoints/"+em+"/"+from[1]+"/"+from[0]+"/"+to[1]+"/"+to[0]);
@@ -193,8 +191,7 @@ function date_filter(criteria, id)
       if(obj['monthNo'] == "null" || obj['monthNo'] == null){
         obj['monthNo'] = "";
       }
-      $(".display_date").html("( "+obj['year']+" "+obj['monthNo']+" )");
-      
+      $(".display_date").html("( "+obj['year']+" "+obj['monthNo']+" )");      
       $("#testing_trends").html("<div>Loading...</div>");
       $("#eid_outcomes").html("<div>Loading...</div>");
       $("#entrypoints").html("<div>Loading...</div>");

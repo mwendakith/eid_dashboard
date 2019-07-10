@@ -12,10 +12,7 @@ function format_date(data)
 function set_multiple_date(first, second){
 	var f = first.split(" ");
 	var s = second.split(" ");
-<<<<<<< HEAD
-=======
 	// return f[0] + "-" + s[0] + " " + f[1];
->>>>>>> 6f706d757719ba85748ebde050471e61e5ec9556
 	return f[0] + ", " + f[1] + " - " + s[0] + ", " + s[1];
 }
 
@@ -38,10 +35,7 @@ function check_error_date_range (first, second) {
 			doAlert('errorAlert', content);
 		}
 	} else {
-<<<<<<< HEAD
-		
-=======
->>>>>>> 6f706d757719ba85748ebde050471e61e5ec9556
+
 		if(firstYear > secondYear){
 			content = "<strong>Warning!</strong>The from year is greater than the to year!";
 			doAlert('errorAlert', content);

@@ -89,7 +89,6 @@ class Template extends MY_Controller
 				'year' => $this->input->post('year'),
 				'month' => $this->input->post('month')
 			);
-<<<<<<< HEAD
 		
 		echo $this->set_filter_date($data);
 	}
@@ -154,72 +153,6 @@ class Template extends MY_Controller
 		if ($type=='null'||$type==null) 
 			$type = NULL;
 		
-=======
-		
-		echo $this->set_filter_date($data);
-	}
-
-	function filter_age_data()
-	{
-		$data = array(
-				'age' => $this->input->post('age')
-			);
-		
-		$this->filter_age($data);
-
-		echo $this->session->userdata('age_filter');
-	}
-
-	function filter_regimen_data()
-	{
-		$data = array(
-				'regimen' => $this->input->post('regimen')
-			);
-		
-		$this->filter_regimen($data);
-
-		echo $this->session->userdata('regimen_filter');
-	}
-
-	function filter_funding_agency_data() {
-		$data = array(
-				'funding_agency' => $this->input->post('agency')
-		);
-
-		$response = $this->filter_funding_agency($data);
-		if ($response)
-			echo json_encode($this->session->userdata('funding_agency_filter'));
-	}
-
-	function breadcrum($data=null,$partner=NULL,$site=NULL,$sub_county=NULL,$age=NULL,$regimen=NULL,$type=null) {
-		/*$type ==> 
-			1: county
-			2: Partner
-			3: Sub-County
-			4: Site
-			5: Funding Agency*/
-		if ($partner=='null'||$partner==null) {
-			$partner = NULL;
-		}
-		if ($site=='null'||$site==null) {
-			$site = NULL;
-		}
-		if ($data=='null'||$data==null) {
-			$data = NULL;
-		}
-		if ($sub_county=='null'||$sub_county==null) {
-			$sub_county = NULL;
-		}
-		if ($age=='null'||$age==null) {
-			$age = NULL;
-		}
-		if ($regimen=='null'||$regimen==null) {
-			$regimen = NULL;
-		}
-		if ($type=='null'||$type==null) 
-			$type = NULL;
-		
->>>>>>> 6f706d757719ba85748ebde050471e61e5ec9556
 		$this->load->model('template_model');
 		// echo "<pre>";print_r($data."<_Part__>".$partner."<_Site__>".$site."<_Sub__>".$sub_county."<__Age_>".$age."<__Regimen_>".$regimen);die();
 		if ($partner) {

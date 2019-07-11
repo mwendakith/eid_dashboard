@@ -177,7 +177,6 @@ class Performance_model extends MY_Model
 						<td>".$value['name']."</td>
 						<td>".$value['facilitycode']."</td>
 						<td>" . $value['countyname'] . "</td>
-
 						<td>".number_format((int) $value['received'])."</td>
 						<td>".number_format((int) $value['rejected']) . " (" . 
 							round(@(($value['rejected']*100)/$value['received']), 1, PHP_ROUND_HALF_UP)."%)</td>

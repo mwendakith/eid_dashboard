@@ -35,6 +35,7 @@ function check_error_date_range (first, second) {
 			doAlert('errorAlert', content);
 		}
 	} else {
+
 		if(firstYear > secondYear){
 			content = "<strong>Warning!</strong>The from year is greater than the to year!";
 			doAlert('errorAlert', content);

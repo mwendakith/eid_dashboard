@@ -73,7 +73,8 @@ $active_group = 'default';
 $query_builder = TRUE;
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'mysql',
+	'hostname' => '10.230.50.11',
+	// 'hostname' => '127.0.0.1',
 	'username' => 'root',
 	'password' => 'FnP5FjbnMrzXCm.',
 	'database' => 'apidb',
@@ -90,8 +91,12 @@ $db['default'] = array(
 	'compress' => FALSE,
 	'stricton' => FALSE,
 	'failover' => array(),
-	'save_queries' => TRUE
+	'save_queries' => TRUE,
+	'port' => 3306
+
 );
+
+
 $db['eid_survey'] = array(
 	'dsn'	=> '',
 	'hostname' => 'mysql',
@@ -111,9 +116,6 @@ $db['eid_survey'] = array(
 	'compress' => FALSE,
 	'stricton' => FALSE,
 	'failover' => array(),
-	'save_queries' => TRUE
+	'save_queries' => TRUE,
+	'port' => 3307
 );
-
-
-
-

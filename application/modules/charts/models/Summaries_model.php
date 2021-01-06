@@ -274,6 +274,9 @@ class Summaries_model extends MY_Model
 		//     		<td>'. number_format((int) $value['confirmpos']) .'('. round(((int) $value['confirmpos'])/((int) $value['confirmdna'] + (int) $value['repeatspos'])*100,1) .'%)</td>
 		//     	</tr>
 		foreach ($result as $key => $value) {
+			$pcr2 = $value['repeatspos'] - $value['pcr3'];
+			$pcr2pos = $value['repeatsposPOS'] - $value['pcr3pos'];
+
 			$data['ul'] .= '<tr>
 					<td>Total EID Tests</td>
 					<td>'.number_format((int) ($value['firstdna']+$value['confirmdna']+$value['repeatspos'])).'</td>
@@ -287,12 +290,25 @@ class Summaries_model extends MY_Model
 		    		<td>'.number_format((int) $value['pos']).'('.round((((int) $value['pos']/(int) $value['firstdna'])*100),1).'%)</td>
 		    	</tr>
 		    	<tr>
+		    		<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2nd PCR:</td>
+		    		<td>'.number_format((int) $pcr2).'</td>
+		    		<td>Positive (+):</td>
+		    		<td>'.number_format((int) $pcr2pos).'('.round((((int) $pcr2pos/(int) $pcr2)*100),1).'%)</td>
+		    	</tr>
+		    	<tr>
+		    		<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3rd PCR:</td>
+		    		<td>'.number_format((int) $value['pcr3']).'</td>
+		    		<td>Positive (+):</td>
+		    		<td>'.number_format((int) $value['pcr3pos']).'('.round((((int) $value['pcr3pos']/(int) $value['pcr3'])*100),1).'%)</td>
+		    	</tr>
+		    	' .
+		    	/*<tr>
 		    		<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2nd/3rd PCR:</td>
 		    		<td>'.number_format((int) $value['repeatspos']).'</td>
 		    		<td>Positive (+):</td>
 		    		<td>'.number_format((int) $value['repeatsposPOS']).'('.round((((int) $value['repeatsposPOS']/(int) $value['repeatspos'])*100),1).'%)</td>
-		    	</tr>
-		    	<tr>
+		    	</tr>*/
+		    	'<tr>
 		    		<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Confirmatory PCR:</td>
 		    		<td>'.number_format((int) $value['confirmdna']).'</td>
 		    		<td>Positive (+):</td>
